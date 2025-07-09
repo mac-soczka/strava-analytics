@@ -1,0 +1,394 @@
+[
+  {
+    "id": 3226254241612923400,
+    "resource_state": 2,
+    "name": "Down to the D&C",
+    "activity": {
+      "id": 11426214187,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1209,
+    "moving_time": 584,
+    "start_date": "2024-05-16T16:45:55Z",
+    "start_date_local": "2024-05-16T17:45:55Z",
+    "distance": 1323.7,
+    "start_index": 40,
+    "end_index": 170,
+    "device_watts": false,
+    "average_heartrate": 84.4,
+    "max_heartrate": 112,
+    "segment": {
+      "id": 11706034,
+      "resource_state": 2,
+      "name": "Down to the D&C",
+      "activity_type": "Ride",
+      "distance": 1323.7,
+      "average_grade": -1.4,
+      "maximum_grade": 3.7,
+      "elevation_high": 29.6,
+      "elevation_low": 11.1,
+      "start_latlng": [
+        55.963877,
+        -3.162381
+      ],
+      "end_latlng": [
+        55.969431,
+        -3.14503
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3226254241612202500,
+    "resource_state": 2,
+    "name": "Seafield Sprint then Clinb",
+    "activity": {
+      "id": 11426214187,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 183,
+    "moving_time": 180,
+    "start_date": "2024-05-16T17:06:32Z",
+    "start_date_local": "2024-05-16T18:06:32Z",
+    "distance": 457,
+    "start_index": 175,
+    "end_index": 197,
+    "device_watts": false,
+    "average_heartrate": 66.9,
+    "max_heartrate": 83,
+    "segment": {
+      "id": 18397522,
+      "resource_state": 2,
+      "name": "Seafield Sprint then Clinb",
+      "activity_type": "Ride",
+      "distance": 457,
+      "average_grade": 0.9,
+      "maximum_grade": 2.9,
+      "elevation_high": 95,
+      "elevation_low": 89.6,
+      "start_latlng": [
+        55.969376,
+        -3.144065
+      ],
+      "end_latlng": [
+        55.967943,
+        -3.137215
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3226254241613291000,
+    "resource_state": 2,
+    "name": "sewage single track",
+    "activity": {
+      "id": 11426214187,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 581,
+    "moving_time": 353,
+    "start_date": "2024-05-16T17:11:56Z",
+    "start_date_local": "2024-05-16T18:11:56Z",
+    "distance": 520.7,
+    "start_index": 232,
+    "end_index": 299,
+    "device_watts": false,
+    "average_heartrate": 91.3,
+    "max_heartrate": 121,
+    "segment": {
+      "id": 6582929,
+      "resource_state": 2,
+      "name": "sewage single track",
+      "activity_type": "Ride",
+      "distance": 520.7,
+      "average_grade": 0,
+      "maximum_grade": 2.1,
+      "elevation_high": 10,
+      "elevation_low": 8,
+      "start_latlng": [
+        55.968177,
+        -3.136895
+      ],
+      "end_latlng": [
+        55.969808,
+        -3.14468
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3226254241611368000,
+    "resource_state": 2,
+    "name": "Eat, Sleep, Rave, Repeat...",
+    "activity": {
+      "id": 11426214187,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 180,
+    "moving_time": 141,
+    "start_date": "2024-05-16T17:21:32Z",
+    "start_date_local": "2024-05-16T18:21:32Z",
+    "distance": 158.6,
+    "start_index": 298,
+    "end_index": 327,
+    "device_watts": false,
+    "average_heartrate": 67.1,
+    "max_heartrate": 84,
+    "segment": {
+      "id": 5918052,
+      "resource_state": 2,
+      "name": "Eat, Sleep, Rave, Repeat...",
+      "activity_type": "Ride",
+      "distance": 158.6,
+      "average_grade": 4.2,
+      "maximum_grade": 17.3,
+      "elevation_high": 7,
+      "elevation_low": 0.4,
+      "start_latlng": [
+        55.969516,
+        -3.144675
+      ],
+      "end_latlng": [
+        55.968402,
+        -3.146263
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3226254241611679000,
+    "resource_state": 2,
+    "name": "Restalrig Railway Path Uphill",
+    "activity": {
+      "id": 11426214187,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 393,
+    "moving_time": 392,
+    "start_date": "2024-05-16T17:25:21Z",
+    "start_date_local": "2024-05-16T18:25:21Z",
+    "distance": 1131.86,
+    "start_index": 337,
+    "end_index": 411,
+    "device_watts": false,
+    "average_heartrate": 74.2,
+    "max_heartrate": 93,
+    "segment": {
+      "id": 1594509,
+      "resource_state": 2,
+      "name": "Restalrig Railway Path Uphill",
+      "activity_type": "Ride",
+      "distance": 1131.86,
+      "average_grade": 0.8,
+      "maximum_grade": 22.8,
+      "elevation_high": 34.2,
+      "elevation_low": 18.1,
+      "start_latlng": [
+        55.96822966499327,
+        -3.146932056830286
+      ],
+      "end_latlng": [
+        55.963853521332815,
+        -3.1623221132662263
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3226254241610624500,
+    "resource_state": 2,
+    "name": "3 Fingers of Death",
+    "activity": {
+      "id": 11426214187,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 60,
+    "moving_time": 60,
+    "start_date": "2024-05-16T17:31:57Z",
+    "start_date_local": "2024-05-16T18:31:57Z",
+    "distance": 108.6,
+    "start_index": 412,
+    "end_index": 429,
+    "device_watts": false,
+    "average_heartrate": 92,
+    "max_heartrate": 97,
+    "segment": {
+      "id": 13838462,
+      "resource_state": 2,
+      "name": "3 Fingers of Death",
+      "activity_type": "Ride",
+      "distance": 108.6,
+      "average_grade": 1.6,
+      "maximum_grade": 20.1,
+      "elevation_high": 31.7,
+      "elevation_low": 30,
+      "start_latlng": [
+        55.963768,
+        -3.162571
+      ],
+      "end_latlng": [
+        55.963349,
+        -3.162489
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3226254241611339300,
+    "resource_state": 2,
+    "name": "Easter Road to AbbeyHill lights climb",
+    "activity": {
+      "id": 11426214187,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 100,
+    "moving_time": 93,
+    "start_date": "2024-05-16T17:49:06Z",
+    "start_date_local": "2024-05-16T18:49:06Z",
+    "distance": 134.8,
+    "start_index": 599,
+    "end_index": 629,
+    "device_watts": false,
+    "average_heartrate": 112.8,
+    "max_heartrate": 136,
+    "segment": {
+      "id": 6727334,
+      "resource_state": 2,
+      "name": "Easter Road to AbbeyHill lights climb",
+      "activity_type": "Ride",
+      "distance": 134.8,
+      "average_grade": 2.1,
+      "maximum_grade": 12.9,
+      "elevation_high": 54.3,
+      "elevation_low": 47.8,
+      "start_latlng": [
+        55.957487,
+        -3.172147
+      ],
+      "end_latlng": [
+        55.956417,
+        -3.17232
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

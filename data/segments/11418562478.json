@@ -1,0 +1,562 @@
+[
+  {
+    "id": 3225893513570005000,
+    "resource_state": 2,
+    "name": "Elm Row row row your boat",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 176,
+    "moving_time": 176,
+    "start_date": "2024-05-15T16:50:08Z",
+    "start_date_local": "2024-05-15T17:50:08Z",
+    "distance": 389.9,
+    "start_index": 24,
+    "end_index": 38,
+    "device_watts": false,
+    "average_heartrate": 101.2,
+    "max_heartrate": 107,
+    "segment": {
+      "id": 8895707,
+      "resource_state": 2,
+      "name": "Elm Row row row your boat",
+      "activity_type": "Ride",
+      "distance": 389.9,
+      "average_grade": 3.4,
+      "maximum_grade": 5.5,
+      "elevation_high": 47.3,
+      "elevation_low": 34,
+      "start_latlng": [
+        55.961168,
+        -3.180869
+      ],
+      "end_latlng": [
+        55.958255,
+        -3.184248
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3225893513571854300,
+    "resource_state": 2,
+    "name": "up the round-about",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 146,
+    "moving_time": 146,
+    "start_date": "2024-05-15T16:54:01Z",
+    "start_date_local": "2024-05-15T17:54:01Z",
+    "distance": 261.601,
+    "start_index": 59,
+    "end_index": 76,
+    "device_watts": false,
+    "average_heartrate": 108.3,
+    "max_heartrate": 134,
+    "segment": {
+      "id": 2894967,
+      "resource_state": 2,
+      "name": "up the round-about",
+      "activity_type": "Ride",
+      "distance": 261.601,
+      "average_grade": 3.3,
+      "maximum_grade": 8.6,
+      "elevation_high": 56.1,
+      "elevation_low": 47.4,
+      "start_latlng": [
+        55.95816948541124,
+        -3.1842907372705147
+      ],
+      "end_latlng": [
+        55.956310681696316,
+        -3.1864123146845675
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3225893513570176000,
+    "resource_state": 2,
+    "name": "Omni Centre - Princes Street",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 306,
+    "moving_time": 258,
+    "start_date": "2024-05-15T16:56:14Z",
+    "start_date_local": "2024-05-15T17:56:14Z",
+    "distance": 368.8,
+    "start_index": 75,
+    "end_index": 113,
+    "device_watts": false,
+    "average_heartrate": 99.7,
+    "max_heartrate": 116,
+    "segment": {
+      "id": 5421228,
+      "resource_state": 2,
+      "name": "Omni Centre - Princes Street",
+      "activity_type": "Ride",
+      "distance": 368.8,
+      "average_grade": 3.9,
+      "maximum_grade": 11.4,
+      "elevation_high": 72.9,
+      "elevation_low": 55.7,
+      "start_latlng": [
+        55.956426,
+        -3.18643
+      ],
+      "end_latlng": [
+        55.953486,
+        -3.188383
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3225893513568873500,
+    "resource_state": 2,
+    "name": "Carlton Hill, up n over",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3224,
+    "moving_time": 1172,
+    "start_date": "2024-05-15T17:01:29Z",
+    "start_date_local": "2024-05-15T18:01:29Z",
+    "distance": 1081.2,
+    "start_index": 115,
+    "end_index": 585,
+    "device_watts": false,
+    "average_heartrate": 102.5,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 4156028,
+      "resource_state": 2,
+      "name": "Carlton Hill, up n over",
+      "activity_type": "Ride",
+      "distance": 1081.2,
+      "average_grade": -1.7,
+      "maximum_grade": 9.4,
+      "elevation_high": 76.6,
+      "elevation_low": 51,
+      "start_latlng": [
+        55.953607,
+        -3.187913
+      ],
+      "end_latlng": [
+        55.956094,
+        -3.172695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3225893513569281000,
+    "resource_state": 2,
+    "name": "Regent Road Down",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3134,
+    "moving_time": 1082,
+    "start_date": "2024-05-15T17:01:58Z",
+    "start_date_local": "2024-05-15T18:01:58Z",
+    "distance": 1009.7,
+    "start_index": 116,
+    "end_index": 579,
+    "device_watts": false,
+    "average_heartrate": 102.5,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 7507335,
+      "resource_state": 2,
+      "name": "Regent Road Down",
+      "activity_type": "Ride",
+      "distance": 1009.7,
+      "average_grade": -1.9,
+      "maximum_grade": 9.6,
+      "elevation_high": 75.1,
+      "elevation_low": 49.5,
+      "start_latlng": [
+        55.953573,
+        -3.187559
+      ],
+      "end_latlng": [
+        55.955644,
+        -3.173238
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3225893513572845600,
+    "resource_state": 2,
+    "name": "Calton Climb Challenge CCC",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 113,
+    "moving_time": 113,
+    "start_date": "2024-05-15T17:02:08Z",
+    "start_date_local": "2024-05-15T18:02:08Z",
+    "distance": 258,
+    "start_index": 117,
+    "end_index": 124,
+    "device_watts": false,
+    "average_heartrate": 98.5,
+    "max_heartrate": 101,
+    "segment": {
+      "id": 10680875,
+      "resource_state": 2,
+      "name": "Calton Climb Challenge CCC",
+      "activity_type": "Ride",
+      "distance": 258,
+      "average_grade": 1.8,
+      "maximum_grade": 4.1,
+      "elevation_high": 124,
+      "elevation_low": 119.4,
+      "start_latlng": [
+        55.953806,
+        -3.186802
+      ],
+      "end_latlng": [
+        55.953798,
+        -3.182839
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3225893513572862000,
+    "resource_state": 2,
+    "name": "McGregor's Escape",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3044,
+    "moving_time": 992,
+    "start_date": "2024-05-15T17:04:11Z",
+    "start_date_local": "2024-05-15T18:04:11Z",
+    "distance": 701.4,
+    "start_index": 125,
+    "end_index": 584,
+    "device_watts": false,
+    "average_heartrate": 102.7,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 19972014,
+      "resource_state": 2,
+      "name": "McGregor's Escape",
+      "activity_type": "Ride",
+      "distance": 701.4,
+      "average_grade": -3.3,
+      "maximum_grade": 7.4,
+      "elevation_high": 76.5,
+      "elevation_low": 53.5,
+      "start_latlng": [
+        55.95355,
+        -3.182457
+      ],
+      "end_latlng": [
+        55.956005,
+        -3.172852
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3225893513569116000,
+    "resource_state": 2,
+    "name": "HWFG",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3136,
+    "moving_time": 1058,
+    "start_date": "2024-05-15T17:04:54Z",
+    "start_date_local": "2024-05-15T18:04:54Z",
+    "distance": 753.8,
+    "start_index": 131,
+    "end_index": 602,
+    "device_watts": false,
+    "average_heartrate": 102.1,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 14611487,
+      "resource_state": 2,
+      "name": "HWFG",
+      "activity_type": "Ride",
+      "distance": 753.8,
+      "average_grade": -3.5,
+      "maximum_grade": -1.8,
+      "elevation_high": 21.8,
+      "elevation_low": -4.8,
+      "start_latlng": [
+        55.953379,
+        -3.18196
+      ],
+      "end_latlng": [
+        55.956645,
+        -3.171934
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3225893513570785300,
+    "resource_state": 2,
+    "name": "RRC Regent Road Descent",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2913,
+    "moving_time": 890,
+    "start_date": "2024-05-15T17:05:53Z",
+    "start_date_local": "2024-05-15T18:05:53Z",
+    "distance": 403.4,
+    "start_index": 144,
+    "end_index": 580,
+    "device_watts": false,
+    "average_heartrate": 103,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 24613820,
+      "resource_state": 2,
+      "name": "RRC Regent Road Descent",
+      "activity_type": "Ride",
+      "distance": 403.4,
+      "average_grade": -4.3,
+      "maximum_grade": -1.5,
+      "elevation_high": 68,
+      "elevation_low": 50.8,
+      "start_latlng": [
+        55.953674,
+        -3.178372
+      ],
+      "end_latlng": [
+        55.955785,
+        -3.173125
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3225893513572683000,
+    "resource_state": 2,
+    "name": "Mad Dash",
+    "activity": {
+      "id": 11418562478,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 222,
+    "moving_time": 214,
+    "start_date": "2024-05-15T18:00:44Z",
+    "start_date_local": "2024-05-15T19:00:44Z",
+    "distance": 474.8,
+    "start_index": 638,
+    "end_index": 671,
+    "device_watts": false,
+    "average_heartrate": 90.4,
+    "max_heartrate": 115,
+    "segment": {
+      "id": 6183340,
+      "resource_state": 2,
+      "name": "Mad Dash",
+      "activity_type": "Ride",
+      "distance": 474.8,
+      "average_grade": -3.4,
+      "maximum_grade": -1.5,
+      "elevation_high": 47,
+      "elevation_low": 30.7,
+      "start_latlng": [
+        55.957614,
+        -3.172381
+      ],
+      "end_latlng": [
+        55.961664,
+        -3.171012
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

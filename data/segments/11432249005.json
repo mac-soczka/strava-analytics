@@ -1,0 +1,380 @@
+[
+  {
+    "id": 3226573714285740500,
+    "resource_state": 2,
+    "name": "Albert's Lumpy Lumps E2W",
+    "activity": {
+      "id": 11432249005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 75,
+    "moving_time": 75,
+    "start_date": "2024-05-17T14:24:11Z",
+    "start_date_local": "2024-05-17T15:24:11Z",
+    "distance": 468.4,
+    "start_index": 0,
+    "end_index": 75,
+    "device_watts": false,
+    "segment": {
+      "id": 31397014,
+      "resource_state": 2,
+      "name": "Albert's Lumpy Lumps E2W",
+      "activity_type": "Ride",
+      "distance": 468.4,
+      "average_grade": -0.7,
+      "maximum_grade": 1.2,
+      "elevation_high": 31.5,
+      "elevation_low": 26.8,
+      "start_latlng": [
+        55.962379,
+        -3.171226
+      ],
+      "end_latlng": [
+        55.962609,
+        -3.178715
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3226573714284986000,
+    "resource_state": 2,
+    "name": "McDonald Road & Up",
+    "activity": {
+      "id": 11432249005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 266,
+    "moving_time": 158,
+    "start_date": "2024-05-17T14:27:08Z",
+    "start_date_local": "2024-05-17T15:27:08Z",
+    "distance": 698.685,
+    "start_index": 141,
+    "end_index": 301,
+    "device_watts": false,
+    "segment": {
+      "id": 1960341,
+      "resource_state": 2,
+      "name": "McDonald Road & Up",
+      "activity_type": "Ride",
+      "distance": 698.685,
+      "average_grade": 3.7,
+      "maximum_grade": 8.8,
+      "elevation_high": 59.9,
+      "elevation_low": 34,
+      "start_latlng": [
+        55.961139,
+        -3.180752
+      ],
+      "end_latlng": [
+        55.956807,
+        -3.187733
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3226573714286171600,
+    "resource_state": 2,
+    "name": "Elm Row row row your boat",
+    "activity": {
+      "id": 11432249005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 85,
+    "moving_time": 85,
+    "start_date": "2024-05-17T14:27:08Z",
+    "start_date_local": "2024-05-17T15:27:08Z",
+    "distance": 389.9,
+    "start_index": 141,
+    "end_index": 226,
+    "device_watts": false,
+    "segment": {
+      "id": 8895707,
+      "resource_state": 2,
+      "name": "Elm Row row row your boat",
+      "activity_type": "Ride",
+      "distance": 389.9,
+      "average_grade": 3.4,
+      "maximum_grade": 5.5,
+      "elevation_high": 47.3,
+      "elevation_low": 34,
+      "start_latlng": [
+        55.961168,
+        -3.180869
+      ],
+      "end_latlng": [
+        55.958255,
+        -3.184248
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3226573714283966000,
+    "resource_state": 2,
+    "name": "Roundabout - Bellevue Crescent",
+    "activity": {
+      "id": 11432249005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 82,
+    "moving_time": 77,
+    "start_date": "2024-05-17T14:31:21Z",
+    "start_date_local": "2024-05-17T15:31:21Z",
+    "distance": 492.1,
+    "start_index": 288,
+    "end_index": 367,
+    "device_watts": false,
+    "segment": {
+      "id": 14330539,
+      "resource_state": 2,
+      "name": "Roundabout - Bellevue Crescent",
+      "activity_type": "Ride",
+      "distance": 492.1,
+      "average_grade": -5.3,
+      "maximum_grade": 1.5,
+      "elevation_high": 62,
+      "elevation_low": 36,
+      "start_latlng": [
+        55.956465,
+        -3.187106
+      ],
+      "end_latlng": [
+        55.959941,
+        -3.191726
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3226573714283862500,
+    "resource_state": 2,
+    "name": "broughton st drop",
+    "activity": {
+      "id": 11432249005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 120,
+    "moving_time": 115,
+    "start_date": "2024-05-17T14:31:34Z",
+    "start_date_local": "2024-05-17T15:31:34Z",
+    "distance": 818.9,
+    "start_index": 301,
+    "end_index": 418,
+    "device_watts": false,
+    "segment": {
+      "id": 4456523,
+      "resource_state": 2,
+      "name": "broughton st drop",
+      "activity_type": "Ride",
+      "distance": 818.9,
+      "average_grade": -4.8,
+      "maximum_grade": 15.8,
+      "elevation_high": 60.7,
+      "elevation_low": 21.2,
+      "start_latlng": [
+        55.956755,
+        -3.187766
+      ],
+      "end_latlng": [
+        55.962166,
+        -3.196326
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3226573714285379000,
+    "resource_state": 2,
+    "name": "Broughton st downhill",
+    "activity": {
+      "id": 11432249005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 27,
+    "moving_time": 27,
+    "start_date": "2024-05-17T14:31:49Z",
+    "start_date_local": "2024-05-17T15:31:49Z",
+    "distance": 226.3,
+    "start_index": 313,
+    "end_index": 340,
+    "device_watts": false,
+    "segment": {
+      "id": 7937328,
+      "resource_state": 2,
+      "name": "Broughton st downhill",
+      "activity_type": "Ride",
+      "distance": 226.3,
+      "average_grade": -5.8,
+      "maximum_grade": -4,
+      "elevation_high": 67.2,
+      "elevation_low": 54,
+      "start_latlng": [
+        55.956939,
+        -3.188057
+      ],
+      "end_latlng": [
+        55.958717,
+        -3.189978
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3226573714283990500,
+    "resource_state": 2,
+    "name": "Is the roundabout clear?... hope so!",
+    "activity": {
+      "id": 11432249005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 73,
+    "moving_time": 73,
+    "start_date": "2024-05-17T14:31:54Z",
+    "start_date_local": "2024-05-17T15:31:54Z",
+    "distance": 602.9,
+    "start_index": 318,
+    "end_index": 391,
+    "device_watts": false,
+    "segment": {
+      "id": 21099646,
+      "resource_state": 2,
+      "name": "Is the roundabout clear?... hope so!",
+      "activity_type": "Ride",
+      "distance": 602.9,
+      "average_grade": -4.1,
+      "maximum_grade": -1.1,
+      "elevation_high": 65.6,
+      "elevation_low": 41,
+      "start_latlng": [
+        55.957163,
+        -3.188248
+      ],
+      "end_latlng": [
+        55.961317,
+        -3.194204
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

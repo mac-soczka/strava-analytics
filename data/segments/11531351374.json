@@ -1,0 +1,568 @@
+[
+  {
+    "id": 3231212278895132000,
+    "resource_state": 2,
+    "name": "Grassmarket Uphill Sprint",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 79,
+    "moving_time": 71,
+    "start_date": "2024-05-30T10:27:27Z",
+    "start_date_local": "2024-05-30T11:27:27Z",
+    "distance": 304.88,
+    "start_index": 50,
+    "end_index": 66,
+    "device_watts": false,
+    "average_heartrate": 104.3,
+    "max_heartrate": 114,
+    "segment": {
+      "id": 2841805,
+      "resource_state": 2,
+      "name": "Grassmarket Uphill Sprint",
+      "activity_type": "Ride",
+      "distance": 304.88,
+      "average_grade": -0.4,
+      "maximum_grade": 5.2,
+      "elevation_high": 75,
+      "elevation_low": 71.2,
+      "start_latlng": [
+        55.946584241464734,
+        -3.198656626045704
+      ],
+      "end_latlng": [
+        55.947885029017925,
+        -3.1943848729133606
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3231212278892927500,
+    "resource_state": 2,
+    "name": "Fishmarketberg",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 39,
+    "moving_time": 38,
+    "start_date": "2024-05-30T10:30:06Z",
+    "start_date_local": "2024-05-30T11:30:06Z",
+    "distance": 92.7,
+    "start_index": 84,
+    "end_index": 93,
+    "device_watts": false,
+    "average_heartrate": 110.9,
+    "max_heartrate": 116,
+    "segment": {
+      "id": 13078941,
+      "resource_state": 2,
+      "name": "Fishmarketberg",
+      "activity_type": "Ride",
+      "distance": 92.7,
+      "average_grade": 12.1,
+      "maximum_grade": 11.5,
+      "elevation_high": 81.2,
+      "elevation_low": 69.6,
+      "start_latlng": [
+        55.948432,
+        -3.189134
+      ],
+      "end_latlng": [
+        55.949209,
+        -3.189535
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3231212278895017500,
+    "resource_state": 2,
+    "name": "super steep cobbles",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 72,
+    "moving_time": 70,
+    "start_date": "2024-05-30T10:30:06Z",
+    "start_date_local": "2024-05-30T11:30:06Z",
+    "distance": 151.7,
+    "start_index": 84,
+    "end_index": 98,
+    "device_watts": false,
+    "average_heartrate": 109.4,
+    "max_heartrate": 116,
+    "segment": {
+      "id": 9478592,
+      "resource_state": 2,
+      "name": "super steep cobbles",
+      "activity_type": "Ride",
+      "distance": 151.7,
+      "average_grade": 3.5,
+      "maximum_grade": 7.7,
+      "elevation_high": 92.6,
+      "elevation_low": 86,
+      "start_latlng": [
+        55.948558,
+        -3.189284
+      ],
+      "end_latlng": [
+        55.949795,
+        -3.189863
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3231212278893895000,
+    "resource_state": 2,
+    "name": "steep steep steep",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 44,
+    "moving_time": 42,
+    "start_date": "2024-05-30T10:30:24Z",
+    "start_date_local": "2024-05-30T11:30:24Z",
+    "distance": 105.9,
+    "start_index": 87,
+    "end_index": 97,
+    "device_watts": false,
+    "average_heartrate": 107.8,
+    "max_heartrate": 116,
+    "segment": {
+      "id": 12918692,
+      "resource_state": 2,
+      "name": "steep steep steep",
+      "activity_type": "Ride",
+      "distance": 105.9,
+      "average_grade": 4.1,
+      "maximum_grade": 7,
+      "elevation_high": 91,
+      "elevation_low": 86.4,
+      "start_latlng": [
+        55.948712,
+        -3.18936
+      ],
+      "end_latlng": [
+        55.949594,
+        -3.189552
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3231212278894359000,
+    "resource_state": 2,
+    "name": "Downhill from the World's End ;-)",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 158,
+    "moving_time": 126,
+    "start_date": "2024-05-30T10:33:53Z",
+    "start_date_local": "2024-05-30T11:33:53Z",
+    "distance": 605.2,
+    "start_index": 116,
+    "end_index": 135,
+    "device_watts": false,
+    "average_heartrate": 94.7,
+    "max_heartrate": 102,
+    "segment": {
+      "id": 6991400,
+      "resource_state": 2,
+      "name": "Downhill from the World's End ;-)",
+      "activity_type": "Ride",
+      "distance": 605.2,
+      "average_grade": -5.2,
+      "maximum_grade": -1,
+      "elevation_high": 72,
+      "elevation_low": 40.3,
+      "start_latlng": [
+        55.95072,
+        -3.184017
+      ],
+      "end_latlng": [
+        55.952513,
+        -3.175212
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3231212278894652000,
+    "resource_state": 2,
+    "name": "Abbeymount",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 79,
+    "moving_time": 79,
+    "start_date": "2024-05-30T10:36:45Z",
+    "start_date_local": "2024-05-30T11:36:45Z",
+    "distance": 421.445,
+    "start_index": 136,
+    "end_index": 160,
+    "device_watts": false,
+    "average_heartrate": 102.3,
+    "max_heartrate": 113,
+    "segment": {
+      "id": 1599224,
+      "resource_state": 2,
+      "name": "Abbeymount",
+      "activity_type": "Ride",
+      "distance": 421.445,
+      "average_grade": 2.4,
+      "maximum_grade": 11.7,
+      "elevation_high": 49.2,
+      "elevation_low": 38.4,
+      "start_latlng": [
+        55.953070700928514,
+        -3.1744126457903055
+      ],
+      "end_latlng": [
+        55.956378824504135,
+        -3.1721522145974257
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3231212278895605000,
+    "resource_state": 2,
+    "name": "Climbing Abbey",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 71,
+    "moving_time": 71,
+    "start_date": "2024-05-30T10:36:45Z",
+    "start_date_local": "2024-05-30T11:36:45Z",
+    "distance": 391.3,
+    "start_index": 136,
+    "end_index": 155,
+    "device_watts": false,
+    "average_heartrate": 101.6,
+    "max_heartrate": 113,
+    "segment": {
+      "id": 23867482,
+      "resource_state": 2,
+      "name": "Climbing Abbey",
+      "activity_type": "Ride",
+      "distance": 391.3,
+      "average_grade": 2.2,
+      "maximum_grade": 14.3,
+      "elevation_high": 54.7,
+      "elevation_low": 39,
+      "start_latlng": [
+        55.952947,
+        -3.174601
+      ],
+      "end_latlng": [
+        55.956011,
+        -3.171847
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3231212278895121000,
+    "resource_state": 2,
+    "name": "Abbeymount",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 62,
+    "moving_time": 62,
+    "start_date": "2024-05-30T10:36:54Z",
+    "start_date_local": "2024-05-30T11:36:54Z",
+    "distance": 318.4,
+    "start_index": 138,
+    "end_index": 155,
+    "device_watts": false,
+    "average_heartrate": 101.7,
+    "max_heartrate": 113,
+    "segment": {
+      "id": 15583228,
+      "resource_state": 2,
+      "name": "Abbeymount",
+      "activity_type": "Ride",
+      "distance": 318.4,
+      "average_grade": 1.5,
+      "maximum_grade": 7.7,
+      "elevation_high": 149.8,
+      "elevation_low": 145,
+      "start_latlng": [
+        55.95367,
+        -3.174238
+      ],
+      "end_latlng": [
+        55.956088,
+        -3.17191
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3237151888150627300,
+    "resource_state": 2,
+    "name": "Traffic Light gamble ",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 139,
+    "moving_time": 105,
+    "start_date": "2024-05-30T10:37:07Z",
+    "start_date_local": "2024-05-30T11:37:07Z",
+    "distance": 580.5,
+    "start_index": 139,
+    "end_index": 179,
+    "device_watts": false,
+    "average_heartrate": 94.7,
+    "max_heartrate": 113,
+    "segment": {
+      "id": 37117000,
+      "resource_state": 2,
+      "name": "Traffic Light gamble ",
+      "activity_type": "Ride",
+      "distance": 580.5,
+      "average_grade": 0.1,
+      "maximum_grade": 15.8,
+      "elevation_high": 30.6,
+      "elevation_low": 15.8,
+      "start_latlng": [
+        55.953829,
+        -3.173875
+      ],
+      "end_latlng": [
+        55.958507,
+        -3.171883
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3231212278895660500,
+    "resource_state": 2,
+    "name": "Mad Dash",
+    "activity": {
+      "id": 11531351374,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 57,
+    "moving_time": 56,
+    "start_date": "2024-05-30T10:39:15Z",
+    "start_date_local": "2024-05-30T11:39:15Z",
+    "distance": 474.8,
+    "start_index": 177,
+    "end_index": 197,
+    "device_watts": false,
+    "average_heartrate": 117.4,
+    "max_heartrate": 141,
+    "segment": {
+      "id": 6183340,
+      "resource_state": 2,
+      "name": "Mad Dash",
+      "activity_type": "Ride",
+      "distance": 474.8,
+      "average_grade": -3.4,
+      "maximum_grade": -1.5,
+      "elevation_high": 47,
+      "elevation_low": 30.7,
+      "start_latlng": [
+        55.957614,
+        -3.172381
+      ],
+      "end_latlng": [
+        55.961664,
+        -3.171012
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

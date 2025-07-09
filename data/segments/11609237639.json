@@ -1,0 +1,608 @@
+[
+  {
+    "id": 3234806815478454000,
+    "resource_state": 2,
+    "name": "dunbar high st",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 267,
+    "moving_time": 178,
+    "start_date": "2024-06-08T11:56:42Z",
+    "start_date_local": "2024-06-08T12:56:42Z",
+    "distance": 374.7,
+    "start_index": 138,
+    "end_index": 339,
+    "device_watts": false,
+    "segment": {
+      "id": 13967169,
+      "resource_state": 2,
+      "name": "dunbar high st",
+      "activity_type": "Ride",
+      "distance": 374.7,
+      "average_grade": -0.4,
+      "maximum_grade": 1.5,
+      "elevation_high": 20.4,
+      "elevation_low": 17.2,
+      "start_latlng": [
+        56.000505,
+        -2.514695
+      ],
+      "end_latlng": [
+        56.003531,
+        -2.517195
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3234806815480548000,
+    "resource_state": 2,
+    "name": "The true shred!!",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1988,
+    "moving_time": 1047,
+    "start_date": "2024-06-08T12:20:07Z",
+    "start_date_local": "2024-06-08T13:20:07Z",
+    "distance": 1862.7,
+    "start_index": 916,
+    "end_index": 2111,
+    "device_watts": false,
+    "segment": {
+      "id": 8726767,
+      "resource_state": 2,
+      "name": "The true shred!!",
+      "activity_type": "Ride",
+      "distance": 1862.7,
+      "average_grade": -0.8,
+      "maximum_grade": 9.3,
+      "elevation_high": 18.4,
+      "elevation_low": 1.6,
+      "start_latlng": [
+        56.005722,
+        -2.525557
+      ],
+      "end_latlng": [
+        56.001181,
+        -2.54308
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3234806815477907000,
+    "resource_state": 2,
+    "name": "Auld Beardy's Golf Course Shred",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1918,
+    "moving_time": 1011,
+    "start_date": "2024-06-08T12:20:56Z",
+    "start_date_local": "2024-06-08T13:20:56Z",
+    "distance": 1621.9,
+    "start_index": 939,
+    "end_index": 2090,
+    "device_watts": false,
+    "segment": {
+      "id": 4458728,
+      "resource_state": 2,
+      "name": "Auld Beardy's Golf Course Shred",
+      "activity_type": "Ride",
+      "distance": 1621.9,
+      "average_grade": -1,
+      "maximum_grade": 8.2,
+      "elevation_high": 20.1,
+      "elevation_low": 1.9,
+      "start_latlng": [
+        56.005709,
+        -2.526177
+      ],
+      "end_latlng": [
+        56.001297,
+        -2.542836
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3234806815478860300,
+    "resource_state": 2,
+    "name": "Short (Golf) Course XC Grins",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1441,
+    "moving_time": 715,
+    "start_date": "2024-06-08T12:28:59Z",
+    "start_date_local": "2024-06-08T13:28:59Z",
+    "distance": 1111.1,
+    "start_index": 1278,
+    "end_index": 2096,
+    "device_watts": false,
+    "segment": {
+      "id": 31530130,
+      "resource_state": 2,
+      "name": "Short (Golf) Course XC Grins",
+      "activity_type": "Ride",
+      "distance": 1111.1,
+      "average_grade": -1.1,
+      "maximum_grade": 8.5,
+      "elevation_high": 18.8,
+      "elevation_low": 6.4,
+      "start_latlng": [
+        56.005092,
+        -2.534483
+      ],
+      "end_latlng": [
+        56.001258,
+        -2.542931
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3234806815480314400,
+    "resource_state": 2,
+    "name": "Sunset Dash",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 248,
+    "moving_time": 230,
+    "start_date": "2024-06-08T13:34:23Z",
+    "start_date_local": "2024-06-08T14:34:23Z",
+    "distance": 476.1,
+    "start_index": 2343,
+    "end_index": 2575,
+    "device_watts": false,
+    "segment": {
+      "id": 11762482,
+      "resource_state": 2,
+      "name": "Sunset Dash",
+      "activity_type": "Ride",
+      "distance": 476.1,
+      "average_grade": 0.2,
+      "maximum_grade": 3.7,
+      "elevation_high": 12,
+      "elevation_low": 9.9,
+      "start_latlng": [
+        55.998818,
+        -2.542583
+      ],
+      "end_latlng": [
+        55.998221,
+        -2.55015
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3234806815477136000,
+    "resource_state": 2,
+    "name": "sandpit sprint ",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 573,
+    "moving_time": 440,
+    "start_date": "2024-06-08T13:56:18Z",
+    "start_date_local": "2024-06-08T14:56:18Z",
+    "distance": 736.3,
+    "start_index": 3258,
+    "end_index": 3760,
+    "device_watts": false,
+    "segment": {
+      "id": 36846941,
+      "resource_state": 2,
+      "name": "sandpit sprint ",
+      "activity_type": "Ride",
+      "distance": 736.3,
+      "average_grade": -0.1,
+      "maximum_grade": 9.5,
+      "elevation_high": -0.2,
+      "elevation_low": -1.8,
+      "start_latlng": [
+        56.001467,
+        -2.561911
+      ],
+      "end_latlng": [
+        56.005702,
+        -2.570715
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3352403121121796600,
+    "resource_state": 2,
+    "name": "Sandpit Sprint!",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 838,
+    "moving_time": 531,
+    "start_date": "2024-06-08T13:56:57Z",
+    "start_date_local": "2024-06-08T14:56:57Z",
+    "distance": 799.1,
+    "start_index": 3297,
+    "end_index": 3932,
+    "device_watts": false,
+    "segment": {
+      "id": 39063679,
+      "resource_state": 2,
+      "name": "Sandpit Sprint!",
+      "activity_type": "Ride",
+      "distance": 799.1,
+      "average_grade": 0.1,
+      "maximum_grade": 3.1,
+      "elevation_high": 4.4,
+      "elevation_low": 3,
+      "start_latlng": [
+        56.00195,
+        -2.562953
+      ],
+      "end_latlng": [
+        56.006314,
+        -2.572839
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3344067282119877600,
+    "resource_state": 2,
+    "name": "Sandpit Sprint",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 642,
+    "moving_time": 431,
+    "start_date": "2024-06-08T13:57:01Z",
+    "start_date_local": "2024-06-08T14:57:01Z",
+    "distance": 681.5,
+    "start_index": 3301,
+    "end_index": 3814,
+    "device_watts": false,
+    "segment": {
+      "id": 38896128,
+      "resource_state": 2,
+      "name": "Sandpit Sprint",
+      "activity_type": "Ride",
+      "distance": 681.5,
+      "average_grade": 0.1,
+      "maximum_grade": 4,
+      "elevation_high": 9.6,
+      "elevation_low": 7.6,
+      "start_latlng": [
+        56.001979,
+        -2.563059
+      ],
+      "end_latlng": [
+        56.005993,
+        -2.5712
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3234806815480204000,
+    "resource_state": 2,
+    "name": "Bayside Blast - Mind the People",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 751,
+    "moving_time": 559,
+    "start_date": "2024-06-08T14:39:14Z",
+    "start_date_local": "2024-06-08T15:39:14Z",
+    "distance": 645.4,
+    "start_index": 4744,
+    "end_index": 5361,
+    "device_watts": false,
+    "segment": {
+      "id": 24670005,
+      "resource_state": 2,
+      "name": "Bayside Blast - Mind the People",
+      "activity_type": "Ride",
+      "distance": 645.4,
+      "average_grade": 0.3,
+      "maximum_grade": 11,
+      "elevation_high": 5.4,
+      "elevation_low": -0.6,
+      "start_latlng": [
+        56.001129,
+        -2.578907
+      ],
+      "end_latlng": [
+        55.998734,
+        -2.587893
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3234806815478251000,
+    "resource_state": 2,
+    "name": "Reverse Bayside Blast",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2139,
+    "moving_time": 938,
+    "start_date": "2024-06-08T14:40:10Z",
+    "start_date_local": "2024-06-08T15:40:10Z",
+    "distance": 1340.6,
+    "start_index": 4791,
+    "end_index": 5895,
+    "device_watts": false,
+    "segment": {
+      "id": 11765922,
+      "resource_state": 2,
+      "name": "Reverse Bayside Blast",
+      "activity_type": "Ride",
+      "distance": 1340.6,
+      "average_grade": -0.1,
+      "maximum_grade": 4.3,
+      "elevation_high": 7.8,
+      "elevation_low": 3.2,
+      "start_latlng": [
+        56.001159,
+        -2.579024
+      ],
+      "end_latlng": [
+        55.997565,
+        -2.598266
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3234806815479542300,
+    "resource_state": 2,
+    "name": "Past the cubes",
+    "activity": {
+      "id": 11609237639,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1202,
+    "moving_time": 378,
+    "start_date": "2024-06-08T14:56:11Z",
+    "start_date_local": "2024-06-08T15:56:11Z",
+    "distance": 651.5,
+    "start_index": 5458,
+    "end_index": 5919,
+    "device_watts": false,
+    "segment": {
+      "id": 19315577,
+      "resource_state": 2,
+      "name": "Past the cubes",
+      "activity_type": "Ride",
+      "distance": 651.5,
+      "average_grade": 0.2,
+      "maximum_grade": 1.8,
+      "elevation_high": 3,
+      "elevation_low": 1.2,
+      "start_latlng": [
+        55.998659,
+        -2.589066
+      ],
+      "end_latlng": [
+        55.997716,
+        -2.598713
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

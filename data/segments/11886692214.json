@@ -1,0 +1,7688 @@
+[
+  {
+    "id": 3247572302880992000,
+    "resource_state": 2,
+    "name": "London road Dash",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 102,
+    "moving_time": 102,
+    "start_date": "2024-07-14T11:39:34Z",
+    "start_date_local": "2024-07-14T12:39:34Z",
+    "distance": 714.493,
+    "start_index": 118,
+    "end_index": 220,
+    "device_watts": false,
+    "segment": {
+      "id": 1680614,
+      "resource_state": 2,
+      "name": "London road Dash",
+      "activity_type": "Ride",
+      "distance": 714.493,
+      "average_grade": -0.1,
+      "maximum_grade": 4.8,
+      "elevation_high": 53.8,
+      "elevation_low": 44.3,
+      "start_latlng": [
+        55.95764964859419,
+        -3.1721940128545714
+      ],
+      "end_latlng": [
+        55.95788003247038,
+        -3.1836431831621814
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881883000,
+    "resource_state": 2,
+    "name": "up the round-about",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 50,
+    "moving_time": 50,
+    "start_date": "2024-07-14T11:41:24Z",
+    "start_date_local": "2024-07-14T12:41:24Z",
+    "distance": 261.601,
+    "start_index": 228,
+    "end_index": 278,
+    "device_watts": false,
+    "segment": {
+      "id": 2894967,
+      "resource_state": 2,
+      "name": "up the round-about",
+      "activity_type": "Ride",
+      "distance": 261.601,
+      "average_grade": 3.3,
+      "maximum_grade": 8.6,
+      "elevation_high": 56.1,
+      "elevation_low": 47.4,
+      "start_latlng": [
+        55.95816948541124,
+        -3.1842907372705147
+      ],
+      "end_latlng": [
+        55.956310681696316,
+        -3.1864123146845675
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879980500,
+    "resource_state": 2,
+    "name": "Omni Centre - Princes Street",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 86,
+    "moving_time": 86,
+    "start_date": "2024-07-14T11:42:12Z",
+    "start_date_local": "2024-07-14T12:42:12Z",
+    "distance": 368.8,
+    "start_index": 276,
+    "end_index": 362,
+    "device_watts": false,
+    "segment": {
+      "id": 5421228,
+      "resource_state": 2,
+      "name": "Omni Centre - Princes Street",
+      "activity_type": "Ride",
+      "distance": 368.8,
+      "average_grade": 3.9,
+      "maximum_grade": 11.4,
+      "elevation_high": 72.9,
+      "elevation_low": 55.7,
+      "start_latlng": [
+        55.956426,
+        -3.18643
+      ],
+      "end_latlng": [
+        55.953486,
+        -3.188383
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880928000,
+    "resource_state": 2,
+    "name": "Full Prince",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 259,
+    "moving_time": 162,
+    "start_date": "2024-07-14T11:43:49Z",
+    "start_date_local": "2024-07-14T12:43:49Z",
+    "distance": 1068.2,
+    "start_index": 373,
+    "end_index": 544,
+    "device_watts": false,
+    "segment": {
+      "id": 24284351,
+      "resource_state": 2,
+      "name": "Full Prince",
+      "activity_type": "Ride",
+      "distance": 1068.2,
+      "average_grade": -0.4,
+      "maximum_grade": 0,
+      "elevation_high": 45.4,
+      "elevation_low": 40.8,
+      "start_latlng": [
+        55.953316,
+        -3.189335
+      ],
+      "end_latlng": [
+        55.950463,
+        -3.205669
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881502000,
+    "resource_state": 2,
+    "name": "Princes st. westbound",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 195,
+    "moving_time": 136,
+    "start_date": "2024-07-14T11:45:05Z",
+    "start_date_local": "2024-07-14T12:45:05Z",
+    "distance": 926.1,
+    "start_index": 419,
+    "end_index": 556,
+    "device_watts": false,
+    "segment": {
+      "id": 12398134,
+      "resource_state": 2,
+      "name": "Princes st. westbound",
+      "activity_type": "Ride",
+      "distance": 926.1,
+      "average_grade": 0.3,
+      "maximum_grade": 5.9,
+      "elevation_high": 70.5,
+      "elevation_low": 60.2,
+      "start_latlng": [
+        55.952687,
+        -3.19251
+      ],
+      "end_latlng": [
+        55.950221,
+        -3.206695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880408600,
+    "resource_state": 2,
+    "name": "Let Fly ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 82,
+    "moving_time": 82,
+    "start_date": "2024-07-14T11:45:13Z",
+    "start_date_local": "2024-07-14T12:45:13Z",
+    "distance": 598.9,
+    "start_index": 427,
+    "end_index": 509,
+    "device_watts": false,
+    "segment": {
+      "id": 34777198,
+      "resource_state": 2,
+      "name": "Let Fly ",
+      "activity_type": "Ride",
+      "distance": 598.9,
+      "average_grade": -0.5,
+      "maximum_grade": 0.6,
+      "elevation_high": 71.9,
+      "elevation_low": 68,
+      "start_latlng": [
+        55.952579,
+        -3.193261
+      ],
+      "end_latlng": [
+        55.950987,
+        -3.202399
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880609300,
+    "resource_state": 2,
+    "name": "Off the mound onto princes street sprint",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 143,
+    "moving_time": 84,
+    "start_date": "2024-07-14T11:45:45Z",
+    "start_date_local": "2024-07-14T12:45:45Z",
+    "distance": 547.8,
+    "start_index": 459,
+    "end_index": 544,
+    "device_watts": false,
+    "segment": {
+      "id": 14468406,
+      "resource_state": 2,
+      "name": "Off the mound onto princes street sprint",
+      "activity_type": "Ride",
+      "distance": 547.8,
+      "average_grade": 1.2,
+      "maximum_grade": 6.4,
+      "elevation_high": 69.7,
+      "elevation_low": 57.2,
+      "start_latlng": [
+        55.951892,
+        -3.197427
+      ],
+      "end_latlng": [
+        55.95053,
+        -3.205684
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879629300,
+    "resource_state": 2,
+    "name": "Heading out of Town",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 170,
+    "moving_time": 75,
+    "start_date": "2024-07-14T11:48:45Z",
+    "start_date_local": "2024-07-14T12:48:45Z",
+    "distance": 421.7,
+    "start_index": 581,
+    "end_index": 680,
+    "device_watts": false,
+    "segment": {
+      "id": 29364568,
+      "resource_state": 2,
+      "name": "Heading out of Town",
+      "activity_type": "Ride",
+      "distance": 421.7,
+      "average_grade": -2.6,
+      "maximum_grade": -0.7,
+      "elevation_high": 69.6,
+      "elevation_low": 58.7,
+      "start_latlng": [
+        55.950304,
+        -3.208389
+      ],
+      "end_latlng": [
+        55.952367,
+        -3.213871
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881641500,
+    "resource_state": 2,
+    "name": "Doonhill Jaunt",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 113,
+    "moving_time": 112,
+    "start_date": "2024-07-14T11:51:22Z",
+    "start_date_local": "2024-07-14T12:51:22Z",
+    "distance": 797.1,
+    "start_index": 667,
+    "end_index": 774,
+    "device_watts": false,
+    "segment": {
+      "id": 12249344,
+      "resource_state": 2,
+      "name": "Doonhill Jaunt",
+      "activity_type": "Ride",
+      "distance": 797.1,
+      "average_grade": -1.8,
+      "maximum_grade": 2,
+      "elevation_high": 62.9,
+      "elevation_low": 46.6,
+      "start_latlng": [
+        55.951914,
+        -3.212239
+      ],
+      "end_latlng": [
+        55.955433,
+        -3.221484
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880332000,
+    "resource_state": 2,
+    "name": "Dean Bridge Downhill ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 54,
+    "moving_time": 53,
+    "start_date": "2024-07-14T11:51:26Z",
+    "start_date_local": "2024-07-14T12:51:26Z",
+    "distance": 401.307,
+    "start_index": 671,
+    "end_index": 723,
+    "device_watts": false,
+    "segment": {
+      "id": 2034253,
+      "resource_state": 2,
+      "name": "Dean Bridge Downhill ",
+      "activity_type": "Ride",
+      "distance": 401.307,
+      "average_grade": -2.2,
+      "maximum_grade": 5.7,
+      "elevation_high": 62,
+      "elevation_low": 46.7,
+      "start_latlng": [
+        55.951895895414054,
+        -3.2127645425498486
+      ],
+      "end_latlng": [
+        55.95491568557918,
+        -3.2159893959760666
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880749600,
+    "resource_state": 2,
+    "name": "Queensferry Road to Holiday Inn",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 134,
+    "moving_time": 134,
+    "start_date": "2024-07-14T11:53:00Z",
+    "start_date_local": "2024-07-14T12:53:00Z",
+    "distance": 1062.8,
+    "start_index": 759,
+    "end_index": 893,
+    "device_watts": false,
+    "segment": {
+      "id": 5680013,
+      "resource_state": 2,
+      "name": "Queensferry Road to Holiday Inn",
+      "activity_type": "Ride",
+      "distance": 1062.8,
+      "average_grade": -0.6,
+      "maximum_grade": 2.9,
+      "elevation_high": 51.4,
+      "elevation_low": 44.1,
+      "start_latlng": [
+        55.955143,
+        -3.220133
+      ],
+      "end_latlng": [
+        55.954856,
+        -3.236898
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880009000,
+    "resource_state": 2,
+    "name": "Orchard Brae to Queensferry Terrace Sprint",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 55,
+    "moving_time": 55,
+    "start_date": "2024-07-14T11:53:28Z",
+    "start_date_local": "2024-07-14T12:53:28Z",
+    "distance": 466.6,
+    "start_index": 787,
+    "end_index": 842,
+    "device_watts": false,
+    "segment": {
+      "id": 6121103,
+      "resource_state": 2,
+      "name": "Orchard Brae to Queensferry Terrace Sprint",
+      "activity_type": "Ride",
+      "distance": 466.6,
+      "average_grade": 0,
+      "maximum_grade": 0,
+      "elevation_high": 127.4,
+      "elevation_low": 127.4,
+      "start_latlng": [
+        55.955084,
+        -3.222777
+      ],
+      "end_latlng": [
+        55.954663,
+        -3.230211
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880651300,
+    "resource_state": 2,
+    "name": "Another Queensferry Rd sprint",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 85,
+    "moving_time": 85,
+    "start_date": "2024-07-14T11:54:35Z",
+    "start_date_local": "2024-07-14T12:54:35Z",
+    "distance": 664.534,
+    "start_index": 854,
+    "end_index": 939,
+    "device_watts": false,
+    "segment": {
+      "id": 2602275,
+      "resource_state": 2,
+      "name": "Another Queensferry Rd sprint",
+      "activity_type": "Ride",
+      "distance": 664.534,
+      "average_grade": 0.9,
+      "maximum_grade": 5.7,
+      "elevation_high": 52.9,
+      "elevation_low": 43.5,
+      "start_latlng": [
+        55.954569962031094,
+        -3.2313396186959045
+      ],
+      "end_latlng": [
+        55.95586003165069,
+        -3.2415867882136684
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302883002400,
+    "resource_state": 2,
+    "name": "Black Haul",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 183,
+    "moving_time": 183,
+    "start_date": "2024-07-14T11:57:08Z",
+    "start_date_local": "2024-07-14T12:57:08Z",
+    "distance": 1147.8,
+    "start_index": 996,
+    "end_index": 1179,
+    "device_watts": false,
+    "segment": {
+      "id": 17294720,
+      "resource_state": 2,
+      "name": "Black Haul",
+      "activity_type": "Ride",
+      "distance": 1147.8,
+      "average_grade": 1.5,
+      "maximum_grade": 17.9,
+      "elevation_high": 65,
+      "elevation_low": 48,
+      "start_latlng": [
+        55.958424,
+        -3.244913
+      ],
+      "end_latlng": [
+        55.964139,
+        -3.259662
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881416000,
+    "resource_state": 2,
+    "name": "Craigleith to Barnton Junction",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 362,
+    "moving_time": 362,
+    "start_date": "2024-07-14T11:57:09Z",
+    "start_date_local": "2024-07-14T12:57:09Z",
+    "distance": 2310,
+    "start_index": 997,
+    "end_index": 1359,
+    "device_watts": false,
+    "segment": {
+      "id": 24188526,
+      "resource_state": 2,
+      "name": "Craigleith to Barnton Junction",
+      "activity_type": "Ride",
+      "distance": 2310,
+      "average_grade": 0.4,
+      "maximum_grade": 5.6,
+      "elevation_high": 65,
+      "elevation_low": 49.9,
+      "start_latlng": [
+        55.958364,
+        -3.245001
+      ],
+      "end_latlng": [
+        55.966664,
+        -3.275746
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881194000,
+    "resource_state": 2,
+    "name": "Sainsburys to Silverycows",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 274,
+    "moving_time": 274,
+    "start_date": "2024-07-14T11:57:11Z",
+    "start_date_local": "2024-07-14T12:57:11Z",
+    "distance": 1834.2,
+    "start_index": 999,
+    "end_index": 1273,
+    "device_watts": false,
+    "segment": {
+      "id": 8453766,
+      "resource_state": 2,
+      "name": "Sainsburys to Silverycows",
+      "activity_type": "Ride",
+      "distance": 1834.2,
+      "average_grade": 0.3,
+      "maximum_grade": 4.8,
+      "elevation_high": 64.7,
+      "elevation_low": 50.2,
+      "start_latlng": [
+        55.958257,
+        -3.245134
+      ],
+      "end_latlng": [
+        55.967455,
+        -3.268695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879616000,
+    "resource_state": 2,
+    "name": "Blackhall Path",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 257,
+    "moving_time": 257,
+    "start_date": "2024-07-14T11:57:11Z",
+    "start_date_local": "2024-07-14T12:57:11Z",
+    "distance": 1727.5,
+    "start_index": 999,
+    "end_index": 1256,
+    "device_watts": false,
+    "segment": {
+      "id": 8717729,
+      "resource_state": 2,
+      "name": "Blackhall Path",
+      "activity_type": "Ride",
+      "distance": 1727.5,
+      "average_grade": 0.4,
+      "maximum_grade": 4.8,
+      "elevation_high": 64.8,
+      "elevation_low": 49.9,
+      "start_latlng": [
+        55.958259,
+        -3.245131
+      ],
+      "end_latlng": [
+        55.96659,
+        -3.267753
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879418400,
+    "resource_state": 2,
+    "name": "Barnton Branch",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 172,
+    "moving_time": 172,
+    "start_date": "2024-07-14T11:57:12Z",
+    "start_date_local": "2024-07-14T12:57:12Z",
+    "distance": 1090.6,
+    "start_index": 1000,
+    "end_index": 1172,
+    "device_watts": false,
+    "segment": {
+      "id": 8017001,
+      "resource_state": 2,
+      "name": "Barnton Branch",
+      "activity_type": "Ride",
+      "distance": 1090.6,
+      "average_grade": 1.3,
+      "maximum_grade": 4.6,
+      "elevation_high": 64.6,
+      "elevation_low": 50,
+      "start_latlng": [
+        55.958302,
+        -3.245161
+      ],
+      "end_latlng": [
+        55.963948,
+        -3.258936
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882283500,
+    "resource_state": 2,
+    "name": "Up past the field of dreams",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 184,
+    "moving_time": 184,
+    "start_date": "2024-07-14T11:57:13Z",
+    "start_date_local": "2024-07-14T12:57:13Z",
+    "distance": 1177.7,
+    "start_index": 1001,
+    "end_index": 1185,
+    "device_watts": false,
+    "segment": {
+      "id": 12064529,
+      "resource_state": 2,
+      "name": "Up past the field of dreams",
+      "activity_type": "Ride",
+      "distance": 1177.7,
+      "average_grade": 1.2,
+      "maximum_grade": 3.5,
+      "elevation_high": 64.7,
+      "elevation_low": 50.1,
+      "start_latlng": [
+        55.95831,
+        -3.245279
+      ],
+      "end_latlng": [
+        55.964302,
+        -3.260352
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880772000,
+    "resource_state": 2,
+    "name": "Drylaw Dash",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 152,
+    "moving_time": 152,
+    "start_date": "2024-07-14T11:57:16Z",
+    "start_date_local": "2024-07-14T12:57:16Z",
+    "distance": 967.1,
+    "start_index": 1004,
+    "end_index": 1156,
+    "device_watts": false,
+    "segment": {
+      "id": 14369982,
+      "resource_state": 2,
+      "name": "Drylaw Dash",
+      "activity_type": "Ride",
+      "distance": 967.1,
+      "average_grade": 1.5,
+      "maximum_grade": 2.4,
+      "elevation_high": 52.6,
+      "elevation_low": 37.6,
+      "start_latlng": [
+        55.958435,
+        -3.245436
+      ],
+      "end_latlng": [
+        55.963548,
+        -3.257373
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879435000,
+    "resource_state": 2,
+    "name": "Craigleith to Silverknowes",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 252,
+    "moving_time": 252,
+    "start_date": "2024-07-14T11:57:16Z",
+    "start_date_local": "2024-07-14T12:57:16Z",
+    "distance": 1696.2,
+    "start_index": 1004,
+    "end_index": 1256,
+    "device_watts": false,
+    "segment": {
+      "id": 31477337,
+      "resource_state": 2,
+      "name": "Craigleith to Silverknowes",
+      "activity_type": "Ride",
+      "distance": 1696.2,
+      "average_grade": 0.5,
+      "maximum_grade": 2.2,
+      "elevation_high": 65.2,
+      "elevation_low": 49.6,
+      "start_latlng": [
+        55.95848,
+        -3.24524
+      ],
+      "end_latlng": [
+        55.966567,
+        -3.267687
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879713300,
+    "resource_state": 2,
+    "name": "Segment",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 157,
+    "moving_time": 157,
+    "start_date": "2024-07-14T11:57:17Z",
+    "start_date_local": "2024-07-14T12:57:17Z",
+    "distance": 992.3,
+    "start_index": 1005,
+    "end_index": 1162,
+    "device_watts": false,
+    "segment": {
+      "id": 15456790,
+      "resource_state": 2,
+      "name": "Segment",
+      "activity_type": "Ride",
+      "distance": 992.3,
+      "average_grade": 1.3,
+      "maximum_grade": 7.4,
+      "elevation_high": 42,
+      "elevation_low": 28.8,
+      "start_latlng": [
+        55.958488,
+        -3.245272
+      ],
+      "end_latlng": [
+        55.9636,
+        -3.257989
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880362500,
+    "resource_state": 2,
+    "name": "Craigleith Climb N",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 156,
+    "moving_time": 156,
+    "start_date": "2024-07-14T11:57:21Z",
+    "start_date_local": "2024-07-14T12:57:21Z",
+    "distance": 1007,
+    "start_index": 1009,
+    "end_index": 1165,
+    "device_watts": false,
+    "segment": {
+      "id": 26353026,
+      "resource_state": 2,
+      "name": "Craigleith Climb N",
+      "activity_type": "Ride",
+      "distance": 1007,
+      "average_grade": 1.5,
+      "maximum_grade": 2.3,
+      "elevation_high": 65.4,
+      "elevation_low": 49.9,
+      "start_latlng": [
+        55.958663,
+        -3.245176
+      ],
+      "end_latlng": [
+        55.963733,
+        -3.258253
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880289000,
+    "resource_state": 2,
+    "name": "g/hill to top of brig climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 811,
+    "moving_time": 788,
+    "start_date": "2024-07-14T11:57:33Z",
+    "start_date_local": "2024-07-14T12:57:33Z",
+    "distance": 5208.3,
+    "start_index": 1021,
+    "end_index": 1811,
+    "device_watts": false,
+    "segment": {
+      "id": 7850890,
+      "resource_state": 2,
+      "name": "g/hill to top of brig climb",
+      "activity_type": "Ride",
+      "distance": 5208.3,
+      "average_grade": -0.3,
+      "maximum_grade": 24.2,
+      "elevation_high": 61.2,
+      "elevation_low": 12.8,
+      "start_latlng": [
+        55.95915,
+        -3.24575
+      ],
+      "end_latlng": [
+        55.966098,
+        -3.318211
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880372700,
+    "resource_state": 2,
+    "name": "Blackhall Path Climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 143,
+    "moving_time": 143,
+    "start_date": "2024-07-14T11:57:34Z",
+    "start_date_local": "2024-07-14T12:57:34Z",
+    "distance": 941.8,
+    "start_index": 1022,
+    "end_index": 1165,
+    "device_watts": false,
+    "segment": {
+      "id": 34817326,
+      "resource_state": 2,
+      "name": "Blackhall Path Climb",
+      "activity_type": "Ride",
+      "distance": 941.8,
+      "average_grade": 1.6,
+      "maximum_grade": 4.8,
+      "elevation_high": 92.6,
+      "elevation_low": 77.4,
+      "start_latlng": [
+        55.959173,
+        -3.24586
+      ],
+      "end_latlng": [
+        55.963718,
+        -3.258304
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3260979687322409500,
+    "resource_state": 2,
+    "name": "Blackhall Leg Sapper ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 234,
+    "moving_time": 234,
+    "start_date": "2024-07-14T11:57:39Z",
+    "start_date_local": "2024-07-14T12:57:39Z",
+    "distance": 1612.2,
+    "start_index": 1027,
+    "end_index": 1261,
+    "device_watts": false,
+    "segment": {
+      "id": 37601811,
+      "resource_state": 2,
+      "name": "Blackhall Leg Sapper ",
+      "activity_type": "Ride",
+      "distance": 1612.2,
+      "average_grade": 0.5,
+      "maximum_grade": 4.7,
+      "elevation_high": 58.2,
+      "elevation_low": 44.2,
+      "start_latlng": [
+        55.959473,
+        -3.246125
+      ],
+      "end_latlng": [
+        55.966915,
+        -3.268077
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879543300,
+    "resource_state": 2,
+    "name": "It's in the Trees West",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 92,
+    "moving_time": 92,
+    "start_date": "2024-07-14T12:00:14Z",
+    "start_date_local": "2024-07-14T13:00:14Z",
+    "distance": 667.7,
+    "start_index": 1182,
+    "end_index": 1274,
+    "device_watts": false,
+    "segment": {
+      "id": 13525202,
+      "resource_state": 2,
+      "name": "It's in the Trees West",
+      "activity_type": "Ride",
+      "distance": 667.7,
+      "average_grade": -1.3,
+      "maximum_grade": 0.6,
+      "elevation_high": 64.6,
+      "elevation_low": 56,
+      "start_latlng": [
+        55.964269,
+        -3.260049
+      ],
+      "end_latlng": [
+        55.967484,
+        -3.268726
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882533400,
+    "resource_state": 2,
+    "name": "Silverycows to RHS",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 175,
+    "moving_time": 164,
+    "start_date": "2024-07-14T12:01:44Z",
+    "start_date_local": "2024-07-14T13:01:44Z",
+    "distance": 842.5,
+    "start_index": 1272,
+    "end_index": 1437,
+    "device_watts": false,
+    "segment": {
+      "id": 8453793,
+      "resource_state": 2,
+      "name": "Silverycows to RHS",
+      "activity_type": "Ride",
+      "distance": 842.5,
+      "average_grade": 1.6,
+      "maximum_grade": 5.4,
+      "elevation_high": 69.2,
+      "elevation_low": 53.1,
+      "start_latlng": [
+        55.967421,
+        -3.268638
+      ],
+      "end_latlng": [
+        55.966163,
+        -3.281253
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881730600,
+    "resource_state": 2,
+    "name": "Silverknowes Tangent",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 71,
+    "moving_time": 71,
+    "start_date": "2024-07-14T12:01:46Z",
+    "start_date_local": "2024-07-14T13:01:46Z",
+    "distance": 396.4,
+    "start_index": 1274,
+    "end_index": 1345,
+    "device_watts": false,
+    "segment": {
+      "id": 17883694,
+      "resource_state": 2,
+      "name": "Silverknowes Tangent",
+      "activity_type": "Ride",
+      "distance": 396.4,
+      "average_grade": 0.5,
+      "maximum_grade": 2.7,
+      "elevation_high": 57,
+      "elevation_low": 54,
+      "start_latlng": [
+        55.967475,
+        -3.26877
+      ],
+      "end_latlng": [
+        55.967096,
+        -3.274962
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882717700,
+    "resource_state": 2,
+    "name": "Manicured Lawns",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 32,
+    "moving_time": 32,
+    "start_date": "2024-07-14T12:02:25Z",
+    "start_date_local": "2024-07-14T13:02:25Z",
+    "distance": 187.9,
+    "start_index": 1313,
+    "end_index": 1345,
+    "device_watts": false,
+    "segment": {
+      "id": 7317316,
+      "resource_state": 2,
+      "name": "Manicured Lawns",
+      "activity_type": "Ride",
+      "distance": 187.9,
+      "average_grade": 1.3,
+      "maximum_grade": 3.7,
+      "elevation_high": 55.8,
+      "elevation_low": 53.2,
+      "start_latlng": [
+        55.967417,
+        -3.271978
+      ],
+      "end_latlng": [
+        55.967058,
+        -3.274915
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880764000,
+    "resource_state": 2,
+    "name": "Barnton Ave onto Barnton Ave West ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 320,
+    "moving_time": 308,
+    "start_date": "2024-07-14T12:03:31Z",
+    "start_date_local": "2024-07-14T13:03:31Z",
+    "distance": 2261.3,
+    "start_index": 1369,
+    "end_index": 1678,
+    "device_watts": false,
+    "segment": {
+      "id": 7894353,
+      "resource_state": 2,
+      "name": "Barnton Ave onto Barnton Ave West ",
+      "activity_type": "Ride",
+      "distance": 2261.3,
+      "average_grade": -1,
+      "maximum_grade": 5.8,
+      "elevation_high": 71.1,
+      "elevation_low": 36,
+      "start_latlng": [
+        55.966556,
+        -3.276114
+      ],
+      "end_latlng": [
+        55.966126,
+        -3.307705
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881579000,
+    "resource_state": 2,
+    "name": "Barton Ave climb from Cramond Rd",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 96,
+    "moving_time": 96,
+    "start_date": "2024-07-14T12:03:35Z",
+    "start_date_local": "2024-07-14T13:03:35Z",
+    "distance": 507.8,
+    "start_index": 1373,
+    "end_index": 1469,
+    "device_watts": false,
+    "segment": {
+      "id": 5545204,
+      "resource_state": 2,
+      "name": "Barton Ave climb from Cramond Rd",
+      "activity_type": "Ride",
+      "distance": 507.8,
+      "average_grade": 2,
+      "maximum_grade": 5,
+      "elevation_high": 71.1,
+      "elevation_low": 58.9,
+      "start_latlng": [
+        55.966508,
+        -3.276392
+      ],
+      "end_latlng": [
+        55.967247,
+        -3.283679
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882304000,
+    "resource_state": 2,
+    "name": "Barnton Avenue kick",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 62,
+    "moving_time": 62,
+    "start_date": "2024-07-14T12:03:37Z",
+    "start_date_local": "2024-07-14T13:03:37Z",
+    "distance": 304.1,
+    "start_index": 1375,
+    "end_index": 1437,
+    "device_watts": false,
+    "segment": {
+      "id": 13431213,
+      "resource_state": 2,
+      "name": "Barnton Avenue kick",
+      "activity_type": "Ride",
+      "distance": 304.1,
+      "average_grade": -1.5,
+      "maximum_grade": 1.2,
+      "elevation_high": 40.8,
+      "elevation_low": 35.8,
+      "start_latlng": [
+        55.966469,
+        -3.276528
+      ],
+      "end_latlng": [
+        55.966181,
+        -3.281247
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302883124000,
+    "resource_state": 2,
+    "name": "Barnton Push Extended",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 291,
+    "moving_time": 291,
+    "start_date": "2024-07-14T12:03:38Z",
+    "start_date_local": "2024-07-14T13:03:38Z",
+    "distance": 2155.3,
+    "start_index": 1376,
+    "end_index": 1667,
+    "device_watts": false,
+    "segment": {
+      "id": 3435355,
+      "resource_state": 2,
+      "name": "Barnton Push Extended",
+      "activity_type": "Ride",
+      "distance": 2155.3,
+      "average_grade": -1.1,
+      "maximum_grade": 4.8,
+      "elevation_high": 71.2,
+      "elevation_low": 36.2,
+      "start_latlng": [
+        55.966448,
+        -3.27658
+      ],
+      "end_latlng": [
+        55.966419,
+        -3.306561
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880352000,
+    "resource_state": 2,
+    "name": "Barton Ave E to W",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 151,
+    "moving_time": 151,
+    "start_date": "2024-07-14T12:03:42Z",
+    "start_date_local": "2024-07-14T13:03:42Z",
+    "distance": 1075.6,
+    "start_index": 1380,
+    "end_index": 1531,
+    "device_watts": false,
+    "segment": {
+      "id": 7436165,
+      "resource_state": 2,
+      "name": "Barton Ave E to W",
+      "activity_type": "Ride",
+      "distance": 1075.6,
+      "average_grade": -0.6,
+      "maximum_grade": 5.5,
+      "elevation_high": 81.4,
+      "elevation_low": 71.3,
+      "start_latlng": [
+        55.966415,
+        -3.276882
+      ],
+      "end_latlng": [
+        55.965885,
+        -3.29266
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881667000,
+    "resource_state": 2,
+    "name": "RHS to Dip",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 251,
+    "moving_time": 239,
+    "start_date": "2024-07-14T12:04:40Z",
+    "start_date_local": "2024-07-14T13:04:40Z",
+    "distance": 1918.2,
+    "start_index": 1438,
+    "end_index": 1678,
+    "device_watts": false,
+    "segment": {
+      "id": 8453806,
+      "resource_state": 2,
+      "name": "RHS to Dip",
+      "activity_type": "Ride",
+      "distance": 1918.2,
+      "average_grade": -1.7,
+      "maximum_grade": 4.5,
+      "elevation_high": 71.2,
+      "elevation_low": 36,
+      "start_latlng": [
+        55.966172,
+        -3.281301
+      ],
+      "end_latlng": [
+        55.966037,
+        -3.307695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882993000,
+    "resource_state": 2,
+    "name": "The effortlessly recreated (westbound)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 69,
+    "moving_time": 69,
+    "start_date": "2024-07-14T12:06:24Z",
+    "start_date_local": "2024-07-14T13:06:24Z",
+    "distance": 491.9,
+    "start_index": 1542,
+    "end_index": 1611,
+    "device_watts": false,
+    "segment": {
+      "id": 7400329,
+      "resource_state": 2,
+      "name": "The effortlessly recreated (westbound)",
+      "activity_type": "Ride",
+      "distance": 491.9,
+      "average_grade": -1.5,
+      "maximum_grade": 6,
+      "elevation_high": 52.2,
+      "elevation_low": 41,
+      "start_latlng": [
+        55.966282,
+        -3.293765
+      ],
+      "end_latlng": [
+        55.968369,
+        -3.300198
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881371000,
+    "resource_state": 2,
+    "name": "Chicane Alley (W)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 56,
+    "moving_time": 56,
+    "start_date": "2024-07-14T12:06:34Z",
+    "start_date_local": "2024-07-14T13:06:34Z",
+    "distance": 403.7,
+    "start_index": 1552,
+    "end_index": 1608,
+    "device_watts": false,
+    "segment": {
+      "id": 7363194,
+      "resource_state": 2,
+      "name": "Chicane Alley (W)",
+      "activity_type": "Ride",
+      "distance": 403.7,
+      "average_grade": -1.8,
+      "maximum_grade": 4.2,
+      "elevation_high": 47.5,
+      "elevation_low": 36.3,
+      "start_latlng": [
+        55.966756,
+        -3.294022
+      ],
+      "end_latlng": [
+        55.968428,
+        -3.299954
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882177000,
+    "resource_state": 2,
+    "name": "Barnton Avenue West to Whitehouse Road ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 71,
+    "moving_time": 71,
+    "start_date": "2024-07-14T12:07:25Z",
+    "start_date_local": "2024-07-14T13:07:25Z",
+    "distance": 562.8,
+    "start_index": 1603,
+    "end_index": 1674,
+    "device_watts": false,
+    "segment": {
+      "id": 31005988,
+      "resource_state": 2,
+      "name": "Barnton Avenue West to Whitehouse Road ",
+      "activity_type": "Ride",
+      "distance": 562.8,
+      "average_grade": -1,
+      "maximum_grade": 4.6,
+      "elevation_high": 44.9,
+      "elevation_low": 36.4,
+      "start_latlng": [
+        55.968393,
+        -3.2996
+      ],
+      "end_latlng": [
+        55.966271,
+        -3.307553
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cramond",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881638400,
+    "resource_state": 2,
+    "name": "Barnton down hill, Pot-hole City",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 65,
+    "moving_time": 65,
+    "start_date": "2024-07-14T12:08:57Z",
+    "start_date_local": "2024-07-14T13:08:57Z",
+    "distance": 495.2,
+    "start_index": 1684,
+    "end_index": 1749,
+    "device_watts": false,
+    "segment": {
+      "id": 7894373,
+      "resource_state": 2,
+      "name": "Barnton down hill, Pot-hole City",
+      "activity_type": "Ride",
+      "distance": 495.2,
+      "average_grade": -2.9,
+      "maximum_grade": 6.3,
+      "elevation_high": 36.7,
+      "elevation_low": 19.7,
+      "start_latlng": [
+        55.96606,
+        -3.307922
+      ],
+      "end_latlng": [
+        55.965134,
+        -3.315264
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880631000,
+    "resource_state": 2,
+    "name": "Cramond: Brig to Brig",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 240,
+    "moving_time": 240,
+    "start_date": "2024-07-14T12:10:12Z",
+    "start_date_local": "2024-07-14T13:10:12Z",
+    "distance": 1076.71,
+    "start_index": 1759,
+    "end_index": 1999,
+    "device_watts": false,
+    "segment": {
+      "id": 2285714,
+      "resource_state": 2,
+      "name": "Cramond: Brig to Brig",
+      "activity_type": "Ride",
+      "distance": 1076.71,
+      "average_grade": 3,
+      "maximum_grade": 6.7,
+      "elevation_high": 57,
+      "elevation_low": 22.6,
+      "start_latlng": [
+        55.9651670884341,
+        -3.3160830661654472
+      ],
+      "end_latlng": [
+        55.97138034179807,
+        -3.3282918948680162
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879976400,
+    "resource_state": 2,
+    "name": "Bridge Up (from the gates)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 191,
+    "moving_time": 191,
+    "start_date": "2024-07-14T12:10:19Z",
+    "start_date_local": "2024-07-14T13:10:19Z",
+    "distance": 757.8,
+    "start_index": 1766,
+    "end_index": 1957,
+    "device_watts": false,
+    "segment": {
+      "id": 20238168,
+      "resource_state": 2,
+      "name": "Bridge Up (from the gates)",
+      "activity_type": "Ride",
+      "distance": 757.8,
+      "average_grade": 4.8,
+      "maximum_grade": 9.7,
+      "elevation_high": 102.2,
+      "elevation_low": 66.2,
+      "start_latlng": [
+        55.965289,
+        -3.316526
+      ],
+      "end_latlng": [
+        55.970094,
+        -3.324697
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879788000,
+    "resource_state": 2,
+    "name": "The Hairy Cow Climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 567,
+    "moving_time": 567,
+    "start_date": "2024-07-14T12:10:20Z",
+    "start_date_local": "2024-07-14T13:10:20Z",
+    "distance": 3419.1,
+    "start_index": 1767,
+    "end_index": 2334,
+    "device_watts": false,
+    "segment": {
+      "id": 18733529,
+      "resource_state": 2,
+      "name": "The Hairy Cow Climb",
+      "activity_type": "Ride",
+      "distance": 3419.1,
+      "average_grade": 1.1,
+      "maximum_grade": 16.9,
+      "elevation_high": 59.5,
+      "elevation_low": 23,
+      "start_latlng": [
+        55.965239,
+        -3.316569
+      ],
+      "end_latlng": [
+        55.984353,
+        -3.358666
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880582700,
+    "resource_state": 2,
+    "name": "Crammond Burner 🔥",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 111,
+    "moving_time": 111,
+    "start_date": "2024-07-14T12:10:24Z",
+    "start_date_local": "2024-07-14T13:10:24Z",
+    "distance": 425.9,
+    "start_index": 1771,
+    "end_index": 1882,
+    "device_watts": false,
+    "segment": {
+      "id": 16496985,
+      "resource_state": 2,
+      "name": "Crammond Burner 🔥",
+      "activity_type": "Ride",
+      "distance": 425.9,
+      "average_grade": 5.1,
+      "maximum_grade": 12.8,
+      "elevation_high": 54.8,
+      "elevation_low": 33,
+      "start_latlng": [
+        55.965271,
+        -3.316837
+      ],
+      "end_latlng": [
+        55.968033,
+        -3.321502
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881053700,
+    "resource_state": 2,
+    "name": "Crammond Leg Checker",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 40,
+    "moving_time": 40,
+    "start_date": "2024-07-14T12:10:28Z",
+    "start_date_local": "2024-07-14T13:10:28Z",
+    "distance": 128,
+    "start_index": 1775,
+    "end_index": 1815,
+    "device_watts": false,
+    "segment": {
+      "id": 4677907,
+      "resource_state": 2,
+      "name": "Crammond Leg Checker",
+      "activity_type": "Ride",
+      "distance": 128,
+      "average_grade": 8,
+      "maximum_grade": 11.1,
+      "elevation_high": 12.6,
+      "elevation_low": 2.4,
+      "start_latlng": [
+        55.96532,
+        -3.317033
+      ],
+      "end_latlng": [
+        55.96615,
+        -3.318417
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "United Kingdom",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881665000,
+    "resource_state": 2,
+    "name": "Steep and bumpy bit",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 80,
+    "moving_time": 80,
+    "start_date": "2024-07-14T12:10:35Z",
+    "start_date_local": "2024-07-14T13:10:35Z",
+    "distance": 302.7,
+    "start_index": 1782,
+    "end_index": 1862,
+    "device_watts": false,
+    "segment": {
+      "id": 20556138,
+      "resource_state": 2,
+      "name": "Steep and bumpy bit",
+      "activity_type": "Ride",
+      "distance": 302.7,
+      "average_grade": 4.8,
+      "maximum_grade": 12.5,
+      "elevation_high": 51.4,
+      "elevation_low": 37,
+      "start_latlng": [
+        55.965455,
+        -3.317305
+      ],
+      "end_latlng": [
+        55.967342,
+        -3.320487
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881664000,
+    "resource_state": 2,
+    "name": "Segment",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 162,
+    "moving_time": 162,
+    "start_date": "2024-07-14T12:11:09Z",
+    "start_date_local": "2024-07-14T13:11:09Z",
+    "distance": 738.1,
+    "start_index": 1816,
+    "end_index": 1978,
+    "device_watts": false,
+    "segment": {
+      "id": 5759084,
+      "resource_state": 2,
+      "name": "Segment",
+      "activity_type": "Ride",
+      "distance": 738.1,
+      "average_grade": 3.6,
+      "maximum_grade": 15.1,
+      "elevation_high": 47.2,
+      "elevation_low": 20.6,
+      "start_latlng": [
+        55.966149,
+        -3.318462
+      ],
+      "end_latlng": [
+        55.971089,
+        -3.326042
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry EH30, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302883123000,
+    "resource_state": 2,
+    "name": "Brig to Dalmeny gate",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 514,
+    "moving_time": 514,
+    "start_date": "2024-07-14T12:11:12Z",
+    "start_date_local": "2024-07-14T13:11:12Z",
+    "distance": 3252.1,
+    "start_index": 1819,
+    "end_index": 2333,
+    "device_watts": false,
+    "segment": {
+      "id": 7894397,
+      "resource_state": 2,
+      "name": "Brig to Dalmeny gate",
+      "activity_type": "Ride",
+      "distance": 3252.1,
+      "average_grade": 0.9,
+      "maximum_grade": 8,
+      "elevation_high": 58.2,
+      "elevation_low": 27.4,
+      "start_latlng": [
+        55.96616,
+        -3.318642
+      ],
+      "end_latlng": [
+        55.984337,
+        -3.358624
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry EH30, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880323600,
+    "resource_state": 2,
+    "name": "cycle path climb north",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 155,
+    "moving_time": 155,
+    "start_date": "2024-07-14T12:11:14Z",
+    "start_date_local": "2024-07-14T13:11:14Z",
+    "distance": 698.2,
+    "start_index": 1821,
+    "end_index": 1976,
+    "device_watts": false,
+    "segment": {
+      "id": 1393520,
+      "resource_state": 2,
+      "name": "cycle path climb north",
+      "activity_type": "Ride",
+      "distance": 698.2,
+      "average_grade": 3.7,
+      "maximum_grade": 6.6,
+      "elevation_high": 56.2,
+      "elevation_low": 30.3,
+      "start_latlng": [
+        55.96613521889533,
+        -3.3188476322106197
+      ],
+      "end_latlng": [
+        55.97092894791553,
+        -3.3259196421575195
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879568000,
+    "resource_state": 2,
+    "name": "Cycle Path Climb North",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 152,
+    "moving_time": 152,
+    "start_date": "2024-07-14T12:11:14Z",
+    "start_date_local": "2024-07-14T13:11:14Z",
+    "distance": 674.8,
+    "start_index": 1821,
+    "end_index": 1973,
+    "device_watts": false,
+    "segment": {
+      "id": 23222435,
+      "resource_state": 2,
+      "name": "Cycle Path Climb North",
+      "activity_type": "Ride",
+      "distance": 674.8,
+      "average_grade": 3.5,
+      "maximum_grade": 9.2,
+      "elevation_high": 63.4,
+      "elevation_low": 37,
+      "start_latlng": [
+        55.966182,
+        -3.318776
+      ],
+      "end_latlng": [
+        55.97082,
+        -3.325559
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cramond",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881153000,
+    "resource_state": 2,
+    "name": "A90 Cycle Path Climb to Dalmeny Gate",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 147,
+    "moving_time": 147,
+    "start_date": "2024-07-14T12:11:16Z",
+    "start_date_local": "2024-07-14T13:11:16Z",
+    "distance": 651.2,
+    "start_index": 1823,
+    "end_index": 1970,
+    "device_watts": false,
+    "segment": {
+      "id": 10199435,
+      "resource_state": 2,
+      "name": "A90 Cycle Path Climb to Dalmeny Gate",
+      "activity_type": "Ride",
+      "distance": 651.2,
+      "average_grade": 3.9,
+      "maximum_grade": 8.5,
+      "elevation_high": 56.8,
+      "elevation_low": 30.7,
+      "start_latlng": [
+        55.966208,
+        -3.318853
+      ],
+      "end_latlng": [
+        55.970666,
+        -3.325438
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880270300,
+    "resource_state": 2,
+    "name": "How can a climb on a cycle path possibly be hazardous????",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 162,
+    "moving_time": 162,
+    "start_date": "2024-07-14T12:11:18Z",
+    "start_date_local": "2024-07-14T13:11:18Z",
+    "distance": 758.9,
+    "start_index": 1825,
+    "end_index": 1987,
+    "device_watts": false,
+    "segment": {
+      "id": 8301271,
+      "resource_state": 2,
+      "name": "How can a climb on a cycle path possibly be hazardous????",
+      "activity_type": "Ride",
+      "distance": 758.9,
+      "average_grade": 3.3,
+      "maximum_grade": 7.7,
+      "elevation_high": 56.8,
+      "elevation_low": 31.1,
+      "start_latlng": [
+        55.966283,
+        -3.31898
+      ],
+      "end_latlng": [
+        55.971313,
+        -3.326921
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881834000,
+    "resource_state": 2,
+    "name": "Edinburgh to Dalmeny (cycle path)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 637,
+    "moving_time": 637,
+    "start_date": "2024-07-14T12:11:22Z",
+    "start_date_local": "2024-07-14T13:11:22Z",
+    "distance": 4078.86,
+    "start_index": 1829,
+    "end_index": 2466,
+    "device_watts": false,
+    "segment": {
+      "id": 3325745,
+      "resource_state": 2,
+      "name": "Edinburgh to Dalmeny (cycle path)",
+      "activity_type": "Ride",
+      "distance": 4078.86,
+      "average_grade": 0.7,
+      "maximum_grade": 7.1,
+      "elevation_high": 68,
+      "elevation_low": 27.5,
+      "start_latlng": [
+        55.96641,
+        -3.319125
+      ],
+      "end_latlng": [
+        55.982257,
+        -3.371828
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879133700,
+    "resource_state": 2,
+    "name": "bus stop sprint",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 189,
+    "moving_time": 189,
+    "start_date": "2024-07-14T12:13:46Z",
+    "start_date_local": "2024-07-14T13:13:46Z",
+    "distance": 1745.7,
+    "start_index": 1973,
+    "end_index": 2162,
+    "device_watts": false,
+    "segment": {
+      "id": 21297384,
+      "resource_state": 2,
+      "name": "bus stop sprint",
+      "activity_type": "Ride",
+      "distance": 1745.7,
+      "average_grade": -1.4,
+      "maximum_grade": 3.7,
+      "elevation_high": 59.3,
+      "elevation_low": 26.5,
+      "start_latlng": [
+        55.970868,
+        -3.325492
+      ],
+      "end_latlng": [
+        55.98025,
+        -3.347739
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879015000,
+    "resource_state": 2,
+    "name": "Down the A90 (kind of)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 135,
+    "moving_time": 135,
+    "start_date": "2024-07-14T12:14:09Z",
+    "start_date_local": "2024-07-14T13:14:09Z",
+    "distance": 1394.7,
+    "start_index": 1996,
+    "end_index": 2131,
+    "device_watts": false,
+    "segment": {
+      "id": 35120860,
+      "resource_state": 2,
+      "name": "Down the A90 (kind of)",
+      "activity_type": "Ride",
+      "distance": 1394.7,
+      "average_grade": -2.1,
+      "maximum_grade": 0.3,
+      "elevation_high": 57,
+      "elevation_low": 27.2,
+      "start_latlng": [
+        55.971602,
+        -3.327632
+      ],
+      "end_latlng": [
+        55.979088,
+        -3.345486
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882917400,
+    "resource_state": 2,
+    "name": "Burnshot Down hill",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 108,
+    "moving_time": 108,
+    "start_date": "2024-07-14T12:14:12Z",
+    "start_date_local": "2024-07-14T13:14:12Z",
+    "distance": 1143.5,
+    "start_index": 1999,
+    "end_index": 2107,
+    "device_watts": false,
+    "segment": {
+      "id": 7894432,
+      "resource_state": 2,
+      "name": "Burnshot Down hill",
+      "activity_type": "Ride",
+      "distance": 1143.5,
+      "average_grade": -2.4,
+      "maximum_grade": 2.3,
+      "elevation_high": 57,
+      "elevation_low": 27.4,
+      "start_latlng": [
+        55.971698,
+        -3.327939
+      ],
+      "end_latlng": [
+        55.97788,
+        -3.342522
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry EH30, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881838000,
+    "resource_state": 2,
+    "name": "Climb to Dalmeny Gate",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 226,
+    "moving_time": 226,
+    "start_date": "2024-07-14T12:16:00Z",
+    "start_date_local": "2024-07-14T13:16:00Z",
+    "distance": 1240.9,
+    "start_index": 2107,
+    "end_index": 2333,
+    "device_watts": false,
+    "segment": {
+      "id": 7894411,
+      "resource_state": 2,
+      "name": "Climb to Dalmeny Gate",
+      "activity_type": "Ride",
+      "distance": 1240.9,
+      "average_grade": 2.4,
+      "maximum_grade": 7.7,
+      "elevation_high": 58.2,
+      "elevation_low": 28,
+      "start_latlng": [
+        55.97788,
+        -3.342522
+      ],
+      "end_latlng": [
+        55.984337,
+        -3.358624
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "City of Edinburgh, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881512400,
+    "resource_state": 2,
+    "name": "B924 north boost",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 160,
+    "moving_time": 160,
+    "start_date": "2024-07-14T12:17:01Z",
+    "start_date_local": "2024-07-14T13:17:01Z",
+    "distance": 774.565,
+    "start_index": 2168,
+    "end_index": 2328,
+    "device_watts": false,
+    "segment": {
+      "id": 1574989,
+      "resource_state": 2,
+      "name": "B924 north boost",
+      "activity_type": "Ride",
+      "distance": 774.565,
+      "average_grade": 2.5,
+      "maximum_grade": 5.4,
+      "elevation_high": 56.9,
+      "elevation_low": 37.4,
+      "start_latlng": [
+        55.980440729184764,
+        -3.3482447727138873
+      ],
+      "end_latlng": [
+        55.98420176580121,
+        -3.3584173138850884
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879438000,
+    "resource_state": 2,
+    "name": "B924 Steep Bit",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 104,
+    "moving_time": 104,
+    "start_date": "2024-07-14T12:17:58Z",
+    "start_date_local": "2024-07-14T13:17:58Z",
+    "distance": 468.4,
+    "start_index": 2225,
+    "end_index": 2329,
+    "device_watts": false,
+    "segment": {
+      "id": 5039958,
+      "resource_state": 2,
+      "name": "B924 Steep Bit",
+      "activity_type": "Ride",
+      "distance": 468.4,
+      "average_grade": 4,
+      "maximum_grade": 11.2,
+      "elevation_high": 42.4,
+      "elevation_low": 23.8,
+      "start_latlng": [
+        55.982009,
+        -3.352093
+      ],
+      "end_latlng": [
+        55.984264,
+        -3.358421
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry EH30, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880706600,
+    "resource_state": 2,
+    "name": "Sonic Blah!",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 46,
+    "moving_time": 46,
+    "start_date": "2024-07-14T12:18:35Z",
+    "start_date_local": "2024-07-14T13:18:35Z",
+    "distance": 180.6,
+    "start_index": 2262,
+    "end_index": 2308,
+    "device_watts": false,
+    "segment": {
+      "id": 5450009,
+      "resource_state": 2,
+      "name": "Sonic Blah!",
+      "activity_type": "Ride",
+      "distance": 180.6,
+      "average_grade": 3.7,
+      "maximum_grade": 5,
+      "elevation_high": 53.5,
+      "elevation_low": 46.8,
+      "start_latlng": [
+        55.983013,
+        -3.354763
+      ],
+      "end_latlng": [
+        55.983956,
+        -3.357117
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "City of Edinburgh, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881327000,
+    "resource_state": 2,
+    "name": "west to Dalmeny",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 130,
+    "moving_time": 130,
+    "start_date": "2024-07-14T12:19:56Z",
+    "start_date_local": "2024-07-14T13:19:56Z",
+    "distance": 891.629,
+    "start_index": 2343,
+    "end_index": 2473,
+    "device_watts": false,
+    "segment": {
+      "id": 1393495,
+      "resource_state": 2,
+      "name": "west to Dalmeny",
+      "activity_type": "Ride",
+      "distance": 891.629,
+      "average_grade": 0.2,
+      "maximum_grade": 3.2,
+      "elevation_high": 67.8,
+      "elevation_low": 59.3,
+      "start_latlng": [
+        55.984387175228775,
+        -3.359138908511582
+      ],
+      "end_latlng": [
+        55.982204616805326,
+        -3.3726830871745572
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880029700,
+    "resource_state": 2,
+    "name": "Scotstoun West",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 114,
+    "moving_time": 103,
+    "start_date": "2024-07-14T12:24:29Z",
+    "start_date_local": "2024-07-14T13:24:29Z",
+    "distance": 875,
+    "start_index": 2616,
+    "end_index": 2720,
+    "device_watts": false,
+    "segment": {
+      "id": 9318652,
+      "resource_state": 2,
+      "name": "Scotstoun West",
+      "activity_type": "Ride",
+      "distance": 875,
+      "average_grade": -0.6,
+      "maximum_grade": 1.9,
+      "elevation_high": 56.2,
+      "elevation_low": 51,
+      "start_latlng": [
+        55.982721,
+        -3.383586
+      ],
+      "end_latlng": [
+        55.983557,
+        -3.396442
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879040500,
+    "resource_state": 2,
+    "name": "H-Bomb Burst (east to west)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 60,
+    "moving_time": 60,
+    "start_date": "2024-07-14T12:24:37Z",
+    "start_date_local": "2024-07-14T13:24:37Z",
+    "distance": 554.6,
+    "start_index": 2624,
+    "end_index": 2684,
+    "device_watts": false,
+    "segment": {
+      "id": 8548914,
+      "resource_state": 2,
+      "name": "H-Bomb Burst (east to west)",
+      "activity_type": "Ride",
+      "distance": 554.6,
+      "average_grade": -0.1,
+      "maximum_grade": 1.9,
+      "elevation_high": 56.1,
+      "elevation_low": 54,
+      "start_latlng": [
+        55.982702,
+        -3.38472
+      ],
+      "end_latlng": [
+        55.982366,
+        -3.39329
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880509000,
+    "resource_state": 2,
+    "name": "Shorter Scotstoun West",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 70,
+    "moving_time": 70,
+    "start_date": "2024-07-14T12:24:38Z",
+    "start_date_local": "2024-07-14T13:24:38Z",
+    "distance": 650.9,
+    "start_index": 2625,
+    "end_index": 2695,
+    "device_watts": false,
+    "segment": {
+      "id": 14977011,
+      "resource_state": 2,
+      "name": "Shorter Scotstoun West",
+      "activity_type": "Ride",
+      "distance": 650.9,
+      "average_grade": -0.2,
+      "maximum_grade": 3.2,
+      "elevation_high": 56,
+      "elevation_low": 53.8,
+      "start_latlng": [
+        55.982678,
+        -3.384842
+      ],
+      "end_latlng": [
+        55.982741,
+        -3.394795
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880862000,
+    "resource_state": 2,
+    "name": "Ferry Muir Sprint",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 54,
+    "moving_time": 54,
+    "start_date": "2024-07-14T12:26:39Z",
+    "start_date_local": "2024-07-14T13:26:39Z",
+    "distance": 359.605,
+    "start_index": 2736,
+    "end_index": 2790,
+    "device_watts": false,
+    "segment": {
+      "id": 3229187,
+      "resource_state": 2,
+      "name": "Ferry Muir Sprint",
+      "activity_type": "Ride",
+      "distance": 359.605,
+      "average_grade": -0.3,
+      "maximum_grade": 2.1,
+      "elevation_high": 52.1,
+      "elevation_low": 48.3,
+      "start_latlng": [
+        55.98286177,
+        -3.39669194
+      ],
+      "end_latlng": [
+        55.98443973,
+        -3.40137678
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880135000,
+    "resource_state": 2,
+    "name": "Up the Bridge (north) Hazardous? Don't be daft!!!",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 250,
+    "moving_time": 250,
+    "start_date": "2024-07-14T12:29:20Z",
+    "start_date_local": "2024-07-14T13:29:20Z",
+    "distance": 1390.7,
+    "start_index": 2897,
+    "end_index": 3147,
+    "device_watts": false,
+    "segment": {
+      "id": 7564829,
+      "resource_state": 2,
+      "name": "Up the Bridge (north) Hazardous? Don't be daft!!!",
+      "activity_type": "Ride",
+      "distance": 1390.7,
+      "average_grade": -2.5,
+      "maximum_grade": 25.5,
+      "elevation_high": 34.7,
+      "elevation_low": 0,
+      "start_latlng": [
+        55.989222,
+        -3.404499
+      ],
+      "end_latlng": [
+        56.001696,
+        -3.403869
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882951000,
+    "resource_state": 2,
+    "name": "FRB North Climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 153,
+    "moving_time": 153,
+    "start_date": "2024-07-14T12:30:01Z",
+    "start_date_local": "2024-07-14T13:30:01Z",
+    "distance": 807.5,
+    "start_index": 2938,
+    "end_index": 3091,
+    "device_watts": false,
+    "segment": {
+      "id": 9460559,
+      "resource_state": 2,
+      "name": "FRB North Climb",
+      "activity_type": "Ride",
+      "distance": 807.5,
+      "average_grade": 3,
+      "maximum_grade": 6.5,
+      "elevation_high": 72.6,
+      "elevation_low": 48.6,
+      "start_latlng": [
+        55.991706,
+        -3.404396
+      ],
+      "end_latlng": [
+        55.998955,
+        -3.403961
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882083000,
+    "resource_state": 2,
+    "name": "Up the Bridge (going North)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 186,
+    "moving_time": 186,
+    "start_date": "2024-07-14T12:30:05Z",
+    "start_date_local": "2024-07-14T13:30:05Z",
+    "distance": 984.6,
+    "start_index": 2942,
+    "end_index": 3128,
+    "device_watts": false,
+    "segment": {
+      "id": 4580487,
+      "resource_state": 2,
+      "name": "Up the Bridge (going North)",
+      "activity_type": "Ride",
+      "distance": 984.6,
+      "average_grade": 2.4,
+      "maximum_grade": 9.6,
+      "elevation_high": 45.2,
+      "elevation_low": 21.8,
+      "start_latlng": [
+        55.991912,
+        -3.404371
+      ],
+      "end_latlng": [
+        56.00075,
+        -3.403937
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880768000,
+    "resource_state": 2,
+    "name": "Under and Up",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 69,
+    "moving_time": 69,
+    "start_date": "2024-07-14T12:39:43Z",
+    "start_date_local": "2024-07-14T13:39:43Z",
+    "distance": 488.6,
+    "start_index": 3328,
+    "end_index": 3397,
+    "device_watts": false,
+    "segment": {
+      "id": 26284020,
+      "resource_state": 2,
+      "name": "Under and Up",
+      "activity_type": "Ride",
+      "distance": 488.6,
+      "average_grade": 4.7,
+      "maximum_grade": 9.5,
+      "elevation_high": 47.4,
+      "elevation_low": 24.4,
+      "start_latlng": [
+        55.990068,
+        -3.40429
+      ],
+      "end_latlng": [
+        55.986278,
+        -3.403833
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881934300,
+    "resource_state": 2,
+    "name": "Up the path",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 49,
+    "moving_time": 49,
+    "start_date": "2024-07-14T12:39:55Z",
+    "start_date_local": "2024-07-14T13:39:55Z",
+    "distance": 302.5,
+    "start_index": 3340,
+    "end_index": 3389,
+    "device_watts": false,
+    "segment": {
+      "id": 4580276,
+      "resource_state": 2,
+      "name": "Up the path",
+      "activity_type": "Ride",
+      "distance": 302.5,
+      "average_grade": 1.3,
+      "maximum_grade": 6.3,
+      "elevation_high": 51.4,
+      "elevation_low": 47.4,
+      "start_latlng": [
+        55.989163,
+        -3.40446
+      ],
+      "end_latlng": [
+        55.986463,
+        -3.404236
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882459600,
+    "resource_state": 2,
+    "name": "Scotstoun East",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 143,
+    "moving_time": 143,
+    "start_date": "2024-07-14T12:42:39Z",
+    "start_date_local": "2024-07-14T13:42:39Z",
+    "distance": 879.7,
+    "start_index": 3504,
+    "end_index": 3647,
+    "device_watts": false,
+    "segment": {
+      "id": 9318668,
+      "resource_state": 2,
+      "name": "Scotstoun East",
+      "activity_type": "Ride",
+      "distance": 879.7,
+      "average_grade": 0.6,
+      "maximum_grade": 3.4,
+      "elevation_high": 56.2,
+      "elevation_low": 50.8,
+      "start_latlng": [
+        55.983688,
+        -3.396387
+      ],
+      "end_latlng": [
+        55.982711,
+        -3.383591
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881603600,
+    "resource_state": 2,
+    "name": "Agilent Approach",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 134,
+    "moving_time": 134,
+    "start_date": "2024-07-14T12:42:50Z",
+    "start_date_local": "2024-07-14T13:42:50Z",
+    "distance": 838.405,
+    "start_index": 3515,
+    "end_index": 3649,
+    "device_watts": false,
+    "segment": {
+      "id": 1650022,
+      "resource_state": 2,
+      "name": "Agilent Approach",
+      "activity_type": "Ride",
+      "distance": 838.405,
+      "average_grade": 0.7,
+      "maximum_grade": 4.2,
+      "elevation_high": 113,
+      "elevation_low": 104,
+      "start_latlng": [
+        55.983297,
+        -3.395945
+      ],
+      "end_latlng": [
+        55.982621,
+        -3.383392
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882231300,
+    "resource_state": 2,
+    "name": "Home to Dalmeny Gate",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 150,
+    "moving_time": 150,
+    "start_date": "2024-07-14T12:47:49Z",
+    "start_date_local": "2024-07-14T13:47:49Z",
+    "distance": 933.9,
+    "start_index": 3814,
+    "end_index": 3964,
+    "device_watts": false,
+    "segment": {
+      "id": 8347833,
+      "resource_state": 2,
+      "name": "Home to Dalmeny Gate",
+      "activity_type": "Ride",
+      "distance": 933.9,
+      "average_grade": -0.2,
+      "maximum_grade": 4.5,
+      "elevation_high": 67.9,
+      "elevation_low": 59.2,
+      "start_latlng": [
+        55.982142,
+        -3.373178
+      ],
+      "end_latlng": [
+        55.984394,
+        -3.359055
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dalmeny",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881132500,
+    "resource_state": 2,
+    "name": "Dalmeny > Cramond Brig",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 621,
+    "moving_time": 611,
+    "start_date": "2024-07-14T12:47:52Z",
+    "start_date_local": "2024-07-14T13:47:52Z",
+    "distance": 4267.5,
+    "start_index": 3817,
+    "end_index": 4429,
+    "device_watts": false,
+    "segment": {
+      "id": 36291165,
+      "resource_state": 2,
+      "name": "Dalmeny > Cramond Brig",
+      "activity_type": "Ride",
+      "distance": 4267.5,
+      "average_grade": -0.8,
+      "maximum_grade": 7.4,
+      "elevation_high": 67,
+      "elevation_low": 27.4,
+      "start_latlng": [
+        55.982197,
+        -3.373002
+      ],
+      "end_latlng": [
+        55.965759,
+        -3.317753
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879948000,
+    "resource_state": 2,
+    "name": "East from Dalmeny",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 135,
+    "moving_time": 135,
+    "start_date": "2024-07-14T12:47:54Z",
+    "start_date_local": "2024-07-14T13:47:54Z",
+    "distance": 859.256,
+    "start_index": 3819,
+    "end_index": 3954,
+    "device_watts": false,
+    "segment": {
+      "id": 1575103,
+      "resource_state": 2,
+      "name": "East from Dalmeny",
+      "activity_type": "Ride",
+      "distance": 859.256,
+      "average_grade": -0.1,
+      "maximum_grade": 3.6,
+      "elevation_high": 68,
+      "elevation_low": 60.2,
+      "start_latlng": [
+        55.98217991976815,
+        -3.3728299395585957
+      ],
+      "end_latlng": [
+        55.984393459065885,
+        -3.35984162195394
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dalmeny",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302883150000,
+    "resource_state": 2,
+    "name": "Dalmeny to Edinburgh (cycle path)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 584,
+    "moving_time": 584,
+    "start_date": "2024-07-14T12:48:04Z",
+    "start_date_local": "2024-07-14T13:48:04Z",
+    "distance": 4113.94,
+    "start_index": 3829,
+    "end_index": 4413,
+    "device_watts": false,
+    "segment": {
+      "id": 3325789,
+      "resource_state": 2,
+      "name": "Dalmeny to Edinburgh (cycle path)",
+      "activity_type": "Ride",
+      "distance": 4113.94,
+      "average_grade": -0.8,
+      "maximum_grade": 7.6,
+      "elevation_high": 67.8,
+      "elevation_low": 27.4,
+      "start_latlng": [
+        55.982301,
+        -3.372
+      ],
+      "end_latlng": [
+        55.966122,
+        -3.318895
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dalmeny",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881735700,
+    "resource_state": 2,
+    "name": "Dalmeny to Edinburgh",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 613,
+    "moving_time": 603,
+    "start_date": "2024-07-14T12:48:07Z",
+    "start_date_local": "2024-07-14T13:48:07Z",
+    "distance": 4239.9,
+    "start_index": 3832,
+    "end_index": 4436,
+    "device_watts": false,
+    "segment": {
+      "id": 8050832,
+      "resource_state": 2,
+      "name": "Dalmeny to Edinburgh",
+      "activity_type": "Ride",
+      "distance": 4239.9,
+      "average_grade": -0.9,
+      "maximum_grade": 8.1,
+      "elevation_high": 67.8,
+      "elevation_low": 22.5,
+      "start_latlng": [
+        55.982343,
+        -3.371739
+      ],
+      "end_latlng": [
+        55.965085,
+        -3.317572
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": true
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881466400,
+    "resource_state": 2,
+    "name": "Dalmeny Gate to Burnshot downhill",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 151,
+    "moving_time": 151,
+    "start_date": "2024-07-14T12:50:22Z",
+    "start_date_local": "2024-07-14T13:50:22Z",
+    "distance": 1369.6,
+    "start_index": 3967,
+    "end_index": 4118,
+    "device_watts": false,
+    "segment": {
+      "id": 7886363,
+      "resource_state": 2,
+      "name": "Dalmeny Gate to Burnshot downhill",
+      "activity_type": "Ride",
+      "distance": 1369.6,
+      "average_grade": -2.3,
+      "maximum_grade": 1.4,
+      "elevation_high": 59.1,
+      "elevation_low": 27.4,
+      "start_latlng": [
+        55.984398,
+        -3.358943
+      ],
+      "end_latlng": [
+        55.977252,
+        -3.341216
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry EH30, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880986000,
+    "resource_state": 2,
+    "name": "B924 Fast Decent",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 82,
+    "moving_time": 82,
+    "start_date": "2024-07-14T12:50:28Z",
+    "start_date_local": "2024-07-14T13:50:28Z",
+    "distance": 766.229,
+    "start_index": 3973,
+    "end_index": 4055,
+    "device_watts": false,
+    "segment": {
+      "id": 3416743,
+      "resource_state": 2,
+      "name": "B924 Fast Decent",
+      "activity_type": "Ride",
+      "distance": 766.229,
+      "average_grade": -2.7,
+      "maximum_grade": -0.4,
+      "elevation_high": 58.3,
+      "elevation_low": 37.5,
+      "start_latlng": [
+        55.984349,
+        -3.35862
+      ],
+      "end_latlng": [
+        55.980522,
+        -3.348436
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879471600,
+    "resource_state": 2,
+    "name": "From here to there (cycle path)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 437,
+    "moving_time": 437,
+    "start_date": "2024-07-14T12:50:31Z",
+    "start_date_local": "2024-07-14T13:50:31Z",
+    "distance": 3221.81,
+    "start_index": 3976,
+    "end_index": 4413,
+    "device_watts": false,
+    "segment": {
+      "id": 3897037,
+      "resource_state": 2,
+      "name": "From here to there (cycle path)",
+      "activity_type": "Ride",
+      "distance": 3221.81,
+      "average_grade": -0.9,
+      "maximum_grade": 7.9,
+      "elevation_high": 57.6,
+      "elevation_low": 27.4,
+      "start_latlng": [
+        55.984311,
+        -3.358435
+      ],
+      "end_latlng": [
+        55.966111,
+        -3.318869
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "EH30, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880234500,
+    "resource_state": 2,
+    "name": "pinging under planes",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 333,
+    "moving_time": 333,
+    "start_date": "2024-07-14T12:50:38Z",
+    "start_date_local": "2024-07-14T13:50:38Z",
+    "distance": 2399,
+    "start_index": 3983,
+    "end_index": 4316,
+    "device_watts": false,
+    "segment": {
+      "id": 20563126,
+      "resource_state": 2,
+      "name": "pinging under planes",
+      "activity_type": "Ride",
+      "distance": 2399,
+      "average_grade": 0,
+      "maximum_grade": 4.7,
+      "elevation_high": 57.7,
+      "elevation_low": 26.5,
+      "start_latlng": [
+        55.984166,
+        -3.357827
+      ],
+      "end_latlng": [
+        55.971411,
+        -3.326984
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882371600,
+    "resource_state": 2,
+    "name": "climb to Burnshot Bridge",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 209,
+    "moving_time": 209,
+    "start_date": "2024-07-14T12:52:38Z",
+    "start_date_local": "2024-07-14T13:52:38Z",
+    "distance": 1192.5,
+    "start_index": 4103,
+    "end_index": 4312,
+    "device_watts": false,
+    "segment": {
+      "id": 29921487,
+      "resource_state": 2,
+      "name": "climb to Burnshot Bridge",
+      "activity_type": "Ride",
+      "distance": 1192.5,
+      "average_grade": 2.5,
+      "maximum_grade": 6.2,
+      "elevation_high": 53.2,
+      "elevation_low": 23.2,
+      "start_latlng": [
+        55.977988,
+        -3.34257
+      ],
+      "end_latlng": [
+        55.971544,
+        -3.327389
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881282000,
+    "resource_state": 2,
+    "name": "Burnshot to Glenpunty Climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 201,
+    "moving_time": 201,
+    "start_date": "2024-07-14T12:52:56Z",
+    "start_date_local": "2024-07-14T13:52:56Z",
+    "distance": 1119.7,
+    "start_index": 4121,
+    "end_index": 4322,
+    "device_watts": false,
+    "segment": {
+      "id": 7886385,
+      "resource_state": 2,
+      "name": "Burnshot to Glenpunty Climb",
+      "activity_type": "Ride",
+      "distance": 1119.7,
+      "average_grade": 2.6,
+      "maximum_grade": 8,
+      "elevation_high": 57,
+      "elevation_low": 27.4,
+      "start_latlng": [
+        55.977111,
+        -3.340927
+      ],
+      "end_latlng": [
+        55.971221,
+        -3.326573
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "City of Edinburgh, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881323000,
+    "resource_state": 2,
+    "name": "Cycle Path Climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 203,
+    "moving_time": 203,
+    "start_date": "2024-07-14T12:53:02Z",
+    "start_date_local": "2024-07-14T13:53:02Z",
+    "distance": 1129.8,
+    "start_index": 4127,
+    "end_index": 4330,
+    "device_watts": false,
+    "segment": {
+      "id": 4936158,
+      "resource_state": 2,
+      "name": "Cycle Path Climb",
+      "activity_type": "Ride",
+      "distance": 1129.8,
+      "average_grade": 2.5,
+      "maximum_grade": 8.9,
+      "elevation_high": 67.8,
+      "elevation_low": 39.8,
+      "start_latlng": [
+        55.97686,
+        -3.340367
+      ],
+      "end_latlng": [
+        55.970899,
+        -3.325769
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry EH30, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879574000,
+    "resource_state": 2,
+    "name": "New To Old",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 98,
+    "moving_time": 98,
+    "start_date": "2024-07-14T12:53:21Z",
+    "start_date_local": "2024-07-14T13:53:21Z",
+    "distance": 494,
+    "start_index": 4146,
+    "end_index": 4244,
+    "device_watts": false,
+    "segment": {
+      "id": 6830601,
+      "resource_state": 2,
+      "name": "New To Old",
+      "activity_type": "Ride",
+      "distance": 494,
+      "average_grade": 4,
+      "maximum_grade": 7.9,
+      "elevation_high": 51.4,
+      "elevation_low": 31.8,
+      "start_latlng": [
+        55.976151,
+        -3.338957
+      ],
+      "end_latlng": [
+        55.973471,
+        -3.332653
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "City of Edinburgh, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879953000,
+    "resource_state": 2,
+    "name": "Burnshot > JK's Hoose",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 299,
+    "moving_time": 280,
+    "start_date": "2024-07-14T12:56:13Z",
+    "start_date_local": "2024-07-14T13:56:13Z",
+    "distance": 1566.9,
+    "start_index": 4318,
+    "end_index": 4608,
+    "device_watts": false,
+    "segment": {
+      "id": 36291170,
+      "resource_state": 2,
+      "name": "Burnshot > JK's Hoose",
+      "activity_type": "Ride",
+      "distance": 1566.9,
+      "average_grade": -1.5,
+      "maximum_grade": 6.9,
+      "elevation_high": 63.2,
+      "elevation_low": 16.4,
+      "start_latlng": [
+        55.971416,
+        -3.32684
+      ],
+      "end_latlng": [
+        55.966256,
+        -3.307589
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882278400,
+    "resource_state": 2,
+    "name": "Cramond Brig downhill",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 75,
+    "moving_time": 65,
+    "start_date": "2024-07-14T12:57:40Z",
+    "start_date_local": "2024-07-14T13:57:40Z",
+    "distance": 365.1,
+    "start_index": 4405,
+    "end_index": 4471,
+    "device_watts": false,
+    "segment": {
+      "id": 14694554,
+      "resource_state": 2,
+      "name": "Cramond Brig downhill",
+      "activity_type": "Ride",
+      "distance": 365.1,
+      "average_grade": -3.4,
+      "maximum_grade": -0.4,
+      "elevation_high": 32.9,
+      "elevation_low": 20.4,
+      "start_latlng": [
+        55.966626,
+        -3.319612
+      ],
+      "end_latlng": [
+        55.965423,
+        -3.315143
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882350000,
+    "resource_state": 2,
+    "name": "Cramond Brig Speed Check",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 195,
+    "moving_time": 176,
+    "start_date": "2024-07-14T12:57:51Z",
+    "start_date_local": "2024-07-14T13:57:51Z",
+    "distance": 770,
+    "start_index": 4416,
+    "end_index": 4602,
+    "device_watts": false,
+    "segment": {
+      "id": 14696881,
+      "resource_state": 2,
+      "name": "Cramond Brig Speed Check",
+      "activity_type": "Ride",
+      "distance": 770,
+      "average_grade": 0.8,
+      "maximum_grade": 6.8,
+      "elevation_high": 36.5,
+      "elevation_low": 19.8,
+      "start_latlng": [
+        55.966147,
+        -3.318624
+      ],
+      "end_latlng": [
+        55.966163,
+        -3.307922
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881700000,
+    "resource_state": 2,
+    "name": "Cramond Toll to Whitehouse Road",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 134,
+    "moving_time": 125,
+    "start_date": "2024-07-14T12:58:51Z",
+    "start_date_local": "2024-07-14T13:58:51Z",
+    "distance": 471.89,
+    "start_index": 4467,
+    "end_index": 4601,
+    "device_watts": false,
+    "segment": {
+      "id": 3478105,
+      "resource_state": 2,
+      "name": "Cramond Toll to Whitehouse Road",
+      "activity_type": "Ride",
+      "distance": 471.89,
+      "average_grade": 2.8,
+      "maximum_grade": 22.2,
+      "elevation_high": 16.4,
+      "elevation_low": 0,
+      "start_latlng": [
+        55.96525199711323,
+        -3.3151634875684977
+      ],
+      "end_latlng": [
+        55.96608658321202,
+        -3.307928144931793
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "South Queensferry",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880801000,
+    "resource_state": 2,
+    "name": "Postman Pat Sprint ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 550,
+    "moving_time": 481,
+    "start_date": "2024-07-14T12:58:57Z",
+    "start_date_local": "2024-07-14T13:58:57Z",
+    "distance": 2210.9,
+    "start_index": 4473,
+    "end_index": 4964,
+    "device_watts": false,
+    "segment": {
+      "id": 17620256,
+      "resource_state": 2,
+      "name": "Postman Pat Sprint ",
+      "activity_type": "Ride",
+      "distance": 2210.9,
+      "average_grade": 2.2,
+      "maximum_grade": 11.8,
+      "elevation_high": 128,
+      "elevation_low": 77.4,
+      "start_latlng": [
+        55.965449,
+        -3.314951
+      ],
+      "end_latlng": [
+        55.967125,
+        -3.28305
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881748000,
+    "resource_state": 2,
+    "name": "Brae Park Road",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 106,
+    "moving_time": 106,
+    "start_date": "2024-07-14T12:59:07Z",
+    "start_date_local": "2024-07-14T13:59:07Z",
+    "distance": 384.5,
+    "start_index": 4483,
+    "end_index": 4589,
+    "device_watts": false,
+    "segment": {
+      "id": 28314415,
+      "resource_state": 2,
+      "name": "Brae Park Road",
+      "activity_type": "Ride",
+      "distance": 384.5,
+      "average_grade": 4.6,
+      "maximum_grade": 11.3,
+      "elevation_high": 19.4,
+      "elevation_low": 1.8,
+      "start_latlng": [
+        55.965622,
+        -3.314013
+      ],
+      "end_latlng": [
+        55.966105,
+        -3.308099
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cramond",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881595400,
+    "resource_state": 2,
+    "name": "Pet Margone",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 95,
+    "moving_time": 95,
+    "start_date": "2024-07-14T12:59:16Z",
+    "start_date_local": "2024-07-14T13:59:16Z",
+    "distance": 330.7,
+    "start_index": 4492,
+    "end_index": 4587,
+    "device_watts": false,
+    "segment": {
+      "id": 17474164,
+      "resource_state": 2,
+      "name": "Pet Margone",
+      "activity_type": "Ride",
+      "distance": 330.7,
+      "average_grade": 3,
+      "maximum_grade": 6.2,
+      "elevation_high": 35.8,
+      "elevation_low": 25.8,
+      "start_latlng": [
+        55.965556,
+        -3.313334
+      ],
+      "end_latlng": [
+        55.966021,
+        -3.308156
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880829400,
+    "resource_state": 2,
+    "name": "Climb to Whitehouse rd",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 101,
+    "moving_time": 92,
+    "start_date": "2024-07-14T12:59:24Z",
+    "start_date_local": "2024-07-14T13:59:24Z",
+    "distance": 334.4,
+    "start_index": 4500,
+    "end_index": 4601,
+    "device_watts": false,
+    "segment": {
+      "id": 16470106,
+      "resource_state": 2,
+      "name": "Climb to Whitehouse rd",
+      "activity_type": "Ride",
+      "distance": 334.4,
+      "average_grade": 4.4,
+      "maximum_grade": 11.7,
+      "elevation_high": 34,
+      "elevation_low": 19.4,
+      "start_latlng": [
+        55.965539,
+        -3.312973
+      ],
+      "end_latlng": [
+        55.966192,
+        -3.307979
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880222000,
+    "resource_state": 2,
+    "name": "Barnton Ave & Ave West End 2 End W>E",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 481,
+    "moving_time": 421,
+    "start_date": "2024-07-14T13:01:10Z",
+    "start_date_local": "2024-07-14T14:01:10Z",
+    "distance": 2248.6,
+    "start_index": 4606,
+    "end_index": 5028,
+    "device_watts": false,
+    "segment": {
+      "id": 9310499,
+      "resource_state": 2,
+      "name": "Barnton Ave & Ave West End 2 End W>E",
+      "activity_type": "Ride",
+      "distance": 2248.6,
+      "average_grade": 1,
+      "maximum_grade": 10.3,
+      "elevation_high": 71.1,
+      "elevation_low": 36,
+      "start_latlng": [
+        55.966175,
+        -3.307678
+      ],
+      "end_latlng": [
+        55.966603,
+        -3.276221
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882830300,
+    "resource_state": 2,
+    "name": "Dip to RHS",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 434,
+    "moving_time": 374,
+    "start_date": "2024-07-14T13:01:14Z",
+    "start_date_local": "2024-07-14T14:01:14Z",
+    "distance": 1885.3,
+    "start_index": 4610,
+    "end_index": 4985,
+    "device_watts": false,
+    "segment": {
+      "id": 8436439,
+      "resource_state": 2,
+      "name": "Dip to RHS",
+      "activity_type": "Ride",
+      "distance": 1885.3,
+      "average_grade": 1.8,
+      "maximum_grade": 11,
+      "elevation_high": 71.2,
+      "elevation_low": 36,
+      "start_latlng": [
+        55.96626,
+        -3.307462
+      ],
+      "end_latlng": [
+        55.96625,
+        -3.281612
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882105300,
+    "resource_state": 2,
+    "name": "Cargifield Ascent",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 409,
+    "moving_time": 349,
+    "start_date": "2024-07-14T13:01:20Z",
+    "start_date_local": "2024-07-14T14:01:20Z",
+    "distance": 1722.96,
+    "start_index": 4616,
+    "end_index": 4966,
+    "device_watts": false,
+    "segment": {
+      "id": 2462830,
+      "resource_state": 2,
+      "name": "Cargifield Ascent",
+      "activity_type": "Ride",
+      "distance": 1722.96,
+      "average_grade": 2,
+      "maximum_grade": 10.7,
+      "elevation_high": 71,
+      "elevation_low": 36.1,
+      "start_latlng": [
+        55.966275,
+        -3.306986
+      ],
+      "end_latlng": [
+        55.967016,
+        -3.282954
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880141300,
+    "resource_state": 2,
+    "name": "Barnton Gap West to East",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 460,
+    "moving_time": 400,
+    "start_date": "2024-07-14T13:01:22Z",
+    "start_date_local": "2024-07-14T14:01:22Z",
+    "distance": 2138.3,
+    "start_index": 4618,
+    "end_index": 5019,
+    "device_watts": false,
+    "segment": {
+      "id": 6999848,
+      "resource_state": 2,
+      "name": "Barnton Gap West to East",
+      "activity_type": "Ride",
+      "distance": 2138.3,
+      "average_grade": 1.1,
+      "maximum_grade": 9.6,
+      "elevation_high": 71.1,
+      "elevation_low": 36.3,
+      "start_latlng": [
+        55.966375,
+        -3.306861
+      ],
+      "end_latlng": [
+        55.966357,
+        -3.277139
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881455000,
+    "resource_state": 2,
+    "name": "Mini Barnton Push",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 155,
+    "moving_time": 95,
+    "start_date": "2024-07-14T13:01:23Z",
+    "start_date_local": "2024-07-14T14:01:23Z",
+    "distance": 490.619,
+    "start_index": 4619,
+    "end_index": 4715,
+    "device_watts": false,
+    "segment": {
+      "id": 2665661,
+      "resource_state": 2,
+      "name": "Mini Barnton Push",
+      "activity_type": "Ride",
+      "distance": 490.619,
+      "average_grade": 0.8,
+      "maximum_grade": 3.9,
+      "elevation_high": 43.2,
+      "elevation_low": 36.3,
+      "start_latlng": [
+        55.966399,
+        -3.306817
+      ],
+      "end_latlng": [
+        55.968427,
+        -3.299918
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882810000,
+    "resource_state": 2,
+    "name": "Barnton Avenue Climb W>E",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 212,
+    "moving_time": 212,
+    "start_date": "2024-07-14T13:04:41Z",
+    "start_date_local": "2024-07-14T14:04:41Z",
+    "distance": 1022.5,
+    "start_index": 4758,
+    "end_index": 4970,
+    "device_watts": false,
+    "segment": {
+      "id": 9310521,
+      "resource_state": 2,
+      "name": "Barnton Avenue Climb W>E",
+      "activity_type": "Ride",
+      "distance": 1022.5,
+      "average_grade": 3.4,
+      "maximum_grade": 10.3,
+      "elevation_high": 71.1,
+      "elevation_low": 36.2,
+      "start_latlng": [
+        55.967883,
+        -3.296345
+      ],
+      "end_latlng": [
+        55.966972,
+        -3.282536
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881062000,
+    "resource_state": 2,
+    "name": "barnton climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 262,
+    "moving_time": 262,
+    "start_date": "2024-07-14T13:04:43Z",
+    "start_date_local": "2024-07-14T14:04:43Z",
+    "distance": 1339.12,
+    "start_index": 4760,
+    "end_index": 5022,
+    "device_watts": false,
+    "segment": {
+      "id": 2201028,
+      "resource_state": 2,
+      "name": "barnton climb",
+      "activity_type": "Ride",
+      "distance": 1339.12,
+      "average_grade": 1.7,
+      "maximum_grade": 6.8,
+      "elevation_high": 71.1,
+      "elevation_low": 36.3,
+      "start_latlng": [
+        55.967983450000006,
+        -3.2960070666666668
+      ],
+      "end_latlng": [
+        55.966305750000004,
+        -3.2767137666666666
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879459300,
+    "resource_state": 2,
+    "name": "Millionaire's Row ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 197,
+    "moving_time": 197,
+    "start_date": "2024-07-14T13:04:46Z",
+    "start_date_local": "2024-07-14T14:04:46Z",
+    "distance": 920,
+    "start_index": 4763,
+    "end_index": 4960,
+    "device_watts": false,
+    "segment": {
+      "id": 35647986,
+      "resource_state": 2,
+      "name": "Millionaire's Row ",
+      "activity_type": "Ride",
+      "distance": 920,
+      "average_grade": 3.8,
+      "maximum_grade": 12.1,
+      "elevation_high": 116.2,
+      "elevation_low": 81,
+      "start_latlng": [
+        55.967738,
+        -3.295837
+      ],
+      "end_latlng": [
+        55.967273,
+        -3.283288
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882464000,
+    "resource_state": 2,
+    "name": "The Barnton Push",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 217,
+    "moving_time": 217,
+    "start_date": "2024-07-14T13:04:53Z",
+    "start_date_local": "2024-07-14T14:04:53Z",
+    "distance": 1063.87,
+    "start_index": 4770,
+    "end_index": 4987,
+    "device_watts": false,
+    "segment": {
+      "id": 1299309,
+      "resource_state": 2,
+      "name": "The Barnton Push",
+      "activity_type": "Ride",
+      "distance": 1063.87,
+      "average_grade": 2.8,
+      "maximum_grade": 9.7,
+      "elevation_high": 71.1,
+      "elevation_low": 39.8,
+      "start_latlng": [
+        55.96751,
+        -3.295469
+      ],
+      "end_latlng": [
+        55.966169,
+        -3.281291
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882898000,
+    "resource_state": 2,
+    "name": "Barnton Push",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 209,
+    "moving_time": 209,
+    "start_date": "2024-07-14T13:04:54Z",
+    "start_date_local": "2024-07-14T14:04:54Z",
+    "distance": 1087.08,
+    "start_index": 4771,
+    "end_index": 4980,
+    "device_watts": false,
+    "segment": {
+      "id": 1410382,
+      "resource_state": 2,
+      "name": "Barnton Push",
+      "activity_type": "Ride",
+      "distance": 1087.08,
+      "average_grade": 2.8,
+      "maximum_grade": 9.5,
+      "elevation_high": 71.3,
+      "elevation_low": 40.6,
+      "start_latlng": [
+        55.967434733482655,
+        -3.2953821780633845
+      ],
+      "end_latlng": [
+        55.96628632215857,
+        -3.282326073358678
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880911400,
+    "resource_state": 2,
+    "name": "Barnton Push without hazardous section",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 166,
+    "moving_time": 166,
+    "start_date": "2024-07-14T13:05:32Z",
+    "start_date_local": "2024-07-14T14:05:32Z",
+    "distance": 803.2,
+    "start_index": 4809,
+    "end_index": 4975,
+    "device_watts": false,
+    "segment": {
+      "id": 3968943,
+      "resource_state": 2,
+      "name": "Barnton Push without hazardous section",
+      "activity_type": "Ride",
+      "distance": 803.2,
+      "average_grade": 2.8,
+      "maximum_grade": 5.5,
+      "elevation_high": 71.1,
+      "elevation_low": 48.6,
+      "start_latlng": [
+        55.966442,
+        -3.293703
+      ],
+      "end_latlng": [
+        55.966715,
+        -3.282284
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880635000,
+    "resource_state": 2,
+    "name": "Straight out the gates to the post box...",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 151,
+    "moving_time": 151,
+    "start_date": "2024-07-14T13:05:37Z",
+    "start_date_local": "2024-07-14T14:05:37Z",
+    "distance": 721.1,
+    "start_index": 4814,
+    "end_index": 4965,
+    "device_watts": false,
+    "segment": {
+      "id": 7225611,
+      "resource_state": 2,
+      "name": "Straight out the gates to the post box...",
+      "activity_type": "Ride",
+      "distance": 721.1,
+      "average_grade": 3.2,
+      "maximum_grade": 8.3,
+      "elevation_high": 44.8,
+      "elevation_low": 21.6,
+      "start_latlng": [
+        55.966313,
+        -3.293524
+      ],
+      "end_latlng": [
+        55.967127,
+        -3.282931
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879805400,
+    "resource_state": 2,
+    "name": "Segment",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 139,
+    "moving_time": 139,
+    "start_date": "2024-07-14T13:05:48Z",
+    "start_date_local": "2024-07-14T14:05:48Z",
+    "distance": 671,
+    "start_index": 4825,
+    "end_index": 4964,
+    "device_watts": false,
+    "segment": {
+      "id": 5759224,
+      "resource_state": 2,
+      "name": "Segment",
+      "activity_type": "Ride",
+      "distance": 671,
+      "average_grade": 3.3,
+      "maximum_grade": 9.2,
+      "elevation_high": 41.4,
+      "elevation_low": 19.4,
+      "start_latlng": [
+        55.965958,
+        -3.292978
+      ],
+      "end_latlng": [
+        55.967124,
+        -3.282994
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879274000,
+    "resource_state": 2,
+    "name": "Short Barnton Push",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 100,
+    "moving_time": 100,
+    "start_date": "2024-07-14T13:06:04Z",
+    "start_date_local": "2024-07-14T14:06:04Z",
+    "distance": 475.6,
+    "start_index": 4841,
+    "end_index": 4941,
+    "device_watts": false,
+    "segment": {
+      "id": 8442210,
+      "resource_state": 2,
+      "name": "Short Barnton Push",
+      "activity_type": "Ride",
+      "distance": 475.6,
+      "average_grade": 3.3,
+      "maximum_grade": 8,
+      "elevation_high": 81.4,
+      "elevation_low": 65.6,
+      "start_latlng": [
+        55.965857,
+        -3.291736
+      ],
+      "end_latlng": [
+        55.96729,
+        -3.284729
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879107000,
+    "resource_state": 2,
+    "name": "RHS to Bike Path",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 126,
+    "moving_time": 113,
+    "start_date": "2024-07-14T13:08:32Z",
+    "start_date_local": "2024-07-14T14:08:32Z",
+    "distance": 825.2,
+    "start_index": 4989,
+    "end_index": 5104,
+    "device_watts": false,
+    "segment": {
+      "id": 8387902,
+      "resource_state": 2,
+      "name": "RHS to Bike Path",
+      "activity_type": "Ride",
+      "distance": 825.2,
+      "average_grade": -1.6,
+      "maximum_grade": 2.6,
+      "elevation_high": 69.1,
+      "elevation_low": 53.1,
+      "start_latlng": [
+        55.966078,
+        -3.281048
+      ],
+      "end_latlng": [
+        55.967443,
+        -3.268703
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880112600,
+    "resource_state": 2,
+    "name": "MMcK dents",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 46,
+    "moving_time": 46,
+    "start_date": "2024-07-14T13:09:48Z",
+    "start_date_local": "2024-07-14T14:09:48Z",
+    "distance": 365.2,
+    "start_index": 5054,
+    "end_index": 5100,
+    "device_watts": false,
+    "segment": {
+      "id": 8165607,
+      "resource_state": 2,
+      "name": "MMcK dents",
+      "activity_type": "Ride",
+      "distance": 365.2,
+      "average_grade": 0.2,
+      "maximum_grade": 2.5,
+      "elevation_high": 56.2,
+      "elevation_low": 53,
+      "start_latlng": [
+        55.967059,
+        -3.274705
+      ],
+      "end_latlng": [
+        55.967486,
+        -3.269034
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881402000,
+    "resource_state": 2,
+    "name": "The Insto Uphill Classic",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 25,
+    "moving_time": 25,
+    "start_date": "2024-07-14T13:10:07Z",
+    "start_date_local": "2024-07-14T14:10:07Z",
+    "distance": 187.3,
+    "start_index": 5073,
+    "end_index": 5098,
+    "device_watts": false,
+    "segment": {
+      "id": 4585254,
+      "resource_state": 2,
+      "name": "The Insto Uphill Classic",
+      "activity_type": "Ride",
+      "distance": 187.3,
+      "average_grade": 1.7,
+      "maximum_grade": 2.6,
+      "elevation_high": 56.3,
+      "elevation_low": 53,
+      "start_latlng": [
+        55.967511,
+        -3.272077
+      ],
+      "end_latlng": [
+        55.96746,
+        -3.269147
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880857000,
+    "resource_state": 2,
+    "name": "SilverKnowes Rd to Telford Rd Bridge",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 183,
+    "moving_time": 183,
+    "start_date": "2024-07-14T13:10:35Z",
+    "start_date_local": "2024-07-14T14:10:35Z",
+    "distance": 1496.1,
+    "start_index": 5101,
+    "end_index": 5284,
+    "device_watts": false,
+    "segment": {
+      "id": 4325365,
+      "resource_state": 2,
+      "name": "SilverKnowes Rd to Telford Rd Bridge",
+      "activity_type": "Ride",
+      "distance": 1496.1,
+      "average_grade": 0.1,
+      "maximum_grade": 4.2,
+      "elevation_high": 64.8,
+      "elevation_low": 56,
+      "start_latlng": [
+        55.967499,
+        -3.268883
+      ],
+      "end_latlng": [
+        55.960826,
+        -3.248777
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879191000,
+    "resource_state": 2,
+    "name": "Silverknowes to traffic lights",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 396,
+    "moving_time": 383,
+    "start_date": "2024-07-14T13:10:37Z",
+    "start_date_local": "2024-07-14T14:10:37Z",
+    "distance": 2983.2,
+    "start_index": 5103,
+    "end_index": 5488,
+    "device_watts": false,
+    "segment": {
+      "id": 15764333,
+      "resource_state": 2,
+      "name": "Silverknowes to traffic lights",
+      "activity_type": "Ride",
+      "distance": 2983.2,
+      "average_grade": -0.9,
+      "maximum_grade": 9.7,
+      "elevation_high": 65,
+      "elevation_low": 28.2,
+      "start_latlng": [
+        55.967483,
+        -3.268801
+      ],
+      "end_latlng": [
+        55.960841,
+        -3.229752
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881613000,
+    "resource_state": 2,
+    "name": "It's in the Trees East",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 90,
+    "moving_time": 90,
+    "start_date": "2024-07-14T13:10:37Z",
+    "start_date_local": "2024-07-14T14:10:37Z",
+    "distance": 673.1,
+    "start_index": 5103,
+    "end_index": 5193,
+    "device_watts": false,
+    "segment": {
+      "id": 13525237,
+      "resource_state": 2,
+      "name": "It's in the Trees East",
+      "activity_type": "Ride",
+      "distance": 673.1,
+      "average_grade": 1.3,
+      "maximum_grade": 3,
+      "elevation_high": 64.6,
+      "elevation_low": 56.1,
+      "start_latlng": [
+        55.967475,
+        -3.268793
+      ],
+      "end_latlng": [
+        55.964283,
+        -3.260043
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302881231000,
+    "resource_state": 2,
+    "name": "Bike Path to Sainsburys",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 232,
+    "moving_time": 232,
+    "start_date": "2024-07-14T13:10:39Z",
+    "start_date_local": "2024-07-14T14:10:39Z",
+    "distance": 1855.1,
+    "start_index": 5105,
+    "end_index": 5337,
+    "device_watts": false,
+    "segment": {
+      "id": 8387908,
+      "resource_state": 2,
+      "name": "Bike Path to Sainsburys",
+      "activity_type": "Ride",
+      "distance": 1855.1,
+      "average_grade": -0.3,
+      "maximum_grade": 3.4,
+      "elevation_high": 64.6,
+      "elevation_low": 50,
+      "start_latlng": [
+        55.967417,
+        -3.268667
+      ],
+      "end_latlng": [
+        55.958131,
+        -3.244963
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882181000,
+    "resource_state": 2,
+    "name": "Silverknows to crossroads",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 219,
+    "moving_time": 219,
+    "start_date": "2024-07-14T13:10:53Z",
+    "start_date_local": "2024-07-14T14:10:53Z",
+    "distance": 1773.8,
+    "start_index": 5119,
+    "end_index": 5338,
+    "device_watts": false,
+    "segment": {
+      "id": 7684053,
+      "resource_state": 2,
+      "name": "Silverknows to crossroads",
+      "activity_type": "Ride",
+      "distance": 1773.8,
+      "average_grade": -0.4,
+      "maximum_grade": 3.3,
+      "elevation_high": 64.8,
+      "elevation_low": 49.8,
+      "start_latlng": [
+        55.966669,
+        -3.267982
+      ],
+      "end_latlng": [
+        55.958132,
+        -3.244898
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882543600,
+    "resource_state": 2,
+    "name": "Blackhall Path to Craigleith ",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 203,
+    "moving_time": 203,
+    "start_date": "2024-07-14T13:11:01Z",
+    "start_date_local": "2024-07-14T14:11:01Z",
+    "distance": 1654.7,
+    "start_index": 5127,
+    "end_index": 5330,
+    "device_watts": false,
+    "segment": {
+      "id": 24083933,
+      "resource_state": 2,
+      "name": "Blackhall Path to Craigleith ",
+      "activity_type": "Ride",
+      "distance": 1654.7,
+      "average_grade": -0.5,
+      "maximum_grade": 4.3,
+      "elevation_high": 126.8,
+      "elevation_low": 110.2,
+      "start_latlng": [
+        55.966433,
+        -3.267063
+      ],
+      "end_latlng": [
+        55.958416,
+        -3.245281
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882399000,
+    "resource_state": 2,
+    "name": "Craigleith Climb S",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 83,
+    "moving_time": 83,
+    "start_date": "2024-07-14T13:11:03Z",
+    "start_date_local": "2024-07-14T14:11:03Z",
+    "distance": 629.9,
+    "start_index": 5129,
+    "end_index": 5212,
+    "device_watts": false,
+    "segment": {
+      "id": 26353064,
+      "resource_state": 2,
+      "name": "Craigleith Climb S",
+      "activity_type": "Ride",
+      "distance": 629.9,
+      "average_grade": 1.1,
+      "maximum_grade": 2,
+      "elevation_high": 65.4,
+      "elevation_low": 58.2,
+      "start_latlng": [
+        55.966352,
+        -3.266929
+      ],
+      "end_latlng": [
+        55.96357,
+        -3.258137
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Davidson's Mains",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880393000,
+    "resource_state": 2,
+    "name": "Race for Sainsburys",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 127,
+    "moving_time": 127,
+    "start_date": "2024-07-14T13:12:13Z",
+    "start_date_local": "2024-07-14T14:12:13Z",
+    "distance": 1111.6,
+    "start_index": 5199,
+    "end_index": 5326,
+    "device_watts": false,
+    "segment": {
+      "id": 12031600,
+      "resource_state": 2,
+      "name": "Race for Sainsburys",
+      "activity_type": "Ride",
+      "distance": 1111.6,
+      "average_grade": -1.3,
+      "maximum_grade": 2.2,
+      "elevation_high": 64.7,
+      "elevation_low": 50,
+      "start_latlng": [
+        55.96409,
+        -3.259409
+      ],
+      "end_latlng": [
+        55.958628,
+        -3.24539
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882914300,
+    "resource_state": 2,
+    "name": "Craigleith Hill Ave Downhill",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 116,
+    "moving_time": 104,
+    "start_date": "2024-07-14T13:15:31Z",
+    "start_date_local": "2024-07-14T14:15:31Z",
+    "distance": 917.6,
+    "start_index": 5386,
+    "end_index": 5491,
+    "device_watts": false,
+    "segment": {
+      "id": 11853522,
+      "resource_state": 2,
+      "name": "Craigleith Hill Ave Downhill",
+      "activity_type": "Ride",
+      "distance": 917.6,
+      "average_grade": -2.1,
+      "maximum_grade": 3,
+      "elevation_high": 47.6,
+      "elevation_low": 28,
+      "start_latlng": [
+        55.960136,
+        -3.243673
+      ],
+      "end_latlng": [
+        55.960838,
+        -3.229562
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882517000,
+    "resource_state": 2,
+    "name": "Fettes College Half Easterly Run",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 33,
+    "moving_time": 33,
+    "start_date": "2024-07-14T13:17:32Z",
+    "start_date_local": "2024-07-14T14:17:32Z",
+    "distance": 292.2,
+    "start_index": 5496,
+    "end_index": 5529,
+    "device_watts": false,
+    "segment": {
+      "id": 6831645,
+      "resource_state": 2,
+      "name": "Fettes College Half Easterly Run",
+      "activity_type": "Ride",
+      "distance": 292.2,
+      "average_grade": -1,
+      "maximum_grade": 2.2,
+      "elevation_high": 29.1,
+      "elevation_low": 25.2,
+      "start_latlng": [
+        55.960943,
+        -3.229391
+      ],
+      "end_latlng": [
+        55.961879,
+        -3.225053
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881237000,
+    "resource_state": 2,
+    "name": "Fettes Tailwind",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 58,
+    "moving_time": 58,
+    "start_date": "2024-07-14T13:17:34Z",
+    "start_date_local": "2024-07-14T14:17:34Z",
+    "distance": 504.86,
+    "start_index": 5498,
+    "end_index": 5556,
+    "device_watts": false,
+    "segment": {
+      "id": 3556451,
+      "resource_state": 2,
+      "name": "Fettes Tailwind",
+      "activity_type": "Ride",
+      "distance": 504.86,
+      "average_grade": -1,
+      "maximum_grade": 0,
+      "elevation_high": 41.4,
+      "elevation_low": 36.2,
+      "start_latlng": [
+        55.96098183654249,
+        -3.2292080763727427
+      ],
+      "end_latlng": [
+        55.962561909109354,
+        -3.2216336019337177
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882673700,
+    "resource_state": 2,
+    "name": "Fettes College Easterly Run",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 63,
+    "moving_time": 63,
+    "start_date": "2024-07-14T13:17:34Z",
+    "start_date_local": "2024-07-14T14:17:34Z",
+    "distance": 548.6,
+    "start_index": 5498,
+    "end_index": 5561,
+    "device_watts": false,
+    "segment": {
+      "id": 6787957,
+      "resource_state": 2,
+      "name": "Fettes College Easterly Run",
+      "activity_type": "Ride",
+      "distance": 548.6,
+      "average_grade": -0.5,
+      "maximum_grade": 2.1,
+      "elevation_high": 29.1,
+      "elevation_low": 23.1,
+      "start_latlng": [
+        55.960975,
+        -3.229267
+      ],
+      "end_latlng": [
+        55.962656,
+        -3.221091
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880721000,
+    "resource_state": 2,
+    "name": "Inverleith Park West Shrt Flat Centre",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 21,
+    "moving_time": 21,
+    "start_date": "2024-07-14T13:19:02Z",
+    "start_date_local": "2024-07-14T14:19:02Z",
+    "distance": 160.1,
+    "start_index": 5580,
+    "end_index": 5601,
+    "device_watts": false,
+    "segment": {
+      "id": 6966260,
+      "resource_state": 2,
+      "name": "Inverleith Park West Shrt Flat Centre",
+      "activity_type": "Ride",
+      "distance": 160.1,
+      "average_grade": -0.5,
+      "maximum_grade": 1.2,
+      "elevation_high": 25.7,
+      "elevation_low": 24.6,
+      "start_latlng": [
+        55.962843,
+        -3.22046
+      ],
+      "end_latlng": [
+        55.963404,
+        -3.218167
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302883157000,
+    "resource_state": 2,
+    "name": "Inverleith Central Path W-E",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 71,
+    "moving_time": 71,
+    "start_date": "2024-07-14T13:19:03Z",
+    "start_date_local": "2024-07-14T14:19:03Z",
+    "distance": 470.9,
+    "start_index": 5581,
+    "end_index": 5652,
+    "device_watts": false,
+    "segment": {
+      "id": 31212092,
+      "resource_state": 2,
+      "name": "Inverleith Central Path W-E",
+      "activity_type": "Ride",
+      "distance": 470.9,
+      "average_grade": -1.1,
+      "maximum_grade": 6.9,
+      "elevation_high": 23.8,
+      "elevation_low": 17.8,
+      "start_latlng": [
+        55.962873,
+        -3.220347
+      ],
+      "end_latlng": [
+        55.964333,
+        -3.213273
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879180000,
+    "resource_state": 2,
+    "name": "bumpy road!!",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 71,
+    "moving_time": 71,
+    "start_date": "2024-07-14T13:21:00Z",
+    "start_date_local": "2024-07-14T14:21:00Z",
+    "distance": 510,
+    "start_index": 5694,
+    "end_index": 5765,
+    "device_watts": false,
+    "segment": {
+      "id": 5666407,
+      "resource_state": 2,
+      "name": "bumpy road!!",
+      "activity_type": "Ride",
+      "distance": 510,
+      "average_grade": 0.1,
+      "maximum_grade": 2.1,
+      "elevation_high": 23.9,
+      "elevation_low": 22,
+      "start_latlng": [
+        55.96274,
+        -3.21138
+      ],
+      "end_latlng": [
+        55.963836,
+        -3.203515
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882509000,
+    "resource_state": 2,
+    "name": "Inverleith Terrace - Up and over",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 82,
+    "moving_time": 82,
+    "start_date": "2024-07-14T13:21:00Z",
+    "start_date_local": "2024-07-14T14:21:00Z",
+    "distance": 606.8,
+    "start_index": 5694,
+    "end_index": 5776,
+    "device_watts": false,
+    "segment": {
+      "id": 11817442,
+      "resource_state": 2,
+      "name": "Inverleith Terrace - Up and over",
+      "activity_type": "Ride",
+      "distance": 606.8,
+      "average_grade": -0.4,
+      "maximum_grade": 3,
+      "elevation_high": 23.9,
+      "elevation_low": 20,
+      "start_latlng": [
+        55.962774,
+        -3.211386
+      ],
+      "end_latlng": [
+        55.964271,
+        -3.20227
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302879399000,
+    "resource_state": 2,
+    "name": "Cannonhill",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 59,
+    "moving_time": 25,
+    "start_date": "2024-07-14T13:23:19Z",
+    "start_date_local": "2024-07-14T14:23:19Z",
+    "distance": 173.8,
+    "start_index": 5815,
+    "end_index": 5841,
+    "device_watts": false,
+    "segment": {
+      "id": 8484983,
+      "resource_state": 2,
+      "name": "Cannonhill",
+      "activity_type": "Ride",
+      "distance": 173.8,
+      "average_grade": 0.9,
+      "maximum_grade": 3.1,
+      "elevation_high": 21.1,
+      "elevation_low": 19.5,
+      "start_latlng": [
+        55.962715,
+        -3.199702
+      ],
+      "end_latlng": [
+        55.962438,
+        -3.197099
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302880067600,
+    "resource_state": 2,
+    "name": "Broughton Street Climb",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 234,
+    "moving_time": 200,
+    "start_date": "2024-07-14T13:23:26Z",
+    "start_date_local": "2024-07-14T14:23:26Z",
+    "distance": 938,
+    "start_index": 5822,
+    "end_index": 6023,
+    "device_watts": false,
+    "segment": {
+      "id": 4739273,
+      "resource_state": 2,
+      "name": "Broughton Street Climb",
+      "activity_type": "Ride",
+      "distance": 938,
+      "average_grade": 3.8,
+      "maximum_grade": 8.2,
+      "elevation_high": 56.5,
+      "elevation_low": 19.5,
+      "start_latlng": [
+        55.962501,
+        -3.198871
+      ],
+      "end_latlng": [
+        55.957264,
+        -3.188196
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880259000,
+    "resource_state": 2,
+    "name": "Ooh Rodney",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 85,
+    "moving_time": 85,
+    "start_date": "2024-07-14T13:24:24Z",
+    "start_date_local": "2024-07-14T14:24:24Z",
+    "distance": 416,
+    "start_index": 5847,
+    "end_index": 5932,
+    "device_watts": false,
+    "segment": {
+      "id": 10575300,
+      "resource_state": 2,
+      "name": "Ooh Rodney",
+      "activity_type": "Ride",
+      "distance": 416,
+      "average_grade": 3.7,
+      "maximum_grade": 7.3,
+      "elevation_high": 36.7,
+      "elevation_low": 21.2,
+      "start_latlng": [
+        55.962399,
+        -3.196787
+      ],
+      "end_latlng": [
+        55.960297,
+        -3.191947
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881628000,
+    "resource_state": 2,
+    "name": "Broughton St",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 249,
+    "moving_time": 191,
+    "start_date": "2024-07-14T13:24:26Z",
+    "start_date_local": "2024-07-14T14:24:26Z",
+    "distance": 841.93,
+    "start_index": 5849,
+    "end_index": 6041,
+    "device_watts": false,
+    "segment": {
+      "id": 1054940,
+      "resource_state": 2,
+      "name": "Broughton St",
+      "activity_type": "Ride",
+      "distance": 841.93,
+      "average_grade": 4.4,
+      "maximum_grade": 10.3,
+      "elevation_high": 36.7,
+      "elevation_low": -0.3,
+      "start_latlng": [
+        55.9623646,
+        -3.1966709
+      ],
+      "end_latlng": [
+        55.9567791,
+        -3.188086
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880843000,
+    "resource_state": 2,
+    "name": "Broughton St (no junctions)",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 165,
+    "moving_time": 165,
+    "start_date": "2024-07-14T13:24:39Z",
+    "start_date_local": "2024-07-14T14:24:39Z",
+    "distance": 755.9,
+    "start_index": 5862,
+    "end_index": 6027,
+    "device_watts": false,
+    "segment": {
+      "id": 6975104,
+      "resource_state": 2,
+      "name": "Broughton St (no junctions)",
+      "activity_type": "Ride",
+      "distance": 755.9,
+      "average_grade": 4,
+      "maximum_grade": 14,
+      "elevation_high": 89,
+      "elevation_low": 58.8,
+      "start_latlng": [
+        55.962124,
+        -3.195688
+      ],
+      "end_latlng": [
+        55.957126,
+        -3.188101
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879739000,
+    "resource_state": 2,
+    "name": "Drummond to Princess",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 308,
+    "moving_time": 196,
+    "start_date": "2024-07-14T13:26:24Z",
+    "start_date_local": "2024-07-14T14:26:24Z",
+    "distance": 780.351,
+    "start_index": 5967,
+    "end_index": 6169,
+    "device_watts": false,
+    "segment": {
+      "id": 3245005,
+      "resource_state": 2,
+      "name": "Drummond to Princess",
+      "activity_type": "Ride",
+      "distance": 780.351,
+      "average_grade": 3.7,
+      "maximum_grade": 10.4,
+      "elevation_high": 72.9,
+      "elevation_low": 42.4,
+      "start_latlng": [
+        55.95906767438268,
+        -3.1904836945974187
+      ],
+      "end_latlng": [
+        55.95352113333387,
+        -3.1885861033683565
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882016000,
+    "resource_state": 2,
+    "name": "PR Up Broughton St lights to lights",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 127,
+    "moving_time": 69,
+    "start_date": "2024-07-14T13:26:24Z",
+    "start_date_local": "2024-07-14T14:26:24Z",
+    "distance": 293.5,
+    "start_index": 5967,
+    "end_index": 6037,
+    "device_watts": false,
+    "segment": {
+      "id": 8393182,
+      "resource_state": 2,
+      "name": "PR Up Broughton St lights to lights",
+      "activity_type": "Ride",
+      "distance": 293.5,
+      "average_grade": 5.6,
+      "maximum_grade": 7.4,
+      "elevation_high": 58.8,
+      "elevation_low": 42.3,
+      "start_latlng": [
+        55.959086,
+        -3.190495
+      ],
+      "end_latlng": [
+        55.956937,
+        -3.18787
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881115000,
+    "resource_state": 2,
+    "name": "broughton street full",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 137,
+    "moving_time": 79,
+    "start_date": "2024-07-14T13:26:24Z",
+    "start_date_local": "2024-07-14T14:26:24Z",
+    "distance": 322.09,
+    "start_index": 5967,
+    "end_index": 6047,
+    "device_watts": false,
+    "segment": {
+      "id": 3244996,
+      "resource_state": 2,
+      "name": "broughton street full",
+      "activity_type": "Ride",
+      "distance": 322.09,
+      "average_grade": 5.6,
+      "maximum_grade": 6.6,
+      "elevation_high": 60.6,
+      "elevation_low": 42.4,
+      "start_latlng": [
+        55.95906767438268,
+        -3.1904836945974187
+      ],
+      "end_latlng": [
+        55.9566989842497,
+        -3.187588640698332
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882704400,
+    "resource_state": 2,
+    "name": "Omni Centre - Princes Street",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 143,
+    "moving_time": 89,
+    "start_date": "2024-07-14T13:29:10Z",
+    "start_date_local": "2024-07-14T14:29:10Z",
+    "distance": 368.8,
+    "start_index": 6076,
+    "end_index": 6170,
+    "device_watts": false,
+    "segment": {
+      "id": 5421228,
+      "resource_state": 2,
+      "name": "Omni Centre - Princes Street",
+      "activity_type": "Ride",
+      "distance": 368.8,
+      "average_grade": 3.9,
+      "maximum_grade": 11.4,
+      "elevation_high": 72.9,
+      "elevation_low": 55.7,
+      "start_latlng": [
+        55.956426,
+        -3.18643
+      ],
+      "end_latlng": [
+        55.953486,
+        -3.188383
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881123300,
+    "resource_state": 2,
+    "name": "Carlton Hill, up n over",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2240,
+    "moving_time": 224,
+    "start_date": "2024-07-14T13:31:40Z",
+    "start_date_local": "2024-07-14T14:31:40Z",
+    "distance": 1081.2,
+    "start_index": 6177,
+    "end_index": 6430,
+    "device_watts": false,
+    "segment": {
+      "id": 4156028,
+      "resource_state": 2,
+      "name": "Carlton Hill, up n over",
+      "activity_type": "Ride",
+      "distance": 1081.2,
+      "average_grade": -1.7,
+      "maximum_grade": 9.4,
+      "elevation_high": 76.6,
+      "elevation_low": 51,
+      "start_latlng": [
+        55.953607,
+        -3.187913
+      ],
+      "end_latlng": [
+        55.956094,
+        -3.172695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3247572302879981600,
+    "resource_state": 2,
+    "name": "Regent Road Down",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2218,
+    "moving_time": 202,
+    "start_date": "2024-07-14T13:31:45Z",
+    "start_date_local": "2024-07-14T14:31:45Z",
+    "distance": 1009.7,
+    "start_index": 6182,
+    "end_index": 6413,
+    "device_watts": false,
+    "segment": {
+      "id": 7507335,
+      "resource_state": 2,
+      "name": "Regent Road Down",
+      "activity_type": "Ride",
+      "distance": 1009.7,
+      "average_grade": -1.9,
+      "maximum_grade": 9.6,
+      "elevation_high": 75.1,
+      "elevation_low": 49.5,
+      "start_latlng": [
+        55.953573,
+        -3.187559
+      ],
+      "end_latlng": [
+        55.955644,
+        -3.173238
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882659300,
+    "resource_state": 2,
+    "name": "Calton Climb Challenge CCC",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 48,
+    "moving_time": 48,
+    "start_date": "2024-07-14T13:31:57Z",
+    "start_date_local": "2024-07-14T14:31:57Z",
+    "distance": 258,
+    "start_index": 6194,
+    "end_index": 6242,
+    "device_watts": false,
+    "segment": {
+      "id": 10680875,
+      "resource_state": 2,
+      "name": "Calton Climb Challenge CCC",
+      "activity_type": "Ride",
+      "distance": 258,
+      "average_grade": 1.8,
+      "maximum_grade": 4.1,
+      "elevation_high": 124,
+      "elevation_low": 119.4,
+      "start_latlng": [
+        55.953806,
+        -3.186802
+      ],
+      "end_latlng": [
+        55.953798,
+        -3.182839
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3247572302881696000,
+    "resource_state": 2,
+    "name": "McGregor's Escape",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2166,
+    "moving_time": 150,
+    "start_date": "2024-07-14T13:32:50Z",
+    "start_date_local": "2024-07-14T14:32:50Z",
+    "distance": 701.4,
+    "start_index": 6247,
+    "end_index": 6426,
+    "device_watts": false,
+    "segment": {
+      "id": 19972014,
+      "resource_state": 2,
+      "name": "McGregor's Escape",
+      "activity_type": "Ride",
+      "distance": 701.4,
+      "average_grade": -3.3,
+      "maximum_grade": 7.4,
+      "elevation_high": 76.5,
+      "elevation_low": 53.5,
+      "start_latlng": [
+        55.95355,
+        -3.182457
+      ],
+      "end_latlng": [
+        55.956005,
+        -3.172852
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3247572302880232400,
+    "resource_state": 2,
+    "name": "HWFG",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2177,
+    "moving_time": 161,
+    "start_date": "2024-07-14T13:32:55Z",
+    "start_date_local": "2024-07-14T14:32:55Z",
+    "distance": 753.8,
+    "start_index": 6252,
+    "end_index": 6442,
+    "device_watts": false,
+    "segment": {
+      "id": 14611487,
+      "resource_state": 2,
+      "name": "HWFG",
+      "activity_type": "Ride",
+      "distance": 753.8,
+      "average_grade": -3.5,
+      "maximum_grade": -1.8,
+      "elevation_high": 21.8,
+      "elevation_low": -4.8,
+      "start_latlng": [
+        55.953379,
+        -3.18196
+      ],
+      "end_latlng": [
+        55.956645,
+        -3.171934
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3247572302882908000,
+    "resource_state": 2,
+    "name": "RRC Regent Road Descent",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2126,
+    "moving_time": 110,
+    "start_date": "2024-07-14T13:33:20Z",
+    "start_date_local": "2024-07-14T14:33:20Z",
+    "distance": 403.4,
+    "start_index": 6277,
+    "end_index": 6416,
+    "device_watts": false,
+    "segment": {
+      "id": 24613820,
+      "resource_state": 2,
+      "name": "RRC Regent Road Descent",
+      "activity_type": "Ride",
+      "distance": 403.4,
+      "average_grade": -4.3,
+      "maximum_grade": -1.5,
+      "elevation_high": 68,
+      "elevation_low": 50.8,
+      "start_latlng": [
+        55.953674,
+        -3.178372
+      ],
+      "end_latlng": [
+        55.955785,
+        -3.173125
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3247572302882526000,
+    "resource_state": 2,
+    "name": "Mad Dash",
+    "activity": {
+      "id": 11886692214,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 74,
+    "moving_time": 66,
+    "start_date": "2024-07-14T14:09:27Z",
+    "start_date_local": "2024-07-14T15:09:27Z",
+    "distance": 474.8,
+    "start_index": 6457,
+    "end_index": 6524,
+    "device_watts": false,
+    "segment": {
+      "id": 6183340,
+      "resource_state": 2,
+      "name": "Mad Dash",
+      "activity_type": "Ride",
+      "distance": 474.8,
+      "average_grade": -3.4,
+      "maximum_grade": -1.5,
+      "elevation_high": 47,
+      "elevation_low": 30.7,
+      "start_latlng": [
+        55.957614,
+        -3.172381
+      ],
+      "end_latlng": [
+        55.961664,
+        -3.171012
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

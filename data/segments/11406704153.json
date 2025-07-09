@@ -1,0 +1,554 @@
+[
+  {
+    "id": 3225394806006971000,
+    "resource_state": 2,
+    "name": "Lothian Road ",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 132,
+    "moving_time": 88,
+    "start_date": "2024-05-14T09:07:39Z",
+    "start_date_local": "2024-05-14T10:07:39Z",
+    "distance": 762.2,
+    "start_index": 43,
+    "end_index": 142,
+    "device_watts": false,
+    "segment": {
+      "id": 11544893,
+      "resource_state": 2,
+      "name": "Lothian Road ",
+      "activity_type": "Ride",
+      "distance": 762.2,
+      "average_grade": -0.9,
+      "maximum_grade": 7.3,
+      "elevation_high": 82.5,
+      "elevation_low": 70.1,
+      "start_latlng": [
+        55.943716,
+        -3.203885
+      ],
+      "end_latlng": [
+        55.950063,
+        -3.207309
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3225394806007135700,
+    "resource_state": 2,
+    "name": "Lothian Road Downhill Dash",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 81,
+    "moving_time": 44,
+    "start_date": "2024-05-14T09:08:25Z",
+    "start_date_local": "2024-05-14T10:08:25Z",
+    "distance": 426,
+    "start_index": 88,
+    "end_index": 137,
+    "device_watts": false,
+    "segment": {
+      "id": 15207595,
+      "resource_state": 2,
+      "name": "Lothian Road Downhill Dash",
+      "activity_type": "Ride",
+      "distance": 426,
+      "average_grade": -2,
+      "maximum_grade": 15.4,
+      "elevation_high": 83,
+      "elevation_low": 70.1,
+      "start_latlng": [
+        55.946033,
+        -3.205625
+      ],
+      "end_latlng": [
+        55.949763,
+        -3.207079
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3225394806007137000,
+    "resource_state": 2,
+    "name": "Princes Street Sprint",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 123,
+    "moving_time": 68,
+    "start_date": "2024-05-14T09:10:17Z",
+    "start_date_local": "2024-05-14T10:10:17Z",
+    "distance": 416.3,
+    "start_index": 168,
+    "end_index": 239,
+    "device_watts": false,
+    "segment": {
+      "id": 12791812,
+      "resource_state": 2,
+      "name": "Princes Street Sprint",
+      "activity_type": "Ride",
+      "distance": 416.3,
+      "average_grade": -1.7,
+      "maximum_grade": 3.8,
+      "elevation_high": 69,
+      "elevation_low": 61.8,
+      "start_latlng": [
+        55.950533,
+        -3.205881
+      ],
+      "end_latlng": [
+        55.951568,
+        -3.19963
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3225394806002899500,
+    "resource_state": 2,
+    "name": "Princes Street Sprint",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 240,
+    "moving_time": 147,
+    "start_date": "2024-05-14T09:10:34Z",
+    "start_date_local": "2024-05-14T10:10:34Z",
+    "distance": 842.3,
+    "start_index": 179,
+    "end_index": 335,
+    "device_watts": false,
+    "segment": {
+      "id": 9592777,
+      "resource_state": 2,
+      "name": "Princes Street Sprint",
+      "activity_type": "Ride",
+      "distance": 842.3,
+      "average_grade": 0.4,
+      "maximum_grade": 4.4,
+      "elevation_high": 70.3,
+      "elevation_low": 60.6,
+      "start_latlng": [
+        55.950576,
+        -3.205051
+      ],
+      "end_latlng": [
+        55.952855,
+        -3.19221
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3225394806006353400,
+    "resource_state": 2,
+    "name": "Princes of Darkness",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 183,
+    "moving_time": 101,
+    "start_date": "2024-05-14T09:10:37Z",
+    "start_date_local": "2024-05-14T10:10:37Z",
+    "distance": 605.2,
+    "start_index": 182,
+    "end_index": 286,
+    "device_watts": false,
+    "segment": {
+      "id": 23605945,
+      "resource_state": 2,
+      "name": "Princes of Darkness",
+      "activity_type": "Ride",
+      "distance": 605.2,
+      "average_grade": 0.1,
+      "maximum_grade": 1.7,
+      "elevation_high": 34,
+      "elevation_low": 31.2,
+      "start_latlng": [
+        55.950636,
+        -3.204636
+      ],
+      "end_latlng": [
+        55.952213,
+        -3.195367
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3225394806001215000,
+    "resource_state": 2,
+    "name": "Princes St To Brunswick st",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 370,
+    "moving_time": 191,
+    "start_date": "2024-05-14T09:16:00Z",
+    "start_date_local": "2024-05-14T10:16:00Z",
+    "distance": 1058.4,
+    "start_index": 389,
+    "end_index": 607,
+    "device_watts": false,
+    "segment": {
+      "id": 5325340,
+      "resource_state": 2,
+      "name": "Princes St To Brunswick st",
+      "activity_type": "Ride",
+      "distance": 1058.4,
+      "average_grade": -3.5,
+      "maximum_grade": 3.7,
+      "elevation_high": 73,
+      "elevation_low": 34.6,
+      "start_latlng": [
+        55.953359,
+        -3.189393
+      ],
+      "end_latlng": [
+        55.961111,
+        -3.181103
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3225394806003454500,
+    "resource_state": 2,
+    "name": "Leith Street descent",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 204,
+    "moving_time": 78,
+    "start_date": "2024-05-14T09:16:04Z",
+    "start_date_local": "2024-05-14T10:16:04Z",
+    "distance": 468.8,
+    "start_index": 393,
+    "end_index": 485,
+    "device_watts": false,
+    "segment": {
+      "id": 7287977,
+      "resource_state": 2,
+      "name": "Leith Street descent",
+      "activity_type": "Ride",
+      "distance": 468.8,
+      "average_grade": -2,
+      "maximum_grade": 6.2,
+      "elevation_high": 72,
+      "elevation_low": 56.7,
+      "start_latlng": [
+        55.953062,
+        -3.188949
+      ],
+      "end_latlng": [
+        55.956526,
+        -3.186994
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3225394805999906300,
+    "resource_state": 2,
+    "name": "Beat the lights",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 146,
+    "moving_time": 93,
+    "start_date": "2024-05-14T09:19:45Z",
+    "start_date_local": "2024-05-14T10:19:45Z",
+    "distance": 612.2,
+    "start_index": 502,
+    "end_index": 608,
+    "device_watts": false,
+    "segment": {
+      "id": 17541941,
+      "resource_state": 2,
+      "name": "Beat the lights",
+      "activity_type": "Ride",
+      "distance": 612.2,
+      "average_grade": -4.1,
+      "maximum_grade": 0,
+      "elevation_high": 58.8,
+      "elevation_low": 33.8,
+      "start_latlng": [
+        55.956682,
+        -3.186554
+      ],
+      "end_latlng": [
+        55.961164,
+        -3.181094
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3225394806001883600,
+    "resource_state": 2,
+    "name": "speed bump central",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 117,
+    "moving_time": 115,
+    "start_date": "2024-05-14T09:22:16Z",
+    "start_date_local": "2024-05-14T10:22:16Z",
+    "distance": 518,
+    "start_index": 613,
+    "end_index": 730,
+    "device_watts": false,
+    "segment": {
+      "id": 4867821,
+      "resource_state": 2,
+      "name": "speed bump central",
+      "activity_type": "Ride",
+      "distance": 518,
+      "average_grade": -0.6,
+      "maximum_grade": 2.3,
+      "elevation_high": 35.7,
+      "elevation_low": 29,
+      "start_latlng": [
+        55.961395,
+        -3.180918
+      ],
+      "end_latlng": [
+        55.960681,
+        -3.173793
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3225394806000315000,
+    "resource_state": 2,
+    "name": "Brunswick Road Death Star Trench",
+    "activity": {
+      "id": 11406704153,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 61,
+    "moving_time": 61,
+    "start_date": "2024-05-14T09:22:57Z",
+    "start_date_local": "2024-05-14T10:22:57Z",
+    "distance": 362.4,
+    "start_index": 654,
+    "end_index": 715,
+    "device_watts": false,
+    "segment": {
+      "id": 9209278,
+      "resource_state": 2,
+      "name": "Brunswick Road Death Star Trench",
+      "activity_type": "Ride",
+      "distance": 362.4,
+      "average_grade": -0.8,
+      "maximum_grade": 1.2,
+      "elevation_high": 35.5,
+      "elevation_low": 30.1,
+      "start_latlng": [
+        55.961098,
+        -3.180103
+      ],
+      "end_latlng": [
+        55.960349,
+        -3.175178
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

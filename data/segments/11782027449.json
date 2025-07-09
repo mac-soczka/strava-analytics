@@ -1,0 +1,4484 @@
+[
+  {
+    "id": 3242850897533401600,
+    "resource_state": 2,
+    "name": "Ft Augustus",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 116,
+    "moving_time": 105,
+    "start_date": "2024-07-01T07:59:20Z",
+    "start_date_local": "2024-07-01T08:59:20Z",
+    "distance": 421.3,
+    "start_index": 97,
+    "end_index": 203,
+    "device_watts": false,
+    "segment": {
+      "id": 12762880,
+      "resource_state": 2,
+      "name": "Ft Augustus",
+      "activity_type": "Ride",
+      "distance": 421.3,
+      "average_grade": 0.2,
+      "maximum_grade": 4.9,
+      "elevation_high": 34.6,
+      "elevation_low": 32,
+      "start_latlng": [
+        57.147106,
+        -4.680996
+      ],
+      "end_latlng": [
+        57.143596,
+        -4.679268
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897535084000,
+    "resource_state": 2,
+    "name": "General Wade (Peak Tours challenge)",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4884,
+    "moving_time": 3802,
+    "start_date": "2024-07-01T07:59:35Z",
+    "start_date_local": "2024-07-01T08:59:35Z",
+    "distance": 8913.64,
+    "start_index": 112,
+    "end_index": 3941,
+    "device_watts": false,
+    "segment": {
+      "id": 732959,
+      "resource_state": 2,
+      "name": "General Wade (Peak Tours challenge)",
+      "activity_type": "Ride",
+      "distance": 8913.64,
+      "average_grade": 4.1,
+      "maximum_grade": 26.7,
+      "elevation_high": 402.2,
+      "elevation_low": 26.6,
+      "start_latlng": [
+        57.146492740139365,
+        -4.681295016780496
+      ],
+      "end_latlng": [
+        57.15921060182154,
+        -4.565096357837319
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897529660000,
+    "resource_state": 2,
+    "name": "Fort Augustus to Whitebridge",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 6775,
+    "moving_time": 4732,
+    "start_date": "2024-07-01T08:00:02Z",
+    "start_date_local": "2024-07-01T09:00:02Z",
+    "distance": 15141.1,
+    "start_index": 139,
+    "end_index": 4915,
+    "device_watts": false,
+    "segment": {
+      "id": 4411232,
+      "resource_state": 2,
+      "name": "Fort Augustus to Whitebridge",
+      "activity_type": "Ride",
+      "distance": 15141.1,
+      "average_grade": 1.1,
+      "maximum_grade": 21.8,
+      "elevation_high": 389.2,
+      "elevation_low": 19.1,
+      "start_latlng": [
+        57.145576,
+        -4.680928
+      ],
+      "end_latlng": [
+        57.204233,
+        -4.502941
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus, Highland PH32, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897536544300,
+    "resource_state": 2,
+    "name": "Fort Augustus (climb from)",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4782,
+    "moving_time": 3711,
+    "start_date": "2024-07-01T08:01:14Z",
+    "start_date_local": "2024-07-01T09:01:14Z",
+    "distance": 8536.71,
+    "start_index": 201,
+    "end_index": 3938,
+    "device_watts": false,
+    "segment": {
+      "id": 723617,
+      "resource_state": 2,
+      "name": "Fort Augustus (climb from)",
+      "activity_type": "Ride",
+      "distance": 8536.71,
+      "average_grade": 4.4,
+      "maximum_grade": 35.2,
+      "elevation_high": 410.1,
+      "elevation_low": 17.9,
+      "start_latlng": [
+        57.1436564,
+        -4.6793584
+      ],
+      "end_latlng": [
+        57.159189,
+        -4.5652244
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897529204000,
+    "resource_state": 2,
+    "name": "Fort Augustus to Dores (Etape stage)",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 14243,
+    "moving_time": 9448,
+    "start_date": "2024-07-01T08:01:31Z",
+    "start_date_local": "2024-07-01T09:01:31Z",
+    "distance": 38864.1,
+    "start_index": 218,
+    "end_index": 9767,
+    "device_watts": false,
+    "segment": {
+      "id": 9297818,
+      "resource_state": 2,
+      "name": "Fort Augustus to Dores (Etape stage)",
+      "activity_type": "Ride",
+      "distance": 38864.1,
+      "average_grade": 0,
+      "maximum_grade": 21.8,
+      "elevation_high": 390.2,
+      "elevation_low": 19,
+      "start_latlng": [
+        57.142982,
+        -4.679207
+      ],
+      "end_latlng": [
+        57.381191,
+        -4.333244
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897533571600,
+    "resource_state": 2,
+    "name": "Morags big climb apprehension ",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 209,
+    "moving_time": 201,
+    "start_date": "2024-07-01T08:02:05Z",
+    "start_date_local": "2024-07-01T09:02:05Z",
+    "distance": 685.2,
+    "start_index": 243,
+    "end_index": 449,
+    "device_watts": false,
+    "segment": {
+      "id": 28785385,
+      "resource_state": 2,
+      "name": "Morags big climb apprehension ",
+      "activity_type": "Ride",
+      "distance": 685.2,
+      "average_grade": 0.8,
+      "maximum_grade": 5.6,
+      "elevation_high": 2,
+      "elevation_low": -3.8,
+      "start_latlng": [
+        57.142253,
+        -4.678999
+      ],
+      "end_latlng": [
+        57.138009,
+        -4.671793
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897534495000,
+    "resource_state": 2,
+    "name": "Carn an t-Suidhe OFFICIAL Scotland Climbs",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4692,
+    "moving_time": 3631,
+    "start_date": "2024-07-01T08:02:12Z",
+    "start_date_local": "2024-07-01T09:02:12Z",
+    "distance": 8283.7,
+    "start_index": 250,
+    "end_index": 3906,
+    "device_watts": false,
+    "segment": {
+      "id": 19517223,
+      "resource_state": 2,
+      "name": "Carn an t-Suidhe OFFICIAL Scotland Climbs",
+      "activity_type": "Ride",
+      "distance": 8283.7,
+      "average_grade": 4.4,
+      "maximum_grade": 11.4,
+      "elevation_high": 388,
+      "elevation_low": 19.3,
+      "start_latlng": [
+        57.14201,
+        -4.67906
+      ],
+      "end_latlng": [
+        57.1587,
+        -4.56589
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530051000,
+    "resource_state": 2,
+    "name": "FA Canal to Whitebridge",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 6619,
+    "moving_time": 4601,
+    "start_date": "2024-07-01T08:02:28Z",
+    "start_date_local": "2024-07-01T09:02:28Z",
+    "distance": 14727.2,
+    "start_index": 266,
+    "end_index": 4905,
+    "device_watts": false,
+    "segment": {
+      "id": 25626715,
+      "resource_state": 2,
+      "name": "FA Canal to Whitebridge",
+      "activity_type": "Ride",
+      "distance": 14727.2,
+      "average_grade": 1.2,
+      "maximum_grade": 20.1,
+      "elevation_high": 389,
+      "elevation_low": 19.7,
+      "start_latlng": [
+        57.141756,
+        -4.678425
+      ],
+      "end_latlng": [
+        57.203888,
+        -4.503884
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897532481000,
+    "resource_state": 2,
+    "name": "Fort Augustus to Foyers",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 7819,
+    "moving_time": 5688,
+    "start_date": "2024-07-01T08:02:41Z",
+    "start_date_local": "2024-07-01T09:02:41Z",
+    "distance": 19886.2,
+    "start_index": 279,
+    "end_index": 6034,
+    "device_watts": false,
+    "segment": {
+      "id": 14682568,
+      "resource_state": 2,
+      "name": "Fort Augustus to Foyers",
+      "activity_type": "Ride",
+      "distance": 19886.2,
+      "average_grade": 0.7,
+      "maximum_grade": 19.8,
+      "elevation_high": 405,
+      "elevation_low": 15,
+      "start_latlng": [
+        57.141438,
+        -4.678524
+      ],
+      "end_latlng": [
+        57.243083,
+        -4.487543
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3262364726863653400,
+    "resource_state": 2,
+    "name": "ICC Glendoe Hill Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4687,
+    "moving_time": 3630,
+    "start_date": "2024-07-01T08:02:45Z",
+    "start_date_local": "2024-07-01T09:02:45Z",
+    "distance": 8276.6,
+    "start_index": 283,
+    "end_index": 3934,
+    "device_watts": false,
+    "segment": {
+      "id": 37630720,
+      "resource_state": 2,
+      "name": "ICC Glendoe Hill Climb",
+      "activity_type": "Ride",
+      "distance": 8276.6,
+      "average_grade": 4.6,
+      "maximum_grade": 17.5,
+      "elevation_high": 400.9,
+      "elevation_low": 21.7,
+      "start_latlng": [
+        57.14135,
+        -4.678384
+      ],
+      "end_latlng": [
+        57.159098,
+        -4.565269
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897533225500,
+    "resource_state": 2,
+    "name": "Glamping",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3245,
+    "moving_time": 2497,
+    "start_date": "2024-07-01T08:02:57Z",
+    "start_date_local": "2024-07-01T09:02:57Z",
+    "distance": 5117.8,
+    "start_index": 295,
+    "end_index": 2811,
+    "device_watts": false,
+    "segment": {
+      "id": 32319051,
+      "resource_state": 2,
+      "name": "Glamping",
+      "activity_type": "Ride",
+      "distance": 5117.8,
+      "average_grade": 5.4,
+      "maximum_grade": 15.3,
+      "elevation_high": 295.9,
+      "elevation_low": 20.5,
+      "start_latlng": [
+        57.140943,
+        -4.678423
+      ],
+      "end_latlng": [
+        57.148892,
+        -4.61067
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897535052300,
+    "resource_state": 2,
+    "name": "Fort Augustus Pt 1",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1850,
+    "moving_time": 1276,
+    "start_date": "2024-07-01T08:03:36Z",
+    "start_date_local": "2024-07-01T09:03:36Z",
+    "distance": 2609.36,
+    "start_index": 331,
+    "end_index": 1618,
+    "device_watts": false,
+    "segment": {
+      "id": 1553862,
+      "resource_state": 2,
+      "name": "Fort Augustus Pt 1",
+      "activity_type": "Ride",
+      "distance": 2609.36,
+      "average_grade": 6.3,
+      "maximum_grade": 11.3,
+      "elevation_high": 128.3,
+      "elevation_low": -50.9,
+      "start_latlng": [
+        57.139989,
+        -4.677743
+      ],
+      "end_latlng": [
+        57.144116,
+        -4.644149
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897533709000,
+    "resource_state": 2,
+    "name": "up to Loch Tarff",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3288,
+    "moving_time": 2544,
+    "start_date": "2024-07-01T08:03:45Z",
+    "start_date_local": "2024-07-01T09:03:45Z",
+    "distance": 5459.45,
+    "start_index": 340,
+    "end_index": 2902,
+    "device_watts": false,
+    "segment": {
+      "id": 2403947,
+      "resource_state": 2,
+      "name": "up to Loch Tarff",
+      "activity_type": "Ride",
+      "distance": 5459.45,
+      "average_grade": 5,
+      "maximum_grade": 42.1,
+      "elevation_high": 306.3,
+      "elevation_low": 24.2,
+      "start_latlng": [
+        57.1397586,
+        -4.6773622
+      ],
+      "end_latlng": [
+        57.1497235,
+        -4.6035468
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530463700,
+    "resource_state": 2,
+    "name": "First Monster Ft Augustus Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5521,
+    "moving_time": 3584,
+    "start_date": "2024-07-01T08:04:19Z",
+    "start_date_local": "2024-07-01T09:04:19Z",
+    "distance": 8023.18,
+    "start_index": 374,
+    "end_index": 3992,
+    "device_watts": false,
+    "segment": {
+      "id": 1365161,
+      "resource_state": 2,
+      "name": "First Monster Ft Augustus Climb",
+      "activity_type": "Ride",
+      "distance": 8023.18,
+      "average_grade": 4.6,
+      "maximum_grade": 18.7,
+      "elevation_high": 389.1,
+      "elevation_low": 23.6,
+      "start_latlng": [
+        57.13921104557812,
+        -4.6748824417591095
+      ],
+      "end_latlng": [
+        57.15958569198847,
+        -4.564603082835674
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897529200000,
+    "resource_state": 2,
+    "name": "Etape section 2",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5519,
+    "moving_time": 3582,
+    "start_date": "2024-07-01T08:04:24Z",
+    "start_date_local": "2024-07-01T09:04:24Z",
+    "distance": 7976.7,
+    "start_index": 379,
+    "end_index": 3995,
+    "device_watts": false,
+    "segment": {
+      "id": 9248121,
+      "resource_state": 2,
+      "name": "Etape section 2",
+      "activity_type": "Ride",
+      "distance": 7976.7,
+      "average_grade": 4.7,
+      "maximum_grade": 13.6,
+      "elevation_high": 401,
+      "elevation_low": 22.2,
+      "start_latlng": [
+        57.138802,
+        -4.675016
+      ],
+      "end_latlng": [
+        57.159719,
+        -4.564415
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897531246000,
+    "resource_state": 2,
+    "name": "Carn an t-Suidhe",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5497,
+    "moving_time": 3560,
+    "start_date": "2024-07-01T08:04:40Z",
+    "start_date_local": "2024-07-01T09:04:40Z",
+    "distance": 7923.04,
+    "start_index": 395,
+    "end_index": 3989,
+    "device_watts": false,
+    "segment": {
+      "id": 1559463,
+      "resource_state": 2,
+      "name": "Carn an t-Suidhe",
+      "activity_type": "Ride",
+      "distance": 7923.04,
+      "average_grade": 4.5,
+      "maximum_grade": 20.9,
+      "elevation_high": 388.6,
+      "elevation_low": 28.3,
+      "start_latlng": [
+        57.1389074,
+        -4.6741531
+      ],
+      "end_latlng": [
+        57.1595106,
+        -4.5646864
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530309000,
+    "resource_state": 2,
+    "name": "Inverness Etape Part 2",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 8955,
+    "moving_time": 6689,
+    "start_date": "2024-07-01T08:04:43Z",
+    "start_date_local": "2024-07-01T09:04:43Z",
+    "distance": 25905.5,
+    "start_index": 398,
+    "end_index": 7173,
+    "device_watts": false,
+    "segment": {
+      "id": 17329371,
+      "resource_state": 2,
+      "name": "Inverness Etape Part 2",
+      "activity_type": "Ride",
+      "distance": 25905.5,
+      "average_grade": 0,
+      "maximum_grade": 21.5,
+      "elevation_high": 389,
+      "elevation_low": 19.8,
+      "start_latlng": [
+        57.138545,
+        -4.674306
+      ],
+      "end_latlng": [
+        57.292565,
+        -4.446109
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897534886400,
+    "resource_state": 2,
+    "name": "Etape Part 2A",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4535,
+    "moving_time": 3482,
+    "start_date": "2024-07-01T08:05:16Z",
+    "start_date_local": "2024-07-01T09:05:16Z",
+    "distance": 7749.8,
+    "start_index": 431,
+    "end_index": 3933,
+    "device_watts": false,
+    "segment": {
+      "id": 29562846,
+      "resource_state": 2,
+      "name": "Etape Part 2A",
+      "activity_type": "Ride",
+      "distance": 7749.8,
+      "average_grade": 4.7,
+      "maximum_grade": 22.3,
+      "elevation_high": 389.7,
+      "elevation_low": 21.8,
+      "start_latlng": [
+        57.13814,
+        -4.672895
+      ],
+      "end_latlng": [
+        57.159074,
+        -4.565254
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3377758181009286700,
+    "resource_state": 2,
+    "name": "Etape Loch Ness - Glendoe climb 1st Ramp",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1162,
+    "moving_time": 1121,
+    "start_date": "2024-07-01T08:05:21Z",
+    "start_date_local": "2024-07-01T09:05:21Z",
+    "distance": 1927.1,
+    "start_index": 436,
+    "end_index": 1561,
+    "device_watts": false,
+    "segment": {
+      "id": 39581818,
+      "resource_state": 2,
+      "name": "Etape Loch Ness - Glendoe climb 1st Ramp",
+      "activity_type": "Ride",
+      "distance": 1927.1,
+      "average_grade": 9.1,
+      "maximum_grade": 15.4,
+      "elevation_high": 199.9,
+      "elevation_low": 21.8,
+      "start_latlng": [
+        57.138136,
+        -4.67259
+      ],
+      "end_latlng": [
+        57.144281,
+        -4.647705
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530515000,
+    "resource_state": 2,
+    "name": "OFFICIAL Etape Loch Ness KOM",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4540,
+    "moving_time": 3487,
+    "start_date": "2024-07-01T08:05:26Z",
+    "start_date_local": "2024-07-01T09:05:26Z",
+    "distance": 7726.2,
+    "start_index": 441,
+    "end_index": 3948,
+    "device_watts": false,
+    "segment": {
+      "id": 31637303,
+      "resource_state": 2,
+      "name": "OFFICIAL Etape Loch Ness KOM",
+      "activity_type": "Ride",
+      "distance": 7726.2,
+      "average_grade": 5.1,
+      "maximum_grade": 952.2,
+      "elevation_high": 326.8,
+      "elevation_low": -69.8,
+      "start_latlng": [
+        57.138084,
+        -4.672276
+      ],
+      "end_latlng": [
+        57.159385,
+        -4.56494
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897534789000,
+    "resource_state": 2,
+    "name": "Full Glendoe Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4469,
+    "moving_time": 3416,
+    "start_date": "2024-07-01T08:05:37Z",
+    "start_date_local": "2024-07-01T09:05:37Z",
+    "distance": 7581.1,
+    "start_index": 452,
+    "end_index": 3888,
+    "device_watts": false,
+    "segment": {
+      "id": 34472964,
+      "resource_state": 2,
+      "name": "Full Glendoe Climb",
+      "activity_type": "Ride",
+      "distance": 7581.1,
+      "average_grade": 4.9,
+      "maximum_grade": 19.8,
+      "elevation_high": 382.6,
+      "elevation_low": 9.2,
+      "start_latlng": [
+        57.137979,
+        -4.671569
+      ],
+      "end_latlng": [
+        57.158487,
+        -4.566408
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897533201000,
+    "resource_state": 2,
+    "name": "Etape Climb Part 1",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1162,
+    "moving_time": 1115,
+    "start_date": "2024-07-01T08:05:40Z",
+    "start_date_local": "2024-07-01T09:05:40Z",
+    "distance": 1882,
+    "start_index": 455,
+    "end_index": 1575,
+    "device_watts": false,
+    "segment": {
+      "id": 17538428,
+      "resource_state": 2,
+      "name": "Etape Climb Part 1",
+      "activity_type": "Ride",
+      "distance": 1882,
+      "average_grade": 9.6,
+      "maximum_grade": 33.3,
+      "elevation_high": 207,
+      "elevation_low": 26,
+      "start_latlng": [
+        57.137958,
+        -4.671405
+      ],
+      "end_latlng": [
+        57.144098,
+        -4.647298
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897536525000,
+    "resource_state": 2,
+    "name": "Fort Augustus to Loch Tarff",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3089,
+    "moving_time": 2345,
+    "start_date": "2024-07-01T08:05:42Z",
+    "start_date_local": "2024-07-01T09:05:42Z",
+    "distance": 4898.9,
+    "start_index": 457,
+    "end_index": 2820,
+    "device_watts": false,
+    "segment": {
+      "id": 11904257,
+      "resource_state": 2,
+      "name": "Fort Augustus to Loch Tarff",
+      "activity_type": "Ride",
+      "distance": 4898.9,
+      "average_grade": 5.4,
+      "maximum_grade": 29.1,
+      "elevation_high": 296.1,
+      "elevation_low": 31.3,
+      "start_latlng": [
+        57.137852,
+        -4.671326
+      ],
+      "end_latlng": [
+        57.148821,
+        -4.610273
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897536056000,
+    "resource_state": 2,
+    "name": "Loch Ness to Loch Tarff Everesting",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3052,
+    "moving_time": 2308,
+    "start_date": "2024-07-01T08:05:51Z",
+    "start_date_local": "2024-07-01T09:05:51Z",
+    "distance": 4455.8,
+    "start_index": 466,
+    "end_index": 2792,
+    "device_watts": false,
+    "segment": {
+      "id": 32640151,
+      "resource_state": 2,
+      "name": "Loch Ness to Loch Tarff Everesting",
+      "activity_type": "Ride",
+      "distance": 4455.8,
+      "average_grade": 5.7,
+      "maximum_grade": 15.3,
+      "elevation_high": 294.6,
+      "elevation_low": 40.2,
+      "start_latlng": [
+        57.137826,
+        -4.670727
+      ],
+      "end_latlng": [
+        57.148686,
+        -4.611434
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897535037000,
+    "resource_state": 2,
+    "name": "B862 Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1111,
+    "moving_time": 1070,
+    "start_date": "2024-07-01T08:06:07Z",
+    "start_date_local": "2024-07-01T09:06:07Z",
+    "distance": 1769.07,
+    "start_index": 482,
+    "end_index": 1556,
+    "device_watts": false,
+    "segment": {
+      "id": 1065619,
+      "resource_state": 2,
+      "name": "B862 Climb",
+      "activity_type": "Ride",
+      "distance": 1769.07,
+      "average_grade": 9.8,
+      "maximum_grade": 17.6,
+      "elevation_high": 205,
+      "elevation_low": 32.1,
+      "start_latlng": [
+        57.1377182006836,
+        -4.67015695571899
+      ],
+      "end_latlng": [
+        57.1444320678711,
+        -4.64769601821899
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897531271700,
+    "resource_state": 2,
+    "name": "Etape Loch Ness - Glendoe Full Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5407,
+    "moving_time": 3470,
+    "start_date": "2024-07-01T08:06:07Z",
+    "start_date_local": "2024-07-01T09:06:07Z",
+    "distance": 7616.4,
+    "start_index": 482,
+    "end_index": 3986,
+    "device_watts": false,
+    "segment": {
+      "id": 11779165,
+      "resource_state": 2,
+      "name": "Etape Loch Ness - Glendoe Full Climb",
+      "activity_type": "Ride",
+      "distance": 7616.4,
+      "average_grade": 4.7,
+      "maximum_grade": 21.8,
+      "elevation_high": 387.8,
+      "elevation_low": 32.3,
+      "start_latlng": [
+        57.137689,
+        -4.670187
+      ],
+      "end_latlng": [
+        57.159414,
+        -4.564738
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897536076300,
+    "resource_state": 2,
+    "name": "My shorter Glendoe",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4336,
+    "moving_time": 3283,
+    "start_date": "2024-07-01T08:06:12Z",
+    "start_date_local": "2024-07-01T09:06:12Z",
+    "distance": 9904,
+    "start_index": 487,
+    "end_index": 3790,
+    "device_watts": false,
+    "segment": {
+      "id": 13812025,
+      "resource_state": 2,
+      "name": "My shorter Glendoe",
+      "activity_type": "Ride",
+      "distance": 9904,
+      "average_grade": 3.4,
+      "maximum_grade": 33.3,
+      "elevation_high": 372.8,
+      "elevation_low": 32.6,
+      "start_latlng": [
+        57.137646,
+        -4.670065
+      ],
+      "end_latlng": [
+        57.157436,
+        -4.568683
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897532363300,
+    "resource_state": 2,
+    "name": "Glendoe up n down",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 8748,
+    "moving_time": 6482,
+    "start_date": "2024-07-01T08:06:17Z",
+    "start_date_local": "2024-07-01T09:06:17Z",
+    "distance": 24974.6,
+    "start_index": 492,
+    "end_index": 7060,
+    "device_watts": false,
+    "segment": {
+      "id": 9362136,
+      "resource_state": 2,
+      "name": "Glendoe up n down",
+      "activity_type": "Ride",
+      "distance": 24974.6,
+      "average_grade": 0,
+      "maximum_grade": 20.4,
+      "elevation_high": 388.6,
+      "elevation_low": 30.6,
+      "start_latlng": [
+        57.137679,
+        -4.669863
+      ],
+      "end_latlng": [
+        57.288024,
+        -4.450981
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897536167400,
+    "resource_state": 2,
+    "name": "Etape KOM",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4448,
+    "moving_time": 3395,
+    "start_date": "2024-07-01T08:06:18Z",
+    "start_date_local": "2024-07-01T09:06:18Z",
+    "distance": 7537.9,
+    "start_index": 493,
+    "end_index": 3908,
+    "device_watts": false,
+    "segment": {
+      "id": 11849828,
+      "resource_state": 2,
+      "name": "Etape KOM",
+      "activity_type": "Ride",
+      "distance": 7537.9,
+      "average_grade": 4.7,
+      "maximum_grade": 26.7,
+      "elevation_high": 384.4,
+      "elevation_low": 32.3,
+      "start_latlng": [
+        57.137677,
+        -4.669838
+      ],
+      "end_latlng": [
+        57.158755,
+        -4.565897
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530022400,
+    "resource_state": 2,
+    "name": "Complete Glendoe climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5406,
+    "moving_time": 3470,
+    "start_date": "2024-07-01T08:07:05Z",
+    "start_date_local": "2024-07-01T09:07:05Z",
+    "distance": 7979.81,
+    "start_index": 540,
+    "end_index": 4043,
+    "device_watts": false,
+    "segment": {
+      "id": 2467236,
+      "resource_state": 2,
+      "name": "Complete Glendoe climb",
+      "activity_type": "Ride",
+      "distance": 7979.81,
+      "average_grade": 4,
+      "maximum_grade": 15.9,
+      "elevation_high": 387.4,
+      "elevation_low": 40,
+      "start_latlng": [
+        57.137399381026626,
+        -4.668898181989789
+      ],
+      "end_latlng": [
+        57.16226446442306,
+        -4.5604743249714375
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897535412700,
+    "resource_state": 2,
+    "name": "Etape Loch Ness 2022 KOM",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4418,
+    "moving_time": 3366,
+    "start_date": "2024-07-01T08:07:16Z",
+    "start_date_local": "2024-07-01T09:07:16Z",
+    "distance": 7499.2,
+    "start_index": 551,
+    "end_index": 3936,
+    "device_watts": false,
+    "segment": {
+      "id": 31607775,
+      "resource_state": 2,
+      "name": "Etape Loch Ness 2022 KOM",
+      "activity_type": "Ride",
+      "distance": 7499.2,
+      "average_grade": 4.8,
+      "maximum_grade": 21.5,
+      "elevation_high": 397.2,
+      "elevation_low": 39,
+      "start_latlng": [
+        57.137441,
+        -4.668482
+      ],
+      "end_latlng": [
+        57.159119,
+        -4.565205
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897533416000,
+    "resource_state": 2,
+    "name": "Loch Ness to Loch Tarff Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2945,
+    "moving_time": 2202,
+    "start_date": "2024-07-01T08:07:59Z",
+    "start_date_local": "2024-07-01T09:07:59Z",
+    "distance": 4291,
+    "start_index": 594,
+    "end_index": 2813,
+    "device_watts": false,
+    "segment": {
+      "id": 32312034,
+      "resource_state": 2,
+      "name": "Loch Ness to Loch Tarff Climb",
+      "activity_type": "Ride",
+      "distance": 4291,
+      "average_grade": 5.9,
+      "maximum_grade": 15.3,
+      "elevation_high": 295.9,
+      "elevation_low": 40.8,
+      "start_latlng": [
+        57.13766,
+        -4.667189
+      ],
+      "end_latlng": [
+        57.148894,
+        -4.610576
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897534285300,
+    "resource_state": 2,
+    "name": "Glamping short",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1013,
+    "moving_time": 973,
+    "start_date": "2024-07-01T08:07:59Z",
+    "start_date_local": "2024-07-01T09:07:59Z",
+    "distance": 1599.2,
+    "start_index": 594,
+    "end_index": 1570,
+    "device_watts": false,
+    "segment": {
+      "id": 32457197,
+      "resource_state": 2,
+      "name": "Glamping short",
+      "activity_type": "Ride",
+      "distance": 1599.2,
+      "average_grade": 10,
+      "maximum_grade": 15.3,
+      "elevation_high": 200.3,
+      "elevation_low": 40.8,
+      "start_latlng": [
+        57.13766,
+        -4.667189
+      ],
+      "end_latlng": [
+        57.144173,
+        -4.64743
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897528915500,
+    "resource_state": 2,
+    "name": "B862 Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4384,
+    "moving_time": 3332,
+    "start_date": "2024-07-01T08:08:01Z",
+    "start_date_local": "2024-07-01T09:08:01Z",
+    "distance": 7523.6,
+    "start_index": 596,
+    "end_index": 3947,
+    "device_watts": false,
+    "segment": {
+      "id": 15892382,
+      "resource_state": 2,
+      "name": "B862 Climb",
+      "activity_type": "Ride",
+      "distance": 7523.6,
+      "average_grade": 4.5,
+      "maximum_grade": 22.1,
+      "elevation_high": 388.4,
+      "elevation_low": 51.5,
+      "start_latlng": [
+        57.137659,
+        -4.667119
+      ],
+      "end_latlng": [
+        57.159357,
+        -4.565022
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897534599700,
+    "resource_state": 2,
+    "name": "LEJOG Loch Ness B-Road climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 898,
+    "moving_time": 858,
+    "start_date": "2024-07-01T08:08:31Z",
+    "start_date_local": "2024-07-01T09:08:31Z",
+    "distance": 1399.3,
+    "start_index": 626,
+    "end_index": 1487,
+    "device_watts": false,
+    "segment": {
+      "id": 20651558,
+      "resource_state": 2,
+      "name": "LEJOG Loch Ness B-Road climb",
+      "activity_type": "Ride",
+      "distance": 1399.3,
+      "average_grade": 10,
+      "maximum_grade": 14.2,
+      "elevation_high": 189.6,
+      "elevation_low": 49.2,
+      "start_latlng": [
+        57.137925,
+        -4.666482
+      ],
+      "end_latlng": [
+        57.144605,
+        -4.649655
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897531263500,
+    "resource_state": 2,
+    "name": "Fort Augustus big climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5252,
+    "moving_time": 3316,
+    "start_date": "2024-07-01T08:08:48Z",
+    "start_date_local": "2024-07-01T09:08:48Z",
+    "distance": 7428.2,
+    "start_index": 643,
+    "end_index": 3992,
+    "device_watts": false,
+    "segment": {
+      "id": 28785325,
+      "resource_state": 2,
+      "name": "Fort Augustus big climb",
+      "activity_type": "Ride",
+      "distance": 7428.2,
+      "average_grade": 4.7,
+      "maximum_grade": 40.3,
+      "elevation_high": 377.8,
+      "elevation_low": 26,
+      "start_latlng": [
+        57.138016,
+        -4.666155
+      ],
+      "end_latlng": [
+        57.159629,
+        -4.564573
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 3,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897536720400,
+    "resource_state": 2,
+    "name": "Fort Augustus Pt 2 - Loch Tarff Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2626,
+    "moving_time": 2147,
+    "start_date": "2024-07-01T08:36:23Z",
+    "start_date_local": "2024-07-01T09:36:23Z",
+    "distance": 4861,
+    "start_index": 1735,
+    "end_index": 3891,
+    "device_watts": false,
+    "segment": {
+      "id": 1552108,
+      "resource_state": 2,
+      "name": "Fort Augustus Pt 2 - Loch Tarff Climb",
+      "activity_type": "Ride",
+      "distance": 4861,
+      "average_grade": 4.5,
+      "maximum_grade": 16.5,
+      "elevation_high": 321.3,
+      "elevation_low": 100.5,
+      "start_latlng": [
+        57.143102,
+        -4.634874
+      ],
+      "end_latlng": [
+        57.158514,
+        -4.56629
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 2,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897535745500,
+    "resource_state": 2,
+    "name": "Etape Climb Part 2",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1180,
+    "moving_time": 1010,
+    "start_date": "2024-07-01T08:37:42Z",
+    "start_date_local": "2024-07-01T09:37:42Z",
+    "distance": 1633,
+    "start_index": 1814,
+    "end_index": 2831,
+    "device_watts": false,
+    "segment": {
+      "id": 17538454,
+      "resource_state": 2,
+      "name": "Etape Climb Part 2",
+      "activity_type": "Ride",
+      "distance": 1633,
+      "average_grade": 8,
+      "maximum_grade": 33.3,
+      "elevation_high": 306,
+      "elevation_low": 176,
+      "start_latlng": [
+        57.142008,
+        -4.631203
+      ],
+      "end_latlng": [
+        57.148871,
+        -4.609745
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897535280600,
+    "resource_state": 2,
+    "name": "Etape Loch Ness - Glendoe climb 2nd ramp",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1119,
+    "moving_time": 949,
+    "start_date": "2024-07-01T08:37:48Z",
+    "start_date_local": "2024-07-01T09:37:48Z",
+    "distance": 1470.5,
+    "start_index": 1820,
+    "end_index": 2776,
+    "device_watts": false,
+    "segment": {
+      "id": 23775073,
+      "resource_state": 2,
+      "name": "Etape Loch Ness - Glendoe climb 2nd ramp",
+      "activity_type": "Ride",
+      "distance": 1470.5,
+      "average_grade": 7.7,
+      "maximum_grade": 21.8,
+      "elevation_high": 296.4,
+      "elevation_low": 183.9,
+      "start_latlng": [
+        57.142064,
+        -4.631001
+      ],
+      "end_latlng": [
+        57.1485,
+        -4.611939
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897536411000,
+    "resource_state": 2,
+    "name": "B862 Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1053,
+    "moving_time": 883,
+    "start_date": "2024-07-01T08:38:18Z",
+    "start_date_local": "2024-07-01T09:38:18Z",
+    "distance": 1346.68,
+    "start_index": 1850,
+    "end_index": 2740,
+    "device_watts": false,
+    "segment": {
+      "id": 1065620,
+      "resource_state": 2,
+      "name": "B862 Climb",
+      "activity_type": "Ride",
+      "distance": 1346.68,
+      "average_grade": 7.7,
+      "maximum_grade": 19.5,
+      "elevation_high": 291.7,
+      "elevation_low": 187.9,
+      "start_latlng": [
+        57.1418418884277,
+        -4.63036727905273
+      ],
+      "end_latlng": [
+        57.148078918457,
+        -4.61279344558716
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897535174000,
+    "resource_state": 2,
+    "name": "Loch Tarff Sprint!",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 354,
+    "moving_time": 193,
+    "start_date": "2024-07-01T08:57:14Z",
+    "start_date_local": "2024-07-01T09:57:14Z",
+    "distance": 943,
+    "start_index": 2823,
+    "end_index": 3017,
+    "device_watts": false,
+    "segment": {
+      "id": 20454111,
+      "resource_state": 2,
+      "name": "Loch Tarff Sprint!",
+      "activity_type": "Ride",
+      "distance": 943,
+      "average_grade": -0.4,
+      "maximum_grade": 1.3,
+      "elevation_high": 298,
+      "elevation_low": 294.2,
+      "start_latlng": [
+        57.148936,
+        -4.610104
+      ],
+      "end_latlng": [
+        57.152237,
+        -4.596212
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897532232000,
+    "resource_state": 2,
+    "name": "Doogals big day out",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2826,
+    "moving_time": 1580,
+    "start_date": "2024-07-01T08:59:33Z",
+    "start_date_local": "2024-07-01T09:59:33Z",
+    "distance": 6470,
+    "start_index": 2962,
+    "end_index": 4559,
+    "device_watts": false,
+    "segment": {
+      "id": 31515702,
+      "resource_state": 2,
+      "name": "Doogals big day out",
+      "activity_type": "Ride",
+      "distance": 6470,
+      "average_grade": -1.2,
+      "maximum_grade": 34.3,
+      "elevation_high": 400.4,
+      "elevation_low": 220.4,
+      "start_latlng": [
+        57.151094,
+        -4.599638
+      ],
+      "end_latlng": [
+        57.18854,
+        -4.527709
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897534174700,
+    "resource_state": 2,
+    "name": "The sting",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 192,
+    "moving_time": 192,
+    "start_date": "2024-07-01T09:03:17Z",
+    "start_date_local": "2024-07-01T10:03:17Z",
+    "distance": 444.8,
+    "start_index": 3026,
+    "end_index": 3218,
+    "device_watts": false,
+    "segment": {
+      "id": 29607612,
+      "resource_state": 2,
+      "name": "The sting",
+      "activity_type": "Ride",
+      "distance": 444.8,
+      "average_grade": 6.6,
+      "maximum_grade": 26.9,
+      "elevation_high": 321.4,
+      "elevation_low": 292.2,
+      "start_latlng": [
+        57.152672,
+        -4.595489
+      ],
+      "end_latlng": [
+        57.153638,
+        -4.588795
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897532536300,
+    "resource_state": 2,
+    "name": "Etape Loch Ness - Glendoe climb 3rd ramp",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1974,
+    "moving_time": 942,
+    "start_date": "2024-07-01T09:03:20Z",
+    "start_date_local": "2024-07-01T10:03:20Z",
+    "distance": 2064.9,
+    "start_index": 3029,
+    "end_index": 3986,
+    "device_watts": false,
+    "segment": {
+      "id": 23775124,
+      "resource_state": 2,
+      "name": "Etape Loch Ness - Glendoe climb 3rd ramp",
+      "activity_type": "Ride",
+      "distance": 2064.9,
+      "average_grade": 4.4,
+      "maximum_grade": 15.3,
+      "elevation_high": 387.8,
+      "elevation_low": 297.3,
+      "start_latlng": [
+        57.152831,
+        -4.595379
+      ],
+      "end_latlng": [
+        57.159414,
+        -4.564738
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897534546400,
+    "resource_state": 2,
+    "name": "Last kick",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 936,
+    "moving_time": 788,
+    "start_date": "2024-07-01T09:03:56Z",
+    "start_date_local": "2024-07-01T10:03:56Z",
+    "distance": 1773.6,
+    "start_index": 3065,
+    "end_index": 3854,
+    "device_watts": false,
+    "segment": {
+      "id": 7152667,
+      "resource_state": 2,
+      "name": "Last kick",
+      "activity_type": "Ride",
+      "distance": 1773.6,
+      "average_grade": 4.5,
+      "maximum_grade": 15.8,
+      "elevation_high": 380.5,
+      "elevation_low": 301.1,
+      "start_latlng": [
+        57.153208,
+        -4.594175
+      ],
+      "end_latlng": [
+        57.158181,
+        -4.567227
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus, Highland PH32, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897528846000,
+    "resource_state": 2,
+    "name": "B862 Climb",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1758,
+    "moving_time": 726,
+    "start_date": "2024-07-01T09:06:56Z",
+    "start_date_local": "2024-07-01T10:06:56Z",
+    "distance": 1497.72,
+    "start_index": 3245,
+    "end_index": 3986,
+    "device_watts": false,
+    "segment": {
+      "id": 1334023,
+      "resource_state": 2,
+      "name": "B862 Climb",
+      "activity_type": "Ride",
+      "distance": 1497.72,
+      "average_grade": 5.4,
+      "maximum_grade": 14.3,
+      "elevation_high": 387.8,
+      "elevation_low": 307.4,
+      "start_latlng": [
+        57.15346145443618,
+        -4.58644456230104
+      ],
+      "end_latlng": [
+        57.15942735783756,
+        -4.564762841910124
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Fort Augustus",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897529126400,
+    "resource_state": 2,
+    "name": "Suidhe Síos",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1360,
+    "moving_time": 1234,
+    "start_date": "2024-07-01T09:35:48Z",
+    "start_date_local": "2024-07-01T10:35:48Z",
+    "distance": 8289,
+    "start_index": 3975,
+    "end_index": 5225,
+    "device_watts": false,
+    "segment": {
+      "id": 17135317,
+      "resource_state": 2,
+      "name": "Suidhe Síos",
+      "activity_type": "Ride",
+      "distance": 8289,
+      "average_grade": -2.7,
+      "maximum_grade": 9.6,
+      "elevation_high": 389,
+      "elevation_low": 163.1,
+      "start_latlng": [
+        57.15929,
+        -4.565012
+      ],
+      "end_latlng": [
+        57.220398,
+        -4.494597
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897531661000,
+    "resource_state": 2,
+    "name": "Down to the Lump",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1698,
+    "moving_time": 1566,
+    "start_date": "2024-07-01T09:36:10Z",
+    "start_date_local": "2024-07-01T10:36:10Z",
+    "distance": 9861.7,
+    "start_index": 3982,
+    "end_index": 5565,
+    "device_watts": false,
+    "segment": {
+      "id": 9348692,
+      "resource_state": 2,
+      "name": "Down to the Lump",
+      "activity_type": "Ride",
+      "distance": 9861.7,
+      "average_grade": -2.4,
+      "maximum_grade": 8.3,
+      "elevation_high": 389,
+      "elevation_low": 144.1,
+      "start_latlng": [
+        57.159393,
+        -4.564867
+      ],
+      "end_latlng": [
+        57.233604,
+        -4.495695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530791400,
+    "resource_state": 2,
+    "name": "Inverness Etape Part 2B",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3470,
+    "moving_time": 3141,
+    "start_date": "2024-07-01T09:36:13Z",
+    "start_date_local": "2024-07-01T10:36:13Z",
+    "distance": 18309.3,
+    "start_index": 3985,
+    "end_index": 7178,
+    "device_watts": false,
+    "segment": {
+      "id": 17528270,
+      "resource_state": 2,
+      "name": "Inverness Etape Part 2B",
+      "activity_type": "Ride",
+      "distance": 18309.3,
+      "average_grade": -2,
+      "maximum_grade": 19.6,
+      "elevation_high": 388.9,
+      "elevation_low": 19.8,
+      "start_latlng": [
+        57.159408,
+        -4.564767
+      ],
+      "end_latlng": [
+        57.292681,
+        -4.445978
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897529815600,
+    "resource_state": 2,
+    "name": "Glen Doe Summit to Foyers turn off",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1322,
+    "moving_time": 1217,
+    "start_date": "2024-07-01T09:36:25Z",
+    "start_date_local": "2024-07-01T10:36:25Z",
+    "distance": 8195.7,
+    "start_index": 3997,
+    "end_index": 5224,
+    "device_watts": false,
+    "segment": {
+      "id": 30604558,
+      "resource_state": 2,
+      "name": "Glen Doe Summit to Foyers turn off",
+      "activity_type": "Ride",
+      "distance": 8195.7,
+      "average_grade": -2.8,
+      "maximum_grade": 3.5,
+      "elevation_high": 381.6,
+      "elevation_low": 152.4,
+      "start_latlng": [
+        57.159836,
+        -4.564314
+      ],
+      "end_latlng": [
+        57.220413,
+        -4.494494
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897528850000,
+    "resource_state": 2,
+    "name": "GW Descent",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 3329,
+    "moving_time": 3000,
+    "start_date": "2024-07-01T09:36:26Z",
+    "start_date_local": "2024-07-01T10:36:26Z",
+    "distance": 17230.8,
+    "start_index": 3998,
+    "end_index": 7050,
+    "device_watts": false,
+    "segment": {
+      "id": 9013986,
+      "resource_state": 2,
+      "name": "GW Descent",
+      "activity_type": "Ride",
+      "distance": 17230.8,
+      "average_grade": -2.1,
+      "maximum_grade": 21.8,
+      "elevation_high": 385.8,
+      "elevation_low": 30.9,
+      "start_latlng": [
+        57.159891,
+        -4.564271
+      ],
+      "end_latlng": [
+        57.287174,
+        -4.451639
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897531938300,
+    "resource_state": 2,
+    "name": "Suidhe Viewpoint to Foyers",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 2181,
+    "moving_time": 1991,
+    "start_date": "2024-07-01T09:36:43Z",
+    "start_date_local": "2024-07-01T10:36:43Z",
+    "distance": 11422.2,
+    "start_index": 4015,
+    "end_index": 6038,
+    "device_watts": false,
+    "segment": {
+      "id": 14682579,
+      "resource_state": 2,
+      "name": "Suidhe Viewpoint to Foyers",
+      "activity_type": "Ride",
+      "distance": 11422.2,
+      "average_grade": -2.1,
+      "maximum_grade": 17.4,
+      "elevation_high": 396.4,
+      "elevation_low": 137,
+      "start_latlng": [
+        57.160479,
+        -4.563016
+      ],
+      "end_latlng": [
+        57.243333,
+        -4.487298
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort Augustus",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897531610600,
+    "resource_state": 2,
+    "name": "as far as you can see",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 294,
+    "moving_time": 294,
+    "start_date": "2024-07-01T09:36:44Z",
+    "start_date_local": "2024-07-01T10:36:44Z",
+    "distance": 2028.2,
+    "start_index": 4016,
+    "end_index": 4310,
+    "device_watts": false,
+    "segment": {
+      "id": 4411844,
+      "resource_state": 2,
+      "name": "as far as you can see",
+      "activity_type": "Ride",
+      "distance": 2028.2,
+      "average_grade": -4,
+      "maximum_grade": 2.9,
+      "elevation_high": 405,
+      "elevation_low": 324.6,
+      "start_latlng": [
+        57.160547,
+        -4.562872
+      ],
+      "end_latlng": [
+        57.175849,
+        -4.545192
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897528972000,
+    "resource_state": 2,
+    "name": "Descent to Feed Stop 1 RAB8",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 917,
+    "moving_time": 857,
+    "start_date": "2024-07-01T09:36:46Z",
+    "start_date_local": "2024-07-01T10:36:46Z",
+    "distance": 5919.42,
+    "start_index": 4018,
+    "end_index": 4877,
+    "device_watts": false,
+    "segment": {
+      "id": 2561461,
+      "resource_state": 2,
+      "name": "Descent to Feed Stop 1 RAB8",
+      "activity_type": "Ride",
+      "distance": 5919.42,
+      "average_grade": -3.1,
+      "maximum_grade": 5.5,
+      "elevation_high": 397.2,
+      "elevation_low": 212.6,
+      "start_latlng": [
+        57.160636028274894,
+        -4.562659822404385
+      ],
+      "end_latlng": [
+        57.20324073918164,
+        -4.506291188299656
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Whitebridge",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897529275000,
+    "resource_state": 2,
+    "name": "Whitebridge - Foyers Junction",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1676,
+    "moving_time": 1509,
+    "start_date": "2024-07-01T09:51:53Z",
+    "start_date_local": "2024-07-01T10:51:53Z",
+    "distance": 7636.1,
+    "start_index": 4867,
+    "end_index": 6407,
+    "device_watts": false,
+    "segment": {
+      "id": 1365136,
+      "resource_state": 2,
+      "name": "Whitebridge - Foyers Junction",
+      "activity_type": "Ride",
+      "distance": 7636.1,
+      "average_grade": -1.4,
+      "maximum_grade": 21.1,
+      "elevation_high": 200.4,
+      "elevation_low": 96.2,
+      "start_latlng": [
+        57.20301426015794,
+        -4.5073615573346615
+      ],
+      "end_latlng": [
+        57.25962529890239,
+        -4.48308639228344
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Whitebridge",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897530532400,
+    "resource_state": 2,
+    "name": "Whitebridge to Dores",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 7549,
+    "moving_time": 4786,
+    "start_date": "2024-07-01T09:52:54Z",
+    "start_date_local": "2024-07-01T10:52:54Z",
+    "distance": 23801.7,
+    "start_index": 4912,
+    "end_index": 9756,
+    "device_watts": false,
+    "segment": {
+      "id": 29618233,
+      "resource_state": 2,
+      "name": "Whitebridge to Dores",
+      "activity_type": "Ride",
+      "distance": 23801.7,
+      "average_grade": -0.7,
+      "maximum_grade": 22,
+      "elevation_high": 179,
+      "elevation_low": 6.2,
+      "start_latlng": [
+        57.20407,
+        -4.503174
+      ],
+      "end_latlng": [
+        57.380756,
+        -4.33361
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897531155000,
+    "resource_state": 2,
+    "name": "Get past before the twisties ",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 152,
+    "moving_time": 124,
+    "start_date": "2024-07-01T09:55:11Z",
+    "start_date_local": "2024-07-01T10:55:11Z",
+    "distance": 888.6,
+    "start_index": 5049,
+    "end_index": 5180,
+    "device_watts": false,
+    "segment": {
+      "id": 11915254,
+      "resource_state": 2,
+      "name": "Get past before the twisties ",
+      "activity_type": "Ride",
+      "distance": 888.6,
+      "average_grade": -2.1,
+      "maximum_grade": -0.6,
+      "elevation_high": 183.2,
+      "elevation_low": 164.1,
+      "start_latlng": [
+        57.210581,
+        -4.497632
+      ],
+      "end_latlng": [
+        57.218358,
+        -4.495391
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897529792000,
+    "resource_state": 2,
+    "name": "Cemetry to Foyers",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1179,
+    "moving_time": 1057,
+    "start_date": "2024-07-01T09:58:33Z",
+    "start_date_local": "2024-07-01T10:58:33Z",
+    "distance": 4463.6,
+    "start_index": 5230,
+    "end_index": 6310,
+    "device_watts": false,
+    "segment": {
+      "id": 17135287,
+      "resource_state": 2,
+      "name": "Cemetry to Foyers",
+      "activity_type": "Ride",
+      "distance": 4463.6,
+      "average_grade": -1.2,
+      "maximum_grade": 10.2,
+      "elevation_high": 193,
+      "elevation_low": 111,
+      "start_latlng": [
+        57.220604,
+        -4.494785
+      ],
+      "end_latlng": [
+        57.253307,
+        -4.489862
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897529240000,
+    "resource_state": 2,
+    "name": "Dalcrag",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 473,
+    "moving_time": 409,
+    "start_date": "2024-07-01T10:03:34Z",
+    "start_date_local": "2024-07-01T11:03:34Z",
+    "distance": 1328.9,
+    "start_index": 5526,
+    "end_index": 5950,
+    "device_watts": false,
+    "segment": {
+      "id": 5583795,
+      "resource_state": 2,
+      "name": "Dalcrag",
+      "activity_type": "Ride",
+      "distance": 1328.9,
+      "average_grade": 2.6,
+      "maximum_grade": 18.6,
+      "elevation_high": 198,
+      "elevation_low": 144.6,
+      "start_latlng": [
+        57.231932,
+        -4.495566
+      ],
+      "end_latlng": [
+        57.239276,
+        -4.485307
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897532322300,
+    "resource_state": 2,
+    "name": "Climb to top of Foyers",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 326,
+    "moving_time": 278,
+    "start_date": "2024-07-01T10:04:40Z",
+    "start_date_local": "2024-07-01T11:04:40Z",
+    "distance": 808.2,
+    "start_index": 5577,
+    "end_index": 5869,
+    "device_watts": false,
+    "segment": {
+      "id": 4253252,
+      "resource_state": 2,
+      "name": "Climb to top of Foyers",
+      "activity_type": "Ride",
+      "distance": 808.2,
+      "average_grade": 5.3,
+      "maximum_grade": 23.1,
+      "elevation_high": 196,
+      "elevation_low": 152.9,
+      "start_latlng": [
+        57.233967,
+        -4.495222
+      ],
+      "end_latlng": [
+        57.238049,
+        -4.485119
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897528700400,
+    "resource_state": 2,
+    "name": "Hill SPRINT",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 262,
+    "moving_time": 214,
+    "start_date": "2024-07-01T10:05:12Z",
+    "start_date_local": "2024-07-01T11:05:12Z",
+    "distance": 505.7,
+    "start_index": 5609,
+    "end_index": 5837,
+    "device_watts": false,
+    "segment": {
+      "id": 30386716,
+      "resource_state": 2,
+      "name": "Hill SPRINT",
+      "activity_type": "Ride",
+      "distance": 505.7,
+      "average_grade": 7.3,
+      "maximum_grade": 14.2,
+      "elevation_high": 183,
+      "elevation_low": 146.2,
+      "start_latlng": [
+        57.234704,
+        -4.494434
+      ],
+      "end_latlng": [
+        57.237415,
+        -4.488198
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897528951300,
+    "resource_state": 2,
+    "name": "OLD VERSION - Wee Kick",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 78,
+    "moving_time": 65,
+    "start_date": "2024-07-01T10:06:22Z",
+    "start_date_local": "2024-07-01T11:06:22Z",
+    "distance": 173.1,
+    "start_index": 5664,
+    "end_index": 5736,
+    "device_watts": false,
+    "segment": {
+      "id": 5627591,
+      "resource_state": 2,
+      "name": "OLD VERSION - Wee Kick",
+      "activity_type": "Ride",
+      "distance": 173.1,
+      "average_grade": 10.5,
+      "maximum_grade": 20.7,
+      "elevation_high": 182.8,
+      "elevation_low": 164.6,
+      "start_latlng": [
+        57.235323,
+        -4.493324
+      ],
+      "end_latlng": [
+        57.236374,
+        -4.491587
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897529973000,
+    "resource_state": 2,
+    "name": "Wee Kick",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 94,
+    "moving_time": 94,
+    "start_date": "2024-07-01T10:06:43Z",
+    "start_date_local": "2024-07-01T11:06:43Z",
+    "distance": 192.1,
+    "start_index": 5679,
+    "end_index": 5773,
+    "device_watts": false,
+    "segment": {
+      "id": 5627033,
+      "resource_state": 2,
+      "name": "Wee Kick",
+      "activity_type": "Ride",
+      "distance": 192.1,
+      "average_grade": 11.8,
+      "maximum_grade": 20.3,
+      "elevation_high": 188.7,
+      "elevation_low": 165.1,
+      "start_latlng": [
+        57.235735,
+        -4.49303
+      ],
+      "end_latlng": [
+        57.23667,
+        -4.4906
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897532427000,
+    "resource_state": 2,
+    "name": "Top Gear Boys",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 130,
+    "moving_time": 130,
+    "start_date": "2024-07-01T10:13:19Z",
+    "start_date_local": "2024-07-01T11:13:19Z",
+    "distance": 385,
+    "start_index": 6053,
+    "end_index": 6183,
+    "device_watts": false,
+    "segment": {
+      "id": 8000415,
+      "resource_state": 2,
+      "name": "Top Gear Boys",
+      "activity_type": "Ride",
+      "distance": 385,
+      "average_grade": 0.3,
+      "maximum_grade": 12.6,
+      "elevation_high": 127.4,
+      "elevation_low": 112.6,
+      "start_latlng": [
+        57.244452,
+        -4.486952
+      ],
+      "end_latlng": [
+        57.247371,
+        -4.489426
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897530227000,
+    "resource_state": 2,
+    "name": "Down through Foyers",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 86,
+    "moving_time": 86,
+    "start_date": "2024-07-01T10:16:45Z",
+    "start_date_local": "2024-07-01T11:16:45Z",
+    "distance": 581.9,
+    "start_index": 6223,
+    "end_index": 6309,
+    "device_watts": false,
+    "segment": {
+      "id": 12717271,
+      "resource_state": 2,
+      "name": "Down through Foyers",
+      "activity_type": "Ride",
+      "distance": 581.9,
+      "average_grade": -6.4,
+      "maximum_grade": -1.5,
+      "elevation_high": 144.2,
+      "elevation_low": 106.8,
+      "start_latlng": [
+        57.248473,
+        -4.489866
+      ],
+      "end_latlng": [
+        57.253238,
+        -4.489846
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897528754700,
+    "resource_state": 2,
+    "name": "foyers to Dores",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 6061,
+    "moving_time": 3448,
+    "start_date": "2024-07-01T10:17:24Z",
+    "start_date_local": "2024-07-01T11:17:24Z",
+    "distance": 17569.5,
+    "start_index": 6262,
+    "end_index": 9738,
+    "device_watts": false,
+    "segment": {
+      "id": 7117340,
+      "resource_state": 2,
+      "name": "foyers to Dores",
+      "activity_type": "Ride",
+      "distance": 17569.5,
+      "average_grade": 0.1,
+      "maximum_grade": 15.5,
+      "elevation_high": 364.8,
+      "elevation_low": 185.2,
+      "start_latlng": [
+        57.250655,
+        -4.4904
+      ],
+      "end_latlng": [
+        57.380112,
+        -4.334213
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Foyers, o/s Upper Foyers Shop on B852, Inverness, Highland IV2, UK",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897529841000,
+    "resource_state": 2,
+    "name": "Foyers to Dores",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5996,
+    "moving_time": 3383,
+    "start_date": "2024-07-01T10:18:40Z",
+    "start_date_local": "2024-07-01T11:18:40Z",
+    "distance": 17124.6,
+    "start_index": 6338,
+    "end_index": 9749,
+    "device_watts": false,
+    "segment": {
+      "id": 8246971,
+      "resource_state": 2,
+      "name": "Foyers to Dores",
+      "activity_type": "Ride",
+      "distance": 17124.6,
+      "average_grade": -0.5,
+      "maximum_grade": 19,
+      "elevation_high": 126.6,
+      "elevation_low": 36.2,
+      "start_latlng": [
+        57.254651,
+        -4.489034
+      ],
+      "end_latlng": [
+        57.380494,
+        -4.333854
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897531084300,
+    "resource_state": 2,
+    "name": "Foyers Dores",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5987,
+    "moving_time": 3374,
+    "start_date": "2024-07-01T10:18:59Z",
+    "start_date_local": "2024-07-01T11:18:59Z",
+    "distance": 17113.1,
+    "start_index": 6357,
+    "end_index": 9759,
+    "device_watts": false,
+    "segment": {
+      "id": 29605397,
+      "resource_state": 2,
+      "name": "Foyers Dores",
+      "activity_type": "Ride",
+      "distance": 17113.1,
+      "average_grade": -0.4,
+      "maximum_grade": 15.2,
+      "elevation_high": 96.9,
+      "elevation_low": 18.7,
+      "start_latlng": [
+        57.256535,
+        -4.487756
+      ],
+      "end_latlng": [
+        57.380856,
+        -4.333531
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897529593300,
+    "resource_state": 2,
+    "name": "Nessie 10",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5840,
+    "moving_time": 3227,
+    "start_date": "2024-07-01T10:20:30Z",
+    "start_date_local": "2024-07-01T11:20:30Z",
+    "distance": 16106.7,
+    "start_index": 6448,
+    "end_index": 9703,
+    "device_watts": false,
+    "segment": {
+      "id": 8069007,
+      "resource_state": 2,
+      "name": "Nessie 10",
+      "activity_type": "Ride",
+      "distance": 16106.7,
+      "average_grade": -0.4,
+      "maximum_grade": 18.8,
+      "elevation_high": 98,
+      "elevation_low": 25.2,
+      "start_latlng": [
+        57.260679,
+        -4.482082
+      ],
+      "end_latlng": [
+        57.378707,
+        -4.335673
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897530371600,
+    "resource_state": 2,
+    "name": "InverF Dores",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 5232,
+    "moving_time": 2721,
+    "start_date": "2024-07-01T10:31:06Z",
+    "start_date_local": "2024-07-01T11:31:06Z",
+    "distance": 13182.3,
+    "start_index": 7001,
+    "end_index": 9731,
+    "device_watts": false,
+    "segment": {
+      "id": 29605413,
+      "resource_state": 2,
+      "name": "InverF Dores",
+      "activity_type": "Ride",
+      "distance": 13182.3,
+      "average_grade": -0.2,
+      "maximum_grade": 15.2,
+      "elevation_high": 46.6,
+      "elevation_low": 18.7,
+      "start_latlng": [
+        57.283822,
+        -4.454075
+      ],
+      "end_latlng": [
+        57.379857,
+        -4.334551
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897529773600,
+    "resource_state": 2,
+    "name": "Inverfarigaig to Dores",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 4858,
+    "moving_time": 2359,
+    "start_date": "2024-07-01T10:34:52Z",
+    "start_date_local": "2024-07-01T11:34:52Z",
+    "distance": 10874.2,
+    "start_index": 7227,
+    "end_index": 9594,
+    "device_watts": false,
+    "segment": {
+      "id": 3415999,
+      "resource_state": 2,
+      "name": "Inverfarigaig to Dores",
+      "activity_type": "Ride",
+      "distance": 10874.2,
+      "average_grade": 0,
+      "maximum_grade": 10.6,
+      "elevation_high": 56.3,
+      "elevation_low": 28.6,
+      "start_latlng": [
+        57.2946675,
+        -4.4441851
+      ],
+      "end_latlng": [
+        57.3741669,
+        -4.3408991
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530940000,
+    "resource_state": 2,
+    "name": "BackTrack the Dores way ",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1578,
+    "moving_time": 1069,
+    "start_date": "2024-07-01T12:07:51Z",
+    "start_date_local": "2024-07-01T13:07:51Z",
+    "distance": 4838.9,
+    "start_index": 10283,
+    "end_index": 11359,
+    "device_watts": false,
+    "segment": {
+      "id": 9709041,
+      "resource_state": 2,
+      "name": "BackTrack the Dores way ",
+      "activity_type": "Ride",
+      "distance": 4838.9,
+      "average_grade": -0.3,
+      "maximum_grade": 12.9,
+      "elevation_high": 76.4,
+      "elevation_low": 33,
+      "start_latlng": [
+        57.395792,
+        -4.320417
+      ],
+      "end_latlng": [
+        57.428521,
+        -4.282976
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897531981300,
+    "resource_state": 2,
+    "name": "Out back of school to top",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 373,
+    "moving_time": 369,
+    "start_date": "2024-07-01T12:08:12Z",
+    "start_date_local": "2024-07-01T13:08:12Z",
+    "distance": 1150.7,
+    "start_index": 10304,
+    "end_index": 10674,
+    "device_watts": false,
+    "segment": {
+      "id": 24920840,
+      "resource_state": 2,
+      "name": "Out back of school to top",
+      "activity_type": "Ride",
+      "distance": 1150.7,
+      "average_grade": 2,
+      "maximum_grade": 10.5,
+      "elevation_high": 85.8,
+      "elevation_low": 59,
+      "start_latlng": [
+        57.395882,
+        -4.319711
+      ],
+      "end_latlng": [
+        57.400005,
+        -4.306587
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897529254400,
+    "resource_state": 2,
+    "name": "Scaniport Special",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1167,
+    "moving_time": 662,
+    "start_date": "2024-07-01T12:14:15Z",
+    "start_date_local": "2024-07-01T13:14:15Z",
+    "distance": 3535,
+    "start_index": 10664,
+    "end_index": 11332,
+    "device_watts": false,
+    "segment": {
+      "id": 2156966,
+      "resource_state": 2,
+      "name": "Scaniport Special",
+      "activity_type": "Ride",
+      "distance": 3535,
+      "average_grade": -1.2,
+      "maximum_grade": 2.3,
+      "elevation_high": 76.2,
+      "elevation_low": 33.1,
+      "start_latlng": [
+        57.399783,
+        -4.306933
+      ],
+      "end_latlng": [
+        57.427666,
+        -4.282533
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242850897530150400,
+    "resource_state": 2,
+    "name": "Anthill to Scaniport",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1058,
+    "moving_time": 553,
+    "start_date": "2024-07-01T12:16:01Z",
+    "start_date_local": "2024-07-01T13:16:01Z",
+    "distance": 2999.3,
+    "start_index": 10770,
+    "end_index": 11329,
+    "device_watts": false,
+    "segment": {
+      "id": 20822856,
+      "resource_state": 2,
+      "name": "Anthill to Scaniport",
+      "activity_type": "Ride",
+      "distance": 2999.3,
+      "average_grade": -0.5,
+      "maximum_grade": 4.6,
+      "elevation_high": 51.1,
+      "elevation_low": 33.9,
+      "start_latlng": [
+        57.404169,
+        -4.304956
+      ],
+      "end_latlng": [
+        57.427581,
+        -4.282606
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897530645000,
+    "resource_state": 2,
+    "name": "The Last Push",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 201,
+    "moving_time": 201,
+    "start_date": "2024-07-01T12:34:18Z",
+    "start_date_local": "2024-07-01T13:34:18Z",
+    "distance": 595.7,
+    "start_index": 11368,
+    "end_index": 11569,
+    "device_watts": false,
+    "segment": {
+      "id": 7453486,
+      "resource_state": 2,
+      "name": "The Last Push",
+      "activity_type": "Ride",
+      "distance": 595.7,
+      "average_grade": 1.9,
+      "maximum_grade": 5.4,
+      "elevation_high": 47.3,
+      "elevation_low": 35.5,
+      "start_latlng": [
+        57.428826,
+        -4.28278
+      ],
+      "end_latlng": [
+        57.432513,
+        -4.275605
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897530319400,
+    "resource_state": 2,
+    "name": "Nippy wee Laggan Hill ",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 88,
+    "moving_time": 88,
+    "start_date": "2024-07-01T12:34:26Z",
+    "start_date_local": "2024-07-01T13:34:26Z",
+    "distance": 376.8,
+    "start_index": 11376,
+    "end_index": 11464,
+    "device_watts": false,
+    "segment": {
+      "id": 15472108,
+      "resource_state": 2,
+      "name": "Nippy wee Laggan Hill ",
+      "activity_type": "Ride",
+      "distance": 376.8,
+      "average_grade": 0.1,
+      "maximum_grade": 5.7,
+      "elevation_high": 34.7,
+      "elevation_low": 32.1,
+      "start_latlng": [
+        57.429002,
+        -4.282132
+      ],
+      "end_latlng": [
+        57.431111,
+        -4.277908
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Scaniport",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897530469000,
+    "resource_state": 2,
+    "name": "Lagan sruthán",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 161,
+    "moving_time": 161,
+    "start_date": "2024-07-01T12:35:29Z",
+    "start_date_local": "2024-07-01T13:35:29Z",
+    "distance": 353.5,
+    "start_index": 11439,
+    "end_index": 11600,
+    "device_watts": false,
+    "segment": {
+      "id": 17433864,
+      "resource_state": 2,
+      "name": "Lagan sruthán",
+      "activity_type": "Ride",
+      "distance": 353.5,
+      "average_grade": 4.1,
+      "maximum_grade": 6.9,
+      "elevation_high": 48.3,
+      "elevation_low": 33.9,
+      "start_latlng": [
+        57.43093,
+        -4.278743
+      ],
+      "end_latlng": [
+        57.432928,
+        -4.274739
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897532053000,
+    "resource_state": 2,
+    "name": "Essich Burn",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1339,
+    "moving_time": 449,
+    "start_date": "2024-07-01T12:41:26Z",
+    "start_date_local": "2024-07-01T13:41:26Z",
+    "distance": 1657,
+    "start_index": 11796,
+    "end_index": 12275,
+    "device_watts": false,
+    "segment": {
+      "id": 1548262,
+      "resource_state": 2,
+      "name": "Essich Burn",
+      "activity_type": "Ride",
+      "distance": 1657,
+      "average_grade": -0.3,
+      "maximum_grade": 4.4,
+      "elevation_high": 59.5,
+      "elevation_low": 47.5,
+      "start_latlng": [
+        57.438816,
+        -4.264766
+      ],
+      "end_latlng": [
+        57.44325,
+        -4.239933
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Highland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897528761000,
+    "resource_state": 2,
+    "name": "Zoom down to Tesco roundabout",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 108,
+    "moving_time": 108,
+    "start_date": "2024-07-01T13:08:00Z",
+    "start_date_local": "2024-07-01T14:08:00Z",
+    "distance": 566.1,
+    "start_index": 12489,
+    "end_index": 12597,
+    "device_watts": false,
+    "segment": {
+      "id": 35528782,
+      "resource_state": 2,
+      "name": "Zoom down to Tesco roundabout",
+      "activity_type": "Ride",
+      "distance": 566.1,
+      "average_grade": -3.9,
+      "maximum_grade": 0,
+      "elevation_high": 45.9,
+      "elevation_low": 23.9,
+      "start_latlng": [
+        57.448324,
+        -4.241661
+      ],
+      "end_latlng": [
+        57.450199,
+        -4.250357
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897530820000,
+    "resource_state": 2,
+    "name": "K2 Sprint",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 139,
+    "moving_time": 139,
+    "start_date": "2024-07-01T13:10:24Z",
+    "start_date_local": "2024-07-01T14:10:24Z",
+    "distance": 627.9,
+    "start_index": 12633,
+    "end_index": 12772,
+    "device_watts": false,
+    "segment": {
+      "id": 8402819,
+      "resource_state": 2,
+      "name": "K2 Sprint",
+      "activity_type": "Ride",
+      "distance": 627.9,
+      "average_grade": -0.7,
+      "maximum_grade": -0.2,
+      "elevation_high": 21.4,
+      "elevation_low": 17.1,
+      "start_latlng": [
+        57.451489,
+        -4.249464
+      ],
+      "end_latlng": [
+        57.455833,
+        -4.242816
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897531587000,
+    "resource_state": 2,
+    "name": "Highland Rugby Club - Blue Link (Gold to Black)",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 305,
+    "moving_time": 285,
+    "start_date": "2024-07-01T13:12:40Z",
+    "start_date_local": "2024-07-01T14:12:40Z",
+    "distance": 1479.3,
+    "start_index": 12769,
+    "end_index": 13056,
+    "device_watts": false,
+    "segment": {
+      "id": 27710826,
+      "resource_state": 2,
+      "name": "Highland Rugby Club - Blue Link (Gold to Black)",
+      "activity_type": "Ride",
+      "distance": 1479.3,
+      "average_grade": -0.5,
+      "maximum_grade": 0.9,
+      "elevation_high": 19,
+      "elevation_low": 11.3,
+      "start_latlng": [
+        57.455681,
+        -4.24295
+      ],
+      "end_latlng": [
+        57.46561,
+        -4.227701
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242850897531304400,
+    "resource_state": 2,
+    "name": "Road in the bump",
+    "activity": {
+      "id": 11782027449,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 144,
+    "moving_time": 139,
+    "start_date": "2024-07-01T13:13:21Z",
+    "start_date_local": "2024-07-01T14:13:21Z",
+    "distance": 698.7,
+    "start_index": 12810,
+    "end_index": 12950,
+    "device_watts": false,
+    "segment": {
+      "id": 12816710,
+      "resource_state": 2,
+      "name": "Road in the bump",
+      "activity_type": "Ride",
+      "distance": 698.7,
+      "average_grade": -0.4,
+      "maximum_grade": 5.3,
+      "elevation_high": 32.6,
+      "elevation_low": 14.8,
+      "start_latlng": [
+        57.457547,
+        -4.240174
+      ],
+      "end_latlng": [
+        57.461581,
+        -4.231378
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

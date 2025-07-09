@@ -1,0 +1,2270 @@
+[
+  {
+    "id": 3242202905368189000,
+    "resource_state": 2,
+    "name": "Airds to The Greens",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 367,
+    "moving_time": 367,
+    "start_date": "2024-06-29T13:21:11Z",
+    "start_date_local": "2024-06-29T14:21:11Z",
+    "distance": 1454.5,
+    "start_index": 92,
+    "end_index": 459,
+    "device_watts": false,
+    "segment": {
+      "id": 15844969,
+      "resource_state": 2,
+      "name": "Airds to The Greens",
+      "activity_type": "Ride",
+      "distance": 1454.5,
+      "average_grade": 1.3,
+      "maximum_grade": 25.4,
+      "elevation_high": 29.7,
+      "elevation_low": 6,
+      "start_latlng": [
+        56.412032,
+        -5.472637
+      ],
+      "end_latlng": [
+        56.414106,
+        -5.454192
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905368606700,
+    "resource_state": 2,
+    "name": "The Glencruitten Hill",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1021,
+    "moving_time": 959,
+    "start_date": "2024-06-29T13:21:58Z",
+    "start_date_local": "2024-06-29T14:21:58Z",
+    "distance": 2774.2,
+    "start_index": 139,
+    "end_index": 1102,
+    "device_watts": false,
+    "segment": {
+      "id": 29602980,
+      "resource_state": 2,
+      "name": "The Glencruitten Hill",
+      "activity_type": "Ride",
+      "distance": 2774.2,
+      "average_grade": 3.3,
+      "maximum_grade": 21.9,
+      "elevation_high": 104.4,
+      "elevation_low": 10.8,
+      "start_latlng": [
+        56.411037,
+        -5.470312
+      ],
+      "end_latlng": [
+        56.411648,
+        -5.436183
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905365894000,
+    "resource_state": 2,
+    "name": "Glencruitten Rd end to turbine track",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1422,
+    "moving_time": 1360,
+    "start_date": "2024-06-29T13:22:18Z",
+    "start_date_local": "2024-06-29T14:22:18Z",
+    "distance": 4638.5,
+    "start_index": 159,
+    "end_index": 1523,
+    "device_watts": false,
+    "segment": {
+      "id": 17970184,
+      "resource_state": 2,
+      "name": "Glencruitten Rd end to turbine track",
+      "activity_type": "Ride",
+      "distance": 4638.5,
+      "average_grade": 0.9,
+      "maximum_grade": 25,
+      "elevation_high": 113.2,
+      "elevation_low": 6,
+      "start_latlng": [
+        56.41051,
+        -5.469563
+      ],
+      "end_latlng": [
+        56.41913,
+        -5.415042
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905368238000,
+    "resource_state": 2,
+    "name": "Glencruiten from the Church.",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 966,
+    "moving_time": 904,
+    "start_date": "2024-06-29T13:23:03Z",
+    "start_date_local": "2024-06-29T14:23:03Z",
+    "distance": 2620.41,
+    "start_index": 204,
+    "end_index": 1112,
+    "device_watts": false,
+    "segment": {
+      "id": 3686671,
+      "resource_state": 2,
+      "name": "Glencruiten from the Church.",
+      "activity_type": "Ride",
+      "distance": 2620.41,
+      "average_grade": 3.6,
+      "maximum_grade": 12,
+      "elevation_high": 111.5,
+      "elevation_low": 15.6,
+      "start_latlng": [
+        56.409637,
+        -5.468176
+      ],
+      "end_latlng": [
+        56.411372,
+        -5.436132
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905366000600,
+    "resource_state": 2,
+    "name": "By the pitches up",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 162,
+    "moving_time": 162,
+    "start_date": "2024-06-29T13:23:40Z",
+    "start_date_local": "2024-06-29T14:23:40Z",
+    "distance": 801.4,
+    "start_index": 241,
+    "end_index": 403,
+    "device_watts": false,
+    "segment": {
+      "id": 5066615,
+      "resource_state": 2,
+      "name": "By the pitches up",
+      "activity_type": "Ride",
+      "distance": 801.4,
+      "average_grade": 1.6,
+      "maximum_grade": 12.9,
+      "elevation_high": 28.5,
+      "elevation_low": 11.1,
+      "start_latlng": [
+        56.409523,
+        -5.46667
+      ],
+      "end_latlng": [
+        56.413464,
+        -5.456003
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905368178700,
+    "resource_state": 2,
+    "name": "The Hilly Bit.",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 771,
+    "moving_time": 709,
+    "start_date": "2024-06-29T13:26:04Z",
+    "start_date_local": "2024-06-29T14:26:04Z",
+    "distance": 1741.7,
+    "start_index": 385,
+    "end_index": 1098,
+    "device_watts": false,
+    "segment": {
+      "id": 5742344,
+      "resource_state": 2,
+      "name": "The Hilly Bit.",
+      "activity_type": "Ride",
+      "distance": 1741.7,
+      "average_grade": 5.2,
+      "maximum_grade": 23.9,
+      "elevation_high": 113.6,
+      "elevation_low": 21.4,
+      "start_latlng": [
+        56.412932,
+        -5.456953
+      ],
+      "end_latlng": [
+        56.411762,
+        -5.436172
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905364945000,
+    "resource_state": 2,
+    "name": "Golf course to Glencruitten House",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 493,
+    "moving_time": 472,
+    "start_date": "2024-06-29T13:29:39Z",
+    "start_date_local": "2024-06-29T14:29:39Z",
+    "distance": 1014,
+    "start_index": 600,
+    "end_index": 1074,
+    "device_watts": false,
+    "segment": {
+      "id": 11299194,
+      "resource_state": 2,
+      "name": "Golf course to Glencruitten House",
+      "activity_type": "Ride",
+      "distance": 1014,
+      "average_grade": 7.3,
+      "maximum_grade": 17.7,
+      "elevation_high": 113.7,
+      "elevation_low": 36.8,
+      "start_latlng": [
+        56.414638,
+        -5.448582
+      ],
+      "end_latlng": [
+        56.412163,
+        -5.436289
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905368630300,
+    "resource_state": 2,
+    "name": "Glencruitten up and over from Oban",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 739,
+    "moving_time": 677,
+    "start_date": "2024-06-29T13:29:48Z",
+    "start_date_local": "2024-06-29T14:29:48Z",
+    "distance": 2054.3,
+    "start_index": 609,
+    "end_index": 1290,
+    "device_watts": false,
+    "segment": {
+      "id": 17432573,
+      "resource_state": 2,
+      "name": "Glencruitten up and over from Oban",
+      "activity_type": "Ride",
+      "distance": 2054.3,
+      "average_grade": 1.4,
+      "maximum_grade": 20.6,
+      "elevation_high": 113.2,
+      "elevation_low": 34.8,
+      "start_latlng": [
+        56.414374,
+        -5.448063
+      ],
+      "end_latlng": [
+        56.412776,
+        -5.422357
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905367332000,
+    "resource_state": 2,
+    "name": "Glencruitten house to Turbine track",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 415,
+    "moving_time": 415,
+    "start_date": "2024-06-29T13:39:09Z",
+    "start_date_local": "2024-06-29T14:39:09Z",
+    "distance": 1930.3,
+    "start_index": 1112,
+    "end_index": 1527,
+    "device_watts": false,
+    "segment": {
+      "id": 14968650,
+      "resource_state": 2,
+      "name": "Glencruitten house to Turbine track",
+      "activity_type": "Ride",
+      "distance": 1930.3,
+      "average_grade": -3.3,
+      "maximum_grade": 8.8,
+      "elevation_high": 113.1,
+      "elevation_low": 36.5,
+      "start_latlng": [
+        56.411343,
+        -5.436159
+      ],
+      "end_latlng": [
+        56.419266,
+        -5.414824
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905367433000,
+    "resource_state": 2,
+    "name": "Glencruitten house to junction",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 172,
+    "moving_time": 172,
+    "start_date": "2024-06-29T13:39:11Z",
+    "start_date_local": "2024-06-29T14:39:11Z",
+    "distance": 987.4,
+    "start_index": 1114,
+    "end_index": 1286,
+    "device_watts": false,
+    "segment": {
+      "id": 24459778,
+      "resource_state": 2,
+      "name": "Glencruitten house to junction",
+      "activity_type": "Ride",
+      "distance": 987.4,
+      "average_grade": -4.6,
+      "maximum_grade": 6,
+      "elevation_high": 109,
+      "elevation_low": 63.1,
+      "start_latlng": [
+        56.411288,
+        -5.436064
+      ],
+      "end_latlng": [
+        56.412794,
+        -5.422536
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365178400,
+    "resource_state": 2,
+    "name": "down and round and along a bit",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1471,
+    "moving_time": 1250,
+    "start_date": "2024-06-29T13:39:14Z",
+    "start_date_local": "2024-06-29T14:39:14Z",
+    "distance": 6139.8,
+    "start_index": 1117,
+    "end_index": 2374,
+    "device_watts": false,
+    "segment": {
+      "id": 18488827,
+      "resource_state": 2,
+      "name": "down and round and along a bit",
+      "activity_type": "Ride",
+      "distance": 6139.8,
+      "average_grade": -1.5,
+      "maximum_grade": 14.1,
+      "elevation_high": 113,
+      "elevation_low": 10.9,
+      "start_latlng": [
+        56.411248,
+        -5.43595
+      ],
+      "end_latlng": [
+        56.452268,
+        -5.390839
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905368616000,
+    "resource_state": 2,
+    "name": "Zoom zoom.",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1287,
+    "moving_time": 1066,
+    "start_date": "2024-06-29T13:42:19Z",
+    "start_date_local": "2024-06-29T14:42:19Z",
+    "distance": 5104,
+    "start_index": 1302,
+    "end_index": 2375,
+    "device_watts": false,
+    "segment": {
+      "id": 4097892,
+      "resource_state": 2,
+      "name": "Zoom zoom.",
+      "activity_type": "Ride",
+      "distance": 5104,
+      "average_grade": -0.8,
+      "maximum_grade": 20.1,
+      "elevation_high": 68.6,
+      "elevation_low": 10.6,
+      "start_latlng": [
+        56.412944,
+        -5.42206
+      ],
+      "end_latlng": [
+        56.452249,
+        -5.390916
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905365801000,
+    "resource_state": 2,
+    "name": "Oban turn to Connel cycle path",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1021,
+    "moving_time": 978,
+    "start_date": "2024-06-29T13:42:25Z",
+    "start_date_local": "2024-06-29T14:42:25Z",
+    "distance": 4780.6,
+    "start_index": 1308,
+    "end_index": 2292,
+    "device_watts": false,
+    "segment": {
+      "id": 17432552,
+      "resource_state": 2,
+      "name": "Oban turn to Connel cycle path",
+      "activity_type": "Ride",
+      "distance": 4780.6,
+      "average_grade": -0.9,
+      "maximum_grade": 13.8,
+      "elevation_high": 60.4,
+      "elevation_low": 10.9,
+      "start_latlng": [
+        56.413095,
+        -5.422021
+      ],
+      "end_latlng": [
+        56.449844,
+        -5.389049
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365631000,
+    "resource_state": 2,
+    "name": "Glencruiten turn to cattle grid",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 814,
+    "moving_time": 799,
+    "start_date": "2024-06-29T13:42:44Z",
+    "start_date_local": "2024-06-29T14:42:44Z",
+    "distance": 3915,
+    "start_index": 1327,
+    "end_index": 2128,
+    "device_watts": false,
+    "segment": {
+      "id": 18674009,
+      "resource_state": 2,
+      "name": "Glencruiten turn to cattle grid",
+      "activity_type": "Ride",
+      "distance": 3915,
+      "average_grade": -0.9,
+      "maximum_grade": 14.1,
+      "elevation_high": 58,
+      "elevation_low": 18.6,
+      "start_latlng": [
+        56.413888,
+        -5.422002
+      ],
+      "end_latlng": [
+        56.443702,
+        -5.394907
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905366487000,
+    "resource_state": 2,
+    "name": "Turbine sub-station to Connel",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1069,
+    "moving_time": 848,
+    "start_date": "2024-06-29T13:46:35Z",
+    "start_date_local": "2024-06-29T14:46:35Z",
+    "distance": 4202.2,
+    "start_index": 1558,
+    "end_index": 2413,
+    "device_watts": false,
+    "segment": {
+      "id": 13910570,
+      "resource_state": 2,
+      "name": "Turbine sub-station to Connel",
+      "activity_type": "Ride",
+      "distance": 4202.2,
+      "average_grade": -0.6,
+      "maximum_grade": 16.1,
+      "elevation_high": 58,
+      "elevation_low": 10.9,
+      "start_latlng": [
+        56.420055,
+        -5.411972
+      ],
+      "end_latlng": [
+        56.453481,
+        -5.392484
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905367089000,
+    "resource_state": 2,
+    "name": "It's all downhill from here",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 934,
+    "moving_time": 713,
+    "start_date": "2024-06-29T13:48:11Z",
+    "start_date_local": "2024-06-29T14:48:11Z",
+    "distance": 3752.1,
+    "start_index": 1654,
+    "end_index": 2374,
+    "device_watts": false,
+    "segment": {
+      "id": 18714375,
+      "resource_state": 2,
+      "name": "It's all downhill from here",
+      "activity_type": "Ride",
+      "distance": 3752.1,
+      "average_grade": -1,
+      "maximum_grade": 14.1,
+      "elevation_high": 58,
+      "elevation_low": 10.9,
+      "start_latlng": [
+        56.421963,
+        -5.41075
+      ],
+      "end_latlng": [
+        56.452262,
+        -5.39084
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905366342700,
+    "resource_state": 2,
+    "name": "Decent descent to Connel",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 926,
+    "moving_time": 709,
+    "start_date": "2024-06-29T13:49:09Z",
+    "start_date_local": "2024-06-29T14:49:09Z",
+    "distance": 3586.5,
+    "start_index": 1709,
+    "end_index": 2424,
+    "device_watts": false,
+    "segment": {
+      "id": 27453073,
+      "resource_state": 2,
+      "name": "Decent descent to Connel",
+      "activity_type": "Ride",
+      "distance": 3586.5,
+      "average_grade": -0.8,
+      "maximum_grade": 11.9,
+      "elevation_high": 54.2,
+      "elevation_low": 7.4,
+      "start_latlng": [
+        56.424736,
+        -5.407594
+      ],
+      "end_latlng": [
+        56.453667,
+        -5.392277
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905367132000,
+    "resource_state": 2,
+    "name": "Cattle grid to cattle grid -North",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 468,
+    "moving_time": 262,
+    "start_date": "2024-06-29T13:56:15Z",
+    "start_date_local": "2024-06-29T14:56:15Z",
+    "distance": 1188.1,
+    "start_index": 2125,
+    "end_index": 2392,
+    "device_watts": false,
+    "segment": {
+      "id": 27033235,
+      "resource_state": 2,
+      "name": "Cattle grid to cattle grid -North",
+      "activity_type": "Ride",
+      "distance": 1188.1,
+      "average_grade": -0.4,
+      "maximum_grade": 13.5,
+      "elevation_high": 27.6,
+      "elevation_low": 14.6,
+      "start_latlng": [
+        56.443631,
+        -5.394961
+      ],
+      "end_latlng": [
+        56.452873,
+        -5.39187
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905366079500,
+    "resource_state": 2,
+    "name": "Grid to Bridge Blast",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 451,
+    "moving_time": 245,
+    "start_date": "2024-06-29T13:56:17Z",
+    "start_date_local": "2024-06-29T14:56:17Z",
+    "distance": 1099.1,
+    "start_index": 2127,
+    "end_index": 2377,
+    "device_watts": false,
+    "segment": {
+      "id": 18191872,
+      "resource_state": 2,
+      "name": "Grid to Bridge Blast",
+      "activity_type": "Ride",
+      "distance": 1099.1,
+      "average_grade": 0.2,
+      "maximum_grade": 12.4,
+      "elevation_high": 22.5,
+      "elevation_low": 10.9,
+      "start_latlng": [
+        56.443676,
+        -5.394926
+      ],
+      "end_latlng": [
+        56.452351,
+        -5.390957
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365241000,
+    "resource_state": 2,
+    "name": "Connel Bridge - North",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 220,
+    "moving_time": 216,
+    "start_date": "2024-06-29T14:05:58Z",
+    "start_date_local": "2024-06-29T15:05:58Z",
+    "distance": 313.3,
+    "start_index": 2497,
+    "end_index": 2717,
+    "device_watts": false,
+    "segment": {
+      "id": 6700848,
+      "resource_state": 2,
+      "name": "Connel Bridge - North",
+      "activity_type": "Ride",
+      "distance": 313.3,
+      "average_grade": -1.6,
+      "maximum_grade": 7.8,
+      "elevation_high": 13.9,
+      "elevation_low": 3.3,
+      "start_latlng": [
+        56.454751,
+        -5.3908
+      ],
+      "end_latlng": [
+        56.457478,
+        -5.392033
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905367879700,
+    "resource_state": 2,
+    "name": "Benderloch Reach Around",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 141,
+    "moving_time": 141,
+    "start_date": "2024-06-29T14:23:00Z",
+    "start_date_local": "2024-06-29T15:23:00Z",
+    "distance": 754.5,
+    "start_index": 3501,
+    "end_index": 3642,
+    "device_watts": false,
+    "segment": {
+      "id": 14098617,
+      "resource_state": 2,
+      "name": "Benderloch Reach Around",
+      "activity_type": "Ride",
+      "distance": 754.5,
+      "average_grade": 0.4,
+      "maximum_grade": 8.7,
+      "elevation_high": 18.7,
+      "elevation_low": 10,
+      "start_latlng": [
+        56.485308,
+        -5.405297
+      ],
+      "end_latlng": [
+        56.491907,
+        -5.404305
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365492700,
+    "resource_state": 2,
+    "name": "Cycle Path Sprint (bit uphill)",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 347,
+    "moving_time": 347,
+    "start_date": "2024-06-29T14:26:52Z",
+    "start_date_local": "2024-06-29T15:26:52Z",
+    "distance": 1677.77,
+    "start_index": 3733,
+    "end_index": 4080,
+    "device_watts": false,
+    "segment": {
+      "id": 3752660,
+      "resource_state": 2,
+      "name": "Cycle Path Sprint (bit uphill)",
+      "activity_type": "Ride",
+      "distance": 1677.77,
+      "average_grade": 0.7,
+      "maximum_grade": 5.1,
+      "elevation_high": 26.6,
+      "elevation_low": 11.4,
+      "start_latlng": [
+        56.493077874183655,
+        -5.401303768157959
+      ],
+      "end_latlng": [
+        56.50637090206146,
+        -5.388670563697815
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905364671500,
+    "resource_state": 2,
+    "name": "Ronalds Post to Caravan Site",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 117,
+    "moving_time": 117,
+    "start_date": "2024-06-29T14:54:35Z",
+    "start_date_local": "2024-06-29T15:54:35Z",
+    "distance": 638,
+    "start_index": 5383,
+    "end_index": 5500,
+    "device_watts": false,
+    "segment": {
+      "id": 18209698,
+      "resource_state": 2,
+      "name": "Ronalds Post to Caravan Site",
+      "activity_type": "Ride",
+      "distance": 638,
+      "average_grade": -1.7,
+      "maximum_grade": 0.9,
+      "elevation_high": 27,
+      "elevation_low": 16.3,
+      "start_latlng": [
+        56.521367,
+        -5.309921
+      ],
+      "end_latlng": [
+        56.526495,
+        -5.310855
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365930000,
+    "resource_state": 2,
+    "name": "roonaboot to roonaboot",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 185,
+    "moving_time": 185,
+    "start_date": "2024-06-29T15:26:08Z",
+    "start_date_local": "2024-06-29T16:26:08Z",
+    "distance": 752,
+    "start_index": 6194,
+    "end_index": 6379,
+    "device_watts": false,
+    "segment": {
+      "id": 7219304,
+      "resource_state": 2,
+      "name": "roonaboot to roonaboot",
+      "activity_type": "Ride",
+      "distance": 752,
+      "average_grade": -1.7,
+      "maximum_grade": 48.5,
+      "elevation_high": 42.4,
+      "elevation_low": 3.1,
+      "start_latlng": [
+        56.544401,
+        -5.292939
+      ],
+      "end_latlng": [
+        56.550126,
+        -5.292589
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Oban, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905368460300,
+    "resource_state": 2,
+    "name": "Creagan Inn escape!",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 286,
+    "moving_time": 286,
+    "start_date": "2024-06-29T15:31:44Z",
+    "start_date_local": "2024-06-29T16:31:44Z",
+    "distance": 1178.1,
+    "start_index": 6530,
+    "end_index": 6816,
+    "device_watts": false,
+    "segment": {
+      "id": 26880104,
+      "resource_state": 2,
+      "name": "Creagan Inn escape!",
+      "activity_type": "Ride",
+      "distance": 1178.1,
+      "average_grade": 1.4,
+      "maximum_grade": 4.5,
+      "elevation_high": 19.8,
+      "elevation_low": 2.8,
+      "start_latlng": [
+        56.551433,
+        -5.30225
+      ],
+      "end_latlng": [
+        56.552161,
+        -5.321077
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365710000,
+    "resource_state": 2,
+    "name": "Tyneribbie Express",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 396,
+    "moving_time": 396,
+    "start_date": "2024-06-29T15:38:11Z",
+    "start_date_local": "2024-06-29T16:38:11Z",
+    "distance": 2381.9,
+    "start_index": 6917,
+    "end_index": 7313,
+    "device_watts": false,
+    "segment": {
+      "id": 6184908,
+      "resource_state": 2,
+      "name": "Tyneribbie Express",
+      "activity_type": "Ride",
+      "distance": 2381.9,
+      "average_grade": -0.8,
+      "maximum_grade": 11.6,
+      "elevation_high": 30.2,
+      "elevation_low": 6.6,
+      "start_latlng": [
+        56.554199,
+        -5.323112
+      ],
+      "end_latlng": [
+        56.562537,
+        -5.357671
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin PA38, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905368749000,
+    "resource_state": 2,
+    "name": "Castle Stalker flyby northwards",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1094,
+    "moving_time": 827,
+    "start_date": "2024-06-29T15:45:16Z",
+    "start_date_local": "2024-06-29T16:45:16Z",
+    "distance": 4430.8,
+    "start_index": 7342,
+    "end_index": 8188,
+    "device_watts": false,
+    "segment": {
+      "id": 5597447,
+      "resource_state": 2,
+      "name": "Castle Stalker flyby northwards",
+      "activity_type": "Ride",
+      "distance": 4430.8,
+      "average_grade": 0.1,
+      "maximum_grade": 13,
+      "elevation_high": -100,
+      "elevation_low": -105.6,
+      "start_latlng": [
+        56.563283,
+        -5.358836
+      ],
+      "end_latlng": [
+        56.594453,
+        -5.366831
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin PA38, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905364680700,
+    "resource_state": 2,
+    "name": "Highland Titles up and over north",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 920,
+    "moving_time": 608,
+    "start_date": "2024-06-29T16:24:14Z",
+    "start_date_local": "2024-06-29T17:24:14Z",
+    "distance": 2262.2,
+    "start_index": 9367,
+    "end_index": 9999,
+    "device_watts": false,
+    "segment": {
+      "id": 23678908,
+      "resource_state": 2,
+      "name": "Highland Titles up and over north",
+      "activity_type": "Ride",
+      "distance": 2262.2,
+      "average_grade": -0.1,
+      "maximum_grade": 17.9,
+      "elevation_high": 67.8,
+      "elevation_low": 17.3,
+      "start_latlng": [
+        56.626376,
+        -5.310569
+      ],
+      "end_latlng": [
+        56.636816,
+        -5.287283
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905366640600,
+    "resource_state": 2,
+    "name": "Highland titles uphill North",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 580,
+    "moving_time": 310,
+    "start_date": "2024-06-29T16:24:35Z",
+    "start_date_local": "2024-06-29T17:24:35Z",
+    "distance": 623.1,
+    "start_index": 9388,
+    "end_index": 9709,
+    "device_watts": false,
+    "segment": {
+      "id": 23560710,
+      "resource_state": 2,
+      "name": "Highland titles uphill North",
+      "activity_type": "Ride",
+      "distance": 623.1,
+      "average_grade": 6.9,
+      "maximum_grade": 13.8,
+      "elevation_high": 67.8,
+      "elevation_low": 24.7,
+      "start_latlng": [
+        56.626236,
+        -5.309966
+      ],
+      "end_latlng": [
+        56.629679,
+        -5.303906
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905367950300,
+    "resource_state": 2,
+    "name": "cycle path to old bridge",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 226,
+    "moving_time": 226,
+    "start_date": "2024-06-29T16:41:42Z",
+    "start_date_local": "2024-06-29T17:41:42Z",
+    "distance": 835.7,
+    "start_index": 10127,
+    "end_index": 10353,
+    "device_watts": false,
+    "segment": {
+      "id": 36845609,
+      "resource_state": 2,
+      "name": "cycle path to old bridge",
+      "activity_type": "Ride",
+      "distance": 835.7,
+      "average_grade": 1.6,
+      "maximum_grade": 5.2,
+      "elevation_high": 31.3,
+      "elevation_low": 17.2,
+      "start_latlng": [
+        56.64113,
+        -5.282185
+      ],
+      "end_latlng": [
+        56.642853,
+        -5.270736
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905367657500,
+    "resource_state": 2,
+    "name": "down and then up again",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1328,
+    "moving_time": 909,
+    "start_date": "2024-06-29T16:47:23Z",
+    "start_date_local": "2024-06-29T17:47:23Z",
+    "distance": 3887.9,
+    "start_index": 10468,
+    "end_index": 11381,
+    "device_watts": false,
+    "segment": {
+      "id": 36845619,
+      "resource_state": 2,
+      "name": "down and then up again",
+      "activity_type": "Ride",
+      "distance": 3887.9,
+      "average_grade": -0.6,
+      "maximum_grade": 12.4,
+      "elevation_high": 42.2,
+      "elevation_low": 11,
+      "start_latlng": [
+        56.64694,
+        -5.268129
+      ],
+      "end_latlng": [
+        56.674881,
+        -5.242279
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905366991000,
+    "resource_state": 2,
+    "name": "Duror Expressway East",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 262,
+    "moving_time": 262,
+    "start_date": "2024-06-29T16:48:28Z",
+    "start_date_local": "2024-06-29T17:48:28Z",
+    "distance": 1085.4,
+    "start_index": 10533,
+    "end_index": 10795,
+    "device_watts": false,
+    "segment": {
+      "id": 7503102,
+      "resource_state": 2,
+      "name": "Duror Expressway East",
+      "activity_type": "Ride",
+      "distance": 1085.4,
+      "average_grade": 0.4,
+      "maximum_grade": 4.1,
+      "elevation_high": 24.4,
+      "elevation_low": 19.8,
+      "start_latlng": [
+        56.647399,
+        -5.26965
+      ],
+      "end_latlng": [
+        56.655071,
+        -5.258792
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin PA38, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365670000,
+    "resource_state": 2,
+    "name": "Track North",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 104,
+    "moving_time": 104,
+    "start_date": "2024-06-29T16:51:18Z",
+    "start_date_local": "2024-06-29T17:51:18Z",
+    "distance": 466,
+    "start_index": 10703,
+    "end_index": 10807,
+    "device_watts": false,
+    "segment": {
+      "id": 9642738,
+      "resource_state": 2,
+      "name": "Track North",
+      "activity_type": "Ride",
+      "distance": 466,
+      "average_grade": -0.7,
+      "maximum_grade": 4,
+      "elevation_high": 32.4,
+      "elevation_low": 26.6,
+      "start_latlng": [
+        56.652126,
+        -5.262842
+      ],
+      "end_latlng": [
+        56.655501,
+        -5.258353
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905366201300,
+    "resource_state": 2,
+    "name": "Oh My Gawd Hill East",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 574,
+    "moving_time": 236,
+    "start_date": "2024-06-29T16:58:15Z",
+    "start_date_local": "2024-06-29T17:58:15Z",
+    "distance": 614.4,
+    "start_index": 11040,
+    "end_index": 11279,
+    "device_watts": false,
+    "segment": {
+      "id": 7503132,
+      "resource_state": 2,
+      "name": "Oh My Gawd Hill East",
+      "activity_type": "Ride",
+      "distance": 614.4,
+      "average_grade": 3.4,
+      "maximum_grade": 15.3,
+      "elevation_high": 31.2,
+      "elevation_low": 8.6,
+      "start_latlng": [
+        56.666637,
+        -5.250444
+      ],
+      "end_latlng": [
+        56.671394,
+        -5.245741
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "PA38, UK",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905368151000,
+    "resource_state": 2,
+    "name": "Sprint to the view point ",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 179,
+    "moving_time": 179,
+    "start_date": "2024-06-29T16:58:18Z",
+    "start_date_local": "2024-06-29T17:58:18Z",
+    "distance": 420.3,
+    "start_index": 11043,
+    "end_index": 11222,
+    "device_watts": false,
+    "segment": {
+      "id": 24374006,
+      "resource_state": 2,
+      "name": "Sprint to the view point ",
+      "activity_type": "Ride",
+      "distance": 420.3,
+      "average_grade": 5.4,
+      "maximum_grade": 10.6,
+      "elevation_high": 37.8,
+      "elevation_low": 15,
+      "start_latlng": [
+        56.66683,
+        -5.25029
+      ],
+      "end_latlng": [
+        56.670067,
+        -5.246955
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905366016000,
+    "resource_state": 2,
+    "name": "cruising home",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 401,
+    "moving_time": 401,
+    "start_date": "2024-06-29T17:09:40Z",
+    "start_date_local": "2024-06-29T18:09:40Z",
+    "distance": 2134.3,
+    "start_index": 11390,
+    "end_index": 11791,
+    "device_watts": false,
+    "segment": {
+      "id": 36845634,
+      "resource_state": 2,
+      "name": "cruising home",
+      "activity_type": "Ride",
+      "distance": 2134.3,
+      "average_grade": 0,
+      "maximum_grade": 7.4,
+      "elevation_high": 15.2,
+      "elevation_low": 8.3,
+      "start_latlng": [
+        56.675031,
+        -5.242251
+      ],
+      "end_latlng": [
+        56.686448,
+        -5.217172
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905365849000,
+    "resource_state": 2,
+    "name": "Kentallen to Ballachulish",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 988,
+    "moving_time": 876,
+    "start_date": "2024-06-29T17:09:46Z",
+    "start_date_local": "2024-06-29T18:09:46Z",
+    "distance": 3930.6,
+    "start_index": 11396,
+    "end_index": 12284,
+    "device_watts": false,
+    "segment": {
+      "id": 11970542,
+      "resource_state": 2,
+      "name": "Kentallen to Ballachulish",
+      "activity_type": "Ride",
+      "distance": 3930.6,
+      "average_grade": 0.7,
+      "maximum_grade": 30.1,
+      "elevation_high": 51.1,
+      "elevation_low": 0,
+      "start_latlng": [
+        56.675121,
+        -5.242146
+      ],
+      "end_latlng": [
+        56.681969,
+        -5.190414
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905367197700,
+    "resource_state": 2,
+    "name": "Climb into Glenachulish",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 578,
+    "moving_time": 466,
+    "start_date": "2024-06-29T17:17:40Z",
+    "start_date_local": "2024-06-29T18:17:40Z",
+    "distance": 1566.2,
+    "start_index": 11870,
+    "end_index": 12348,
+    "device_watts": false,
+    "segment": {
+      "id": 29558917,
+      "resource_state": 2,
+      "name": "Climb into Glenachulish",
+      "activity_type": "Ride",
+      "distance": 1566.2,
+      "average_grade": 1.4,
+      "maximum_grade": 7.4,
+      "elevation_high": 43.2,
+      "elevation_low": 15.4,
+      "start_latlng": [
+        56.686243,
+        -5.209999
+      ],
+      "end_latlng": [
+        56.682597,
+        -5.188263
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Appin",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905367508000,
+    "resource_state": 2,
+    "name": " Bridge to Onich",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 857,
+    "moving_time": 713,
+    "start_date": "2024-06-29T17:31:23Z",
+    "start_date_local": "2024-06-29T18:31:23Z",
+    "distance": 3109.6,
+    "start_index": 12593,
+    "end_index": 13319,
+    "device_watts": false,
+    "segment": {
+      "id": 19894974,
+      "resource_state": 2,
+      "name": " Bridge to Onich",
+      "activity_type": "Ride",
+      "distance": 3109.6,
+      "average_grade": -0.5,
+      "maximum_grade": 6.7,
+      "elevation_high": 25.2,
+      "elevation_low": 1.2,
+      "start_latlng": [
+        56.687799,
+        -5.18242
+      ],
+      "end_latlng": [
+        56.702395,
+        -5.210193
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905368084500,
+    "resource_state": 2,
+    "name": "Home Run",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 878,
+    "moving_time": 815,
+    "start_date": "2024-06-29T17:37:14Z",
+    "start_date_local": "2024-06-29T18:37:14Z",
+    "distance": 3482,
+    "start_index": 12813,
+    "end_index": 13629,
+    "device_watts": false,
+    "segment": {
+      "id": 9481932,
+      "resource_state": 2,
+      "name": "Home Run",
+      "activity_type": "Ride",
+      "distance": 3482,
+      "average_grade": 0,
+      "maximum_grade": 7.7,
+      "elevation_high": -3.6,
+      "elevation_low": -14.6,
+      "start_latlng": [
+        56.694764,
+        -5.182071
+      ],
+      "end_latlng": [
+        56.7033,
+        -5.228917
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort William",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3242202905366878000,
+    "resource_state": 2,
+    "name": "Forestry Houses Climb",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 686,
+    "moving_time": 533,
+    "start_date": "2024-06-29T17:51:59Z",
+    "start_date_local": "2024-06-29T18:51:59Z",
+    "distance": 2079.2,
+    "start_index": 13636,
+    "end_index": 14178,
+    "device_watts": false,
+    "segment": {
+      "id": 3997305,
+      "resource_state": 2,
+      "name": "Forestry Houses Climb",
+      "activity_type": "Ride",
+      "distance": 2079.2,
+      "average_grade": 4.8,
+      "maximum_grade": 11.2,
+      "elevation_high": -5,
+      "elevation_low": -104.2,
+      "start_latlng": [
+        56.703485,
+        -5.229335
+      ],
+      "end_latlng": [
+        56.719704,
+        -5.231364
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "United Kingdom",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3242202905368298500,
+    "resource_state": 2,
+    "name": "Catch the ferry!",
+    "activity": {
+      "id": 11769570251,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 289,
+    "moving_time": 84,
+    "start_date": "2024-06-29T18:03:35Z",
+    "start_date_local": "2024-06-29T19:03:35Z",
+    "distance": 308.7,
+    "start_index": 14188,
+    "end_index": 14273,
+    "device_watts": false,
+    "segment": {
+      "id": 26700199,
+      "resource_state": 2,
+      "name": "Catch the ferry!",
+      "activity_type": "Ride",
+      "distance": 308.7,
+      "average_grade": -5.3,
+      "maximum_grade": 7.6,
+      "elevation_high": 23.6,
+      "elevation_low": 7.3,
+      "start_latlng": [
+        56.720109,
+        -5.231369
+      ],
+      "end_latlng": [
+        56.721426,
+        -5.235074
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Fort William",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

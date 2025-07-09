@@ -1,0 +1,170 @@
+[
+  {
+    "id": 3252650838733808000,
+    "resource_state": 2,
+    "name": "Albert's Lumpy Lumps E2W",
+    "activity": {
+      "id": 12002931139,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 148,
+    "moving_time": 148,
+    "start_date": "2024-07-28T10:01:31Z",
+    "start_date_local": "2024-07-28T11:01:31Z",
+    "distance": 468.4,
+    "start_index": 13,
+    "end_index": 37,
+    "device_watts": false,
+    "average_heartrate": 71.2,
+    "max_heartrate": 84,
+    "segment": {
+      "id": 31397014,
+      "resource_state": 2,
+      "name": "Albert's Lumpy Lumps E2W",
+      "activity_type": "Ride",
+      "distance": 468.4,
+      "average_grade": -0.7,
+      "maximum_grade": 1.2,
+      "elevation_high": 31.5,
+      "elevation_low": 26.8,
+      "start_latlng": [
+        55.962379,
+        -3.171226
+      ],
+      "end_latlng": [
+        55.962609,
+        -3.178715
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3252650838735084000,
+    "resource_state": 2,
+    "name": "Down McDonald Road",
+    "activity": {
+      "id": 12002931139,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 155,
+    "moving_time": 155,
+    "start_date": "2024-07-28T10:07:20Z",
+    "start_date_local": "2024-07-28T11:07:20Z",
+    "distance": 498.544,
+    "start_index": 65,
+    "end_index": 79,
+    "device_watts": false,
+    "average_heartrate": 67.4,
+    "max_heartrate": 77,
+    "segment": {
+      "id": 2043047,
+      "resource_state": 2,
+      "name": "Down McDonald Road",
+      "activity_type": "Ride",
+      "distance": 498.544,
+      "average_grade": -1,
+      "maximum_grade": 0,
+      "elevation_high": 84,
+      "elevation_low": 79,
+      "start_latlng": [
+        55.96261739730672,
+        -3.182902336120513
+      ],
+      "end_latlng": [
+        55.96585750579671,
+        -3.188416957855132
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3252650838733601300,
+    "resource_state": 2,
+    "name": "Fire Station Sprint",
+    "activity": {
+      "id": 12002931139,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 129,
+    "moving_time": 129,
+    "start_date": "2024-07-28T10:08:02Z",
+    "start_date_local": "2024-07-28T11:08:02Z",
+    "distance": 394.5,
+    "start_index": 69,
+    "end_index": 80,
+    "device_watts": false,
+    "average_heartrate": 67.9,
+    "max_heartrate": 77,
+    "segment": {
+      "id": 5417211,
+      "resource_state": 2,
+      "name": "Fire Station Sprint",
+      "activity_type": "Ride",
+      "distance": 394.5,
+      "average_grade": -0.6,
+      "maximum_grade": 2.1,
+      "elevation_high": 24.2,
+      "elevation_low": 21.1,
+      "start_latlng": [
+        55.963492,
+        -3.184414
+      ],
+      "end_latlng": [
+        55.966059,
+        -3.188741
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

@@ -1,0 +1,890 @@
+[
+  {
+    "id": 3227374333683283500,
+    "resource_state": 2,
+    "name": "Albert's Lumpy Lumps E2W",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 153,
+    "moving_time": 153,
+    "start_date": "2024-05-19T15:48:54Z",
+    "start_date_local": "2024-05-19T16:48:54Z",
+    "distance": 468.4,
+    "start_index": 50,
+    "end_index": 203,
+    "device_watts": false,
+    "segment": {
+      "id": 31397014,
+      "resource_state": 2,
+      "name": "Albert's Lumpy Lumps E2W",
+      "activity_type": "Ride",
+      "distance": 468.4,
+      "average_grade": -0.7,
+      "maximum_grade": 1.2,
+      "elevation_high": 31.5,
+      "elevation_low": 26.8,
+      "start_latlng": [
+        55.962379,
+        -3.171226
+      ],
+      "end_latlng": [
+        55.962609,
+        -3.178715
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3227374333684645400,
+    "resource_state": 2,
+    "name": "Elm Row row row your boat",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 172,
+    "moving_time": 172,
+    "start_date": "2024-05-19T15:53:20Z",
+    "start_date_local": "2024-05-19T16:53:20Z",
+    "distance": 389.9,
+    "start_index": 304,
+    "end_index": 476,
+    "device_watts": false,
+    "segment": {
+      "id": 8895707,
+      "resource_state": 2,
+      "name": "Elm Row row row your boat",
+      "activity_type": "Ride",
+      "distance": 389.9,
+      "average_grade": 3.4,
+      "maximum_grade": 5.5,
+      "elevation_high": 47.3,
+      "elevation_low": 34,
+      "start_latlng": [
+        55.961168,
+        -3.180869
+      ],
+      "end_latlng": [
+        55.958255,
+        -3.184248
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3227374333683412500,
+    "resource_state": 2,
+    "name": "up the round-about",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 138,
+    "moving_time": 117,
+    "start_date": "2024-05-19T15:56:45Z",
+    "start_date_local": "2024-05-19T16:56:45Z",
+    "distance": 261.601,
+    "start_index": 486,
+    "end_index": 604,
+    "device_watts": false,
+    "segment": {
+      "id": 2894967,
+      "resource_state": 2,
+      "name": "up the round-about",
+      "activity_type": "Ride",
+      "distance": 261.601,
+      "average_grade": 3.3,
+      "maximum_grade": 8.6,
+      "elevation_high": 56.1,
+      "elevation_low": 47.4,
+      "start_latlng": [
+        55.95816948541124,
+        -3.1842907372705147
+      ],
+      "end_latlng": [
+        55.956310681696316,
+        -3.1864123146845675
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333682876000,
+    "resource_state": 2,
+    "name": "The Mound from Princes St incl cobbles to The Castle",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 304,
+    "moving_time": 276,
+    "start_date": "2024-05-19T16:25:08Z",
+    "start_date_local": "2024-05-19T17:25:08Z",
+    "distance": 392.69,
+    "start_index": 1288,
+    "end_index": 1579,
+    "device_watts": false,
+    "segment": {
+      "id": 1430524,
+      "resource_state": 2,
+      "name": "The Mound from Princes St incl cobbles to The Castle",
+      "activity_type": "Ride",
+      "distance": 392.69,
+      "average_grade": 8.4,
+      "maximum_grade": 20.1,
+      "elevation_high": 102.6,
+      "elevation_low": 61.5,
+      "start_latlng": [
+        55.95156346200306,
+        -3.1966294812657954
+      ],
+      "end_latlng": [
+        55.94902319966186,
+        -3.195749796334171
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333682137600,
+    "resource_state": 2,
+    "name": "The Mound, RSA to Bus stop",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 118,
+    "moving_time": 98,
+    "start_date": "2024-05-19T16:25:09Z",
+    "start_date_local": "2024-05-19T17:25:09Z",
+    "distance": 157.88,
+    "start_index": 1289,
+    "end_index": 1397,
+    "device_watts": false,
+    "segment": {
+      "id": 1637816,
+      "resource_state": 2,
+      "name": "The Mound, RSA to Bus stop",
+      "activity_type": "Ride",
+      "distance": 157.88,
+      "average_grade": 1.3,
+      "maximum_grade": 4.9,
+      "elevation_high": 58.6,
+      "elevation_low": 56.6,
+      "start_latlng": [
+        55.951346000656486,
+        -3.19646785967052
+      ],
+      "end_latlng": [
+        55.95026548951864,
+        -3.195336554199457
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333681190400,
+    "resource_state": 2,
+    "name": "Red Bull Hill Chasers 2014",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 194,
+    "moving_time": 170,
+    "start_date": "2024-05-19T16:25:14Z",
+    "start_date_local": "2024-05-19T17:25:14Z",
+    "distance": 248,
+    "start_index": 1294,
+    "end_index": 1475,
+    "device_watts": false,
+    "segment": {
+      "id": 6994419,
+      "resource_state": 2,
+      "name": "Red Bull Hill Chasers 2014",
+      "activity_type": "Ride",
+      "distance": 248,
+      "average_grade": 13.9,
+      "maximum_grade": 23.6,
+      "elevation_high": 95.8,
+      "elevation_low": 61.4,
+      "start_latlng": [
+        55.951232,
+        -3.196429
+      ],
+      "end_latlng": [
+        55.949812,
+        -3.195648
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333682201000,
+    "resource_state": 2,
+    "name": "Edinburgh's Steepest Street",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 799,
+    "moving_time": 325,
+    "start_date": "2024-05-19T16:27:35Z",
+    "start_date_local": "2024-05-19T17:27:35Z",
+    "distance": 323.7,
+    "start_index": 1425,
+    "end_index": 1846,
+    "device_watts": false,
+    "segment": {
+      "id": 21756898,
+      "resource_state": 2,
+      "name": "Edinburgh's Steepest Street",
+      "activity_type": "Ride",
+      "distance": 323.7,
+      "average_grade": 2.9,
+      "maximum_grade": 21.6,
+      "elevation_high": 99.9,
+      "elevation_low": 86.1,
+      "start_latlng": [
+        55.950088,
+        -3.194894
+      ],
+      "end_latlng": [
+        55.949437,
+        -3.193383
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333684281000,
+    "resource_state": 2,
+    "name": "mound place-ramsay lane up",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 121,
+    "moving_time": 115,
+    "start_date": "2024-05-19T16:27:52Z",
+    "start_date_local": "2024-05-19T17:27:52Z",
+    "distance": 131.969,
+    "start_index": 1442,
+    "end_index": 1560,
+    "device_watts": false,
+    "segment": {
+      "id": 2142053,
+      "resource_state": 2,
+      "name": "mound place-ramsay lane up",
+      "activity_type": "Ride",
+      "distance": 131.969,
+      "average_grade": 3.8,
+      "maximum_grade": 21.5,
+      "elevation_high": 102.4,
+      "elevation_low": 92.4,
+      "start_latlng": [
+        55.94996462,
+        -3.19503126
+      ],
+      "end_latlng": [
+        55.94920342,
+        -3.19577699
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333683278300,
+    "resource_state": 2,
+    "name": "George IV Bridge Out",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1080,
+    "moving_time": 195,
+    "start_date": "2024-05-19T16:42:23Z",
+    "start_date_local": "2024-05-19T17:42:23Z",
+    "distance": 325.8,
+    "start_index": 1905,
+    "end_index": 2145,
+    "device_watts": false,
+    "segment": {
+      "id": 6800596,
+      "resource_state": 2,
+      "name": "George IV Bridge Out",
+      "activity_type": "Ride",
+      "distance": 325.8,
+      "average_grade": -2.4,
+      "maximum_grade": 3.3,
+      "elevation_high": 54.4,
+      "elevation_low": 40.2,
+      "start_latlng": [
+        55.949366,
+        -3.192558
+      ],
+      "end_latlng": [
+        55.946665,
+        -3.190964
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3227374333681910300,
+    "resource_state": 2,
+    "name": "George IV Bridge Blast (to the left)",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1165,
+    "moving_time": 275,
+    "start_date": "2024-05-19T16:42:28Z",
+    "start_date_local": "2024-05-19T17:42:28Z",
+    "distance": 431,
+    "start_index": 1910,
+    "end_index": 2230,
+    "device_watts": false,
+    "segment": {
+      "id": 4314198,
+      "resource_state": 2,
+      "name": "George IV Bridge Blast (to the left)",
+      "activity_type": "Ride",
+      "distance": 431,
+      "average_grade": -0.2,
+      "maximum_grade": 4.4,
+      "elevation_high": 94.9,
+      "elevation_low": 88.2,
+      "start_latlng": [
+        55.949291,
+        -3.192653
+      ],
+      "end_latlng": [
+        55.946023,
+        -3.189478
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333680994000,
+    "resource_state": 2,
+    "name": "Great Grog to Pollock traffic lights",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 221,
+    "moving_time": 191,
+    "start_date": "2024-05-19T18:31:36Z",
+    "start_date_local": "2024-05-19T19:31:36Z",
+    "distance": 536.1,
+    "start_index": 3821,
+    "end_index": 4029,
+    "device_watts": false,
+    "segment": {
+      "id": 12455181,
+      "resource_state": 2,
+      "name": "Great Grog to Pollock traffic lights",
+      "activity_type": "Ride",
+      "distance": 536.1,
+      "average_grade": 0.1,
+      "maximum_grade": 3.5,
+      "elevation_high": 91,
+      "elevation_low": 86.4,
+      "start_latlng": [
+        55.941394,
+        -3.177813
+      ],
+      "end_latlng": [
+        55.940815,
+        -3.172736
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333684148700,
+    "resource_state": 2,
+    "name": "Bumpy Town",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 332,
+    "moving_time": 277,
+    "start_date": "2024-05-19T18:39:55Z",
+    "start_date_local": "2024-05-19T19:39:55Z",
+    "distance": 716.3,
+    "start_index": 4288,
+    "end_index": 4590,
+    "device_watts": false,
+    "segment": {
+      "id": 28095167,
+      "resource_state": 2,
+      "name": "Bumpy Town",
+      "activity_type": "Ride",
+      "distance": 716.3,
+      "average_grade": -4.1,
+      "maximum_grade": 3.5,
+      "elevation_high": 78.4,
+      "elevation_low": 47.8,
+      "start_latlng": [
+        55.944366,
+        -3.179324
+      ],
+      "end_latlng": [
+        55.950292,
+        -3.177834
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333684765000,
+    "resource_state": 2,
+    "name": "Climbing Abbey",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 163,
+    "moving_time": 140,
+    "start_date": "2024-05-19T18:49:31Z",
+    "start_date_local": "2024-05-19T19:49:31Z",
+    "distance": 391.3,
+    "start_index": 4832,
+    "end_index": 4980,
+    "device_watts": false,
+    "segment": {
+      "id": 23867482,
+      "resource_state": 2,
+      "name": "Climbing Abbey",
+      "activity_type": "Ride",
+      "distance": 391.3,
+      "average_grade": 2.2,
+      "maximum_grade": 14.3,
+      "elevation_high": 54.7,
+      "elevation_low": 39,
+      "start_latlng": [
+        55.952947,
+        -3.174601
+      ],
+      "end_latlng": [
+        55.956011,
+        -3.171847
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3227374333680998000,
+    "resource_state": 2,
+    "name": "Abbeymount",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 172,
+    "moving_time": 152,
+    "start_date": "2024-05-19T18:49:45Z",
+    "start_date_local": "2024-05-19T19:49:45Z",
+    "distance": 421.445,
+    "start_index": 4846,
+    "end_index": 5003,
+    "device_watts": false,
+    "segment": {
+      "id": 1599224,
+      "resource_state": 2,
+      "name": "Abbeymount",
+      "activity_type": "Ride",
+      "distance": 421.445,
+      "average_grade": 2.4,
+      "maximum_grade": 11.7,
+      "elevation_high": 49.2,
+      "elevation_low": 38.4,
+      "start_latlng": [
+        55.953070700928514,
+        -3.1744126457903055
+      ],
+      "end_latlng": [
+        55.956378824504135,
+        -3.1721522145974257
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3227374333682682400,
+    "resource_state": 2,
+    "name": "Abbeymount",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 140,
+    "moving_time": 120,
+    "start_date": "2024-05-19T18:50:03Z",
+    "start_date_local": "2024-05-19T19:50:03Z",
+    "distance": 318.4,
+    "start_index": 4864,
+    "end_index": 4989,
+    "device_watts": false,
+    "segment": {
+      "id": 15583228,
+      "resource_state": 2,
+      "name": "Abbeymount",
+      "activity_type": "Ride",
+      "distance": 318.4,
+      "average_grade": 1.5,
+      "maximum_grade": 7.7,
+      "elevation_high": 149.8,
+      "elevation_low": 145,
+      "start_latlng": [
+        55.95367,
+        -3.174238
+      ],
+      "end_latlng": [
+        55.956088,
+        -3.17191
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3227374333684641300,
+    "resource_state": 2,
+    "name": "Mad Dash",
+    "activity": {
+      "id": 11450810818,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 201,
+    "moving_time": 129,
+    "start_date": "2024-05-19T19:17:18Z",
+    "start_date_local": "2024-05-19T20:17:18Z",
+    "distance": 474.8,
+    "start_index": 5293,
+    "end_index": 5460,
+    "device_watts": false,
+    "segment": {
+      "id": 6183340,
+      "resource_state": 2,
+      "name": "Mad Dash",
+      "activity_type": "Ride",
+      "distance": 474.8,
+      "average_grade": -3.4,
+      "maximum_grade": -1.5,
+      "elevation_high": 47,
+      "elevation_low": 30.7,
+      "start_latlng": [
+        55.957614,
+        -3.172381
+      ],
+      "end_latlng": [
+        55.961664,
+        -3.171012
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

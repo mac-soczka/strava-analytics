@@ -1,0 +1,164 @@
+[
+  {
+    "id": 3232272220597664000,
+    "resource_state": 2,
+    "name": "Albert's Lumpy Lumps E2W",
+    "activity": {
+      "id": 11553321476,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 108,
+    "moving_time": 108,
+    "start_date": "2024-06-02T07:44:19Z",
+    "start_date_local": "2024-06-02T08:44:19Z",
+    "distance": 468.4,
+    "start_index": 0,
+    "end_index": 108,
+    "device_watts": false,
+    "segment": {
+      "id": 31397014,
+      "resource_state": 2,
+      "name": "Albert's Lumpy Lumps E2W",
+      "activity_type": "Ride",
+      "distance": 468.4,
+      "average_grade": -0.7,
+      "maximum_grade": 1.2,
+      "elevation_high": 31.5,
+      "elevation_low": 26.8,
+      "start_latlng": [
+        55.962379,
+        -3.171226
+      ],
+      "end_latlng": [
+        55.962609,
+        -3.178715
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3232272220598848500,
+    "resource_state": 2,
+    "name": "Elm Row row row your boat",
+    "activity": {
+      "id": 11553321476,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 200,
+    "moving_time": 200,
+    "start_date": "2024-06-02T07:47:21Z",
+    "start_date_local": "2024-06-02T08:47:21Z",
+    "distance": 389.9,
+    "start_index": 182,
+    "end_index": 382,
+    "device_watts": false,
+    "segment": {
+      "id": 8895707,
+      "resource_state": 2,
+      "name": "Elm Row row row your boat",
+      "activity_type": "Ride",
+      "distance": 389.9,
+      "average_grade": 3.4,
+      "maximum_grade": 5.5,
+      "elevation_high": 47.3,
+      "elevation_low": 34,
+      "start_latlng": [
+        55.961168,
+        -3.180869
+      ],
+      "end_latlng": [
+        55.958255,
+        -3.184248
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3232272220596743000,
+    "resource_state": 2,
+    "name": "up the round-about",
+    "activity": {
+      "id": 11553321476,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 208,
+    "moving_time": 142,
+    "start_date": "2024-06-02T07:50:47Z",
+    "start_date_local": "2024-06-02T08:50:47Z",
+    "distance": 261.601,
+    "start_index": 388,
+    "end_index": 531,
+    "device_watts": false,
+    "segment": {
+      "id": 2894967,
+      "resource_state": 2,
+      "name": "up the round-about",
+      "activity_type": "Ride",
+      "distance": 261.601,
+      "average_grade": 3.3,
+      "maximum_grade": 8.6,
+      "elevation_high": 56.1,
+      "elevation_low": 47.4,
+      "start_latlng": [
+        55.95816948541124,
+        -3.1842907372705147
+      ],
+      "end_latlng": [
+        55.956310681696316,
+        -3.1864123146845675
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

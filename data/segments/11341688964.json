@@ -1,0 +1,5402 @@
+[
+  {
+    "id": 3222316243789902000,
+    "resource_state": 2,
+    "name": "Were you going up, or down the slope?",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 67,
+    "moving_time": 67,
+    "start_date": "2024-05-05T15:07:46Z",
+    "start_date_local": "2024-05-05T16:07:46Z",
+    "distance": 570,
+    "start_index": 20,
+    "end_index": 87,
+    "device_watts": false,
+    "segment": {
+      "id": 28442092,
+      "resource_state": 2,
+      "name": "Were you going up, or down the slope?",
+      "activity_type": "Ride",
+      "distance": 570,
+      "average_grade": -0.1,
+      "maximum_grade": 1.9,
+      "elevation_high": 34.9,
+      "elevation_low": 33.4,
+      "start_latlng": [
+        55.961675,
+        -3.170731
+      ],
+      "end_latlng": [
+        55.963342,
+        -3.162777
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792239600,
+    "resource_state": 2,
+    "name": "Sleigh Drive",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 94,
+    "moving_time": 94,
+    "start_date": "2024-05-05T15:09:46Z",
+    "start_date_local": "2024-05-05T16:09:46Z",
+    "distance": 856.4,
+    "start_index": 125,
+    "end_index": 219,
+    "device_watts": false,
+    "segment": {
+      "id": 7218013,
+      "resource_state": 2,
+      "name": "Sleigh Drive",
+      "activity_type": "Ride",
+      "distance": 856.4,
+      "average_grade": -1,
+      "maximum_grade": 0,
+      "elevation_high": -16.8,
+      "elevation_low": -25.6,
+      "start_latlng": [
+        55.962545,
+        -3.158599
+      ],
+      "end_latlng": [
+        55.962408,
+        -3.145095
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792078000,
+    "resource_state": 2,
+    "name": "Roundabout to the shops",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 81,
+    "moving_time": 81,
+    "start_date": "2024-05-05T15:10:21Z",
+    "start_date_local": "2024-05-05T16:10:21Z",
+    "distance": 779.9,
+    "start_index": 160,
+    "end_index": 241,
+    "device_watts": false,
+    "segment": {
+      "id": 23267756,
+      "resource_state": 2,
+      "name": "Roundabout to the shops",
+      "activity_type": "Ride",
+      "distance": 779.9,
+      "average_grade": -1.8,
+      "maximum_grade": 0,
+      "elevation_high": 29,
+      "elevation_low": 14.6,
+      "start_latlng": [
+        55.962176,
+        -3.153224
+      ],
+      "end_latlng": [
+        55.960691,
+        -3.142177
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788992500,
+    "resource_state": 2,
+    "name": "Craigentinny Road E/B",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 202,
+    "moving_time": 202,
+    "start_date": "2024-05-05T15:10:25Z",
+    "start_date_local": "2024-05-05T16:10:25Z",
+    "distance": 2050.75,
+    "start_index": 164,
+    "end_index": 366,
+    "device_watts": false,
+    "segment": {
+      "id": 1547781,
+      "resource_state": 2,
+      "name": "Craigentinny Road E/B",
+      "activity_type": "Ride",
+      "distance": 2050.75,
+      "average_grade": -0.5,
+      "maximum_grade": 1.3,
+      "elevation_high": 28.8,
+      "elevation_low": 17.8,
+      "start_latlng": [
+        55.96214782051526,
+        -3.1529605993120473
+      ],
+      "end_latlng": [
+        55.95764312250398,
+        -3.1250785376871115
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788975000,
+    "resource_state": 2,
+    "name": "Craigenfanny",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 184,
+    "moving_time": 184,
+    "start_date": "2024-05-05T15:10:36Z",
+    "start_date_local": "2024-05-05T16:10:36Z",
+    "distance": 1954.1,
+    "start_index": 175,
+    "end_index": 359,
+    "device_watts": false,
+    "segment": {
+      "id": 5146978,
+      "resource_state": 2,
+      "name": "Craigenfanny",
+      "activity_type": "Ride",
+      "distance": 1954.1,
+      "average_grade": -0.5,
+      "maximum_grade": 1.9,
+      "elevation_high": 28.5,
+      "elevation_low": 18.2,
+      "start_latlng": [
+        55.962223,
+        -3.152176
+      ],
+      "end_latlng": [
+        55.958173,
+        -3.125155
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243790852000,
+    "resource_state": 2,
+    "name": "Traffic Island Tussle",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 23,
+    "moving_time": 23,
+    "start_date": "2024-05-05T15:12:08Z",
+    "start_date_local": "2024-05-05T16:12:08Z",
+    "distance": 250.3,
+    "start_index": 267,
+    "end_index": 290,
+    "device_watts": false,
+    "segment": {
+      "id": 11066712,
+      "resource_state": 2,
+      "name": "Traffic Island Tussle",
+      "activity_type": "Ride",
+      "distance": 250.3,
+      "average_grade": -0.8,
+      "maximum_grade": 0.6,
+      "elevation_high": 21.2,
+      "elevation_low": 19,
+      "start_latlng": [
+        55.960178,
+        -3.137981
+      ],
+      "end_latlng": [
+        55.960518,
+        -3.134024
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792114700,
+    "resource_state": 2,
+    "name": "Junction to Bath Street",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 108,
+    "moving_time": 93,
+    "start_date": "2024-05-05T15:14:17Z",
+    "start_date_local": "2024-05-05T16:14:17Z",
+    "distance": 677.2,
+    "start_index": 396,
+    "end_index": 490,
+    "device_watts": false,
+    "segment": {
+      "id": 15676481,
+      "resource_state": 2,
+      "name": "Junction to Bath Street",
+      "activity_type": "Ride",
+      "distance": 677.2,
+      "average_grade": 0.1,
+      "maximum_grade": 3.4,
+      "elevation_high": 13.9,
+      "elevation_low": 11,
+      "start_latlng": [
+        55.957258,
+        -3.122007
+      ],
+      "end_latlng": [
+        55.952929,
+        -3.114406
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243790984000,
+    "resource_state": 2,
+    "name": "Porty, I'm leaving you for Joppa",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 125,
+    "moving_time": 125,
+    "start_date": "2024-05-05T15:16:12Z",
+    "start_date_local": "2024-05-05T16:16:12Z",
+    "distance": 1162.3,
+    "start_index": 497,
+    "end_index": 622,
+    "device_watts": false,
+    "segment": {
+      "id": 17838182,
+      "resource_state": 2,
+      "name": "Porty, I'm leaving you for Joppa",
+      "activity_type": "Ride",
+      "distance": 1162.3,
+      "average_grade": 0.3,
+      "maximum_grade": 10.3,
+      "elevation_high": 21,
+      "elevation_low": 13,
+      "start_latlng": [
+        55.95263,
+        -3.11355
+      ],
+      "end_latlng": [
+        55.948853,
+        -3.096487
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791025000,
+    "resource_state": 2,
+    "name": "Abercorn to Fisherrow",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 244,
+    "moving_time": 235,
+    "start_date": "2024-05-05T15:17:22Z",
+    "start_date_local": "2024-05-05T16:17:22Z",
+    "distance": 2212.9,
+    "start_index": 567,
+    "end_index": 803,
+    "device_watts": false,
+    "segment": {
+      "id": 15783305,
+      "resource_state": 2,
+      "name": "Abercorn to Fisherrow",
+      "activity_type": "Ride",
+      "distance": 2212.9,
+      "average_grade": -0.3,
+      "maximum_grade": 1.1,
+      "elevation_high": 6.6,
+      "elevation_low": -1.6,
+      "start_latlng": [
+        55.950383,
+        -3.104635
+      ],
+      "end_latlng": [
+        55.944865,
+        -3.070877
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792264000,
+    "resource_state": 2,
+    "name": "Sea Blast",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 98,
+    "moving_time": 98,
+    "start_date": "2024-05-05T15:18:02Z",
+    "start_date_local": "2024-05-05T16:18:02Z",
+    "distance": 954.7,
+    "start_index": 607,
+    "end_index": 705,
+    "device_watts": false,
+    "segment": {
+      "id": 15463822,
+      "resource_state": 2,
+      "name": "Sea Blast",
+      "activity_type": "Ride",
+      "distance": 954.7,
+      "average_grade": -0.2,
+      "maximum_grade": 19.8,
+      "elevation_high": 20.7,
+      "elevation_low": 9.3,
+      "start_latlng": [
+        55.949105,
+        -3.099055
+      ],
+      "end_latlng": [
+        55.948153,
+        -3.084003
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243792399400,
+    "resource_state": 2,
+    "name": "Prom To River Esk",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 319,
+    "moving_time": 310,
+    "start_date": "2024-05-05T15:18:25Z",
+    "start_date_local": "2024-05-05T16:18:25Z",
+    "distance": 2910.4,
+    "start_index": 630,
+    "end_index": 941,
+    "device_watts": false,
+    "segment": {
+      "id": 6691769,
+      "resource_state": 2,
+      "name": "Prom To River Esk",
+      "activity_type": "Ride",
+      "distance": 2910.4,
+      "average_grade": -0.4,
+      "maximum_grade": 24.6,
+      "elevation_high": 16.3,
+      "elevation_low": 4.9,
+      "start_latlng": [
+        55.948816,
+        -3.095225
+      ],
+      "end_latlng": [
+        55.945492,
+        -3.050664
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791418400,
+    "resource_state": 2,
+    "name": "Prom to Musselburgh",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 137,
+    "moving_time": 128,
+    "start_date": "2024-05-05T15:18:25Z",
+    "start_date_local": "2024-05-05T16:18:25Z",
+    "distance": 1135.3,
+    "start_index": 630,
+    "end_index": 759,
+    "device_watts": false,
+    "segment": {
+      "id": 6276196,
+      "resource_state": 2,
+      "name": "Prom to Musselburgh",
+      "activity_type": "Ride",
+      "distance": 1135.3,
+      "average_grade": -0.3,
+      "maximum_grade": 11.8,
+      "elevation_high": 10.2,
+      "elevation_low": 3,
+      "start_latlng": [
+        55.948897,
+        -3.095109
+      ],
+      "end_latlng": [
+        55.946028,
+        -3.078285
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243791590400,
+    "resource_state": 2,
+    "name": "Prom to Eastfield",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 84,
+    "moving_time": 84,
+    "start_date": "2024-05-05T15:18:27Z",
+    "start_date_local": "2024-05-05T16:18:27Z",
+    "distance": 769.4,
+    "start_index": 632,
+    "end_index": 716,
+    "device_watts": false,
+    "segment": {
+      "id": 7266098,
+      "resource_state": 2,
+      "name": "Prom to Eastfield",
+      "activity_type": "Ride",
+      "distance": 769.4,
+      "average_grade": 0,
+      "maximum_grade": 11.3,
+      "elevation_high": 17.2,
+      "elevation_low": 8.2,
+      "start_latlng": [
+        55.948789,
+        -3.094741
+      ],
+      "end_latlng": [
+        55.947735,
+        -3.082686
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789355000,
+    "resource_state": 2,
+    "name": "Punch it! ",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1487,
+    "moving_time": 1344,
+    "start_date": "2024-05-05T15:18:28Z",
+    "start_date_local": "2024-05-05T16:18:28Z",
+    "distance": 12500.2,
+    "start_index": 633,
+    "end_index": 1977,
+    "device_watts": false,
+    "segment": {
+      "id": 11640216,
+      "resource_state": 2,
+      "name": "Punch it! ",
+      "activity_type": "Ride",
+      "distance": 12500.2,
+      "average_grade": 0,
+      "maximum_grade": 23.9,
+      "elevation_high": 15.8,
+      "elevation_low": 3.1,
+      "start_latlng": [
+        55.948854,
+        -3.094553
+      ],
+      "end_latlng": [
+        55.974243,
+        -2.91473
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243790429000,
+    "resource_state": 2,
+    "name": "Prom to Longniddry",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1664,
+    "moving_time": 1521,
+    "start_date": "2024-05-05T15:18:29Z",
+    "start_date_local": "2024-05-05T16:18:29Z",
+    "distance": 14061,
+    "start_index": 634,
+    "end_index": 2155,
+    "device_watts": false,
+    "segment": {
+      "id": 34808890,
+      "resource_state": 2,
+      "name": "Prom to Longniddry",
+      "activity_type": "Ride",
+      "distance": 14061,
+      "average_grade": 0,
+      "maximum_grade": 10.3,
+      "elevation_high": 8,
+      "elevation_low": 0.4,
+      "start_latlng": [
+        55.948828,
+        -3.094512
+      ],
+      "end_latlng": [
+        55.983685,
+        -2.896725
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789946000,
+    "resource_state": 2,
+    "name": "Joppa to Gosford House",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1873,
+    "moving_time": 1730,
+    "start_date": "2024-05-05T15:18:36Z",
+    "start_date_local": "2024-05-05T16:18:36Z",
+    "distance": 15928.6,
+    "start_index": 641,
+    "end_index": 2371,
+    "device_watts": false,
+    "segment": {
+      "id": 28081444,
+      "resource_state": 2,
+      "name": "Joppa to Gosford House",
+      "activity_type": "Ride",
+      "distance": 15928.6,
+      "average_grade": 0,
+      "maximum_grade": 4.9,
+      "elevation_high": 1.6,
+      "elevation_low": -5.4,
+      "start_latlng": [
+        55.948788,
+        -3.093432
+      ],
+      "end_latlng": [
+        55.998198,
+        -2.884703
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243791053000,
+    "resource_state": 2,
+    "name": "Dash to the prom",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 113,
+    "moving_time": 104,
+    "start_date": "2024-05-05T15:20:09Z",
+    "start_date_local": "2024-05-05T16:20:09Z",
+    "distance": 978.2,
+    "start_index": 734,
+    "end_index": 839,
+    "device_watts": false,
+    "segment": {
+      "id": 9320105,
+      "resource_state": 2,
+      "name": "Dash to the prom",
+      "activity_type": "Ride",
+      "distance": 978.2,
+      "average_grade": -0.5,
+      "maximum_grade": 7.7,
+      "elevation_high": 14.4,
+      "elevation_low": 5.7,
+      "start_latlng": [
+        55.946557,
+        -3.081064
+      ],
+      "end_latlng": [
+        55.944869,
+        -3.066186
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788989400,
+    "resource_state": 2,
+    "name": "Quickstep past Musselburgh",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 522,
+    "moving_time": 388,
+    "start_date": "2024-05-05T15:20:32Z",
+    "start_date_local": "2024-05-05T16:20:32Z",
+    "distance": 3378,
+    "start_index": 749,
+    "end_index": 1138,
+    "device_watts": false,
+    "segment": {
+      "id": 6047743,
+      "resource_state": 2,
+      "name": "Quickstep past Musselburgh",
+      "activity_type": "Ride",
+      "distance": 3378,
+      "average_grade": 0,
+      "maximum_grade": 6.3,
+      "elevation_high": 13.5,
+      "elevation_low": 4.8,
+      "start_latlng": [
+        55.946472,
+        -3.079764
+      ],
+      "end_latlng": [
+        55.944514,
+        -3.027724
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789479000,
+    "resource_state": 2,
+    "name": "Fisherrow Sprint",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 47,
+    "moving_time": 47,
+    "start_date": "2024-05-05T15:20:40Z",
+    "start_date_local": "2024-05-05T16:20:40Z",
+    "distance": 541.4,
+    "start_index": 757,
+    "end_index": 804,
+    "device_watts": false,
+    "segment": {
+      "id": 27894245,
+      "resource_state": 2,
+      "name": "Fisherrow Sprint",
+      "activity_type": "Ride",
+      "distance": 541.4,
+      "average_grade": -0.8,
+      "maximum_grade": 0.7,
+      "elevation_high": 0.2,
+      "elevation_low": -4.4,
+      "start_latlng": [
+        55.946121,
+        -3.078742
+      ],
+      "end_latlng": [
+        55.944817,
+        -3.070627
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243790927000,
+    "resource_state": 2,
+    "name": "New Street Sprint",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 128,
+    "moving_time": 128,
+    "start_date": "2024-05-05T15:21:36Z",
+    "start_date_local": "2024-05-05T16:21:36Z",
+    "distance": 1182.05,
+    "start_index": 813,
+    "end_index": 941,
+    "device_watts": false,
+    "segment": {
+      "id": 3667451,
+      "resource_state": 2,
+      "name": "New Street Sprint",
+      "activity_type": "Ride",
+      "distance": 1182.05,
+      "average_grade": -0.2,
+      "maximum_grade": 2.1,
+      "elevation_high": 8.1,
+      "elevation_low": 4.8,
+      "start_latlng": [
+        55.944597,
+        -3.069295
+      ],
+      "end_latlng": [
+        55.945602,
+        -3.050633
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789954000,
+    "resource_state": 2,
+    "name": "The Final Stretch",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 332,
+    "moving_time": 198,
+    "start_date": "2024-05-05T15:25:00Z",
+    "start_date_local": "2024-05-05T16:25:00Z",
+    "distance": 1728.78,
+    "start_index": 1017,
+    "end_index": 1216,
+    "device_watts": false,
+    "segment": {
+      "id": 3778409,
+      "resource_state": 2,
+      "name": "The Final Stretch",
+      "activity_type": "Ride",
+      "distance": 1728.78,
+      "average_grade": 0.2,
+      "maximum_grade": 3.4,
+      "elevation_high": 14.5,
+      "elevation_low": 5.2,
+      "start_latlng": [
+        55.945374,
+        -3.042362
+      ],
+      "end_latlng": [
+        55.948413,
+        -3.018684
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791688700,
+    "resource_state": 2,
+    "name": "Racecourse to Longniddry",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1272,
+    "moving_time": 1138,
+    "start_date": "2024-05-05T15:25:02Z",
+    "start_date_local": "2024-05-05T16:25:02Z",
+    "distance": 10551.3,
+    "start_index": 1019,
+    "end_index": 2156,
+    "device_watts": false,
+    "segment": {
+      "id": 23217143,
+      "resource_state": 2,
+      "name": "Racecourse to Longniddry",
+      "activity_type": "Ride",
+      "distance": 10551.3,
+      "average_grade": 0,
+      "maximum_grade": 4.3,
+      "elevation_high": 1.2,
+      "elevation_low": -6,
+      "start_latlng": [
+        55.945458,
+        -3.042056
+      ],
+      "end_latlng": [
+        55.983779,
+        -2.896662
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243792406500,
+    "resource_state": 2,
+    "name": "Proper Cycling Magazine Racecourse Out",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 256,
+    "moving_time": 122,
+    "start_date": "2024-05-05T15:25:04Z",
+    "start_date_local": "2024-05-05T16:25:04Z",
+    "distance": 949.7,
+    "start_index": 1021,
+    "end_index": 1144,
+    "device_watts": false,
+    "segment": {
+      "id": 28459832,
+      "resource_state": 2,
+      "name": "Proper Cycling Magazine Racecourse Out",
+      "activity_type": "Ride",
+      "distance": 949.7,
+      "average_grade": 0,
+      "maximum_grade": 0.6,
+      "elevation_high": 6.6,
+      "elevation_low": 6.2,
+      "start_latlng": [
+        55.945443,
+        -3.041765
+      ],
+      "end_latlng": [
+        55.944459,
+        -3.027079
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243791712000,
+    "resource_state": 2,
+    "name": "Final Furlong (west to east)",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 254,
+    "moving_time": 120,
+    "start_date": "2024-05-05T15:25:10Z",
+    "start_date_local": "2024-05-05T16:25:10Z",
+    "distance": 906.98,
+    "start_index": 1027,
+    "end_index": 1148,
+    "device_watts": false,
+    "segment": {
+      "id": 2043137,
+      "resource_state": 2,
+      "name": "Final Furlong (west to east)",
+      "activity_type": "Ride",
+      "distance": 906.98,
+      "average_grade": -0.1,
+      "maximum_grade": 0.8,
+      "elevation_high": 7.9,
+      "elevation_low": 5.2,
+      "start_latlng": [
+        55.9455566,
+        -3.0408694
+      ],
+      "end_latlng": [
+        55.9444312,
+        -3.0266647
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789038600,
+    "resource_state": 2,
+    "name": "Racecourse to Aberlady ",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1666,
+    "moving_time": 1532,
+    "start_date": "2024-05-05T15:25:10Z",
+    "start_date_local": "2024-05-05T16:25:10Z",
+    "distance": 14024.4,
+    "start_index": 1027,
+    "end_index": 2558,
+    "device_watts": false,
+    "segment": {
+      "id": 7747350,
+      "resource_state": 2,
+      "name": "Racecourse to Aberlady ",
+      "activity_type": "Ride",
+      "distance": 14024.4,
+      "average_grade": 0.1,
+      "maximum_grade": 5.9,
+      "elevation_high": 14.8,
+      "elevation_low": 2,
+      "start_latlng": [
+        55.945545,
+        -3.040948
+      ],
+      "end_latlng": [
+        56.007097,
+        -2.867544
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh EH21, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791851500,
+    "resource_state": 2,
+    "name": "Proper Cycling Magazine Big Red's TT",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 887,
+    "moving_time": 753,
+    "start_date": "2024-05-05T15:25:12Z",
+    "start_date_local": "2024-05-05T16:25:12Z",
+    "distance": 7032.4,
+    "start_index": 1029,
+    "end_index": 1781,
+    "device_watts": false,
+    "segment": {
+      "id": 32434490,
+      "resource_state": 2,
+      "name": "Proper Cycling Magazine Big Red's TT",
+      "activity_type": "Ride",
+      "distance": 7032.4,
+      "average_grade": 0,
+      "maximum_grade": 2.8,
+      "elevation_high": 17.8,
+      "elevation_low": 11,
+      "start_latlng": [
+        55.945587,
+        -3.040697
+      ],
+      "end_latlng": [
+        55.972187,
+        -2.944817
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789958000,
+    "resource_state": 2,
+    "name": "Racecourse To Prestonpans",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 225,
+    "moving_time": 225,
+    "start_date": "2024-05-05T15:29:30Z",
+    "start_date_local": "2024-05-05T16:29:30Z",
+    "distance": 2320.59,
+    "start_index": 1154,
+    "end_index": 1379,
+    "device_watts": false,
+    "segment": {
+      "id": 764970,
+      "resource_state": 2,
+      "name": "Racecourse To Prestonpans",
+      "activity_type": "Ride",
+      "distance": 2320.59,
+      "average_grade": 0.4,
+      "maximum_grade": 4.4,
+      "elevation_high": 65,
+      "elevation_low": 53,
+      "start_latlng": [
+        55.944591547784455,
+        -3.0260476097832485
+      ],
+      "end_latlng": [
+        55.95600727144819,
+        -2.9957331354418635
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791057000,
+    "resource_state": 2,
+    "name": "From LA to West Pans",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 61,
+    "moving_time": 61,
+    "start_date": "2024-05-05T15:29:31Z",
+    "start_date_local": "2024-05-05T16:29:31Z",
+    "distance": 649.1,
+    "start_index": 1155,
+    "end_index": 1216,
+    "device_watts": false,
+    "segment": {
+      "id": 26565039,
+      "resource_state": 2,
+      "name": "From LA to West Pans",
+      "activity_type": "Ride",
+      "distance": 649.1,
+      "average_grade": 0.4,
+      "maximum_grade": 4.7,
+      "elevation_high": 27.6,
+      "elevation_low": 22,
+      "start_latlng": [
+        55.944629,
+        -3.026056
+      ],
+      "end_latlng": [
+        55.948342,
+        -3.018627
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791245300,
+    "resource_state": 2,
+    "name": "Musselburgh to Aberlady",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1429,
+    "moving_time": 1429,
+    "start_date": "2024-05-05T15:29:34Z",
+    "start_date_local": "2024-05-05T16:29:34Z",
+    "distance": 13269.6,
+    "start_index": 1158,
+    "end_index": 2585,
+    "device_watts": false,
+    "segment": {
+      "id": 12554250,
+      "resource_state": 2,
+      "name": "Musselburgh to Aberlady",
+      "activity_type": "Ride",
+      "distance": 13269.6,
+      "average_grade": 0,
+      "maximum_grade": 29,
+      "elevation_high": 19,
+      "elevation_low": 3.1,
+      "start_latlng": [
+        55.944752,
+        -3.025707
+      ],
+      "end_latlng": [
+        56.008233,
+        -2.864604
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243790333000,
+    "resource_state": 2,
+    "name": "MB roundabout to Aberlady",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1369,
+    "moving_time": 1369,
+    "start_date": "2024-05-05T15:29:34Z",
+    "start_date_local": "2024-05-05T16:29:34Z",
+    "distance": 12783.5,
+    "start_index": 1158,
+    "end_index": 2525,
+    "device_watts": false,
+    "segment": {
+      "id": 13001458,
+      "resource_state": 2,
+      "name": "MB roundabout to Aberlady",
+      "activity_type": "Ride",
+      "distance": 12783.5,
+      "average_grade": 0,
+      "maximum_grade": 32.4,
+      "elevation_high": 18.9,
+      "elevation_low": 3,
+      "start_latlng": [
+        55.944791,
+        -3.025628
+      ],
+      "end_latlng": [
+        56.005839,
+        -2.870699
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789811700,
+    "resource_state": 2,
+    "name": "The First Mile East",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 157,
+    "moving_time": 157,
+    "start_date": "2024-05-05T15:30:33Z",
+    "start_date_local": "2024-05-05T16:30:33Z",
+    "distance": 1639.15,
+    "start_index": 1217,
+    "end_index": 1374,
+    "device_watts": false,
+    "segment": {
+      "id": 3831434,
+      "resource_state": 2,
+      "name": "The First Mile East",
+      "activity_type": "Ride",
+      "distance": 1639.15,
+      "average_grade": -0.5,
+      "maximum_grade": 3.6,
+      "elevation_high": 13.6,
+      "elevation_low": 4.6,
+      "start_latlng": [
+        55.948328,
+        -3.01829
+      ],
+      "end_latlng": [
+        55.955788,
+        -2.996232
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh EH21, UK",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243791901700,
+    "resource_state": 2,
+    "name": "Hash Disposal",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 48,
+    "moving_time": 48,
+    "start_date": "2024-05-05T15:30:46Z",
+    "start_date_local": "2024-05-05T16:30:46Z",
+    "distance": 510.6,
+    "start_index": 1230,
+    "end_index": 1278,
+    "device_watts": false,
+    "segment": {
+      "id": 11835438,
+      "resource_state": 2,
+      "name": "Hash Disposal",
+      "activity_type": "Ride",
+      "distance": 510.6,
+      "average_grade": -0.8,
+      "maximum_grade": 2.9,
+      "elevation_high": 11.6,
+      "elevation_low": 6.3,
+      "start_latlng": [
+        55.949071,
+        -3.016399
+      ],
+      "end_latlng": [
+        55.951835,
+        -3.010356
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791907000,
+    "resource_state": 2,
+    "name": "Papapappapapaan",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 406,
+    "moving_time": 406,
+    "start_date": "2024-05-05T15:31:34Z",
+    "start_date_local": "2024-05-05T16:31:34Z",
+    "distance": 3881.1,
+    "start_index": 1278,
+    "end_index": 1682,
+    "device_watts": false,
+    "segment": {
+      "id": 22859183,
+      "resource_state": 2,
+      "name": "Papapappapapaan",
+      "activity_type": "Ride",
+      "distance": 3881.1,
+      "average_grade": 0,
+      "maximum_grade": 4.5,
+      "elevation_high": 3.2,
+      "elevation_low": -3.8,
+      "start_latlng": [
+        55.951651,
+        -3.010191
+      ],
+      "end_latlng": [
+        55.970269,
+        -2.959083
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Wallyford",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789913000,
+    "resource_state": 2,
+    "name": "Lidl Less Conversation",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 167,
+    "moving_time": 167,
+    "start_date": "2024-05-05T15:33:12Z",
+    "start_date_local": "2024-05-05T16:33:12Z",
+    "distance": 1461.2,
+    "start_index": 1376,
+    "end_index": 1541,
+    "device_watts": false,
+    "segment": {
+      "id": 25792782,
+      "resource_state": 2,
+      "name": "Lidl Less Conversation",
+      "activity_type": "Ride",
+      "distance": 1461.2,
+      "average_grade": -0.1,
+      "maximum_grade": 2.9,
+      "elevation_high": -3,
+      "elevation_low": -6.6,
+      "start_latlng": [
+        55.955919,
+        -2.995975
+      ],
+      "end_latlng": [
+        55.962978,
+        -2.976434
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792467000,
+    "resource_state": 2,
+    "name": "Cockenzie Straight",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 60,
+    "moving_time": 60,
+    "start_date": "2024-05-05T15:36:14Z",
+    "start_date_local": "2024-05-05T16:36:14Z",
+    "distance": 644.9,
+    "start_index": 1556,
+    "end_index": 1616,
+    "device_watts": false,
+    "segment": {
+      "id": 34916147,
+      "resource_state": 2,
+      "name": "Cockenzie Straight",
+      "activity_type": "Ride",
+      "distance": 644.9,
+      "average_grade": -0.2,
+      "maximum_grade": 2.8,
+      "elevation_high": -16.2,
+      "elevation_low": -18.8,
+      "start_latlng": [
+        55.964022,
+        -2.974545
+      ],
+      "end_latlng": [
+        55.968346,
+        -2.967676
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789305000,
+    "resource_state": 2,
+    "name": "Power Station Sprint",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 68,
+    "moving_time": 68,
+    "start_date": "2024-05-05T15:36:21Z",
+    "start_date_local": "2024-05-05T16:36:21Z",
+    "distance": 707.672,
+    "start_index": 1563,
+    "end_index": 1631,
+    "device_watts": false,
+    "segment": {
+      "id": 764967,
+      "resource_state": 2,
+      "name": "Power Station Sprint",
+      "activity_type": "Ride",
+      "distance": 707.672,
+      "average_grade": -0.3,
+      "maximum_grade": 1.5,
+      "elevation_high": 59,
+      "elevation_low": 56,
+      "start_latlng": [
+        55.96452124582375,
+        -2.9737662848332937
+      ],
+      "end_latlng": [
+        55.96897948099051,
+        -2.9658368724643376
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789535000,
+    "resource_state": 2,
+    "name": "Cockenzie > Gosford",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 825,
+    "moving_time": 825,
+    "start_date": "2024-05-05T15:36:25Z",
+    "start_date_local": "2024-05-05T16:36:25Z",
+    "distance": 7642.8,
+    "start_index": 1567,
+    "end_index": 2392,
+    "device_watts": false,
+    "segment": {
+      "id": 14608211,
+      "resource_state": 2,
+      "name": "Cockenzie > Gosford",
+      "activity_type": "Ride",
+      "distance": 7642.8,
+      "average_grade": 0,
+      "maximum_grade": 4.6,
+      "elevation_high": -11.2,
+      "elevation_low": -15.8,
+      "start_latlng": [
+        55.964865,
+        -2.973254
+      ],
+      "end_latlng": [
+        55.999857,
+        -2.884295
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792411600,
+    "resource_state": 2,
+    "name": "Gosford Road to Gosford House",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 816,
+    "moving_time": 816,
+    "start_date": "2024-05-05T15:38:58Z",
+    "start_date_local": "2024-05-05T16:38:58Z",
+    "distance": 7438.1,
+    "start_index": 1720,
+    "end_index": 2536,
+    "device_watts": false,
+    "segment": {
+      "id": 21623303,
+      "resource_state": 2,
+      "name": "Gosford Road to Gosford House",
+      "activity_type": "Ride",
+      "distance": 7438.1,
+      "average_grade": 0.1,
+      "maximum_grade": 5,
+      "elevation_high": 15,
+      "elevation_low": 0.9,
+      "start_latlng": [
+        55.971347,
+        -2.954511
+      ],
+      "end_latlng": [
+        56.006283,
+        -2.869698
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Port Seton",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789543400,
+    "resource_state": 2,
+    "name": "Sprint festival",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 61,
+    "moving_time": 61,
+    "start_date": "2024-05-05T15:39:39Z",
+    "start_date_local": "2024-05-05T16:39:39Z",
+    "distance": 665.9,
+    "start_index": 1761,
+    "end_index": 1822,
+    "device_watts": false,
+    "segment": {
+      "id": 5186551,
+      "resource_state": 2,
+      "name": "Sprint festival",
+      "activity_type": "Ride",
+      "distance": 665.9,
+      "average_grade": -0.3,
+      "maximum_grade": 1.1,
+      "elevation_high": 8,
+      "elevation_low": 6,
+      "start_latlng": [
+        55.972273,
+        -2.948314
+      ],
+      "end_latlng": [
+        55.972037,
+        -2.937669
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Port Seton",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243790266400,
+    "resource_state": 2,
+    "name": "Dragon Sands",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 100,
+    "moving_time": 100,
+    "start_date": "2024-05-05T15:39:40Z",
+    "start_date_local": "2024-05-05T16:39:40Z",
+    "distance": 1053.18,
+    "start_index": 1762,
+    "end_index": 1862,
+    "device_watts": false,
+    "segment": {
+      "id": 2400822,
+      "resource_state": 2,
+      "name": "Dragon Sands",
+      "activity_type": "Ride",
+      "distance": 1053.18,
+      "average_grade": -0.2,
+      "maximum_grade": 1.1,
+      "elevation_high": 9,
+      "elevation_low": 5.4,
+      "start_latlng": [
+        55.97226,
+        -2.9482
+      ],
+      "end_latlng": [
+        55.97241,
+        -2.93135
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Port Seton, East Lothian, UK",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791540000,
+    "resource_state": 2,
+    "name": "Sprint out of Port Seton",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 29,
+    "moving_time": 29,
+    "start_date": "2024-05-05T15:39:42Z",
+    "start_date_local": "2024-05-05T16:39:42Z",
+    "distance": 323,
+    "start_index": 1764,
+    "end_index": 1793,
+    "device_watts": false,
+    "segment": {
+      "id": 14608657,
+      "resource_state": 2,
+      "name": "Sprint out of Port Seton",
+      "activity_type": "Ride",
+      "distance": 323,
+      "average_grade": 0,
+      "maximum_grade": 0,
+      "elevation_high": -13.4,
+      "elevation_low": -13.4,
+      "start_latlng": [
+        55.972282,
+        -2.947751
+      ],
+      "end_latlng": [
+        55.972138,
+        -2.942544
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Port Seton",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243792727000,
+    "resource_state": 2,
+    "name": "Katie Archibald",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 426,
+    "moving_time": 426,
+    "start_date": "2024-05-05T15:39:42Z",
+    "start_date_local": "2024-05-05T16:39:42Z",
+    "distance": 4044.8,
+    "start_index": 1764,
+    "end_index": 2190,
+    "device_watts": false,
+    "segment": {
+      "id": 20397427,
+      "resource_state": 2,
+      "name": "Katie Archibald",
+      "activity_type": "Ride",
+      "distance": 4044.8,
+      "average_grade": 0.1,
+      "maximum_grade": 4.4,
+      "elevation_high": 7.9,
+      "elevation_low": 0.9,
+      "start_latlng": [
+        55.972316,
+        -2.947748
+      ],
+      "end_latlng": [
+        55.98643,
+        -2.896422
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Port Seton",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789505500,
+    "resource_state": 2,
+    "name": "Chris Hoy challenge",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 35,
+    "moving_time": 35,
+    "start_date": "2024-05-05T15:39:46Z",
+    "start_date_local": "2024-05-05T16:39:46Z",
+    "distance": 397.7,
+    "start_index": 1768,
+    "end_index": 1803,
+    "device_watts": false,
+    "segment": {
+      "id": 6643815,
+      "resource_state": 2,
+      "name": "Chris Hoy challenge",
+      "activity_type": "Ride",
+      "distance": 397.7,
+      "average_grade": -0.2,
+      "maximum_grade": 0.6,
+      "elevation_high": 8,
+      "elevation_low": 6,
+      "start_latlng": [
+        55.972273,
+        -2.947166
+      ],
+      "end_latlng": [
+        55.97207,
+        -2.940808
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Port Seton",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789303000,
+    "resource_state": 2,
+    "name": "Port Seton to Aberlady",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 741,
+    "moving_time": 741,
+    "start_date": "2024-05-05T15:40:18Z",
+    "start_date_local": "2024-05-05T16:40:18Z",
+    "distance": 6608.6,
+    "start_index": 1800,
+    "end_index": 2541,
+    "device_watts": false,
+    "segment": {
+      "id": 21246434,
+      "resource_state": 2,
+      "name": "Port Seton to Aberlady",
+      "activity_type": "Ride",
+      "distance": 6608.6,
+      "average_grade": 0.2,
+      "maximum_grade": 5.1,
+      "elevation_high": 15,
+      "elevation_low": 0.9,
+      "start_latlng": [
+        55.972079,
+        -2.941331
+      ],
+      "end_latlng": [
+        56.006432,
+        -2.869186
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Port Seton",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243788765000,
+    "resource_state": 2,
+    "name": "Caravan Kilo",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 103,
+    "moving_time": 103,
+    "start_date": "2024-05-05T15:40:33Z",
+    "start_date_local": "2024-05-05T16:40:33Z",
+    "distance": 995.7,
+    "start_index": 1815,
+    "end_index": 1918,
+    "device_watts": false,
+    "segment": {
+      "id": 30931761,
+      "resource_state": 2,
+      "name": "Caravan Kilo",
+      "activity_type": "Ride",
+      "distance": 995.7,
+      "average_grade": -0.1,
+      "maximum_grade": 2.1,
+      "elevation_high": -23,
+      "elevation_low": -25,
+      "start_latlng": [
+        55.97202,
+        -2.938872
+      ],
+      "end_latlng": [
+        55.97284,
+        -2.922996
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792459000,
+    "resource_state": 2,
+    "name": "McGregor's Caravan",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 157,
+    "moving_time": 157,
+    "start_date": "2024-05-05T15:40:35Z",
+    "start_date_local": "2024-05-05T16:40:35Z",
+    "distance": 1490.8,
+    "start_index": 1817,
+    "end_index": 1974,
+    "device_watts": false,
+    "segment": {
+      "id": 19228745,
+      "resource_state": 2,
+      "name": "McGregor's Caravan",
+      "activity_type": "Ride",
+      "distance": 1490.8,
+      "average_grade": 0.4,
+      "maximum_grade": 3.2,
+      "elevation_high": 10.4,
+      "elevation_low": 0.7,
+      "start_latlng": [
+        55.971908,
+        -2.93842
+      ],
+      "end_latlng": [
+        55.974318,
+        -2.915208
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789181000,
+    "resource_state": 2,
+    "name": "Links Rd",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 297,
+    "moving_time": 297,
+    "start_date": "2024-05-05T15:41:15Z",
+    "start_date_local": "2024-05-05T16:41:15Z",
+    "distance": 2695.89,
+    "start_index": 1857,
+    "end_index": 2154,
+    "device_watts": false,
+    "segment": {
+      "id": 2665923,
+      "resource_state": 2,
+      "name": "Links Rd",
+      "activity_type": "Ride",
+      "distance": 2695.89,
+      "average_grade": -0.1,
+      "maximum_grade": 12.9,
+      "elevation_high": 18.6,
+      "elevation_low": 4.6,
+      "start_latlng": [
+        55.97242497844246,
+        -2.932123756038893
+      ],
+      "end_latlng": [
+        55.983586078736856,
+        -2.8967985177267983
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791824000,
+    "resource_state": 2,
+    "name": "Col de Longniddry Bents",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 135,
+    "moving_time": 135,
+    "start_date": "2024-05-05T15:43:22Z",
+    "start_date_local": "2024-05-05T16:43:22Z",
+    "distance": 1193.7,
+    "start_index": 1984,
+    "end_index": 2119,
+    "device_watts": false,
+    "segment": {
+      "id": 7017102,
+      "resource_state": 2,
+      "name": "Col de Longniddry Bents",
+      "activity_type": "Ride",
+      "distance": 1193.7,
+      "average_grade": -0.2,
+      "maximum_grade": 35.3,
+      "elevation_high": 18.9,
+      "elevation_low": 5,
+      "start_latlng": [
+        55.974495,
+        -2.91374
+      ],
+      "end_latlng": [
+        55.981338,
+        -2.89999
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788841000,
+    "resource_state": 2,
+    "name": "Long Lady 3.2",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 587,
+    "moving_time": 587,
+    "start_date": "2024-05-05T15:43:26Z",
+    "start_date_local": "2024-05-05T16:43:26Z",
+    "distance": 5142.1,
+    "start_index": 1988,
+    "end_index": 2575,
+    "device_watts": false,
+    "segment": {
+      "id": 12299595,
+      "resource_state": 2,
+      "name": "Long Lady 3.2",
+      "activity_type": "Ride",
+      "distance": 5142.1,
+      "average_grade": 0.1,
+      "maximum_grade": 36.6,
+      "elevation_high": 18.9,
+      "elevation_low": 3.1,
+      "start_latlng": [
+        55.974756,
+        -2.913324
+      ],
+      "end_latlng": [
+        56.007865,
+        -2.86564
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788974000,
+    "resource_state": 2,
+    "name": "Longniddry to Gosford Sands",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 353,
+    "moving_time": 353,
+    "start_date": "2024-05-05T15:44:43Z",
+    "start_date_local": "2024-05-05T16:44:43Z",
+    "distance": 3165.7,
+    "start_index": 2065,
+    "end_index": 2418,
+    "device_watts": false,
+    "segment": {
+      "id": 13086641,
+      "resource_state": 2,
+      "name": "Longniddry to Gosford Sands",
+      "activity_type": "Ride",
+      "distance": 3165.7,
+      "average_grade": -0.1,
+      "maximum_grade": 2.5,
+      "elevation_high": 32,
+      "elevation_low": 28,
+      "start_latlng": [
+        55.979254,
+        -2.906415
+      ],
+      "end_latlng": [
+        56.001338,
+        -2.882189
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792662500,
+    "resource_state": 2,
+    "name": "Dash to the Bothy",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 340,
+    "moving_time": 340,
+    "start_date": "2024-05-05T15:46:23Z",
+    "start_date_local": "2024-05-05T16:46:23Z",
+    "distance": 2993.9,
+    "start_index": 2165,
+    "end_index": 2505,
+    "device_watts": false,
+    "segment": {
+      "id": 13976190,
+      "resource_state": 2,
+      "name": "Dash to the Bothy",
+      "activity_type": "Ride",
+      "distance": 2993.9,
+      "average_grade": 0.1,
+      "maximum_grade": 6.1,
+      "elevation_high": 9.2,
+      "elevation_low": 4,
+      "start_latlng": [
+        55.98443,
+        -2.896553
+      ],
+      "end_latlng": [
+        56.005036,
+        -2.872596
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789233000,
+    "resource_state": 2,
+    "name": "Gosford Straight, Corner to 30mph Limit",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 129,
+    "moving_time": 129,
+    "start_date": "2024-05-05T15:50:23Z",
+    "start_date_local": "2024-05-05T16:50:23Z",
+    "distance": 1040.63,
+    "start_index": 2405,
+    "end_index": 2534,
+    "device_watts": false,
+    "segment": {
+      "id": 1626995,
+      "resource_state": 2,
+      "name": "Gosford Straight, Corner to 30mph Limit",
+      "activity_type": "Ride",
+      "distance": 1040.63,
+      "average_grade": 0.6,
+      "maximum_grade": 4.8,
+      "elevation_high": 14.7,
+      "elevation_low": 6.8,
+      "start_latlng": [
+        56.00080132484436,
+        -2.8834980726242065
+      ],
+      "end_latlng": [
+        56.006171107292175,
+        -2.869829535484314
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792843000,
+    "resource_state": 2,
+    "name": "Aberlady Straight",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 282,
+    "moving_time": 282,
+    "start_date": "2024-05-05T16:30:22Z",
+    "start_date_local": "2024-05-05T17:30:22Z",
+    "distance": 2043.12,
+    "start_index": 2772,
+    "end_index": 3054,
+    "device_watts": false,
+    "segment": {
+      "id": 3348677,
+      "resource_state": 2,
+      "name": "Aberlady Straight",
+      "activity_type": "Ride",
+      "distance": 2043.12,
+      "average_grade": 0,
+      "maximum_grade": 2.7,
+      "elevation_high": 14.9,
+      "elevation_low": 5.8,
+      "start_latlng": [
+        56.01052,
+        -2.860099
+      ],
+      "end_latlng": [
+        56.000213,
+        -2.884192
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Aberlady",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243785803000,
+    "resource_state": 2,
+    "name": "Aberlady to Musselburgh",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1820,
+    "moving_time": 1820,
+    "start_date": "2024-05-05T16:32:01Z",
+    "start_date_local": "2024-05-05T17:32:01Z",
+    "distance": 13202.6,
+    "start_index": 2871,
+    "end_index": 4682,
+    "device_watts": false,
+    "segment": {
+      "id": 765831,
+      "resource_state": 2,
+      "name": "Aberlady to Musselburgh",
+      "activity_type": "Ride",
+      "distance": 13202.6,
+      "average_grade": 0,
+      "maximum_grade": 1.9,
+      "elevation_high": -71.6,
+      "elevation_low": -82,
+      "start_latlng": [
+        56.008389964699745,
+        -2.8638679906725883
+      ],
+      "end_latlng": [
+        55.94519795849919,
+        -3.024781923741102
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789904000,
+    "resource_state": 2,
+    "name": "Aberlady to Prestonpans",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 887,
+    "moving_time": 887,
+    "start_date": "2024-05-05T16:32:15Z",
+    "start_date_local": "2024-05-05T17:32:15Z",
+    "distance": 6882.41,
+    "start_index": 2885,
+    "end_index": 3772,
+    "device_watts": false,
+    "segment": {
+      "id": 2340603,
+      "resource_state": 2,
+      "name": "Aberlady to Prestonpans",
+      "activity_type": "Ride",
+      "distance": 6882.41,
+      "average_grade": -0.1,
+      "maximum_grade": 5.9,
+      "elevation_high": 22.8,
+      "elevation_low": 12.2,
+      "start_latlng": [
+        56.007988722994924,
+        -2.8651028964668512
+      ],
+      "end_latlng": [
+        55.97194477915764,
+        -2.940174490213394
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": true
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243789929500,
+    "resource_state": 2,
+    "name": "Lady Sprint",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 160,
+    "moving_time": 160,
+    "start_date": "2024-05-05T16:32:18Z",
+    "start_date_local": "2024-05-05T17:32:18Z",
+    "distance": 1394.1,
+    "start_index": 2888,
+    "end_index": 3048,
+    "device_watts": false,
+    "segment": {
+      "id": 19309700,
+      "resource_state": 2,
+      "name": "Lady Sprint",
+      "activity_type": "Ride",
+      "distance": 1394.1,
+      "average_grade": -0.4,
+      "maximum_grade": 2.2,
+      "elevation_high": 123,
+      "elevation_low": 113.8,
+      "start_latlng": [
+        56.007918,
+        -2.865361
+      ],
+      "end_latlng": [
+        56.000708,
+        -2.883623
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243785675000,
+    "resource_state": 2,
+    "name": "Aberlady- Musselburgh",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1773,
+    "moving_time": 1773,
+    "start_date": "2024-05-05T16:32:25Z",
+    "start_date_local": "2024-05-05T17:32:25Z",
+    "distance": 12983.8,
+    "start_index": 2895,
+    "end_index": 4668,
+    "device_watts": false,
+    "segment": {
+      "id": 3814875,
+      "resource_state": 2,
+      "name": "Aberlady- Musselburgh",
+      "activity_type": "Ride",
+      "distance": 12983.8,
+      "average_grade": 0,
+      "maximum_grade": 4.7,
+      "elevation_high": 15.4,
+      "elevation_low": 3.2,
+      "start_latlng": [
+        56.00767280906439,
+        -2.8659656457602978
+      ],
+      "end_latlng": [
+        55.94567413441837,
+        -3.023865194991231
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Aberlady",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243789312000,
+    "resource_state": 2,
+    "name": "gosforth estate",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 423,
+    "moving_time": 423,
+    "start_date": "2024-05-05T16:32:31Z",
+    "start_date_local": "2024-05-05T17:32:31Z",
+    "distance": 3418.4,
+    "start_index": 2901,
+    "end_index": 3324,
+    "device_watts": false,
+    "segment": {
+      "id": 5258875,
+      "resource_state": 2,
+      "name": "gosforth estate",
+      "activity_type": "Ride",
+      "distance": 3418.4,
+      "average_grade": -0.1,
+      "maximum_grade": 6,
+      "elevation_high": 0,
+      "elevation_low": -8.4,
+      "start_latlng": [
+        56.007492,
+        -2.866429
+      ],
+      "end_latlng": [
+        55.984803,
+        -2.896328
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Aberlady",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791169500,
+    "resource_state": 2,
+    "name": "John Muir War Gravel to Tank Traps",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 147,
+    "moving_time": 147,
+    "start_date": "2024-05-05T16:32:39Z",
+    "start_date_local": "2024-05-05T17:32:39Z",
+    "distance": 1377.1,
+    "start_index": 2909,
+    "end_index": 3056,
+    "device_watts": false,
+    "segment": {
+      "id": 28075374,
+      "resource_state": 2,
+      "name": "John Muir War Gravel to Tank Traps",
+      "activity_type": "Ride",
+      "distance": 1377.1,
+      "average_grade": -0.6,
+      "maximum_grade": 2.2,
+      "elevation_high": 21.6,
+      "elevation_low": 11.6,
+      "start_latlng": [
+        56.007324,
+        -2.867063
+      ],
+      "end_latlng": [
+        56.000041,
+        -2.88441
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Aberlady",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243785018400,
+    "resource_state": 2,
+    "name": "Open Road Aberlady to Town Sign",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1632,
+    "moving_time": 1632,
+    "start_date": "2024-05-05T16:33:29Z",
+    "start_date_local": "2024-05-05T17:33:29Z",
+    "distance": 11995.6,
+    "start_index": 2959,
+    "end_index": 4591,
+    "device_watts": false,
+    "segment": {
+      "id": 20467390,
+      "resource_state": 2,
+      "name": "Open Road Aberlady to Town Sign",
+      "activity_type": "Ride",
+      "distance": 11995.6,
+      "average_grade": -0.1,
+      "maximum_grade": 2.6,
+      "elevation_high": 34.4,
+      "elevation_low": 22.4,
+      "start_latlng": [
+        56.005201,
+        -2.87209
+      ],
+      "end_latlng": [
+        55.948603,
+        -3.017099
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Aberlady",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": true
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243790665700,
+    "resource_state": 2,
+    "name": "Versatile Overdrive",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 286,
+    "moving_time": 286,
+    "start_date": "2024-05-05T16:35:00Z",
+    "start_date_local": "2024-05-05T17:35:00Z",
+    "distance": 2201.2,
+    "start_index": 3050,
+    "end_index": 3336,
+    "device_watts": false,
+    "segment": {
+      "id": 20366674,
+      "resource_state": 2,
+      "name": "Versatile Overdrive",
+      "activity_type": "Ride",
+      "distance": 2201.2,
+      "average_grade": 0,
+      "maximum_grade": 3.2,
+      "elevation_high": 10.2,
+      "elevation_low": 3.5,
+      "start_latlng": [
+        56.000565,
+        -2.883817
+      ],
+      "end_latlng": [
+        55.983915,
+        -2.896607
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243791684600,
+    "resource_state": 2,
+    "name": "Fame Forum Custom",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 206,
+    "moving_time": 206,
+    "start_date": "2024-05-05T16:39:46Z",
+    "start_date_local": "2024-05-05T17:39:46Z",
+    "distance": 1606.5,
+    "start_index": 3336,
+    "end_index": 3542,
+    "device_watts": false,
+    "segment": {
+      "id": 20366632,
+      "resource_state": 2,
+      "name": "Fame Forum Custom",
+      "activity_type": "Ride",
+      "distance": 1606.5,
+      "average_grade": 0.1,
+      "maximum_grade": 6.7,
+      "elevation_high": 8.6,
+      "elevation_low": 2.9,
+      "start_latlng": [
+        55.983915,
+        -2.896607
+      ],
+      "end_latlng": [
+        55.974229,
+        -2.91353
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243787142000,
+    "resource_state": 2,
+    "name": "LyarsEnd",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1280,
+    "moving_time": 1280,
+    "start_date": "2024-05-05T16:39:46Z",
+    "start_date_local": "2024-05-05T17:39:46Z",
+    "distance": 9055.4,
+    "start_index": 3336,
+    "end_index": 4616,
+    "device_watts": false,
+    "segment": {
+      "id": 28099292,
+      "resource_state": 2,
+      "name": "LyarsEnd",
+      "activity_type": "Ride",
+      "distance": 9055.4,
+      "average_grade": 0,
+      "maximum_grade": 5.8,
+      "elevation_high": -8.4,
+      "elevation_low": -14.4,
+      "start_latlng": [
+        55.983906,
+        -2.896614
+      ],
+      "end_latlng": [
+        55.947895,
+        -3.019316
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243791746000,
+    "resource_state": 2,
+    "name": "Longniddry Golf Course Sprint",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 275,
+    "moving_time": 275,
+    "start_date": "2024-05-05T16:39:55Z",
+    "start_date_local": "2024-05-05T17:39:55Z",
+    "distance": 2081.7,
+    "start_index": 3345,
+    "end_index": 3620,
+    "device_watts": false,
+    "segment": {
+      "id": 4318553,
+      "resource_state": 2,
+      "name": "Longniddry Golf Course Sprint",
+      "activity_type": "Ride",
+      "distance": 2081.7,
+      "average_grade": 0.1,
+      "maximum_grade": 1.7,
+      "elevation_high": 7.3,
+      "elevation_low": 4,
+      "start_latlng": [
+        55.983274,
+        -2.896917
+      ],
+      "end_latlng": [
+        55.972813,
+        -2.922712
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788774400,
+    "resource_state": 2,
+    "name": "Port Seton Coast Road",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 226,
+    "moving_time": 226,
+    "start_date": "2024-05-05T16:44:33Z",
+    "start_date_local": "2024-05-05T17:44:33Z",
+    "distance": 1561.14,
+    "start_index": 3623,
+    "end_index": 3849,
+    "device_watts": false,
+    "segment": {
+      "id": 765830,
+      "resource_state": 2,
+      "name": "Port Seton Coast Road",
+      "activity_type": "Ride",
+      "distance": 1561.14,
+      "average_grade": 0,
+      "maximum_grade": 0.5,
+      "elevation_high": -79.2,
+      "elevation_low": -81,
+      "start_latlng": [
+        55.972808953374624,
+        -2.923096949234605
+      ],
+      "end_latlng": [
+        55.97225692123175,
+        -2.948075942695141
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "East Lothian, UK",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787623400,
+    "resource_state": 2,
+    "name": "SS30 to PP30",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 497,
+    "moving_time": 497,
+    "start_date": "2024-05-05T16:44:40Z",
+    "start_date_local": "2024-05-05T17:44:40Z",
+    "distance": 3384.3,
+    "start_index": 3630,
+    "end_index": 4127,
+    "device_watts": false,
+    "segment": {
+      "id": 17809588,
+      "resource_state": 2,
+      "name": "SS30 to PP30",
+      "activity_type": "Ride",
+      "distance": 3384.3,
+      "average_grade": 0,
+      "maximum_grade": 4.3,
+      "elevation_high": -42.2,
+      "elevation_low": -50.2,
+      "start_latlng": [
+        55.972785,
+        -2.923931
+      ],
+      "end_latlng": [
+        55.964468,
+        -2.97377
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Seton Dean",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243792006000,
+    "resource_state": 2,
+    "name": "Beat the bus sprint!!",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 46,
+    "moving_time": 46,
+    "start_date": "2024-05-05T16:45:14Z",
+    "start_date_local": "2024-05-05T17:45:14Z",
+    "distance": 334.3,
+    "start_index": 3664,
+    "end_index": 3710,
+    "device_watts": false,
+    "segment": {
+      "id": 13509479,
+      "resource_state": 2,
+      "name": "Beat the bus sprint!!",
+      "activity_type": "Ride",
+      "distance": 334.3,
+      "average_grade": 0.8,
+      "maximum_grade": 4.9,
+      "elevation_high": 8.8,
+      "elevation_low": 5.2,
+      "start_latlng": [
+        55.972572,
+        -2.927722
+      ],
+      "end_latlng": [
+        55.972313,
+        -2.933053
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Longniddry",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788025000,
+    "resource_state": 2,
+    "name": "Cockwenzie",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 685,
+    "moving_time": 685,
+    "start_date": "2024-05-05T16:50:30Z",
+    "start_date_local": "2024-05-05T17:50:30Z",
+    "distance": 4871.3,
+    "start_index": 3980,
+    "end_index": 4665,
+    "device_watts": false,
+    "segment": {
+      "id": 31226161,
+      "resource_state": 2,
+      "name": "Cockwenzie",
+      "activity_type": "Ride",
+      "distance": 4871.3,
+      "average_grade": -0.1,
+      "maximum_grade": 2.2,
+      "elevation_high": 10.2,
+      "elevation_low": 6.3,
+      "start_latlng": [
+        55.970018,
+        -2.960885
+      ],
+      "end_latlng": [
+        55.94583,
+        -3.023568
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cockenzie",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787181000,
+    "resource_state": 2,
+    "name": "PP Sprint ",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 64,
+    "moving_time": 64,
+    "start_date": "2024-05-05T16:51:24Z",
+    "start_date_local": "2024-05-05T17:51:24Z",
+    "distance": 455.569,
+    "start_index": 4034,
+    "end_index": 4098,
+    "device_watts": false,
+    "segment": {
+      "id": 1242113,
+      "resource_state": 2,
+      "name": "PP Sprint ",
+      "activity_type": "Ride",
+      "distance": 455.569,
+      "average_grade": 0.4,
+      "maximum_grade": 2.9,
+      "elevation_high": 11.4,
+      "elevation_low": 6.4,
+      "start_latlng": [
+        55.96878474094881,
+        -2.9665901427873775
+      ],
+      "end_latlng": [
+        55.96582924831835,
+        -2.9715835816282627
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243785505000,
+    "resource_state": 2,
+    "name": "Menchov's Sprint",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 95,
+    "moving_time": 95,
+    "start_date": "2024-05-05T16:51:34Z",
+    "start_date_local": "2024-05-05T17:51:34Z",
+    "distance": 668.1,
+    "start_index": 4044,
+    "end_index": 4139,
+    "device_watts": false,
+    "segment": {
+      "id": 23918717,
+      "resource_state": 2,
+      "name": "Menchov's Sprint",
+      "activity_type": "Ride",
+      "distance": 668.1,
+      "average_grade": 0,
+      "maximum_grade": 0,
+      "elevation_high": -13.4,
+      "elevation_low": -13.4,
+      "start_latlng": [
+        55.96845,
+        -2.967461
+      ],
+      "end_latlng": [
+        55.963981,
+        -2.9746
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cockenzie",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243786116000,
+    "resource_state": 2,
+    "name": "Powerstation straight",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 108,
+    "moving_time": 108,
+    "start_date": "2024-05-05T16:51:36Z",
+    "start_date_local": "2024-05-05T17:51:36Z",
+    "distance": 760.51,
+    "start_index": 4046,
+    "end_index": 4154,
+    "device_watts": false,
+    "segment": {
+      "id": 3251247,
+      "resource_state": 2,
+      "name": "Powerstation straight",
+      "activity_type": "Ride",
+      "distance": 760.51,
+      "average_grade": 0.1,
+      "maximum_grade": 4.1,
+      "elevation_high": -2.2,
+      "elevation_low": -4.2,
+      "start_latlng": [
+        55.96836159937084,
+        -2.967635951936245
+      ],
+      "end_latlng": [
+        55.96331032924354,
+        -2.9756846744567156
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cockenzie And Port Seton",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243785494500,
+    "resource_state": 2,
+    "name": "Proper Cycling Magazine Power Station",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 99,
+    "moving_time": 99,
+    "start_date": "2024-05-05T16:51:43Z",
+    "start_date_local": "2024-05-05T17:51:43Z",
+    "distance": 710.3,
+    "start_index": 4053,
+    "end_index": 4152,
+    "device_watts": false,
+    "segment": {
+      "id": 25884902,
+      "resource_state": 2,
+      "name": "Proper Cycling Magazine Power Station",
+      "activity_type": "Ride",
+      "distance": 710.3,
+      "average_grade": 0.1,
+      "maximum_grade": 2,
+      "elevation_high": 23.2,
+      "elevation_low": 21.8,
+      "start_latlng": [
+        55.968014,
+        -2.968132
+      ],
+      "end_latlng": [
+        55.96337,
+        -2.975563
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cockenzie",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243786940400,
+    "resource_state": 2,
+    "name": "Power Station Sprint (Straight)",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 85,
+    "moving_time": 85,
+    "start_date": "2024-05-05T16:51:46Z",
+    "start_date_local": "2024-05-05T17:51:46Z",
+    "distance": 600.134,
+    "start_index": 4056,
+    "end_index": 4141,
+    "device_watts": false,
+    "segment": {
+      "id": 1524855,
+      "resource_state": 2,
+      "name": "Power Station Sprint (Straight)",
+      "activity_type": "Ride",
+      "distance": 600.134,
+      "average_grade": -0.8,
+      "maximum_grade": 3.7,
+      "elevation_high": 11.6,
+      "elevation_low": 6.6,
+      "start_latlng": [
+        55.967918,
+        -2.968415
+      ],
+      "end_latlng": [
+        55.963863,
+        -2.974755
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243786749000,
+    "resource_state": 2,
+    "name": "PP straight shortende",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 78,
+    "moving_time": 78,
+    "start_date": "2024-05-05T16:51:48Z",
+    "start_date_local": "2024-05-05T17:51:48Z",
+    "distance": 553.442,
+    "start_index": 4058,
+    "end_index": 4136,
+    "device_watts": false,
+    "segment": {
+      "id": 3625835,
+      "resource_state": 2,
+      "name": "PP straight shortende",
+      "activity_type": "Ride",
+      "distance": 553.442,
+      "average_grade": 0.4,
+      "maximum_grade": 3.5,
+      "elevation_high": -12.4,
+      "elevation_low": -14.6,
+      "start_latlng": [
+        55.96778953447938,
+        -2.9685488250106573
+      ],
+      "end_latlng": [
+        55.964069813489914,
+        -2.97444524243474
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Cockenzie",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243786403000,
+    "resource_state": 2,
+    "name": "Prestonpans High St | West",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 167,
+    "moving_time": 167,
+    "start_date": "2024-05-05T16:54:18Z",
+    "start_date_local": "2024-05-05T17:54:18Z",
+    "distance": 1146.4,
+    "start_index": 4208,
+    "end_index": 4375,
+    "device_watts": false,
+    "segment": {
+      "id": 18250465,
+      "resource_state": 2,
+      "name": "Prestonpans High St | West",
+      "activity_type": "Ride",
+      "distance": 1146.4,
+      "average_grade": -0.3,
+      "maximum_grade": 4.7,
+      "elevation_high": 13.8,
+      "elevation_low": 6.3,
+      "start_latlng": [
+        55.96133,
+        -2.980051
+      ],
+      "end_latlng": [
+        55.955982,
+        -2.995551
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243788541000,
+    "resource_state": 2,
+    "name": "Prestonpans to Racecourse",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 327,
+    "moving_time": 327,
+    "start_date": "2024-05-05T16:56:58Z",
+    "start_date_local": "2024-05-05T17:56:58Z",
+    "distance": 2288.7,
+    "start_index": 4368,
+    "end_index": 4686,
+    "device_watts": false,
+    "segment": {
+      "id": 765805,
+      "resource_state": 2,
+      "name": "Prestonpans to Racecourse",
+      "activity_type": "Ride",
+      "distance": 2288.7,
+      "average_grade": 0.1,
+      "maximum_grade": 4.6,
+      "elevation_high": 66,
+      "elevation_low": 52,
+      "start_latlng": [
+        55.95619434901252,
+        -2.9948001042059618
+      ],
+      "end_latlng": [
+        55.94511419157329,
+        -3.0249387520182416
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "East Lothian",
+      "country": "UK",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243786904600,
+    "resource_state": 2,
+    "name": "Prestonpans to Prestongrange Perilous Pothole Pass",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 170,
+    "moving_time": 170,
+    "start_date": "2024-05-05T16:57:10Z",
+    "start_date_local": "2024-05-05T17:57:10Z",
+    "distance": 1230.95,
+    "start_index": 4380,
+    "end_index": 4550,
+    "device_watts": false,
+    "segment": {
+      "id": 3857051,
+      "resource_state": 2,
+      "name": "Prestonpans to Prestongrange Perilous Pothole Pass",
+      "activity_type": "Ride",
+      "distance": 1230.95,
+      "average_grade": 0.5,
+      "maximum_grade": 7.1,
+      "elevation_high": 13.1,
+      "elevation_low": 4.7,
+      "start_latlng": [
+        55.955797,
+        -2.996066
+      ],
+      "end_latlng": [
+        55.950135,
+        -3.012356
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243786559500,
+    "resource_state": 2,
+    "name": "The bit where Dan attacks on the Ronde Chaingang",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 125,
+    "moving_time": 125,
+    "start_date": "2024-05-05T16:58:46Z",
+    "start_date_local": "2024-05-05T17:58:46Z",
+    "distance": 942,
+    "start_index": 4476,
+    "end_index": 4601,
+    "device_watts": false,
+    "segment": {
+      "id": 32081436,
+      "resource_state": 2,
+      "name": "The bit where Dan attacks on the Ronde Chaingang",
+      "activity_type": "Ride",
+      "distance": 942,
+      "average_grade": -0.6,
+      "maximum_grade": 1.1,
+      "elevation_high": -10,
+      "elevation_low": -15.8,
+      "start_latlng": [
+        55.953112,
+        -3.005857
+      ],
+      "end_latlng": [
+        55.94834,
+        -3.018069
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243785798700,
+    "resource_state": 2,
+    "name": "Bus Stop Sprint (West)",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 55,
+    "moving_time": 55,
+    "start_date": "2024-05-05T17:00:01Z",
+    "start_date_local": "2024-05-05T18:00:01Z",
+    "distance": 427.407,
+    "start_index": 4551,
+    "end_index": 4606,
+    "device_watts": false,
+    "segment": {
+      "id": 3831549,
+      "resource_state": 2,
+      "name": "Bus Stop Sprint (West)",
+      "activity_type": "Ride",
+      "distance": 427.407,
+      "average_grade": 0.4,
+      "maximum_grade": 5.2,
+      "elevation_high": 14.3,
+      "elevation_low": 12.4,
+      "start_latlng": [
+        55.950079,
+        -3.012576
+      ],
+      "end_latlng": [
+        55.948149,
+        -3.018482
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Prestonpans",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243787881500,
+    "resource_state": 2,
+    "name": "Tuesday Worlds Final Sprint",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 61,
+    "moving_time": 61,
+    "start_date": "2024-05-05T17:00:02Z",
+    "start_date_local": "2024-05-05T18:00:02Z",
+    "distance": 462.9,
+    "start_index": 4552,
+    "end_index": 4613,
+    "device_watts": false,
+    "segment": {
+      "id": 8105359,
+      "resource_state": 2,
+      "name": "Tuesday Worlds Final Sprint",
+      "activity_type": "Ride",
+      "distance": 462.9,
+      "average_grade": -0.1,
+      "maximum_grade": 10.4,
+      "elevation_high": 84.6,
+      "elevation_low": 78.6,
+      "start_latlng": [
+        55.950033,
+        -3.012612
+      ],
+      "end_latlng": [
+        55.948004,
+        -3.019078
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787094000,
+    "resource_state": 2,
+    "name": "Lagoons - Three Furlongs",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 111,
+    "moving_time": 111,
+    "start_date": "2024-05-05T17:04:04Z",
+    "start_date_local": "2024-05-05T18:04:04Z",
+    "distance": 604.7,
+    "start_index": 4785,
+    "end_index": 4896,
+    "device_watts": false,
+    "segment": {
+      "id": 6027439,
+      "resource_state": 2,
+      "name": "Lagoons - Three Furlongs",
+      "activity_type": "Ride",
+      "distance": 604.7,
+      "average_grade": 0,
+      "maximum_grade": 0.2,
+      "elevation_high": 16.2,
+      "elevation_low": 15.8,
+      "start_latlng": [
+        55.9477,
+        -3.031601
+      ],
+      "end_latlng": [
+        55.949017,
+        -3.040871
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243785856000,
+    "resource_state": 2,
+    "name": "Esk Sprint 2",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 35,
+    "moving_time": 32,
+    "start_date": "2024-05-05T17:11:36Z",
+    "start_date_local": "2024-05-05T18:11:36Z",
+    "distance": 215.339,
+    "start_index": 5234,
+    "end_index": 5267,
+    "device_watts": false,
+    "segment": {
+      "id": 2154149,
+      "resource_state": 2,
+      "name": "Esk Sprint 2",
+      "activity_type": "Ride",
+      "distance": 215.339,
+      "average_grade": 0.5,
+      "maximum_grade": 1.9,
+      "elevation_high": 7.1,
+      "elevation_low": 6,
+      "start_latlng": [
+        55.94480216503143,
+        -3.0660653114318848
+      ],
+      "end_latlng": [
+        55.944523215293884,
+        -3.069455623626709
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243788167000,
+    "resource_state": 2,
+    "name": "Joppa sprint section.",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 230,
+    "moving_time": 220,
+    "start_date": "2024-05-05T17:12:20Z",
+    "start_date_local": "2024-05-05T18:12:20Z",
+    "distance": 1632.26,
+    "start_index": 5276,
+    "end_index": 5497,
+    "device_watts": false,
+    "segment": {
+      "id": 765768,
+      "resource_state": 2,
+      "name": "Joppa sprint section.",
+      "activity_type": "Ride",
+      "distance": 1632.26,
+      "average_grade": 0.2,
+      "maximum_grade": 2,
+      "elevation_high": 65,
+      "elevation_low": 60,
+      "start_latlng": [
+        55.94450154018744,
+        -3.0699206281396987
+      ],
+      "end_latlng": [
+        55.94879877403529,
+        -3.094283052281642
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243785847000,
+    "resource_state": 2,
+    "name": "Joppa Sprint.",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 294,
+    "moving_time": 284,
+    "start_date": "2024-05-05T17:12:27Z",
+    "start_date_local": "2024-05-05T18:12:27Z",
+    "distance": 2043.9,
+    "start_index": 5283,
+    "end_index": 5568,
+    "device_watts": false,
+    "segment": {
+      "id": 4480846,
+      "resource_state": 2,
+      "name": "Joppa Sprint.",
+      "activity_type": "Ride",
+      "distance": 2043.9,
+      "average_grade": 0.6,
+      "maximum_grade": 5.5,
+      "elevation_high": 18.8,
+      "elevation_low": 6,
+      "start_latlng": [
+        55.944721,
+        -3.070667
+      ],
+      "end_latlng": [
+        55.949519,
+        -3.101456
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243785991000,
+    "resource_state": 2,
+    "name": "Darkness awaits The Great...",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 69,
+    "moving_time": 69,
+    "start_date": "2024-05-05T17:12:35Z",
+    "start_date_local": "2024-05-05T18:12:35Z",
+    "distance": 541.9,
+    "start_index": 5291,
+    "end_index": 5360,
+    "device_watts": false,
+    "segment": {
+      "id": 10430033,
+      "resource_state": 2,
+      "name": "Darkness awaits The Great...",
+      "activity_type": "Ride",
+      "distance": 541.9,
+      "average_grade": 0.2,
+      "maximum_grade": 4.7,
+      "elevation_high": 15.1,
+      "elevation_low": 6.6,
+      "start_latlng": [
+        55.944925,
+        -3.071623
+      ],
+      "end_latlng": [
+        55.946329,
+        -3.079811
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Musselburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243784702000,
+    "resource_state": 2,
+    "name": "Lights to Prom",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 135,
+    "moving_time": 135,
+    "start_date": "2024-05-05T17:14:02Z",
+    "start_date_local": "2024-05-05T18:14:02Z",
+    "distance": 1009.2,
+    "start_index": 5369,
+    "end_index": 5504,
+    "device_watts": false,
+    "segment": {
+      "id": 19238114,
+      "resource_state": 2,
+      "name": "Lights to Prom",
+      "activity_type": "Ride",
+      "distance": 1009.2,
+      "average_grade": 0.1,
+      "maximum_grade": 11.1,
+      "elevation_high": 11.4,
+      "elevation_low": 5.5,
+      "start_latlng": [
+        55.946493,
+        -3.080143
+      ],
+      "end_latlng": [
+        55.948817,
+        -3.095181
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787169000,
+    "resource_state": 2,
+    "name": "Porty Entrance Sprint ",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 49,
+    "moving_time": 49,
+    "start_date": "2024-05-05T17:16:18Z",
+    "start_date_local": "2024-05-05T18:16:18Z",
+    "distance": 297,
+    "start_index": 5505,
+    "end_index": 5554,
+    "device_watts": false,
+    "segment": {
+      "id": 8127926,
+      "resource_state": 2,
+      "name": "Porty Entrance Sprint ",
+      "activity_type": "Ride",
+      "distance": 297,
+      "average_grade": 0.8,
+      "maximum_grade": 1.7,
+      "elevation_high": 18.4,
+      "elevation_low": 15.7,
+      "start_latlng": [
+        55.948768,
+        -3.09531
+      ],
+      "end_latlng": [
+        55.949219,
+        -3.099977
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243786187000,
+    "resource_state": 2,
+    "name": "Registers to Porty",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 219,
+    "moving_time": 219,
+    "start_date": "2024-05-05T19:43:29Z",
+    "start_date_local": "2024-05-05T20:43:29Z",
+    "distance": 1628.01,
+    "start_index": 5955,
+    "end_index": 6174,
+    "device_watts": false,
+    "segment": {
+      "id": 3341415,
+      "resource_state": 2,
+      "name": "Registers to Porty",
+      "activity_type": "Ride",
+      "distance": 1628.01,
+      "average_grade": 1.5,
+      "maximum_grade": 5,
+      "elevation_high": 38.5,
+      "elevation_low": 14.2,
+      "start_latlng": [
+        55.957454,
+        -3.123094
+      ],
+      "end_latlng": [
+        55.955052,
+        -3.148743
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787857000,
+    "resource_state": 2,
+    "name": "Railway to Railway",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 114,
+    "moving_time": 114,
+    "start_date": "2024-05-05T19:43:35Z",
+    "start_date_local": "2024-05-05T20:43:35Z",
+    "distance": 850.9,
+    "start_index": 5961,
+    "end_index": 6075,
+    "device_watts": false,
+    "segment": {
+      "id": 8301825,
+      "resource_state": 2,
+      "name": "Railway to Railway",
+      "activity_type": "Ride",
+      "distance": 850.9,
+      "average_grade": 1.5,
+      "maximum_grade": 3.8,
+      "elevation_high": 104,
+      "elevation_low": 91.4,
+      "start_latlng": [
+        55.957479,
+        -3.123671
+      ],
+      "end_latlng": [
+        55.956166,
+        -3.137074
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787045000,
+    "resource_state": 2,
+    "name": "FlatOut Porty RD",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 200,
+    "moving_time": 200,
+    "start_date": "2024-05-05T19:43:44Z",
+    "start_date_local": "2024-05-05T20:43:44Z",
+    "distance": 1512.4,
+    "start_index": 5970,
+    "end_index": 6170,
+    "device_watts": false,
+    "segment": {
+      "id": 31511910,
+      "resource_state": 2,
+      "name": "FlatOut Porty RD",
+      "activity_type": "Ride",
+      "distance": 1512.4,
+      "average_grade": 1,
+      "maximum_grade": 3.3,
+      "elevation_high": -256.2,
+      "elevation_low": -271.2,
+      "start_latlng": [
+        55.957405,
+        -3.124612
+      ],
+      "end_latlng": [
+        55.95504,
+        -3.148382
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3222316243788732400,
+    "resource_state": 2,
+    "name": "Fishwives LockJodge",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 206,
+    "moving_time": 166,
+    "start_date": "2024-05-05T19:45:15Z",
+    "start_date_local": "2024-05-05T20:45:15Z",
+    "distance": 1246.6,
+    "start_index": 6061,
+    "end_index": 6229,
+    "device_watts": false,
+    "segment": {
+      "id": 34658955,
+      "resource_state": 2,
+      "name": "Fishwives LockJodge",
+      "activity_type": "Ride",
+      "distance": 1246.6,
+      "average_grade": 0.5,
+      "maximum_grade": 6.1,
+      "elevation_high": 37.6,
+      "elevation_low": 27.2,
+      "start_latlng": [
+        55.956235,
+        -3.135376
+      ],
+      "end_latlng": [
+        55.955361,
+        -3.154994
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787147300,
+    "resource_state": 2,
+    "name": "Through the chicane to the lights",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 97,
+    "moving_time": 71,
+    "start_date": "2024-05-05T19:46:04Z",
+    "start_date_local": "2024-05-05T20:46:04Z",
+    "distance": 512,
+    "start_index": 6110,
+    "end_index": 6182,
+    "device_watts": false,
+    "segment": {
+      "id": 33607310,
+      "resource_state": 2,
+      "name": "Through the chicane to the lights",
+      "activity_type": "Ride",
+      "distance": 512,
+      "average_grade": 0.4,
+      "maximum_grade": 3.7,
+      "elevation_high": 35,
+      "elevation_low": 30.7,
+      "start_latlng": [
+        55.95551,
+        -3.140992
+      ],
+      "end_latlng": [
+        55.954981,
+        -3.149079
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243784601600,
+    "resource_state": 2,
+    "name": "ROS to Abbey Lane",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 150,
+    "moving_time": 103,
+    "start_date": "2024-05-05T19:48:51Z",
+    "start_date_local": "2024-05-05T20:48:51Z",
+    "distance": 717.7,
+    "start_index": 6239,
+    "end_index": 6349,
+    "device_watts": false,
+    "segment": {
+      "id": 15384267,
+      "resource_state": 2,
+      "name": "ROS to Abbey Lane",
+      "activity_type": "Ride",
+      "distance": 717.7,
+      "average_grade": 0.7,
+      "maximum_grade": 4,
+      "elevation_high": 44.8,
+      "elevation_low": 34.8,
+      "start_latlng": [
+        55.955573,
+        -3.155875
+      ],
+      "end_latlng": [
+        55.957191,
+        -3.16688
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3222316243785405400,
+    "resource_state": 2,
+    "name": "McDs to Abbeyhill  climb (not the low road",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 122,
+    "moving_time": 75,
+    "start_date": "2024-05-05T19:49:23Z",
+    "start_date_local": "2024-05-05T20:49:23Z",
+    "distance": 435.7,
+    "start_index": 6271,
+    "end_index": 6353,
+    "device_watts": false,
+    "segment": {
+      "id": 6560129,
+      "resource_state": 2,
+      "name": "McDs to Abbeyhill  climb (not the low road",
+      "activity_type": "Ride",
+      "distance": 435.7,
+      "average_grade": 2.7,
+      "maximum_grade": 6.6,
+      "elevation_high": -131.6,
+      "elevation_low": -143.2,
+      "start_latlng": [
+        55.956175,
+        -3.160425
+      ],
+      "end_latlng": [
+        55.957196,
+        -3.167156
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3222316243785122000,
+    "resource_state": 2,
+    "name": "Lower London Road Flat",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 77,
+    "moving_time": 57,
+    "start_date": "2024-05-05T19:49:25Z",
+    "start_date_local": "2024-05-05T20:49:25Z",
+    "distance": 332.1,
+    "start_index": 6273,
+    "end_index": 6331,
+    "device_watts": false,
+    "segment": {
+      "id": 7273318,
+      "resource_state": 2,
+      "name": "Lower London Road Flat",
+      "activity_type": "Ride",
+      "distance": 332.1,
+      "average_grade": 2,
+      "maximum_grade": 4.1,
+      "elevation_high": 36,
+      "elevation_low": 29.1,
+      "start_latlng": [
+        55.956157,
+        -3.160808
+      ],
+      "end_latlng": [
+        55.95686,
+        -3.16598
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3222316243787942000,
+    "resource_state": 2,
+    "name": "Lower London Road climb",
+    "activity": {
+      "id": 11341688964,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 115,
+    "moving_time": 68,
+    "start_date": "2024-05-05T19:49:27Z",
+    "start_date_local": "2024-05-05T20:49:27Z",
+    "distance": 394.107,
+    "start_index": 6275,
+    "end_index": 6350,
+    "device_watts": false,
+    "segment": {
+      "id": 3845651,
+      "resource_state": 2,
+      "name": "Lower London Road climb",
+      "activity_type": "Ride",
+      "distance": 394.107,
+      "average_grade": 2.1,
+      "maximum_grade": 2.3,
+      "elevation_high": 37.5,
+      "elevation_low": 29.1,
+      "start_latlng": [
+        55.9562312,
+        -3.1609542
+      ],
+      "end_latlng": [
+        55.9569522,
+        -3.1671553
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  }
+]

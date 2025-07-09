@@ -1,0 +1,110 @@
+[
+  {
+    "id": 3230127219132300000,
+    "resource_state": 2,
+    "name": "Easter Road to AbbeyHill lights climb",
+    "activity": {
+      "id": 11508021691,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 43,
+    "moving_time": 43,
+    "start_date": "2024-05-26T17:15:08Z",
+    "start_date_local": "2024-05-26T18:15:08Z",
+    "distance": 134.8,
+    "start_index": 12,
+    "end_index": 55,
+    "device_watts": false,
+    "segment": {
+      "id": 6727334,
+      "resource_state": 2,
+      "name": "Easter Road to AbbeyHill lights climb",
+      "activity_type": "Ride",
+      "distance": 134.8,
+      "average_grade": 2.1,
+      "maximum_grade": 12.9,
+      "elevation_high": 54.3,
+      "elevation_low": 47.8,
+      "start_latlng": [
+        55.957487,
+        -3.172147
+      ],
+      "end_latlng": [
+        55.956417,
+        -3.17232
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3230127219130300000,
+    "resource_state": 2,
+    "name": "Mad Dash",
+    "activity": {
+      "id": 11508021691,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 73,
+    "moving_time": 73,
+    "start_date": "2024-05-26T17:35:36Z",
+    "start_date_local": "2024-05-26T18:35:36Z",
+    "distance": 474.8,
+    "start_index": 327,
+    "end_index": 400,
+    "device_watts": false,
+    "segment": {
+      "id": 6183340,
+      "resource_state": 2,
+      "name": "Mad Dash",
+      "activity_type": "Ride",
+      "distance": 474.8,
+      "average_grade": -3.4,
+      "maximum_grade": -1.5,
+      "elevation_high": 47,
+      "elevation_low": 30.7,
+      "start_latlng": [
+        55.957614,
+        -3.172381
+      ],
+      "end_latlng": [
+        55.961664,
+        -3.171012
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

@@ -1,0 +1,798 @@
+[
+  {
+    "id": 3238201615036155400,
+    "resource_state": 2,
+    "name": "Jump the lights ",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 240,
+    "moving_time": 187,
+    "start_date": "2024-05-30T09:39:05Z",
+    "start_date_local": "2024-05-30T10:39:05Z",
+    "distance": 1342,
+    "start_index": 9,
+    "end_index": 83,
+    "device_watts": false,
+    "average_heartrate": 91.3,
+    "max_heartrate": 124,
+    "segment": {
+      "id": 37138744,
+      "resource_state": 2,
+      "name": "Jump the lights ",
+      "activity_type": "Ride",
+      "distance": 1342,
+      "average_grade": 0.4,
+      "maximum_grade": 11.6,
+      "elevation_high": 51.2,
+      "elevation_low": 33.7,
+      "start_latlng": [
+        55.960983,
+        -3.171276
+      ],
+      "end_latlng": [
+        55.950731,
+        -3.171873
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3277420373197735000,
+    "resource_state": 2,
+    "name": "Before the pain begins ",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 282,
+    "moving_time": 229,
+    "start_date": "2024-05-30T09:39:26Z",
+    "start_date_local": "2024-05-30T10:39:26Z",
+    "distance": 1470.1,
+    "start_index": 14,
+    "end_index": 97,
+    "device_watts": false,
+    "average_heartrate": 99.3,
+    "max_heartrate": 132,
+    "segment": {
+      "id": 37906827,
+      "resource_state": 2,
+      "name": "Before the pain begins ",
+      "activity_type": "Ride",
+      "distance": 1470.1,
+      "average_grade": 0.3,
+      "maximum_grade": 21.1,
+      "elevation_high": 19.4,
+      "elevation_low": 3.8,
+      "start_latlng": [
+        55.958771,
+        -3.17144
+      ],
+      "end_latlng": [
+        55.947957,
+        -3.176813
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3259104815430890500,
+    "resource_state": 2,
+    "name": "Past the palace ",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 159,
+    "moving_time": 106,
+    "start_date": "2024-05-30T09:39:39Z",
+    "start_date_local": "2024-05-30T10:39:39Z",
+    "distance": 607.3,
+    "start_index": 16,
+    "end_index": 72,
+    "device_watts": false,
+    "average_heartrate": 88.4,
+    "max_heartrate": 123,
+    "segment": {
+      "id": 37559702,
+      "resource_state": 2,
+      "name": "Past the palace ",
+      "activity_type": "Ride",
+      "distance": 607.3,
+      "average_grade": -0.5,
+      "maximum_grade": 9.1,
+      "elevation_high": 17.8,
+      "elevation_low": 3.8,
+      "start_latlng": [
+        55.957726,
+        -3.171576
+      ],
+      "end_latlng": [
+        55.952941,
+        -3.174355
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3231212250214219300,
+    "resource_state": 2,
+    "name": "London Road to Holyrood roundabout",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 153,
+    "moving_time": 100,
+    "start_date": "2024-05-30T09:39:45Z",
+    "start_date_local": "2024-05-30T10:39:45Z",
+    "distance": 574.5,
+    "start_index": 18,
+    "end_index": 72,
+    "device_watts": false,
+    "average_heartrate": 89,
+    "max_heartrate": 123,
+    "segment": {
+      "id": 6643213,
+      "resource_state": 2,
+      "name": "London Road to Holyrood roundabout",
+      "activity_type": "Ride",
+      "distance": 574.5,
+      "average_grade": -1.8,
+      "maximum_grade": 13,
+      "elevation_high": 54.6,
+      "elevation_low": 39.3,
+      "start_latlng": [
+        55.957373,
+        -3.172259
+      ],
+      "end_latlng": [
+        55.952921,
+        -3.174672
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3231212250211695000,
+    "resource_state": 2,
+    "name": "Easter Road to AbbeyHill lights climb",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 86,
+    "moving_time": 33,
+    "start_date": "2024-05-30T09:39:45Z",
+    "start_date_local": "2024-05-30T10:39:45Z",
+    "distance": 134.8,
+    "start_index": 18,
+    "end_index": 46,
+    "device_watts": false,
+    "average_heartrate": 73.2,
+    "max_heartrate": 120,
+    "segment": {
+      "id": 6727334,
+      "resource_state": 2,
+      "name": "Easter Road to AbbeyHill lights climb",
+      "activity_type": "Ride",
+      "distance": 134.8,
+      "average_grade": 2.1,
+      "maximum_grade": 12.9,
+      "elevation_high": 54.3,
+      "elevation_low": 47.8,
+      "start_latlng": [
+        55.957487,
+        -3.172147
+      ],
+      "end_latlng": [
+        55.956417,
+        -3.17232
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3237150992064466400,
+    "resource_state": 2,
+    "name": "Abbey hill ride through ",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 194,
+    "moving_time": 141,
+    "start_date": "2024-05-30T09:39:51Z",
+    "start_date_local": "2024-05-30T10:39:51Z",
+    "distance": 858.3,
+    "start_index": 19,
+    "end_index": 83,
+    "device_watts": false,
+    "average_heartrate": 94.8,
+    "max_heartrate": 124,
+    "segment": {
+      "id": 37116968,
+      "resource_state": 2,
+      "name": "Abbey hill ride through ",
+      "activity_type": "Ride",
+      "distance": 858.3,
+      "average_grade": -0.5,
+      "maximum_grade": 9.5,
+      "elevation_high": 32.8,
+      "elevation_low": 18.4,
+      "start_latlng": [
+        55.957151,
+        -3.17252
+      ],
+      "end_latlng": [
+        55.950712,
+        -3.17192
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3231212250212739600,
+    "resource_state": 2,
+    "name": "Abbey X to Holyrood ",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 73,
+    "moving_time": 73,
+    "start_date": "2024-05-30T09:41:14Z",
+    "start_date_local": "2024-05-30T10:41:14Z",
+    "distance": 466.2,
+    "start_index": 49,
+    "end_index": 73,
+    "device_watts": false,
+    "average_heartrate": 108.8,
+    "max_heartrate": 123,
+    "segment": {
+      "id": 15821609,
+      "resource_state": 2,
+      "name": "Abbey X to Holyrood ",
+      "activity_type": "Ride",
+      "distance": 466.2,
+      "average_grade": -2.1,
+      "maximum_grade": 2.8,
+      "elevation_high": 48,
+      "elevation_low": 37,
+      "start_latlng": [
+        55.956323,
+        -3.172011
+      ],
+      "end_latlng": [
+        55.952614,
+        -3.174183
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3231212250211964400,
+    "resource_state": 2,
+    "name": "The full Holyrood Climb to Com Pool ",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 341,
+    "moving_time": 341,
+    "start_date": "2024-05-30T09:43:05Z",
+    "start_date_local": "2024-05-30T10:43:05Z",
+    "distance": 1861.5,
+    "start_index": 83,
+    "end_index": 161,
+    "device_watts": false,
+    "average_heartrate": 132.4,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 36232655,
+      "resource_state": 2,
+      "name": "The full Holyrood Climb to Com Pool ",
+      "activity_type": "Ride",
+      "distance": 1861.5,
+      "average_grade": 2.6,
+      "maximum_grade": 14.2,
+      "elevation_high": -18.2,
+      "elevation_low": -74,
+      "start_latlng": [
+        55.950785,
+        -3.17199
+      ],
+      "end_latlng": [
+        55.939266,
+        -3.174238
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3231212250214715000,
+    "resource_state": 2,
+    "name": "Queen's Drive West - Holyrood Gait to roundabout",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 208,
+    "moving_time": 208,
+    "start_date": "2024-05-30T09:43:36Z",
+    "start_date_local": "2024-05-30T10:43:36Z",
+    "distance": 1128.26,
+    "start_index": 92,
+    "end_index": 136,
+    "device_watts": false,
+    "average_heartrate": 133.2,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 867327,
+      "resource_state": 2,
+      "name": "Queen's Drive West - Holyrood Gait to roundabout",
+      "activity_type": "Ride",
+      "distance": 1128.26,
+      "average_grade": 3.4,
+      "maximum_grade": 12.6,
+      "elevation_high": 80.9,
+      "elevation_low": 42.1,
+      "start_latlng": [
+        55.94959795475006,
+        -3.174421191215515
+      ],
+      "end_latlng": [
+        55.9426885843277,
+        -3.170285224914551
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3231212250212361700,
+    "resource_state": 2,
+    "name": "400m Sprint - Footpath crossing to start of trees",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 89,
+    "moving_time": 89,
+    "start_date": "2024-05-30T09:44:18Z",
+    "start_date_local": "2024-05-30T10:44:18Z",
+    "distance": 431.5,
+    "start_index": 98,
+    "end_index": 116,
+    "device_watts": false,
+    "average_heartrate": 129.6,
+    "max_heartrate": 145,
+    "segment": {
+      "id": 13374596,
+      "resource_state": 2,
+      "name": "400m Sprint - Footpath crossing to start of trees",
+      "activity_type": "Ride",
+      "distance": 431.5,
+      "average_grade": 4.2,
+      "maximum_grade": 10.1,
+      "elevation_high": 77.8,
+      "elevation_low": 59.4,
+      "start_latlng": [
+        55.947039,
+        -3.177089
+      ],
+      "end_latlng": [
+        55.943358,
+        -3.175672
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3231212250213062000,
+    "resource_state": 2,
+    "name": "Queens Drive top 2 mins",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 135,
+    "moving_time": 135,
+    "start_date": "2024-05-30T09:44:46Z",
+    "start_date_local": "2024-05-30T10:44:46Z",
+    "distance": 667.5,
+    "start_index": 101,
+    "end_index": 135,
+    "device_watts": false,
+    "average_heartrate": 135.2,
+    "max_heartrate": 154,
+    "segment": {
+      "id": 28232003,
+      "resource_state": 2,
+      "name": "Queens Drive top 2 mins",
+      "activity_type": "Ride",
+      "distance": 667.5,
+      "average_grade": 5.1,
+      "maximum_grade": 7.9,
+      "elevation_high": 86.4,
+      "elevation_low": 52.2,
+      "start_latlng": [
+        55.946007,
+        -3.177337
+      ],
+      "end_latlng": [
+        55.942712,
+        -3.170438
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3231212250214292000,
+    "resource_state": 2,
+    "name": "Holyrood Park Road",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 78,
+    "moving_time": 78,
+    "start_date": "2024-05-30T09:47:28Z",
+    "start_date_local": "2024-05-30T10:47:28Z",
+    "distance": 370.2,
+    "start_index": 144,
+    "end_index": 161,
+    "device_watts": false,
+    "average_heartrate": 137.2,
+    "max_heartrate": 148,
+    "segment": {
+      "id": 25509283,
+      "resource_state": 2,
+      "name": "Holyrood Park Road",
+      "activity_type": "Ride",
+      "distance": 370.2,
+      "average_grade": 2.3,
+      "maximum_grade": 7.9,
+      "elevation_high": 90,
+      "elevation_low": 80,
+      "start_latlng": [
+        55.941602,
+        -3.170713
+      ],
+      "end_latlng": [
+        55.939237,
+        -3.174146
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3231212250215061000,
+    "resource_state": 2,
+    "name": "Climb out of Arthur's Seat past Pollock Halls",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 64,
+    "moving_time": 64,
+    "start_date": "2024-05-30T09:47:39Z",
+    "start_date_local": "2024-05-30T10:47:39Z",
+    "distance": 316.213,
+    "start_index": 145,
+    "end_index": 160,
+    "device_watts": false,
+    "average_heartrate": 139.5,
+    "max_heartrate": 148,
+    "segment": {
+      "id": 1771376,
+      "resource_state": 2,
+      "name": "Climb out of Arthur's Seat past Pollock Halls",
+      "activity_type": "Ride",
+      "distance": 316.213,
+      "average_grade": 1.7,
+      "maximum_grade": 2.8,
+      "elevation_high": 89.1,
+      "elevation_low": 83.3,
+      "start_latlng": [
+        55.9416223,
+        -3.1713557
+      ],
+      "end_latlng": [
+        55.9392855,
+        -3.1740664
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3231212250214510000,
+    "resource_state": 2,
+    "name": "Make the cars get a speeding ticket",
+    "activity": {
+      "id": 11531350560,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 65,
+    "moving_time": 65,
+    "start_date": "2024-05-30T09:53:03Z",
+    "start_date_local": "2024-05-30T10:53:03Z",
+    "distance": 411.3,
+    "start_index": 199,
+    "end_index": 208,
+    "device_watts": false,
+    "average_heartrate": 119.1,
+    "max_heartrate": 122,
+    "segment": {
+      "id": 23977509,
+      "resource_state": 2,
+      "name": "Make the cars get a speeding ticket",
+      "activity_type": "Ride",
+      "distance": 411.3,
+      "average_grade": 0.2,
+      "maximum_grade": 4.8,
+      "elevation_high": 77.4,
+      "elevation_low": 76.5,
+      "start_latlng": [
+        55.939619,
+        -3.189109
+      ],
+      "end_latlng": [
+        55.940292,
+        -3.195376
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

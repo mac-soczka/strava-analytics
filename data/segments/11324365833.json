@@ -1,0 +1,548 @@
+[
+  {
+    "id": 3221543328149075000,
+    "resource_state": 2,
+    "name": "Meadowbank fly-by",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 67,
+    "moving_time": 67,
+    "start_date": "2024-05-03T16:02:50Z",
+    "start_date_local": "2024-05-03T17:02:50Z",
+    "distance": 482.8,
+    "start_index": 193,
+    "end_index": 260,
+    "device_watts": false,
+    "segment": {
+      "id": 19185095,
+      "resource_state": 2,
+      "name": "Meadowbank fly-by",
+      "activity_type": "Ride",
+      "distance": 482.8,
+      "average_grade": -2.3,
+      "maximum_grade": 1.2,
+      "elevation_high": 41.2,
+      "elevation_low": 30.2,
+      "start_latlng": [
+        55.956832,
+        -3.164017
+      ],
+      "end_latlng": [
+        55.955681,
+        -3.156569
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3221543328150739000,
+    "resource_state": 2,
+    "name": "Meadowbank Sprint - Wishaw Terrace to Ped Crossing",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 174,
+    "moving_time": 112,
+    "start_date": "2024-05-03T16:03:18Z",
+    "start_date_local": "2024-05-03T17:03:18Z",
+    "distance": 560.9,
+    "start_index": 221,
+    "end_index": 336,
+    "device_watts": false,
+    "segment": {
+      "id": 14537475,
+      "resource_state": 2,
+      "name": "Meadowbank Sprint - Wishaw Terrace to Ped Crossing",
+      "activity_type": "Ride",
+      "distance": 560.9,
+      "average_grade": 1.1,
+      "maximum_grade": 3,
+      "elevation_high": 30.4,
+      "elevation_low": 23.6,
+      "start_latlng": [
+        55.95635,
+        -3.160699
+      ],
+      "end_latlng": [
+        55.95523,
+        -3.151958
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3221543328147787000,
+    "resource_state": 2,
+    "name": "Piershill plus east",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 74,
+    "moving_time": 74,
+    "start_date": "2024-05-03T16:06:53Z",
+    "start_date_local": "2024-05-03T17:06:53Z",
+    "distance": 446.8,
+    "start_index": 377,
+    "end_index": 448,
+    "device_watts": false,
+    "segment": {
+      "id": 5650969,
+      "resource_state": 2,
+      "name": "Piershill plus east",
+      "activity_type": "Ride",
+      "distance": 446.8,
+      "average_grade": -1.4,
+      "maximum_grade": 1.2,
+      "elevation_high": 38.2,
+      "elevation_low": 31.3,
+      "start_latlng": [
+        55.955094,
+        -3.14881
+      ],
+      "end_latlng": [
+        55.955437,
+        -3.141695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3221543328149228500,
+    "resource_state": 2,
+    "name": "Fishwives Fury",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 120,
+    "moving_time": 120,
+    "start_date": "2024-05-03T16:09:49Z",
+    "start_date_local": "2024-05-03T17:09:49Z",
+    "distance": 771.5,
+    "start_index": 535,
+    "end_index": 655,
+    "device_watts": false,
+    "segment": {
+      "id": 7821729,
+      "resource_state": 2,
+      "name": "Fishwives Fury",
+      "activity_type": "Ride",
+      "distance": 771.5,
+      "average_grade": -1.3,
+      "maximum_grade": 0.4,
+      "elevation_high": 26,
+      "elevation_low": 16.2,
+      "start_latlng": [
+        55.955967,
+        -3.13503
+      ],
+      "end_latlng": [
+        55.954559,
+        -3.123878
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3221543328150957000,
+    "resource_state": 2,
+    "name": "Seafield 300m",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 201,
+    "moving_time": 68,
+    "start_date": "2024-05-03T18:04:11Z",
+    "start_date_local": "2024-05-03T19:04:11Z",
+    "distance": 290.6,
+    "start_index": 1186,
+    "end_index": 1255,
+    "device_watts": false,
+    "segment": {
+      "id": 4905760,
+      "resource_state": 2,
+      "name": "Seafield 300m",
+      "activity_type": "Ride",
+      "distance": 290.6,
+      "average_grade": 0.1,
+      "maximum_grade": 27.6,
+      "elevation_high": 12,
+      "elevation_low": 3,
+      "start_latlng": [
+        55.958583,
+        -3.119581
+      ],
+      "end_latlng": [
+        55.96045,
+        -3.122815
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3221543328150004700,
+    "resource_state": 2,
+    "name": "After the prom.",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 387,
+    "moving_time": 254,
+    "start_date": "2024-05-03T18:04:14Z",
+    "start_date_local": "2024-05-03T19:04:14Z",
+    "distance": 1130.67,
+    "start_index": 1189,
+    "end_index": 1444,
+    "device_watts": false,
+    "segment": {
+      "id": 765767,
+      "resource_state": 2,
+      "name": "After the prom.",
+      "activity_type": "Ride",
+      "distance": 1130.67,
+      "average_grade": 0.2,
+      "maximum_grade": 2.2,
+      "elevation_high": 63,
+      "elevation_low": 60,
+      "start_latlng": [
+        55.95867870641303,
+        -3.1197690787711836
+      ],
+      "end_latlng": [
+        55.966029341233934,
+        -3.1321697440710965
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3221543328148413400,
+    "resource_state": 2,
+    "name": "Cat and dog climb",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 49,
+    "moving_time": 49,
+    "start_date": "2024-05-03T18:09:53Z",
+    "start_date_local": "2024-05-03T19:09:53Z",
+    "distance": 194,
+    "start_index": 1396,
+    "end_index": 1445,
+    "device_watts": false,
+    "segment": {
+      "id": 13043125,
+      "resource_state": 2,
+      "name": "Cat and dog climb",
+      "activity_type": "Ride",
+      "distance": 194,
+      "average_grade": 1.7,
+      "maximum_grade": 3.8,
+      "elevation_high": 10.2,
+      "elevation_low": 6.7,
+      "start_latlng": [
+        55.964996,
+        -3.129969
+      ],
+      "end_latlng": [
+        55.966,
+        -3.132231
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3221543328150538000,
+    "resource_state": 2,
+    "name": "Eat, Sleep, Rave, Repeat...",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 42,
+    "moving_time": 42,
+    "start_date": "2024-05-03T18:13:48Z",
+    "start_date_local": "2024-05-03T19:13:48Z",
+    "distance": 158.6,
+    "start_index": 1620,
+    "end_index": 1662,
+    "device_watts": false,
+    "segment": {
+      "id": 5918052,
+      "resource_state": 2,
+      "name": "Eat, Sleep, Rave, Repeat...",
+      "activity_type": "Ride",
+      "distance": 158.6,
+      "average_grade": 4.2,
+      "maximum_grade": 17.3,
+      "elevation_high": 7,
+      "elevation_low": 0.4,
+      "start_latlng": [
+        55.969516,
+        -3.144675
+      ],
+      "end_latlng": [
+        55.968402,
+        -3.146263
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3221543328149363700,
+    "resource_state": 2,
+    "name": "Restalrig Railway Path Uphill",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 231,
+    "moving_time": 221,
+    "start_date": "2024-05-03T18:14:50Z",
+    "start_date_local": "2024-05-03T19:14:50Z",
+    "distance": 1131.86,
+    "start_index": 1682,
+    "end_index": 1909,
+    "device_watts": false,
+    "segment": {
+      "id": 1594509,
+      "resource_state": 2,
+      "name": "Restalrig Railway Path Uphill",
+      "activity_type": "Ride",
+      "distance": 1131.86,
+      "average_grade": 0.8,
+      "maximum_grade": 22.8,
+      "elevation_high": 34.2,
+      "elevation_low": 18.1,
+      "start_latlng": [
+        55.96822966499327,
+        -3.146932056830286
+      ],
+      "end_latlng": [
+        55.963853521332815,
+        -3.1623221132662263
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3221543328148896000,
+    "resource_state": 2,
+    "name": "3 Fingers of Death",
+    "activity": {
+      "id": 11324365833,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 30,
+    "moving_time": 26,
+    "start_date": "2024-05-03T18:18:45Z",
+    "start_date_local": "2024-05-03T19:18:45Z",
+    "distance": 108.6,
+    "start_index": 1913,
+    "end_index": 1940,
+    "device_watts": false,
+    "segment": {
+      "id": 13838462,
+      "resource_state": 2,
+      "name": "3 Fingers of Death",
+      "activity_type": "Ride",
+      "distance": 108.6,
+      "average_grade": 1.6,
+      "maximum_grade": 20.1,
+      "elevation_high": 31.7,
+      "elevation_low": 30,
+      "start_latlng": [
+        55.963768,
+        -3.162571
+      ],
+      "end_latlng": [
+        55.963349,
+        -3.162489
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  }
+]

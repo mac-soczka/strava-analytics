@@ -1,0 +1,64 @@
+[
+  {
+    "id": 3227199908069587500,
+    "resource_state": 2,
+    "name": "Abbey Hill Crash the Lights",
+    "activity": {
+      "id": 11444920095,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 627,
+    "moving_time": 283,
+    "start_date": "2024-05-17T17:56:07Z",
+    "start_date_local": "2024-05-17T18:56:07Z",
+    "distance": 339.3,
+    "start_index": 261,
+    "end_index": 376,
+    "device_watts": false,
+    "average_heartrate": 88.3,
+    "max_heartrate": 142,
+    "segment": {
+      "id": 18070360,
+      "resource_state": 2,
+      "name": "Abbey Hill Crash the Lights",
+      "activity_type": "Ride",
+      "distance": 339.3,
+      "average_grade": 0.4,
+      "maximum_grade": 11.9,
+      "elevation_high": 51.8,
+      "elevation_low": 41.3,
+      "start_latlng": [
+        55.957272,
+        -3.169874
+      ],
+      "end_latlng": [
+        55.955131,
+        -3.172728
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

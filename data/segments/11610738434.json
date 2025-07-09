@@ -1,0 +1,218 @@
+[
+  {
+    "id": 3234845410836466000,
+    "resource_state": 2,
+    "name": "Reverse Pond Sprint",
+    "activity": {
+      "id": 11610738434,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 185,
+    "moving_time": 169,
+    "start_date": "2024-06-09T10:08:46Z",
+    "start_date_local": "2024-06-09T11:08:46Z",
+    "distance": 446,
+    "start_index": 1308,
+    "end_index": 1484,
+    "device_watts": false,
+    "segment": {
+      "id": 29152783,
+      "resource_state": 2,
+      "name": "Reverse Pond Sprint",
+      "activity_type": "Ride",
+      "distance": 446,
+      "average_grade": -0.1,
+      "maximum_grade": 1.7,
+      "elevation_high": 5,
+      "elevation_low": 4.2,
+      "start_latlng": [
+        55.998269,
+        -2.549768
+      ],
+      "end_latlng": [
+        55.998866,
+        -2.542701
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3234845410834781700,
+    "resource_state": 2,
+    "name": "Back Road sprint climb",
+    "activity": {
+      "id": 11610738434,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 251,
+    "moving_time": 227,
+    "start_date": "2024-06-09T10:13:08Z",
+    "start_date_local": "2024-06-09T11:13:08Z",
+    "distance": 384.193,
+    "start_index": 1561,
+    "end_index": 1790,
+    "device_watts": false,
+    "segment": {
+      "id": 3250120,
+      "resource_state": 2,
+      "name": "Back Road sprint climb",
+      "activity_type": "Ride",
+      "distance": 384.193,
+      "average_grade": 4.6,
+      "maximum_grade": 7.2,
+      "elevation_high": 22,
+      "elevation_low": 3.9,
+      "start_latlng": [
+        55.99986808,
+        -2.54309211
+      ],
+      "end_latlng": [
+        56.00130582,
+        -2.53754021
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": "East Lothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3234845410834890000,
+    "resource_state": 2,
+    "name": "Backroad power test",
+    "activity": {
+      "id": 11610738434,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 188,
+    "moving_time": 187,
+    "start_date": "2024-06-09T10:14:13Z",
+    "start_date_local": "2024-06-09T11:14:13Z",
+    "distance": 307.3,
+    "start_index": 1604,
+    "end_index": 1792,
+    "device_watts": false,
+    "segment": {
+      "id": 28824692,
+      "resource_state": 2,
+      "name": "Backroad power test",
+      "activity_type": "Ride",
+      "distance": 307.3,
+      "average_grade": 5.7,
+      "maximum_grade": 8.9,
+      "elevation_high": 39.2,
+      "elevation_low": 21.6,
+      "start_latlng": [
+        56.000203,
+        -2.541984
+      ],
+      "end_latlng": [
+        56.001347,
+        -2.537504
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Belhaven",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3234845410833903000,
+    "resource_state": 2,
+    "name": "Dunbar high st in reverse ",
+    "activity": {
+      "id": 11610738434,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 267,
+    "moving_time": 195,
+    "start_date": "2024-06-09T11:10:24Z",
+    "start_date_local": "2024-06-09T12:10:24Z",
+    "distance": 391.4,
+    "start_index": 2731,
+    "end_index": 2958,
+    "device_watts": false,
+    "segment": {
+      "id": 13967183,
+      "resource_state": 2,
+      "name": "Dunbar high st in reverse ",
+      "activity_type": "Ride",
+      "distance": 391.4,
+      "average_grade": 0.4,
+      "maximum_grade": 1.6,
+      "elevation_high": -50.8,
+      "elevation_low": -53.2,
+      "start_latlng": [
+        56.003562,
+        -2.517173
+      ],
+      "end_latlng": [
+        56.000525,
+        -2.514228
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Dunbar",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  }
+]

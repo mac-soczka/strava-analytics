@@ -1,0 +1,218 @@
+[
+  {
+    "id": 3229399052977628700,
+    "resource_state": 2,
+    "name": "Abbey X to Holyrood ",
+    "activity": {
+      "id": 11492398705,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 90,
+    "moving_time": 90,
+    "start_date": "2024-05-24T14:57:59Z",
+    "start_date_local": "2024-05-24T15:57:59Z",
+    "distance": 466.2,
+    "start_index": 1,
+    "end_index": 11,
+    "device_watts": false,
+    "segment": {
+      "id": 15821609,
+      "resource_state": 2,
+      "name": "Abbey X to Holyrood ",
+      "activity_type": "Ride",
+      "distance": 466.2,
+      "average_grade": -2.1,
+      "maximum_grade": 2.8,
+      "elevation_high": 48,
+      "elevation_low": 37,
+      "start_latlng": [
+        55.956323,
+        -3.172011
+      ],
+      "end_latlng": [
+        55.952614,
+        -3.174183
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3229399052975164000,
+    "resource_state": 2,
+    "name": "Roundabout to top of wooden stairs",
+    "activity": {
+      "id": 11492398705,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 346,
+    "moving_time": 275,
+    "start_date": "2024-05-24T15:00:55Z",
+    "start_date_local": "2024-05-24T16:00:55Z",
+    "distance": 758.2,
+    "start_index": 29,
+    "end_index": 44,
+    "device_watts": false,
+    "segment": {
+      "id": 11640485,
+      "resource_state": 2,
+      "name": "Roundabout to top of wooden stairs",
+      "activity_type": "Ride",
+      "distance": 758.2,
+      "average_grade": 4.7,
+      "maximum_grade": 14.3,
+      "elevation_high": 79.3,
+      "elevation_low": 42,
+      "start_latlng": [
+        55.949525,
+        -3.174396
+      ],
+      "end_latlng": [
+        55.943535,
+        -3.177208
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3229399052977294000,
+    "resource_state": 2,
+    "name": "Meadows East to Chalmers St",
+    "activity": {
+      "id": 11492398705,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 175,
+    "moving_time": 175,
+    "start_date": "2024-05-24T15:10:58Z",
+    "start_date_local": "2024-05-24T16:10:58Z",
+    "distance": 844.3,
+    "start_index": 57,
+    "end_index": 75,
+    "device_watts": false,
+    "segment": {
+      "id": 7715471,
+      "resource_state": 2,
+      "name": "Meadows East to Chalmers St",
+      "activity_type": "Ride",
+      "distance": 844.3,
+      "average_grade": 0.2,
+      "maximum_grade": 4.7,
+      "elevation_high": 80.1,
+      "elevation_low": 75.1,
+      "start_latlng": [
+        55.941149,
+        -3.183208
+      ],
+      "end_latlng": [
+        55.942462,
+        -3.19612
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3229399052975847000,
+    "resource_state": 2,
+    "name": "Meadows East to West",
+    "activity": {
+      "id": 11492398705,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 201,
+    "moving_time": 201,
+    "start_date": "2024-05-24T15:11:14Z",
+    "start_date_local": "2024-05-24T16:11:14Z",
+    "distance": 1060.8,
+    "start_index": 58,
+    "end_index": 80,
+    "device_watts": false,
+    "segment": {
+      "id": 7463225,
+      "resource_state": 2,
+      "name": "Meadows East to West",
+      "activity_type": "Ride",
+      "distance": 1060.8,
+      "average_grade": 0.3,
+      "maximum_grade": 3.4,
+      "elevation_high": 80.9,
+      "elevation_low": 75.1,
+      "start_latlng": [
+        55.941158,
+        -3.183541
+      ],
+      "end_latlng": [
+        55.942245,
+        -3.199727
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  }
+]

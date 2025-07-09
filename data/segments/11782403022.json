@@ -1,0 +1,56 @@
+[
+  {
+    "id": 3242865573282523000,
+    "resource_state": 2,
+    "name": "Sprint for the line",
+    "activity": {
+      "id": 11782403022,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 153,
+    "moving_time": 92,
+    "start_date": "2024-07-01T13:50:40Z",
+    "start_date_local": "2024-07-01T14:50:40Z",
+    "distance": 243.3,
+    "start_index": 352,
+    "end_index": 464,
+    "device_watts": false,
+    "segment": {
+      "id": 7151405,
+      "resource_state": 2,
+      "name": "Sprint for the line",
+      "activity_type": "Ride",
+      "distance": 243.3,
+      "average_grade": -1.8,
+      "maximum_grade": 0,
+      "elevation_high": 10.6,
+      "elevation_low": 6.2,
+      "start_latlng": [
+        57.476425,
+        -4.228083
+      ],
+      "end_latlng": [
+        57.474354,
+        -4.228781
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Inverness",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]
