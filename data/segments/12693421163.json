@@ -1,0 +1,116 @@
+[
+  {
+    "id": 3282822067345445400,
+    "resource_state": 2,
+    "name": "3 Blocks up Easter Road",
+    "activity": {
+      "id": 12693421163,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 187,
+    "moving_time": 186,
+    "start_date": "2024-10-07T07:29:03Z",
+    "start_date_local": "2024-10-07T08:29:03Z",
+    "distance": 292.6,
+    "start_index": 22,
+    "end_index": 38,
+    "average_cadence": 56.5,
+    "device_watts": false,
+    "average_heartrate": 105.7,
+    "max_heartrate": 116,
+    "segment": {
+      "id": 10243138,
+      "resource_state": 2,
+      "name": "3 Blocks up Easter Road",
+      "activity_type": "Walk",
+      "distance": 292.6,
+      "average_grade": 3.9,
+      "maximum_grade": 9.8,
+      "elevation_high": 45.5,
+      "elevation_low": 34.2,
+      "start_latlng": [
+        55.96026,
+        -3.171419
+      ],
+      "end_latlng": [
+        55.957703,
+        -3.172175
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3282822067343646000,
+    "resource_state": 2,
+    "name": "Kings Theatre to Tun",
+    "activity": {
+      "id": 12693421163,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1649,
+    "moving_time": 1591,
+    "start_date": "2024-10-07T08:35:52Z",
+    "start_date_local": "2024-10-07T09:35:52Z",
+    "distance": 2364.4,
+    "start_index": 691,
+    "end_index": 997,
+    "average_cadence": 56.3,
+    "device_watts": false,
+    "average_heartrate": 68.8,
+    "max_heartrate": 121,
+    "segment": {
+      "id": 30552187,
+      "resource_state": 2,
+      "name": "Kings Theatre to Tun",
+      "activity_type": "Walk",
+      "distance": 2364.4,
+      "average_grade": -1.3,
+      "maximum_grade": 6.5,
+      "elevation_high": 93.3,
+      "elevation_low": 47.7,
+      "start_latlng": [
+        55.942164,
+        -3.202927
+      ],
+      "end_latlng": [
+        55.95048,
+        -3.17749
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

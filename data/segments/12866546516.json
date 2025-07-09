@@ -1,0 +1,56 @@
+[
+  {
+    "id": 3290651897767106000,
+    "resource_state": 2,
+    "name": "Bumpy Town",
+    "activity": {
+      "id": 12866546516,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 229,
+    "moving_time": 222,
+    "start_date": "2024-11-09T18:15:04Z",
+    "start_date_local": "2024-11-09T18:15:04Z",
+    "distance": 716.3,
+    "start_index": 288,
+    "end_index": 517,
+    "device_watts": false,
+    "segment": {
+      "id": 28095167,
+      "resource_state": 2,
+      "name": "Bumpy Town",
+      "activity_type": "Ride",
+      "distance": 716.3,
+      "average_grade": -4.1,
+      "maximum_grade": 3.5,
+      "elevation_high": 78.4,
+      "elevation_low": 47.8,
+      "start_latlng": [
+        55.944366,
+        -3.179324
+      ],
+      "end_latlng": [
+        55.950292,
+        -3.177834
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]
