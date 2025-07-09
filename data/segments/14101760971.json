@@ -1,0 +1,434 @@
+[
+  {
+    "id": 3344071397848643000,
+    "resource_state": 2,
+    "name": "Commie with a Kick",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 160,
+    "moving_time": 123,
+    "start_date": "2025-04-06T11:21:20Z",
+    "start_date_local": "2025-04-06T12:21:20Z",
+    "distance": 344,
+    "start_index": 0,
+    "end_index": 146,
+    "device_watts": false,
+    "segment": {
+      "id": 21744733,
+      "resource_state": 2,
+      "name": "Commie with a Kick",
+      "activity_type": "Ride",
+      "distance": 344,
+      "average_grade": -1.7,
+      "maximum_grade": 0,
+      "elevation_high": 91,
+      "elevation_low": 85,
+      "start_latlng": [
+        55.939301,
+        -3.174187
+      ],
+      "end_latlng": [
+        55.941766,
+        -3.171038
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3344071397847787000,
+    "resource_state": 2,
+    "name": "Commie roundabouts",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 327,
+    "moving_time": 183,
+    "start_date": "2025-04-06T11:21:20Z",
+    "start_date_local": "2025-04-06T12:21:20Z",
+    "distance": 528,
+    "start_index": 0,
+    "end_index": 221,
+    "device_watts": false,
+    "segment": {
+      "id": 21755284,
+      "resource_state": 2,
+      "name": "Commie roundabouts",
+      "activity_type": "Ride",
+      "distance": 528,
+      "average_grade": -1.1,
+      "maximum_grade": 4,
+      "elevation_high": 91,
+      "elevation_low": 83,
+      "start_latlng": [
+        55.939181,
+        -3.174353
+      ],
+      "end_latlng": [
+        55.942738,
+        -3.170921
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3344071397848333000,
+    "resource_state": 2,
+    "name": "Queens Drive Sprint ",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 283,
+    "moving_time": 176,
+    "start_date": "2025-04-06T11:23:50Z",
+    "start_date_local": "2025-04-06T12:23:50Z",
+    "distance": 1272.7,
+    "start_index": 136,
+    "end_index": 327,
+    "device_watts": false,
+    "segment": {
+      "id": 37559716,
+      "resource_state": 2,
+      "name": "Queens Drive Sprint ",
+      "activity_type": "Ride",
+      "distance": 1272.7,
+      "average_grade": -3.4,
+      "maximum_grade": 8.2,
+      "elevation_high": 101,
+      "elevation_low": 55.4,
+      "start_latlng": [
+        55.941673,
+        -3.171621
+      ],
+      "end_latlng": [
+        55.949558,
+        -3.175001
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3344071397851296300,
+    "resource_state": 2,
+    "name": "roundabout to roundabout",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 117,
+    "moving_time": 117,
+    "start_date": "2025-04-06T11:26:43Z",
+    "start_date_local": "2025-04-06T12:26:43Z",
+    "distance": 1149.04,
+    "start_index": 217,
+    "end_index": 334,
+    "device_watts": false,
+    "segment": {
+      "id": 1457125,
+      "resource_state": 2,
+      "name": "roundabout to roundabout",
+      "activity_type": "Ride",
+      "distance": 1149.04,
+      "average_grade": -4.6,
+      "maximum_grade": 1.6,
+      "elevation_high": 77.6,
+      "elevation_low": 24.4,
+      "start_latlng": [
+        55.942594204097986,
+        -3.17060231231153
+      ],
+      "end_latlng": [
+        55.949807837605476,
+        -3.1744602508842945
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3344071397850819000,
+    "resource_state": 2,
+    "name": "Arthur Seat Chaingang Sprint ",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 92,
+    "moving_time": 92,
+    "start_date": "2025-04-06T11:26:50Z",
+    "start_date_local": "2025-04-06T12:26:50Z",
+    "distance": 992.7,
+    "start_index": 224,
+    "end_index": 316,
+    "device_watts": false,
+    "segment": {
+      "id": 37559728,
+      "resource_state": 2,
+      "name": "Arthur Seat Chaingang Sprint ",
+      "activity_type": "Ride",
+      "distance": 992.7,
+      "average_grade": -4.2,
+      "maximum_grade": 2,
+      "elevation_high": 97.6,
+      "elevation_low": 56,
+      "start_latlng": [
+        55.942777,
+        -3.171222
+      ],
+      "end_latlng": [
+        55.949159,
+        -3.175714
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3344071397851508000,
+    "resource_state": 2,
+    "name": "Sprint Sprint sprinty ",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 70,
+    "moving_time": 70,
+    "start_date": "2025-04-06T11:26:50Z",
+    "start_date_local": "2025-04-06T12:26:50Z",
+    "distance": 770.3,
+    "start_index": 224,
+    "end_index": 294,
+    "device_watts": false,
+    "segment": {
+      "id": 37815297,
+      "resource_state": 2,
+      "name": "Sprint Sprint sprinty ",
+      "activity_type": "Ride",
+      "distance": 770.3,
+      "average_grade": -5,
+      "maximum_grade": -3.4,
+      "elevation_high": 44.4,
+      "elevation_low": 5.6,
+      "start_latlng": [
+        55.942777,
+        -3.171165
+      ],
+      "end_latlng": [
+        55.947338,
+        -3.177146
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3344071397847672300,
+    "resource_state": 2,
+    "name": "Aero Tuck Time",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 78,
+    "moving_time": 78,
+    "start_date": "2025-04-06T11:26:56Z",
+    "start_date_local": "2025-04-06T12:26:56Z",
+    "distance": 856.5,
+    "start_index": 230,
+    "end_index": 308,
+    "device_watts": false,
+    "segment": {
+      "id": 10053334,
+      "resource_state": 2,
+      "name": "Aero Tuck Time",
+      "activity_type": "Ride",
+      "distance": 856.5,
+      "average_grade": -4.5,
+      "maximum_grade": -0.4,
+      "elevation_high": 93.4,
+      "elevation_low": 55,
+      "start_latlng": [
+        55.942791,
+        -3.17197
+      ],
+      "end_latlng": [
+        55.948601,
+        -3.176454
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3344071397847793000,
+    "resource_state": 2,
+    "name": "Arthur's seat - Main descent",
+    "activity": {
+      "id": 14101760971,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 55,
+    "moving_time": 55,
+    "start_date": "2025-04-06T11:27:11Z",
+    "start_date_local": "2025-04-06T12:27:11Z",
+    "distance": 620.4,
+    "start_index": 245,
+    "end_index": 300,
+    "device_watts": false,
+    "segment": {
+      "id": 9890942,
+      "resource_state": 2,
+      "name": "Arthur's seat - Main descent",
+      "activity_type": "Ride",
+      "distance": 620.4,
+      "average_grade": -5.2,
+      "maximum_grade": 1.9,
+      "elevation_high": 79.3,
+      "elevation_low": 47.1,
+      "start_latlng": [
+        55.942903,
+        -3.174738
+      ],
+      "end_latlng": [
+        55.947959,
+        -3.176884
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

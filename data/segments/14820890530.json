@@ -1,0 +1,7508 @@
+[
+  {
+    "id": 3369790328999815000,
+    "resource_state": 2,
+    "name": "Queens Drive Sprint ",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 123,
+    "moving_time": 123,
+    "start_date": "2025-06-15T09:15:53Z",
+    "start_date_local": "2025-06-15T10:15:53Z",
+    "distance": 1272.7,
+    "start_index": 24,
+    "end_index": 147,
+    "device_watts": false,
+    "segment": {
+      "id": 37559716,
+      "resource_state": 2,
+      "name": "Queens Drive Sprint ",
+      "activity_type": "Ride",
+      "distance": 1272.7,
+      "average_grade": -3.4,
+      "maximum_grade": 8.2,
+      "elevation_high": 101,
+      "elevation_low": 55.4,
+      "start_latlng": [
+        55.941673,
+        -3.171621
+      ],
+      "end_latlng": [
+        55.949558,
+        -3.175001
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002491000,
+    "resource_state": 2,
+    "name": "Arthur's Seat clockwise",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 895,
+    "moving_time": 895,
+    "start_date": "2025-06-15T09:16:21Z",
+    "start_date_local": "2025-06-15T10:16:21Z",
+    "distance": 5275.76,
+    "start_index": 52,
+    "end_index": 947,
+    "device_watts": false,
+    "segment": {
+      "id": 1003721,
+      "resource_state": 2,
+      "name": "Arthur's Seat clockwise",
+      "activity_type": "Ride",
+      "distance": 5275.76,
+      "average_grade": 0.6,
+      "maximum_grade": 11.6,
+      "elevation_high": 86.1,
+      "elevation_low": -24.4,
+      "start_latlng": [
+        55.942587,
+        -3.170392
+      ],
+      "end_latlng": [
+        55.9426,
+        -3.170196
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329000444000,
+    "resource_state": 2,
+    "name": "roundabout to roundabout",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 103,
+    "moving_time": 103,
+    "start_date": "2025-06-15T09:16:22Z",
+    "start_date_local": "2025-06-15T10:16:22Z",
+    "distance": 1149.04,
+    "start_index": 53,
+    "end_index": 156,
+    "device_watts": false,
+    "segment": {
+      "id": 1457125,
+      "resource_state": 2,
+      "name": "roundabout to roundabout",
+      "activity_type": "Ride",
+      "distance": 1149.04,
+      "average_grade": -4.6,
+      "maximum_grade": 1.6,
+      "elevation_high": 77.6,
+      "elevation_low": 24.4,
+      "start_latlng": [
+        55.942594204097986,
+        -3.17060231231153
+      ],
+      "end_latlng": [
+        55.949807837605476,
+        -3.1744602508842945
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997658600,
+    "resource_state": 2,
+    "name": "Arthur's Seat clockwise x2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1760,
+    "moving_time": 1760,
+    "start_date": "2025-06-15T09:16:22Z",
+    "start_date_local": "2025-06-15T10:16:22Z",
+    "distance": 10504.1,
+    "start_index": 53,
+    "end_index": 1813,
+    "device_watts": false,
+    "segment": {
+      "id": 7138306,
+      "resource_state": 2,
+      "name": "Arthur's Seat clockwise x2",
+      "activity_type": "Ride",
+      "distance": 10504.1,
+      "average_grade": 0,
+      "maximum_grade": 17.8,
+      "elevation_high": 128.7,
+      "elevation_low": 39.8,
+      "start_latlng": [
+        55.942605,
+        -3.170599
+      ],
+      "end_latlng": [
+        55.942616,
+        -3.169854
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999388000,
+    "resource_state": 2,
+    "name": "Prt1",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 245,
+    "moving_time": 245,
+    "start_date": "2025-06-15T09:16:22Z",
+    "start_date_local": "2025-06-15T10:16:22Z",
+    "distance": 2052.3,
+    "start_index": 53,
+    "end_index": 298,
+    "device_watts": false,
+    "segment": {
+      "id": 19809923,
+      "resource_state": 2,
+      "name": "Prt1",
+      "activity_type": "Ride",
+      "distance": 2052.3,
+      "average_grade": -2.1,
+      "maximum_grade": 4,
+      "elevation_high": 85,
+      "elevation_low": 35.1,
+      "start_latlng": [
+        55.942682,
+        -3.17063
+      ],
+      "end_latlng": [
+        55.953002,
+        -3.161083
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002519600,
+    "resource_state": 2,
+    "name": "Arthur's Seat down hill",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 114,
+    "moving_time": 114,
+    "start_date": "2025-06-15T09:16:23Z",
+    "start_date_local": "2025-06-15T10:16:23Z",
+    "distance": 1265.2,
+    "start_index": 54,
+    "end_index": 168,
+    "device_watts": false,
+    "segment": {
+      "id": 4517418,
+      "resource_state": 2,
+      "name": "Arthur's Seat down hill",
+      "activity_type": "Ride",
+      "distance": 1265.2,
+      "average_grade": -3.1,
+      "maximum_grade": 6.3,
+      "elevation_high": 81,
+      "elevation_low": 41.5,
+      "start_latlng": [
+        55.942784,
+        -3.170686
+      ],
+      "end_latlng": [
+        55.95033,
+        -3.173707
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000365000,
+    "resource_state": 2,
+    "name": "Roundabout to Zebra",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 144,
+    "moving_time": 144,
+    "start_date": "2025-06-15T09:16:25Z",
+    "start_date_local": "2025-06-15T10:16:25Z",
+    "distance": 1385.4,
+    "start_index": 56,
+    "end_index": 200,
+    "device_watts": false,
+    "segment": {
+      "id": 34935639,
+      "resource_state": 2,
+      "name": "Roundabout to Zebra",
+      "activity_type": "Ride",
+      "distance": 1385.4,
+      "average_grade": -3.5,
+      "maximum_grade": 1.1,
+      "elevation_high": 82.4,
+      "elevation_low": 32.8,
+      "start_latlng": [
+        55.942727,
+        -3.171046
+      ],
+      "end_latlng": [
+        55.950857,
+        -3.170717
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001856000,
+    "resource_state": 2,
+    "name": "Sprint Sprint sprinty ",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 66,
+    "moving_time": 66,
+    "start_date": "2025-06-15T09:16:26Z",
+    "start_date_local": "2025-06-15T10:16:26Z",
+    "distance": 770.3,
+    "start_index": 57,
+    "end_index": 123,
+    "device_watts": false,
+    "segment": {
+      "id": 37815297,
+      "resource_state": 2,
+      "name": "Sprint Sprint sprinty ",
+      "activity_type": "Ride",
+      "distance": 770.3,
+      "average_grade": -5,
+      "maximum_grade": -3.4,
+      "elevation_high": 44.4,
+      "elevation_low": 5.6,
+      "start_latlng": [
+        55.942777,
+        -3.171165
+      ],
+      "end_latlng": [
+        55.947338,
+        -3.177146
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000254500,
+    "resource_state": 2,
+    "name": "Arthur Seat Chaingang Sprint ",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 82,
+    "moving_time": 82,
+    "start_date": "2025-06-15T09:16:27Z",
+    "start_date_local": "2025-06-15T10:16:27Z",
+    "distance": 992.7,
+    "start_index": 58,
+    "end_index": 140,
+    "device_watts": false,
+    "segment": {
+      "id": 37559728,
+      "resource_state": 2,
+      "name": "Arthur Seat Chaingang Sprint ",
+      "activity_type": "Ride",
+      "distance": 992.7,
+      "average_grade": -4.2,
+      "maximum_grade": 2,
+      "elevation_high": 97.6,
+      "elevation_low": 56,
+      "start_latlng": [
+        55.942777,
+        -3.171222
+      ],
+      "end_latlng": [
+        55.949159,
+        -3.175714
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999436300,
+    "resource_state": 2,
+    "name": "Aero Tuck Time",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 70,
+    "moving_time": 70,
+    "start_date": "2025-06-15T09:16:32Z",
+    "start_date_local": "2025-06-15T10:16:32Z",
+    "distance": 856.5,
+    "start_index": 63,
+    "end_index": 133,
+    "device_watts": false,
+    "segment": {
+      "id": 10053334,
+      "resource_state": 2,
+      "name": "Aero Tuck Time",
+      "activity_type": "Ride",
+      "distance": 856.5,
+      "average_grade": -4.5,
+      "maximum_grade": -0.4,
+      "elevation_high": 93.4,
+      "elevation_low": 55,
+      "start_latlng": [
+        55.942791,
+        -3.17197
+      ],
+      "end_latlng": [
+        55.948601,
+        -3.176454
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001487400,
+    "resource_state": 2,
+    "name": "Arthur's seat - Main descent",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 50,
+    "moving_time": 50,
+    "start_date": "2025-06-15T09:16:47Z",
+    "start_date_local": "2025-06-15T10:16:47Z",
+    "distance": 620.4,
+    "start_index": 78,
+    "end_index": 128,
+    "device_watts": false,
+    "segment": {
+      "id": 9890942,
+      "resource_state": 2,
+      "name": "Arthur's seat - Main descent",
+      "activity_type": "Ride",
+      "distance": 620.4,
+      "average_grade": -5.2,
+      "maximum_grade": 1.9,
+      "elevation_high": 79.3,
+      "elevation_low": 47.1,
+      "start_latlng": [
+        55.942903,
+        -3.174738
+      ],
+      "end_latlng": [
+        55.947959,
+        -3.176884
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328999177000,
+    "resource_state": 2,
+    "name": "Queen`s Drive Dash",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 85,
+    "moving_time": 85,
+    "start_date": "2025-06-15T09:17:00Z",
+    "start_date_local": "2025-06-15T10:17:00Z",
+    "distance": 867.9,
+    "start_index": 91,
+    "end_index": 176,
+    "device_watts": false,
+    "segment": {
+      "id": 7246478,
+      "resource_state": 2,
+      "name": "Queen`s Drive Dash",
+      "activity_type": "Ride",
+      "distance": 867.9,
+      "average_grade": -4.1,
+      "maximum_grade": 5.4,
+      "elevation_high": 79.1,
+      "elevation_low": 42,
+      "start_latlng": [
+        55.943688,
+        -3.177071
+      ],
+      "end_latlng": [
+        55.95029,
+        -3.172684
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328998854700,
+    "resource_state": 2,
+    "name": "Across the 2 main Roundabouts",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 59,
+    "moving_time": 59,
+    "start_date": "2025-06-15T09:17:49Z",
+    "start_date_local": "2025-06-15T10:17:49Z",
+    "distance": 367.9,
+    "start_index": 140,
+    "end_index": 199,
+    "device_watts": false,
+    "segment": {
+      "id": 10091410,
+      "resource_state": 2,
+      "name": "Across the 2 main Roundabouts",
+      "activity_type": "Ride",
+      "distance": 367.9,
+      "average_grade": 0.5,
+      "maximum_grade": 5,
+      "elevation_high": 112.8,
+      "elevation_low": 110.8,
+      "start_latlng": [
+        55.949128,
+        -3.175635
+      ],
+      "end_latlng": [
+        55.950844,
+        -3.170864
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328998345700,
+    "resource_state": 2,
+    "name": "Loop Arthur Seat",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 891,
+    "moving_time": 891,
+    "start_date": "2025-06-15T09:18:06Z",
+    "start_date_local": "2025-06-15T10:18:06Z",
+    "distance": 5248,
+    "start_index": 157,
+    "end_index": 1048,
+    "device_watts": false,
+    "segment": {
+      "id": 16263828,
+      "resource_state": 2,
+      "name": "Loop Arthur Seat",
+      "activity_type": "Ride",
+      "distance": 5248,
+      "average_grade": 0.1,
+      "maximum_grade": 15.5,
+      "elevation_high": 135.2,
+      "elevation_low": 46.4,
+      "start_latlng": [
+        55.949939,
+        -3.174451
+      ],
+      "end_latlng": [
+        55.949755,
+        -3.174649
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999376000,
+    "resource_state": 2,
+    "name": "Volcano loop (1st roundabout to peak)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 744,
+    "moving_time": 744,
+    "start_date": "2025-06-15T09:18:08Z",
+    "start_date_local": "2025-06-15T10:18:08Z",
+    "distance": 3643,
+    "start_index": 159,
+    "end_index": 903,
+    "device_watts": false,
+    "segment": {
+      "id": 25163749,
+      "resource_state": 2,
+      "name": "Volcano loop (1st roundabout to peak)",
+      "activity_type": "Ride",
+      "distance": 3643,
+      "average_grade": 2.4,
+      "maximum_grade": 41.4,
+      "elevation_high": 129,
+      "elevation_low": 40,
+      "start_latlng": [
+        55.949832,
+        -3.174239
+      ],
+      "end_latlng": [
+        55.940841,
+        -3.164401
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001380000,
+    "resource_state": 2,
+    "name": "Arthur's Climb (Full)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 697,
+    "moving_time": 697,
+    "start_date": "2025-06-15T09:18:47Z",
+    "start_date_local": "2025-06-15T10:18:47Z",
+    "distance": 3317.9,
+    "start_index": 198,
+    "end_index": 895,
+    "device_watts": false,
+    "segment": {
+      "id": 21030395,
+      "resource_state": 2,
+      "name": "Arthur's Climb (Full)",
+      "activity_type": "Ride",
+      "distance": 3317.9,
+      "average_grade": 2.6,
+      "maximum_grade": 12.9,
+      "elevation_high": 141.6,
+      "elevation_low": 54.4,
+      "start_latlng": [
+        55.950755,
+        -3.170875
+      ],
+      "end_latlng": [
+        55.940641,
+        -3.163742
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997209000,
+    "resource_state": 2,
+    "name": "Parliament Loop",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 878,
+    "moving_time": 878,
+    "start_date": "2025-06-15T09:18:49Z",
+    "start_date_local": "2025-06-15T10:18:49Z",
+    "distance": 5213.97,
+    "start_index": 200,
+    "end_index": 1078,
+    "device_watts": false,
+    "segment": {
+      "id": 1618420,
+      "resource_state": 2,
+      "name": "Parliament Loop",
+      "activity_type": "Ride",
+      "distance": 5213.97,
+      "average_grade": 0,
+      "maximum_grade": 14.6,
+      "elevation_high": 143.4,
+      "elevation_low": 57.6,
+      "start_latlng": [
+        55.95081450417638,
+        -3.1707053259015083
+      ],
+      "end_latlng": [
+        55.95073772594333,
+        -3.171795392408967
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002543000,
+    "resource_state": 2,
+    "name": "Queens Drive Sprint (ped Xing to gate post)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 91,
+    "moving_time": 91,
+    "start_date": "2025-06-15T09:19:00Z",
+    "start_date_local": "2025-06-15T10:19:00Z",
+    "distance": 606.727,
+    "start_index": 211,
+    "end_index": 302,
+    "device_watts": false,
+    "segment": {
+      "id": 3868802,
+      "resource_state": 2,
+      "name": "Queens Drive Sprint (ped Xing to gate post)",
+      "activity_type": "Ride",
+      "distance": 606.727,
+      "average_grade": -0.6,
+      "maximum_grade": 1.5,
+      "elevation_high": 46.1,
+      "elevation_low": 40.6,
+      "start_latlng": [
+        55.9510782,
+        -3.169612
+      ],
+      "end_latlng": [
+        55.9531527,
+        -3.1607066
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328995812400,
+    "resource_state": 2,
+    "name": "car park to car park",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 884,
+    "moving_time": 884,
+    "start_date": "2025-06-15T09:19:04Z",
+    "start_date_local": "2025-06-15T10:19:04Z",
+    "distance": 5284.98,
+    "start_index": 215,
+    "end_index": 1099,
+    "device_watts": false,
+    "segment": {
+      "id": 1919081,
+      "resource_state": 2,
+      "name": "car park to car park",
+      "activity_type": "Ride",
+      "distance": 5284.98,
+      "average_grade": -0.1,
+      "maximum_grade": 10.6,
+      "elevation_high": 131.2,
+      "elevation_low": 45.8,
+      "start_latlng": [
+        55.95110451802611,
+        -3.1692183762788773
+      ],
+      "end_latlng": [
+        55.95108876004815,
+        -3.1692928075790405
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000814600,
+    "resource_state": 2,
+    "name": "fast Queen's drive sprint loch to ice cream van",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 47,
+    "moving_time": 47,
+    "start_date": "2025-06-15T09:19:07Z",
+    "start_date_local": "2025-06-15T10:19:07Z",
+    "distance": 320.4,
+    "start_index": 218,
+    "end_index": 265,
+    "device_watts": false,
+    "segment": {
+      "id": 8345868,
+      "resource_state": 2,
+      "name": "fast Queen's drive sprint loch to ice cream van",
+      "activity_type": "Ride",
+      "distance": 320.4,
+      "average_grade": -0.2,
+      "maximum_grade": 1.9,
+      "elevation_high": 44.5,
+      "elevation_low": 42.9,
+      "start_latlng": [
+        55.951157,
+        -3.168894
+      ],
+      "end_latlng": [
+        55.951853,
+        -3.164332
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329000555500,
+    "resource_state": 2,
+    "name": "Car Park to Little Kicker",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 684,
+    "moving_time": 684,
+    "start_date": "2025-06-15T09:19:07Z",
+    "start_date_local": "2025-06-15T10:19:07Z",
+    "distance": 3257.8,
+    "start_index": 218,
+    "end_index": 902,
+    "device_watts": false,
+    "segment": {
+      "id": 33568530,
+      "resource_state": 2,
+      "name": "Car Park to Little Kicker",
+      "activity_type": "Ride",
+      "distance": 3257.8,
+      "average_grade": 2.6,
+      "maximum_grade": 14.3,
+      "elevation_high": 126.8,
+      "elevation_low": 42.8,
+      "start_latlng": [
+        55.951138,
+        -3.168932
+      ],
+      "end_latlng": [
+        55.940798,
+        -3.164292
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999690000,
+    "resource_state": 2,
+    "name": "Arthur's Seat - clockwise \"work block\"",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 699,
+    "moving_time": 699,
+    "start_date": "2025-06-15T09:19:22Z",
+    "start_date_local": "2025-06-15T10:19:22Z",
+    "distance": 3436.82,
+    "start_index": 233,
+    "end_index": 932,
+    "device_watts": false,
+    "segment": {
+      "id": 1311981,
+      "resource_state": 2,
+      "name": "Arthur's Seat - clockwise \"work block\"",
+      "activity_type": "Ride",
+      "distance": 3436.82,
+      "average_grade": 1.5,
+      "maximum_grade": 16.3,
+      "elevation_high": 129.1,
+      "elevation_low": 39.9,
+      "start_latlng": [
+        55.95137894153595,
+        -3.1674742698669434
+      ],
+      "end_latlng": [
+        55.9423828125,
+        -3.167238235473633
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997707000,
+    "resource_state": 2,
+    "name": "Race the Volcano Lap",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 876,
+    "moving_time": 876,
+    "start_date": "2025-06-15T09:19:42Z",
+    "start_date_local": "2025-06-15T10:19:42Z",
+    "distance": 5305.3,
+    "start_index": 253,
+    "end_index": 1129,
+    "device_watts": false,
+    "segment": {
+      "id": 21040715,
+      "resource_state": 2,
+      "name": "Race the Volcano Lap",
+      "activity_type": "Ride",
+      "distance": 5305.3,
+      "average_grade": 0,
+      "maximum_grade": 10.2,
+      "elevation_high": 138.4,
+      "elevation_low": 50.8,
+      "start_latlng": [
+        55.951713,
+        -3.165624
+      ],
+      "end_latlng": [
+        55.951722,
+        -3.165466
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000326000,
+    "resource_state": 2,
+    "name": "AS pt2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 642,
+    "moving_time": 642,
+    "start_date": "2025-06-15T09:20:33Z",
+    "start_date_local": "2025-06-15T10:20:33Z",
+    "distance": 3128.9,
+    "start_index": 304,
+    "end_index": 946,
+    "device_watts": false,
+    "segment": {
+      "id": 21409717,
+      "resource_state": 2,
+      "name": "AS pt2",
+      "activity_type": "Ride",
+      "distance": 3128.9,
+      "average_grade": 1.4,
+      "maximum_grade": 19.5,
+      "elevation_high": 128.6,
+      "elevation_low": 42.4,
+      "start_latlng": [
+        55.95322,
+        -3.160454
+      ],
+      "end_latlng": [
+        55.942588,
+        -3.170089
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997153000,
+    "resource_state": 2,
+    "name": "Holyrood Loop Clockwise from Carpark",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 865,
+    "moving_time": 865,
+    "start_date": "2025-06-15T09:20:34Z",
+    "start_date_local": "2025-06-15T10:20:34Z",
+    "distance": 5269.8,
+    "start_index": 305,
+    "end_index": 1170,
+    "device_watts": false,
+    "segment": {
+      "id": 9880577,
+      "resource_state": 2,
+      "name": "Holyrood Loop Clockwise from Carpark",
+      "activity_type": "Ride",
+      "distance": 5269.8,
+      "average_grade": 0,
+      "maximum_grade": 13.6,
+      "elevation_high": 128.8,
+      "elevation_low": 40,
+      "start_latlng": [
+        55.953231,
+        -3.160347
+      ],
+      "end_latlng": [
+        55.953143,
+        -3.160646
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999090000,
+    "resource_state": 2,
+    "name": "AS climb to peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 574,
+    "moving_time": 574,
+    "start_date": "2025-06-15T09:20:35Z",
+    "start_date_local": "2025-06-15T10:20:35Z",
+    "distance": 2531.5,
+    "start_index": 306,
+    "end_index": 880,
+    "device_watts": false,
+    "segment": {
+      "id": 21409093,
+      "resource_state": 2,
+      "name": "AS climb to peak",
+      "activity_type": "Ride",
+      "distance": 2531.5,
+      "average_grade": 3.4,
+      "maximum_grade": 21.6,
+      "elevation_high": 128.5,
+      "elevation_low": 43,
+      "start_latlng": [
+        55.953308,
+        -3.160222
+      ],
+      "end_latlng": [
+        55.94044,
+        -3.162458
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002184700,
+    "resource_state": 2,
+    "name": "VS - Arthur's Seat Climb",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 405,
+    "moving_time": 405,
+    "start_date": "2025-06-15T09:20:37Z",
+    "start_date_local": "2025-06-15T10:20:37Z",
+    "distance": 1445.1,
+    "start_index": 308,
+    "end_index": 713,
+    "device_watts": false,
+    "segment": {
+      "id": 8387766,
+      "resource_state": 2,
+      "name": "VS - Arthur's Seat Climb",
+      "activity_type": "Ride",
+      "distance": 1445.1,
+      "average_grade": 5.8,
+      "maximum_grade": 19.8,
+      "elevation_high": 126.8,
+      "elevation_low": 43,
+      "start_latlng": [
+        55.953239,
+        -3.16006
+      ],
+      "end_latlng": [
+        55.946514,
+        -3.15434
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999119000,
+    "resource_state": 2,
+    "name": "SCMA Open HC Course",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 423,
+    "moving_time": 423,
+    "start_date": "2025-06-15T09:20:39Z",
+    "start_date_local": "2025-06-15T10:20:39Z",
+    "distance": 1480.3,
+    "start_index": 310,
+    "end_index": 733,
+    "device_watts": false,
+    "segment": {
+      "id": 4514644,
+      "resource_state": 2,
+      "name": "SCMA Open HC Course",
+      "activity_type": "Ride",
+      "distance": 1480.3,
+      "average_grade": 5.1,
+      "maximum_grade": 12.1,
+      "elevation_high": 210.8,
+      "elevation_low": 135.6,
+      "start_latlng": [
+        55.953216,
+        -3.159832
+      ],
+      "end_latlng": [
+        55.945598,
+        -3.15415
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002071000,
+    "resource_state": 2,
+    "name": "0.9 climb",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 274,
+    "moving_time": 274,
+    "start_date": "2025-06-15T09:20:39Z",
+    "start_date_local": "2025-06-15T10:20:39Z",
+    "distance": 913,
+    "start_index": 310,
+    "end_index": 584,
+    "device_watts": false,
+    "segment": {
+      "id": 18524140,
+      "resource_state": 2,
+      "name": "0.9 climb",
+      "activity_type": "Ride",
+      "distance": 913,
+      "average_grade": 6.4,
+      "maximum_grade": 30.1,
+      "elevation_high": 103.3,
+      "elevation_low": 44.5,
+      "start_latlng": [
+        55.95324,
+        -3.159803
+      ],
+      "end_latlng": [
+        55.949323,
+        -3.150328
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328998820000,
+    "resource_state": 2,
+    "name": "Arthur's Seat Climb",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 410,
+    "moving_time": 410,
+    "start_date": "2025-06-15T09:20:40Z",
+    "start_date_local": "2025-06-15T10:20:40Z",
+    "distance": 1415.32,
+    "start_index": 311,
+    "end_index": 721,
+    "device_watts": false,
+    "segment": {
+      "id": 686793,
+      "resource_state": 2,
+      "name": "Arthur's Seat Climb",
+      "activity_type": "Ride",
+      "distance": 1415.32,
+      "average_grade": 5.6,
+      "maximum_grade": 10.2,
+      "elevation_high": 119.3,
+      "elevation_low": 41.7,
+      "start_latlng": [
+        55.95349964685738,
+        -3.1598905753344297
+      ],
+      "end_latlng": [
+        55.94618769362569,
+        -3.154458263888955
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328999966700,
+    "resource_state": 2,
+    "name": "Scma hill climb 2015 course",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 429,
+    "moving_time": 429,
+    "start_date": "2025-06-15T09:20:41Z",
+    "start_date_local": "2025-06-15T10:20:41Z",
+    "distance": 1523.7,
+    "start_index": 312,
+    "end_index": 741,
+    "device_watts": false,
+    "segment": {
+      "id": 11013486,
+      "resource_state": 2,
+      "name": "Scma hill climb 2015 course",
+      "activity_type": "Ride",
+      "distance": 1523.7,
+      "average_grade": 4.9,
+      "maximum_grade": 11.7,
+      "elevation_high": 92.6,
+      "elevation_low": 18.2,
+      "start_latlng": [
+        55.953226,
+        -3.15968
+      ],
+      "end_latlng": [
+        55.94523,
+        -3.153642
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328998789000,
+    "resource_state": 2,
+    "name": "Susan Main",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 586,
+    "moving_time": 586,
+    "start_date": "2025-06-15T09:20:41Z",
+    "start_date_local": "2025-06-15T10:20:41Z",
+    "distance": 2607.6,
+    "start_index": 312,
+    "end_index": 898,
+    "device_watts": false,
+    "segment": {
+      "id": 29231734,
+      "resource_state": 2,
+      "name": "Susan Main",
+      "activity_type": "Ride",
+      "distance": 2607.6,
+      "average_grade": 3.1,
+      "maximum_grade": 12.9,
+      "elevation_high": 124.4,
+      "elevation_low": 43.4,
+      "start_latlng": [
+        55.953254,
+        -3.159612
+      ],
+      "end_latlng": [
+        55.940723,
+        -3.163942
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997783600,
+    "resource_state": 2,
+    "name": "Arthur's Seat - lap from gate",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 853,
+    "moving_time": 853,
+    "start_date": "2025-06-15T09:20:42Z",
+    "start_date_local": "2025-06-15T10:20:42Z",
+    "distance": 5252.64,
+    "start_index": 313,
+    "end_index": 1166,
+    "device_watts": false,
+    "segment": {
+      "id": 3810079,
+      "resource_state": 2,
+      "name": "Arthur's Seat - lap from gate",
+      "activity_type": "Ride",
+      "distance": 5252.64,
+      "average_grade": 0,
+      "maximum_grade": 15.3,
+      "elevation_high": 128.7,
+      "elevation_low": 40,
+      "start_latlng": [
+        55.953195,
+        -3.159581667
+      ],
+      "end_latlng": [
+        55.952991667,
+        -3.160996667
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997541000,
+    "resource_state": 2,
+    "name": "Arthurs Seat - Gate to Car Park",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 774,
+    "moving_time": 774,
+    "start_date": "2025-06-15T09:20:43Z",
+    "start_date_local": "2025-06-15T10:20:43Z",
+    "distance": 4516.72,
+    "start_index": 314,
+    "end_index": 1088,
+    "device_watts": false,
+    "segment": {
+      "id": 1221733,
+      "resource_state": 2,
+      "name": "Arthurs Seat - Gate to Car Park",
+      "activity_type": "Ride",
+      "distance": 4516.72,
+      "average_grade": -0.1,
+      "maximum_grade": 9.7,
+      "elevation_high": 144.1,
+      "elevation_low": 56.6,
+      "start_latlng": [
+        55.953213,
+        -3.159468
+      ],
+      "end_latlng": [
+        55.950839,
+        -3.170881
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002591000,
+    "resource_state": 2,
+    "name": "Segment",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 629,
+    "moving_time": 629,
+    "start_date": "2025-06-15T09:20:43Z",
+    "start_date_local": "2025-06-15T10:20:43Z",
+    "distance": 3029.8,
+    "start_index": 314,
+    "end_index": 943,
+    "device_watts": false,
+    "segment": {
+      "id": 5878011,
+      "resource_state": 2,
+      "name": "Segment",
+      "activity_type": "Ride",
+      "distance": 3029.8,
+      "average_grade": 1.6,
+      "maximum_grade": 17.4,
+      "elevation_high": 210,
+      "elevation_low": 129.8,
+      "start_latlng": [
+        55.953212,
+        -3.159476
+      ],
+      "end_latlng": [
+        55.942548,
+        -3.169468
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002384400,
+    "resource_state": 2,
+    "name": "to the gate",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 114,
+    "moving_time": 114,
+    "start_date": "2025-06-15T09:20:46Z",
+    "start_date_local": "2025-06-15T10:20:46Z",
+    "distance": 421.3,
+    "start_index": 317,
+    "end_index": 431,
+    "device_watts": false,
+    "segment": {
+      "id": 18940561,
+      "resource_state": 2,
+      "name": "to the gate",
+      "activity_type": "Ride",
+      "distance": 421.3,
+      "average_grade": 6.8,
+      "maximum_grade": 29.5,
+      "elevation_high": 80.7,
+      "elevation_low": 45.2,
+      "start_latlng": [
+        55.953177,
+        -3.159171
+      ],
+      "end_latlng": [
+        55.95273,
+        -3.153493
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328998722600,
+    "resource_state": 2,
+    "name": "From Gate to Loch (Standing Start)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 393,
+    "moving_time": 393,
+    "start_date": "2025-06-15T09:20:46Z",
+    "start_date_local": "2025-06-15T10:20:46Z",
+    "distance": 1315.6,
+    "start_index": 317,
+    "end_index": 710,
+    "device_watts": false,
+    "segment": {
+      "id": 10601361,
+      "resource_state": 2,
+      "name": "From Gate to Loch (Standing Start)",
+      "activity_type": "Ride",
+      "distance": 1315.6,
+      "average_grade": 5.6,
+      "maximum_grade": 13.4,
+      "elevation_high": 65.6,
+      "elevation_low": -7.6,
+      "start_latlng": [
+        55.953159,
+        -3.159215
+      ],
+      "end_latlng": [
+        55.946606,
+        -3.154096
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002368000,
+    "resource_state": 2,
+    "name": "Arthur's Seat - Gate to Top",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 415,
+    "moving_time": 415,
+    "start_date": "2025-06-15T09:20:46Z",
+    "start_date_local": "2025-06-15T10:20:46Z",
+    "distance": 1463.8,
+    "start_index": 317,
+    "end_index": 732,
+    "device_watts": false,
+    "segment": {
+      "id": 11573934,
+      "resource_state": 2,
+      "name": "Arthur's Seat - Gate to Top",
+      "activity_type": "Ride",
+      "distance": 1463.8,
+      "average_grade": 5.6,
+      "maximum_grade": 19.7,
+      "elevation_high": 129.6,
+      "elevation_low": 47.9,
+      "start_latlng": [
+        55.953175,
+        -3.159204
+      ],
+      "end_latlng": [
+        55.945607,
+        -3.154204
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001950000,
+    "resource_state": 2,
+    "name": "Arthur's Seat KoM - from barrier to peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 402,
+    "moving_time": 402,
+    "start_date": "2025-06-15T09:20:46Z",
+    "start_date_local": "2025-06-15T10:20:46Z",
+    "distance": 1348.9,
+    "start_index": 317,
+    "end_index": 719,
+    "device_watts": false,
+    "segment": {
+      "id": 21166849,
+      "resource_state": 2,
+      "name": "Arthur's Seat KoM - from barrier to peak",
+      "activity_type": "Ride",
+      "distance": 1348.9,
+      "average_grade": 5.8,
+      "maximum_grade": 14.5,
+      "elevation_high": 127,
+      "elevation_low": 46.3,
+      "start_latlng": [
+        55.953134,
+        -3.159121
+      ],
+      "end_latlng": [
+        55.946275,
+        -3.15448
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999200000,
+    "resource_state": 2,
+    "name": "Arthur's Seat Barrier to Layby",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 339,
+    "moving_time": 339,
+    "start_date": "2025-06-15T09:20:47Z",
+    "start_date_local": "2025-06-15T10:20:47Z",
+    "distance": 1105.3,
+    "start_index": 318,
+    "end_index": 657,
+    "device_watts": false,
+    "segment": {
+      "id": 17603372,
+      "resource_state": 2,
+      "name": "Arthur's Seat Barrier to Layby",
+      "activity_type": "Ride",
+      "distance": 1105.3,
+      "average_grade": 5.9,
+      "maximum_grade": 21,
+      "elevation_high": 138.4,
+      "elevation_low": 72.8,
+      "start_latlng": [
+        55.953162,
+        -3.159052
+      ],
+      "end_latlng": [
+        55.947391,
+        -3.15116
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001572400,
+    "resource_state": 2,
+    "name": "hill reps",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 223,
+    "moving_time": 223,
+    "start_date": "2025-06-15T09:20:48Z",
+    "start_date_local": "2025-06-15T10:20:48Z",
+    "distance": 731.9,
+    "start_index": 319,
+    "end_index": 542,
+    "device_watts": false,
+    "segment": {
+      "id": 8868754,
+      "resource_state": 2,
+      "name": "hill reps",
+      "activity_type": "Ride",
+      "distance": 731.9,
+      "average_grade": 6.2,
+      "maximum_grade": 25,
+      "elevation_high": 39,
+      "elevation_low": -6.2,
+      "start_latlng": [
+        55.953159,
+        -3.159024
+      ],
+      "end_latlng": [
+        55.950471,
+        -3.150665
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329001896000,
+    "resource_state": 2,
+    "name": "Arthurs Seat Gate to Top",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 602,
+    "moving_time": 602,
+    "start_date": "2025-06-15T09:20:48Z",
+    "start_date_local": "2025-06-15T10:20:48Z",
+    "distance": 2718.2,
+    "start_index": 319,
+    "end_index": 921,
+    "device_watts": false,
+    "segment": {
+      "id": 8293854,
+      "resource_state": 2,
+      "name": "Arthurs Seat Gate to Top",
+      "activity_type": "Ride",
+      "distance": 2718.2,
+      "average_grade": 2.2,
+      "maximum_grade": 16.4,
+      "elevation_high": 130.4,
+      "elevation_low": 51.1,
+      "start_latlng": [
+        55.953137,
+        -3.158966
+      ],
+      "end_latlng": [
+        55.941964,
+        -3.165524
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001685000,
+    "resource_state": 2,
+    "name": "Arthur Seat Bottom to Peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 589,
+    "moving_time": 589,
+    "start_date": "2025-06-15T09:20:48Z",
+    "start_date_local": "2025-06-15T10:20:48Z",
+    "distance": 2612,
+    "start_index": 319,
+    "end_index": 908,
+    "device_watts": false,
+    "segment": {
+      "id": 10117132,
+      "resource_state": 2,
+      "name": "Arthur Seat Bottom to Peak",
+      "activity_type": "Ride",
+      "distance": 2612,
+      "average_grade": 3.1,
+      "maximum_grade": 12,
+      "elevation_high": 208.4,
+      "elevation_low": 127.8,
+      "start_latlng": [
+        55.953147,
+        -3.158984
+      ],
+      "end_latlng": [
+        55.941034,
+        -3.164838
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999883000,
+    "resource_state": 2,
+    "name": "St Arthur part 1/2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 568,
+    "moving_time": 568,
+    "start_date": "2025-06-15T09:20:49Z",
+    "start_date_local": "2025-06-15T10:20:49Z",
+    "distance": 2505.1,
+    "start_index": 320,
+    "end_index": 888,
+    "device_watts": false,
+    "segment": {
+      "id": 12421400,
+      "resource_state": 2,
+      "name": "St Arthur part 1/2",
+      "activity_type": "Ride",
+      "distance": 2505.1,
+      "average_grade": 3.1,
+      "maximum_grade": 18.2,
+      "elevation_high": 126.8,
+      "elevation_low": 48.4,
+      "start_latlng": [
+        55.953172,
+        -3.158925
+      ],
+      "end_latlng": [
+        55.940535,
+        -3.163186
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328998503400,
+    "resource_state": 2,
+    "name": "gate to after steep incline",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 252,
+    "moving_time": 252,
+    "start_date": "2025-06-15T09:20:50Z",
+    "start_date_local": "2025-06-15T10:20:50Z",
+    "distance": 838.2,
+    "start_index": 321,
+    "end_index": 573,
+    "device_watts": false,
+    "segment": {
+      "id": 5460084,
+      "resource_state": 2,
+      "name": "gate to after steep incline",
+      "activity_type": "Ride",
+      "distance": 838.2,
+      "average_grade": 6.5,
+      "maximum_grade": 16.3,
+      "elevation_high": 103.4,
+      "elevation_low": 50.6,
+      "start_latlng": [
+        55.953207,
+        -3.158895
+      ],
+      "end_latlng": [
+        55.949618,
+        -3.150384
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999737300,
+    "resource_state": 2,
+    "name": "Climbing Arthur",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 577,
+    "moving_time": 577,
+    "start_date": "2025-06-15T09:20:50Z",
+    "start_date_local": "2025-06-15T10:20:50Z",
+    "distance": 2552.4,
+    "start_index": 321,
+    "end_index": 898,
+    "device_watts": false,
+    "segment": {
+      "id": 23867281,
+      "resource_state": 2,
+      "name": "Climbing Arthur",
+      "activity_type": "Ride",
+      "distance": 2552.4,
+      "average_grade": 3.1,
+      "maximum_grade": 12.7,
+      "elevation_high": 127,
+      "elevation_low": 47.4,
+      "start_latlng": [
+        55.95322,
+        -3.158842
+      ],
+      "end_latlng": [
+        55.940716,
+        -3.163979
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999738400,
+    "resource_state": 2,
+    "name": "Arthur's Seat Climb - Gate to Lake",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 367,
+    "moving_time": 367,
+    "start_date": "2025-06-15T09:20:51Z",
+    "start_date_local": "2025-06-15T10:20:51Z",
+    "distance": 1207.44,
+    "start_index": 322,
+    "end_index": 689,
+    "device_watts": false,
+    "segment": {
+      "id": 765113,
+      "resource_state": 2,
+      "name": "Arthur's Seat Climb - Gate to Lake",
+      "activity_type": "Ride",
+      "distance": 1207.44,
+      "average_grade": 4.8,
+      "maximum_grade": 14,
+      "elevation_high": 93.2,
+      "elevation_low": 34.8,
+      "start_latlng": [
+        55.95324803239722,
+        -3.158821811780067
+      ],
+      "end_latlng": [
+        55.94703494145925,
+        -3.152907323032176
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001338000,
+    "resource_state": 2,
+    "name": "Prt2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 622,
+    "moving_time": 622,
+    "start_date": "2025-06-15T09:20:51Z",
+    "start_date_local": "2025-06-15T10:20:51Z",
+    "distance": 2995.6,
+    "start_index": 322,
+    "end_index": 944,
+    "device_watts": false,
+    "segment": {
+      "id": 19809936,
+      "resource_state": 2,
+      "name": "Prt2",
+      "activity_type": "Ride",
+      "distance": 2995.6,
+      "average_grade": 1.4,
+      "maximum_grade": 20.3,
+      "elevation_high": 128.6,
+      "elevation_low": 46.3,
+      "start_latlng": [
+        55.953246,
+        -3.158777
+      ],
+      "end_latlng": [
+        55.942622,
+        -3.169616
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999092000,
+    "resource_state": 2,
+    "name": "Holyrood Park Hill challenge",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 369,
+    "moving_time": 369,
+    "start_date": "2025-06-15T09:21:11Z",
+    "start_date_local": "2025-06-15T10:21:11Z",
+    "distance": 1226.5,
+    "start_index": 342,
+    "end_index": 711,
+    "device_watts": false,
+    "segment": {
+      "id": 10562363,
+      "resource_state": 2,
+      "name": "Holyrood Park Hill challenge",
+      "activity_type": "Ride",
+      "distance": 1226.5,
+      "average_grade": 5.8,
+      "maximum_grade": 13.3,
+      "elevation_high": 103.2,
+      "elevation_low": 31.6,
+      "start_latlng": [
+        55.953704,
+        -3.15788
+      ],
+      "end_latlng": [
+        55.946561,
+        -3.154166
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001246700,
+    "resource_state": 2,
+    "name": "ERC Hill Climb Benchmark",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 206,
+    "moving_time": 206,
+    "start_date": "2025-06-15T09:21:12Z",
+    "start_date_local": "2025-06-15T10:21:12Z",
+    "distance": 659.1,
+    "start_index": 343,
+    "end_index": 549,
+    "device_watts": false,
+    "segment": {
+      "id": 10716752,
+      "resource_state": 2,
+      "name": "ERC Hill Climb Benchmark",
+      "activity_type": "Ride",
+      "distance": 659.1,
+      "average_grade": 7.4,
+      "maximum_grade": 18.6,
+      "elevation_high": 96.1,
+      "elevation_low": 47.6,
+      "start_latlng": [
+        55.953742,
+        -3.157848
+      ],
+      "end_latlng": [
+        55.950297,
+        -3.150537
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328998723600,
+    "resource_state": 2,
+    "name": "Arthurs Seat Climb to Peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 570,
+    "moving_time": 570,
+    "start_date": "2025-06-15T09:21:13Z",
+    "start_date_local": "2025-06-15T10:21:13Z",
+    "distance": 2566.51,
+    "start_index": 344,
+    "end_index": 914,
+    "device_watts": false,
+    "segment": {
+      "id": 1599385,
+      "resource_state": 2,
+      "name": "Arthurs Seat Climb to Peak",
+      "activity_type": "Ride",
+      "distance": 2566.51,
+      "average_grade": 2.1,
+      "maximum_grade": 16.9,
+      "elevation_high": 128.7,
+      "elevation_low": 48.3,
+      "start_latlng": [
+        55.95373341,
+        -3.15778472
+      ],
+      "end_latlng": [
+        55.94139195,
+        -3.16524778
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999148500,
+    "resource_state": 2,
+    "name": "Arthur Seat Climb avoiding false starts!",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 346,
+    "moving_time": 346,
+    "start_date": "2025-06-15T09:21:44Z",
+    "start_date_local": "2025-06-15T10:21:44Z",
+    "distance": 1142.5,
+    "start_index": 375,
+    "end_index": 721,
+    "device_watts": false,
+    "segment": {
+      "id": 15523251,
+      "resource_state": 2,
+      "name": "Arthur Seat Climb avoiding false starts!",
+      "activity_type": "Ride",
+      "distance": 1142.5,
+      "average_grade": 5.7,
+      "maximum_grade": 11.3,
+      "elevation_high": 93.2,
+      "elevation_low": 28.6,
+      "start_latlng": [
+        55.953757,
+        -3.156032
+      ],
+      "end_latlng": [
+        55.946186,
+        -3.154509
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001611300,
+    "resource_state": 2,
+    "name": "First Bend to Water on the Seat",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 298,
+    "moving_time": 298,
+    "start_date": "2025-06-15T09:21:57Z",
+    "start_date_local": "2025-06-15T10:21:57Z",
+    "distance": 936.5,
+    "start_index": 388,
+    "end_index": 686,
+    "device_watts": false,
+    "segment": {
+      "id": 26369172,
+      "resource_state": 2,
+      "name": "First Bend to Water on the Seat",
+      "activity_type": "Ride",
+      "distance": 936.5,
+      "average_grade": 6.3,
+      "maximum_grade": 11.2,
+      "elevation_high": 113.2,
+      "elevation_low": 54.2,
+      "start_latlng": [
+        55.953548,
+        -3.155381
+      ],
+      "end_latlng": [
+        55.947051,
+        -3.152695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000910000,
+    "resource_state": 2,
+    "name": "Steepest kick - AS",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 31,
+    "moving_time": 31,
+    "start_date": "2025-06-15T09:24:04Z",
+    "start_date_local": "2025-06-15T10:24:04Z",
+    "distance": 91.4,
+    "start_index": 515,
+    "end_index": 546,
+    "device_watts": false,
+    "segment": {
+      "id": 10249386,
+      "resource_state": 2,
+      "name": "Steepest kick - AS",
+      "activity_type": "Ride",
+      "distance": 91.4,
+      "average_grade": 8.6,
+      "maximum_grade": 12.3,
+      "elevation_high": 96.4,
+      "elevation_low": 88.5,
+      "start_latlng": [
+        55.951182,
+        -3.150846
+      ],
+      "end_latlng": [
+        55.950379,
+        -3.150638
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329000386600,
+    "resource_state": 2,
+    "name": "Arthur's Seat climb, last 1/3",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 157,
+    "moving_time": 157,
+    "start_date": "2025-06-15T09:24:17Z",
+    "start_date_local": "2025-06-15T10:24:17Z",
+    "distance": 505.7,
+    "start_index": 528,
+    "end_index": 685,
+    "device_watts": false,
+    "segment": {
+      "id": 36845481,
+      "resource_state": 2,
+      "name": "Arthur's Seat climb, last 1/3",
+      "activity_type": "Ride",
+      "distance": 505.7,
+      "average_grade": 6.6,
+      "maximum_grade": 10.7,
+      "elevation_high": 116.2,
+      "elevation_low": 82.6,
+      "start_latlng": [
+        55.95085,
+        -3.150775
+      ],
+      "end_latlng": [
+        55.947088,
+        -3.15267
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001805000,
+    "resource_state": 2,
+    "name": "AS climb - Step to Loch",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 169,
+    "moving_time": 169,
+    "start_date": "2025-06-15T09:24:35Z",
+    "start_date_local": "2025-06-15T10:24:35Z",
+    "distance": 582.3,
+    "start_index": 546,
+    "end_index": 715,
+    "device_watts": false,
+    "segment": {
+      "id": 10494259,
+      "resource_state": 2,
+      "name": "AS climb - Step to Loch",
+      "activity_type": "Ride",
+      "distance": 582.3,
+      "average_grade": 5.2,
+      "maximum_grade": 12.5,
+      "elevation_high": 126.9,
+      "elevation_low": 96.5,
+      "start_latlng": [
+        55.950363,
+        -3.150629
+      ],
+      "end_latlng": [
+        55.946474,
+        -3.154421
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328998496000,
+    "resource_state": 2,
+    "name": "After Steep to Peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 358,
+    "moving_time": 358,
+    "start_date": "2025-06-15T09:24:44Z",
+    "start_date_local": "2025-06-15T10:24:44Z",
+    "distance": 1889.2,
+    "start_index": 555,
+    "end_index": 913,
+    "device_watts": false,
+    "segment": {
+      "id": 6944143,
+      "resource_state": 2,
+      "name": "After Steep to Peak",
+      "activity_type": "Ride",
+      "distance": 1889.2,
+      "average_grade": 1.4,
+      "maximum_grade": 8.2,
+      "elevation_high": 132.6,
+      "elevation_low": 100.4,
+      "start_latlng": [
+        55.950126,
+        -3.150552
+      ],
+      "end_latlng": [
+        55.941319,
+        -3.165188
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329001191400,
+    "resource_state": 2,
+    "name": "Round Loch Dunsapie NR",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 84,
+    "moving_time": 84,
+    "start_date": "2025-06-15T09:26:26Z",
+    "start_date_local": "2025-06-15T10:26:26Z",
+    "distance": 383.3,
+    "start_index": 657,
+    "end_index": 741,
+    "device_watts": false,
+    "segment": {
+      "id": 10395290,
+      "resource_state": 2,
+      "name": "Round Loch Dunsapie NR",
+      "activity_type": "Ride",
+      "distance": 383.3,
+      "average_grade": 3.1,
+      "maximum_grade": 12.3,
+      "elevation_high": 128.8,
+      "elevation_low": 114.6,
+      "start_latlng": [
+        55.947395,
+        -3.151131
+      ],
+      "end_latlng": [
+        55.945209,
+        -3.153645
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328999079000,
+    "resource_state": 2,
+    "name": "Dunsapie Loch to Roundabout (After Climbing)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 222,
+    "moving_time": 222,
+    "start_date": "2025-06-15T09:27:30Z",
+    "start_date_local": "2025-06-15T10:27:30Z",
+    "distance": 1609.2,
+    "start_index": 721,
+    "end_index": 943,
+    "device_watts": false,
+    "segment": {
+      "id": 1704511,
+      "resource_state": 2,
+      "name": "Dunsapie Loch to Roundabout (After Climbing)",
+      "activity_type": "Ride",
+      "distance": 1609.2,
+      "average_grade": -2.7,
+      "maximum_grade": 11.6,
+      "elevation_high": 128.7,
+      "elevation_low": 82.1,
+      "start_latlng": [
+        55.94619,
+        -3.15449
+      ],
+      "end_latlng": [
+        55.942578,
+        -3.169507
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329000576000,
+    "resource_state": 2,
+    "name": "Segment",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 173,
+    "moving_time": 173,
+    "start_date": "2025-06-15T09:27:54Z",
+    "start_date_local": "2025-06-15T10:27:54Z",
+    "distance": 1209,
+    "start_index": 745,
+    "end_index": 918,
+    "device_watts": false,
+    "segment": {
+      "id": 5877986,
+      "resource_state": 2,
+      "name": "Segment",
+      "activity_type": "Ride",
+      "distance": 1209,
+      "average_grade": -0.1,
+      "maximum_grade": 8,
+      "elevation_high": 210,
+      "elevation_low": 206,
+      "start_latlng": [
+        55.945014,
+        -3.15343
+      ],
+      "end_latlng": [
+        55.9417,
+        -3.165434
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000602600,
+    "resource_state": 2,
+    "name": "Top flat - Arthur's Seat NR",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 113,
+    "moving_time": 113,
+    "start_date": "2025-06-15T09:28:19Z",
+    "start_date_local": "2025-06-15T10:28:19Z",
+    "distance": 750.4,
+    "start_index": 770,
+    "end_index": 883,
+    "device_watts": false,
+    "segment": {
+      "id": 10370805,
+      "resource_state": 2,
+      "name": "Top flat - Arthur's Seat NR",
+      "activity_type": "Ride",
+      "distance": 750.4,
+      "average_grade": -0.9,
+      "maximum_grade": 13.1,
+      "elevation_high": 113.3,
+      "elevation_low": 94,
+      "start_latlng": [
+        55.943201,
+        -3.152319
+      ],
+      "end_latlng": [
+        55.940432,
+        -3.162816
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329001092000,
+    "resource_state": 2,
+    "name": "ERC 1 KM Benchmark - Standing Start",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 140,
+    "moving_time": 140,
+    "start_date": "2025-06-15T09:28:19Z",
+    "start_date_local": "2025-06-15T10:28:19Z",
+    "distance": 923.9,
+    "start_index": 770,
+    "end_index": 910,
+    "device_watts": false,
+    "segment": {
+      "id": 10817794,
+      "resource_state": 2,
+      "name": "ERC 1 KM Benchmark - Standing Start",
+      "activity_type": "Ride",
+      "distance": 923.9,
+      "average_grade": 0,
+      "maximum_grade": 17.3,
+      "elevation_high": 113.1,
+      "elevation_low": 93.7,
+      "start_latlng": [
+        55.943212,
+        -3.152358
+      ],
+      "end_latlng": [
+        55.941197,
+        -3.164964
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001710600,
+    "resource_state": 2,
+    "name": "To the Peak(AS top flat)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 118,
+    "moving_time": 118,
+    "start_date": "2025-06-15T09:28:28Z",
+    "start_date_local": "2025-06-15T10:28:28Z",
+    "distance": 761.3,
+    "start_index": 779,
+    "end_index": 897,
+    "device_watts": false,
+    "segment": {
+      "id": 35830678,
+      "resource_state": 2,
+      "name": "To the Peak(AS top flat)",
+      "activity_type": "Ride",
+      "distance": 761.3,
+      "average_grade": 1,
+      "maximum_grade": 4.8,
+      "elevation_high": 121.6,
+      "elevation_low": 113.2,
+      "start_latlng": [
+        55.942863,
+        -3.153184
+      ],
+      "end_latlng": [
+        55.940665,
+        -3.163913
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999666700,
+    "resource_state": 2,
+    "name": "ERC  200m Benchmark - Standing Start",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 24,
+    "moving_time": 24,
+    "start_date": "2025-06-15T09:28:31Z",
+    "start_date_local": "2025-06-15T10:28:31Z",
+    "distance": 172.6,
+    "start_index": 782,
+    "end_index": 806,
+    "device_watts": false,
+    "segment": {
+      "id": 10716729,
+      "resource_state": 2,
+      "name": "ERC  200m Benchmark - Standing Start",
+      "activity_type": "Ride",
+      "distance": 172.6,
+      "average_grade": -2.6,
+      "maximum_grade": 2.7,
+      "elevation_high": 105.9,
+      "elevation_low": 101.4,
+      "start_latlng": [
+        55.942709,
+        -3.153472
+      ],
+      "end_latlng": [
+        55.94172,
+        -3.155602
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002393600,
+    "resource_state": 2,
+    "name": "TBANN burst",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 56,
+    "moving_time": 56,
+    "start_date": "2025-06-15T09:29:31Z",
+    "start_date_local": "2025-06-15T10:29:31Z",
+    "distance": 328.8,
+    "start_index": 842,
+    "end_index": 898,
+    "device_watts": false,
+    "segment": {
+      "id": 15375220,
+      "resource_state": 2,
+      "name": "TBANN burst",
+      "activity_type": "Ride",
+      "distance": 328.8,
+      "average_grade": 1.3,
+      "maximum_grade": 4.2,
+      "elevation_high": 61.2,
+      "elevation_low": 56.2,
+      "start_latlng": [
+        55.940621,
+        -3.15894
+      ],
+      "end_latlng": [
+        55.940709,
+        -3.16404
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329002318000,
+    "resource_state": 2,
+    "name": "Attacus CC Sprint KOM",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 64,
+    "moving_time": 64,
+    "start_date": "2025-06-15T09:29:36Z",
+    "start_date_local": "2025-06-15T10:29:36Z",
+    "distance": 378.2,
+    "start_index": 847,
+    "end_index": 911,
+    "device_watts": false,
+    "segment": {
+      "id": 18395707,
+      "resource_state": 2,
+      "name": "Attacus CC Sprint KOM",
+      "activity_type": "Ride",
+      "distance": 378.2,
+      "average_grade": 0.5,
+      "maximum_grade": 3.9,
+      "elevation_high": 143.4,
+      "elevation_low": 138.8,
+      "start_latlng": [
+        55.940528,
+        -3.159468
+      ],
+      "end_latlng": [
+        55.941197,
+        -3.165012
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999322600,
+    "resource_state": 2,
+    "name": "AS finish",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 70,
+    "moving_time": 70,
+    "start_date": "2025-06-15T09:30:06Z",
+    "start_date_local": "2025-06-15T10:30:06Z",
+    "distance": 608.3,
+    "start_index": 877,
+    "end_index": 947,
+    "device_watts": false,
+    "segment": {
+      "id": 21409127,
+      "resource_state": 2,
+      "name": "AS finish",
+      "activity_type": "Ride",
+      "distance": 608.3,
+      "average_grade": -6.9,
+      "maximum_grade": -1,
+      "elevation_high": 128.3,
+      "elevation_low": 86.2,
+      "start_latlng": [
+        55.940422,
+        -3.162253
+      ],
+      "end_latlng": [
+        55.942579,
+        -3.170227
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329002494000,
+    "resource_state": 2,
+    "name": "the final kick",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 45,
+    "moving_time": 45,
+    "start_date": "2025-06-15T09:30:07Z",
+    "start_date_local": "2025-06-15T10:30:07Z",
+    "distance": 311.2,
+    "start_index": 878,
+    "end_index": 923,
+    "device_watts": false,
+    "segment": {
+      "id": 10050277,
+      "resource_state": 2,
+      "name": "the final kick",
+      "activity_type": "Ride",
+      "distance": 311.2,
+      "average_grade": 4.9,
+      "maximum_grade": 10.6,
+      "elevation_high": 110.5,
+      "elevation_low": 94.5,
+      "start_latlng": [
+        55.94038,
+        -3.16228
+      ],
+      "end_latlng": [
+        55.942134,
+        -3.165694
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995995600,
+    "resource_state": 2,
+    "name": "Arthur's Seat Full Descent",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 289,
+    "moving_time": 289,
+    "start_date": "2025-06-15T09:30:13Z",
+    "start_date_local": "2025-06-15T10:30:13Z",
+    "distance": 2733.8,
+    "start_index": 884,
+    "end_index": 1173,
+    "device_watts": false,
+    "segment": {
+      "id": 15891627,
+      "resource_state": 2,
+      "name": "Arthur's Seat Full Descent",
+      "activity_type": "Ride",
+      "distance": 2733.8,
+      "average_grade": -2.2,
+      "maximum_grade": 31.9,
+      "elevation_high": 113.8,
+      "elevation_low": 37.1,
+      "start_latlng": [
+        55.940466,
+        -3.162888
+      ],
+      "end_latlng": [
+        55.953229,
+        -3.160249
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995323000,
+    "resource_state": 2,
+    "name": "Arthur's Seat clockwise DH",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 140,
+    "moving_time": 140,
+    "start_date": "2025-06-15T09:30:32Z",
+    "start_date_local": "2025-06-15T10:30:32Z",
+    "distance": 1586.85,
+    "start_index": 903,
+    "end_index": 1043,
+    "device_watts": false,
+    "segment": {
+      "id": 1003725,
+      "resource_state": 2,
+      "name": "Arthur's Seat clockwise DH",
+      "activity_type": "Ride",
+      "distance": 1586.85,
+      "average_grade": -5.4,
+      "maximum_grade": -1.7,
+      "elevation_high": 86.1,
+      "elevation_low": 0,
+      "start_latlng": [
+        55.940848,
+        -3.164398
+      ],
+      "end_latlng": [
+        55.949482,
+        -3.175013
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997994500,
+    "resource_state": 2,
+    "name": "St Arthur part 2/2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 258,
+    "moving_time": 258,
+    "start_date": "2025-06-15T09:30:33Z",
+    "start_date_local": "2025-06-15T10:30:33Z",
+    "distance": 2524.6,
+    "start_index": 904,
+    "end_index": 1162,
+    "device_watts": false,
+    "segment": {
+      "id": 12421431,
+      "resource_state": 2,
+      "name": "St Arthur part 2/2",
+      "activity_type": "Ride",
+      "distance": 2524.6,
+      "average_grade": -3.1,
+      "maximum_grade": 10.8,
+      "elevation_high": 126.4,
+      "elevation_low": 41.4,
+      "start_latlng": [
+        55.940888,
+        -3.164536
+      ],
+      "end_latlng": [
+        55.952812,
+        -3.161464
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329001959400,
+    "resource_state": 2,
+    "name": "Queens Drive to round about",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 38,
+    "moving_time": 38,
+    "start_date": "2025-06-15T09:30:37Z",
+    "start_date_local": "2025-06-15T10:30:37Z",
+    "distance": 414.2,
+    "start_index": 908,
+    "end_index": 946,
+    "device_watts": false,
+    "segment": {
+      "id": 4405901,
+      "resource_state": 2,
+      "name": "Queens Drive to round about",
+      "activity_type": "Ride",
+      "distance": 414.2,
+      "average_grade": -4.6,
+      "maximum_grade": 11.1,
+      "elevation_high": 110.2,
+      "elevation_low": 81,
+      "start_latlng": [
+        55.941074,
+        -3.164842
+      ],
+      "end_latlng": [
+        55.942592,
+        -3.170056
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "United Kingdom",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000752000,
+    "resource_state": 2,
+    "name": "Only hazardous if your bike has stabilisers",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 36,
+    "moving_time": 36,
+    "start_date": "2025-06-15T09:30:38Z",
+    "start_date_local": "2025-06-15T10:30:38Z",
+    "distance": 396.8,
+    "start_index": 909,
+    "end_index": 945,
+    "device_watts": false,
+    "segment": {
+      "id": 13075724,
+      "resource_state": 2,
+      "name": "Only hazardous if your bike has stabilisers",
+      "activity_type": "Ride",
+      "distance": 396.8,
+      "average_grade": -8.2,
+      "maximum_grade": 0,
+      "elevation_high": 134.8,
+      "elevation_low": 102.4,
+      "start_latlng": [
+        55.941073,
+        -3.164901
+      ],
+      "end_latlng": [
+        55.942593,
+        -3.169825
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999960600,
+    "resource_state": 2,
+    "name": "Enjoy the view while you can!!!! ",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 30,
+    "moving_time": 30,
+    "start_date": "2025-06-15T09:30:42Z",
+    "start_date_local": "2025-06-15T10:30:42Z",
+    "distance": 344.6,
+    "start_index": 913,
+    "end_index": 943,
+    "device_watts": false,
+    "segment": {
+      "id": 7559689,
+      "resource_state": 2,
+      "name": "Enjoy the view while you can!!!! ",
+      "activity_type": "Ride",
+      "distance": 344.6,
+      "average_grade": -6.1,
+      "maximum_grade": 11.2,
+      "elevation_high": 110.5,
+      "elevation_low": 81.9,
+      "start_latlng": [
+        55.941341,
+        -3.165174
+      ],
+      "end_latlng": [
+        55.942572,
+        -3.169535
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997156000,
+    "resource_state": 2,
+    "name": "ASRockFall",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 732,
+    "moving_time": 732,
+    "start_date": "2025-06-15T09:30:59Z",
+    "start_date_local": "2025-06-15T10:30:59Z",
+    "distance": 4455.7,
+    "start_index": 930,
+    "end_index": 1662,
+    "device_watts": false,
+    "segment": {
+      "id": 13449782,
+      "resource_state": 2,
+      "name": "ASRockFall",
+      "activity_type": "Ride",
+      "distance": 4455.7,
+      "average_grade": 0,
+      "maximum_grade": 17.8,
+      "elevation_high": 129,
+      "elevation_low": 40,
+      "start_latlng": [
+        55.942394,
+        -3.16666
+      ],
+      "end_latlng": [
+        55.941715,
+        -3.155666
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995962000,
+    "resource_state": 2,
+    "name": "Arthur's Seat clockwise",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 866,
+    "moving_time": 866,
+    "start_date": "2025-06-15T09:31:18Z",
+    "start_date_local": "2025-06-15T10:31:18Z",
+    "distance": 5275.76,
+    "start_index": 949,
+    "end_index": 1815,
+    "device_watts": false,
+    "segment": {
+      "id": 1003721,
+      "resource_state": 2,
+      "name": "Arthur's Seat clockwise",
+      "activity_type": "Ride",
+      "distance": 5275.76,
+      "average_grade": 0.6,
+      "maximum_grade": 11.6,
+      "elevation_high": 86.1,
+      "elevation_low": -24.4,
+      "start_latlng": [
+        55.942587,
+        -3.170392
+      ],
+      "end_latlng": [
+        55.9426,
+        -3.170196
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997204000,
+    "resource_state": 2,
+    "name": "roundabout to roundabout",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 99,
+    "moving_time": 99,
+    "start_date": "2025-06-15T09:31:20Z",
+    "start_date_local": "2025-06-15T10:31:20Z",
+    "distance": 1149.04,
+    "start_index": 951,
+    "end_index": 1050,
+    "device_watts": false,
+    "segment": {
+      "id": 1457125,
+      "resource_state": 2,
+      "name": "roundabout to roundabout",
+      "activity_type": "Ride",
+      "distance": 1149.04,
+      "average_grade": -4.6,
+      "maximum_grade": 1.6,
+      "elevation_high": 77.6,
+      "elevation_low": 24.4,
+      "start_latlng": [
+        55.942594204097986,
+        -3.17060231231153
+      ],
+      "end_latlng": [
+        55.949807837605476,
+        -3.1744602508842945
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328995304400,
+    "resource_state": 2,
+    "name": "Prt1",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 214,
+    "moving_time": 214,
+    "start_date": "2025-06-15T09:31:21Z",
+    "start_date_local": "2025-06-15T10:31:21Z",
+    "distance": 2052.3,
+    "start_index": 952,
+    "end_index": 1166,
+    "device_watts": false,
+    "segment": {
+      "id": 19809923,
+      "resource_state": 2,
+      "name": "Prt1",
+      "activity_type": "Ride",
+      "distance": 2052.3,
+      "average_grade": -2.1,
+      "maximum_grade": 4,
+      "elevation_high": 85,
+      "elevation_low": 35.1,
+      "start_latlng": [
+        55.942682,
+        -3.17063
+      ],
+      "end_latlng": [
+        55.953002,
+        -3.161083
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997730300,
+    "resource_state": 2,
+    "name": "Roundabout to Zebra",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 134,
+    "moving_time": 134,
+    "start_date": "2025-06-15T09:31:24Z",
+    "start_date_local": "2025-06-15T10:31:24Z",
+    "distance": 1385.4,
+    "start_index": 955,
+    "end_index": 1089,
+    "device_watts": false,
+    "segment": {
+      "id": 34935639,
+      "resource_state": 2,
+      "name": "Roundabout to Zebra",
+      "activity_type": "Ride",
+      "distance": 1385.4,
+      "average_grade": -3.5,
+      "maximum_grade": 1.1,
+      "elevation_high": 82.4,
+      "elevation_low": 32.8,
+      "start_latlng": [
+        55.942727,
+        -3.171046
+      ],
+      "end_latlng": [
+        55.950857,
+        -3.170717
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999437300,
+    "resource_state": 2,
+    "name": "Sprint Sprint sprinty ",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 64,
+    "moving_time": 64,
+    "start_date": "2025-06-15T09:31:24Z",
+    "start_date_local": "2025-06-15T10:31:24Z",
+    "distance": 770.3,
+    "start_index": 955,
+    "end_index": 1019,
+    "device_watts": false,
+    "segment": {
+      "id": 37815297,
+      "resource_state": 2,
+      "name": "Sprint Sprint sprinty ",
+      "activity_type": "Ride",
+      "distance": 770.3,
+      "average_grade": -5,
+      "maximum_grade": -3.4,
+      "elevation_high": 44.4,
+      "elevation_low": 5.6,
+      "start_latlng": [
+        55.942777,
+        -3.171165
+      ],
+      "end_latlng": [
+        55.947338,
+        -3.177146
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999747600,
+    "resource_state": 2,
+    "name": "Arthur Seat Chaingang Sprint ",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 81,
+    "moving_time": 81,
+    "start_date": "2025-06-15T09:31:25Z",
+    "start_date_local": "2025-06-15T10:31:25Z",
+    "distance": 992.7,
+    "start_index": 956,
+    "end_index": 1037,
+    "device_watts": false,
+    "segment": {
+      "id": 37559728,
+      "resource_state": 2,
+      "name": "Arthur Seat Chaingang Sprint ",
+      "activity_type": "Ride",
+      "distance": 992.7,
+      "average_grade": -4.2,
+      "maximum_grade": 2,
+      "elevation_high": 97.6,
+      "elevation_low": 56,
+      "start_latlng": [
+        55.942777,
+        -3.171222
+      ],
+      "end_latlng": [
+        55.949159,
+        -3.175714
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328999416000,
+    "resource_state": 2,
+    "name": "Aero Tuck Time",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 70,
+    "moving_time": 70,
+    "start_date": "2025-06-15T09:31:29Z",
+    "start_date_local": "2025-06-15T10:31:29Z",
+    "distance": 856.5,
+    "start_index": 960,
+    "end_index": 1030,
+    "device_watts": false,
+    "segment": {
+      "id": 10053334,
+      "resource_state": 2,
+      "name": "Aero Tuck Time",
+      "activity_type": "Ride",
+      "distance": 856.5,
+      "average_grade": -4.5,
+      "maximum_grade": -0.4,
+      "elevation_high": 93.4,
+      "elevation_low": 55,
+      "start_latlng": [
+        55.942791,
+        -3.17197
+      ],
+      "end_latlng": [
+        55.948601,
+        -3.176454
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329001158700,
+    "resource_state": 2,
+    "name": "Arthur's seat - Main descent",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 49,
+    "moving_time": 49,
+    "start_date": "2025-06-15T09:31:44Z",
+    "start_date_local": "2025-06-15T10:31:44Z",
+    "distance": 620.4,
+    "start_index": 975,
+    "end_index": 1024,
+    "device_watts": false,
+    "segment": {
+      "id": 9890942,
+      "resource_state": 2,
+      "name": "Arthur's seat - Main descent",
+      "activity_type": "Ride",
+      "distance": 620.4,
+      "average_grade": -5.2,
+      "maximum_grade": 1.9,
+      "elevation_high": 79.3,
+      "elevation_low": 47.1,
+      "start_latlng": [
+        55.942903,
+        -3.174738
+      ],
+      "end_latlng": [
+        55.947959,
+        -3.176884
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997221400,
+    "resource_state": 2,
+    "name": "Across the 2 main Roundabouts",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 51,
+    "moving_time": 51,
+    "start_date": "2025-06-15T09:32:46Z",
+    "start_date_local": "2025-06-15T10:32:46Z",
+    "distance": 367.9,
+    "start_index": 1037,
+    "end_index": 1088,
+    "device_watts": false,
+    "segment": {
+      "id": 10091410,
+      "resource_state": 2,
+      "name": "Across the 2 main Roundabouts",
+      "activity_type": "Ride",
+      "distance": 367.9,
+      "average_grade": 0.5,
+      "maximum_grade": 5,
+      "elevation_high": 112.8,
+      "elevation_low": 110.8,
+      "start_latlng": [
+        55.949128,
+        -3.175635
+      ],
+      "end_latlng": [
+        55.950844,
+        -3.170864
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997291000,
+    "resource_state": 2,
+    "name": "Volcano loop (1st roundabout to peak)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 720,
+    "moving_time": 720,
+    "start_date": "2025-06-15T09:33:02Z",
+    "start_date_local": "2025-06-15T10:33:02Z",
+    "distance": 3643,
+    "start_index": 1053,
+    "end_index": 1773,
+    "device_watts": false,
+    "segment": {
+      "id": 25163749,
+      "resource_state": 2,
+      "name": "Volcano loop (1st roundabout to peak)",
+      "activity_type": "Ride",
+      "distance": 3643,
+      "average_grade": 2.4,
+      "maximum_grade": 41.4,
+      "elevation_high": 129,
+      "elevation_low": 40,
+      "start_latlng": [
+        55.949832,
+        -3.174239
+      ],
+      "end_latlng": [
+        55.940841,
+        -3.164401
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997108700,
+    "resource_state": 2,
+    "name": "Arthur's Climb (Full)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 676,
+    "moving_time": 676,
+    "start_date": "2025-06-15T09:33:37Z",
+    "start_date_local": "2025-06-15T10:33:37Z",
+    "distance": 3317.9,
+    "start_index": 1088,
+    "end_index": 1764,
+    "device_watts": false,
+    "segment": {
+      "id": 21030395,
+      "resource_state": 2,
+      "name": "Arthur's Climb (Full)",
+      "activity_type": "Ride",
+      "distance": 3317.9,
+      "average_grade": 2.6,
+      "maximum_grade": 12.9,
+      "elevation_high": 141.6,
+      "elevation_low": 54.4,
+      "start_latlng": [
+        55.950755,
+        -3.170875
+      ],
+      "end_latlng": [
+        55.940641,
+        -3.163742
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997542000,
+    "resource_state": 2,
+    "name": "Queens Drive Sprint (ped Xing to gate post)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 73,
+    "moving_time": 73,
+    "start_date": "2025-06-15T09:33:46Z",
+    "start_date_local": "2025-06-15T10:33:46Z",
+    "distance": 606.727,
+    "start_index": 1097,
+    "end_index": 1170,
+    "device_watts": false,
+    "segment": {
+      "id": 3868802,
+      "resource_state": 2,
+      "name": "Queens Drive Sprint (ped Xing to gate post)",
+      "activity_type": "Ride",
+      "distance": 606.727,
+      "average_grade": -0.6,
+      "maximum_grade": 1.5,
+      "elevation_high": 46.1,
+      "elevation_low": 40.6,
+      "start_latlng": [
+        55.9510782,
+        -3.169612
+      ],
+      "end_latlng": [
+        55.9531527,
+        -3.1607066
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997700600,
+    "resource_state": 2,
+    "name": "fast Queen's drive sprint loch to ice cream van",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 35,
+    "moving_time": 35,
+    "start_date": "2025-06-15T09:33:51Z",
+    "start_date_local": "2025-06-15T10:33:51Z",
+    "distance": 320.4,
+    "start_index": 1102,
+    "end_index": 1137,
+    "device_watts": false,
+    "segment": {
+      "id": 8345868,
+      "resource_state": 2,
+      "name": "fast Queen's drive sprint loch to ice cream van",
+      "activity_type": "Ride",
+      "distance": 320.4,
+      "average_grade": -0.2,
+      "maximum_grade": 1.9,
+      "elevation_high": 44.5,
+      "elevation_low": 42.9,
+      "start_latlng": [
+        55.951157,
+        -3.168894
+      ],
+      "end_latlng": [
+        55.951853,
+        -3.164332
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997733400,
+    "resource_state": 2,
+    "name": "Car Park to Little Kicker",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 669,
+    "moving_time": 669,
+    "start_date": "2025-06-15T09:33:51Z",
+    "start_date_local": "2025-06-15T10:33:51Z",
+    "distance": 3257.8,
+    "start_index": 1102,
+    "end_index": 1771,
+    "device_watts": false,
+    "segment": {
+      "id": 33568530,
+      "resource_state": 2,
+      "name": "Car Park to Little Kicker",
+      "activity_type": "Ride",
+      "distance": 3257.8,
+      "average_grade": 2.6,
+      "maximum_grade": 14.3,
+      "elevation_high": 126.8,
+      "elevation_low": 42.8,
+      "start_latlng": [
+        55.951138,
+        -3.168932
+      ],
+      "end_latlng": [
+        55.940798,
+        -3.164292
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995000300,
+    "resource_state": 2,
+    "name": "Arthur's Seat - clockwise \"work block\"",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 687,
+    "moving_time": 687,
+    "start_date": "2025-06-15T09:34:02Z",
+    "start_date_local": "2025-06-15T10:34:02Z",
+    "distance": 3436.82,
+    "start_index": 1113,
+    "end_index": 1800,
+    "device_watts": false,
+    "segment": {
+      "id": 1311981,
+      "resource_state": 2,
+      "name": "Arthur's Seat - clockwise \"work block\"",
+      "activity_type": "Ride",
+      "distance": 3436.82,
+      "average_grade": 1.5,
+      "maximum_grade": 16.3,
+      "elevation_high": 129.1,
+      "elevation_low": 39.9,
+      "start_latlng": [
+        55.95137894153595,
+        -3.1674742698669434
+      ],
+      "end_latlng": [
+        55.9423828125,
+        -3.167238235473633
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329002325000,
+    "resource_state": 2,
+    "name": "Arthur's Seat (East)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 799,
+    "moving_time": 799,
+    "start_date": "2025-06-15T09:34:04Z",
+    "start_date_local": "2025-06-15T10:34:04Z",
+    "distance": 4137.54,
+    "start_index": 1115,
+    "end_index": 1914,
+    "device_watts": false,
+    "segment": {
+      "id": 679257,
+      "resource_state": 2,
+      "name": "Arthur's Seat (East)",
+      "activity_type": "Ride",
+      "distance": 4137.54,
+      "average_grade": 1.2,
+      "maximum_grade": 85.1,
+      "elevation_high": 110.4,
+      "elevation_low": 29,
+      "start_latlng": [
+        55.95146929845214,
+        -3.1671543326228857
+      ],
+      "end_latlng": [
+        55.939222667366266,
+        -3.174220947548747
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994696000,
+    "resource_state": 2,
+    "name": "AS pt2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 643,
+    "moving_time": 643,
+    "start_date": "2025-06-15T09:35:01Z",
+    "start_date_local": "2025-06-15T10:35:01Z",
+    "distance": 3128.9,
+    "start_index": 1172,
+    "end_index": 1815,
+    "device_watts": false,
+    "segment": {
+      "id": 21409717,
+      "resource_state": 2,
+      "name": "AS pt2",
+      "activity_type": "Ride",
+      "distance": 3128.9,
+      "average_grade": 1.4,
+      "maximum_grade": 19.5,
+      "elevation_high": 128.6,
+      "elevation_low": 42.4,
+      "start_latlng": [
+        55.95322,
+        -3.160454
+      ],
+      "end_latlng": [
+        55.942588,
+        -3.170089
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995785700,
+    "resource_state": 2,
+    "name": "AS climb to peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 574,
+    "moving_time": 574,
+    "start_date": "2025-06-15T09:35:03Z",
+    "start_date_local": "2025-06-15T10:35:03Z",
+    "distance": 2531.5,
+    "start_index": 1174,
+    "end_index": 1748,
+    "device_watts": false,
+    "segment": {
+      "id": 21409093,
+      "resource_state": 2,
+      "name": "AS climb to peak",
+      "activity_type": "Ride",
+      "distance": 2531.5,
+      "average_grade": 3.4,
+      "maximum_grade": 21.6,
+      "elevation_high": 128.5,
+      "elevation_low": 43,
+      "start_latlng": [
+        55.953308,
+        -3.160222
+      ],
+      "end_latlng": [
+        55.94044,
+        -3.162458
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995201000,
+    "resource_state": 2,
+    "name": "VS - Arthur's Seat Climb",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 380,
+    "moving_time": 380,
+    "start_date": "2025-06-15T09:35:04Z",
+    "start_date_local": "2025-06-15T10:35:04Z",
+    "distance": 1445.1,
+    "start_index": 1175,
+    "end_index": 1555,
+    "device_watts": false,
+    "segment": {
+      "id": 8387766,
+      "resource_state": 2,
+      "name": "VS - Arthur's Seat Climb",
+      "activity_type": "Ride",
+      "distance": 1445.1,
+      "average_grade": 5.8,
+      "maximum_grade": 19.8,
+      "elevation_high": 126.8,
+      "elevation_low": 43,
+      "start_latlng": [
+        55.953239,
+        -3.16006
+      ],
+      "end_latlng": [
+        55.946514,
+        -3.15434
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997130000,
+    "resource_state": 2,
+    "name": "SCMA Open HC Course",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 398,
+    "moving_time": 398,
+    "start_date": "2025-06-15T09:35:06Z",
+    "start_date_local": "2025-06-15T10:35:06Z",
+    "distance": 1480.3,
+    "start_index": 1177,
+    "end_index": 1575,
+    "device_watts": false,
+    "segment": {
+      "id": 4514644,
+      "resource_state": 2,
+      "name": "SCMA Open HC Course",
+      "activity_type": "Ride",
+      "distance": 1480.3,
+      "average_grade": 5.1,
+      "maximum_grade": 12.1,
+      "elevation_high": 210.8,
+      "elevation_low": 135.6,
+      "start_latlng": [
+        55.953216,
+        -3.159832
+      ],
+      "end_latlng": [
+        55.945598,
+        -3.15415
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995531000,
+    "resource_state": 2,
+    "name": "0.9 climb",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 251,
+    "moving_time": 251,
+    "start_date": "2025-06-15T09:35:06Z",
+    "start_date_local": "2025-06-15T10:35:06Z",
+    "distance": 913,
+    "start_index": 1177,
+    "end_index": 1428,
+    "device_watts": false,
+    "segment": {
+      "id": 18524140,
+      "resource_state": 2,
+      "name": "0.9 climb",
+      "activity_type": "Ride",
+      "distance": 913,
+      "average_grade": 6.4,
+      "maximum_grade": 30.1,
+      "elevation_high": 103.3,
+      "elevation_low": 44.5,
+      "start_latlng": [
+        55.95324,
+        -3.159803
+      ],
+      "end_latlng": [
+        55.949323,
+        -3.150328
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328996047000,
+    "resource_state": 2,
+    "name": "Arthur's Seat Climb",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 384,
+    "moving_time": 384,
+    "start_date": "2025-06-15T09:35:07Z",
+    "start_date_local": "2025-06-15T10:35:07Z",
+    "distance": 1415.32,
+    "start_index": 1178,
+    "end_index": 1562,
+    "device_watts": false,
+    "segment": {
+      "id": 686793,
+      "resource_state": 2,
+      "name": "Arthur's Seat Climb",
+      "activity_type": "Ride",
+      "distance": 1415.32,
+      "average_grade": 5.6,
+      "maximum_grade": 10.2,
+      "elevation_high": 119.3,
+      "elevation_low": 41.7,
+      "start_latlng": [
+        55.95349964685738,
+        -3.1598905753344297
+      ],
+      "end_latlng": [
+        55.94618769362569,
+        -3.154458263888955
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997327000,
+    "resource_state": 2,
+    "name": "Scma hill climb 2015 course",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 406,
+    "moving_time": 406,
+    "start_date": "2025-06-15T09:35:07Z",
+    "start_date_local": "2025-06-15T10:35:07Z",
+    "distance": 1523.7,
+    "start_index": 1178,
+    "end_index": 1584,
+    "device_watts": false,
+    "segment": {
+      "id": 11013486,
+      "resource_state": 2,
+      "name": "Scma hill climb 2015 course",
+      "activity_type": "Ride",
+      "distance": 1523.7,
+      "average_grade": 4.9,
+      "maximum_grade": 11.7,
+      "elevation_high": 92.6,
+      "elevation_low": 18.2,
+      "start_latlng": [
+        55.953226,
+        -3.15968
+      ],
+      "end_latlng": [
+        55.94523,
+        -3.153642
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997613600,
+    "resource_state": 2,
+    "name": "Susan Main",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 588,
+    "moving_time": 588,
+    "start_date": "2025-06-15T09:35:08Z",
+    "start_date_local": "2025-06-15T10:35:08Z",
+    "distance": 2607.6,
+    "start_index": 1179,
+    "end_index": 1767,
+    "device_watts": false,
+    "segment": {
+      "id": 29231734,
+      "resource_state": 2,
+      "name": "Susan Main",
+      "activity_type": "Ride",
+      "distance": 2607.6,
+      "average_grade": 3.1,
+      "maximum_grade": 12.9,
+      "elevation_high": 124.4,
+      "elevation_low": 43.4,
+      "start_latlng": [
+        55.953254,
+        -3.159612
+      ],
+      "end_latlng": [
+        55.940723,
+        -3.163942
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328996070400,
+    "resource_state": 2,
+    "name": "Segment",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 631,
+    "moving_time": 631,
+    "start_date": "2025-06-15T09:35:09Z",
+    "start_date_local": "2025-06-15T10:35:09Z",
+    "distance": 3029.8,
+    "start_index": 1180,
+    "end_index": 1811,
+    "device_watts": false,
+    "segment": {
+      "id": 5878011,
+      "resource_state": 2,
+      "name": "Segment",
+      "activity_type": "Ride",
+      "distance": 3029.8,
+      "average_grade": 1.6,
+      "maximum_grade": 17.4,
+      "elevation_high": 210,
+      "elevation_low": 129.8,
+      "start_latlng": [
+        55.953212,
+        -3.159476
+      ],
+      "end_latlng": [
+        55.942548,
+        -3.169468
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994583600,
+    "resource_state": 2,
+    "name": "From Gate to Loch (Standing Start)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 368,
+    "moving_time": 368,
+    "start_date": "2025-06-15T09:35:12Z",
+    "start_date_local": "2025-06-15T10:35:12Z",
+    "distance": 1315.6,
+    "start_index": 1183,
+    "end_index": 1551,
+    "device_watts": false,
+    "segment": {
+      "id": 10601361,
+      "resource_state": 2,
+      "name": "From Gate to Loch (Standing Start)",
+      "activity_type": "Ride",
+      "distance": 1315.6,
+      "average_grade": 5.6,
+      "maximum_grade": 13.4,
+      "elevation_high": 65.6,
+      "elevation_low": -7.6,
+      "start_latlng": [
+        55.953159,
+        -3.159215
+      ],
+      "end_latlng": [
+        55.946606,
+        -3.154096
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328998160400,
+    "resource_state": 2,
+    "name": "Arthur's Seat - Gate to Top",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 392,
+    "moving_time": 392,
+    "start_date": "2025-06-15T09:35:12Z",
+    "start_date_local": "2025-06-15T10:35:12Z",
+    "distance": 1463.8,
+    "start_index": 1183,
+    "end_index": 1575,
+    "device_watts": false,
+    "segment": {
+      "id": 11573934,
+      "resource_state": 2,
+      "name": "Arthur's Seat - Gate to Top",
+      "activity_type": "Ride",
+      "distance": 1463.8,
+      "average_grade": 5.6,
+      "maximum_grade": 19.7,
+      "elevation_high": 129.6,
+      "elevation_low": 47.9,
+      "start_latlng": [
+        55.953175,
+        -3.159204
+      ],
+      "end_latlng": [
+        55.945607,
+        -3.154204
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328996101000,
+    "resource_state": 2,
+    "name": "to the gate",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 107,
+    "moving_time": 107,
+    "start_date": "2025-06-15T09:35:13Z",
+    "start_date_local": "2025-06-15T10:35:13Z",
+    "distance": 421.3,
+    "start_index": 1184,
+    "end_index": 1291,
+    "device_watts": false,
+    "segment": {
+      "id": 18940561,
+      "resource_state": 2,
+      "name": "to the gate",
+      "activity_type": "Ride",
+      "distance": 421.3,
+      "average_grade": 6.8,
+      "maximum_grade": 29.5,
+      "elevation_high": 80.7,
+      "elevation_low": 45.2,
+      "start_latlng": [
+        55.953177,
+        -3.159171
+      ],
+      "end_latlng": [
+        55.95273,
+        -3.153493
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997584000,
+    "resource_state": 2,
+    "name": "Arthur's Seat KoM - from barrier to peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 376,
+    "moving_time": 376,
+    "start_date": "2025-06-15T09:35:13Z",
+    "start_date_local": "2025-06-15T10:35:13Z",
+    "distance": 1348.9,
+    "start_index": 1184,
+    "end_index": 1560,
+    "device_watts": false,
+    "segment": {
+      "id": 21166849,
+      "resource_state": 2,
+      "name": "Arthur's Seat KoM - from barrier to peak",
+      "activity_type": "Ride",
+      "distance": 1348.9,
+      "average_grade": 5.8,
+      "maximum_grade": 14.5,
+      "elevation_high": 127,
+      "elevation_low": 46.3,
+      "start_latlng": [
+        55.953134,
+        -3.159121
+      ],
+      "end_latlng": [
+        55.946275,
+        -3.15448
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994459600,
+    "resource_state": 2,
+    "name": "hill reps",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 203,
+    "moving_time": 203,
+    "start_date": "2025-06-15T09:35:14Z",
+    "start_date_local": "2025-06-15T10:35:14Z",
+    "distance": 731.9,
+    "start_index": 1185,
+    "end_index": 1388,
+    "device_watts": false,
+    "segment": {
+      "id": 8868754,
+      "resource_state": 2,
+      "name": "hill reps",
+      "activity_type": "Ride",
+      "distance": 731.9,
+      "average_grade": 6.2,
+      "maximum_grade": 25,
+      "elevation_high": 39,
+      "elevation_low": -6.2,
+      "start_latlng": [
+        55.953159,
+        -3.159024
+      ],
+      "end_latlng": [
+        55.950471,
+        -3.150665
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997805000,
+    "resource_state": 2,
+    "name": "Arthur's Seat Barrier to Layby",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 312,
+    "moving_time": 312,
+    "start_date": "2025-06-15T09:35:14Z",
+    "start_date_local": "2025-06-15T10:35:14Z",
+    "distance": 1105.3,
+    "start_index": 1185,
+    "end_index": 1497,
+    "device_watts": false,
+    "segment": {
+      "id": 17603372,
+      "resource_state": 2,
+      "name": "Arthur's Seat Barrier to Layby",
+      "activity_type": "Ride",
+      "distance": 1105.3,
+      "average_grade": 5.9,
+      "maximum_grade": 21,
+      "elevation_high": 138.4,
+      "elevation_low": 72.8,
+      "start_latlng": [
+        55.953162,
+        -3.159052
+      ],
+      "end_latlng": [
+        55.947391,
+        -3.15116
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995660000,
+    "resource_state": 2,
+    "name": "Arthurs Seat Gate to Top",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 604,
+    "moving_time": 604,
+    "start_date": "2025-06-15T09:35:15Z",
+    "start_date_local": "2025-06-15T10:35:15Z",
+    "distance": 2718.2,
+    "start_index": 1186,
+    "end_index": 1790,
+    "device_watts": false,
+    "segment": {
+      "id": 8293854,
+      "resource_state": 2,
+      "name": "Arthurs Seat Gate to Top",
+      "activity_type": "Ride",
+      "distance": 2718.2,
+      "average_grade": 2.2,
+      "maximum_grade": 16.4,
+      "elevation_high": 130.4,
+      "elevation_low": 51.1,
+      "start_latlng": [
+        55.953137,
+        -3.158966
+      ],
+      "end_latlng": [
+        55.941964,
+        -3.165524
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995851300,
+    "resource_state": 2,
+    "name": "Arthur Seat Bottom to Peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 591,
+    "moving_time": 591,
+    "start_date": "2025-06-15T09:35:15Z",
+    "start_date_local": "2025-06-15T10:35:15Z",
+    "distance": 2612,
+    "start_index": 1186,
+    "end_index": 1777,
+    "device_watts": false,
+    "segment": {
+      "id": 10117132,
+      "resource_state": 2,
+      "name": "Arthur Seat Bottom to Peak",
+      "activity_type": "Ride",
+      "distance": 2612,
+      "average_grade": 3.1,
+      "maximum_grade": 12,
+      "elevation_high": 208.4,
+      "elevation_low": 127.8,
+      "start_latlng": [
+        55.953147,
+        -3.158984
+      ],
+      "end_latlng": [
+        55.941034,
+        -3.164838
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994968600,
+    "resource_state": 2,
+    "name": "gate to after steep incline",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 231,
+    "moving_time": 231,
+    "start_date": "2025-06-15T09:35:16Z",
+    "start_date_local": "2025-06-15T10:35:16Z",
+    "distance": 838.2,
+    "start_index": 1187,
+    "end_index": 1418,
+    "device_watts": false,
+    "segment": {
+      "id": 5460084,
+      "resource_state": 2,
+      "name": "gate to after steep incline",
+      "activity_type": "Ride",
+      "distance": 838.2,
+      "average_grade": 6.5,
+      "maximum_grade": 16.3,
+      "elevation_high": 103.4,
+      "elevation_low": 50.6,
+      "start_latlng": [
+        55.953207,
+        -3.158895
+      ],
+      "end_latlng": [
+        55.949618,
+        -3.150384
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994931700,
+    "resource_state": 2,
+    "name": "St Arthur part 1/2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 571,
+    "moving_time": 571,
+    "start_date": "2025-06-15T09:35:16Z",
+    "start_date_local": "2025-06-15T10:35:16Z",
+    "distance": 2505.1,
+    "start_index": 1187,
+    "end_index": 1758,
+    "device_watts": false,
+    "segment": {
+      "id": 12421400,
+      "resource_state": 2,
+      "name": "St Arthur part 1/2",
+      "activity_type": "Ride",
+      "distance": 2505.1,
+      "average_grade": 3.1,
+      "maximum_grade": 18.2,
+      "elevation_high": 126.8,
+      "elevation_low": 48.4,
+      "start_latlng": [
+        55.953172,
+        -3.158925
+      ],
+      "end_latlng": [
+        55.940535,
+        -3.163186
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995055600,
+    "resource_state": 2,
+    "name": "Climbing Arthur",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 580,
+    "moving_time": 580,
+    "start_date": "2025-06-15T09:35:17Z",
+    "start_date_local": "2025-06-15T10:35:17Z",
+    "distance": 2552.4,
+    "start_index": 1188,
+    "end_index": 1768,
+    "device_watts": false,
+    "segment": {
+      "id": 23867281,
+      "resource_state": 2,
+      "name": "Climbing Arthur",
+      "activity_type": "Ride",
+      "distance": 2552.4,
+      "average_grade": 3.1,
+      "maximum_grade": 12.7,
+      "elevation_high": 127,
+      "elevation_low": 47.4,
+      "start_latlng": [
+        55.95322,
+        -3.158842
+      ],
+      "end_latlng": [
+        55.940716,
+        -3.163979
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995425300,
+    "resource_state": 2,
+    "name": "Arthur's Seat Climb - Gate to Lake",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 341,
+    "moving_time": 341,
+    "start_date": "2025-06-15T09:35:18Z",
+    "start_date_local": "2025-06-15T10:35:18Z",
+    "distance": 1207.44,
+    "start_index": 1189,
+    "end_index": 1530,
+    "device_watts": false,
+    "segment": {
+      "id": 765113,
+      "resource_state": 2,
+      "name": "Arthur's Seat Climb - Gate to Lake",
+      "activity_type": "Ride",
+      "distance": 1207.44,
+      "average_grade": 4.8,
+      "maximum_grade": 14,
+      "elevation_high": 93.2,
+      "elevation_low": 34.8,
+      "start_latlng": [
+        55.95324803239722,
+        -3.158821811780067
+      ],
+      "end_latlng": [
+        55.94703494145925,
+        -3.152907323032176
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994397000,
+    "resource_state": 2,
+    "name": "Prt2",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 623,
+    "moving_time": 623,
+    "start_date": "2025-06-15T09:35:18Z",
+    "start_date_local": "2025-06-15T10:35:18Z",
+    "distance": 2995.6,
+    "start_index": 1189,
+    "end_index": 1812,
+    "device_watts": false,
+    "segment": {
+      "id": 19809936,
+      "resource_state": 2,
+      "name": "Prt2",
+      "activity_type": "Ride",
+      "distance": 2995.6,
+      "average_grade": 1.4,
+      "maximum_grade": 20.3,
+      "elevation_high": 128.6,
+      "elevation_low": 46.3,
+      "start_latlng": [
+        55.953246,
+        -3.158777
+      ],
+      "end_latlng": [
+        55.942622,
+        -3.169616
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997694500,
+    "resource_state": 2,
+    "name": "Holyrood Park Hill challenge",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 346,
+    "moving_time": 346,
+    "start_date": "2025-06-15T09:35:36Z",
+    "start_date_local": "2025-06-15T10:35:36Z",
+    "distance": 1226.5,
+    "start_index": 1207,
+    "end_index": 1553,
+    "device_watts": false,
+    "segment": {
+      "id": 10562363,
+      "resource_state": 2,
+      "name": "Holyrood Park Hill challenge",
+      "activity_type": "Ride",
+      "distance": 1226.5,
+      "average_grade": 5.8,
+      "maximum_grade": 13.3,
+      "elevation_high": 103.2,
+      "elevation_low": 31.6,
+      "start_latlng": [
+        55.953704,
+        -3.15788
+      ],
+      "end_latlng": [
+        55.946561,
+        -3.154166
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994351000,
+    "resource_state": 2,
+    "name": "ERC Hill Climb Benchmark",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 187,
+    "moving_time": 187,
+    "start_date": "2025-06-15T09:35:37Z",
+    "start_date_local": "2025-06-15T10:35:37Z",
+    "distance": 659.1,
+    "start_index": 1208,
+    "end_index": 1395,
+    "device_watts": false,
+    "segment": {
+      "id": 10716752,
+      "resource_state": 2,
+      "name": "ERC Hill Climb Benchmark",
+      "activity_type": "Ride",
+      "distance": 659.1,
+      "average_grade": 7.4,
+      "maximum_grade": 18.6,
+      "elevation_high": 96.1,
+      "elevation_low": 47.6,
+      "start_latlng": [
+        55.953742,
+        -3.157848
+      ],
+      "end_latlng": [
+        55.950297,
+        -3.150537
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994483000,
+    "resource_state": 2,
+    "name": "Arthurs Seat Climb to Peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 574,
+    "moving_time": 574,
+    "start_date": "2025-06-15T09:35:38Z",
+    "start_date_local": "2025-06-15T10:35:38Z",
+    "distance": 2566.51,
+    "start_index": 1209,
+    "end_index": 1783,
+    "device_watts": false,
+    "segment": {
+      "id": 1599385,
+      "resource_state": 2,
+      "name": "Arthurs Seat Climb to Peak",
+      "activity_type": "Ride",
+      "distance": 2566.51,
+      "average_grade": 2.1,
+      "maximum_grade": 16.9,
+      "elevation_high": 128.7,
+      "elevation_low": 48.3,
+      "start_latlng": [
+        55.95373341,
+        -3.15778472
+      ],
+      "end_latlng": [
+        55.94139195,
+        -3.16524778
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328996008000,
+    "resource_state": 2,
+    "name": "Arthur Seat Climb avoiding false starts!",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 325,
+    "moving_time": 325,
+    "start_date": "2025-06-15T09:36:06Z",
+    "start_date_local": "2025-06-15T10:36:06Z",
+    "distance": 1142.5,
+    "start_index": 1237,
+    "end_index": 1562,
+    "device_watts": false,
+    "segment": {
+      "id": 15523251,
+      "resource_state": 2,
+      "name": "Arthur Seat Climb avoiding false starts!",
+      "activity_type": "Ride",
+      "distance": 1142.5,
+      "average_grade": 5.7,
+      "maximum_grade": 11.3,
+      "elevation_high": 93.2,
+      "elevation_low": 28.6,
+      "start_latlng": [
+        55.953757,
+        -3.156032
+      ],
+      "end_latlng": [
+        55.946186,
+        -3.154509
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995057700,
+    "resource_state": 2,
+    "name": "First Bend to Water on the Seat",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 276,
+    "moving_time": 276,
+    "start_date": "2025-06-15T09:36:19Z",
+    "start_date_local": "2025-06-15T10:36:19Z",
+    "distance": 936.5,
+    "start_index": 1250,
+    "end_index": 1526,
+    "device_watts": false,
+    "segment": {
+      "id": 26369172,
+      "resource_state": 2,
+      "name": "First Bend to Water on the Seat",
+      "activity_type": "Ride",
+      "distance": 936.5,
+      "average_grade": 6.3,
+      "maximum_grade": 11.2,
+      "elevation_high": 113.2,
+      "elevation_low": 54.2,
+      "start_latlng": [
+        55.953548,
+        -3.155381
+      ],
+      "end_latlng": [
+        55.947051,
+        -3.152695
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995041300,
+    "resource_state": 2,
+    "name": "Steepest kick - AS",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 28,
+    "moving_time": 28,
+    "start_date": "2025-06-15T09:38:12Z",
+    "start_date_local": "2025-06-15T10:38:12Z",
+    "distance": 91.4,
+    "start_index": 1363,
+    "end_index": 1391,
+    "device_watts": false,
+    "segment": {
+      "id": 10249386,
+      "resource_state": 2,
+      "name": "Steepest kick - AS",
+      "activity_type": "Ride",
+      "distance": 91.4,
+      "average_grade": 8.6,
+      "maximum_grade": 12.3,
+      "elevation_high": 96.4,
+      "elevation_low": 88.5,
+      "start_latlng": [
+        55.951182,
+        -3.150846
+      ],
+      "end_latlng": [
+        55.950379,
+        -3.150638
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997830700,
+    "resource_state": 2,
+    "name": "Arthur's Seat climb, last 1/3",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 151,
+    "moving_time": 151,
+    "start_date": "2025-06-15T09:38:23Z",
+    "start_date_local": "2025-06-15T10:38:23Z",
+    "distance": 505.7,
+    "start_index": 1374,
+    "end_index": 1525,
+    "device_watts": false,
+    "segment": {
+      "id": 36845481,
+      "resource_state": 2,
+      "name": "Arthur's Seat climb, last 1/3",
+      "activity_type": "Ride",
+      "distance": 505.7,
+      "average_grade": 6.6,
+      "maximum_grade": 10.7,
+      "elevation_high": 116.2,
+      "elevation_low": 82.6,
+      "start_latlng": [
+        55.95085,
+        -3.150775
+      ],
+      "end_latlng": [
+        55.947088,
+        -3.15267
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328996125700,
+    "resource_state": 2,
+    "name": "AS climb - Step to Loch",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 164,
+    "moving_time": 164,
+    "start_date": "2025-06-15T09:38:41Z",
+    "start_date_local": "2025-06-15T10:38:41Z",
+    "distance": 582.3,
+    "start_index": 1392,
+    "end_index": 1556,
+    "device_watts": false,
+    "segment": {
+      "id": 10494259,
+      "resource_state": 2,
+      "name": "AS climb - Step to Loch",
+      "activity_type": "Ride",
+      "distance": 582.3,
+      "average_grade": 5.2,
+      "maximum_grade": 12.5,
+      "elevation_high": 126.9,
+      "elevation_low": 96.5,
+      "start_latlng": [
+        55.950363,
+        -3.150629
+      ],
+      "end_latlng": [
+        55.946474,
+        -3.154421
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997002000,
+    "resource_state": 2,
+    "name": "After Steep to Peak",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 382,
+    "moving_time": 382,
+    "start_date": "2025-06-15T09:38:49Z",
+    "start_date_local": "2025-06-15T10:38:49Z",
+    "distance": 1889.2,
+    "start_index": 1400,
+    "end_index": 1782,
+    "device_watts": false,
+    "segment": {
+      "id": 6944143,
+      "resource_state": 2,
+      "name": "After Steep to Peak",
+      "activity_type": "Ride",
+      "distance": 1889.2,
+      "average_grade": 1.4,
+      "maximum_grade": 8.2,
+      "elevation_high": 132.6,
+      "elevation_low": 100.4,
+      "start_latlng": [
+        55.950126,
+        -3.150552
+      ],
+      "end_latlng": [
+        55.941319,
+        -3.165188
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328998216700,
+    "resource_state": 2,
+    "name": "Round Loch Dunsapie NR",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 87,
+    "moving_time": 87,
+    "start_date": "2025-06-15T09:40:26Z",
+    "start_date_local": "2025-06-15T10:40:26Z",
+    "distance": 383.3,
+    "start_index": 1497,
+    "end_index": 1584,
+    "device_watts": false,
+    "segment": {
+      "id": 10395290,
+      "resource_state": 2,
+      "name": "Round Loch Dunsapie NR",
+      "activity_type": "Ride",
+      "distance": 383.3,
+      "average_grade": 3.1,
+      "maximum_grade": 12.3,
+      "elevation_high": 128.8,
+      "elevation_low": 114.6,
+      "start_latlng": [
+        55.947395,
+        -3.151131
+      ],
+      "end_latlng": [
+        55.945209,
+        -3.153645
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997375000,
+    "resource_state": 2,
+    "name": "Dunsapie Loch to Roundabout (After Climbing)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 249,
+    "moving_time": 249,
+    "start_date": "2025-06-15T09:41:31Z",
+    "start_date_local": "2025-06-15T10:41:31Z",
+    "distance": 1609.2,
+    "start_index": 1562,
+    "end_index": 1811,
+    "device_watts": false,
+    "segment": {
+      "id": 1704511,
+      "resource_state": 2,
+      "name": "Dunsapie Loch to Roundabout (After Climbing)",
+      "activity_type": "Ride",
+      "distance": 1609.2,
+      "average_grade": -2.7,
+      "maximum_grade": 11.6,
+      "elevation_high": 128.7,
+      "elevation_low": 82.1,
+      "start_latlng": [
+        55.94619,
+        -3.15449
+      ],
+      "end_latlng": [
+        55.942578,
+        -3.169507
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328998186000,
+    "resource_state": 2,
+    "name": "Segment",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 198,
+    "moving_time": 198,
+    "start_date": "2025-06-15T09:41:58Z",
+    "start_date_local": "2025-06-15T10:41:58Z",
+    "distance": 1209,
+    "start_index": 1589,
+    "end_index": 1787,
+    "device_watts": false,
+    "segment": {
+      "id": 5877986,
+      "resource_state": 2,
+      "name": "Segment",
+      "activity_type": "Ride",
+      "distance": 1209,
+      "average_grade": -0.1,
+      "maximum_grade": 8,
+      "elevation_high": 210,
+      "elevation_low": 206,
+      "start_latlng": [
+        55.945014,
+        -3.15343
+      ],
+      "end_latlng": [
+        55.9417,
+        -3.165434
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995226600,
+    "resource_state": 2,
+    "name": "Top flat - Arthur's Seat NR",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 134,
+    "moving_time": 134,
+    "start_date": "2025-06-15T09:42:27Z",
+    "start_date_local": "2025-06-15T10:42:27Z",
+    "distance": 750.4,
+    "start_index": 1618,
+    "end_index": 1752,
+    "device_watts": false,
+    "segment": {
+      "id": 10370805,
+      "resource_state": 2,
+      "name": "Top flat - Arthur's Seat NR",
+      "activity_type": "Ride",
+      "distance": 750.4,
+      "average_grade": -0.9,
+      "maximum_grade": 13.1,
+      "elevation_high": 113.3,
+      "elevation_low": 94,
+      "start_latlng": [
+        55.943201,
+        -3.152319
+      ],
+      "end_latlng": [
+        55.940432,
+        -3.162816
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328997561300,
+    "resource_state": 2,
+    "name": "ERC 1 KM Benchmark - Standing Start",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 162,
+    "moving_time": 162,
+    "start_date": "2025-06-15T09:42:27Z",
+    "start_date_local": "2025-06-15T10:42:27Z",
+    "distance": 923.9,
+    "start_index": 1618,
+    "end_index": 1780,
+    "device_watts": false,
+    "segment": {
+      "id": 10817794,
+      "resource_state": 2,
+      "name": "ERC 1 KM Benchmark - Standing Start",
+      "activity_type": "Ride",
+      "distance": 923.9,
+      "average_grade": 0,
+      "maximum_grade": 17.3,
+      "elevation_high": 113.1,
+      "elevation_low": 93.7,
+      "start_latlng": [
+        55.943212,
+        -3.152358
+      ],
+      "end_latlng": [
+        55.941197,
+        -3.164964
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995539000,
+    "resource_state": 2,
+    "name": "To the Peak(AS top flat)",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 138,
+    "moving_time": 138,
+    "start_date": "2025-06-15T09:42:37Z",
+    "start_date_local": "2025-06-15T10:42:37Z",
+    "distance": 761.3,
+    "start_index": 1628,
+    "end_index": 1766,
+    "device_watts": false,
+    "segment": {
+      "id": 35830678,
+      "resource_state": 2,
+      "name": "To the Peak(AS top flat)",
+      "activity_type": "Ride",
+      "distance": 761.3,
+      "average_grade": 1,
+      "maximum_grade": 4.8,
+      "elevation_high": 121.6,
+      "elevation_low": 113.2,
+      "start_latlng": [
+        55.942863,
+        -3.153184
+      ],
+      "end_latlng": [
+        55.940665,
+        -3.163913
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328994661400,
+    "resource_state": 2,
+    "name": "ERC  200m Benchmark - Standing Start",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 29,
+    "moving_time": 29,
+    "start_date": "2025-06-15T09:42:41Z",
+    "start_date_local": "2025-06-15T10:42:41Z",
+    "distance": 172.6,
+    "start_index": 1632,
+    "end_index": 1661,
+    "device_watts": false,
+    "segment": {
+      "id": 10716729,
+      "resource_state": 2,
+      "name": "ERC  200m Benchmark - Standing Start",
+      "activity_type": "Ride",
+      "distance": 172.6,
+      "average_grade": -2.6,
+      "maximum_grade": 2.7,
+      "elevation_high": 105.9,
+      "elevation_low": 101.4,
+      "start_latlng": [
+        55.942709,
+        -3.153472
+      ],
+      "end_latlng": [
+        55.94172,
+        -3.155602
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328996422700,
+    "resource_state": 2,
+    "name": "TBANN burst",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 65,
+    "moving_time": 65,
+    "start_date": "2025-06-15T09:43:52Z",
+    "start_date_local": "2025-06-15T10:43:52Z",
+    "distance": 328.8,
+    "start_index": 1703,
+    "end_index": 1768,
+    "device_watts": false,
+    "segment": {
+      "id": 15375220,
+      "resource_state": 2,
+      "name": "TBANN burst",
+      "activity_type": "Ride",
+      "distance": 328.8,
+      "average_grade": 1.3,
+      "maximum_grade": 4.2,
+      "elevation_high": 61.2,
+      "elevation_low": 56.2,
+      "start_latlng": [
+        55.940621,
+        -3.15894
+      ],
+      "end_latlng": [
+        55.940709,
+        -3.16404
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328996545500,
+    "resource_state": 2,
+    "name": "Attacus CC Sprint KOM",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 71,
+    "moving_time": 71,
+    "start_date": "2025-06-15T09:43:58Z",
+    "start_date_local": "2025-06-15T10:43:58Z",
+    "distance": 378.2,
+    "start_index": 1709,
+    "end_index": 1780,
+    "device_watts": false,
+    "segment": {
+      "id": 18395707,
+      "resource_state": 2,
+      "name": "Attacus CC Sprint KOM",
+      "activity_type": "Ride",
+      "distance": 378.2,
+      "average_grade": 0.5,
+      "maximum_grade": 3.9,
+      "elevation_high": 143.4,
+      "elevation_low": 138.8,
+      "start_latlng": [
+        55.940528,
+        -3.159468
+      ],
+      "end_latlng": [
+        55.941197,
+        -3.165012
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328997038000,
+    "resource_state": 2,
+    "name": "AS finish",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 70,
+    "moving_time": 70,
+    "start_date": "2025-06-15T09:44:34Z",
+    "start_date_local": "2025-06-15T10:44:34Z",
+    "distance": 608.3,
+    "start_index": 1745,
+    "end_index": 1815,
+    "device_watts": false,
+    "segment": {
+      "id": 21409127,
+      "resource_state": 2,
+      "name": "AS finish",
+      "activity_type": "Ride",
+      "distance": 608.3,
+      "average_grade": -6.9,
+      "maximum_grade": -1,
+      "elevation_high": 128.3,
+      "elevation_low": 86.2,
+      "start_latlng": [
+        55.940422,
+        -3.162253
+      ],
+      "end_latlng": [
+        55.942579,
+        -3.170227
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790328996909000,
+    "resource_state": 2,
+    "name": "the final kick",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 47,
+    "moving_time": 47,
+    "start_date": "2025-06-15T09:44:34Z",
+    "start_date_local": "2025-06-15T10:44:34Z",
+    "distance": 311.2,
+    "start_index": 1745,
+    "end_index": 1792,
+    "device_watts": false,
+    "segment": {
+      "id": 10050277,
+      "resource_state": 2,
+      "name": "the final kick",
+      "activity_type": "Ride",
+      "distance": 311.2,
+      "average_grade": 4.9,
+      "maximum_grade": 10.6,
+      "elevation_high": 110.5,
+      "elevation_low": 94.5,
+      "start_latlng": [
+        55.94038,
+        -3.16228
+      ],
+      "end_latlng": [
+        55.942134,
+        -3.165694
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790329000536000,
+    "resource_state": 2,
+    "name": "Enough laps, Im going home",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 136,
+    "moving_time": 136,
+    "start_date": "2025-06-15T09:45:05Z",
+    "start_date_local": "2025-06-15T10:45:05Z",
+    "distance": 937.8,
+    "start_index": 1776,
+    "end_index": 1912,
+    "device_watts": false,
+    "segment": {
+      "id": 34113937,
+      "resource_state": 2,
+      "name": "Enough laps, Im going home",
+      "activity_type": "Ride",
+      "distance": 937.8,
+      "average_grade": -3.3,
+      "maximum_grade": 8.5,
+      "elevation_high": 115.2,
+      "elevation_low": 74.8,
+      "start_latlng": [
+        55.940954,
+        -3.164682
+      ],
+      "end_latlng": [
+        55.939331,
+        -3.174086
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3369790328996999000,
+    "resource_state": 2,
+    "name": "Queens Drive to round about",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 36,
+    "moving_time": 36,
+    "start_date": "2025-06-15T09:45:07Z",
+    "start_date_local": "2025-06-15T10:45:07Z",
+    "distance": 414.2,
+    "start_index": 1778,
+    "end_index": 1814,
+    "device_watts": false,
+    "segment": {
+      "id": 4405901,
+      "resource_state": 2,
+      "name": "Queens Drive to round about",
+      "activity_type": "Ride",
+      "distance": 414.2,
+      "average_grade": -4.6,
+      "maximum_grade": 11.1,
+      "elevation_high": 110.2,
+      "elevation_low": 81,
+      "start_latlng": [
+        55.941074,
+        -3.164842
+      ],
+      "end_latlng": [
+        55.942592,
+        -3.170056
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "United Kingdom",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995609600,
+    "resource_state": 2,
+    "name": "Only hazardous if your bike has stabilisers",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 35,
+    "moving_time": 35,
+    "start_date": "2025-06-15T09:45:07Z",
+    "start_date_local": "2025-06-15T10:45:07Z",
+    "distance": 396.8,
+    "start_index": 1778,
+    "end_index": 1813,
+    "device_watts": false,
+    "segment": {
+      "id": 13075724,
+      "resource_state": 2,
+      "name": "Only hazardous if your bike has stabilisers",
+      "activity_type": "Ride",
+      "distance": 396.8,
+      "average_grade": -8.2,
+      "maximum_grade": 0,
+      "elevation_high": 134.8,
+      "elevation_low": 102.4,
+      "start_latlng": [
+        55.941073,
+        -3.164901
+      ],
+      "end_latlng": [
+        55.942593,
+        -3.169825
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3369790328995147000,
+    "resource_state": 2,
+    "name": "Enjoy the view while you can!!!! ",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 29,
+    "moving_time": 29,
+    "start_date": "2025-06-15T09:45:11Z",
+    "start_date_local": "2025-06-15T10:45:11Z",
+    "distance": 344.6,
+    "start_index": 1782,
+    "end_index": 1811,
+    "device_watts": false,
+    "segment": {
+      "id": 7559689,
+      "resource_state": 2,
+      "name": "Enjoy the view while you can!!!! ",
+      "activity_type": "Ride",
+      "distance": 344.6,
+      "average_grade": -6.1,
+      "maximum_grade": 11.2,
+      "elevation_high": 110.5,
+      "elevation_low": 81.9,
+      "start_latlng": [
+        55.941341,
+        -3.165174
+      ],
+      "end_latlng": [
+        55.942572,
+        -3.169535
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3369790329002353700,
+    "resource_state": 2,
+    "name": "Holyrood Park Road",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 77,
+    "moving_time": 77,
+    "start_date": "2025-06-15T09:46:05Z",
+    "start_date_local": "2025-06-15T10:46:05Z",
+    "distance": 370.2,
+    "start_index": 1836,
+    "end_index": 1913,
+    "device_watts": false,
+    "segment": {
+      "id": 25509283,
+      "resource_state": 2,
+      "name": "Holyrood Park Road",
+      "activity_type": "Ride",
+      "distance": 370.2,
+      "average_grade": 2.3,
+      "maximum_grade": 7.9,
+      "elevation_high": 90,
+      "elevation_low": 80,
+      "start_latlng": [
+        55.941602,
+        -3.170713
+      ],
+      "end_latlng": [
+        55.939237,
+        -3.174146
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3369790329002267600,
+    "resource_state": 2,
+    "name": "Climb out of Arthur's Seat past Pollock Halls",
+    "activity": {
+      "id": 14820890530,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 70,
+    "moving_time": 70,
+    "start_date": "2025-06-15T09:46:12Z",
+    "start_date_local": "2025-06-15T10:46:12Z",
+    "distance": 316.213,
+    "start_index": 1843,
+    "end_index": 1913,
+    "device_watts": false,
+    "segment": {
+      "id": 1771376,
+      "resource_state": 2,
+      "name": "Climb out of Arthur's Seat past Pollock Halls",
+      "activity_type": "Ride",
+      "distance": 316.213,
+      "average_grade": 1.7,
+      "maximum_grade": 2.8,
+      "elevation_high": 89.1,
+      "elevation_low": 83.3,
+      "start_latlng": [
+        55.9416223,
+        -3.1713557
+      ],
+      "end_latlng": [
+        55.9392855,
+        -3.1740664
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  }
+]

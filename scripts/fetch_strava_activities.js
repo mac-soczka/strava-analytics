@@ -12,26 +12,36 @@ if (!ACCESS_TOKEN) {
 }
 
 async function fetchAllActivities() {
-  let page = 1;
-  const perPage = 200;
-  let allActivities = [];
-  let keepGoing = true;
-
-  while (keepGoing) {
-    const res = await axios.get('https://www.strava.com/api/v3/athlete/activities', {
-      headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
-      params: { page, per_page: perPage }
-    });
-    if (res.data.length === 0) {
-      keepGoing = false;
-    } else {
-      allActivities = allActivities.concat(res.data);
-      page++;
-    }
+  const activitiesPath = path.join(__dirname, '../data/activities.json');
+  if (!fs.existsSync(activitiesPath)) {
+    throw new Error('data/activities.json not found. Please run the fetcher to generate it first.');
   }
 
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(allActivities, null, 2));
-  console.log(`Saved ${allActivities.length} activities to ${OUTPUT_FILE}`);
+  console.log('Reading activities from data/activities.json...');
+  const allActivities = JSON.parse(fs.readFileSync(activitiesPath, 'utf-8'));
+  console.log(`Loaded ${allActivities.length} activities from data/activities.json.`);
+
+  // Ensure /data/activities directory exists
+  const dir = path.join(__dirname, '../data/activities');
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  // Save each activity as its own file, skip if already exists
+  let saved = 0, skipped = 0;
+  allActivities.forEach((a, i) => {
+    const file = path.join(dir, `${a.id}.json`);
+    if (fs.existsSync(file)) {
+      console.log(`[${i + 1}/${allActivities.length}] Skipping already saved activity ${a.id}`);
+      skipped++;
+      return; // Already fetched
+    }
+    fs.writeFileSync(file, JSON.stringify(a, null, 2));
+    console.log(`[${i + 1}/${allActivities.length}] Saved activity ${a.id} (${a.name})`);
+    saved++;
+  });
+  console.log(`Done. Saved ${saved} new activities to ${dir} (${skipped} skipped)`);
 }
+
 
 fetchAllActivities().catch(console.error);
