@@ -42,7 +42,7 @@ export default function ActivitiesTable({ activities }: Props) {
         <tbody>
           {activities.map((a) => (
             <tr key={a.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-800">
-              <td className="px-4 py-2 whitespace-nowrap">{new Date(a.start_date_local).toLocaleDateString()}</td>
+              <td className="px-4 py-2 whitespace-nowrap">{a.start_date_local.slice(0, 10)}</td>
               <td className="px-4 py-2">{a.name}</td>
               <td className="px-4 py-2">{(a.distance / 1000).toFixed(1)} km</td>
               <td className="px-4 py-2">{formatTime(a.moving_time)}</td>
