@@ -1,8 +1,17 @@
 import DashboardSummaryCards from "./DashboardSummaryCards";
 import WeeklyLineChart from "./WeeklyLineChart";
 import LeaderboardTable from "./LeaderboardTable";
+import ActivitiesCharts from "../components/ActivitiesCharts";
+import fs from "fs";
+import path from "path";
 
 export default function DashboardPage() {
+  // Read activities.json at build time
+  const activitiesPath = path.join(process.cwd(), "data", "activities.json");
+  const activities = fs.existsSync(activitiesPath)
+    ? JSON.parse(fs.readFileSync(activitiesPath, "utf8"))
+    : [];
+
   // Mock data
   const summary = {
     mileage: 876,
@@ -24,6 +33,7 @@ export default function DashboardPage() {
   return (
     <main className="flex min-h-screen flex-col p-8 bg-gray-50 dark:bg-gray-900">
       <h1 className="text-3xl font-bold mb-6">🚴‍♂️ Team Dashboard</h1>
+      <ActivitiesCharts activities={activities} />
       <DashboardSummaryCards summary={summary} />
       <section className="my-8">
         <WeeklyLineChart data={weeklyData} />

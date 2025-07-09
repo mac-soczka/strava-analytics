@@ -43,14 +43,24 @@ export default function ActivitiesTable({ activities }: Props) {
           {activities.map((a) => (
             <tr key={a.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-800">
               <td className="px-4 py-2 whitespace-nowrap">{a.start_date_local.slice(0, 10)}</td>
-              <td className="px-4 py-2">{a.name}</td>
+              <td className="px-4 py-2">
+  <a
+    href={`https://www.strava.com/activities/${a.id}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-600 hover:underline"
+    title="View on Strava"
+  >
+    {a.name}
+  </a>
+</td>
               <td className="px-4 py-2">{(a.distance / 1000).toFixed(1)} km</td>
               <td className="px-4 py-2">{formatTime(a.moving_time)}</td>
               <td className="px-4 py-2">{a.total_elevation_gain} m</td>
               <td className="px-4 py-2">{a.type}</td>
               <td className="px-4 py-2">
                 {a.map?.summary_polyline ? (
-                  <PolylineMap polyline={a.map.summary_polyline} />
+                  <PolylineMap polyline={a.map.summary_polyline} href={`https://www.strava.com/activities/${a.id}`} />
                 ) : (
                   <span className="text-gray-400">No Map</span>
                 )}
