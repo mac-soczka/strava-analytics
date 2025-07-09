@@ -22,7 +22,12 @@ export async function GET(req) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    let errorDetails = { error: error.message };
+    if (error.response) {
+      errorDetails.status = error.response.status;
+      errorDetails.data = error.response.data;
+    }
+    return new Response(JSON.stringify(errorDetails, null, 2), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
