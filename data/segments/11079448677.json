@@ -1,0 +1,65 @@
+[
+  {
+    "id": 3210083732829226500,
+    "resource_state": 2,
+    "name": "Royal Mile (bit) downhill",
+    "activity": {
+      "id": 11079448677,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 493,
+    "moving_time": 477,
+    "start_date": "2024-03-28T09:53:09Z",
+    "start_date_local": "2024-03-28T09:53:09Z",
+    "distance": 829,
+    "start_index": 66,
+    "end_index": 100,
+    "average_cadence": 58.6,
+    "device_watts": false,
+    "average_heartrate": 82.2,
+    "max_heartrate": 102,
+    "segment": {
+      "id": 36010575,
+      "resource_state": 2,
+      "name": "Royal Mile (bit) downhill",
+      "activity_type": "Walk",
+      "distance": 829,
+      "average_grade": -3,
+      "maximum_grade": 5.4,
+      "elevation_high": 100.8,
+      "elevation_low": 74.3,
+      "start_latlng": [
+        55.948759,
+        -3.194953
+      ],
+      "end_latlng": [
+        55.95064,
+        -3.184599
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

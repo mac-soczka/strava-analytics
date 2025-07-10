@@ -1,0 +1,59 @@
+[
+  {
+    "id": 3174088192426580000,
+    "resource_state": 2,
+    "name": "Princes Lothian",
+    "activity": {
+      "id": 10431758458,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 723,
+    "moving_time": 715,
+    "start_date": "2023-12-24T12:06:05Z",
+    "start_date_local": "2023-12-24T12:06:05Z",
+    "distance": 986.2,
+    "start_index": 76,
+    "end_index": 112,
+    "average_cadence": 55.8,
+    "device_watts": false,
+    "average_heartrate": 97.3,
+    "max_heartrate": 101,
+    "segment": {
+      "id": 36010558,
+      "resource_state": 2,
+      "name": "Princes Lothian",
+      "activity_type": "Walk",
+      "distance": 986.2,
+      "average_grade": -0.1,
+      "maximum_grade": 8.4,
+      "elevation_high": 72,
+      "elevation_low": 67.6,
+      "start_latlng": [
+        55.952605,
+        -3.192103
+      ],
+      "end_latlng": [
+        55.950127,
+        -3.206934
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

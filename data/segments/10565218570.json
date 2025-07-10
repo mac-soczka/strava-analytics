@@ -1,0 +1,65 @@
+[
+  {
+    "id": 3182078066496206000,
+    "resource_state": 2,
+    "name": "Priinces Street - Primark to the Galleries",
+    "activity": {
+      "id": 10565218570,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 145,
+    "moving_time": 145,
+    "start_date": "2024-01-15T14:35:17Z",
+    "start_date_local": "2024-01-15T14:35:17Z",
+    "distance": 220.1,
+    "start_index": 244,
+    "end_index": 250,
+    "average_cadence": 56.5,
+    "device_watts": false,
+    "average_heartrate": 95.7,
+    "max_heartrate": 99,
+    "segment": {
+      "id": 12696400,
+      "resource_state": 2,
+      "name": "Priinces Street - Primark to the Galleries",
+      "activity_type": "Walk",
+      "distance": 220.1,
+      "average_grade": 2,
+      "maximum_grade": 4.5,
+      "elevation_high": 67.2,
+      "elevation_low": 61.5,
+      "start_latlng": [
+        55.951662,
+        -3.199416
+      ],
+      "end_latlng": [
+        55.95221,
+        -3.196243
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

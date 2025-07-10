@@ -1,0 +1,122 @@
+[
+  {
+    "id": 3185688584361343500,
+    "resource_state": 2,
+    "name": "3 Blocks up Easter Road",
+    "activity": {
+      "id": 10628883670,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 240,
+    "moving_time": 231,
+    "start_date": "2024-01-24T13:51:34Z",
+    "start_date_local": "2024-01-24T13:51:34Z",
+    "distance": 292.6,
+    "start_index": 19,
+    "end_index": 44,
+    "average_cadence": 57.7,
+    "device_watts": false,
+    "average_heartrate": 106.6,
+    "max_heartrate": 132,
+    "segment": {
+      "id": 10243138,
+      "resource_state": 2,
+      "name": "3 Blocks up Easter Road",
+      "activity_type": "Walk",
+      "distance": 292.6,
+      "average_grade": 3.9,
+      "maximum_grade": 9.8,
+      "elevation_high": 45.5,
+      "elevation_low": 34.2,
+      "start_latlng": [
+        55.96026,
+        -3.171419
+      ],
+      "end_latlng": [
+        55.957703,
+        -3.172175
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3185688584360370700,
+    "resource_state": 2,
+    "name": "Priinces Street - Primark to the Galleries",
+    "activity": {
+      "id": 10628883670,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 140,
+    "moving_time": 140,
+    "start_date": "2024-01-24T14:38:03Z",
+    "start_date_local": "2024-01-24T14:38:03Z",
+    "distance": 220.1,
+    "start_index": 296,
+    "end_index": 304,
+    "average_cadence": 55.8,
+    "device_watts": false,
+    "average_heartrate": 102.6,
+    "max_heartrate": 110,
+    "segment": {
+      "id": 12696400,
+      "resource_state": 2,
+      "name": "Priinces Street - Primark to the Galleries",
+      "activity_type": "Walk",
+      "distance": 220.1,
+      "average_grade": 2,
+      "maximum_grade": 4.5,
+      "elevation_high": 67.2,
+      "elevation_low": 61.5,
+      "start_latlng": [
+        55.951662,
+        -3.199416
+      ],
+      "end_latlng": [
+        55.95221,
+        -3.196243
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

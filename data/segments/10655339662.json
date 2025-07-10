@@ -1,0 +1,179 @@
+[
+  {
+    "id": 3187125489629182500,
+    "resource_state": 2,
+    "name": "3 Blocks up Easter Road",
+    "activity": {
+      "id": 10655339662,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 196,
+    "moving_time": 196,
+    "start_date": "2024-01-27T13:31:32Z",
+    "start_date_local": "2024-01-27T13:31:32Z",
+    "distance": 292.6,
+    "start_index": 24,
+    "end_index": 46,
+    "average_cadence": 55.6,
+    "device_watts": false,
+    "average_heartrate": 104.7,
+    "max_heartrate": 113,
+    "segment": {
+      "id": 10243138,
+      "resource_state": 2,
+      "name": "3 Blocks up Easter Road",
+      "activity_type": "Walk",
+      "distance": 292.6,
+      "average_grade": 3.9,
+      "maximum_grade": 9.8,
+      "elevation_high": 45.5,
+      "elevation_low": 34.2,
+      "start_latlng": [
+        55.96026,
+        -3.171419
+      ],
+      "end_latlng": [
+        55.957703,
+        -3.172175
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3187125489628624400,
+    "resource_state": 2,
+    "name": "Queen'S Dr Climb",
+    "activity": {
+      "id": 10655339662,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 968,
+    "moving_time": 968,
+    "start_date": "2024-01-27T13:53:19Z",
+    "start_date_local": "2024-01-27T13:53:19Z",
+    "distance": 1441.67,
+    "start_index": 128,
+    "end_index": 182,
+    "average_cadence": 55.5,
+    "device_watts": false,
+    "average_heartrate": 115.9,
+    "max_heartrate": 130,
+    "segment": {
+      "id": 1306681,
+      "resource_state": 2,
+      "name": "Queen'S Dr Climb",
+      "activity_type": "Walk",
+      "distance": 1441.67,
+      "average_grade": 5.7,
+      "maximum_grade": 12.4,
+      "elevation_high": 128.3,
+      "elevation_low": 46.7,
+      "start_latlng": [
+        55.95318323333333,
+        -3.1593069333333337
+      ],
+      "end_latlng": [
+        55.94590946666667,
+        -3.1544584833333333
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3187125489630031400,
+    "resource_state": 2,
+    "name": "Holyrood parkrun downhill parkwalker/tail walker",
+    "activity": {
+      "id": 10655339662,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 972,
+    "moving_time": 972,
+    "start_date": "2024-01-27T14:21:40Z",
+    "start_date_local": "2024-01-27T14:21:40Z",
+    "distance": 1579,
+    "start_index": 225,
+    "end_index": 277,
+    "average_cadence": 58.1,
+    "device_watts": false,
+    "average_heartrate": 101.9,
+    "max_heartrate": 108,
+    "segment": {
+      "id": 35852003,
+      "resource_state": 2,
+      "name": "Holyrood parkrun downhill parkwalker/tail walker",
+      "activity_type": "Walk",
+      "distance": 1579,
+      "average_grade": -5.3,
+      "maximum_grade": 2.2,
+      "elevation_high": 125.3,
+      "elevation_low": 40.5,
+      "start_latlng": [
+        55.940489,
+        -3.163124
+      ],
+      "end_latlng": [
+        55.948949,
+        -3.175632
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

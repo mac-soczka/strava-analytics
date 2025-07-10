@@ -1,0 +1,812 @@
+[
+  {
+    "id": 3329524656775456000,
+    "resource_state": 2,
+    "name": "Fiveways along Trinity Path",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 109,
+    "moving_time": 109,
+    "start_date": "2024-03-27T18:05:12Z",
+    "start_date_local": "2024-03-27T18:05:12Z",
+    "distance": 662.465,
+    "start_index": 678,
+    "end_index": 787,
+    "device_watts": false,
+    "segment": {
+      "id": 2462785,
+      "resource_state": 2,
+      "name": "Fiveways along Trinity Path",
+      "activity_type": "Ride",
+      "distance": 662.465,
+      "average_grade": -0.7,
+      "maximum_grade": 2.5,
+      "elevation_high": 29.8,
+      "elevation_low": 21.1,
+      "start_latlng": [
+        55.974333,
+        -3.202536
+      ],
+      "end_latlng": [
+        55.979633,
+        -3.205958
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3329524656779463700,
+    "resource_state": 2,
+    "name": "Granton Cycle Path",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 179,
+    "moving_time": 179,
+    "start_date": "2024-03-27T18:08:17Z",
+    "start_date_local": "2024-03-27T18:08:17Z",
+    "distance": 958.8,
+    "start_index": 819,
+    "end_index": 998,
+    "device_watts": false,
+    "segment": {
+      "id": 21598583,
+      "resource_state": 2,
+      "name": "Granton Cycle Path",
+      "activity_type": "Ride",
+      "distance": 958.8,
+      "average_grade": -0.3,
+      "maximum_grade": 2.2,
+      "elevation_high": 18,
+      "elevation_low": 12,
+      "start_latlng": [
+        55.980279,
+        -3.207185
+      ],
+      "end_latlng": [
+        55.980709,
+        -3.222004
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3329524656779380700,
+    "resource_state": 2,
+    "name": "Lower Granton loop",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 436,
+    "moving_time": 436,
+    "start_date": "2024-03-27T18:08:21Z",
+    "start_date_local": "2024-03-27T18:08:21Z",
+    "distance": 2303.3,
+    "start_index": 823,
+    "end_index": 1259,
+    "device_watts": false,
+    "segment": {
+      "id": 18284801,
+      "resource_state": 2,
+      "name": "Lower Granton loop",
+      "activity_type": "Ride",
+      "distance": 2303.3,
+      "average_grade": 0,
+      "maximum_grade": 11.6,
+      "elevation_high": 24.5,
+      "elevation_low": 8.2,
+      "start_latlng": [
+        55.98006,
+        -3.207567
+      ],
+      "end_latlng": [
+        55.980046,
+        -3.207168
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3329524656776977400,
+    "resource_state": 2,
+    "name": "Granton Sq to Trinity Path via McKelvie Parade",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 229,
+    "moving_time": 229,
+    "start_date": "2024-03-27T18:11:53Z",
+    "start_date_local": "2024-03-27T18:11:53Z",
+    "distance": 1121.7,
+    "start_index": 1035,
+    "end_index": 1264,
+    "device_watts": false,
+    "segment": {
+      "id": 21566512,
+      "resource_state": 2,
+      "name": "Granton Sq to Trinity Path via McKelvie Parade",
+      "activity_type": "Ride",
+      "distance": 1121.7,
+      "average_grade": 0.2,
+      "maximum_grade": 7.2,
+      "elevation_high": 10.2,
+      "elevation_low": 3.5,
+      "start_latlng": [
+        55.981153,
+        -3.223913
+      ],
+      "end_latlng": [
+        55.980177,
+        -3.206698
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3329524656778403000,
+    "resource_state": 2,
+    "name": "Lower Granton Rd",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 223,
+    "moving_time": 223,
+    "start_date": "2024-03-27T18:11:55Z",
+    "start_date_local": "2024-03-27T18:11:55Z",
+    "distance": 1082.3,
+    "start_index": 1037,
+    "end_index": 1260,
+    "device_watts": false,
+    "segment": {
+      "id": 3921247,
+      "resource_state": 2,
+      "name": "Lower Granton Rd",
+      "activity_type": "Ride",
+      "distance": 1082.3,
+      "average_grade": 0.7,
+      "maximum_grade": 2.5,
+      "elevation_high": 18.8,
+      "elevation_low": 10.9,
+      "start_latlng": [
+        55.981056,
+        -3.2239
+      ],
+      "end_latlng": [
+        55.979984,
+        -3.207103
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3329524656777740300,
+    "resource_state": 2,
+    "name": "Lower Granton Rd climb",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 138,
+    "moving_time": 138,
+    "start_date": "2024-03-27T18:12:07Z",
+    "start_date_local": "2024-03-27T18:12:07Z",
+    "distance": 666.8,
+    "start_index": 1049,
+    "end_index": 1187,
+    "device_watts": false,
+    "segment": {
+      "id": 7689526,
+      "resource_state": 2,
+      "name": "Lower Granton Rd climb",
+      "activity_type": "Ride",
+      "distance": 666.8,
+      "average_grade": -0.2,
+      "maximum_grade": 0.4,
+      "elevation_high": 21.3,
+      "elevation_low": 18.9,
+      "start_latlng": [
+        55.980943,
+        -3.223169
+      ],
+      "end_latlng": [
+        55.980579,
+        -3.212926
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3329524656779400000,
+    "resource_state": 2,
+    "name": "McKelvie Parade Single Track",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 112,
+    "moving_time": 112,
+    "start_date": "2024-03-27T18:13:55Z",
+    "start_date_local": "2024-03-27T18:13:55Z",
+    "distance": 544.8,
+    "start_index": 1157,
+    "end_index": 1269,
+    "device_watts": false,
+    "segment": {
+      "id": 37061619,
+      "resource_state": 2,
+      "name": "McKelvie Parade Single Track",
+      "activity_type": "Ride",
+      "distance": 544.8,
+      "average_grade": 0.3,
+      "maximum_grade": 3.5,
+      "elevation_high": 35.4,
+      "elevation_low": 32.4,
+      "start_latlng": [
+        55.980459,
+        -3.215077
+      ],
+      "end_latlng": [
+        55.980082,
+        -3.206531
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3329524656775957500,
+    "resource_state": 2,
+    "name": "Chain pier to 5 ways",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 159,
+    "moving_time": 153,
+    "start_date": "2024-03-27T18:17:13Z",
+    "start_date_local": "2024-03-27T18:17:13Z",
+    "distance": 663.1,
+    "start_index": 1296,
+    "end_index": 1450,
+    "device_watts": false,
+    "segment": {
+      "id": 16148606,
+      "resource_state": 2,
+      "name": "Chain pier to 5 ways",
+      "activity_type": "Ride",
+      "distance": 663.1,
+      "average_grade": 1.1,
+      "maximum_grade": 8.7,
+      "elevation_high": 19,
+      "elevation_low": 12,
+      "start_latlng": [
+        55.979738,
+        -3.205952
+      ],
+      "end_latlng": [
+        55.974398,
+        -3.202355
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": null,
+      "country": null,
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3329524656777659400,
+    "resource_state": 2,
+    "name": "Trinity path tunnel",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 60,
+    "moving_time": 60,
+    "start_date": "2024-03-27T18:18:23Z",
+    "start_date_local": "2024-03-27T18:18:23Z",
+    "distance": 329.4,
+    "start_index": 1361,
+    "end_index": 1421,
+    "device_watts": false,
+    "segment": {
+      "id": 13981806,
+      "resource_state": 2,
+      "name": "Trinity path tunnel",
+      "activity_type": "Ride",
+      "distance": 329.4,
+      "average_grade": -0.8,
+      "maximum_grade": 1.1,
+      "elevation_high": 29.1,
+      "elevation_low": 25.9,
+      "start_latlng": [
+        55.978198,
+        -3.20422
+      ],
+      "end_latlng": [
+        55.975402,
+        -3.202923
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3329524656776950000,
+    "resource_state": 2,
+    "name": "St Marks Park / Bridge",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 48,
+    "moving_time": 48,
+    "start_date": "2024-03-27T18:24:40Z",
+    "start_date_local": "2024-03-27T18:24:40Z",
+    "distance": 219.7,
+    "start_index": 1738,
+    "end_index": 1786,
+    "device_watts": false,
+    "segment": {
+      "id": 6937554,
+      "resource_state": 2,
+      "name": "St Marks Park / Bridge",
+      "activity_type": "Ride",
+      "distance": 219.7,
+      "average_grade": -3,
+      "maximum_grade": 1.4,
+      "elevation_high": 19.8,
+      "elevation_low": 12.4,
+      "start_latlng": [
+        55.968774,
+        -3.194501
+      ],
+      "end_latlng": [
+        55.967557,
+        -3.191761
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3329524656778841000,
+    "resource_state": 2,
+    "name": "St Marks Bridge - Dodge the Pedestrians",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 75,
+    "moving_time": 56,
+    "start_date": "2024-03-27T18:25:30Z",
+    "start_date_local": "2024-03-27T18:25:30Z",
+    "distance": 207.7,
+    "start_index": 1788,
+    "end_index": 1847,
+    "device_watts": false,
+    "segment": {
+      "id": 6937562,
+      "resource_state": 2,
+      "name": "St Marks Bridge - Dodge the Pedestrians",
+      "activity_type": "Ride",
+      "distance": 207.7,
+      "average_grade": 3.7,
+      "maximum_grade": 5.7,
+      "elevation_high": 20.8,
+      "elevation_low": 13.2,
+      "start_latlng": [
+        55.967502,
+        -3.191684
+      ],
+      "end_latlng": [
+        55.966387,
+        -3.189096
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": true,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3329524656778235000,
+    "resource_state": 2,
+    "name": "Up McDonald Rd",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 260,
+    "moving_time": 183,
+    "start_date": "2024-03-27T18:26:56Z",
+    "start_date_local": "2024-03-27T18:26:56Z",
+    "distance": 699.86,
+    "start_index": 1858,
+    "end_index": 2042,
+    "device_watts": false,
+    "segment": {
+      "id": 2300844,
+      "resource_state": 2,
+      "name": "Up McDonald Rd",
+      "activity_type": "Ride",
+      "distance": 699.86,
+      "average_grade": 1.7,
+      "maximum_grade": 3.4,
+      "elevation_high": 33.3,
+      "elevation_low": 21,
+      "start_latlng": [
+        55.96609320491552,
+        -3.1886688340455294
+      ],
+      "end_latlng": [
+        55.961445858702064,
+        -3.181040044873953
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3329524656776178700,
+    "resource_state": 2,
+    "name": "McDonald Road - Climb Only",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 120,
+    "moving_time": 120,
+    "start_date": "2024-03-27T18:27:50Z",
+    "start_date_local": "2024-03-27T18:27:50Z",
+    "distance": 441.8,
+    "start_index": 1912,
+    "end_index": 2032,
+    "device_watts": false,
+    "segment": {
+      "id": 9380103,
+      "resource_state": 2,
+      "name": "McDonald Road - Climb Only",
+      "activity_type": "Ride",
+      "distance": 441.8,
+      "average_grade": 2.6,
+      "maximum_grade": 6.5,
+      "elevation_high": 32.9,
+      "elevation_low": 21.2,
+      "start_latlng": [
+        55.964445,
+        -3.186217
+      ],
+      "end_latlng": [
+        55.961698,
+        -3.181238
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3329524656779106300,
+    "resource_state": 2,
+    "name": "speed bump central",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 127,
+    "moving_time": 114,
+    "start_date": "2024-03-27T18:31:19Z",
+    "start_date_local": "2024-03-27T18:31:19Z",
+    "distance": 518,
+    "start_index": 2045,
+    "end_index": 2162,
+    "device_watts": false,
+    "segment": {
+      "id": 4867821,
+      "resource_state": 2,
+      "name": "speed bump central",
+      "activity_type": "Ride",
+      "distance": 518,
+      "average_grade": -0.6,
+      "maximum_grade": 2.3,
+      "elevation_high": 35.7,
+      "elevation_low": 29,
+      "start_latlng": [
+        55.961395,
+        -3.180918
+      ],
+      "end_latlng": [
+        55.960681,
+        -3.173793
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": true
+  },
+  {
+    "id": 3329524656776490000,
+    "resource_state": 2,
+    "name": "Brunswick Road Death Star Trench",
+    "activity": {
+      "id": 13724794059,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 92,
+    "moving_time": 79,
+    "start_date": "2024-03-27T18:31:36Z",
+    "start_date_local": "2024-03-27T18:31:36Z",
+    "distance": 362.4,
+    "start_index": 2062,
+    "end_index": 2144,
+    "device_watts": false,
+    "segment": {
+      "id": 9209278,
+      "resource_state": 2,
+      "name": "Brunswick Road Death Star Trench",
+      "activity_type": "Ride",
+      "distance": 362.4,
+      "average_grade": -0.8,
+      "maximum_grade": 1.2,
+      "elevation_high": 35.5,
+      "elevation_low": 30.1,
+      "start_latlng": [
+        55.961098,
+        -3.180103
+      ],
+      "end_latlng": [
+        55.960349,
+        -3.175178
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

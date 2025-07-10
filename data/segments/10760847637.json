@@ -1,0 +1,173 @@
+[
+  {
+    "id": 3193236133693911600,
+    "resource_state": 2,
+    "name": "3 Blocks up Easter Road",
+    "activity": {
+      "id": 10760847637,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 241,
+    "moving_time": 241,
+    "start_date": "2024-02-13T13:28:47Z",
+    "start_date_local": "2024-02-13T13:28:47Z",
+    "distance": 292.6,
+    "start_index": 19,
+    "end_index": 49,
+    "average_cadence": 57.5,
+    "device_watts": false,
+    "average_heartrate": 93.7,
+    "max_heartrate": 101,
+    "segment": {
+      "id": 10243138,
+      "resource_state": 2,
+      "name": "3 Blocks up Easter Road",
+      "activity_type": "Walk",
+      "distance": 292.6,
+      "average_grade": 3.9,
+      "maximum_grade": 9.8,
+      "elevation_high": 45.5,
+      "elevation_low": 34.2,
+      "start_latlng": [
+        55.96026,
+        -3.171419
+      ],
+      "end_latlng": [
+        55.957703,
+        -3.172175
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3266644708275383300,
+    "resource_state": 2,
+    "name": "Climb Arthur's Seat",
+    "activity": {
+      "id": 10760847637,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 922,
+    "moving_time": 877,
+    "start_date": "2024-02-13T13:43:59Z",
+    "start_date_local": "2024-02-13T13:43:59Z",
+    "distance": 980.2,
+    "start_index": 131,
+    "end_index": 214,
+    "average_cadence": 48.6,
+    "device_watts": false,
+    "average_heartrate": 130,
+    "max_heartrate": 150,
+    "segment": {
+      "id": 37724612,
+      "resource_state": 2,
+      "name": "Climb Arthur's Seat",
+      "activity_type": "Walk",
+      "distance": 980.2,
+      "average_grade": 13.3,
+      "maximum_grade": 25.9,
+      "elevation_high": 172,
+      "elevation_low": 41.7,
+      "start_latlng": [
+        55.950821,
+        -3.169603
+      ],
+      "end_latlng": [
+        55.945941,
+        -3.174085
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3193236133695135000,
+    "resource_state": 2,
+    "name": "Queen'S Dr Climb",
+    "activity": {
+      "id": 10760847637,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 488,
+    "moving_time": 488,
+    "start_date": "2024-02-13T13:47:10Z",
+    "start_date_local": "2024-02-13T13:47:10Z",
+    "distance": 544.207,
+    "start_index": 149,
+    "end_index": 190,
+    "average_cadence": 52,
+    "device_watts": false,
+    "average_heartrate": 138.2,
+    "max_heartrate": 150,
+    "segment": {
+      "id": 1824927,
+      "resource_state": 2,
+      "name": "Queen'S Dr Climb",
+      "activity_type": "Walk",
+      "distance": 544.207,
+      "average_grade": 14.2,
+      "maximum_grade": 29.9,
+      "elevation_high": 132.3,
+      "elevation_low": 54.8,
+      "start_latlng": [
+        55.95097535289824,
+        -3.166538178920746
+      ],
+      "end_latlng": [
+        55.94796675257385,
+        -3.172961985692382
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

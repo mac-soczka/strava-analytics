@@ -1,0 +1,191 @@
+[
+  {
+    "id": 3172277947254436000,
+    "resource_state": 2,
+    "name": "Rose Street, Frederick Street to Princes Street",
+    "activity": {
+      "id": 10405786715,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 744,
+    "moving_time": 239,
+    "start_date": "2023-12-19T11:06:45Z",
+    "start_date_local": "2023-12-19T11:06:45Z",
+    "distance": 169.2,
+    "start_index": 151,
+    "end_index": 313,
+    "average_cadence": 52.7,
+    "device_watts": false,
+    "average_heartrate": 86.5,
+    "max_heartrate": 102,
+    "segment": {
+      "id": 12696384,
+      "resource_state": 2,
+      "name": "Rose Street, Frederick Street to Princes Street",
+      "activity_type": "Walk",
+      "distance": 169.2,
+      "average_grade": -6.1,
+      "maximum_grade": 0,
+      "elevation_high": 71.9,
+      "elevation_low": 61.5,
+      "start_latlng": [
+        55.952227,
+        -3.200435
+      ],
+      "end_latlng": [
+        55.951593,
+        -3.199258
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 3,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 3
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3172277947253604400,
+    "resource_state": 2,
+    "name": "Rose Street, Frederick Street to Princes Street",
+    "activity": {
+      "id": 10405786715,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 661,
+    "moving_time": 185,
+    "start_date": "2023-12-19T11:08:08Z",
+    "start_date_local": "2023-12-19T11:08:08Z",
+    "distance": 169.2,
+    "start_index": 165,
+    "end_index": 313,
+    "average_cadence": 51.6,
+    "device_watts": false,
+    "average_heartrate": 83.4,
+    "max_heartrate": 102,
+    "segment": {
+      "id": 12696384,
+      "resource_state": 2,
+      "name": "Rose Street, Frederick Street to Princes Street",
+      "activity_type": "Walk",
+      "distance": 169.2,
+      "average_grade": -6.1,
+      "maximum_grade": 0,
+      "elevation_high": 71.9,
+      "elevation_low": 61.5,
+      "start_latlng": [
+        55.952227,
+        -3.200435
+      ],
+      "end_latlng": [
+        55.951593,
+        -3.199258
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3172277947252599000,
+    "resource_state": 2,
+    "name": "Priinces Street - Primark to the Galleries",
+    "activity": {
+      "id": 10405786715,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 490,
+    "moving_time": 168,
+    "start_date": "2023-12-19T11:18:55Z",
+    "start_date_local": "2023-12-19T11:18:55Z",
+    "distance": 220.1,
+    "start_index": 312,
+    "end_index": 475,
+    "average_cadence": 52.7,
+    "device_watts": false,
+    "average_heartrate": 93.5,
+    "max_heartrate": 141,
+    "segment": {
+      "id": 12696400,
+      "resource_state": 2,
+      "name": "Priinces Street - Primark to the Galleries",
+      "activity_type": "Walk",
+      "distance": 220.1,
+      "average_grade": 2,
+      "maximum_grade": 4.5,
+      "elevation_high": 67.2,
+      "elevation_low": 61.5,
+      "start_latlng": [
+        55.951662,
+        -3.199416
+      ],
+      "end_latlng": [
+        55.95221,
+        -3.196243
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

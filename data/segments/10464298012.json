@@ -1,0 +1,65 @@
+[
+  {
+    "id": 3176280280389838000,
+    "resource_state": 2,
+    "name": "Broughton Street Push",
+    "activity": {
+      "id": 10464298012,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 239,
+    "moving_time": 238,
+    "start_date": "2023-12-30T14:54:23Z",
+    "start_date_local": "2023-12-30T14:54:23Z",
+    "distance": 355.5,
+    "start_index": 269,
+    "end_index": 292,
+    "average_cadence": 56.4,
+    "device_watts": false,
+    "average_heartrate": 115,
+    "max_heartrate": 124,
+    "segment": {
+      "id": 15711958,
+      "resource_state": 2,
+      "name": "Broughton Street Push",
+      "activity_type": "Walk",
+      "distance": 355.5,
+      "average_grade": 4.6,
+      "maximum_grade": 50,
+      "elevation_high": 57.9,
+      "elevation_low": 40,
+      "start_latlng": [
+        55.959391,
+        -3.190218
+      ],
+      "end_latlng": [
+        55.956786,
+        -3.187742
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

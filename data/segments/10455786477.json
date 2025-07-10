@@ -1,0 +1,59 @@
+[
+  {
+    "id": 3175827456639342600,
+    "resource_state": 2,
+    "name": "Queen'S Dr Climb",
+    "activity": {
+      "id": 10455786477,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 522,
+    "moving_time": 522,
+    "start_date": "2023-12-28T13:59:13Z",
+    "start_date_local": "2023-12-28T13:59:13Z",
+    "distance": 544.207,
+    "start_index": 91,
+    "end_index": 146,
+    "average_cadence": 49.2,
+    "device_watts": false,
+    "average_heartrate": 145.5,
+    "max_heartrate": 162,
+    "segment": {
+      "id": 1824927,
+      "resource_state": 2,
+      "name": "Queen'S Dr Climb",
+      "activity_type": "Walk",
+      "distance": 544.207,
+      "average_grade": 14.2,
+      "maximum_grade": 29.9,
+      "elevation_high": 132.3,
+      "elevation_low": 54.8,
+      "start_latlng": [
+        55.95097535289824,
+        -3.166538178920746
+      ],
+      "end_latlng": [
+        55.94796675257385,
+        -3.172961985692382
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

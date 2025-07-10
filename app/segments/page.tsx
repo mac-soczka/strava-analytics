@@ -4,7 +4,7 @@ import PolylineMap from "../components/PolylineMap";
 import dynamic from "next/dynamic";
 
 const LeafletSegmentMap = dynamic(() => import("../components/LeafletSegmentMap"), { ssr: false });
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Legend } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Legend, Area, ReferenceLine } from "recharts";
 
 function formatDate(date: string) {
   return date.slice(0, 10);
@@ -174,10 +174,20 @@ export default function SegmentsPage() {
               <LeafletSegmentMap polyline={selectedSegment.map.polyline} />
             </div>
           )}
-          <div className="mb-6">
-            <ResponsiveContainer width="100%" height={340}>
-              <LineChart data={chartData} margin={{ left: 16, right: 16, top: 16, bottom: 48 }}>
-                <CartesianGrid strokeDasharray="3 3" />
+          <div className="mb-10 border-2 border-orange-200 dark:border-orange-900 rounded-xl shadow-lg bg-white dark:bg-gray-900 p-4">
+            <ResponsiveContainer width="100%" height={500}>
+              <LineChart data={chartData} margin={{ left: 32, right: 32, top: 32, bottom: 64 }}>
+                <defs>
+                  <linearGradient id="elapsedGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.7}/>
+                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="speedGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.7}/>
+                    <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3}/>
                 <XAxis
                   dataKey="date"
                   angle={-45}
@@ -188,13 +198,20 @@ export default function SegmentsPage() {
                     const n = chartData.length > 30 ? 7 : chartData.length > 12 ? 3 : 1;
                     return idx % n === 0 ? _date : '';
                   }}
+                  tick={{ fill: '#888', fontSize: 13 }}
+                  axisLine={{ stroke: '#ffa500', strokeWidth: 2 }}
                 />
-                <YAxis yAxisId="left" label={{ value: 'Time (s)', angle: -90, position: 'insideLeft' }} />
-                <YAxis yAxisId="right" orientation="right" label={{ value: 'Speed (km/h)', angle: 90, position: 'insideRight' }} />
-                <Tooltip />
-                <Legend verticalAlign="bottom" height={36} wrapperStyle={{ bottom: 0 }} />
-                <Line yAxisId="left" type="monotone" dataKey="elapsed_time" stroke="#8884d8" name="Elapsed Time (s)" />
-                <Line yAxisId="right" type="monotone" dataKey="speed" stroke="#82ca9d" name="Speed (km/h)" />
+                <YAxis yAxisId="left" label={{ value: 'Time (s)', angle: -90, position: 'insideLeft', fill: '#8884d8' }} tick={{ fill: '#8884d8' }} axisLine={{ stroke: '#8884d8' }} />
+                <YAxis yAxisId="right" orientation="right" label={{ value: 'Speed (km/h)', angle: 90, position: 'insideRight', fill: '#82ca9d' }} tick={{ fill: '#82ca9d' }} axisLine={{ stroke: '#82ca9d' }} />
+                <Tooltip formatter={(value: any, name: string) => name === 'Elapsed Time (s)' ? formatElapsedTime(value as number) : value} />
+                <Legend verticalAlign="top" height={40} iconType="circle"/>
+                {/* Area under lines for visual pop */}
+                <Area yAxisId="left" type="monotone" dataKey="elapsed_time" stroke={"#8884d8"} fillOpacity={0.2} fill="url(#elapsedGradient)" name="Elapsed Time (s)" />
+                <Area yAxisId="right" type="monotone" dataKey="speed" stroke={"#82ca9d"} fillOpacity={0.2} fill="url(#speedGradient)" name="Speed (km/h)" />
+                <Line yAxisId="left" type="monotone" dataKey="elapsed_time" stroke="#8884d8" name="Elapsed Time (s)" dot={{ r: 4, fill: '#8884d8', stroke: '#fff', strokeWidth: 1.5 }} strokeWidth={3}/>
+                <Line yAxisId="right" type="monotone" dataKey="speed" stroke="#82ca9d" name="Speed (km/h)" dot={{ r: 4, fill: '#82ca9d', stroke: '#fff', strokeWidth: 1.5 }} strokeWidth={3}/>
+                {/* Reference line for PR */}
+                {pr && <ReferenceLine yAxisId="left" y={pr.elapsed_time} stroke="#ffa500" strokeDasharray="6 2" label={{ value: 'PR', fill: '#ffa500', position: 'top', fontWeight: 700 }} />}
               </LineChart>
             </ResponsiveContainer>
             <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">

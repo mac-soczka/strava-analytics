@@ -1,0 +1,118 @@
+[
+  {
+    "id": 3201885723837431300,
+    "resource_state": 2,
+    "name": "3 Blocks up Easter Road",
+    "activity": {
+      "id": 10929612480,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 179,
+    "moving_time": 120,
+    "start_date": "2024-03-10T10:48:23Z",
+    "start_date_local": "2024-03-10T10:48:23Z",
+    "distance": 292.6,
+    "start_index": 197,
+    "end_index": 376,
+    "average_cadence": 57.3,
+    "device_watts": false,
+    "segment": {
+      "id": 10243138,
+      "resource_state": 2,
+      "name": "3 Blocks up Easter Road",
+      "activity_type": "Walk",
+      "distance": 292.6,
+      "average_grade": 3.9,
+      "maximum_grade": 9.8,
+      "elevation_high": 45.5,
+      "elevation_low": 34.2,
+      "start_latlng": [
+        55.96026,
+        -3.171419
+      ],
+      "end_latlng": [
+        55.957703,
+        -3.172175
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3348325917320913000,
+    "resource_state": 2,
+    "name": "The hill ",
+    "activity": {
+      "id": 10929612480,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 437,
+    "moving_time": 298,
+    "start_date": "2024-03-10T11:04:58Z",
+    "start_date_local": "2024-03-10T11:04:58Z",
+    "distance": 665.5,
+    "start_index": 1192,
+    "end_index": 1629,
+    "average_cadence": 56.3,
+    "device_watts": false,
+    "segment": {
+      "id": 38976272,
+      "resource_state": 2,
+      "name": "The hill ",
+      "activity_type": "Walk",
+      "distance": 665.5,
+      "average_grade": 5.2,
+      "maximum_grade": 29,
+      "elevation_high": 84.6,
+      "elevation_low": 36,
+      "start_latlng": [
+        55.949365,
+        -3.177555
+      ],
+      "end_latlng": [
+        55.943798,
+        -3.178562
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

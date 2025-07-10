@@ -1,0 +1,122 @@
+[
+  {
+    "id": 3162842764112006000,
+    "resource_state": 2,
+    "name": "3 Blocks up Easter Road",
+    "activity": {
+      "id": 10268742595,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 165,
+    "moving_time": 165,
+    "start_date": "2023-11-23T12:30:50Z",
+    "start_date_local": "2023-11-23T12:30:50Z",
+    "distance": 292.6,
+    "start_index": 6,
+    "end_index": 13,
+    "average_cadence": 57,
+    "device_watts": false,
+    "average_heartrate": 104.1,
+    "max_heartrate": 108,
+    "segment": {
+      "id": 10243138,
+      "resource_state": 2,
+      "name": "3 Blocks up Easter Road",
+      "activity_type": "Walk",
+      "distance": 292.6,
+      "average_grade": 3.9,
+      "maximum_grade": 9.8,
+      "elevation_high": 45.5,
+      "elevation_low": 34.2,
+      "start_latlng": [
+        55.96026,
+        -3.171419
+      ],
+      "end_latlng": [
+        55.957703,
+        -3.172175
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": null,
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3162842764115175400,
+    "resource_state": 2,
+    "name": "Queen'S Dr Climb",
+    "activity": {
+      "id": 10268742595,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 929,
+    "moving_time": 928,
+    "start_date": "2023-11-23T12:53:13Z",
+    "start_date_local": "2023-11-23T12:53:13Z",
+    "distance": 1441.67,
+    "start_index": 96,
+    "end_index": 149,
+    "average_cadence": 56,
+    "device_watts": false,
+    "average_heartrate": 102.6,
+    "max_heartrate": 119,
+    "segment": {
+      "id": 1306681,
+      "resource_state": 2,
+      "name": "Queen'S Dr Climb",
+      "activity_type": "Walk",
+      "distance": 1441.67,
+      "average_grade": 5.7,
+      "maximum_grade": 12.4,
+      "elevation_high": 128.3,
+      "elevation_low": 46.7,
+      "start_latlng": [
+        55.95318323333333,
+        -3.1593069333333337
+      ],
+      "end_latlng": [
+        55.94590946666667,
+        -3.1544584833333333
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 1,
+      "city": "Edinburgh",
+      "state": "City of Edinburgh",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

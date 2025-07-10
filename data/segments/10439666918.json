@@ -1,0 +1,122 @@
+[
+  {
+    "id": 3174741614458996700,
+    "resource_state": 2,
+    "name": "Croft-an-Righ to work",
+    "activity": {
+      "id": 10439666918,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1185,
+    "moving_time": 1157,
+    "start_date": "2023-12-26T12:39:08Z",
+    "start_date_local": "2023-12-26T12:39:08Z",
+    "distance": 1624.56,
+    "start_index": 66,
+    "end_index": 143,
+    "average_cadence": 54.9,
+    "device_watts": false,
+    "average_heartrate": 100.5,
+    "max_heartrate": 110,
+    "segment": {
+      "id": 1276104,
+      "resource_state": 2,
+      "name": "Croft-an-Righ to work",
+      "activity_type": "Walk",
+      "distance": 1624.56,
+      "average_grade": 0.2,
+      "maximum_grade": 15,
+      "elevation_high": 74.4,
+      "elevation_low": 56.4,
+      "start_latlng": [
+        55.95329081179197,
+        -3.179925503212195
+      ],
+      "end_latlng": [
+        55.95070356974001,
+        -3.2033644896030458
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Midlothian",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3174741614456544000,
+    "resource_state": 2,
+    "name": "Princes Lothian",
+    "activity": {
+      "id": 10439666918,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 763,
+    "moving_time": 735,
+    "start_date": "2023-12-26T12:48:54Z",
+    "start_date_local": "2023-12-26T12:48:54Z",
+    "distance": 986.2,
+    "start_index": 93,
+    "end_index": 157,
+    "average_cadence": 54.4,
+    "device_watts": false,
+    "average_heartrate": 99.5,
+    "max_heartrate": 110,
+    "segment": {
+      "id": 36010558,
+      "resource_state": 2,
+      "name": "Princes Lothian",
+      "activity_type": "Walk",
+      "distance": 986.2,
+      "average_grade": -0.1,
+      "maximum_grade": 8.4,
+      "elevation_high": 72,
+      "elevation_low": 67.6,
+      "start_latlng": [
+        55.952605,
+        -3.192103
+      ],
+      "end_latlng": [
+        55.950127,
+        -3.206934
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 2,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 2
+      }
+    ],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

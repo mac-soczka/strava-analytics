@@ -1,0 +1,65 @@
+[
+  {
+    "id": 3171475131034545700,
+    "resource_state": 2,
+    "name": "High Street Climb",
+    "activity": {
+      "id": 10395076955,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 702,
+    "moving_time": 702,
+    "start_date": "2023-12-17T12:49:19Z",
+    "start_date_local": "2023-12-17T12:49:19Z",
+    "distance": 1196.1,
+    "start_index": 15,
+    "end_index": 42,
+    "average_cadence": 54,
+    "device_watts": false,
+    "average_heartrate": 116.6,
+    "max_heartrate": 117,
+    "segment": {
+      "id": 5519683,
+      "resource_state": 2,
+      "name": "High Street Climb",
+      "activity_type": "Walk",
+      "distance": 1196.1,
+      "average_grade": 3.9,
+      "maximum_grade": 14.9,
+      "elevation_high": 72.9,
+      "elevation_low": 26.4,
+      "start_latlng": [
+        55.962751,
+        -3.178849
+      ],
+      "end_latlng": [
+        55.954607,
+        -3.187076
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": 1,
+    "achievements": [
+      {
+        "type_id": 3,
+        "type": "pr",
+        "rank": 1
+      }
+    ],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

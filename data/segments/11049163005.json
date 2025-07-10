@@ -1,0 +1,59 @@
+[
+  {
+    "id": 3348325849782421500,
+    "resource_state": 2,
+    "name": "The hill ",
+    "activity": {
+      "id": 11049163005,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 431,
+    "moving_time": 431,
+    "start_date": "2024-03-24T08:48:25Z",
+    "start_date_local": "2024-03-24T08:48:25Z",
+    "distance": 665.5,
+    "start_index": 160,
+    "end_index": 198,
+    "average_cadence": 56.1,
+    "device_watts": false,
+    "average_heartrate": 102.8,
+    "max_heartrate": 127,
+    "segment": {
+      "id": 38976272,
+      "resource_state": 2,
+      "name": "The hill ",
+      "activity_type": "Walk",
+      "distance": 665.5,
+      "average_grade": 5.2,
+      "maximum_grade": 29,
+      "elevation_high": 84.6,
+      "elevation_low": 36,
+      "start_latlng": [
+        55.949365,
+        -3.177555
+      ],
+      "end_latlng": [
+        55.943798,
+        -3.178562
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

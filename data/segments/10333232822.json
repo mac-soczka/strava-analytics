@@ -1,0 +1,116 @@
+[
+  {
+    "id": 3316900670691738000,
+    "resource_state": 2,
+    "name": "Foot of the Walk to Picardy Place",
+    "activity": {
+      "id": 10333232822,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1245,
+    "moving_time": 1230,
+    "start_date": "2023-12-05T16:41:21Z",
+    "start_date_local": "2023-12-05T16:41:21Z",
+    "distance": 1825,
+    "start_index": 100,
+    "end_index": 173,
+    "average_cadence": 54.5,
+    "device_watts": false,
+    "average_heartrate": 83.5,
+    "max_heartrate": 87,
+    "segment": {
+      "id": 38481552,
+      "resource_state": 2,
+      "name": "Foot of the Walk to Picardy Place",
+      "activity_type": "Walk",
+      "distance": 1825,
+      "average_grade": 2.2,
+      "maximum_grade": 8.8,
+      "elevation_high": 54.8,
+      "elevation_low": 14.5,
+      "start_latlng": [
+        55.970668,
+        -3.171903
+      ],
+      "end_latlng": [
+        55.957023,
+        -3.185618
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3167382061286741000,
+    "resource_state": 2,
+    "name": "High Street Climb",
+    "activity": {
+      "id": 10333232822,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 883,
+    "moving_time": 829,
+    "start_date": "2023-12-05T16:51:56Z",
+    "start_date_local": "2023-12-05T16:51:56Z",
+    "distance": 1196.1,
+    "start_index": 135,
+    "end_index": 192,
+    "average_cadence": 55.8,
+    "device_watts": false,
+    "average_heartrate": 84.7,
+    "max_heartrate": 91,
+    "segment": {
+      "id": 5519683,
+      "resource_state": 2,
+      "name": "High Street Climb",
+      "activity_type": "Walk",
+      "distance": 1196.1,
+      "average_grade": 3.9,
+      "maximum_grade": 14.9,
+      "elevation_high": 72.9,
+      "elevation_low": 26.4,
+      "start_latlng": [
+        55.962751,
+        -3.178849
+      ],
+      "end_latlng": [
+        55.954607,
+        -3.187076
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]
