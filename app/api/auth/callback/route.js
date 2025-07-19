@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { config } from '@/lib/config';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -10,8 +11,8 @@ export async function GET(req) {
   try {
     const response = await axios.post('https://www.strava.com/oauth/token', null, {
       params: {
-        client_id: process.env.STRAVA_CLIENT_ID,
-        client_secret: process.env.STRAVA_CLIENT_SECRET,
+        client_id: config.strava.clientId,
+        client_secret: config.strava.clientSecret,
         code,
         grant_type: 'authorization_code',
       },
