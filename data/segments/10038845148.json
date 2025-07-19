@@ -1,0 +1,59 @@
+[
+  {
+    "id": 3148352790818522000,
+    "resource_state": 2,
+    "name": "Holyrood Park Road Climb",
+    "activity": {
+      "id": 10038845148,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 1408,
+    "moving_time": 1229,
+    "start_date": "2023-10-14T16:47:52Z",
+    "start_date_local": "2023-10-14T17:47:52Z",
+    "distance": 1006.9,
+    "start_index": 59,
+    "end_index": 192,
+    "average_cadence": 52.1,
+    "device_watts": false,
+    "average_heartrate": 94.2,
+    "max_heartrate": 122,
+    "segment": {
+      "id": 6110760,
+      "resource_state": 2,
+      "name": "Holyrood Park Road Climb",
+      "activity_type": "Walk",
+      "distance": 1006.9,
+      "average_grade": 5.7,
+      "maximum_grade": 22.8,
+      "elevation_high": 110,
+      "elevation_low": 52.9,
+      "start_latlng": [
+        55.951049,
+        -3.166064
+      ],
+      "end_latlng": [
+        55.943243,
+        -3.165945
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]

@@ -1,0 +1,629 @@
+[
+  {
+    "id": 3330882521522649600,
+    "resource_state": 2,
+    "name": "It should have been 10.... kilometres",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 146,
+    "moving_time": 145,
+    "start_date": "2023-10-18T18:19:17Z",
+    "start_date_local": "2023-10-18T19:19:17Z",
+    "distance": 506.5,
+    "start_index": 0,
+    "end_index": 0,
+    "average_cadence": 82.6,
+    "device_watts": false,
+    "average_heartrate": 175.7,
+    "max_heartrate": 183,
+    "segment": {
+      "id": 38674192,
+      "resource_state": 2,
+      "name": "It should have been 10.... kilometres",
+      "activity_type": "Run",
+      "distance": 506.5,
+      "average_grade": -0.1,
+      "maximum_grade": 1.8,
+      "elevation_high": 34.4,
+      "elevation_low": 32.8,
+      "start_latlng": [
+        55.961553,
+        -3.171146
+      ],
+      "end_latlng": [
+        55.963067,
+        -3.164341
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  },
+  {
+    "id": 3149799701020347000,
+    "resource_state": 2,
+    "name": "Hawkhill to Leith Links",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 721,
+    "moving_time": 721,
+    "start_date": "2023-10-18T18:22:22Z",
+    "start_date_local": "2023-10-18T19:22:22Z",
+    "distance": 2349.6,
+    "start_index": 4,
+    "end_index": 74,
+    "average_cadence": 85.7,
+    "device_watts": false,
+    "average_heartrate": 174.9,
+    "max_heartrate": 189,
+    "segment": {
+      "id": 7928768,
+      "resource_state": 2,
+      "name": "Hawkhill to Leith Links",
+      "activity_type": "Run",
+      "distance": 2349.6,
+      "average_grade": -1,
+      "maximum_grade": 2.1,
+      "elevation_high": 31.8,
+      "elevation_low": 7.4,
+      "start_latlng": [
+        55.963341,
+        -3.162568
+      ],
+      "end_latlng": [
+        55.971463,
+        -3.160906
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3149799701019099600,
+    "resource_state": 2,
+    "name": "Start of the Restalrig Way",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 152,
+    "moving_time": 152,
+    "start_date": "2023-10-18T18:22:38Z",
+    "start_date_local": "2023-10-18T19:22:38Z",
+    "distance": 502,
+    "start_index": 7,
+    "end_index": 20,
+    "average_cadence": 85.2,
+    "device_watts": false,
+    "average_heartrate": 177.6,
+    "max_heartrate": 182,
+    "segment": {
+      "id": 28889361,
+      "resource_state": 2,
+      "name": "Start of the Restalrig Way",
+      "activity_type": "Run",
+      "distance": 502,
+      "average_grade": -1.8,
+      "maximum_grade": 10,
+      "elevation_high": 35,
+      "elevation_low": 26,
+      "start_latlng": [
+        55.963715,
+        -3.162818
+      ],
+      "end_latlng": [
+        55.966284,
+        -3.156333
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3225849706320131000,
+    "resource_state": 2,
+    "name": "Cycle path madness ",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 728,
+    "moving_time": 728,
+    "start_date": "2023-10-18T18:22:43Z",
+    "start_date_local": "2023-10-18T19:22:43Z",
+    "distance": 2331.6,
+    "start_index": 8,
+    "end_index": 76,
+    "average_cadence": 85.7,
+    "device_watts": false,
+    "average_heartrate": 173.9,
+    "max_heartrate": 189,
+    "segment": {
+      "id": 36895808,
+      "resource_state": 2,
+      "name": "Cycle path madness ",
+      "activity_type": "Run",
+      "distance": 2331.6,
+      "average_grade": -0.9,
+      "maximum_grade": 5.7,
+      "elevation_high": 13,
+      "elevation_low": -9,
+      "start_latlng": [
+        55.963814,
+        -3.162578
+      ],
+      "end_latlng": [
+        55.971815,
+        -3.161906
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3149799701020864000,
+    "resource_state": 2,
+    "name": "Lochend Rd to Restalrig Rd",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 133,
+    "moving_time": 133,
+    "start_date": "2023-10-18T18:23:09Z",
+    "start_date_local": "2023-10-18T19:23:09Z",
+    "distance": 432.1,
+    "start_index": 10,
+    "end_index": 21,
+    "average_cadence": 85.3,
+    "device_watts": false,
+    "average_heartrate": 177.8,
+    "max_heartrate": 182,
+    "segment": {
+      "id": 21135559,
+      "resource_state": 2,
+      "name": "Lochend Rd to Restalrig Rd",
+      "activity_type": "Run",
+      "distance": 432.1,
+      "average_grade": -1.1,
+      "maximum_grade": 0,
+      "elevation_high": 28.9,
+      "elevation_low": 24.2,
+      "start_latlng": [
+        55.964116,
+        -3.161824
+      ],
+      "end_latlng": [
+        55.966332,
+        -3.156194
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3149799701020344000,
+    "resource_state": 2,
+    "name": "Maggot Likes to Have a Bit of Fun! Oi! Oi!",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 546,
+    "moving_time": 546,
+    "start_date": "2023-10-18T18:23:09Z",
+    "start_date_local": "2023-10-18T19:23:09Z",
+    "distance": 1783.7,
+    "start_index": 10,
+    "end_index": 62,
+    "average_cadence": 85.9,
+    "device_watts": false,
+    "average_heartrate": 179.4,
+    "max_heartrate": 189,
+    "segment": {
+      "id": 27731982,
+      "resource_state": 2,
+      "name": "Maggot Likes to Have a Bit of Fun! Oi! Oi!",
+      "activity_type": "Run",
+      "distance": 1783.7,
+      "average_grade": -1.2,
+      "maximum_grade": 3.3,
+      "elevation_high": 28.9,
+      "elevation_low": 8.1,
+      "start_latlng": [
+        55.964054,
+        -3.161467
+      ],
+      "end_latlng": [
+        55.971133,
+        -3.15472
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": true
+  },
+  {
+    "id": 3149799701020167700,
+    "resource_state": 2,
+    "name": "The bend",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 354,
+    "moving_time": 354,
+    "start_date": "2023-10-18T18:25:22Z",
+    "start_date_local": "2023-10-18T19:25:22Z",
+    "distance": 1137.5,
+    "start_index": 21,
+    "end_index": 50,
+    "average_cadence": 86.2,
+    "device_watts": false,
+    "average_heartrate": 182.7,
+    "max_heartrate": 189,
+    "segment": {
+      "id": 28889369,
+      "resource_state": 2,
+      "name": "The bend",
+      "activity_type": "Run",
+      "distance": 1137.5,
+      "average_grade": -0.8,
+      "maximum_grade": 9.1,
+      "elevation_high": 27,
+      "elevation_low": 17,
+      "start_latlng": [
+        55.966381,
+        -3.155883
+      ],
+      "end_latlng": [
+        55.971037,
+        -3.151828
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3149799701018200600,
+    "resource_state": 2,
+    "name": "Loop back to Links",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 333,
+    "moving_time": 333,
+    "start_date": "2023-10-18T18:26:38Z",
+    "start_date_local": "2023-10-18T19:26:38Z",
+    "distance": 1091,
+    "start_index": 27,
+    "end_index": 61,
+    "average_cadence": 86,
+    "device_watts": false,
+    "average_heartrate": 180,
+    "max_heartrate": 189,
+    "segment": {
+      "id": 21425403,
+      "resource_state": 2,
+      "name": "Loop back to Links",
+      "activity_type": "Run",
+      "distance": 1091,
+      "average_grade": -1.4,
+      "maximum_grade": 0.7,
+      "elevation_high": 23,
+      "elevation_low": 7.3,
+      "start_latlng": [
+        55.96651,
+        -3.152238
+      ],
+      "end_latlng": [
+        55.97131,
+        -3.154612
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3149799701020734000,
+    "resource_state": 2,
+    "name": "Links 500 reverse",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 159,
+    "moving_time": 159,
+    "start_date": "2023-10-18T18:31:29Z",
+    "start_date_local": "2023-10-18T19:31:29Z",
+    "distance": 498.9,
+    "start_index": 53,
+    "end_index": 73,
+    "average_cadence": 85.4,
+    "device_watts": false,
+    "average_heartrate": 155.5,
+    "max_heartrate": 180,
+    "segment": {
+      "id": 7274554,
+      "resource_state": 2,
+      "name": "Links 500 reverse",
+      "activity_type": "Run",
+      "distance": 498.9,
+      "average_grade": -0.2,
+      "maximum_grade": 1.7,
+      "elevation_high": 9.7,
+      "elevation_low": 7,
+      "start_latlng": [
+        55.970949,
+        -3.152543
+      ],
+      "end_latlng": [
+        55.971532,
+        -3.160419
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3149799701019307500,
+    "resource_state": 2,
+    "name": "Easter Road to Hawkhill Old Railway Route",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 215,
+    "moving_time": 215,
+    "start_date": "2023-10-18T18:40:31Z",
+    "start_date_local": "2023-10-18T19:40:31Z",
+    "distance": 658.6,
+    "start_index": 133,
+    "end_index": 152,
+    "average_cadence": 83.8,
+    "device_watts": false,
+    "average_heartrate": 164.6,
+    "max_heartrate": 168,
+    "segment": {
+      "id": 7928705,
+      "resource_state": 2,
+      "name": "Easter Road to Hawkhill Old Railway Route",
+      "activity_type": "Run",
+      "distance": 658.6,
+      "average_grade": 1.9,
+      "maximum_grade": 5.6,
+      "elevation_high": 31.3,
+      "elevation_low": 18.7,
+      "start_latlng": [
+        55.967201,
+        -3.169094
+      ],
+      "end_latlng": [
+        55.96345,
+        -3.162647
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3238908888146419000,
+    "resource_state": 2,
+    "name": "HEARTS Rd ",
+    "activity": {
+      "id": 10063117761,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 125,
+    "moving_time": 125,
+    "start_date": "2023-10-18T18:45:27Z",
+    "start_date_local": "2023-10-18T19:45:27Z",
+    "distance": 378.6,
+    "start_index": 156,
+    "end_index": 156,
+    "average_cadence": 84.5,
+    "device_watts": false,
+    "average_heartrate": 171.3,
+    "max_heartrate": 175,
+    "segment": {
+      "id": 37151697,
+      "resource_state": 2,
+      "name": "HEARTS Rd ",
+      "activity_type": "Run",
+      "distance": 378.6,
+      "average_grade": -2.3,
+      "maximum_grade": 0.9,
+      "elevation_high": 54.2,
+      "elevation_low": 45,
+      "start_latlng": [
+        55.962839,
+        -3.165874
+      ],
+      "end_latlng": [
+        55.964389,
+        -3.170331
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": null,
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "only_me",
+    "hidden": false
+  }
+]

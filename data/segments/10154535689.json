@@ -1,0 +1,173 @@
+[
+  {
+    "id": 3155596996332282400,
+    "resource_state": 2,
+    "name": "Easter Road to Hawkhill Old Railway Route",
+    "activity": {
+      "id": 10154535689,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 409,
+    "moving_time": 409,
+    "start_date": "2023-11-03T16:13:59Z",
+    "start_date_local": "2023-11-03T16:13:59Z",
+    "distance": 658.6,
+    "start_index": 11,
+    "end_index": 41,
+    "average_cadence": 58.3,
+    "device_watts": false,
+    "average_heartrate": 102.3,
+    "max_heartrate": 112,
+    "segment": {
+      "id": 7928705,
+      "resource_state": 2,
+      "name": "Easter Road to Hawkhill Old Railway Route",
+      "activity_type": "Run",
+      "distance": 658.6,
+      "average_grade": 1.9,
+      "maximum_grade": 5.6,
+      "elevation_high": 31.3,
+      "elevation_low": 18.7,
+      "start_latlng": [
+        55.967201,
+        -3.169094
+      ],
+      "end_latlng": [
+        55.96345,
+        -3.162647
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3155596996331495000,
+    "resource_state": 2,
+    "name": "ERN Meadowbank Sprint Finish",
+    "activity": {
+      "id": 10154535689,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 107,
+    "moving_time": 107,
+    "start_date": "2023-11-03T16:33:36Z",
+    "start_date_local": "2023-11-03T16:33:36Z",
+    "distance": 227.9,
+    "start_index": 93,
+    "end_index": 97,
+    "average_cadence": 59.5,
+    "device_watts": false,
+    "average_heartrate": 97.3,
+    "max_heartrate": 98,
+    "segment": {
+      "id": 13471076,
+      "resource_state": 2,
+      "name": "ERN Meadowbank Sprint Finish",
+      "activity_type": "Run",
+      "distance": 227.9,
+      "average_grade": 0.1,
+      "maximum_grade": 4.2,
+      "elevation_high": 32.6,
+      "elevation_low": 29.7,
+      "start_latlng": [
+        55.956195,
+        -3.159729
+      ],
+      "end_latlng": [
+        55.95618,
+        -3.156573
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  },
+  {
+    "id": 3155596996331251000,
+    "resource_state": 2,
+    "name": "Sprint there are actual runners watching ",
+    "activity": {
+      "id": 10154535689,
+      "visibility": "followers_only",
+      "resource_state": 1
+    },
+    "athlete": {
+      "id": 42137242,
+      "resource_state": 1
+    },
+    "elapsed_time": 286,
+    "moving_time": 285,
+    "start_date": "2023-11-03T17:17:24Z",
+    "start_date_local": "2023-11-03T17:17:24Z",
+    "distance": 396.1,
+    "start_index": 135,
+    "end_index": 156,
+    "average_cadence": 56.5,
+    "device_watts": false,
+    "average_heartrate": 88,
+    "max_heartrate": 94,
+    "segment": {
+      "id": 33359642,
+      "resource_state": 2,
+      "name": "Sprint there are actual runners watching ",
+      "activity_type": "Run",
+      "distance": 396.1,
+      "average_grade": 0.3,
+      "maximum_grade": 5.5,
+      "elevation_high": 34.6,
+      "elevation_low": 29.9,
+      "start_latlng": [
+        55.955638,
+        -3.155702
+      ],
+      "end_latlng": [
+        55.956513,
+        -3.161782
+      ],
+      "elevation_profile": null,
+      "elevation_profiles": null,
+      "climb_category": 0,
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "country": "United Kingdom",
+      "private": false,
+      "hazardous": false,
+      "starred": false
+    },
+    "pr_rank": null,
+    "achievements": [],
+    "visibility": "followers_only",
+    "hidden": false
+  }
+]
