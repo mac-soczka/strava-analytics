@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { config } from '@/lib/config';
+import { createClient } from '@supabase/supabase-js';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -17,8 +18,56 @@ export async function GET(req) {
         grant_type: 'authorization_code',
       },
     });
-    // Store tokens (you might want to save these to a database)
+    // Store tokens and user data in Supabase
     const { access_token, refresh_token, athlete } = response.data;
+    
+    // Initialize Supabase client
+    const supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey);
+    
+    try {
+      // Upsert user data (create or update)
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .upsert({
+          strava_id: athlete.id,
+          firstname: athlete.firstname,
+          lastname: athlete.lastname,
+          city: athlete.city,
+          state: athlete.state,
+          country: athlete.country,
+          profile_picture: athlete.profile,
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'strava_id'
+        });
+      
+      if (userError) {
+        console.error('Error saving user data:', userError);
+      }
+      
+      // Store tokens securely
+      const { data: tokenData, error: tokenError } = await supabase
+        .from('strava_tokens')
+        .upsert({
+          strava_id: athlete.id,
+          access_token: access_token,
+          refresh_token: refresh_token,
+          expires_at: new Date(response.data.expires_at * 1000).toISOString(),
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'strava_id'
+        });
+      
+      if (tokenError) {
+        console.error('Error saving tokens:', tokenError);
+      }
+      
+      console.log('✅ User authenticated and data stored:', athlete.firstname, athlete.lastname);
+      
+    } catch (dbError) {
+      console.error('Database error:', dbError);
+      // Continue with redirect even if DB fails
+    }
     
     // Redirect to dashboard after successful authentication
     const dashboardUrl = process.env.NODE_ENV === 'production' 

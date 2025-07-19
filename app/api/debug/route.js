@@ -10,6 +10,9 @@ export async function GET() {
     finalRedirectUri: config.strava.redirectUri,
     hasDoubleSlash: config.strava.redirectUri.replace(/^https?:\/\//, '').includes('//'),
     urlSource: getUrlSource(),
+    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ? 'SET' : 'NOT SET',
+    supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'SET' : 'NOT SET',
+    supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY ? 'SET' : 'NOT SET',
     timestamp: new Date().toISOString()
   }
   
