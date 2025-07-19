@@ -1,5 +1,4 @@
 import DashboardSummaryCards from "./DashboardSummaryCards";
-import WeeklyLineChart from "./WeeklyLineChart";
 import LeaderboardTable from "./LeaderboardTable";
 import ActivitiesCharts from "../components/ActivitiesCharts";
 import CalendarHeatmapStrava from "../components/CalendarHeatmapStrava";
@@ -19,12 +18,7 @@ export default function DashboardPage() {
     avgPower: 212,
     elevation: 11034,
   };
-  const weeklyData = [
-    { week: "2025-06-10", Alice: 120, Bob: 100, Carol: 80 },
-    { week: "2025-06-17", Alice: 140, Bob: 130, Carol: 110 },
-    { week: "2025-06-24", Alice: 160, Bob: 120, Carol: 140 },
-    { week: "2025-07-01", Alice: 180, Bob: 150, Carol: 160 },
-  ];
+
   const leaderboard = [
     { name: "Alice", mileage: 600, power: 220, elevation: 4000 },
     { name: "Bob", mileage: 500, power: 210, elevation: 3500 },

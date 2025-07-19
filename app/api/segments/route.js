@@ -18,7 +18,7 @@ async function loadAllSegments() {
       if (Array.isArray(data)) {
         allEfforts = allEfforts.concat(data);
       }
-    } catch (err) {
+    } catch {
       // ignore corrupt files
     }
   }

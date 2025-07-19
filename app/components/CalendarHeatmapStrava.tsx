@@ -59,10 +59,11 @@ export default function CalendarHeatmapStrava({ activities }: Props) {
               if (v.count >= 1) return "color-github-1";
               return "color-empty";
             }}
-            tooltipDataAttrs={(v: any) => {
-              if (!v || !v.date) return { "data-tip": "No activity" };
+            tooltipDataAttrs={(v: unknown) => {
+              const value = v as { date?: string; count?: number; distance?: number } | null;
+              if (!value || !value.date) return { "data-tip": "No activity" };
               return {
-                "data-tip": `${v.date}: ${v.count} activit${v.count === 1 ? "y" : "ies"} (${v.distance} km)`
+                "data-tip": `${value.date}: ${value.count} activit${value.count === 1 ? "y" : "ies"} (${value.distance} km)`
               };
             }}
             showWeekdayLabels

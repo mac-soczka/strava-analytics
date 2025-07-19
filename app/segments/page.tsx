@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
-import PolylineMap from "../components/PolylineMap";
+import { StravaSegmentEffort, StravaSegment } from "../../types/strava";
+
 import dynamic from "next/dynamic";
 
 const LeafletSegmentMap = dynamic(() => import("../components/LeafletSegmentMap"), { ssr: false });
@@ -19,10 +20,9 @@ function formatElapsedTime(seconds: number) {
 export default function SegmentsPage() {
   // Styling constants
   const cardClass = "bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-8 border border-gray-100 dark:border-gray-800";
-  const statClass = "inline-block px-3 py-1 bg-orange-50 dark:bg-gray-800 text-orange-600 dark:text-orange-400 rounded-full text-xs font-semibold mr-2 mb-2";
 
   const [sortByTimeAsc, setSortByTimeAsc] = useState<boolean | null>(null);
-  const [segments, setSegments] = useState<any[]>([]);
+  const [segments, setSegments] = useState<StravaSegmentEffort[]>([]);
   const [selectedSegmentId, setSelectedSegmentId] = useState<string>("");
   const [segmentInput, setSegmentInput] = useState<string>("");
   const [loading, setLoading] = useState(true);
@@ -95,7 +95,7 @@ export default function SegmentsPage() {
 
   // Best effort (fastest time)
   const pr = useMemo(() => {
-    return efforts.reduce((best, e) => (!best || e.elapsed_time < best.elapsed_time ? e : best), null);
+    return efforts.reduce((best, e) => (!best || e.elapsed_time < best.elapsed_time ? e : best), null as StravaSegmentEffort | null);
   }, [efforts]);
 
   return (
@@ -143,7 +143,7 @@ export default function SegmentsPage() {
           )}
         </div>
         <datalist id="segments-list">
-          {uniqueSegments.map((seg: any) => (
+          {uniqueSegments.map((seg: StravaSegment) => (
             <option key={seg.id} value={seg.name + (seg.city ? ` (${seg.city})` : "")}>{seg.name} ({seg.city || seg.state || seg.country || ''})</option>
           ))}
         </datalist>
@@ -203,7 +203,7 @@ export default function SegmentsPage() {
                 />
                 <YAxis yAxisId="left" label={{ value: 'Time (s)', angle: -90, position: 'insideLeft', fill: '#8884d8' }} tick={{ fill: '#8884d8' }} axisLine={{ stroke: '#8884d8' }} />
                 <YAxis yAxisId="right" orientation="right" label={{ value: 'Speed (km/h)', angle: 90, position: 'insideRight', fill: '#82ca9d' }} tick={{ fill: '#82ca9d' }} axisLine={{ stroke: '#82ca9d' }} />
-                <Tooltip formatter={(value: any, name: string) => name === 'Elapsed Time (s)' ? formatElapsedTime(value as number) : value} />
+                <Tooltip formatter={(value: unknown, name: string) => name === 'Elapsed Time (s)' ? formatElapsedTime(value as number) : String(value)} />
                 <Legend verticalAlign="top" height={40} iconType="circle"/>
                 {/* Area under lines for visual pop */}
                 <Area yAxisId="left" type="monotone" dataKey="elapsed_time" stroke={"#8884d8"} fillOpacity={0.2} fill="url(#elapsedGradient)" name="Elapsed Time (s)" />
@@ -236,14 +236,14 @@ export default function SegmentsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {effortsWithPercentile.map((e, i) => (
+                  {effortsWithPercentile.map((e) => (
                     <tr key={e.id} className={pr && e.id === pr.id ? "bg-green-100 dark:bg-green-900" : mostRecentEffort && e.id === mostRecentEffort.id ? "bg-blue-50 dark:bg-blue-900" : ""}>
                       <td className="px-2 py-1">{formatDate(e.start_date_local || e.start_date)}</td>
                       <td className="px-2 py-1">{formatElapsedTime(e.elapsed_time)}</td>
                       <td className="px-2 py-1">{e.percentile !== undefined ? `${e.percentile}th` : ""}</td>
                       <td className="px-2 py-1">{e.segment?.distance && e.elapsed_time ? (e.segment.distance / e.elapsed_time * 3.6).toFixed(2) : ""}</td>
                       <td className="px-2 py-1">
-                        <a href={`https://www.strava.com/activities/${e.activity?.id}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View</a>
+                        <a href={`https://www.strava.com/activities/${e.id}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View</a>
                       </td>
                     </tr>
                   ))}
