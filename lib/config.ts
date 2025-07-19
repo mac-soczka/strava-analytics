@@ -50,8 +50,10 @@ function getDefaultRedirectUri(): string {
     return `${baseUrl}/api/auth/callback`;
   }
 
-  // Fallback to localhost for development
-  return "http://localhost:3000/api/auth/callback";
+  // Note: localhost won't work if Strava app is configured for production domain
+  // You'll need to use the production URL even for local development
+  console.warn('⚠️ Warning: Using production redirect URI for local development');
+  return "https://strava-heatmap-alpha.vercel.app/api/auth/callback";
 }
 
 // Validate required environment variables

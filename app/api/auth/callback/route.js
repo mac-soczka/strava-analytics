@@ -17,11 +17,15 @@ export async function GET(req) {
         grant_type: 'authorization_code',
       },
     });
-    // For demo: return the token JSON
-    return new Response(JSON.stringify(response.data, null, 2), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    // Store tokens (you might want to save these to a database)
+    const { access_token, refresh_token, athlete } = response.data;
+    
+    // Redirect to dashboard after successful authentication
+    const dashboardUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://strava-heatmap-alpha.vercel.app/dashboard'
+      : 'http://localhost:3000/dashboard';
+    
+    return Response.redirect(dashboardUrl);
   } catch (error) {
     let errorDetails = { error: error.message };
     if (error.response) {
