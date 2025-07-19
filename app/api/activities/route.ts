@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ActivitiesRepository } from '@/lib/repositories/activities-repository'
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,6 +8,8 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || ''
     const sportType = searchParams.get('sportType') || ''
     
+    // Dynamic import to avoid build-time initialization
+    const { ActivitiesRepository } = await import('@/lib/repositories/activities-repository')
     const activitiesRepo = new ActivitiesRepository()
     
     // Calculate offset
@@ -47,6 +48,18 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error fetching activities:', error)
+    
+    // Check if it's a configuration error
+    if (error instanceof Error && error.message.includes('supabaseUrl is required')) {
+      return NextResponse.json(
+        { 
+          error: 'Supabase configuration required',
+          message: 'Please configure your Supabase environment variables'
+        },
+        { status: 503 }
+      )
+    }
+    
     return NextResponse.json(
       { error: 'Failed to fetch activities' },
       { status: 500 }
