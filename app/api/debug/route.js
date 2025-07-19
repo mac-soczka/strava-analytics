@@ -9,6 +9,7 @@ export async function GET() {
     stravaClientId: process.env.STRAVA_CLIENT_ID ? 'SET' : 'NOT SET',
     finalRedirectUri: config.strava.redirectUri,
     hasDoubleSlash: config.strava.redirectUri.includes('//'),
+    urlSource: getUrlSource(),
     timestamp: new Date().toISOString()
   }
   
@@ -18,4 +19,11 @@ export async function GET() {
       'Cache-Control': 'no-cache'
     }
   })
+}
+
+function getUrlSource() {
+  if (process.env.STRAVA_REDIRECT_URI) return 'STRAVA_REDIRECT_URI'
+  if (process.env.VERCEL_URL) return 'VERCEL_URL'
+  if (process.env.NEXT_PUBLIC_APP_URL) return 'NEXT_PUBLIC_APP_URL'
+  return 'localhost'
 } 

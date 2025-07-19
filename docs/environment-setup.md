@@ -26,8 +26,8 @@ SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 STRAVA_CLIENT_ID=your_strava_client_id
 STRAVA_CLIENT_SECRET=your_strava_client_secret
 
-# Optional: Override default redirect URI (recommended for production)
-STRAVA_REDIRECT_URI=https://strava-heatmap-alpha.vercel.app/api/auth/callback
+# Optional: Override default redirect URI
+STRAVA_REDIRECT_URI=https://your-domain.com/api/auth/callback
 
 # Optional: Custom app URL (if not using Vercel's automatic detection)
 NEXT_PUBLIC_APP_URL=https://your-custom-domain.com
@@ -91,6 +91,7 @@ Preview deployments automatically use the `VERCEL_URL` environment variable:
 #### For Production:
 - **Authorization Callback Domain**: `your-production-domain.com` (or Vercel domain)
 - **Redirect URI**: `https://your-production-domain.com/api/auth/callback` (or Vercel URL)
+- **Note**: The application automatically detects the correct URL using `VERCEL_URL` environment variable
 
 #### For Preview Deployments:
 - **Authorization Callback Domain**: `*.vercel.app`

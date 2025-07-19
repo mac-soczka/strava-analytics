@@ -38,11 +38,6 @@ function getDefaultRedirectUri(): string {
     return process.env.STRAVA_REDIRECT_URI
   }
   
-  // Special case for your production domain to avoid double slash issues
-  if (process.env.VERCEL_URL && process.env.VERCEL_URL.includes('strava-heatmap-alpha.vercel.app')) {
-    return 'https://strava-heatmap-alpha.vercel.app/api/auth/callback'
-  }
-  
   // Use VERCEL_URL if available (works for both production and preview deployments)
   if (process.env.VERCEL_URL) {
     const baseUrl = cleanUrl(process.env.VERCEL_URL)
