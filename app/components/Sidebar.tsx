@@ -15,7 +15,7 @@ const navItems = [
 export default function Sidebar() {
   const pathname = usePathname();
   return (
-    <aside className="h-screen w-56 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col py-8 px-4">
+    <aside className="h-[calc(100vh-4rem)] w-56 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col py-8 px-4 sticky top-0">
       <div className="mb-8 text-2xl font-bold text-orange-500 tracking-tight">Cycling Coach</div>
       <nav className="flex-1 flex flex-col gap-2">
         {navItems.map((item) => (
