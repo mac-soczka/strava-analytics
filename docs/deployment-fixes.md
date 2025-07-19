@@ -1,18 +1,29 @@
 # Deployment Fixes - ISR Size Issue Resolution
 
-This document describes the fixes applied to resolve the Vercel deployment failure due to oversized Incremental Static Regeneration (ISR) pages.
+This document describes the fixes applied to resolve the Vercel deployment failures.
 
-## 🚨 Problem
+## 🚨 Problems Encountered
 
+### 1. **ISR Size Issue**
 The deployment was failing with the error:
 ```
 Oversized Incremental Static Regeneration (ISR) page: activities.fallback (29.57 MB). 
 Pre-rendered responses that are larger than 19.07 MB result in a failure (FALLBACK_BODY_TOO_LARGE)
 ```
 
-## 🔍 Root Cause
+### 2. **LightningCSS Binary Issue**
+After fixing the ISR issue, a new error occurred:
+```
+Error: Cannot find module '../lightningcss.linux-x64-gnu.node'
+```
 
+## 🔍 Root Causes
+
+### ISR Size Issue
 The activities page was trying to pre-render all activities data at build time, resulting in a 29.57 MB response that exceeded Vercel's 19.07 MB limit for ISR pages.
+
+### LightningCSS Issue
+The project was using Tailwind CSS v4 with `@tailwindcss/postcss`, which uses lightningcss with platform-specific native binaries that don't match the Vercel deployment environment.
 
 ## ✅ Solutions Applied
 
@@ -127,21 +138,116 @@ try {
 - ✅ Clear error messages
 - ✅ Better developer experience
 
+### 7. **Tailwind CSS v3 Migration**
+Downgraded from Tailwind CSS v4 to v3 to avoid lightningcss issues:
+
+```bash
+# Remove v4 dependencies
+yarn remove @tailwindcss/postcss tailwindcss
+
+# Install v3 dependencies
+yarn add -D tailwindcss@^3.4.0 postcss autoprefixer
+```
+
+**Updated Configuration:**
+
+```javascript
+// postcss.config.mjs
+const config = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+export default config;
+
+// tailwind.config.js
+module.exports = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+```css
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+```
+
+**Benefits:**
+- ✅ No platform-specific binaries
+- ✅ Stable and widely supported
+- ✅ Compatible with Vercel deployment
+- ✅ Better build reliability
+
+### 8. **Dependency Cleanup**
+Cleaned up dependencies to avoid conflicts:
+
+```bash
+# Remove all dependencies and lock files
+rm -rf node_modules package-lock.json yarn.lock .next
+
+# Reinstall with yarn
+yarn install
+
+# Remove conflicting package-lock.json
+rm -f package-lock.json
+```
+
+**Benefits:**
+- ✅ No dependency conflicts
+- ✅ Consistent package manager usage
+- ✅ Clean build environment
+
 ## 📊 Results
 
 ### Before Fixes
-- ❌ Build failed with ISR size error
-- ❌ 29.57 MB page size
+- ❌ Build failed with ISR size error (29.57 MB)
+- ❌ Build failed with lightningcss binary error
 - ❌ Static pre-rendering
+- ❌ Tailwind CSS v4 with native binaries
 - ❌ No error handling
 
 ### After Fixes
 - ✅ Build successful
 - ✅ Dynamic rendering (ƒ)
-- ✅ Small initial page size
+- ✅ Small initial page size (2.9 kB)
+- ✅ Tailwind CSS v3 (stable)
 - ✅ Comprehensive error handling
 - ✅ Client-side pagination
 - ✅ Server-side API support
+- ✅ Clean dependency management
 
 ## 🚀 Deployment Status
 
@@ -150,6 +256,7 @@ The application now successfully builds and deploys to Vercel with:
 - **Efficient pagination** for large datasets
 - **Graceful error handling** for missing configuration
 - **Scalable architecture** for future growth
+- **Stable CSS framework** without native dependencies
 
 ## 🔧 Environment Variables
 
@@ -182,6 +289,11 @@ VERCEL_BYPASS_FALLBACK_OVERSIZED_ERROR=1
 - **Client Bundle**: Optimized with pagination
 - **Server Bundle**: Minimal with dynamic imports
 
+### Build Reliability
+- **No Native Binaries**: Eliminated lightningcss issues
+- **Stable Dependencies**: Tailwind CSS v3
+- **Clean Environment**: No package manager conflicts
+
 ### User Experience
 - **Faster Initial Load**: Users see content quickly
 - **Smooth Pagination**: Efficient data browsing
@@ -202,5 +314,41 @@ VERCEL_BYPASS_FALLBACK_OVERSIZED_ERROR=1
 - **Error Tracking**: Monitor for issues
 - **Usage Analytics**: Understand user behavior
 - **Resource Usage**: Monitor database and API usage
+
+## 🛠️ Troubleshooting
+
+### Common Issues and Solutions
+
+1. **Build Fails with LightningCSS Error**
+   ```bash
+   # Solution: Downgrade to Tailwind CSS v3
+   yarn remove @tailwindcss/postcss tailwindcss
+   yarn add -D tailwindcss@^3.4.0 postcss autoprefixer
+   ```
+
+2. **ISR Size Limit Exceeded**
+   ```typescript
+   // Solution: Use dynamic rendering
+   export const dynamic = 'force-dynamic'
+   export const revalidate = 0
+   ```
+
+3. **Package Manager Conflicts**
+   ```bash
+   # Solution: Clean and reinstall
+   rm -rf node_modules package-lock.json yarn.lock .next
+   yarn install
+   rm -f package-lock.json
+   ```
+
+4. **Supabase Configuration Missing**
+   ```typescript
+   // Solution: Add error handling
+   try {
+     // Database operations
+   } catch (error) {
+     // Show configuration message
+   }
+   ```
 
 This solution provides a robust, scalable foundation for the Strava Heatmap application while maintaining excellent performance and user experience. 
