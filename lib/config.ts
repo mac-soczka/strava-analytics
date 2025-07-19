@@ -6,67 +6,69 @@ export const config = {
     clientSecret: process.env.STRAVA_CLIENT_SECRET!,
     redirectUri: process.env.STRAVA_REDIRECT_URI || getDefaultRedirectUri(),
   },
-  
+
   // Supabase configuration
   supabase: {
     url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
     anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY!,
   },
-}
+};
 
 // Utility function to clean URLs and ensure proper formatting
 function cleanUrl(url: string): string {
-  if (!url) return url
-  
+  if (!url) return url;
+
   // Remove protocol if present
-  let cleaned = url.replace(/^https?:\/\//, '')
-  
+  let cleaned = url.replace(/^https?:\/\//, "");
+
   // Remove trailing slashes
-  cleaned = cleaned.replace(/\/+$/, '')
-  
+  cleaned = cleaned.replace(/\/+$/, "");
+
   // Remove any double slashes (except for protocol)
-  cleaned = cleaned.replace(/\/\//g, '/')
-  
-  return cleaned
+  cleaned = cleaned.replace(/\/\//g, "/");
+
+  return cleaned;
 }
 
 // Get the default redirect URI based on environment
 function getDefaultRedirectUri(): string {
   // Use explicit redirect URI if set (highest priority)
   if (process.env.STRAVA_REDIRECT_URI) {
-    return process.env.STRAVA_REDIRECT_URI
+    return process.env.STRAVA_REDIRECT_URI;
   }
-  
+
   // Use VERCEL_URL if available (works for both production and preview deployments)
   if (process.env.VERCEL_URL) {
-    const baseUrl = cleanUrl(process.env.VERCEL_URL)
-    return `https://${baseUrl}/api/auth/callback`
+    const baseUrl = cleanUrl(process.env.VERCEL_URL);
+    return `https://${baseUrl}/api/auth/callback`;
   }
-  
+
   // Use custom domain if specified
   if (process.env.NEXT_PUBLIC_APP_URL) {
-    const baseUrl = cleanUrl(process.env.NEXT_PUBLIC_APP_URL)
-    return `${baseUrl}/api/auth/callback`
+    const baseUrl = cleanUrl(process.env.NEXT_PUBLIC_APP_URL);
+    return `${baseUrl}/api/auth/callback`;
   }
-  
+
   // Fallback to localhost for development
-  return 'http://localhost:3000/api/auth/callback'
+  return "http://localhost:3000/api/auth/callback";
 }
 
 // Validate required environment variables
 export function validateConfig() {
   const required = [
-    'STRAVA_CLIENT_ID',
-    'STRAVA_CLIENT_SECRET',
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-    'SUPABASE_SERVICE_ROLE_KEY',
-  ]
+    "STRAVA_CLIENT_ID",
+    "STRAVA_CLIENT_SECRET",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+    "SUPABASE_SERVICE_ROLE_KEY",
+  ];
 
-  const missing = required.filter(key => !process.env[key])
-  
+  const missing = required.filter((key) => !process.env[key]);
+
   if (missing.length > 0) {
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`)
+    throw new Error(
+      `Missing required environment variables: ${missing.join(", ")}`
+    );
   }
-} 
+}
