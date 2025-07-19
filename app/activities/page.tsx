@@ -1,19 +1,28 @@
-import React from "react";
-import ActivitiesTable from "../components/ActivitiesTable";
-import path from "path";
-import fs from "fs";
+import { Suspense } from 'react'
+import { ActivitiesRepository } from '@/lib/repositories/activities-repository'
+import ActivitiesClient from './activities-client'
 
-// Server Component: read activities.json at build time
-const activitiesPath = path.join(process.cwd(), "data", "activities.json");
-const activities = fs.existsSync(activitiesPath)
-  ? JSON.parse(fs.readFileSync(activitiesPath, "utf8"))
-  : [];
+// Force dynamic rendering to avoid ISR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
-export default function ActivitiesPage() {
+export default async function ActivitiesPage() {
+  const activitiesRepo = new ActivitiesRepository()
+  
+  // Fetch only a small number of activities for initial load
+  const activities = await activitiesRepo.getActivities(10) // Reduced to 10 for initial load
+  const stats = await activitiesRepo.getActivityStats()
+
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Your Strava Activities</h1>
-      <ActivitiesTable activities={activities} />
-    </div>
-  );
+    <main className="flex min-h-screen flex-col p-8 bg-gray-50 dark:bg-gray-900">
+      <h1 className="text-3xl font-bold mb-6">🚴‍♂️ Activities</h1>
+      
+      <Suspense fallback={<div>Loading activities...</div>}>
+        <ActivitiesClient 
+          initialActivities={activities} 
+          stats={stats}
+        />
+      </Suspense>
+    </main>
+  )
 }
