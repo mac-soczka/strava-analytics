@@ -18,8 +18,17 @@ export const config = {
 // Utility function to clean URLs and ensure proper formatting
 function cleanUrl(url: string): string {
   if (!url) return url
-  // Remove trailing slashes and ensure proper formatting
-  return url.replace(/\/+$/, '').replace(/^https?:\/\//, '') // Remove protocol and trailing slashes
+  
+  // Remove protocol if present
+  let cleaned = url.replace(/^https?:\/\//, '')
+  
+  // Remove trailing slashes
+  cleaned = cleaned.replace(/\/+$/, '')
+  
+  // Remove any double slashes (except for protocol)
+  cleaned = cleaned.replace(/\/\//g, '/')
+  
+  return cleaned
 }
 
 // Get the default redirect URI based on environment
@@ -27,6 +36,11 @@ function getDefaultRedirectUri(): string {
   // Use explicit redirect URI if set (highest priority)
   if (process.env.STRAVA_REDIRECT_URI) {
     return process.env.STRAVA_REDIRECT_URI
+  }
+  
+  // Special case for your production domain to avoid double slash issues
+  if (process.env.VERCEL_URL && process.env.VERCEL_URL.includes('strava-heatmap-alpha.vercel.app')) {
+    return 'https://strava-heatmap-alpha.vercel.app/api/auth/callback'
   }
   
   // Use VERCEL_URL if available (works for both production and preview deployments)
