@@ -8,7 +8,7 @@ export async function GET() {
     stravaRedirectUri: process.env.STRAVA_REDIRECT_URI,
     stravaClientId: process.env.STRAVA_CLIENT_ID ? 'SET' : 'NOT SET',
     finalRedirectUri: config.strava.redirectUri,
-    hasDoubleSlash: config.strava.redirectUri.includes('//'),
+    hasDoubleSlash: config.strava.redirectUri.replace(/^https?:\/\//, '').includes('//'),
     urlSource: getUrlSource(),
     timestamp: new Date().toISOString()
   }
