@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface User {
   id: string;
@@ -16,6 +16,7 @@ export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -33,6 +34,19 @@ export default function Navbar() {
     };
 
     fetchUserProfile();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const handleLogout = async () => {
@@ -62,7 +76,7 @@ export default function Navbar() {
               <div className="w-20 h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
             </div>
           ) : user ? (
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
