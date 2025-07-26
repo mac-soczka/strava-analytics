@@ -38,6 +38,7 @@ export default function TestPage() {
   const [results, setResults] = useState<TestResult[]>([])
   const [isRunning, setIsRunning] = useState(false)
   const [user, setUser] = useState<any>(null)
+  const [rateLimitStatus, setRateLimitStatus] = useState<any>(null)
   const supabase = createClientComponentClient()
 
   const addResult = (test: string, status: TestResult['status'], message: string, data?: any, error?: any) => {
@@ -89,7 +90,26 @@ export default function TestPage() {
     }
   }
 
-  // Test 3: Strava OAuth Flow Simulation
+  // Test 3: Rate Limit Status
+  const testRateLimitStatus = async () => {
+    try {
+      addResult('Rate Limit Status', 'pending', 'Checking Strava API rate limits...')
+      
+      const response = await fetch('/api/strava/rate-limit')
+      const data = await response.json()
+      
+      if (response.ok) {
+        setRateLimitStatus(data)
+        addResult('Rate Limit Status', 'success', 'Rate limit status retrieved', data)
+      } else {
+        addResult('Rate Limit Status', 'error', 'Failed to get rate limit status', undefined, data.error)
+      }
+    } catch (error: any) {
+      addResult('Rate Limit Status', 'error', 'Rate limit status check failed', undefined, error.message)
+    }
+  }
+
+  // Test 4: Strava OAuth Flow Simulation
   const testStravaOAuthFlow = async () => {
     try {
       addResult('Strava OAuth Flow', 'pending', 'Simulating Strava OAuth flow...')
@@ -676,6 +696,7 @@ export default function TestPage() {
     await testConnection()
     await testSchemaCheck()
     await testRLSPolicies()
+    await testRateLimitStatus()
     await testAppSession()
     await testSessionValidation()
     await testTokenRefresh()
@@ -720,6 +741,55 @@ export default function TestPage() {
               </>
             )}
           </div>
+          
+          {/* Rate Limit Status */}
+          {rateLimitStatus && (
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <h3 className="text-lg font-semibold mb-3">Strava API Rate Limits</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <p className="text-sm text-gray-600">15-Minute Limit:</p>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
+                      <div 
+                        className={`h-2 rounded-full ${
+                          rateLimitStatus.usage.percent15Min > 80 ? 'bg-red-500' :
+                          rateLimitStatus.usage.percent15Min > 60 ? 'bg-yellow-500' : 'bg-green-500'
+                        }`}
+                        style={{ width: `${rateLimitStatus.usage.percent15Min}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-medium">
+                      {rateLimitStatus.data.requests15min}/100
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Daily Limit:</p>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
+                      <div 
+                        className={`h-2 rounded-full ${
+                          rateLimitStatus.usage.percentDay > 80 ? 'bg-red-500' :
+                          rateLimitStatus.usage.percentDay > 60 ? 'bg-yellow-500' : 'bg-green-500'
+                        }`}
+                        style={{ width: `${rateLimitStatus.usage.percentDay}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-medium">
+                      {rateLimitStatus.data.requestsDay}/1000
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Next Reset (15min):</p>
+                  <p className="text-sm font-medium">
+                    {new Date(rateLimitStatus.data.nextReset15min).toLocaleTimeString()}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Test Controls */}
@@ -780,6 +850,13 @@ export default function TestPage() {
               className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
             >
               Session Status
+            </button>
+            <button
+              onClick={testRateLimitStatus}
+              disabled={isRunning}
+              className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
+            >
+              Rate Limits
             </button>
             <button
               onClick={testStravaOAuthFlow}
