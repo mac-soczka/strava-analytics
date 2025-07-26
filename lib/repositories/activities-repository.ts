@@ -25,7 +25,19 @@ export class ActivitiesRepository {
         .range(offset, offset + limit - 1)
 
       if (error) throw error
-      return data as StravaActivity[]
+      
+      // Convert DatabaseActivity to StravaActivity format
+      return (data || []).map((dbActivity: any) => ({
+        id: dbActivity.activity_id, // Use activity_id as the Strava ID
+        name: dbActivity.name,
+        distance: dbActivity.distance,
+        moving_time: dbActivity.moving_time,
+        elapsed_time: dbActivity.elapsed_time,
+        total_elevation_gain: dbActivity.total_elevation_gain,
+        type: dbActivity.type,
+        start_date: dbActivity.start_date,
+        start_date_local: dbActivity.start_date_local
+      })) as StravaActivity[]
     } catch (error) {
       console.error('Error fetching activities:', error)
       throw error
