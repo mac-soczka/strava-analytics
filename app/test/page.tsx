@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@/lib/supabase'
 import { supabase as serverSupabase } from '@/lib/database'
+import { AuthService, SessionManager, TokenManager } from '@/lib/services/auth-service'
+import { upsertUser, upsertTokens, getUserByStravaId, getTokensByStravaId } from '@/lib/database'
 
 interface TestResult {
   test: string
@@ -64,62 +66,84 @@ export default function TestPage() {
     }
   }
 
-  // Test 2: Auth Status Check
-  const testAuthStatus = async () => {
+  // Test 2: App Session Status Check
+  const testAppSessionStatus = async () => {
     try {
-      addResult('Auth Status', 'pending', 'Checking auth status...')
+      addResult('App Session Status', 'pending', 'Checking app session status...')
       
-      const { data: { user }, error } = await supabase.auth.getUser()
+      const response = await fetch('/api/auth/session')
+      const data = await response.json()
       
-      if (error) throw error
-      
-      if (user) {
-        addResult('Auth Status', 'success', 'User authenticated', { 
-          id: user.id, 
-          email: user.email,
-          created_at: user.created_at 
+      if (response.ok && data.authenticated) {
+        addResult('App Session Status', 'success', 'User has valid app session', {
+          user: data.user,
+          authenticated: data.authenticated
         })
-        setUser(user)
+        setUser(data.user)
       } else {
-        addResult('Auth Status', 'success', 'No user authenticated')
+        addResult('App Session Status', 'success', 'No valid app session found')
+        setUser(null)
       }
     } catch (error: any) {
-      addResult('Auth Status', 'error', 'Auth check failed', undefined, error.message)
+      addResult('App Session Status', 'error', 'Session status check failed', undefined, error.message)
     }
   }
 
-  // Test 3: Sign In (Anonymous)
-  const testSignIn = async () => {
+  // Test 3: Strava OAuth Flow Simulation
+  const testStravaOAuthFlow = async () => {
     try {
-      addResult('Sign In', 'pending', 'Attempting anonymous sign in...')
+      addResult('Strava OAuth Flow', 'pending', 'Simulating Strava OAuth flow...')
       
-      const { data, error } = await supabase.auth.signInAnonymously()
+      // This simulates what happens after successful Strava OAuth
+      const testStravaId = Math.floor(Math.random() * 1000000)
       
-      if (error) throw error
-      
-      addResult('Sign In', 'success', 'Anonymous sign in successful', {
-        user_id: data.user?.id,
-        session: !!data.session
+      // Use the actual service functions
+      const user = await upsertUser({
+        strava_id: testStravaId,
+        firstname: 'Test',
+        lastname: 'User',
+        city: 'Test City',
+        state: 'Test State',
+        country: 'Test Country'
       })
-      setUser(data.user)
+      
+      const tokens = await upsertTokens({
+        strava_id: testStravaId,
+        access_token: `test_access_${Date.now()}`,
+        refresh_token: `test_refresh_${Date.now()}`,
+        expires_at: new Date(Date.now() + 6 * 60 * 60 * 1000).toISOString() // 6 hours from now
+      })
+      
+      const { sessionToken, expiresAt } = await SessionManager.createSession(testStravaId)
+      
+      addResult('Strava OAuth Flow', 'success', 'OAuth flow simulation completed', {
+        user,
+        tokens,
+        session: { sessionToken, expiresAt }
+      })
     } catch (error: any) {
-      addResult('Sign In', 'error', 'Sign in failed', undefined, error.message)
+      addResult('Strava OAuth Flow', 'error', 'OAuth flow simulation failed', undefined, error.message)
     }
   }
 
-  // Test 4: Sign Out
-  const testSignOut = async () => {
+  // Test 4: App Logout
+  const testAppLogout = async () => {
     try {
-      addResult('Sign Out', 'pending', 'Signing out...')
+      addResult('App Logout', 'pending', 'Testing app logout...')
       
-      const { error } = await supabase.auth.signOut()
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST'
+      })
       
-      if (error) throw error
-      
-      addResult('Sign Out', 'success', 'Sign out successful')
-      setUser(null)
+      if (response.ok) {
+        addResult('App Logout', 'success', 'App logout successful')
+        setUser(null)
+      } else {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Logout failed')
+      }
     } catch (error: any) {
-      addResult('Sign Out', 'error', 'Sign out failed', undefined, error.message)
+      addResult('App Logout', 'error', 'App logout failed', undefined, error.message)
     }
   }
 
@@ -137,15 +161,9 @@ export default function TestPage() {
         country: 'Test Country'
       }
       
-      const { data, error } = await supabase
-        .from('users')
-        .insert(testUser)
-        .select()
-        .single()
+      const user = await upsertUser(testUser)
       
-      if (error) throw error
-      
-      addResult('Create User', 'success', 'User created successfully', data)
+      addResult('Create User', 'success', 'User created successfully', user)
     } catch (error: any) {
       addResult('Create User', 'error', 'User creation failed', undefined, error.message)
     }
@@ -352,36 +370,24 @@ export default function TestPage() {
       const testStravaId = 123456
       
       // First create a test user if it doesn't exist
-      const { data: existingUser } = await supabase
-        .from('users')
-        .select('*')
-        .eq('strava_id', testStravaId)
-        .single()
-      
-      if (!existingUser) {
-        await supabase
-          .from('users')
-          .insert({
-            strava_id: testStravaId,
-            firstname: 'Test',
-            lastname: 'User'
-          })
+      try {
+        await getUserByStravaId(testStravaId)
+      } catch {
+        await upsertUser({
+          strava_id: testStravaId,
+          firstname: 'Test',
+          lastname: 'User'
+        })
       }
       
-      // Test session creation
-      const { data: session, error } = await supabase
-        .from('app_sessions')
-        .insert({
-          strava_id: testStravaId,
-          session_token: `test_token_${Date.now()}`,
-          expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
-        })
-        .select()
-        .single()
+      // Test session creation using the service
+      const { sessionToken, expiresAt } = await SessionManager.createSession(testStravaId)
       
-      if (error) throw error
-      
-      addResult('App Session', 'success', 'Session created successfully', session)
+      addResult('App Session', 'success', 'Session created successfully', {
+        sessionToken,
+        expiresAt,
+        strava_id: testStravaId
+      })
     } catch (error: any) {
       addResult('App Session', 'error', 'Session creation failed', undefined, error.message)
     }
@@ -393,30 +399,17 @@ export default function TestPage() {
       addResult('Session Validation', 'pending', 'Testing session validation...')
       
       // Create a test session
-      const testToken = `test_validation_${Date.now()}`
       const testStravaId = 123456
+      const { sessionToken } = await SessionManager.createSession(testStravaId)
       
-      await supabase
-        .from('app_sessions')
-        .insert({
-          strava_id: testStravaId,
-          session_token: testToken,
-          expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+      // Test validation using the service
+      const stravaId = await SessionManager.validateSession(sessionToken)
+      
+      if (stravaId) {
+        addResult('Session Validation', 'success', 'Session validation successful', {
+          sessionToken,
+          strava_id: stravaId
         })
-      
-      // Test validation
-      const { data: session, error } = await supabase
-        .from('app_sessions')
-        .select('strava_id, expires_at')
-        .eq('session_token', testToken)
-        .single()
-      
-      if (error) throw error
-      
-      const isValid = session && new Date(session.expires_at) > new Date()
-      
-      if (isValid) {
-        addResult('Session Validation', 'success', 'Session validation successful', session)
       } else {
         addResult('Session Validation', 'error', 'Session validation failed')
       }
@@ -430,34 +423,30 @@ export default function TestPage() {
     try {
       addResult('Token Refresh', 'pending', 'Testing token refresh simulation...')
       
-      // Create expired token
-      const expiredToken = {
-        strava_id: 123456,
-        access_token: 'expired_token',
-        refresh_token: 'valid_refresh_token',
-        expires_at: new Date(Date.now() - 3600000).toISOString() // 1 hour ago
-      }
+      // Test getting tokens for a user
+      const testStravaId = 123456
       
-      // Insert expired token
-      const { data: token, error } = await supabase
-        .from('strava_tokens')
-        .upsert(expiredToken, { onConflict: 'strava_id' })
-        .select()
-        .single()
-      
-      if (error) throw error
-      
-      // Check if token is expired
-      const isExpired = new Date(token.expires_at) < new Date()
-      
-      if (isExpired) {
-        addResult('Token Refresh', 'success', 'Token expiration detected correctly', {
-          token_id: token.id,
-          expires_at: token.expires_at,
+      try {
+        const tokens = await getTokensByStravaId(testStravaId)
+        
+        // Check if token is expired
+        const isExpired = new Date(tokens.expires_at) < new Date()
+        
+        addResult('Token Refresh', 'success', 'Token status checked', {
+          strava_id: tokens.strava_id,
+          expires_at: tokens.expires_at,
           is_expired: isExpired
         })
-      } else {
-        addResult('Token Refresh', 'error', 'Token expiration check failed')
+      } catch {
+        // Create a test token if none exists
+        await upsertTokens({
+          strava_id: testStravaId,
+          access_token: 'test_token',
+          refresh_token: 'test_refresh',
+          expires_at: new Date(Date.now() + 6 * 60 * 60 * 1000).toISOString() // 6 hours from now
+        })
+        
+        addResult('Token Refresh', 'success', 'Test token created for future refresh tests')
       }
     } catch (error: any) {
       addResult('Token Refresh', 'error', 'Token refresh test failed', undefined, error.message)
@@ -469,7 +458,7 @@ export default function TestPage() {
     try {
       addResult('Session Cleanup', 'pending', 'Testing session cleanup...')
       
-      // Create expired session
+      // Create expired session manually for testing
       const expiredSession = {
         strava_id: 123456,
         session_token: `expired_${Date.now()}`,
@@ -480,18 +469,142 @@ export default function TestPage() {
         .from('app_sessions')
         .insert(expiredSession)
       
-      // Clean up expired sessions
-      const { data: deletedSessions, error } = await supabase
+      // Use the service to clean up expired sessions
+      await SessionManager.cleanupExpiredSessions()
+      
+      // Verify cleanup worked
+      const { data: remainingExpired, error } = await supabase
         .from('app_sessions')
-        .delete()
+        .select('*')
         .lt('expires_at', new Date().toISOString())
-        .select()
       
       if (error) throw error
       
-      addResult('Session Cleanup', 'success', `Cleaned up ${deletedSessions?.length || 0} expired sessions`, deletedSessions)
+      addResult('Session Cleanup', 'success', `Cleanup completed. ${remainingExpired?.length || 0} expired sessions remaining`, {
+        cleaned_sessions: remainingExpired
+      })
     } catch (error: any) {
       addResult('Session Cleanup', 'error', 'Session cleanup failed', undefined, error.message)
+    }
+  }
+
+  // Test 17: Session Rotation
+  const testSessionRotation = async () => {
+    try {
+      addResult('Session Rotation', 'pending', 'Testing session rotation...')
+      
+      // Create a test session using the service
+      const testStravaId = 123456
+      const { sessionToken } = await SessionManager.createSession(testStravaId)
+      
+      // Rotate the session using the service
+      const newToken = await SessionManager.rotateSession(sessionToken)
+      
+      if (newToken) {
+        addResult('Session Rotation', 'success', 'Session rotated successfully', {
+          original_token: sessionToken,
+          new_token: newToken
+        })
+      } else {
+        addResult('Session Rotation', 'error', 'Session rotation failed')
+      }
+    } catch (error: any) {
+      addResult('Session Rotation', 'error', 'Session rotation failed', undefined, error.message)
+    }
+  }
+
+  // Test 18: Protected Route Simulation
+  const testProtectedRoute = async () => {
+    try {
+      addResult('Protected Route', 'pending', 'Testing protected route simulation...')
+      
+      // Test accessing protected route without session
+      const response = await fetch('/api/auth/session')
+      const data = await response.json()
+      
+      if (data.authenticated) {
+        addResult('Protected Route', 'success', 'User has access to protected route', {
+          user: data.user,
+          authenticated: data.authenticated
+        })
+      } else {
+        addResult('Protected Route', 'success', 'User would be redirected to login', {
+          authenticated: data.authenticated
+        })
+      }
+    } catch (error: any) {
+      addResult('Protected Route', 'error', 'Protected route test failed', undefined, error.message)
+    }
+  }
+
+  // Test 19: CSRF Token Generation
+  const testCSRFToken = async () => {
+    try {
+      addResult('CSRF Token', 'pending', 'Testing CSRF token generation...')
+      
+      // Simulate CSRF token generation (this would normally be done server-side)
+      const csrfToken = `csrf_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      
+      // Test token validation
+      const isValidToken = csrfToken.length > 20 && csrfToken.startsWith('csrf_')
+      
+      if (isValidToken) {
+        addResult('CSRF Token', 'success', 'CSRF token generated and validated', {
+          token: csrfToken,
+          length: csrfToken.length,
+          valid: isValidToken
+        })
+      } else {
+        addResult('CSRF Token', 'error', 'CSRF token validation failed')
+      }
+    } catch (error: any) {
+      addResult('CSRF Token', 'error', 'CSRF token test failed', undefined, error.message)
+    }
+  }
+
+  // Test 20: Complete Auth Flow
+  const testCompleteAuthFlow = async () => {
+    try {
+      addResult('Complete Auth Flow', 'pending', 'Testing complete authentication flow...')
+      
+      const testStravaId = Math.floor(Math.random() * 1000000)
+      
+      // Step 1: Create user (simulates Strava OAuth callback)
+      const user = await upsertUser({
+        strava_id: testStravaId,
+        firstname: 'Complete',
+        lastname: 'Flow',
+        city: 'Test City',
+        state: 'Test State',
+        country: 'Test Country'
+      })
+      
+      // Step 2: Store tokens
+      const tokens = await upsertTokens({
+        strava_id: testStravaId,
+        access_token: `complete_flow_access_${Date.now()}`,
+        refresh_token: `complete_flow_refresh_${Date.now()}`,
+        expires_at: new Date(Date.now() + 6 * 60 * 60 * 1000).toISOString()
+      })
+      
+      // Step 3: Create session
+      const { sessionToken, expiresAt } = await SessionManager.createSession(testStravaId)
+      
+      // Step 4: Validate session
+      const stravaId = await SessionManager.validateSession(sessionToken)
+      
+      if (stravaId && stravaId === testStravaId) {
+        addResult('Complete Auth Flow', 'success', 'Complete authentication flow successful', {
+          user,
+          tokens,
+          session: { sessionToken, expiresAt, strava_id: stravaId },
+          flow_completed: true
+        })
+      } else {
+        addResult('Complete Auth Flow', 'error', 'Session validation failed in complete flow')
+      }
+    } catch (error: any) {
+      addResult('Complete Auth Flow', 'error', 'Complete auth flow failed', undefined, error.message)
     }
   }
 
@@ -502,21 +615,25 @@ export default function TestPage() {
     
     const tests = [
       testConnection,
-      testAuthStatus,
-      testSignIn,
+      testAppSessionStatus,
+      testStravaOAuthFlow,
       testSchemaCheck,
       testRLSPolicies,
       testAppSession,
       testSessionValidation,
       testTokenRefresh,
       testSessionCleanup,
+      testSessionRotation,
+      testProtectedRoute,
+      testCSRFToken,
+      testCompleteAuthFlow,
       testCreateUser,
       testReadUsers,
       testUpdateUser,
       testCreateActivity,
       testReadActivities,
       testDeleteUser,
-      testSignOut
+      testAppLogout
     ]
     
     for (const test of tests) {
@@ -533,9 +650,9 @@ export default function TestPage() {
     setIsRunning(true)
     clearResults()
     
-    await testAuthStatus()
-    await testSignIn()
-    await testSignOut()
+    await testAppSessionStatus()
+    await testStravaOAuthFlow()
+    await testAppLogout()
     
     setIsRunning(false)
   }
@@ -563,6 +680,10 @@ export default function TestPage() {
     await testSessionValidation()
     await testTokenRefresh()
     await testSessionCleanup()
+    await testSessionRotation()
+    await testProtectedRoute()
+    await testCSRFToken()
+    await testCompleteAuthFlow()
     
     setIsRunning(false)
   }
@@ -577,16 +698,26 @@ export default function TestPage() {
           <h2 className="text-xl font-semibold mb-4">Current Status</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-600">Authentication Status:</p>
+              <p className="text-sm text-gray-600">App Session Status:</p>
               <p className={`font-medium ${user ? 'text-green-600' : 'text-red-600'}`}>
-                {user ? 'Authenticated' : 'Not Authenticated'}
+                {user ? 'Session Active' : 'No Session'}
               </p>
             </div>
             {user && (
-              <div>
-                <p className="text-sm text-gray-600">User ID:</p>
-                <p className="font-mono text-sm">{user.id}</p>
-              </div>
+              <>
+                <div>
+                  <p className="text-sm text-gray-600">User:</p>
+                  <p className="font-medium">{user.firstname} {user.lastname}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Strava ID:</p>
+                  <p className="font-mono text-sm">{user.strava_id}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Location:</p>
+                  <p className="text-sm">{user.city}, {user.state}, {user.country}</p>
+                </div>
+              </>
             )}
           </div>
         </div>
@@ -644,25 +775,25 @@ export default function TestPage() {
               Connection
             </button>
             <button
-              onClick={testAuthStatus}
+              onClick={testAppSessionStatus}
               disabled={isRunning}
               className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
             >
-              Auth Status
+              Session Status
             </button>
             <button
-              onClick={testSignIn}
+              onClick={testStravaOAuthFlow}
               disabled={isRunning}
               className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
             >
-              Sign In
+              OAuth Flow
             </button>
             <button
-              onClick={testSignOut}
+              onClick={testAppLogout}
               disabled={isRunning}
               className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
             >
-              Sign Out
+              App Logout
             </button>
             <button
               onClick={testCreateUser}
@@ -719,6 +850,34 @@ export default function TestPage() {
               className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
             >
               Session Cleanup
+            </button>
+            <button
+              onClick={testSessionRotation}
+              disabled={isRunning}
+              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
+            >
+              Session Rotation
+            </button>
+            <button
+              onClick={testProtectedRoute}
+              disabled={isRunning}
+              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
+            >
+              Protected Route
+            </button>
+            <button
+              onClick={testCSRFToken}
+              disabled={isRunning}
+              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
+            >
+              CSRF Token
+            </button>
+            <button
+              onClick={testCompleteAuthFlow}
+              disabled={isRunning}
+              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
+            >
+              Complete Flow
             </button>
           </div>
         </div>

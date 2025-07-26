@@ -32,7 +32,13 @@
     "db:local:studio": "npm run supabase:local:start && npm run supabase:local:studio",
     "db:prod:apply": "npm run supabase:prod:push:all",
     "db:prod:sync": "npm run supabase:prod:pull && npm run supabase:prod:push:all",
-    "auth:migrate": "node scripts/apply-auth-migration.js"
+    "auth:migrate": "node scripts/apply-auth-migration.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "@mapbox/polyline": "^1.2.1",
@@ -51,12 +57,19 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.40.0",
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "node-mocks-http": "^1.12.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.0",
     "typescript": "^5"
