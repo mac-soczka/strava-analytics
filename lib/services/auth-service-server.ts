@@ -37,18 +37,30 @@ export class SessionManagerServer {
     const sessionToken = generateSecureToken()
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24 hours
 
-    const { error } = await serverSupabase
-      .from('app_sessions')
-      .insert({
-        strava_id: stravaId,
-        session_token: sessionToken,
-        expires_at: expiresAt
-      })
+    console.log('🔧 Creating session for strava_id:', stravaId)
+    console.log('🔧 Session token:', sessionToken)
+    console.log('🔧 Expires at:', expiresAt)
+    console.log('🔧 ServerSupabase client:', !!serverSupabase)
 
-    if (error) {
-      throw new Error(`Failed to create session: ${error.message}`)
+    try {
+      const { error } = await serverSupabase
+        .from('app_sessions')
+        .insert({
+          strava_id: stravaId,
+          session_token: sessionToken,
+          expires_at: expiresAt
+        })
+
+      if (error) {
+        console.error('❌ Session creation error:', error)
+        throw new Error(`Failed to create session: ${error.message}`)
+      }
+    } catch (dbError: any) {
+      console.error('❌ Database connection error:', dbError)
+      throw new Error(`Database connection failed: ${dbError?.message || 'Unknown error'}`)
     }
 
+    console.log('✅ Session created successfully')
     return { sessionToken, expiresAt }
   }
 
@@ -169,7 +181,7 @@ export class TokenManagerServer {
 
 // Main authentication service for server-side
 export class AuthServiceServer {
-  static async authenticateUser(stravaId: number): Promise<{ sessionToken: string; user: AuthUser }> {
+  static async authenticateUser(stravaId: number): Promise<{ sessionToken: string; expiresAt: string; user: AuthUser }> {
     try {
       // Get user data
       const user = await getUserByStravaId(stravaId)
@@ -178,10 +190,11 @@ export class AuthServiceServer {
       }
 
       // Create app session
-      const { sessionToken } = await SessionManagerServer.createSession(stravaId)
+      const { sessionToken, expiresAt } = await SessionManagerServer.createSession(stravaId)
 
       return {
         sessionToken,
+        expiresAt,
         user: {
           id: user.id,
           strava_id: user.strava_id,

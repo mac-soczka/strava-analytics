@@ -4,6 +4,10 @@ import { config } from './config';
 // Create Supabase client with service role key for server-side operations
 export const supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey);
 
+// Debug Supabase configuration
+console.log('🔧 Supabase URL:', config.supabase.url)
+console.log('🔧 Service Role Key exists:', !!config.supabase.serviceRoleKey)
+
 // Create Supabase client with anon key for client-side operations
 export const supabaseClient = createClient(config.supabase.url, config.supabase.anonKey);
 

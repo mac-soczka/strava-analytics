@@ -22,6 +22,10 @@ export async function GET(req) {
     
     const { access_token, refresh_token, athlete } = response.data;
     
+    // Initialize session variables
+    let sessionToken = null;
+    let expiresAt = null;
+    
     try {
       // Upsert user data (create or update)
       await upsertUser({
@@ -43,31 +47,41 @@ export async function GET(req) {
       });
       
       // Create app session
-      const { sessionToken, expiresAt } = await AuthServiceServer.authenticateUser(athlete.id);
+      const sessionResult = await AuthServiceServer.authenticateUser(athlete.id);
+      sessionToken = sessionResult.sessionToken;
+      expiresAt = sessionResult.expiresAt;
       
       console.log('✅ User authenticated and session created:', athlete.firstname, athlete.lastname);
       
     } catch (dbError) {
       console.error('Database error:', dbError);
-      // Continue with redirect even if DB fails
+      // If database operations fail, we can't create a session
+      // Redirect to home page with error
+      const homeUrl = process.env.NODE_ENV === 'production' 
+        ? 'https://strava-heatmap-alpha.vercel.app'
+        : 'http://localhost:3001';
+      
+      return Response.redirect(homeUrl);
     }
     
     // Redirect to dashboard after successful authentication
     const dashboardUrl = process.env.NODE_ENV === 'production' 
       ? 'https://strava-heatmap-alpha.vercel.app/dashboard'
-      : 'http://localhost:3000/dashboard';
+      : 'http://localhost:3001/dashboard';
     
     // Create response with session cookie
     const response_redirect = Response.redirect(dashboardUrl);
     
-    // Set session cookie
-    const sessionCookie = CookieManagerServer.setSessionCookie(sessionToken, expiresAt);
-    response_redirect.headers.set('Set-Cookie', sessionCookie);
-    
-    // Set CSRF token
-    const csrfToken = AuthServiceServer.generateCSRFToken();
-    const csrfCookie = CookieManagerServer.setCSRFCookie(csrfToken);
-    response_redirect.headers.set('Set-Cookie', csrfCookie);
+    // Set session cookie only if session was created successfully
+    if (sessionToken && expiresAt) {
+      const sessionCookie = CookieManagerServer.setSessionCookie(sessionToken, expiresAt);
+      response_redirect.headers.set('Set-Cookie', sessionCookie);
+      
+      // Set CSRF token
+      const csrfToken = AuthServiceServer.generateCSRFToken();
+      const csrfCookie = CookieManagerServer.setCSRFCookie(csrfToken);
+      response_redirect.headers.set('Set-Cookie', csrfCookie);
+    }
     
     return response_redirect;
   } catch (error) {

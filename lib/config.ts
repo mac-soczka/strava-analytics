@@ -35,6 +35,7 @@ function cleanUrl(url: string): string {
 function getDefaultRedirectUri(): string {
   // Use explicit redirect URI if set (highest priority)
   if (process.env.STRAVA_REDIRECT_URI) {
+    console.log('🔧 Using STRAVA_REDIRECT_URI from env:', process.env.STRAVA_REDIRECT_URI);
     return process.env.STRAVA_REDIRECT_URI;
   }
 
@@ -50,6 +51,12 @@ function getDefaultRedirectUri(): string {
     return `${baseUrl}/api/auth/callback`;
   }
 
+  // Use localhost for development
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🔧 Using development redirect URI: http://localhost:3001/api/auth/callback');
+    return "http://localhost:3001/api/auth/callback";
+  }
+  
   // Note: localhost won't work if Strava app is configured for production domain
   // You'll need to use the production URL even for local development
   console.warn('⚠️ Warning: Using production redirect URI for local development');
