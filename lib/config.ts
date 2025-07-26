@@ -81,7 +81,7 @@ function getStravaApiLimits(): StravaApiLimits {
     // Fetch Limits (Strava API maximums)
     maxActivitiesPerRequest: 200, // Strava API maximum
                 maxSegmentBatchSize: 100,     // Process 100 activities at a time for segments
-            maxCrawlerBatchSize: 1000,    // Maximum activities per crawler run (increased)
+            maxCrawlerBatchSize: 200,     // Maximum activities per crawler run (Strava API limit)
     
     // Timing Configuration
     minDelayMs: 900,  // 1 request per 0.9 seconds (conservative)

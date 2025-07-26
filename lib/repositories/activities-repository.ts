@@ -118,14 +118,14 @@ export class ActivitiesRepository {
   }
 
   /**
-   * Get activities by sport type
+   * Get activities by type
    */
-  async getActivitiesByType(sportType: string) {
+  async getActivitiesByType(activityType: string) {
     try {
       const { data, error } = await this.supabase
         .from('activities')
         .select('*')
-        .eq('sport_type', sportType)
+        .eq('type', activityType)
         .order('start_date', { ascending: false })
 
       if (error) throw error
@@ -232,7 +232,7 @@ export class ActivitiesRepository {
     try {
       const { data, error } = await this.supabase
         .from('activities')
-        .select('distance, moving_time, total_elevation_gain, sport_type')
+        .select('distance, moving_time, total_elevation_gain, type')
 
       if (error) throw error
 
@@ -242,7 +242,7 @@ export class ActivitiesRepository {
         totalTime: data.reduce((sum, a) => sum + (a.moving_time || 0), 0),
         totalElevation: data.reduce((sum, a) => sum + (a.total_elevation_gain || 0), 0),
         bySportType: data.reduce((acc, a) => {
-          acc[a.sport_type] = (acc[a.sport_type] || 0) + 1
+          acc[a.type] = (acc[a.type] || 0) + 1
           return acc
         }, {} as Record<string, number>)
       }

@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     
     if (sportType && sportType !== 'all') {
       filteredActivities = filteredActivities.filter(activity =>
-        activity.sport_type === sportType
+        activity.type === sportType
       )
     }
     

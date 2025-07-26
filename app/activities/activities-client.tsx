@@ -37,7 +37,7 @@ export default function ActivitiesClient({ initialActivities, stats }: Activitie
     // Apply sport type filter
     if (sportTypeFilter !== 'all') {
       filtered = filtered.filter(activity =>
-        activity.sport_type === sportTypeFilter
+        activity.type === sportTypeFilter
       )
     }
 
