@@ -45,7 +45,7 @@ export default function ActivitiesClient({ initialActivities, stats, totalCount 
   const [currentPage, setCurrentPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [showFilters, setShowFilters] = useState(false)
-  const [lastSync, setLastSync] = useState<Date>(new Date())
+  const [lastSync, setLastSync] = useState<string>('')
 
   const itemsPerPage = 20
 
@@ -136,7 +136,7 @@ export default function ActivitiesClient({ initialActivities, stats, totalCount 
         setActivities(transformed)
         setCurrentPage(1)
         setHasMore(true)
-        setLastSync(new Date())
+        setLastSync(new Date().toLocaleTimeString())
       }
     } catch (error) {
       console.error('Error refreshing activities:', error)
@@ -361,9 +361,11 @@ export default function ActivitiesClient({ initialActivities, stats, totalCount 
         </div>
 
         {/* Last Sync Info */}
-        <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-          Last synced: {lastSync.toLocaleTimeString()}
-        </div>
+        {lastSync && (
+          <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            Last synced: {lastSync}
+          </div>
+        )}
       </motion.div>
 
       {/* Activities List */}

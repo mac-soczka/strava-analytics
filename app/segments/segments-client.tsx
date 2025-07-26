@@ -46,7 +46,7 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
   const [selectedSegmentId, setSelectedSegmentId] = useState<string>('')
   const [sortBy, setSortBy] = useState<'name' | 'distance' | 'efforts' | 'elevation' | 'steepness' | 'time_max' | 'time_min'>('name')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-  const [lastSync, setLastSync] = useState<Date>(new Date())
+  const [lastSync, setLastSync] = useState<string>('')
 
   // Calculate segment metrics for sorting
   const segmentsWithMetrics = useMemo(() => {
@@ -155,7 +155,7 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
     try {
       // This would typically refetch from the server component
       // For now, we'll just update the timestamp
-      setLastSync(new Date())
+      setLastSync(new Date().toLocaleTimeString())
     } catch (error) {
       console.error('Error refreshing segments:', error)
     } finally {
@@ -313,9 +313,11 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
         </div>
 
         {/* Last Sync Info */}
-        <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-          Last synced: {lastSync.toLocaleTimeString()}
-        </div>
+        {lastSync && (
+          <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            Last synced: {lastSync}
+          </div>
+        )}
       </motion.div>
 
       {/* Segments List */}
@@ -335,14 +337,149 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
             <table className="min-w-full">
               <thead>
                 <tr className="border-b border-gray-200 dark:border-gray-700">
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Segment</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Distance</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Elevation</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Grade</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Attempts</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Best Time</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Avg Time</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Actions</th>
+                  <th 
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'name') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('name')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Segment
+                      {sortBy === 'name' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th 
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'distance') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('distance')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Distance
+                      {sortBy === 'distance' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th 
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'elevation') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('elevation')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Elevation
+                      {sortBy === 'elevation' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th 
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'steepness') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('steepness')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Grade
+                      {sortBy === 'steepness' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th 
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'efforts') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('efforts')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Attempts
+                      {sortBy === 'efforts' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th 
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'time_min') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('time_min')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Best Time
+                      {sortBy === 'time_min' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th 
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'time_max') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('time_max')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Avg Time
+                      {sortBy === 'time_max' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
