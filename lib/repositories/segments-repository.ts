@@ -69,20 +69,24 @@ export class SegmentsRepository {
   }
 
   /**
-   * Get segments by location
+   * Get segments by location (city, state, country)
    */
-  async getSegmentsByLocation(city?: string, state?: string, country?: string): Promise<{ data: Segment[] | null; error: any }> {
-    let query = this.supabase
-      .from('segments')
-      .select('*')
+  async getSegmentsByLocation(city?: string, state?: string, country?: string) {
+    try {
+      let query = this.supabase.from('segments').select('*')
 
-    if (city) query = query.eq('city', city)
-    if (state) query = query.eq('state', state)
-    if (country) query = query.eq('country', country)
+      if (city) query = query.eq('city', city)
+      if (state) query = query.eq('state', state)
+      if (country) query = query.eq('country', country)
 
-    const { data, error } = await query
+      const { data, error } = await query
 
-    return { data: data as Segment[] | null, error }
+      if (error) throw error
+      return data as unknown as Segment[] | null
+    } catch (error) {
+      console.error('Error fetching segments by location:', error)
+      throw error
+    }
   }
 
   /**

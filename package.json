@@ -7,9 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    
     "dev:full": "npm run supabase:local:start && npm run dev",
-    
     "supabase:local:start": "npx supabase start",
     "supabase:local:stop": "npx supabase stop",
     "supabase:local:status": "npx supabase status",
@@ -17,28 +15,21 @@
     "supabase:local:reset": "npx supabase db reset",
     "supabase:local:pull": "npx supabase db pull",
     "supabase:local:diff": "npx supabase db diff",
-    
     "supabase:migration:new": "npx supabase migration new",
     "supabase:migration:list": "npx supabase migration list",
     "supabase:migration:list:local": "npx supabase migration list --local",
     "supabase:migration:list:prod": "npx supabase migration list",
-    
     "supabase:prod:push": "npx supabase db push",
     "supabase:prod:push:all": "npx supabase db push --include-all",
     "supabase:prod:pull": "npx supabase db pull",
     "supabase:prod:diff": "npx supabase db diff",
-    
     "db:local:setup": "npm run supabase:local:start && npm run supabase:local:reset && npm run supabase:local:studio",
     "db:local:studio": "npm run supabase:local:start && npm run supabase:local:studio",
     "db:prod:apply": "npm run supabase:prod:push:all",
     "db:prod:sync": "npm run supabase:prod:pull && npm run supabase:prod:push:all",
     "auth:migrate": "node scripts/apply-auth-migration.js",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug",
     "strava:no-limits:enable": "node scripts/enable-no-limits.js enable",
     "strava:no-limits:disable": "node scripts/enable-no-limits.js disable",
     "strava:no-limits:status": "node scripts/enable-no-limits.js status"
@@ -63,7 +54,7 @@
     "@playwright/test": "^1.40.0",
     "@testing-library/jest-dom": "^6.1.0",
     "@testing-library/react": "^14.0.0",
-    "@types/jest": "^29.5.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -75,6 +66,7 @@
     "node-mocks-http": "^1.12.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.0",
+    "ts-jest": "^29.4.0",
     "typescript": "^5"
   }
 }

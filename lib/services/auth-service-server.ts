@@ -55,9 +55,9 @@ export class SessionManagerServer {
         console.error('❌ Session creation error:', error)
         throw new Error(`Failed to create session: ${error.message}`)
       }
-    } catch (dbError: any) {
-      console.error('❌ Database connection error:', dbError)
-      throw new Error(`Database connection failed: ${dbError?.message || 'Unknown error'}`)
+    } catch (_error) {
+      console.error('Failed to create session:', _error)
+      throw new Error('Failed to create session')
     }
 
     console.log('✅ Session created successfully')
