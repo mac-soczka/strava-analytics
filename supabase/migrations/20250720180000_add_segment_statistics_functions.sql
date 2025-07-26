@@ -110,4 +110,114 @@ BEGIN
   GROUP BY s.segment_id, s.name, s.distance
   ORDER BY effort_count DESC;
 END;
+$$ LANGUAGE plpgsql;
+
+-- Create comprehensive dashboard statistics function
+CREATE OR REPLACE FUNCTION get_dashboard_statistics()
+RETURNS TABLE (
+  total_activities BIGINT,
+  total_segments BIGINT,
+  total_efforts BIGINT,
+  total_distance NUMERIC,
+  total_time BIGINT,
+  total_elevation NUMERIC,
+  avg_speed NUMERIC,
+  avg_elevation_per_activity NUMERIC,
+  activity_types JSONB,
+  top_segments JSONB,
+  recent_activities JSONB,
+  monthly_trends JSONB
+) AS $$
+DECLARE
+  activity_types_json JSONB;
+  top_segments_json JSONB;
+  recent_activities_json JSONB;
+  monthly_trends_json JSONB;
+BEGIN
+  -- Get activity type distribution
+  SELECT jsonb_object_agg(type, count) INTO activity_types_json
+  FROM (SELECT type, COUNT(*) as count FROM activities GROUP BY type) t;
+  
+  -- Get top segments by effort count
+  SELECT jsonb_agg(
+    jsonb_build_object(
+      'id', s.segment_id,
+      'name', s.name,
+      'distance', s.distance,
+      'elevation', s.elevation_gain,
+      'effort_count', COALESCE(e.effort_count, 0)
+    )
+  ) INTO top_segments_json
+  FROM segments s
+  LEFT JOIN (
+    SELECT segment_id, COUNT(*) as effort_count
+    FROM segment_efforts
+    GROUP BY segment_id
+  ) e ON s.segment_id = e.segment_id
+  WHERE e.effort_count > 0
+  ORDER BY e.effort_count DESC
+  LIMIT 10;
+  
+  -- Get recent activities
+  SELECT jsonb_agg(
+    jsonb_build_object(
+      'activity_id', activity_id,
+      'name', name,
+      'distance', distance,
+      'moving_time', moving_time,
+      'total_elevation_gain', total_elevation_gain,
+      'type', type,
+      'start_date', start_date
+    )
+  ) INTO recent_activities_json
+  FROM activities
+  ORDER BY start_date DESC
+  LIMIT 5;
+  
+  -- Get monthly trends (last 12 months)
+  SELECT jsonb_agg(
+    jsonb_build_object(
+      'month', month_name,
+      'activities', activity_count,
+      'distance', total_distance,
+      'elevation', total_elevation
+    )
+  ) INTO monthly_trends_json
+  FROM (
+    SELECT 
+      to_char(date_trunc('month', start_date), 'Mon') as month_name,
+      COUNT(*) as activity_count,
+      COALESCE(SUM(distance), 0) as total_distance,
+      COALESCE(SUM(total_elevation_gain), 0) as total_elevation
+    FROM activities
+    WHERE start_date >= date_trunc('month', CURRENT_DATE - INTERVAL '11 months')
+    GROUP BY date_trunc('month', start_date)
+    ORDER BY date_trunc('month', start_date)
+  ) monthly_data;
+  
+  RETURN QUERY
+  SELECT 
+    (SELECT COUNT(*) FROM activities) as total_activities,
+    (SELECT COUNT(*) FROM segments) as total_segments,
+    (SELECT COUNT(*) FROM segment_efforts) as total_efforts,
+    (SELECT COALESCE(SUM(distance), 0) FROM activities) as total_distance,
+    (SELECT COALESCE(SUM(moving_time), 0) FROM activities) as total_time,
+    (SELECT COALESCE(SUM(total_elevation_gain), 0) FROM activities) as total_elevation,
+    CASE 
+      WHEN (SELECT COALESCE(SUM(moving_time), 0) FROM activities) > 0 
+      THEN ((SELECT COALESCE(SUM(distance), 0) FROM activities) / 1000.0) / 
+           ((SELECT COALESCE(SUM(moving_time), 0) FROM activities) / 3600.0)
+      ELSE 0 
+    END as avg_speed,
+    CASE 
+      WHEN (SELECT COUNT(*) FROM activities) > 0 
+      THEN (SELECT COALESCE(SUM(total_elevation_gain), 0) FROM activities) / 
+           (SELECT COUNT(*) FROM activities)
+      ELSE 0 
+    END as avg_elevation_per_activity,
+    COALESCE(activity_types_json, '{}'::jsonb) as activity_types,
+    COALESCE(top_segments_json, '[]'::jsonb) as top_segments,
+    COALESCE(recent_activities_json, '[]'::jsonb) as recent_activities,
+    COALESCE(monthly_trends_json, '[]'::jsonb) as monthly_trends;
+END;
 $$ LANGUAGE plpgsql; 

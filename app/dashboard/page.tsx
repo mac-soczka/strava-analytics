@@ -50,51 +50,39 @@ async function DashboardContent() {
   const supabase = createServerComponentClient()
 
   try {
-    // Fetch all data in parallel
-    const [
-      activitiesCount,
-      segmentsCount,
-      effortsCount,
-      activities,
-      segments,
-      segmentEfforts,
-      recentActivities,
-      topSegments
-    ] = await Promise.all([
-      // Counts
+    // 🎯 APPROACH 1: Efficient count queries for simple totals
+    const [activitiesCount, segmentsCount, effortsCount] = await Promise.all([
       supabase.from('activities').select('*', { count: 'exact', head: true }),
       supabase.from('segments').select('*', { count: 'exact', head: true }),
-      supabase.from('segment_efforts').select('*', { count: 'exact', head: true }),
-      
-      // Full data for calculations
-      supabase.from('activities').select('*').order('start_date', { ascending: false }),
-      supabase.from('segments').select('*'),
-      supabase.from('segment_efforts').select('*'),
-      
-      // Recent activities for trends
-      supabase.from('activities').select('*').order('start_date', { ascending: false }).limit(10),
-      
-      // Top segments by effort count
-      supabase.from('segment_efforts')
-        .select('segment_id, segments(name, distance, elevation_gain)')
-        .order('segment_id')
+      supabase.from('segment_efforts').select('*', { count: 'exact', head: true })
     ])
 
     if (activitiesCount.error) throw activitiesCount.error
     if (segmentsCount.error) throw segmentsCount.error
     if (effortsCount.error) throw effortsCount.error
+
+    // 🎯 APPROACH 2: Parallel data fetching for calculations
+    const [activities, segments, segmentEfforts, recentActivities] = await Promise.all([
+      // Full data for calculations (limited for performance)
+      supabase.from('activities').select('distance, moving_time, total_elevation_gain, type, start_date').order('start_date', { ascending: false }).limit(1000),
+      supabase.from('segments').select('segment_id, name, distance, elevation_gain'),
+      supabase.from('segment_efforts').select('segment_id'),
+      
+      // Recent activities for display
+      supabase.from('activities').select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date').order('start_date', { ascending: false }).limit(5)
+    ])
+
     if (activities.error) throw activities.error
     if (segments.error) throw segments.error
     if (segmentEfforts.error) throw segmentEfforts.error
     if (recentActivities.error) throw recentActivities.error
-    if (topSegments.error) throw topSegments.error
 
-    // Calculate statistics
+    // 🎯 APPROACH 3: Client-side aggregation for performance metrics
     const totalDistance = activities.data?.reduce((sum: number, a: any) => sum + (a.distance || 0), 0) || 0
     const totalTime = activities.data?.reduce((sum: number, a: any) => sum + (a.moving_time || 0), 0) || 0
     const totalElevation = activities.data?.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0) || 0
     
-    // Calculate effort statistics
+    // Calculate effort statistics efficiently
     const effortCountMap = new Map<number, number>()
     segmentEfforts.data?.forEach((effort: any) => {
       const segmentId = effort.segment_id
@@ -102,7 +90,7 @@ async function DashboardContent() {
     })
 
     // Get top segments by effort count
-    const topSegmentsByEfforts = Array.from(effortCountMap.entries())
+    const topSegments = Array.from(effortCountMap.entries())
       .map(([segmentId, count]) => {
         const segment = segments.data?.find((s: any) => s.segment_id === segmentId)
         return {
@@ -122,7 +110,7 @@ async function DashboardContent() {
       return acc
     }, {} as Record<string, number>) || {}
 
-    // Calculate monthly trends (last 12 months)
+    // Calculate monthly trends (last 12 months) - efficient approach
     const monthlyData = new Array(12).fill(0).map((_, i) => {
       const date = new Date()
       date.setMonth(date.getMonth() - i)
@@ -163,7 +151,7 @@ async function DashboardContent() {
       <DashboardClient 
         stats={stats}
         recentActivities={recentActivities.data || []}
-        topSegments={topSegmentsByEfforts}
+        topSegments={topSegments}
         activityTypes={activityTypes}
         monthlyData={monthlyData}
       />

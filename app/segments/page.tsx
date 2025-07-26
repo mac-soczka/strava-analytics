@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { createClient } from '@supabase/supabase-js'
+import { createServerComponentClient } from '@/lib/supabase'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -51,54 +51,22 @@ function SegmentsLoadingSkeleton() {
 }
 
 async function SegmentsContent() {
+  const supabase = createServerComponentClient()
+
   try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    )
-    
-    // 🎯 APPROACH 1: Using RPC with custom functions (MOST EFFICIENT)
-    let { data: stats, error: statsError } = await supabase
-      .rpc('get_segment_statistics')
+    // 🎯 APPROACH 1: Reliable count queries for totals
+    const [segmentsCount, effortsCount] = await Promise.all([
+      supabase.from('segments').select('*', { count: 'exact', head: true }),
+      supabase.from('segment_efforts').select('*', { count: 'exact', head: true })
+    ])
 
-    if (statsError) {
-      console.warn('RPC failed, falling back to manual queries:', statsError)
-      
-      // 🎯 APPROACH 2: Manual aggregate queries (FALLBACK)
-      const [segmentsCount, effortsCount, distanceSum, elevationSum] = await Promise.all([
-        supabase.from('segments').select('*', { count: 'exact', head: true }),
-        supabase.from('segment_efforts').select('*', { count: 'exact', head: true }),
-        supabase.from('segments').select('distance'),
-        supabase.from('segments').select('elevation_gain')
-      ])
+    if (segmentsCount.error) throw segmentsCount.error
+    if (effortsCount.error) throw effortsCount.error
 
-      if (segmentsCount.error) throw segmentsCount.error
-      if (effortsCount.error) throw effortsCount.error
-      if (distanceSum.error) throw distanceSum.error
-      if (elevationSum.error) throw elevationSum.error
-
-      // Calculate totals
-      const totalDistance = distanceSum.data?.reduce((sum: number, s: any) => sum + (s.distance || 0), 0) || 0
-      const totalElevation = elevationSum.data?.reduce((sum: number, s: any) => sum + (s.elevation_gain || 0), 0) || 0
-      
-      stats = {
-        total_segments: segmentsCount.count || 0,
-        total_efforts: effortsCount.count || 0,
-        total_distance: totalDistance,
-        total_elevation: totalElevation
-      }
-    }
-    
-    // 🎯 APPROACH 3: Using RPC for segments with effort counts
-    const { data: segmentsWithCounts, error: segmentsError } = await supabase
-      .rpc('get_segments_with_effort_counts', { limit_count: 200 })
-
-    if (segmentsError) {
-      console.warn('RPC for segments failed, falling back to manual query:', segmentsError)
-      
-      // 🎯 APPROACH 4: Manual query with joins (FALLBACK)
-      const { data: segments, error: segmentsQueryError } = await supabase
-        .from('segments')
+    // 🎯 APPROACH 2: Parallel data fetching for calculations
+    const [segments, segmentEfforts, distanceSum, elevationSum] = await Promise.all([
+      // Segments with efforts for display (limited for performance)
+      supabase.from('segments')
         .select(`
           *,
           segment_efforts (
@@ -112,86 +80,46 @@ async function SegmentsContent() {
           )
         `)
         .order('name')
-        .limit(200)
+        .limit(200), // Limit for display purposes
 
-      if (segmentsQueryError) throw segmentsQueryError
+      // All segment efforts for accurate counting
+      supabase.from('segment_efforts').select('segment_id'),
+      
+      // Distance and elevation for statistics
+      supabase.from('segments').select('distance'),
+      supabase.from('segments').select('elevation_gain')
+    ])
 
-      // Get effort counts for each segment
-      const { data: effortCounts, error: countError } = await supabase
-        .from('segment_efforts')
-        .select('segment_id')
-        .order('segment_id')
+    if (segments.error) throw segments.error
+    if (segmentEfforts.error) throw segmentEfforts.error
+    if (distanceSum.error) throw distanceSum.error
+    if (elevationSum.error) throw elevationSum.error
 
-      if (countError) throw countError
+    // 🎯 APPROACH 3: Client-side aggregation for accurate counts
+    const totalDistance = distanceSum.data?.reduce((sum: number, s: any) => sum + (s.distance || 0), 0) || 0
+    const totalElevation = elevationSum.data?.reduce((sum: number, s: any) => sum + (s.elevation_gain || 0), 0) || 0
 
-      // Calculate effort counts per segment
-      const effortCountMap = new Map<number, number>()
-      effortCounts?.forEach((effort: any) => {
-        const segmentId = effort.segment_id
-        effortCountMap.set(segmentId, (effortCountMap.get(segmentId) || 0) + 1)
-      })
+    // Calculate effort counts per segment efficiently
+    const effortCountMap = new Map<number, number>()
+    segmentEfforts.data?.forEach((effort: any) => {
+      const segmentId = effort.segment_id
+      effortCountMap.set(segmentId, (effortCountMap.get(segmentId) || 0) + 1)
+    })
 
-      // Transform segments to match expected format
-      const transformedSegments = segments?.map((segment: any) => ({
-        id: segment.segment_id,
-        name: segment.name,
-        distance: segment.distance,
-        elevation_high: segment.elevation_gain + (segment.elevation_low || 0),
-        elevation_low: segment.elevation_low || 0,
-        average_grade: segment.average_grade,
-        maximum_grade: segment.maximum_grade,
-        climb_category: segment.climb_category,
-        city: segment.city,
-        state: segment.state,
-        country: segment.country,
-        map: segment.polyline ? { polyline: segment.polyline } : undefined,
-        segment_efforts: segment.segment_efforts?.map((effort: any) => ({
-          id: effort.id,
-          activity_id: effort.activity_id,
-          elapsed_time: effort.elapsed_time,
-          moving_time: effort.moving_time,
-          start_date: effort.start_date,
-          average_watts: effort.average_watts,
-          max_watts: effort.max_watts,
-          segment: {
-            id: segment.segment_id,
-            name: segment.name,
-            distance: segment.distance,
-            elevation_high: segment.elevation_gain + (segment.elevation_low || 0),
-            elevation_low: segment.elevation_low || 0,
-            average_grade: segment.average_grade,
-            maximum_grade: segment.maximum_grade,
-            climb_category: segment.climb_category,
-            city: segment.city,
-            state: segment.state,
-            country: segment.country,
-            map: segment.polyline ? { polyline: segment.polyline } : undefined
-          }
-        })) || [],
-        total_effort_count: effortCountMap.get(segment.segment_id) || 0
-      })) || []
-
-      const { default: SegmentsClient } = await import('./segments-client')
-
-      return (
-        <SegmentsClient 
-          segments={transformedSegments}
-          stats={{
-            totalSegments: stats.total_segments,
-            totalEfforts: stats.total_efforts,
-            totalDistance: stats.total_distance,
-            totalElevation: stats.total_elevation
-          }}
-        />
-      )
+    // Calculate statistics
+    const stats = {
+      totalSegments: segmentsCount.count || 0,
+      totalEfforts: effortsCount.count || 0,
+      totalDistance,
+      totalElevation
     }
 
-    // Use RPC result
-    const transformedSegments = segmentsWithCounts?.map((segment: any) => ({
+    // Transform segments to match expected format
+    const transformedSegments = segments.data?.map((segment: any) => ({
       id: segment.segment_id,
       name: segment.name,
       distance: segment.distance,
-      elevation_high: segment.elevation_gain + (segment.elevation_low || 0),
+      elevation_high: segment.elevation_gain + (segment.elevation_low || 0), // Approximate high elevation
       elevation_low: segment.elevation_low || 0,
       average_grade: segment.average_grade,
       maximum_grade: segment.maximum_grade,
@@ -200,8 +128,31 @@ async function SegmentsContent() {
       state: segment.state,
       country: segment.country,
       map: segment.polyline ? { polyline: segment.polyline } : undefined,
-      segment_efforts: [], // RPC doesn't include nested efforts
-      total_effort_count: segment.effort_count || 0
+      segment_efforts: segment.segment_efforts?.map((effort: any) => ({
+        id: effort.id,
+        activity_id: effort.activity_id,
+        elapsed_time: effort.elapsed_time,
+        moving_time: effort.moving_time,
+        start_date: effort.start_date,
+        average_watts: effort.average_watts,
+        max_watts: effort.max_watts,
+        segment: {
+          id: segment.segment_id,
+          name: segment.name,
+          distance: segment.distance,
+          elevation_high: segment.elevation_gain + (segment.elevation_low || 0),
+          elevation_low: segment.elevation_low || 0,
+          average_grade: segment.average_grade,
+          maximum_grade: segment.maximum_grade,
+          climb_category: segment.climb_category,
+          city: segment.city,
+          state: segment.state,
+          country: segment.country,
+          map: segment.polyline ? { polyline: segment.polyline } : undefined
+        }
+      })) || [],
+      // Add the total effort count from the database
+      total_effort_count: effortCountMap.get(segment.segment_id) || 0
     })) || []
 
     const { default: SegmentsClient } = await import('./segments-client')
@@ -209,12 +160,7 @@ async function SegmentsContent() {
     return (
       <SegmentsClient 
         segments={transformedSegments}
-        stats={{
-          totalSegments: stats.total_segments,
-          totalEfforts: stats.total_efforts,
-          totalDistance: stats.total_distance,
-          totalElevation: stats.total_elevation
-        }}
+        stats={stats}
       />
     )
   } catch (error) {
