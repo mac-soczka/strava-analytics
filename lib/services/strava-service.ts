@@ -194,6 +194,8 @@ export class StravaService {
   private async refreshTokens(refreshToken: string, stravaId?: number): Promise<StravaTokens> {
     const { config } = await import('@/lib/config')
     
+    console.log(`🔄 Attempting to refresh tokens for user ${stravaId}...`)
+    
     const response = await fetch('https://www.strava.com/oauth/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -206,10 +208,26 @@ export class StravaService {
     })
 
     if (!response.ok) {
-      throw new Error('Failed to refresh Strava tokens')
+      const errorText = await response.text()
+      let errorDetails
+      try {
+        errorDetails = JSON.parse(errorText)
+      } catch (e) {
+        errorDetails = { message: errorText }
+      }
+
+      // Check if it's an invalid refresh token error
+      if (response.status === 400 && errorDetails.errors?.some((e: any) => e.code === 'invalid')) {
+        console.error(`❌ Invalid refresh token for user ${stravaId}. User needs to re-authenticate.`)
+        throw new Error(`Invalid refresh token - user ${stravaId} needs to re-authenticate with Strava`)
+      }
+
+      console.error(`❌ Token refresh failed for user ${stravaId}:`, errorDetails)
+      throw new Error(`Failed to refresh Strava tokens: ${response.status} - ${errorDetails.message || errorText}`)
     }
 
     const newTokens = await response.json()
+    console.log(`✅ Token refresh successful for user ${stravaId}`)
 
     // Save new tokens to database
     const tokenData = {

@@ -41,10 +41,10 @@ export class ActivitiesRepository {
         .from('activities')
         .select('*')
         .eq('activity_id', activityId)
-        .single()
+        .maybeSingle() // Use maybeSingle() instead of single() to return null if not found
 
       if (error) throw error
-      return data as StravaActivity
+      return data as StravaActivity | null // Return null if activity not found
     } catch (error) {
       console.error('Error fetching activity by ID:', error)
       throw error
