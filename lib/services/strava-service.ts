@@ -457,7 +457,25 @@ export class StravaService {
           const segmentEfforts = await this.fetchActivitySegments(activity.activity_id)
 
           if (segmentEfforts.length > 0) {
-            // Save segments to database
+            // First, create segment records in the segments table
+            const segmentsToCreate = segmentEfforts.map(effort => ({
+              segment_id: effort.segment.id,
+              name: effort.segment.name,
+              distance: effort.segment.distance,
+              elevation_gain: effort.segment.elevation_high - effort.segment.elevation_low, // Calculate elevation gain
+              average_grade: effort.segment.average_grade,
+              maximum_grade: effort.segment.maximum_grade,
+              climb_category: effort.segment.climb_category,
+              city: effort.segment.city,
+              state: effort.segment.state,
+              country: effort.segment.country,
+              polyline: effort.segment.map?.polyline,
+            }))
+
+            // Upsert segments (create if they don't exist)
+            await this.segmentsRepo.bulkUpsertSegments(segmentsToCreate)
+
+            // Then save segment efforts to database
             const segmentsToSave = segmentEfforts.map(effort => ({
               activity_id: activity.activity_id,
               segment_id: effort.segment.id,
@@ -472,10 +490,14 @@ export class StravaService {
             await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
             segmentsAdded += segmentEfforts.length
             console.log(`✅ Added ${segmentEfforts.length} segments for activity ${activity.activity_id}`)
+            
+            // Mark activity as having segments fetched only if segments were found
+            await this.activitiesRepo.markSegmentsFetched(activity.id)
+          } else {
+            console.log(`ℹ️  No segments found for activity ${activity.activity_id}`)
+            // Don't mark as fetched if no segments were found
           }
-
-          // Mark activity as having segments fetched
-          await this.activitiesRepo.markSegmentsFetched(activity.id)
+          
           processed++
 
         } catch (error) {

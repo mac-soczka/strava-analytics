@@ -43,6 +43,14 @@ export class SessionManagerServer {
     console.log('🔧 ServerSupabase client:', !!serverSupabase)
 
     try {
+      // First, clean up any existing sessions for this user
+      console.log('🧹 Cleaning up existing sessions for user:', stravaId)
+      await serverSupabase
+        .from('app_sessions')
+        .delete()
+        .eq('strava_id', stravaId)
+
+      // Create new session
       const { error } = await serverSupabase
         .from('app_sessions')
         .insert({
@@ -119,6 +127,37 @@ export class SessionManagerServer {
       .delete()
       .lt('expires_at', new Date().toISOString())
   }
+
+  static async getExistingSession(stravaId: number): Promise<AppSession | null> {
+    try {
+      const { data, error } = await serverSupabase
+        .from('app_sessions')
+        .select('*')
+        .eq('strava_id', stravaId)
+        .single()
+
+      if (error || !data) return null
+
+      // Check if session is still valid
+      if (new Date(data.expires_at) < new Date()) {
+        // Session expired, clean it up
+        await this.deleteSession(data.session_token)
+        return null
+      }
+
+      return data
+    } catch (error) {
+      return null
+    }
+  }
+
+  static async cleanupAllSessionsForUser(stravaId: number): Promise<void> {
+    console.log('🧹 Cleaning up all sessions for user:', stravaId)
+    await serverSupabase
+      .from('app_sessions')
+      .delete()
+      .eq('strava_id', stravaId)
+  }
 }
 
 // Token management
@@ -189,7 +228,27 @@ export class AuthServiceServer {
         throw new Error('User not found')
       }
 
-      // Create app session
+      // Check for existing valid session
+      const existingSession = await SessionManagerServer.getExistingSession(stravaId)
+      if (existingSession) {
+        console.log('✅ Found existing valid session for user:', stravaId)
+        return {
+          sessionToken: existingSession.session_token,
+          expiresAt: existingSession.expires_at,
+          user: {
+            id: user.id,
+            strava_id: user.strava_id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            city: user.city,
+            state: user.state,
+            country: user.country,
+            profile_picture: user.profile_picture
+          }
+        }
+      }
+
+      // Create new app session
       const { sessionToken, expiresAt } = await SessionManagerServer.createSession(stravaId)
 
       return {
