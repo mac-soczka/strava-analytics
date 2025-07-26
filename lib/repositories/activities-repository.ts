@@ -16,7 +16,7 @@ export class ActivitiesRepository {
   /**
    * Get all activities with optional pagination
    */
-  async getActivities(limit = 50, offset = 0) {
+  async getActivities(limit = 200, offset = 0) {
     try {
       const { data, error } = await this.supabase
         .from('activities')
@@ -119,7 +119,7 @@ export class ActivitiesRepository {
     try {
       const { data, error } = await this.supabase
         .from('activities')
-        .select('id')
+        .select('id, activity_id, name')
         .eq('segments_fetched', false)
         .limit(limit)
 

@@ -49,7 +49,7 @@ const RATE_LIMIT_CONFIG = {
   REQUESTS_PER_DAY: 1000,
   MIN_DELAY_MS: 900, // 1 request per 0.9 seconds (conservative)
   MAX_DELAY_MS: 1200, // 1 request per 1.2 seconds (safe)
-  BATCH_SIZE: 80, // Leave 20 requests buffer per 15min
+  BATCH_SIZE: 200, // Maximum activities per request (Strava API limit)
   RETRY_DELAY_MS: 15 * 60 * 1000, // 15 minutes for rate limit reset
 }
 
@@ -259,7 +259,7 @@ export class StravaService {
   /**
    * Fetch activities from Strava API with rate limiting
    */
-  async fetchActivities(page = 1, perPage = 30): Promise<StravaActivity[]> {
+  async fetchActivities(page = 1, perPage = 200): Promise<StravaActivity[]> {
     // Check rate limits before making request
     if (!rateLimitTracker.canMakeRequest()) {
       const status = rateLimitTracker.getStatus()
@@ -475,80 +475,73 @@ export class StravaService {
   /**
    * Sync segments for activities that need them
    */
-  async syncSegments(batchSize = 10): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
+  async syncSegments(batchSize = 50): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
     let processed = 0
     let segmentsAdded = 0
     let errors = 0
 
     try {
-      // Get activities that need segments
+      console.log(`🔄 Starting segment sync (batch size: ${batchSize})`)
+
+      // Get activities that need segments fetched
       const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize)
+
+      if (!activitiesNeedingSegments || activitiesNeedingSegments.length === 0) {
+        console.log('✅ No activities need segments fetched')
+        return { processed: 0, segmentsAdded: 0, errors: 0 }
+      }
+
+      console.log(`📊 Found ${activitiesNeedingSegments.length} activities needing segments`)
 
       for (const activity of activitiesNeedingSegments) {
         try {
-          // Fetch segments from Strava
-          const segments = await this.fetchActivitySegments(activity.id)
+          // Check if segments already exist for this activity
+          const existingSegments = await this.segmentsRepo.getSegmentEffortsByActivity(activity.activity_id)
+          
+          if (existingSegments.data && existingSegments.data.length > 0) {
+            console.log(`Activity ${activity.activity_id} already has ${existingSegments.data.length} segments, skipping...`)
+            // Mark as fetched even if we skip
+            await this.activitiesRepo.markSegmentsFetched(activity.id)
+            processed++
+            continue
+          }
 
-          if (segments.length > 0) {
-            // Transform segments for database
-            const segmentEfforts = segments.map(segment => ({
-              activity_id: activity.id,
-              segment_id: segment.segment.id,
-              segment_name: segment.segment.name,
-              segment_distance: segment.segment.distance,
-              segment_elevation_high: segment.segment.elevation_high,
-              segment_elevation_low: segment.segment.elevation_low,
-              segment_grade: segment.segment.average_grade,
-              segment_climb_category: segment.segment.climb_category,
-              segment_city: segment.segment.city,
-              segment_state: segment.segment.state,
-              segment_country: segment.segment.country,
-              segment_private: segment.segment.private,
-              segment_hazardous: segment.segment.hazardous,
-              segment_starred: segment.segment.starred,
-              elapsed_time: segment.elapsed_time,
-              moving_time: segment.moving_time,
-              start_date: segment.start_date,
-              start_date_local: segment.start_date_local,
-              average_watts: segment.average_watts,
-              max_watts: segment.max_watts,
-              average_heartrate: segment.average_heartrate,
-              max_heartrate: segment.max_heartrate,
-              average_cadence: segment.average_cadence,
-              max_cadence: segment.max_cadence,
-              average_temp: segment.average_temp,
+          console.log(`🔄 Processing segments for activity ${activity.activity_id}`)
+
+          // Fetch segments from Strava
+          const segmentEfforts = await this.fetchActivitySegments(activity.activity_id)
+
+          if (segmentEfforts.length > 0) {
+            // Save segments to database
+            const segmentsToSave = segmentEfforts.map(effort => ({
+              activity_id: activity.activity_id,
+              segment_id: effort.segment.id,
+              effort_id: effort.id,
+              elapsed_time: effort.elapsed_time,
+              moving_time: effort.moving_time,
+              start_date: effort.start_date,
+              average_watts: effort.average_watts,
+              max_watts: effort.max_watts,
             }))
 
-            // Save segments to database
-            for (const effort of segmentEfforts) {
-              await this.segmentsRepo.upsertSegmentEffort({
-                activity_id: effort.activity_id,
-                segment_id: effort.segment_id,
-                effort_id: effort.segment_id, // Using segment_id as effort_id for now
-                elapsed_time: effort.elapsed_time,
-                moving_time: effort.moving_time,
-                start_date: effort.start_date,
-                average_watts: effort.average_watts,
-                max_watts: effort.max_watts,
-              })
-            }
-            segmentsAdded += segments.length
+            await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
+            segmentsAdded += segmentEfforts.length
+            console.log(`✅ Added ${segmentEfforts.length} segments for activity ${activity.activity_id}`)
           }
 
           // Mark activity as having segments fetched
           await this.activitiesRepo.markSegmentsFetched(activity.id)
           processed++
 
-          console.log(`Processed activity ${activity.id}: ${segments.length} segments`)
-
-          // Rate limiting is handled in fetchActivitySegments
         } catch (error) {
-          console.error(`Error processing activity ${activity.id}:`, error)
+          console.error(`❌ Error processing activity ${activity.activity_id}:`, error)
           errors++
         }
       }
+
+      console.log(`🎉 Segment sync complete: ${processed} processed, ${segmentsAdded} segments added, ${errors} errors`)
     } catch (error) {
-      console.error('Error in syncSegments:', error)
+      console.error('❌ Error in syncSegments:', error)
       throw error
     }
 

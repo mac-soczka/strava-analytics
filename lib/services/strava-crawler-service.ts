@@ -170,12 +170,11 @@ export class StravaCrawlerService {
       this.stravaService = new StravaService(user.strava_id)
       
       // Sync activities
-      const activityResult = await this.stravaService.syncActivities(options.batch_size || 80)
-      result.activities_fetched = activityResult.synced
+      const activityResult = await this.stravaService.syncActivities(options.batch_size || 200)
 
       // Sync segments if requested
       if (options.include_segments !== false) {
-        const segmentResult = await this.stravaService.syncSegments(options.segment_batch_size || 10)
+        const segmentResult = await this.stravaService.syncSegments(options.segment_batch_size || 50)
         result.segments_fetched = segmentResult.segmentsAdded
       }
 

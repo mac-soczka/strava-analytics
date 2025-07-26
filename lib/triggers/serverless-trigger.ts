@@ -30,7 +30,7 @@ export async function serverlessTrigger(req: Request) {
     // Process user(s) based on authentication context
     const results = await crawlerService.crawlStravaData({
       user_id: userId, // If undefined, will process all users
-      batch_size: 80,
+      batch_size: 200,
       include_segments: true
     })
     
