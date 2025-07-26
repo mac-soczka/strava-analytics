@@ -208,33 +208,19 @@ export class StravaService {
     // Check rate limits before making request
     if (!rateLimitTracker.canMakeRequest()) {
       const status = rateLimitTracker.getStatus()
-      throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      const errorMsg = `Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`
+      console.warn(`🚫 ${errorMsg}`)
+      throw new Error(errorMsg)
     }
 
     if (config.stravaApiLimits.noLimitsMode) {
-      console.log('🚀 NO-LIMITS MODE: Fetching activities without rate limiting')
+      console.log(`🚀 NO-LIMITS MODE: Fetching activities page ${page} without rate limiting`)
+    } else {
+      const status = rateLimitTracker.getStatus()
+      console.log(`📊 Rate limit status before activities fetch: 15min ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
     }
 
     const tokens = await this.getValidTokens()
-
-    // Check if we already have recent activities in the database
-    const existingActivities = await this.activitiesRepo.getActivities(perPage, (page - 1) * perPage)
-    
-    if (existingActivities && existingActivities.length > 0) {
-      console.log(`📊 Found ${existingActivities.length} existing activities in database, checking if we need to fetch from Strava...`)
-      
-      // Check if the most recent activity is recent enough (within last 24 hours)
-      const mostRecentActivity = existingActivities[0] as any
-      const lastActivityDate = new Date(mostRecentActivity.start_date)
-      const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000)
-      
-      if (lastActivityDate > oneDayAgo) {
-        console.log(`✅ Recent activities found in database (last: ${lastActivityDate.toISOString()}), skipping Strava API call`)
-        return existingActivities
-      }
-    }
-
-    console.log(`🔄 Fetching activities from Strava API (page: ${page}, per_page: ${perPage})`)
 
     const response = await fetch(
       `https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${perPage}`,
@@ -249,11 +235,15 @@ export class StravaService {
     if (!response.ok) {
       if (response.status === 429) {
         // Rate limit hit, wait for reset
-        console.warn('Rate limit hit, waiting for reset...')
+        const status = rateLimitTracker.getStatus()
+        console.warn(`🚫 Rate limit hit (429) while fetching activities! 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+        console.warn(`⏳ Waiting ${config.stravaApiLimits.retryDelayMs / 1000}s for rate limit reset...`)
         await new Promise(resolve => setTimeout(resolve, config.stravaApiLimits.retryDelayMs))
+        console.log(`🔄 Retrying activities fetch after rate limit reset...`)
         return this.fetchActivities(page, perPage) // Retry after waiting
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
+        console.warn(`🔄 Token expired (401), refreshing tokens...`)
         await this.refreshTokens(tokens.refresh_token, this.userId)
         return this.fetchActivities(page, perPage) // Retry with new tokens
       }
@@ -262,7 +252,10 @@ export class StravaService {
 
     // Apply rate limiting delay
     const delay = rateLimitTracker.getDelay()
-    await new Promise(resolve => setTimeout(resolve, delay))
+    if (delay > 0) {
+      console.log(`⏱️ Applying rate limit delay: ${delay}ms`)
+      await new Promise(resolve => setTimeout(resolve, delay))
+    }
 
     const activities = await response.json()
     console.log(`✅ Fetched ${activities.length} activities from Strava API`)
@@ -316,11 +309,16 @@ export class StravaService {
     // Check rate limits before making request
     if (!rateLimitTracker.canMakeRequest()) {
       const status = rateLimitTracker.getStatus()
-      throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      const errorMsg = `Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`
+      console.warn(`🚫 ${errorMsg}`)
+      throw new Error(errorMsg)
     }
 
     if (config.stravaApiLimits.noLimitsMode) {
       console.log(`🚀 NO-LIMITS MODE: Fetching segments for activity ${activityId} without rate limiting`)
+    } else {
+      const status = rateLimitTracker.getStatus()
+      console.log(`📊 Rate limit status before segments fetch: 15min ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
     }
 
     const tokens = await this.getValidTokens()
@@ -338,11 +336,15 @@ export class StravaService {
     if (!response.ok) {
       if (response.status === 429) {
         // Rate limit hit, wait for reset
-        console.warn('Rate limit hit, waiting for reset...')
+        const status = rateLimitTracker.getStatus()
+        console.warn(`🚫 Rate limit hit (429) while fetching segments for activity ${activityId}! 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+        console.warn(`⏳ Waiting ${config.stravaApiLimits.retryDelayMs / 1000}s for rate limit reset...`)
         await new Promise(resolve => setTimeout(resolve, config.stravaApiLimits.retryDelayMs))
+        console.log(`🔄 Retrying segments fetch for activity ${activityId} after rate limit reset...`)
         return this.fetchActivitySegments(activityId) // Retry after waiting
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
+        console.warn(`🔄 Token expired (401), refreshing tokens...`)
         await this.refreshTokens(tokens.refresh_token, this.userId)
         return this.fetchActivitySegments(activityId) // Retry with new tokens
       }
@@ -351,7 +353,10 @@ export class StravaService {
 
     // Apply rate limiting delay
     const delay = rateLimitTracker.getDelay()
-    await new Promise(resolve => setTimeout(resolve, delay))
+    if (delay > 0) {
+      console.log(`⏱️ Applying rate limit delay: ${delay}ms`)
+      await new Promise(resolve => setTimeout(resolve, delay))
+    }
 
     const activity = await response.json()
     const segments = activity.segment_efforts || []

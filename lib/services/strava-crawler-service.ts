@@ -178,24 +178,33 @@ export class StravaCrawlerService {
   private async processUser(user: any, options: CrawlerOptions = {}): Promise<CrawlerResult> {
     const startTime = Date.now()
     const result: CrawlerResult = {
-      success: true, // Initialize as success
       user_id: user.strava_id,
       user_name: `${user.firstname} ${user.lastname}`,
+      success: false,
       activities_fetched: 0,
       segments_fetched: 0,
-      message: 'User processed successfully', // Set default message
+      message: '',
+      errors: [],
       execution_time_ms: 0
     }
 
     try {
       console.log(`🔄 Processing user: ${user.firstname} ${user.lastname} (${user.strava_id})`)
       
-      // Initialize StravaService with user ID
+      // Initialize StravaService for this user
       this.stravaService = new StravaService(user.strava_id)
       
+      // Log initial rate limit status
+      const initialRateLimitStatus = this.stravaService.getRateLimitStatus()
+      console.log(`📊 Initial rate limit status for ${user.firstname}: ${initialRateLimitStatus.mode} - 15min: ${initialRateLimitStatus.requests15min}/${initialRateLimitStatus.requestsPer15Min}, Day: ${initialRateLimitStatus.requestsDay}/${initialRateLimitStatus.requestsPerDay}`)
+
       // Sync activities
       const activityResult = await this.stravaService.syncActivities(options.batch_size || config.stravaApiLimits.maxCrawlerBatchSize)
       result.activities_fetched = activityResult.synced
+
+      // Log rate limit status after activities
+      const afterActivitiesRateLimitStatus = this.stravaService.getRateLimitStatus()
+      console.log(`📊 Rate limit status after activities for ${user.firstname}: 15min: ${afterActivitiesRateLimitStatus.requests15min}/${afterActivitiesRateLimitStatus.requestsPer15Min}, Day: ${afterActivitiesRateLimitStatus.requestsDay}/${afterActivitiesRateLimitStatus.requestsPerDay}`)
 
       // Sync segments if requested
       if (options.include_segments !== false) {
@@ -203,7 +212,12 @@ export class StravaCrawlerService {
         result.segments_fetched = segmentResult.segmentsAdded
       }
 
+      // Log final rate limit status
+      const finalRateLimitStatus = this.stravaService.getRateLimitStatus()
+      console.log(`📊 Final rate limit status for ${user.firstname}: 15min: ${finalRateLimitStatus.requests15min}/${finalRateLimitStatus.requestsPer15Min}, Day: ${finalRateLimitStatus.requestsDay}/${finalRateLimitStatus.requestsPerDay}`)
+
       result.execution_time_ms = Date.now() - startTime
+      result.success = true
       result.message = `Successfully processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments`
       console.log(`✅ User ${user.firstname} ${user.lastname} processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments`)
 
@@ -213,13 +227,19 @@ export class StravaCrawlerService {
       result.errors.push(error.message)
       result.execution_time_ms = Date.now() - startTime
 
-      // Handle specific error types
+      // Handle specific error types with enhanced logging
       if (error.message.includes('Invalid refresh token')) {
         result.message = `User ${user.firstname} ${user.lastname} needs to re-authenticate with Strava`
         console.log(`⚠️ User ${user.firstname} ${user.lastname} (${user.strava_id}) needs re-authentication`)
       } else if (error.message.includes('Rate limit exceeded')) {
         result.message = `Rate limit hit while processing user ${user.firstname} ${user.lastname}`
         console.log(`⚠️ Rate limit exceeded for user ${user.firstname} ${user.lastname} (${user.strava_id})`)
+        
+        // Log detailed rate limit information
+        if (this.stravaService) {
+          const rateLimitStatus = this.stravaService.getRateLimitStatus()
+          console.log(`📊 Rate limit details at failure: ${rateLimitStatus.mode} - 15min: ${rateLimitStatus.requests15min}/${rateLimitStatus.requestsPer15Min}, Day: ${rateLimitStatus.requestsDay}/${rateLimitStatus.requestsPerDay}`)
+        }
       } else {
         result.message = `Error processing user ${user.firstname} ${user.lastname}: ${error.message}`
         console.error(`❌ Error processing user ${user.firstname} ${user.lastname} (${user.strava_id}):`, error)

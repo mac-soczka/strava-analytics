@@ -57,6 +57,13 @@ async function SegmentsContent() {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
     
+    // Get total count of segments
+    const { count: totalSegments, error: segmentsCountError } = await supabase
+      .from('segments')
+      .select('*', { count: 'exact', head: true })
+
+    if (segmentsCountError) throw segmentsCountError
+    
     // Fetch segments with their efforts
     const { data: segments, error: segmentsError } = await supabase
       .from('segments')
@@ -83,9 +90,24 @@ async function SegmentsContent() {
 
     if (effortsError) throw effortsError
 
+    // Get effort counts for each segment
+    const { data: effortCounts, error: countError } = await supabase
+      .from('segment_efforts')
+      .select('segment_id')
+      .order('segment_id')
+
+    if (countError) throw countError
+
+    // Calculate effort counts per segment
+    const effortCountMap = new Map<number, number>()
+    effortCounts?.forEach((effort: any) => {
+      const segmentId = effort.segment_id
+      effortCountMap.set(segmentId, (effortCountMap.get(segmentId) || 0) + 1)
+    })
+
     // Calculate statistics
     const stats = {
-      totalSegments: segments?.length || 0,
+      totalSegments: totalSegments || 0,
       totalEfforts: effortsData?.length || 0,
       totalDistance: segments?.reduce((sum: number, s: any) => sum + (s.distance || 0), 0) || 0,
       totalElevation: segments?.reduce((sum: number, s: any) => sum + (s.elevation_gain || 0), 0) || 0
@@ -96,14 +118,15 @@ async function SegmentsContent() {
       id: segment.segment_id,
       name: segment.name,
       distance: segment.distance,
-      elevation_gain: segment.elevation_gain,
+      elevation_high: segment.elevation_gain + (segment.elevation_low || 0), // Approximate high elevation
+      elevation_low: segment.elevation_low || 0,
       average_grade: segment.average_grade,
       maximum_grade: segment.maximum_grade,
       climb_category: segment.climb_category,
       city: segment.city,
       state: segment.state,
       country: segment.country,
-      polyline: segment.polyline,
+      map: segment.polyline ? { polyline: segment.polyline } : undefined,
       segment_efforts: segment.segment_efforts?.map((effort: any) => ({
         id: effort.id,
         activity_id: effort.activity_id,
@@ -116,7 +139,8 @@ async function SegmentsContent() {
           id: segment.segment_id,
           name: segment.name,
           distance: segment.distance,
-          elevation_gain: segment.elevation_gain,
+          elevation_high: segment.elevation_gain + (segment.elevation_low || 0),
+          elevation_low: segment.elevation_low || 0,
           average_grade: segment.average_grade,
           maximum_grade: segment.maximum_grade,
           climb_category: segment.climb_category,
@@ -125,7 +149,9 @@ async function SegmentsContent() {
           country: segment.country,
           map: segment.polyline ? { polyline: segment.polyline } : undefined
         }
-      })) || []
+      })) || [],
+      // Add the total effort count from the database
+      total_effort_count: effortCountMap.get(segment.segment_id) || 0
     })) || []
 
     const { default: SegmentsClient } = await import('./segments-client')

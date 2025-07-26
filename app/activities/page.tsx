@@ -72,6 +72,13 @@ async function ActivitiesContent() {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
     
+    // Get total count of activities
+    const { count: totalActivities, error: countError } = await supabase
+      .from('activities')
+      .select('*', { count: 'exact', head: true })
+
+    if (countError) throw countError
+
     // Fetch activities with pagination
     const { data: activities, error: activitiesError } = await supabase
       .from('activities')
@@ -98,7 +105,7 @@ async function ActivitiesContent() {
 
     // Calculate statistics
     const stats = {
-      totalActivities: statsData.length,
+      totalActivities: totalActivities || 0,
       totalDistance: statsData.reduce((sum: number, a: any) => sum + (a.distance || 0), 0),
       totalTime: statsData.reduce((sum: number, a: any) => sum + (a.moving_time || 0), 0),
       totalElevation: statsData.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0),
