@@ -33,14 +33,14 @@ export class ActivitiesRepository {
   }
 
   /**
-   * Get a single activity by ID
+   * Get a single activity by Strava activity ID
    */
-  async getActivityById(id: number) {
+  async getActivityById(activityId: number) {
     try {
       const { data, error } = await this.supabase
         .from('activities')
         .select('*')
-        .eq('id', id)
+        .eq('activity_id', activityId)
         .single()
 
       if (error) throw error

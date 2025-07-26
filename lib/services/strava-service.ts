@@ -1,6 +1,8 @@
-import { createServerComponentClient } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 import { ActivitiesRepository } from '@/lib/repositories/activities-repository'
 import { SegmentsRepository } from '@/lib/repositories/segments-repository'
+import { StravaActivity } from '@/types/strava'
+import { config } from '@/lib/config'
 
 interface StravaTokens {
   access_token: string
@@ -8,23 +10,7 @@ interface StravaTokens {
   expires_at: string
 }
 
-interface StravaActivity {
-  id: number
-  name: string
-  distance: number
-  moving_time: number
-  elapsed_time: number
-  total_elevation_gain: number
-  type: string
-  sport_type: string
-  start_date: string
-  start_date_local: string
-  timezone: string
-  utc_offset: number
-  map?: {
-    polyline: string
-  }
-}
+
 
 interface StravaSegmentEffort {
   id: number
@@ -132,44 +118,67 @@ class RateLimitTracker {
 const rateLimitTracker = new RateLimitTracker()
 
 export class StravaService {
-  private supabase: ReturnType<typeof createServerComponentClient>
+  private supabase: ReturnType<typeof createClient>
   private activitiesRepo: ActivitiesRepository
   private segmentsRepo: SegmentsRepository
+  private userId?: number
 
-  constructor() {
-    this.supabase = createServerComponentClient()
+  constructor(userId?: number) {
+    this.supabase = createClient(
+      config.supabase.url,
+      config.supabase.serviceRoleKey
+    )
     this.activitiesRepo = new ActivitiesRepository()
     this.segmentsRepo = new SegmentsRepository()
+    this.userId = userId
   }
 
   /**
    * Get valid Strava tokens, refreshing if necessary
    */
   async getValidTokens(): Promise<StravaTokens> {
-    const { data: tokens } = await this.supabase
-      .from('tokens')
+    console.log(`🔍 Looking for tokens for user: ${this.userId}`)
+    
+    let query = this.supabase
+      .from('strava_tokens')
       .select('*')
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single()
+
+    // If userId is provided, filter by that user
+    if (this.userId) {
+      query = query.eq('strava_id', this.userId)
+    }
+
+    const { data: tokens, error } = await query.single()
+
+    if (error) {
+      console.log(`❌ Error fetching tokens:`, error)
+    }
 
     if (!tokens) {
+      console.log(`❌ No tokens found for user ${this.userId}`)
       throw new Error('No Strava tokens found. Please authenticate first.')
     }
 
+    const typedTokens = tokens as unknown as StravaTokens & { strava_id: number }
+
+    console.log(`✅ Found tokens for user ${this.userId}, expires at: ${typedTokens.expires_at}`)
+    console.log(`🕐 Current time: ${new Date().toISOString()}`)
+    console.log(`⏰ Token expires: ${new Date(typedTokens.expires_at).toISOString()}`)
+    console.log(`📊 Is expired: ${new Date(typedTokens.expires_at) <= new Date()}`)
+
     // Check if token is expired
-    if (new Date(tokens.expires_at) <= new Date()) {
+    if (new Date(typedTokens.expires_at) <= new Date()) {
       console.log('Token expired, refreshing...')
-      return await this.refreshTokens(tokens.refresh_token)
+      return await this.refreshTokens(typedTokens.refresh_token, typedTokens.strava_id)
     }
 
-    return tokens
+    return typedTokens
   }
 
   /**
    * Refresh Strava access tokens
    */
-  private async refreshTokens(refreshToken: string): Promise<StravaTokens> {
+  private async refreshTokens(refreshToken: string, stravaId?: number): Promise<StravaTokens> {
     const { config } = await import('@/lib/config')
     
     const response = await fetch('https://www.strava.com/oauth/token', {
@@ -190,13 +199,24 @@ export class StravaService {
     const newTokens = await response.json()
 
     // Save new tokens to database
-    await this.supabase
-      .from('tokens')
-      .insert({
-        access_token: newTokens.access_token,
-        refresh_token: newTokens.refresh_token,
-        expires_at: new Date(newTokens.expires_at * 1000).toISOString(),
-      })
+    const tokenData = {
+      access_token: newTokens.access_token,
+      refresh_token: newTokens.refresh_token,
+      expires_at: new Date(newTokens.expires_at * 1000).toISOString(),
+    }
+
+    if (stravaId) {
+      // Update existing tokens for specific user
+      await this.supabase
+        .from('strava_tokens')
+        .update(tokenData)
+        .eq('strava_id', stravaId)
+    } else {
+      // Insert new tokens (fallback)
+      await this.supabase
+        .from('strava_tokens')
+        .insert(tokenData)
+    }
 
     return {
       access_token: newTokens.access_token,
@@ -397,7 +417,18 @@ export class StravaService {
             }))
 
             // Save segments to database
-            await this.segmentsRepo.createSegmentEfforts(segmentEfforts)
+            for (const effort of segmentEfforts) {
+              await this.segmentsRepo.upsertSegmentEffort({
+                activity_id: effort.activity_id,
+                segment_id: effort.segment_id,
+                effort_id: effort.segment_id, // Using segment_id as effort_id for now
+                elapsed_time: effort.elapsed_time,
+                moving_time: effort.moving_time,
+                start_date: effort.start_date,
+                average_watts: effort.average_watts,
+                max_watts: effort.max_watts,
+              })
+            }
             segmentsAdded += segments.length
           }
 
@@ -432,14 +463,14 @@ export class StravaService {
 
     return {
       activities: activityStats,
-      segments: segmentStats,
+      segments: segmentStats.data,
       summary: {
         totalActivities: activityStats.totalActivities,
         totalDistance: activityStats.totalDistance,
         totalTime: activityStats.totalTime,
         totalElevation: activityStats.totalElevation,
-        totalSegmentEfforts: segmentStats.totalEfforts,
-        uniqueSegments: segmentStats.uniqueSegments,
+        totalSegments: segmentStats.data?.total_segments || 0,
+        uniqueSegments: segmentStats.data?.total_segments || 0,
       }
     }
   }

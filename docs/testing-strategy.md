@@ -1,252 +1,340 @@
-# Testing Strategy for Strava Heatmap Authentication
+# Testing Strategy for Strava Crawler
 
 ## Overview
 
-This document outlines the comprehensive testing strategy for the authentication system, covering unit tests, integration tests, and end-to-end tests.
+This document outlines the comprehensive testing strategy for the Strava crawler system, covering unit tests, integration tests, and end-to-end (E2E) tests.
 
-## Testing Pyramid
+## Test Types
 
-```
-    E2E Tests (Few, Critical Paths)
-         /\
-        /  \
-   Integration Tests (API, Database)
-        /  \
-       /    \
-  Unit Tests (Services, Utils)
-```
+### 1. Unit Tests
 
-## 1. Unit Tests
+**Purpose**: Test individual components in isolation with mocked dependencies.
 
-### Purpose
-- Test individual functions in isolation
-- Fast execution (< 100ms per test)
-- High coverage of business logic
-- Mock external dependencies
+**Coverage**:
+- `StravaService` - Token management, API calls, rate limiting
+- `RateLimitTracker` - Rate limit tracking and calculations
+- `ActivitiesRepository` - Database operations for activities
+- `SegmentsRepository` - Database operations for segments
+- `StravaCrawlerService` - Core crawler logic
 
-### What to Test
-- **AuthService** methods (authenticateUser, getCurrentUser, etc.)
-- **SessionManager** methods (createSession, validateSession, etc.)
-- **TokenManager** methods (getValidTokens, refreshTokens, etc.)
-- **Database** utility functions (upsertUser, upsertTokens, etc.)
-- **Utility functions** (CSRF token generation, validation)
-
-### Example Test Structure
+**Key Test Scenarios**:
 ```typescript
-// __tests__/unit/auth-service.test.ts
-describe('AuthService', () => {
-  describe('authenticateUser', () => {
-    it('should authenticate user and create session', async () => {
-      // Test implementation
-    })
-    
-    it('should throw error if user not found', async () => {
-      // Test error handling
-    })
-  })
+// Token Management
+- Valid token retrieval
+- Expired token refresh
+- Missing token handling
+- Database connection errors
+
+// API Integration
+- Successful activity fetching
+- Rate limit handling (429 errors)
+- Network failures
+- Invalid responses
+
+// Rate Limiting
+- 15-minute request tracking
+- Daily request tracking
+- Counter resets
+- Delay calculations
+```
+
+**Run Command**: `yarn test`
+
+### 2. Integration Tests
+
+**Purpose**: Test component interactions and database operations.
+
+**Coverage**:
+- `StravaCrawlerService` with mocked Strava API
+- Database operations with test database
+- Repository interactions
+- Error handling across components
+
+**Key Test Scenarios**:
+```typescript
+// Crawler Workflow
+- Complete user processing
+- Multiple user handling
+- Partial failure scenarios
+- Logging and statistics
+
+// Database Integration
+- Activity storage and retrieval
+- Segment storage and retrieval
+- Foreign key constraints
+- Data integrity
+```
+
+**Run Command**: `yarn test:integration`
+
+### 3. E2E Tests
+
+**Purpose**: Test complete workflows from UI to database.
+
+**Coverage**:
+- Full crawler workflow via UI
+- API endpoint testing
+- Rate limit monitoring
+- Error handling in UI
+
+**Key Test Scenarios**:
+```typescript
+// UI Workflows
+- Crawler triggering via button
+- Results display
+- Error handling
+- Rate limit status display
+
+// API Endpoints
+- POST /api/strava/crawl
+- GET /api/strava/crawler/logs
+- GET /api/strava/crawler/stats
+- GET /api/strava/rate-limit
+```
+
+**Run Command**: `yarn test:e2e`
+
+## Test Structure
+
+```
+tests/
+├── unit/
+│   ├── services/
+│   │   ├── strava-service.test.ts
+│   │   ├── strava-crawler-service.test.ts
+│   │   └── rate-limit-tracker.test.ts
+│   └── repositories/
+│       ├── activities-repository.test.ts
+│       └── segments-repository.test.ts
+├── integration/
+│   ├── strava-crawler-service.test.ts
+│   └── database.test.ts
+└── e2e/
+    ├── crawler-workflow.test.ts
+    └── api-endpoints.test.ts
+```
+
+## Mock Strategy
+
+### External Dependencies
+
+1. **Strava API**: Mock `fetch` calls with realistic responses
+2. **Supabase**: Mock `createClient` and database operations
+3. **Environment Variables**: Mock in Jest setup
+4. **Time-based Operations**: Mock `setTimeout` and `Date`
+
+### Mock Examples
+
+```typescript
+// Strava API Mock
+const mockActivities = [
+  {
+    id: 123456789,
+    name: "Morning Ride",
+    distance: 25000,
+    moving_time: 3600,
+    // ... other fields
+  }
+]
+
+;(fetch as jest.Mock).mockResolvedValue({
+  ok: true,
+  json: () => Promise.resolve(mockActivities)
 })
-```
 
-### Running Unit Tests
-```bash
-yarn test                    # Run all unit tests
-yarn test:watch             # Run in watch mode
-yarn test:coverage          # Run with coverage report
-```
-
-## 2. Integration Tests
-
-### Purpose
-- Test API endpoints and database interactions
-- Verify service integration
-- Test error scenarios and edge cases
-- Mock external services (Strava API)
-
-### What to Test
-- **API Routes** (`/api/auth/session`, `/api/auth/logout`, `/api/auth/callback`)
-- **Database Operations** with real Supabase client
-- **Service Integration** (AuthService + SessionManager + TokenManager)
-- **Error Handling** (network failures, invalid tokens, etc.)
-
-### Example Test Structure
-```typescript
-// __tests__/integration/auth-api.test.ts
-describe('/api/auth/session', () => {
-  it('should return authenticated user when valid session', async () => {
-    // Test API endpoint with mocked services
+// Supabase Mock
+const mockSupabase = {
+  from: jest.fn().mockReturnThis(),
+  select: jest.fn().mockReturnThis(),
+  eq: jest.fn().mockReturnThis(),
+  single: jest.fn().mockResolvedValue({
+    data: mockData,
+    error: null
   })
-  
-  it('should return 401 when no session token', async () => {
-    // Test error response
-  })
-})
-```
-
-### Running Integration Tests
-```bash
-yarn test __tests__/integration/  # Run only integration tests
-```
-
-## 3. End-to-End Tests
-
-### Purpose
-- Test complete user flows
-- Verify real browser interactions
-- Test OAuth flow simulation
-- Validate protected routes
-
-### What to Test
-- **Complete OAuth Flow** (login → callback → session creation → dashboard access)
-- **Protected Routes** (redirects, session validation)
-- **Test Page Functionality** (all test buttons work correctly)
-- **Error Scenarios** (network failures, invalid tokens)
-
-### Example Test Structure
-```typescript
-// e2e/auth-flow.spec.ts
-test.describe('Authentication Flow', () => {
-  test('should complete OAuth flow successfully', async ({ page }) => {
-    // Navigate to login
-    // Complete OAuth flow
-    // Verify session creation
-    // Access protected route
-  })
-})
-```
-
-### Running E2E Tests
-```bash
-yarn test:e2e              # Run all E2E tests
-yarn test:e2e:ui           # Run with Playwright UI
-yarn test:e2e:debug        # Run in debug mode
-```
-
-## 4. Test Data Management
-
-### Test Database
-- Use separate test database for integration tests
-- Reset database state between tests
-- Use test fixtures for consistent data
-
-### Mock Data
-```typescript
-// __tests__/fixtures/auth-data.ts
-export const mockUser = {
-  id: 'user-1',
-  strava_id: 123456,
-  firstname: 'Test',
-  lastname: 'User',
-  // ... other fields
 }
-
-export const mockTokens = {
-  access_token: 'test-access-token',
-  refresh_token: 'test-refresh-token',
-  expires_at: new Date(Date.now() + 3600000).toISOString()
-}
 ```
 
-## 5. Testing Best Practices
+## Test Data
 
-### Unit Tests
-- **Arrange-Act-Assert** pattern
-- Mock external dependencies
-- Test both success and failure cases
-- Keep tests focused and isolated
+### Sample Activities
+```typescript
+const sampleActivities = [
+  {
+    id: 123456789,
+    name: "Morning Ride",
+    distance: 25000,
+    moving_time: 3600,
+    elapsed_time: 3600,
+    total_elevation_gain: 150,
+    type: "Ride",
+    start_date: "2025-07-26T10:00:00Z",
+    start_date_local: "2025-07-26T10:00:00Z"
+  }
+]
+```
 
-### Integration Tests
-- Use real database connections
-- Mock external APIs (Strava)
-- Test API contracts
-- Verify error responses
+### Sample Segments
+```typescript
+const sampleSegments = [
+  {
+    id: 987654321,
+    segment: {
+      id: 12345,
+      name: "Test Segment",
+      distance: 1000,
+      average_grade: 5.2,
+      maximum_grade: 8.1,
+      elevation_high: 100,
+      elevation_low: 50,
+      climb_category: 3,
+      city: "Test City",
+      state: "Test State",
+      country: "Test Country",
+      private: false,
+      hazardous: false,
+      starred: false
+    },
+    elapsed_time: 180,
+    moving_time: 180,
+    start_date: "2025-07-26T10:00:00Z",
+    start_date_local: "2025-07-26T10:00:00Z"
+  }
+]
+```
 
-### E2E Tests
-- Test critical user paths
-- Use realistic test data
-- Handle async operations properly
-- Test cross-browser compatibility
+## Performance Testing
 
-## 6. Test Coverage Goals
+### Load Testing Scenarios
+```typescript
+// Test with large datasets
+- 1000+ activities
+- Multiple users
+- High rate limit usage
+- Memory consumption
+- Execution time limits
+```
 
-- **Unit Tests**: 90%+ coverage
-- **Integration Tests**: All API endpoints
-- **E2E Tests**: Critical user flows
+### Performance Benchmarks
+- **Activity Sync**: < 5 seconds per 100 activities
+- **Memory Usage**: < 100MB for 1000 activities
+- **Database Operations**: < 1 second per batch
+- **API Calls**: Respect rate limits (100/15min, 1000/day)
 
-## 7. CI/CD Integration
+## Continuous Integration
 
 ### GitHub Actions Workflow
 ```yaml
 name: Tests
 on: [push, pull_request]
 jobs:
-  unit-tests:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - run: yarn install
+      - run: yarn test
       - run: yarn test:coverage
-  
-  integration-tests:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:15
-    steps:
-      - uses: actions/checkout@v3
-      - run: yarn test __tests__/integration/
-  
-  e2e-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
       - run: yarn test:e2e
 ```
 
-## 8. Testing Tools
+### Coverage Requirements
+- **Lines**: 70%
+- **Functions**: 70%
+- **Branches**: 70%
+- **Statements**: 70%
 
-### Unit & Integration Tests
-- **Jest** - Test runner and assertion library
-- **@testing-library/react** - React component testing
-- **node-mocks-http** - HTTP request mocking
-- **@testing-library/jest-dom** - Custom matchers
+## Running Tests
 
-### E2E Tests
-- **Playwright** - Browser automation
-- **Multiple browsers** - Chrome, Firefox, Safari
-- **Visual testing** - Screenshot comparisons
-- **Network mocking** - API response simulation
-
-## 9. Debugging Tests
-
-### Unit Tests
+### Development
 ```bash
-yarn test --verbose        # Detailed output
-yarn test --detectOpenHandles  # Find hanging processes
+# Run all tests
+yarn test
+
+# Run tests in watch mode
+yarn test:watch
+
+# Run with coverage
+yarn test:coverage
+
+# Run E2E tests
+yarn test:e2e
+
+# Run E2E tests with UI
+yarn test:e2e:ui
+
+# Run E2E tests in debug mode
+yarn test:e2e:debug
 ```
 
-### Integration Tests
+### Specific Test Files
 ```bash
-yarn test --runInBand      # Run tests sequentially
-yarn test --detectLeaks    # Memory leak detection
+# Run specific test file
+yarn test strava-service.test.ts
+
+# Run tests matching pattern
+yarn test --testNamePattern="token"
+
+# Run tests in specific directory
+yarn test tests/unit/services/
 ```
 
-### E2E Tests
+## Best Practices
+
+### Test Organization
+1. **Arrange**: Set up test data and mocks
+2. **Act**: Execute the function being tested
+3. **Assert**: Verify the expected outcomes
+
+### Naming Conventions
+- Test files: `*.test.ts` or `*.spec.ts`
+- Test descriptions: "should [expected behavior]"
+- Mock variables: `mock[ComponentName]`
+
+### Error Testing
+- Test both success and failure scenarios
+- Verify error messages and types
+- Test edge cases and boundary conditions
+
+### Async Testing
+- Use `async/await` for asynchronous operations
+- Mock timers for time-based operations
+- Test promise rejections and error handling
+
+## Debugging Tests
+
+### Jest Debugging
 ```bash
-yarn test:e2e:debug        # Run with debugger
-yarn test:e2e --headed     # Run with visible browser
+# Run specific test with debugging
+yarn test --verbose --no-coverage
+
+# Debug with Node.js inspector
+node --inspect-brk node_modules/.bin/jest --runInBand
 ```
 
-## 10. Performance Testing
+### Playwright Debugging
+```bash
+# Run with debug mode
+yarn test:e2e:debug
 
-### Load Testing
-- Test session creation under load
-- Verify database performance
-- Monitor memory usage
+# Run with UI mode
+yarn test:e2e:ui
 
-### Security Testing
-- Test CSRF protection
-- Verify session security
-- Test token refresh mechanisms
+# Generate trace
+yarn test:e2e --trace on
+```
 
-This testing strategy ensures comprehensive coverage of the authentication system while maintaining fast feedback loops for development. 
+## Future Enhancements
+
+### Planned Test Improvements
+1. **Visual Regression Testing**: Screenshot comparisons
+2. **Performance Testing**: Automated performance benchmarks
+3. **Security Testing**: Vulnerability scanning
+4. **Contract Testing**: API contract validation
+5. **Chaos Testing**: Failure injection testing
+
+### Test Infrastructure
+1. **Test Database**: Dedicated test database setup
+2. **Test Data Factory**: Automated test data generation
+3. **Test Environment**: Isolated test environment
+4. **Monitoring**: Test execution monitoring and alerting 

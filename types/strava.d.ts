@@ -42,10 +42,10 @@ export interface StravaActivity {
   elapsed_time: number;
   total_elevation_gain: number;
   type: string;
-  sport_type: string;
+  sport_type?: string; // Optional since database doesn't have this column
   workout_type?: number;
   start_date: string;
   start_date_local: string;
-  timezone: string;
-  utc_offset: number;
+  timezone?: string; // Optional since database doesn't have this column
+  utc_offset?: number; // Optional since database doesn't have this column
 } 

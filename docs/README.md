@@ -1,16 +1,36 @@
-# Strava Heatmap - Documentation
+# Strava Heatmap - Documentation 📚
 
-Welcome to the Strava Heatmap project documentation. This project is built with Next.js 15 and Supabase, implementing modern design patterns for scalability and maintainability.
+Welcome to the comprehensive documentation for the Strava Heatmap project. This project is built with Next.js 15 and Supabase, implementing modern design patterns for scalability and maintainability.
 
-## 📚 Documentation Structure
+## 📋 Documentation Index
 
+### 🏗️ Architecture & Design
 - **[Architecture](./architecture.md)** - System architecture and design patterns
-- **[Database Schema](./database-schema.md)** - Supabase database structure
-- **[API Reference](./api-reference.md)** - API endpoints and usage
-- **[Components](./components.md)** - React components documentation
+- **[Design Patterns](./design-patterns.md)** - Implemented design patterns and best practices
 - **[Services](./services.md)** - Business logic and external integrations
-- **[Deployment](./deployment.md)** - Deployment and hosting guide
-- **[Development](./development.md)** - Development setup and guidelines
+- **[Crawler Architecture](./crawler-architecture.md)** - Strava data crawler system design
+
+### 🚀 Setup & Development
+- **[Development Setup](./development-setup.md)** - Development environment setup guide
+- **[Environment Setup](./environment-setup.md)** - Environment variables and configuration
+- **[Local Supabase Setup](./local-supabase-setup.md)** - Setting up Supabase locally
+- **[Supabase Setup](./supabase-setup.md)** - Production Supabase configuration
+
+### 🗄️ Database & Migrations
+- **[Migration Guide](./migration-guide.md)** - Database migration procedures
+- **[Supabase Commands](./supabase-commands.md)** - Useful Supabase CLI commands
+- **[Testing Without Triggers](./testing-without-triggers.md)** - Database testing strategies
+
+### 🧪 Testing
+- **[Testing Strategy](./testing-strategy.md)** - Comprehensive testing guidelines and examples
+
+### 🔧 Troubleshooting & Deployment
+- **[Strava OAuth Troubleshooting](./strava-oauth-troubleshooting.md)** - Common OAuth issues and solutions
+- **[Deployment Fixes](./deployment-fixes.md)** - Deployment issues and solutions
+
+### 📖 Reference Guides
+- **[Quick Reference](./quick-reference.md)** - Quick commands and shortcuts
+- **[Package.json Scripts](./package-json-scripts.md)** - Available npm/yarn scripts
 
 ## 🏗️ Design Patterns Implemented
 
@@ -21,6 +41,8 @@ This project implements several key design patterns:
 3. **Service Layer Pattern** - Business logic separation
 4. **Real-time Subscriptions** - Live data updates
 5. **Optimistic Updates** - Enhanced user experience
+6. **Rate Limiting Strategy** - Intelligent API call management
+7. **Crawler Architecture** - Automated data synchronization
 
 ## 🚀 Quick Start
 
@@ -67,9 +89,13 @@ strava-heatmap/
 │   └── supabase.ts        # Supabase configuration
 ├── types/                 # TypeScript definitions
 ├── supabase/              # Supabase configuration
-│   ├── schema.sql         # Database schema
-│   └── functions/         # Edge functions
+│   ├── migrations/        # Database migrations
+│   └── config.toml        # Supabase configuration
 ├── scripts/               # Utility scripts
+├── tests/                 # Test files
+│   ├── unit/              # Unit tests
+│   ├── integration/       # Integration tests
+│   └── e2e/               # End-to-end tests
 └── docs/                  # Documentation
 ```
 
@@ -81,6 +107,7 @@ strava-heatmap/
 - **Tailwind CSS** - Utility-first CSS framework
 - **React Leaflet** - Interactive maps
 - **Recharts** - Data visualization
+- **Jest & Playwright** - Testing framework
 
 ## 📈 Features
 
@@ -90,11 +117,34 @@ strava-heatmap/
 - ✅ **Interactive Maps** - Activity and segment visualization
 - ✅ **Performance Charts** - Historical data analysis
 - ✅ **Responsive Design** - Mobile-friendly interface
+- ✅ **Automated Crawler** - Background data synchronization
+- ✅ **Rate Limit Management** - Intelligent API usage
+- ✅ **Comprehensive Testing** - Unit, integration, and E2E tests
+
+## 🧪 Testing
+
+The project includes comprehensive testing:
+
+- **Unit Tests** - Individual component testing
+- **Integration Tests** - Component interaction testing
+- **E2E Tests** - Complete workflow testing
+- **Performance Tests** - Load and stress testing
+
+Run tests with:
+```bash
+yarn test          # Unit and integration tests
+yarn test:e2e      # End-to-end tests
+yarn test:coverage # Coverage report
+```
 
 ## 🤝 Contributing
 
-See [Development Guide](./development.md) for contribution guidelines.
+See [Development Setup](./development-setup.md) for contribution guidelines and [Testing Strategy](./testing-strategy.md) for testing requirements.
 
 ## 📄 License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.
+
+---
+
+**Need help?** Check the troubleshooting guides or create an issue in the repository. 

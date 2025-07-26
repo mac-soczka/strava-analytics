@@ -12,6 +12,10 @@ const navItems = [
   { name: "Settings", href: "/settings", icon: "⚙️" },
 ];
 
+const devItems = [
+  { name: "Test Page", href: "/test", icon: "🧪" },
+];
+
 export default function Sidebar() {
   const pathname = usePathname();
   return (
@@ -29,6 +33,25 @@ export default function Sidebar() {
           </Link>
         ))}
       </nav>
+      
+      {/* Development/Testing Section */}
+      <div className="mt-auto pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div className="mb-3 px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+          Development
+        </div>
+        <nav className="flex flex-col gap-1">
+          {devItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors font-medium text-sm hover:bg-orange-50 dark:hover:bg-gray-800 ${pathname.startsWith(item.href) ? "bg-orange-100 dark:bg-gray-800 text-orange-600 dark:text-orange-400" : "text-gray-600 dark:text-gray-300"}`}
+            >
+              <span className="text-lg">{item.icon}</span>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </aside>
   );
 }

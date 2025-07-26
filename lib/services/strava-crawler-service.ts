@@ -156,7 +156,7 @@ export class StravaCrawlerService {
       console.log(`🔄 Processing user: ${user.firstname} ${user.lastname} (${user.strava_id})`)
 
       // Create StravaService for this user
-      this.stravaService = new StravaService()
+      this.stravaService = new StravaService(user.strava_id)
       
       // Fetch activities
       const activitiesResult = await this.stravaService.syncActivities(options.batch_size || 80)
