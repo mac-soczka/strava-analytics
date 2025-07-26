@@ -10,6 +10,15 @@ export async function serverlessTrigger(req: Request) {
   console.log('🔗 Serverless function triggered at:', new Date().toISOString())
   
   try {
+    // Parse request body for options
+    let options: any = {}
+    try {
+      const body = await req.json()
+      options = body || {}
+    } catch (e) {
+      // No body or invalid JSON, use defaults
+    }
+    
     // Get user from session (if triggered from your app)
     const sessionToken = req.headers.get('authorization')?.replace('Bearer ', '')
     let userId: number | undefined
@@ -28,28 +37,27 @@ export async function serverlessTrigger(req: Request) {
     
     const crawlerService = new StravaCrawlerService()
     
+    // Build crawler options
+    const crawlerOptions = {
+      batch_size: options.batch_size || config.stravaApiLimits.maxCrawlerBatchSize,
+      include_segments: options.include_segments !== false, // Default to true
+      skip_invalid_tokens: options.skip_invalid_tokens || false,
+      segment_batch_size: options.segment_batch_size || config.stravaApiLimits.maxSegmentBatchSize
+    }
+    
     // Process user(s) based on authentication context
-    const results = await crawlerService.crawlStravaData({
-      user_id: userId, // If undefined, will process all users
-      batch_size: config.stravaApiLimits.maxCrawlerBatchSize,
-      include_segments: true
-    })
+    const results = await crawlerService.crawlStravaData(crawlerOptions)
     
-    console.log(`✅ Serverless function completed. Processed ${results.length} user(s)`)
-    
-    // Log summary
-    const successful = results.filter(r => r.success).length
-    const totalActivities = results.reduce((sum, r) => sum + r.activities_fetched, 0)
-    const totalSegments = results.reduce((sum, r) => sum + r.segments_fetched, 0)
+    console.log(`✅ Serverless function completed. Processed ${results.users_processed} user(s)`)
     
     const response = {
-      success: true,
+      success: results.success,
       user_id: userId,
-      users_processed: results.length,
-      users_successful: successful,
-      total_activities: totalActivities,
-      total_segments: totalSegments,
-      results,
+      users_processed: results.users_processed,
+      users_successful: results.users_successful,
+      total_activities: results.total_activities,
+      total_segments: results.total_segments,
+      results: results.results,
       timestamp: new Date().toISOString()
     }
     

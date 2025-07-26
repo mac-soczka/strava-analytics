@@ -254,7 +254,7 @@ export class StravaService {
         return this.fetchActivities(page, perPage) // Retry after waiting
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
-        await this.refreshTokens(tokens.refresh_token)
+        await this.refreshTokens(tokens.refresh_token, this.userId)
         return this.fetchActivities(page, perPage) // Retry with new tokens
       }
       throw new Error(`Failed to fetch activities: ${response.status}`)
@@ -343,7 +343,7 @@ export class StravaService {
         return this.fetchActivitySegments(activityId) // Retry after waiting
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
-        await this.refreshTokens(tokens.refresh_token)
+        await this.refreshTokens(tokens.refresh_token, this.userId)
         return this.fetchActivitySegments(activityId) // Retry with new tokens
       }
       throw new Error(`Failed to fetch activity segments: ${response.status}`)

@@ -1,150 +1,175 @@
 import { createClient } from '@supabase/supabase-js'
 import { StravaService } from './strava-service'
 import { config } from '@/lib/config'
-
-// Types for the crawler service
-export interface CrawlerResult {
-  success: boolean
-  user_id: number
-  user_name: string
-  activities_fetched: number
-  segments_fetched: number
-  errors: string[]
-  rate_limit_status?: any
-  execution_time_ms: number
-  message?: string // Add message property
-}
-
-export interface CrawlerOptions {
-  user_id?: number // If not provided, will process all users
-  batch_size?: number
-  include_segments?: boolean
-  dry_run?: boolean
-  segment_batch_size?: number // Add segment_batch_size property
-}
+import { TokenHealthService } from './token-health-service'
 
 export interface CrawlerLogEntry {
-  id?: string
   run_at: string
-  user_id?: number
+  user_id?: number | null
   status: 'success' | 'error' | 'partial'
   message: string
   activities_fetched: number
   segments_fetched: number
-  error?: string
   execution_time_ms: number
-  rate_limit_status?: any
 }
 
-// Shared core crawler service
+export interface CrawlerResult {
+  user_id: number
+  user_name: string
+  success: boolean
+  activities_fetched: number
+  segments_fetched: number
+  message: string
+  errors?: string[]
+  execution_time_ms: number
+}
+
+export interface CrawlerOptions {
+  batch_size?: number
+  include_segments?: boolean
+  skip_invalid_tokens?: boolean
+  segment_batch_size?: number
+}
+
 export class StravaCrawlerService {
   private supabase: ReturnType<typeof createClient>
   private stravaService!: StravaService
+  private tokenHealthService: TokenHealthService
 
   constructor() {
-    this.supabase = createClient(
-      config.supabase.url,
-      config.supabase.serviceRoleKey
-    )
+    this.supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
+    this.tokenHealthService = new TokenHealthService()
   }
 
   /**
-   * Main crawler method - can be called from any trigger
+   * Main crawler method
    */
-  async crawlStravaData(options: CrawlerOptions = {}): Promise<CrawlerResult[]> {
+  async crawlStravaData(options: CrawlerOptions = {}): Promise<{
+    success: boolean
+    users_processed: number
+    users_successful: number
+    total_activities: number
+    total_segments: number
+    results: CrawlerResult[]
+  }> {
     const startTime = Date.now()
-    const results: CrawlerResult[] = []
+    console.log('🚀 Starting Strava data crawler...')
 
     try {
-      // Get users to process
-      const users = await this.getUsersToProcess(options.user_id)
-      console.log(`🔄 Starting crawler for ${users.length} user(s)`)
+      // Check token health if requested
+      if (options.skip_invalid_tokens) {
+        console.log('🔍 Checking token health before crawling...')
+        const tokenHealth = await this.tokenHealthService.checkAllTokenHealth()
+        const usersWithValidTokens = tokenHealth.filter(status => !status.needs_reauthentication)
+        console.log(`✅ Found ${usersWithValidTokens.length} users with valid tokens out of ${tokenHealth.length} total users`)
+      }
 
-      // Process each user
+      const users = await this.getUsersToProcess(options.skip_invalid_tokens)
+      console.log(`👥 Processing ${users.length} users...`)
+
+      const results: CrawlerResult[] = []
+      let totalActivities = 0
+      let totalSegments = 0
+      let successfulUsers = 0
+
       for (const user of users) {
-        try {
-          const result = await this.processUser(user, options)
-          results.push(result)
-          
-          // Log the result
-          await this.logCrawlerResult({
-            user_id: user.strava_id,
-            status: result.success ? 'success' : 'error',
-            message: result.success 
-              ? `Synced ${result.activities_fetched} activities, ${result.segments_fetched} segments`
-              : result.errors.join(', '),
-            activities_fetched: result.activities_fetched,
-            segments_fetched: result.segments_fetched,
-            error: result.success ? undefined : result.errors.join(', '),
-            execution_time_ms: result.execution_time_ms,
-            rate_limit_status: result.rate_limit_status
-          })
+        const result = await this.processUser(user, options)
+        results.push(result)
 
-        } catch (error: any) {
-          console.error(`❌ Error processing user ${user.strava_id}:`, error)
-          
-          const errorResult: CrawlerResult = {
-            success: false,
-            user_id: user.strava_id,
-            user_name: `${user.firstname} ${user.lastname}`,
-            activities_fetched: 0,
-            segments_fetched: 0,
-            errors: [error?.message || 'Unknown error'],
-            execution_time_ms: Date.now() - startTime
-          }
-          
-          results.push(errorResult)
-          
-          await this.logCrawlerResult({
-            user_id: user.strava_id,
-            status: 'error',
-            message: `Failed to process user: ${error?.message || 'Unknown error'}`,
-            activities_fetched: 0,
-            segments_fetched: 0,
-            error: error?.message || 'Unknown error',
-            execution_time_ms: Date.now() - startTime
-          })
+        if (result.success) {
+          successfulUsers++
+          totalActivities += result.activities_fetched
+          totalSegments += result.segments_fetched
         }
       }
 
-      console.log(`✅ Crawler completed. Processed ${users.length} users in ${Date.now() - startTime}ms`)
-      return results
+      const executionTime = Date.now() - startTime
+      const summary = {
+        success: true,
+        users_processed: users.length,
+        users_successful: successfulUsers,
+        total_activities: totalActivities,
+        total_segments: totalSegments,
+        results
+      }
 
-    } catch (error) {
+      // Log the overall result
+      await this.logCrawlerResult({
+        user_id: null, // System log
+        status: 'success',
+        message: `Crawler completed: ${successfulUsers}/${users.length} users successful, ${totalActivities} activities, ${totalSegments} segments`,
+        activities_fetched: totalActivities,
+        segments_fetched: totalSegments,
+        execution_time_ms: executionTime
+      })
+
+      console.log('✅ Crawler completed successfully')
+      return summary
+
+    } catch (error: any) {
+      const executionTime = Date.now() - startTime
       console.error('❌ Crawler failed:', error)
-      throw error
+
+      await this.logCrawlerResult({
+        user_id: null, // System log
+        status: 'error',
+        message: `Crawler failed: ${error.message}`,
+        activities_fetched: 0,
+        segments_fetched: 0,
+        execution_time_ms: executionTime
+      })
+
+      return {
+        success: false,
+        users_processed: 0,
+        users_successful: 0,
+        total_activities: 0,
+        total_segments: 0,
+        results: []
+      }
     }
   }
 
   /**
-   * Get users to process (single user or all users)
+   * Get users to process, optionally filtering by token health
    */
-  private async getUsersToProcess(userId?: number) {
-    let query = this.supabase
-      .from('users')
-      .select(`
-        strava_id,
-        firstname,
-        lastname,
-        strava_tokens!inner(access_token, refresh_token, expires_at)
-      `)
-      .not('strava_tokens.expires_at', 'lt', new Date().toISOString())
+  private async getUsersToProcess(skipInvalidTokens = false): Promise<any[]> {
+    if (skipInvalidTokens) {
+      // Get only users with valid tokens
+      const tokenHealth = await this.tokenHealthService.checkAllTokenHealth()
+      const validUserIds = tokenHealth
+        .filter(status => !status.needs_reauthentication)
+        .map(status => status.strava_id)
 
-    if (userId) {
-      query = query.eq('strava_id', userId)
+      if (validUserIds.length === 0) {
+        console.log('⚠️  No users with valid tokens found')
+        return []
+      }
+
+      const { data: users, error } = await this.supabase
+        .from('users')
+        .select('*')
+        .in('strava_id', validUserIds)
+
+      if (error) {
+        console.error('Failed to fetch users with valid tokens:', error)
+        return []
+      }
+
+      return users || []
+    } else {
+      // Get all users
+      const { data: users, error } = await this.supabase
+        .from('users')
+        .select('*')
+
+      if (error) {
+        console.error('Failed to fetch users:', error)
+        return []
+      }
+
+      return users || []
     }
-
-    const { data: users, error } = await query
-
-    if (error) {
-      throw new Error(`Failed to fetch users: ${error.message}`)
-    }
-
-    if (!users || users.length === 0) {
-      throw new Error('No users with valid Strava tokens found')
-    }
-
-    return users as { strava_id: number; firstname: string; lastname: string }[]
   }
 
   /**
@@ -158,9 +183,8 @@ export class StravaCrawlerService {
       user_name: `${user.firstname} ${user.lastname}`,
       activities_fetched: 0,
       segments_fetched: 0,
-      errors: [],
-      execution_time_ms: 0,
-      message: 'User processed successfully' // Set default message
+      message: 'User processed successfully', // Set default message
+      execution_time_ms: 0
     }
 
     try {
@@ -185,6 +209,7 @@ export class StravaCrawlerService {
 
     } catch (error: any) {
       result.success = false // Ensure success is false on error
+      if (!result.errors) result.errors = []
       result.errors.push(error.message)
       result.execution_time_ms = Date.now() - startTime
 
