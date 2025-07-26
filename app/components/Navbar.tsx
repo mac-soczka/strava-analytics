@@ -21,10 +21,12 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch('/api/user/profile');
+        const response = await fetch('/api/auth/session');
         if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
+          const data = await response.json();
+          if (data.authenticated) {
+            setUser(data.user);
+          }
         }
       } catch (error) {
         console.error('Error fetching user profile:', error);

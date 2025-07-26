@@ -31,7 +31,8 @@
     "db:local:setup": "npm run supabase:local:start && npm run supabase:local:reset && npm run supabase:local:studio",
     "db:local:studio": "npm run supabase:local:start && npm run supabase:local:studio",
     "db:prod:apply": "npm run supabase:prod:push:all",
-    "db:prod:sync": "npm run supabase:prod:pull && npm run supabase:prod:push:all"
+    "db:prod:sync": "npm run supabase:prod:pull && npm run supabase:prod:push:all",
+    "auth:migrate": "node scripts/apply-auth-migration.js"
   },
   "dependencies": {
     "@mapbox/polyline": "^1.2.1",

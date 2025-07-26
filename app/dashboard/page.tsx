@@ -2,6 +2,7 @@ import DashboardSummaryCards from "./DashboardSummaryCards";
 import LeaderboardTable from "./LeaderboardTable";
 import ActivitiesCharts from "../components/ActivitiesCharts";
 import CalendarHeatmapStrava from "../components/CalendarHeatmapStrava";
+import ProtectedRoute from "../components/ProtectedRoute";
 import fs from "fs";
 import path from "path";
 
@@ -26,15 +27,17 @@ export default function DashboardPage() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col p-8 bg-gray-50 dark:bg-gray-900">
-      <h1 className="text-3xl font-bold mb-6">🚴‍♂️ Team Dashboard</h1>
-      <CalendarHeatmapStrava activities={activities} />
-      <ActivitiesCharts activities={activities} />
-      <DashboardSummaryCards summary={summary} />
+    <ProtectedRoute>
+      <main className="flex min-h-screen flex-col p-8 bg-gray-50 dark:bg-gray-900">
+        <h1 className="text-3xl font-bold mb-6">🚴‍♂️ Team Dashboard</h1>
+        <CalendarHeatmapStrava activities={activities} />
+        <ActivitiesCharts activities={activities} />
+        <DashboardSummaryCards summary={summary} />
 
-      <section>
-        <LeaderboardTable data={leaderboard} />
-      </section>
-    </main>
+        <section>
+          <LeaderboardTable data={leaderboard} />
+        </section>
+      </main>
+    </ProtectedRoute>
   );
 }

@@ -1,36 +1,26 @@
-import { createClient } from '@supabase/supabase-js'
-import { config } from '@/lib/config'
+import { AuthService, CookieManager } from '@/lib/services/auth-service'
 
 export async function POST(req) {
   try {
-    // Initialize Supabase client
-    const supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
+    // Get session token from cookies
+    const cookies = req.headers.get('cookie')
+    const sessionToken = cookies?.split(';')
+      .find(c => c.trim().startsWith('app_session='))
+      ?.split('=')[1]
     
-    // For now, we'll clear the most recent user's tokens (you can implement session management later)
-    const { data: users, error: userError } = await supabase
-      .from('users')
-      .select('strava_id')
-      .order('updated_at', { ascending: false })
-      .limit(1)
-    
-    if (userError) {
-      console.error('Error fetching user for logout:', userError)
-      return Response.json({ error: 'Failed to logout' }, { status: 500 })
+    if (sessionToken) {
+      // Delete the session
+      await AuthService.logout(sessionToken)
     }
     
-    if (users && users.length > 0) {
-      // Clear tokens for the user
-      const { error: tokenError } = await supabase
-        .from('strava_tokens')
-        .delete()
-        .eq('strava_id', users[0].strava_id)
-      
-      if (tokenError) {
-        console.error('Error clearing tokens:', tokenError)
-      }
-    }
+    // Create response with cleared cookies
+    const response = Response.json({ message: 'Logged out successfully' })
     
-    return Response.json({ message: 'Logged out successfully' })
+    // Clear session cookie
+    const clearSessionCookie = CookieManager.clearSessionCookie()
+    response.headers.set('Set-Cookie', clearSessionCookie)
+    
+    return response
     
   } catch (error) {
     console.error('Error in logout API:', error)
