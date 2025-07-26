@@ -71,7 +71,6 @@ export async function GET(req) {
     
     // Create response with session cookie
     console.log('🔧 Redirecting to dashboard:', dashboardUrl);
-    const response_redirect = Response.redirect(dashboardUrl);
     
     // Set session cookie only if session was created successfully
     if (sessionToken && expiresAt) {
@@ -83,15 +82,25 @@ export async function GET(req) {
       console.log('🔧 Session cookie:', sessionCookie);
       console.log('🔧 CSRF cookie:', csrfCookie);
       
-      // Set both cookies in a single Set-Cookie header
-      response_redirect.headers.set('Set-Cookie', [sessionCookie, csrfCookie]);
       console.log('✅ Cookies set successfully');
+      console.log('✅ Redirecting to dashboard with cookies');
+      
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: dashboardUrl,
+          'Set-Cookie': [sessionCookie, csrfCookie],
+        },
+      });
     } else {
       console.log('❌ No session token or expiresAt available');
+      console.log('✅ Redirecting to dashboard without cookies');
+      
+      return new Response(null, {
+        status: 302,
+        headers: { Location: dashboardUrl },
+      });
     }
-    
-    console.log('✅ Redirecting to dashboard');
-    return response_redirect;
   } catch (error) {
     console.error('❌ Callback error:', error);
     console.error('❌ Error stack:', error.stack);
