@@ -1,4 +1,4 @@
-import { AuthService, CookieManager } from '@/lib/services/auth-service'
+import { AuthServiceServer, CookieManagerServer } from '@/lib/services/auth-service-server'
 
 export async function POST(req) {
   try {
@@ -10,14 +10,14 @@ export async function POST(req) {
     
     if (sessionToken) {
       // Delete the session
-      await AuthService.logout(sessionToken)
+      await AuthServiceServer.logout(sessionToken)
     }
     
     // Create response with cleared cookies
     const response = Response.json({ message: 'Logged out successfully' })
     
     // Clear session cookie
-    const clearSessionCookie = CookieManager.clearSessionCookie()
+    const clearSessionCookie = CookieManagerServer.clearSessionCookie()
     response.headers.set('Set-Cookie', clearSessionCookie)
     
     return response

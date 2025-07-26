@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { config } from '@/lib/config';
 import { upsertUser, upsertTokens } from '@/lib/database';
-import { AuthService, CookieManager } from '@/lib/services/auth-service';
+import { AuthServiceServer, CookieManagerServer } from '@/lib/services/auth-service-server';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -43,7 +43,7 @@ export async function GET(req) {
       });
       
       // Create app session
-      const { sessionToken, expiresAt } = await AuthService.authenticateUser(athlete.id);
+      const { sessionToken, expiresAt } = await AuthServiceServer.authenticateUser(athlete.id);
       
       console.log('✅ User authenticated and session created:', athlete.firstname, athlete.lastname);
       
@@ -61,12 +61,12 @@ export async function GET(req) {
     const response_redirect = Response.redirect(dashboardUrl);
     
     // Set session cookie
-    const sessionCookie = CookieManager.setSessionCookie(sessionToken, expiresAt);
+    const sessionCookie = CookieManagerServer.setSessionCookie(sessionToken, expiresAt);
     response_redirect.headers.set('Set-Cookie', sessionCookie);
     
     // Set CSRF token
-    const csrfToken = AuthService.generateCSRFToken();
-    const csrfCookie = CookieManager.setCSRFCookie(csrfToken);
+    const csrfToken = AuthServiceServer.generateCSRFToken();
+    const csrfCookie = CookieManagerServer.setCSRFCookie(csrfToken);
     response_redirect.headers.set('Set-Cookie', csrfCookie);
     
     return response_redirect;

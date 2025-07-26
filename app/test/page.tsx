@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@/lib/supabase'
 import { supabase as serverSupabase } from '@/lib/database'
 import { AuthService, SessionManager, TokenManager } from '@/lib/services/auth-service'
-import { upsertUser, upsertTokens, getUserByStravaId, getTokensByStravaId } from '@/lib/database'
+import { upsertUserClient, upsertTokensClient, getUserByStravaIdClient, getTokensByStravaIdClient } from '@/lib/database-client'
 
 interface TestResult {
   test: string
@@ -98,7 +98,7 @@ export default function TestPage() {
       const testStravaId = Math.floor(Math.random() * 1000000)
       
       // Use the actual service functions
-      const user = await upsertUser({
+      const user = await upsertUserClient({
         strava_id: testStravaId,
         firstname: 'Test',
         lastname: 'User',
@@ -107,7 +107,7 @@ export default function TestPage() {
         country: 'Test Country'
       })
       
-      const tokens = await upsertTokens({
+      const tokens = await upsertTokensClient({
         strava_id: testStravaId,
         access_token: `test_access_${Date.now()}`,
         refresh_token: `test_refresh_${Date.now()}`,
@@ -161,7 +161,7 @@ export default function TestPage() {
         country: 'Test Country'
       }
       
-      const user = await upsertUser(testUser)
+      const user = await upsertUserClient(testUser)
       
       addResult('Create User', 'success', 'User created successfully', user)
     } catch (error: any) {
@@ -371,9 +371,9 @@ export default function TestPage() {
       
       // First create a test user if it doesn't exist
       try {
-        await getUserByStravaId(testStravaId)
+        await getUserByStravaIdClient(testStravaId)
       } catch {
-        await upsertUser({
+        await upsertUserClient({
           strava_id: testStravaId,
           firstname: 'Test',
           lastname: 'User'
@@ -427,7 +427,7 @@ export default function TestPage() {
       const testStravaId = 123456
       
       try {
-        const tokens = await getTokensByStravaId(testStravaId)
+        const tokens = await getTokensByStravaIdClient(testStravaId)
         
         // Check if token is expired
         const isExpired = new Date(tokens.expires_at) < new Date()
@@ -439,7 +439,7 @@ export default function TestPage() {
         })
       } catch {
         // Create a test token if none exists
-        await upsertTokens({
+        await upsertTokensClient({
           strava_id: testStravaId,
           access_token: 'test_token',
           refresh_token: 'test_refresh',
@@ -570,7 +570,7 @@ export default function TestPage() {
       const testStravaId = Math.floor(Math.random() * 1000000)
       
       // Step 1: Create user (simulates Strava OAuth callback)
-      const user = await upsertUser({
+      const user = await upsertUserClient({
         strava_id: testStravaId,
         firstname: 'Complete',
         lastname: 'Flow',
@@ -580,7 +580,7 @@ export default function TestPage() {
       })
       
       // Step 2: Store tokens
-      const tokens = await upsertTokens({
+      const tokens = await upsertTokensClient({
         strava_id: testStravaId,
         access_token: `complete_flow_access_${Date.now()}`,
         refresh_token: `complete_flow_refresh_${Date.now()}`,

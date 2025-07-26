@@ -1,5 +1,6 @@
-import { createClientComponentClient } from '@/lib/supabase'
-import { getUserByStravaIdClient, getTokensByStravaIdClient, upsertTokensClient } from '@/lib/database-client'
+import { supabase as serverSupabase } from '@/lib/database'
+import { getUserByStravaId, getTokensByStravaId, upsertTokens } from '@/lib/database'
+import crypto from 'crypto'
 
 // Types
 export interface AppSession {
@@ -23,29 +24,20 @@ export interface AuthUser {
 
 // Utility functions
 function generateSecureToken(): string {
-  const array = new Uint8Array(32)
-  crypto.getRandomValues(array)
-  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('')
+  return crypto.randomBytes(32).toString('hex')
 }
 
 function generateCSRFToken(): string {
-  const array = new Uint8Array(16)
-  crypto.getRandomValues(array)
-  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('')
+  return crypto.randomBytes(16).toString('hex')
 }
 
-// Session management
-export class SessionManager {
-  private static getClient() {
-    return createClientComponentClient()
-  }
-
+// Session management for server-side
+export class SessionManagerServer {
   static async createSession(stravaId: number): Promise<{ sessionToken: string; expiresAt: string }> {
     const sessionToken = generateSecureToken()
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24 hours
 
-    const client = this.getClient()
-    const { error } = await client
+    const { error } = await serverSupabase
       .from('app_sessions')
       .insert({
         strava_id: stravaId,
@@ -64,8 +56,7 @@ export class SessionManager {
     if (!sessionToken) return null
 
     try {
-      const client = this.getClient()
-      const { data, error } = await client
+      const { data, error } = await serverSupabase
         .from('app_sessions')
         .select('strava_id, expires_at')
         .eq('session_token', sessionToken)
@@ -86,8 +77,7 @@ export class SessionManager {
   }
 
   static async deleteSession(sessionToken: string): Promise<void> {
-    const client = this.getClient()
-    await client
+    await serverSupabase
       .from('app_sessions')
       .delete()
       .eq('session_token', sessionToken)
@@ -96,8 +86,7 @@ export class SessionManager {
   static async rotateSession(oldToken: string): Promise<string | null> {
     try {
       const newToken = generateSecureToken()
-      const client = this.getClient()
-      const { error } = await client
+      const { error } = await serverSupabase
         .from('app_sessions')
         .update({ 
           session_token: newToken,
@@ -113,8 +102,7 @@ export class SessionManager {
   }
 
   static async cleanupExpiredSessions(): Promise<void> {
-    const client = this.getClient()
-    await client
+    await serverSupabase
       .from('app_sessions')
       .delete()
       .lt('expires_at', new Date().toISOString())
@@ -122,10 +110,10 @@ export class SessionManager {
 }
 
 // Token management
-export class TokenManager {
+export class TokenManagerServer {
   static async getValidTokens(stravaId: number): Promise<any> {
     try {
-      const tokens = await getTokensByStravaIdClient(stravaId)
+      const tokens = await getTokensByStravaId(stravaId)
       const expiresAt = new Date(tokens.expires_at)
       
       // If token expires in next 5 minutes, refresh it
@@ -161,7 +149,7 @@ export class TokenManager {
       const data = await response.json()
       
       // Update tokens in database
-      await upsertTokensClient({
+      await upsertTokens({
         strava_id: stravaId,
         access_token: data.access_token,
         refresh_token: data.refresh_token,
@@ -179,18 +167,18 @@ export class TokenManager {
   }
 }
 
-// Main authentication service
-export class AuthService {
+// Main authentication service for server-side
+export class AuthServiceServer {
   static async authenticateUser(stravaId: number): Promise<{ sessionToken: string; user: AuthUser }> {
     try {
       // Get user data
-      const user = await getUserByStravaIdClient(stravaId)
+      const user = await getUserByStravaId(stravaId)
       if (!user) {
         throw new Error('User not found')
       }
 
       // Create app session
-      const { sessionToken } = await SessionManager.createSession(stravaId)
+      const { sessionToken } = await SessionManagerServer.createSession(stravaId)
 
       return {
         sessionToken,
@@ -212,10 +200,10 @@ export class AuthService {
 
   static async getCurrentUser(sessionToken: string): Promise<AuthUser | null> {
     try {
-      const stravaId = await SessionManager.validateSession(sessionToken)
+      const stravaId = await SessionManagerServer.validateSession(sessionToken)
       if (!stravaId) return null
 
-      const user = await getUserByStravaIdClient(stravaId)
+      const user = await getUserByStravaId(stravaId)
       if (!user) return null
 
       return {
@@ -234,7 +222,7 @@ export class AuthService {
   }
 
   static async logout(sessionToken: string): Promise<void> {
-    await SessionManager.deleteSession(sessionToken)
+    await SessionManagerServer.deleteSession(sessionToken)
   }
 
   static generateCSRFToken(): string {
@@ -246,8 +234,8 @@ export class AuthService {
   }
 }
 
-// Cookie utilities for Next.js
-export class CookieManager {
+// Cookie utilities for server-side
+export class CookieManagerServer {
   static setSessionCookie(sessionToken: string, expiresAt: string): string {
     const expires = new Date(expiresAt)
     

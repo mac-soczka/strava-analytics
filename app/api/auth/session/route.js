@@ -1,4 +1,4 @@
-import { AuthService } from '@/lib/services/auth-service'
+import { AuthServiceServer } from '@/lib/services/auth-service-server'
 
 export async function GET(req) {
   try {
@@ -13,7 +13,7 @@ export async function GET(req) {
     }
     
     // Get current user from session
-    const user = await AuthService.getCurrentUser(sessionToken)
+    const user = await AuthServiceServer.getCurrentUser(sessionToken)
     
     if (!user) {
       return Response.json({ authenticated: false }, { status: 401 })
