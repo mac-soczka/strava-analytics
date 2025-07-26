@@ -1,4 +1,5 @@
 import { StravaCrawlerService } from '../services/strava-crawler-service'
+import { config } from '../config'
 
 /**
  * Cron job trigger for Strava data crawling
@@ -12,7 +13,7 @@ export async function cronTrigger() {
     
     // Process all users with valid tokens
     const results = await crawlerService.crawlStravaData({
-      batch_size: 80,
+      batch_size: config.stravaApiLimits.maxCrawlerBatchSize,
       include_segments: true
     })
     
