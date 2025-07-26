@@ -224,13 +224,24 @@ export class StravaService {
       console.log(`📊 Found ${existingActivities.length} existing activities in database, checking if we need to fetch from Strava...`)
       
       // Check if the most recent activity is recent enough (within last 24 hours)
-      const mostRecentActivity = existingActivities[0]
+      const mostRecentActivity = existingActivities[0] as any
       const lastActivityDate = new Date(mostRecentActivity.start_date)
       const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000)
       
       if (lastActivityDate > oneDayAgo) {
         console.log(`✅ Recent activities found in database (last: ${lastActivityDate.toISOString()}), skipping Strava API call`)
-        return existingActivities
+        // Convert DatabaseActivity to StravaActivity format
+        return existingActivities.map((dbActivity: any) => ({
+          id: dbActivity.activity_id, // Use activity_id as the Strava ID
+          name: dbActivity.name,
+          distance: dbActivity.distance,
+          moving_time: dbActivity.moving_time,
+          elapsed_time: dbActivity.elapsed_time,
+          total_elevation_gain: dbActivity.total_elevation_gain,
+          type: dbActivity.type,
+          start_date: dbActivity.start_date,
+          start_date_local: dbActivity.start_date_local
+        }))
       }
     }
 
