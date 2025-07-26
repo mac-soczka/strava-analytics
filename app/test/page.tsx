@@ -35,6 +35,38 @@ interface TestActivity {
   start_date?: string
 }
 
+interface TestSegment {
+  segment_id: number
+  name: string
+  distance: number
+  elevation_gain: number
+  average_grade: number
+  maximum_grade: number
+  climb_category: number
+  city: string
+  state: string
+  country: string
+}
+
+interface TestSegmentEffort {
+  activity_id: number
+  segment_id: number
+  effort_id: number
+  elapsed_time: number
+  moving_time: number
+  start_date: string
+  average_watts?: number
+  max_watts?: number
+}
+
+interface SystemStatus {
+  database: 'healthy' | 'warning' | 'critical' | 'unknown'
+  authentication: 'healthy' | 'warning' | 'critical' | 'unknown'
+  strava: 'healthy' | 'warning' | 'critical' | 'unknown'
+  crawler: 'healthy' | 'warning' | 'critical' | 'unknown'
+  overall: 'healthy' | 'warning' | 'critical' | 'unknown'
+}
+
 export default function TestPage() {
   const [results, setResults] = useState<TestResult[]>([])
   const [isRunning, setIsRunning] = useState(false)
@@ -42,6 +74,20 @@ export default function TestPage() {
   const [rateLimitStatus, setRateLimitStatus] = useState<any>(null)
   const [noLimitsMode, setNoLimitsMode] = useState<boolean>(false)
   const [crawlerDiagnostics, setCrawlerDiagnostics] = useState<any>(null)
+  const [systemStatus, setSystemStatus] = useState<SystemStatus>({
+    database: 'unknown',
+    authentication: 'unknown',
+    strava: 'unknown',
+    crawler: 'unknown',
+    overall: 'unknown'
+  })
+  const [testData, setTestData] = useState<any>({
+    users: [],
+    activities: [],
+    segments: [],
+    tokens: []
+  })
+  const [activeTab, setActiveTab] = useState<'overview' | 'crud' | 'crawler' | 'auth' | 'diagnostics'>('overview')
   const supabase = createClientComponentClient()
 
   const addResult = (test: string, status: TestResult['status'], message: string, data?: any, error?: any) => {
@@ -379,9 +425,47 @@ export default function TestPage() {
       
       const user = await upsertUserClient(testUser)
       
+      // Update test data
+      setTestData((prev: any) => ({
+        ...prev,
+        users: [...prev.users, user]
+      }))
+      
       addResult('Create User', 'success', 'User created successfully', user)
     } catch (error: any) {
       addResult('Create User', 'error', 'User creation failed', undefined, error.message)
+    }
+  }
+
+  // Test 5.1: Create Multiple Users (CRUD)
+  const testCreateMultipleUsers = async () => {
+    try {
+      addResult('Create Multiple Users', 'pending', 'Creating multiple test users...')
+      
+      const users: any[] = []
+      for (let i = 0; i < 3; i++) {
+        const testUser: TestUser = {
+          strava_id: Math.floor(Math.random() * 1000000),
+          firstname: `Test${i + 1}`,
+          lastname: 'User',
+          city: `Test City ${i + 1}`,
+          state: 'Test State',
+          country: 'Test Country'
+        }
+        
+        const user = await upsertUserClient(testUser)
+        users.push(user)
+      }
+      
+      // Update test data
+      setTestData((prev: any) => ({
+        ...prev,
+        users: [...prev.users, ...users]
+      }))
+      
+      addResult('Create Multiple Users', 'success', `${users.length} users created successfully`, users)
+    } catch (error: any) {
+      addResult('Create Multiple Users', 'error', 'Multiple user creation failed', undefined, error.message)
     }
   }
 
@@ -499,9 +583,122 @@ export default function TestPage() {
       
       if (error) throw error
       
+      // Update test data
+      setTestData((prev: any) => ({
+        ...prev,
+        activities: [...prev.activities, data]
+      }))
+      
       addResult('Create Activity', 'success', 'Activity created successfully', data)
     } catch (error: any) {
       addResult('Create Activity', 'error', 'Activity creation failed', undefined, error.message)
+    }
+  }
+
+  // Test 9.1: Create Multiple Activities
+  const testCreateMultipleActivities = async () => {
+    try {
+      addResult('Create Multiple Activities', 'pending', 'Creating multiple test activities...')
+      
+      const activities: any[] = []
+      for (let i = 0; i < 3; i++) {
+        const testActivity: TestActivity = {
+          strava_id: 123456,
+          activity_id: Math.floor(Math.random() * 1000000),
+          name: `Test Activity ${i + 1}`,
+          distance: 1000 + (i * 500),
+          moving_time: 3600 + (i * 300),
+          type: i % 2 === 0 ? 'Run' : 'Ride',
+          start_date: new Date(Date.now() - i * 24 * 60 * 60 * 1000).toISOString()
+        }
+        
+        const { data, error } = await supabase
+          .from('activities')
+          .insert(testActivity)
+          .select()
+          .single()
+        
+        if (error) throw error
+        activities.push(data)
+      }
+      
+      // Update test data
+      setTestData((prev: any) => ({
+        ...prev,
+        activities: [...prev.activities, ...activities]
+      }))
+      
+      addResult('Create Multiple Activities', 'success', `${activities.length} activities created successfully`, activities)
+    } catch (error: any) {
+      addResult('Create Multiple Activities', 'error', 'Multiple activity creation failed', undefined, error.message)
+    }
+  }
+
+  // Test 9.2: Create Segment
+  const testCreateSegment = async () => {
+    try {
+      addResult('Create Segment', 'pending', 'Creating test segment...')
+      
+      const testSegment: TestSegment = {
+        segment_id: Math.floor(Math.random() * 1000000),
+        name: 'Test Segment',
+        distance: 1000,
+        elevation_gain: 50,
+        average_grade: 5.0,
+        maximum_grade: 8.0,
+        climb_category: 4,
+        city: 'Test City',
+        state: 'Test State',
+        country: 'Test Country'
+      }
+      
+      const { data, error } = await supabase
+        .from('segments')
+        .insert(testSegment)
+        .select()
+        .single()
+      
+      if (error) throw error
+      
+      // Update test data
+      setTestData((prev: any) => ({
+        ...prev,
+        segments: [...prev.segments, data]
+      }))
+      
+      addResult('Create Segment', 'success', 'Segment created successfully', data)
+    } catch (error: any) {
+      addResult('Create Segment', 'error', 'Segment creation failed', undefined, error.message)
+    }
+  }
+
+  // Test 9.3: Create Segment Effort
+  const testCreateSegmentEffort = async () => {
+    try {
+      addResult('Create Segment Effort', 'pending', 'Creating test segment effort...')
+      
+      const testEffort: TestSegmentEffort = {
+        activity_id: Math.floor(Math.random() * 1000000),
+        segment_id: Math.floor(Math.random() * 1000000),
+        effort_id: Math.floor(Math.random() * 1000000),
+        elapsed_time: 1800,
+        moving_time: 1700,
+        start_date: new Date().toISOString(),
+        average_watts: 200,
+        max_watts: 300
+      }
+      
+      const { data, error } = await supabase
+        .from('segment_efforts')
+        .insert(testEffort)
+        .select()
+        .single()
+      
+      if (error) throw error
+      
+      addResult('Create Segment Effort', 'success', 'Segment effort created successfully', data)
+    } catch (error: any) {
+      addResult('Create Segment Effort', 'error', 'Segment effort creation failed', undefined, error.message)
     }
   }
 
@@ -906,6 +1103,76 @@ export default function TestPage() {
     setIsRunning(false)
   }
 
+  // Crawler Tests
+  const testCrawlerTrigger = async () => {
+    try {
+      addResult('Crawler Trigger', 'pending', 'Triggering crawler...')
+      
+      const response = await fetch('/api/strava/crawl', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      
+      const data = await response.json()
+      
+      if (response.ok) {
+        addResult('Crawler Trigger', 'success', 'Crawler triggered successfully', data)
+      } else {
+        addResult('Crawler Trigger', 'error', 'Crawler trigger failed', undefined, data.error)
+      }
+    } catch (error: any) {
+      addResult('Crawler Trigger', 'error', 'Crawler trigger failed', undefined, error.message)
+    }
+  }
+
+  const testCrawlerLogs = async () => {
+    try {
+      addResult('Crawler Logs', 'pending', 'Fetching crawler logs...')
+      
+      const response = await fetch('/api/strava/crawler/logs?limit=10')
+      const data = await response.json()
+      
+      if (response.ok) {
+        addResult('Crawler Logs', 'success', `Found ${data.logs.length} recent logs`, data)
+      } else {
+        addResult('Crawler Logs', 'error', 'Failed to fetch crawler logs', undefined, data.error)
+      }
+    } catch (error: any) {
+      addResult('Crawler Logs', 'error', 'Failed to fetch crawler logs', undefined, error.message)
+    }
+  }
+
+  const testCrawlerStats = async () => {
+    try {
+      addResult('Crawler Stats', 'pending', 'Fetching crawler statistics...')
+      
+      const response = await fetch('/api/strava/crawler/stats')
+      const data = await response.json()
+      
+      if (response.ok) {
+        addResult('Crawler Stats', 'success', 'Crawler statistics retrieved', data)
+      } else {
+        addResult('Crawler Stats', 'error', 'Failed to fetch crawler stats', undefined, data.error)
+      }
+    } catch (error: any) {
+      addResult('Crawler Stats', 'error', 'Failed to fetch crawler stats', undefined, error.message)
+    }
+  }
+
+  const runCrawlerTests = async () => {
+    setIsRunning(true)
+    clearResults()
+    
+    await testCrawlerTrigger()
+    await testCrawlerLogs()
+    await testCrawlerStats()
+    await runCrawlerDiagnostics()
+    
+    setIsRunning(false)
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto">
@@ -996,190 +1263,362 @@ export default function TestPage() {
           )}
         </div>
 
-        {/* Test Controls */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">Test Controls</h2>
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={runAllTests}
-              disabled={isRunning}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-            >
-              {isRunning ? 'Running...' : 'Run All Tests'}
-            </button>
-            <button
-              onClick={runAuthTests}
-              disabled={isRunning}
-              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
-            >
-              Auth Tests
-            </button>
-            <button
-              onClick={runCRUDTests}
-              disabled={isRunning}
-              className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50"
-            >
-              CRUD Tests
-            </button>
-            <button
-              onClick={runDiagnosticTests}
-              disabled={isRunning}
-              className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 disabled:opacity-50"
-            >
-              Diagnostics
-            </button>
-            <button
-              onClick={clearResults}
-              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-            >
-              Clear Results
-            </button>
+        {/* Tabbed Interface */}
+        <div className="bg-white rounded-lg shadow mb-8">
+          {/* Tab Navigation */}
+          <div className="border-b border-gray-200">
+            <nav className="flex space-x-8 px-6" aria-label="Tabs">
+              {[
+                { id: 'overview', name: 'Overview', icon: '📊' },
+                { id: 'crud', name: 'CRUD Operations', icon: '🗄️' },
+                { id: 'crawler', name: 'Crawler', icon: '🕷️' },
+                { id: 'auth', name: 'Authentication', icon: '🔐' },
+                { id: 'diagnostics', name: 'Diagnostics', icon: '🔍' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                    activeTab === tab.id
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
+                >
+                  <span className="mr-2">{tab.icon}</span>
+                  {tab.name}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          {/* Tab Content */}
+          <div className="p-6">
+            {/* Overview Tab */}
+            {activeTab === 'overview' && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">System Overview</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <h3 className="font-semibold text-blue-800">Database</h3>
+                    <p className="text-2xl font-bold text-blue-600">{testData.users.length}</p>
+                    <p className="text-sm text-blue-600">Users</p>
+                  </div>
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <h3 className="font-semibold text-green-800">Activities</h3>
+                    <p className="text-2xl font-bold text-green-600">{testData.activities.length}</p>
+                    <p className="text-sm text-green-600">Total</p>
+                  </div>
+                  <div className="bg-purple-50 p-4 rounded-lg">
+                    <h3 className="font-semibold text-purple-800">Segments</h3>
+                    <p className="text-2xl font-bold text-purple-600">{testData.segments.length}</p>
+                    <p className="text-sm text-purple-600">Total</p>
+                  </div>
+                  <div className="bg-orange-50 p-4 rounded-lg">
+                    <h3 className="font-semibold text-orange-800">Tokens</h3>
+                    <p className="text-2xl font-bold text-orange-600">{testData.tokens.length}</p>
+                    <p className="text-sm text-orange-600">Active</p>
+                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    onClick={runAllTests}
+                    disabled={isRunning}
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                  >
+                    {isRunning ? 'Running...' : 'Run All Tests'}
+                  </button>
+                  <button
+                    onClick={runCrawlerDiagnostics}
+                    disabled={isRunning}
+                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
+                  >
+                    🔍 Quick Diagnostics
+                  </button>
+                  <button
+                    onClick={clearResults}
+                    className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                  >
+                    Clear Results
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* CRUD Operations Tab */}
+            {activeTab === 'crud' && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">CRUD Operations</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <button
+                    onClick={testCreateUser}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50 text-sm"
+                  >
+                    Create User
+                  </button>
+                  <button
+                    onClick={testCreateMultipleUsers}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50 text-sm"
+                  >
+                    Create Multiple Users
+                  </button>
+                  <button
+                    onClick={testReadUsers}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
+                  >
+                    Read Users
+                  </button>
+                  <button
+                    onClick={testUpdateUser}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 disabled:opacity-50 text-sm"
+                  >
+                    Update User
+                  </button>
+                  <button
+                    onClick={testDeleteUser}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 disabled:opacity-50 text-sm"
+                  >
+                    Delete User
+                  </button>
+                  <button
+                    onClick={testCreateActivity}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50 text-sm"
+                  >
+                    Create Activity
+                  </button>
+                  <button
+                    onClick={testCreateMultipleActivities}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50 text-sm"
+                  >
+                    Create Multiple Activities
+                  </button>
+                  <button
+                    onClick={testReadActivities}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
+                  >
+                    Read Activities
+                  </button>
+                  <button
+                    onClick={testCreateSegment}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 disabled:opacity-50 text-sm"
+                  >
+                    Create Segment
+                  </button>
+                  <button
+                    onClick={testCreateSegmentEffort}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 disabled:opacity-50 text-sm"
+                  >
+                    Create Segment Effort
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Crawler Tab */}
+            {activeTab === 'crawler' && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Crawler Operations</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <button
+                    onClick={testCrawlerTrigger}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 disabled:opacity-50 text-sm"
+                  >
+                    🚀 Trigger Crawler
+                  </button>
+                  <button
+                    onClick={testCrawlerLogs}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
+                  >
+                    📋 View Logs
+                  </button>
+                  <button
+                    onClick={testCrawlerStats}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50 text-sm"
+                  >
+                    📊 View Stats
+                  </button>
+                  <button
+                    onClick={runCrawlerDiagnostics}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 disabled:opacity-50 text-sm"
+                  >
+                    🔍 Diagnostics
+                  </button>
+                  <button
+                    onClick={runCrawlerTests}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50 text-sm col-span-2"
+                  >
+                    🧪 Run All Crawler Tests
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Authentication Tab */}
+            {activeTab === 'auth' && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Authentication Tests</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <button
+                    onClick={testAppSessionStatus}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
+                  >
+                    Session Status
+                  </button>
+                  <button
+                    onClick={testStravaOAuthFlow}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50 text-sm"
+                  >
+                    OAuth Flow
+                  </button>
+                  <button
+                    onClick={testAppLogout}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 disabled:opacity-50 text-sm"
+                  >
+                    App Logout
+                  </button>
+                  <button
+                    onClick={testAppSession}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 disabled:opacity-50 text-sm"
+                  >
+                    App Session
+                  </button>
+                  <button
+                    onClick={testSessionValidation}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 disabled:opacity-50 text-sm"
+                  >
+                    Session Validation
+                  </button>
+                  <button
+                    onClick={testTokenRefresh}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 disabled:opacity-50 text-sm"
+                  >
+                    Token Refresh
+                  </button>
+                  <button
+                    onClick={testSessionCleanup}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
+                  >
+                    Session Cleanup
+                  </button>
+                  <button
+                    onClick={testSessionRotation}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 disabled:opacity-50 text-sm"
+                  >
+                    Session Rotation
+                  </button>
+                  <button
+                    onClick={testProtectedRoute}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-teal-100 text-teal-700 rounded hover:bg-teal-200 disabled:opacity-50 text-sm"
+                  >
+                    Protected Route
+                  </button>
+                  <button
+                    onClick={testCSRFToken}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-pink-100 text-pink-700 rounded hover:bg-pink-200 disabled:opacity-50 text-sm"
+                  >
+                    CSRF Token
+                  </button>
+                  <button
+                    onClick={testCompleteAuthFlow}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 text-sm col-span-2"
+                  >
+                    🧪 Complete Auth Flow
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Diagnostics Tab */}
+            {activeTab === 'diagnostics' && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">System Diagnostics</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <button
+                    onClick={testConnection}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
+                  >
+                    Database Connection
+                  </button>
+                  <button
+                    onClick={testSchemaCheck}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50 text-sm"
+                  >
+                    Schema Check
+                  </button>
+                  <button
+                    onClick={testRLSPolicies}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 disabled:opacity-50 text-sm"
+                  >
+                    RLS Policies
+                  </button>
+                  <button
+                    onClick={testRateLimitStatus}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 disabled:opacity-50 text-sm"
+                  >
+                    Rate Limits
+                  </button>
+                  <button
+                    onClick={toggleNoLimitsMode}
+                    disabled={isRunning}
+                    className={`px-3 py-2 rounded hover:opacity-80 disabled:opacity-50 text-sm font-medium ${
+                      noLimitsMode 
+                        ? 'bg-red-100 text-red-700 hover:bg-red-200' 
+                        : 'bg-green-100 text-green-700 hover:bg-green-200'
+                    }`}
+                  >
+                    {noLimitsMode ? '🚀 No-Limits ON' : '⚡ No-Limits OFF'}
+                  </button>
+                  <button
+                    onClick={runCrawlerDiagnostics}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 disabled:opacity-50 text-sm"
+                  >
+                    🔍 Crawler Diagnostics
+                  </button>
+                  <button
+                    onClick={runDiagnosticTests}
+                    disabled={isRunning}
+                    className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 text-sm col-span-2"
+                  >
+                    🧪 Run All Diagnostics
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Individual Test Buttons */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">Individual Tests</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button
-              onClick={testConnection}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Connection
-            </button>
-            <button
-              onClick={testAppSessionStatus}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Session Status
-            </button>
-            <button
-              onClick={testRateLimitStatus}
-              disabled={isRunning}
-              className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
-            >
-              Rate Limits
-            </button>
-            <button
-              onClick={runCrawlerDiagnostics}
-              disabled={isRunning}
-              className="px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 disabled:opacity-50 text-sm font-medium"
-            >
-              🔍 Crawler Diagnostics
-            </button>
-            <button
-              onClick={toggleNoLimitsMode}
-              disabled={isRunning}
-              className={`px-3 py-2 rounded hover:opacity-80 disabled:opacity-50 text-sm font-medium ${
-                noLimitsMode 
-                  ? 'bg-red-100 text-red-700 hover:bg-red-200' 
-                  : 'bg-green-100 text-green-700 hover:bg-green-200'
-              }`}
-            >
-              {noLimitsMode ? '🚀 No-Limits ON' : '⚡ No-Limits OFF'}
-            </button>
-            <button
-              onClick={testStravaOAuthFlow}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              OAuth Flow
-            </button>
-            <button
-              onClick={testAppLogout}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              App Logout
-            </button>
-            <button
-              onClick={testCreateUser}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Create User
-            </button>
-            <button
-              onClick={testReadUsers}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Read Users
-            </button>
-            <button
-              onClick={testUpdateUser}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Update User
-            </button>
-            <button
-              onClick={testDeleteUser}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Delete User
-            </button>
-            <button
-              onClick={testAppSession}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              App Session
-            </button>
-            <button
-              onClick={testSessionValidation}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Session Validation
-            </button>
-            <button
-              onClick={testTokenRefresh}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Token Refresh
-            </button>
-            <button
-              onClick={testSessionCleanup}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Session Cleanup
-            </button>
-            <button
-              onClick={testSessionRotation}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Session Rotation
-            </button>
-            <button
-              onClick={testProtectedRoute}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Protected Route
-            </button>
-            <button
-              onClick={testCSRFToken}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              CSRF Token
-            </button>
-            <button
-              onClick={testCompleteAuthFlow}
-              disabled={isRunning}
-              className="px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 text-sm"
-            >
-              Complete Flow
-            </button>
-          </div>
-        </div>
+
 
         {/* Test Results */}
         <div className="bg-white rounded-lg shadow">
