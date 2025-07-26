@@ -6,7 +6,7 @@ This document explains how to set up and manage automated cron jobs for the Stra
 
 The Supabase Cron system uses the `pg_cron` Postgres extension to schedule recurring jobs. For the Strava crawler, we've set up:
 
-- **Daily automated runs** at 6 AM UTC
+- **Frequent automated runs** every 15 minutes
 - **Manual trigger function** for testing
 - **Comprehensive logging** to track execution
 
@@ -42,6 +42,8 @@ The following migrations have been applied:
 - `20250726000000_add_strava_crawler_cron.sql` - Initial setup
 - `20250726000001_fix_cron_http.sql` - HTTP extension fix
 - `20250726000002_direct_cron_function.sql` - Direct execution
+- `20250726000003_update_cron_schedule.sql` - Update to 15-minute schedule
+- `20250726000004_rename_cron_job.sql` - Rename job for clarity
 
 ### **2. Extensions Enabled**
 
@@ -53,13 +55,19 @@ CREATE EXTENSION IF NOT EXISTS http;
 ### **3. Cron Job Schedule**
 
 ```sql
--- Daily at 6 AM UTC
+-- Every 15 minutes
 SELECT cron.schedule(
-  'strava-crawler-daily',
-  '0 6 * * *',
+  'strava-crawler-15min',
+  '*/15 * * * *',
   'SELECT trigger_strava_crawler_direct();'
 );
 ```
+
+**Schedule Benefits:**
+- **Fresh data**: Activities and segments fetched every 15 minutes
+- **Rate limit optimization**: Small batches spread across time
+- **Real-time updates**: Users see new data within 15 minutes
+- **Efficient processing**: Database checks prevent redundant API calls
 
 ## **Available Functions**
 
