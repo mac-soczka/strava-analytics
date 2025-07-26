@@ -272,6 +272,25 @@ export class StravaService {
 
     const tokens = await this.getValidTokens()
 
+    // Check if we already have recent activities in the database
+    const existingActivities = await this.activitiesRepo.getActivities(perPage, (page - 1) * perPage)
+    
+    if (existingActivities && existingActivities.length > 0) {
+      console.log(`📊 Found ${existingActivities.length} existing activities in database, checking if we need to fetch from Strava...`)
+      
+      // Check if the most recent activity is recent enough (within last 24 hours)
+      const mostRecentActivity = existingActivities[0]
+      const lastActivityDate = new Date(mostRecentActivity.start_date)
+      const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000)
+      
+      if (lastActivityDate > oneDayAgo) {
+        console.log(`✅ Recent activities found in database (last: ${lastActivityDate.toISOString()}), skipping Strava API call`)
+        return existingActivities
+      }
+    }
+
+    console.log(`🔄 Fetching activities from Strava API (page: ${page}, per_page: ${perPage})`)
+
     const response = await fetch(
       `https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${perPage}`,
       {
@@ -300,13 +319,55 @@ export class StravaService {
     const delay = rateLimitTracker.getDelay()
     await new Promise(resolve => setTimeout(resolve, delay))
 
-    return response.json()
+    const activities = await response.json()
+    console.log(`✅ Fetched ${activities.length} activities from Strava API`)
+    
+    return activities
   }
 
   /**
-   * Fetch segments for a specific activity with rate limiting
+   * Fetch segments for a specific activity from Strava API
    */
   async fetchActivitySegments(activityId: number): Promise<StravaSegmentEffort[]> {
+    // Check if we already have segments for this activity in the database
+    const existingSegmentsResult = await this.segmentsRepo.getSegmentEffortsByActivity(activityId)
+    
+    if (existingSegmentsResult.data && existingSegmentsResult.data.length > 0) {
+      console.log(`📊 Found ${existingSegmentsResult.data.length} existing segments for activity ${activityId} in database, skipping Strava API call`)
+      return existingSegmentsResult.data.map((segment: any) => ({
+        id: segment.effort_id,
+        segment: {
+          id: segment.segment_id,
+          name: segment.segment_name || '',
+          distance: segment.segment_distance || 0,
+          average_grade: segment.segment_average_grade || 0,
+          maximum_grade: segment.segment_maximum_grade || 0,
+          elevation_high: segment.segment_elevation_high || 0,
+          elevation_low: segment.segment_elevation_low || 0,
+          climb_category: segment.segment_climb_category || 0,
+          city: segment.segment_city || '',
+          state: segment.segment_state || '',
+          country: segment.segment_country || '',
+          private: false,
+          hazardous: false,
+          starred: false
+        },
+        elapsed_time: segment.elapsed_time,
+        moving_time: segment.moving_time,
+        start_date: segment.start_date,
+        start_date_local: segment.start_date_local,
+        average_watts: segment.average_watts,
+        max_watts: segment.max_watts,
+        average_heartrate: segment.average_heartrate,
+        max_heartrate: segment.max_heartrate,
+        average_cadence: segment.average_cadence,
+        max_cadence: segment.max_cadence,
+        average_temp: segment.average_temp
+      }))
+    }
+
+    console.log(`🔄 Fetching segments for activity ${activityId} from Strava API`)
+
     // Check rate limits before making request
     if (!rateLimitTracker.canMakeRequest()) {
       const status = rateLimitTracker.getStatus()
@@ -348,7 +409,10 @@ export class StravaService {
     await new Promise(resolve => setTimeout(resolve, delay))
 
     const activity = await response.json()
-    return activity.segment_efforts || []
+    const segments = activity.segment_efforts || []
+    console.log(`✅ Fetched ${segments.length} segments for activity ${activityId} from Strava API`)
+    
+    return segments
   }
 
   /**
