@@ -18,6 +18,12 @@ export interface StravaSegment {
   };
 }
 
+export interface StravaTokens {
+  access_token: string;
+  refresh_token: string;
+  expires_at: string;
+}
+
 export interface StravaSegmentEffort {
   id: number;
   segment: StravaSegment;

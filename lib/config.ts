@@ -1,83 +1,102 @@
-// Configuration for different environments
-export const config = {
-  // Strava OAuth configuration
-  strava: {
-    clientId: process.env.STRAVA_CLIENT_ID!,
-    clientSecret: process.env.STRAVA_CLIENT_SECRET!,
-    redirectUri: process.env.STRAVA_REDIRECT_URI || getDefaultRedirectUri(),
-  },
+import { config as dotenvConfig } from 'dotenv'
 
-  // Supabase configuration
-  supabase: {
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  },
-};
+// Load environment variables
+dotenvConfig({ path: '.env.local' })
 
-// Utility function to clean URLs and ensure proper formatting
-function cleanUrl(url: string): string {
-  if (!url) return url;
-
-  // Remove protocol if present
-  let cleaned = url.replace(/^https?:\/\//, "");
-
-  // Remove trailing slashes
-  cleaned = cleaned.replace(/\/+$/, "");
-
-  // Remove any double slashes (except for protocol)
-  cleaned = cleaned.replace(/\/\//g, "/");
-
-  return cleaned;
+export interface StravaConfig {
+  clientId: string
+  clientSecret: string
+  redirectUri: string
 }
 
-// Get the default redirect URI based on environment
-function getDefaultRedirectUri(): string {
-  // Use explicit redirect URI if set (highest priority)
-  if (process.env.STRAVA_REDIRECT_URI) {
-    console.log('🔧 Using STRAVA_REDIRECT_URI from env:', process.env.STRAVA_REDIRECT_URI);
-    return process.env.STRAVA_REDIRECT_URI;
-  }
+export interface SupabaseConfig {
+  url: string
+  anonKey: string
+  serviceRoleKey: string
+}
 
-  // Use VERCEL_URL if available (works for both production and preview deployments)
-  if (process.env.VERCEL_URL) {
-    const baseUrl = cleanUrl(process.env.VERCEL_URL);
-    return `https://${baseUrl}/api/auth/callback`;
-  }
-
-  // Use custom domain if specified
-  if (process.env.NEXT_PUBLIC_APP_URL) {
-    const baseUrl = cleanUrl(process.env.NEXT_PUBLIC_APP_URL);
-    return `${baseUrl}/api/auth/callback`;
-  }
-
-          // Use localhost for development
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🔧 Using development redirect URI: http://localhost:3000/api/auth/callback');
-          return "http://localhost:3000/api/auth/callback";
-        }
+export interface StravaApiLimits {
+  // API Rate Limits
+  requestsPer15Min: number
+  requestsPerDay: number
   
-  // Note: localhost won't work if Strava app is configured for production domain
-  // You'll need to use the production URL even for local development
-  console.warn('⚠️ Warning: Using production redirect URI for local development');
-  return "https://strava-heatmap-alpha.vercel.app/api/auth/callback";
+  // Fetch Limits
+  maxActivitiesPerRequest: number
+  maxSegmentBatchSize: number
+  maxCrawlerBatchSize: number
+  
+  // Timing Configuration
+  minDelayMs: number
+  maxDelayMs: number
+  retryDelayMs: number
+  
+  // Development Overrides
+  noLimitsMode: boolean
 }
 
-// Validate required environment variables
-export function validateConfig() {
-  const required = [
-    "STRAVA_CLIENT_ID",
-    "STRAVA_CLIENT_SECRET",
-    "NEXT_PUBLIC_SUPABASE_URL",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-    "SUPABASE_SERVICE_ROLE_KEY",
-  ];
+export interface AppConfig {
+  strava: StravaConfig
+  supabase: SupabaseConfig
+  stravaApiLimits: StravaApiLimits
+}
 
-  const missing = required.filter((key) => !process.env[key]);
+function getStravaConfig(): StravaConfig {
+  const clientId = process.env.STRAVA_CLIENT_ID
+  const clientSecret = process.env.STRAVA_CLIENT_SECRET
+  const redirectUri = process.env.STRAVA_REDIRECT_URI
 
-  if (missing.length > 0) {
-    throw new Error(
-      `Missing required environment variables: ${missing.join(", ")}`
-    );
+  if (!clientId || !clientSecret || !redirectUri) {
+    throw new Error('Missing required Strava configuration. Please check your environment variables.')
+  }
+
+  return {
+    clientId,
+    clientSecret,
+    redirectUri
   }
 }
+
+function getSupabaseConfig(): SupabaseConfig {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+  if (!url || !anonKey || !serviceRoleKey) {
+    throw new Error('Missing required Supabase configuration. Please check your environment variables.')
+  }
+
+  return {
+    url,
+    anonKey,
+    serviceRoleKey
+  }
+}
+
+function getStravaApiLimits(): StravaApiLimits {
+  return {
+    // API Rate Limits (Strava API limits)
+    requestsPer15Min: 100,
+    requestsPerDay: 1000,
+    
+    // Fetch Limits (Strava API maximums)
+    maxActivitiesPerRequest: 200, // Strava API maximum
+    maxSegmentBatchSize: 50,      // Process 50 activities at a time for segments
+    maxCrawlerBatchSize: 200,     // Maximum activities per crawler run
+    
+    // Timing Configuration
+    minDelayMs: 900,  // 1 request per 0.9 seconds (conservative)
+    maxDelayMs: 1200, // 1 request per 1.2 seconds (safe)
+    retryDelayMs: 15 * 60 * 1000, // 15 minutes for rate limit reset
+    
+    // Development Overrides
+    noLimitsMode: process.env.STRAVA_NO_LIMITS === 'true'
+  }
+}
+
+export const config: AppConfig = {
+  strava: getStravaConfig(),
+  supabase: getSupabaseConfig(),
+  stravaApiLimits: getStravaApiLimits()
+}
+
+export default config

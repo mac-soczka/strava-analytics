@@ -1,5 +1,6 @@
 import { StravaCrawlerService } from '../services/strava-crawler-service'
 import { AuthServiceServer } from '../services/auth-service-server'
+import { config } from '../config'
 
 /**
  * Serverless function trigger for Strava data crawling
@@ -30,7 +31,7 @@ export async function serverlessTrigger(req: Request) {
     // Process user(s) based on authentication context
     const results = await crawlerService.crawlStravaData({
       user_id: userId, // If undefined, will process all users
-      batch_size: 200,
+      batch_size: config.stravaApiLimits.maxCrawlerBatchSize,
       include_segments: true
     })
     

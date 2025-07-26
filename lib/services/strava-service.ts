@@ -1,60 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
+import { config } from '@/lib/config'
 import { ActivitiesRepository } from '@/lib/repositories/activities-repository'
 import { SegmentsRepository } from '@/lib/repositories/segments-repository'
-import { StravaActivity, DatabaseActivity } from '@/types/strava'
-import { config } from '@/lib/config'
-
-interface StravaTokens {
-  access_token: string
-  refresh_token: string
-  expires_at: string
-}
-
-
-
-interface StravaSegmentEffort {
-  id: number
-  segment: {
-    id: number
-    name: string
-    distance: number
-    average_grade: number
-    maximum_grade: number
-    elevation_high: number
-    elevation_low: number
-    climb_category: number
-    city: string
-    state: string
-    country: string
-    private: boolean
-    hazardous: boolean
-    starred: boolean
-  }
-  elapsed_time: number
-  moving_time: number
-  start_date: string
-  start_date_local: string
-  average_watts?: number
-  max_watts?: number
-  average_heartrate?: number
-  max_heartrate?: number
-  average_cadence?: number
-  max_cadence?: number
-  average_temp?: number
-}
-
-// Rate limiting configuration
-const RATE_LIMIT_CONFIG = {
-  REQUESTS_PER_15MIN: 100,
-  REQUESTS_PER_DAY: 1000,
-  MIN_DELAY_MS: 900, // 1 request per 0.9 seconds (conservative)
-  MAX_DELAY_MS: 1200, // 1 request per 1.2 seconds (safe)
-  BATCH_SIZE: 200, // Maximum activities per request (Strava API limit)
-  RETRY_DELAY_MS: 15 * 60 * 1000, // 15 minutes for rate limit reset
-}
-
-// Check if no-limits mode is enabled
-const NO_LIMITS_MODE = process.env.STRAVA_NO_LIMITS === 'true'
+import { StravaActivity, StravaSegmentEffort, StravaTokens, DatabaseActivity } from '@/types/strava'
 
 // Rate limit tracking
 class RateLimitTracker {
@@ -65,13 +13,13 @@ class RateLimitTracker {
 
   canMakeRequest(): boolean {
     // In no-limits mode, always allow requests
-    if (NO_LIMITS_MODE) {
+    if (config.stravaApiLimits.noLimitsMode) {
       return true
     }
     
     this.updateCounters()
-    return this.requests15min < RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN &&
-           this.requestsDay < RATE_LIMIT_CONFIG.REQUESTS_PER_DAY
+    return this.requests15min < config.stravaApiLimits.requestsPer15Min &&
+           this.requestsDay < config.stravaApiLimits.requestsPerDay
   }
 
   recordRequest() {
@@ -88,42 +36,43 @@ class RateLimitTracker {
       this.lastReset15min = now
     }
     
-    // Reset daily counter
+    // Reset daily counter (simplified - resets every 24 hours from first request)
     if (now - this.lastResetDay >= 24 * 60 * 60 * 1000) {
       this.requestsDay = 0
       this.lastResetDay = now
     }
   }
 
+  getStatus() {
+    this.updateCounters()
+    return {
+      requests15min: this.requests15min,
+      requestsDay: this.requestsDay,
+      remaining15min: config.stravaApiLimits.requestsPer15Min - this.requests15min,
+      remainingDay: config.stravaApiLimits.requestsPerDay - this.requestsDay,
+      noLimitsMode: config.stravaApiLimits.noLimitsMode,
+      mode: config.stravaApiLimits.noLimitsMode ? 'NO-LIMITS' : 'RATE-LIMITED'
+    }
+  }
+
   getDelay(): number {
     // In no-limits mode, no delay
-    if (NO_LIMITS_MODE) {
+    if (config.stravaApiLimits.noLimitsMode) {
       return 0
     }
     
-    const remaining15min = RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN - this.requests15min
-    const remainingDay = RATE_LIMIT_CONFIG.REQUESTS_PER_DAY - this.requestsDay
+    const remaining15min = config.stravaApiLimits.requestsPer15Min - this.requests15min
+    const remainingDay = config.stravaApiLimits.requestsPerDay - this.requestsDay
     
     // Use the more restrictive limit
     const remaining = Math.min(remaining15min, remainingDay)
     
     if (remaining <= 10) {
-      return RATE_LIMIT_CONFIG.MAX_DELAY_MS // Slow down when approaching limit
+      return config.stravaApiLimits.maxDelayMs // Slow down when approaching limit
     } else if (remaining <= 20) {
-      return RATE_LIMIT_CONFIG.MIN_DELAY_MS + 100 // Moderate delay
+      return config.stravaApiLimits.minDelayMs + 100 // Moderate delay
     } else {
-      return RATE_LIMIT_CONFIG.MIN_DELAY_MS // Normal speed
-    }
-  }
-
-  getStatus() {
-    return {
-      requests15min: this.requests15min,
-      requestsDay: this.requestsDay,
-      remaining15min: RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN - this.requests15min,
-      remainingDay: RATE_LIMIT_CONFIG.REQUESTS_PER_DAY - this.requestsDay,
-      nextReset15min: new Date(this.lastReset15min + 15 * 60 * 1000),
-      nextResetDay: new Date(this.lastResetDay + 24 * 60 * 60 * 1000),
+      return config.stravaApiLimits.minDelayMs // Normal speed
     }
   }
 }
@@ -147,53 +96,58 @@ export class StravaService {
   }
 
   /**
-   * Get valid Strava tokens, refreshing if necessary
+   * Get current rate limit status
    */
-  async getValidTokens(): Promise<StravaTokens> {
-    console.log(`🔍 Looking for tokens for user: ${this.userId}`)
-    
-    let query = this.supabase
-      .from('strava_tokens')
-      .select('*')
-
-    // If userId is provided, filter by that user
-    if (this.userId) {
-      query = query.eq('strava_id', this.userId)
-    }
-
-    const { data: tokens, error } = await query.single()
-
-    if (error) {
-      console.log(`❌ Error fetching tokens:`, error)
-    }
-
-    if (!tokens) {
-      console.log(`❌ No tokens found for user ${this.userId}`)
-      throw new Error('No Strava tokens found. Please authenticate first.')
-    }
-
-    const typedTokens = tokens as unknown as StravaTokens & { strava_id: number }
-
-    console.log(`✅ Found tokens for user ${this.userId}, expires at: ${typedTokens.expires_at}`)
-    console.log(`🕐 Current time: ${new Date().toISOString()}`)
-    console.log(`⏰ Token expires: ${new Date(typedTokens.expires_at).toISOString()}`)
-    console.log(`📊 Is expired: ${new Date(typedTokens.expires_at) <= new Date()}`)
-
-    // Check if token is expired
-    if (new Date(typedTokens.expires_at) <= new Date()) {
-      console.log('Token expired, refreshing...')
-      return await this.refreshTokens(typedTokens.refresh_token, typedTokens.strava_id)
-    }
-
-    return typedTokens
+  getRateLimitStatus() {
+    return rateLimitTracker.getStatus()
   }
 
   /**
-   * Refresh Strava access tokens
+   * Get valid Strava tokens, refreshing if necessary
+   */
+  async getValidTokens(): Promise<StravaTokens> {
+    if (!this.userId) {
+      throw new Error('User ID is required to get tokens')
+    }
+
+    console.log(`🔍 Looking for tokens for user: ${this.userId}`)
+
+    const { data: tokens, error } = await this.supabase
+      .from('strava_tokens')
+      .select('*')
+      .eq('strava_id', this.userId)
+      .single()
+
+    if (error || !tokens) {
+      throw new Error(`No Strava tokens found for user ${this.userId}. Please authenticate first.`)
+    }
+
+    console.log(`✅ Found tokens for user ${this.userId}, expires at: ${tokens.expires_at}`)
+    console.log(`🕐 Current time: ${new Date().toISOString()}`)
+    console.log(`⏰ Token expires: ${tokens.expires_at}`)
+
+    const expiresAt = new Date(tokens.expires_at as string)
+    const now = new Date()
+    const isExpired = expiresAt <= now
+
+    console.log(`📊 Is expired: ${isExpired}`)
+
+    if (isExpired) {
+      console.log(`🔄 Token expired, refreshing...`)
+      return this.refreshTokens(tokens.refresh_token as string, this.userId)
+    }
+
+    return {
+      access_token: tokens.access_token as string,
+      refresh_token: tokens.refresh_token as string,
+      expires_at: tokens.expires_at as string
+    }
+  }
+
+  /**
+   * Refresh Strava tokens
    */
   private async refreshTokens(refreshToken: string, stravaId?: number): Promise<StravaTokens> {
-    const { config } = await import('@/lib/config')
-    
     console.log(`🔄 Attempting to refresh tokens for user ${stravaId}...`)
     
     const response = await fetch('https://www.strava.com/oauth/token', {
@@ -215,13 +169,10 @@ export class StravaService {
       } catch (e) {
         errorDetails = { message: errorText }
       }
-
-      // Check if it's an invalid refresh token error
       if (response.status === 400 && errorDetails.errors?.some((e: any) => e.code === 'invalid')) {
         console.error(`❌ Invalid refresh token for user ${stravaId}. User needs to re-authenticate.`)
         throw new Error(`Invalid refresh token - user ${stravaId} needs to re-authenticate with Strava`)
       }
-
       console.error(`❌ Token refresh failed for user ${stravaId}:`, errorDetails)
       throw new Error(`Failed to refresh Strava tokens: ${response.status} - ${errorDetails.message || errorText}`)
     }
@@ -230,43 +181,37 @@ export class StravaService {
     console.log(`✅ Token refresh successful for user ${stravaId}`)
 
     // Save new tokens to database
-    const tokenData = {
-      access_token: newTokens.access_token,
-      refresh_token: newTokens.refresh_token,
-      expires_at: new Date(newTokens.expires_at * 1000).toISOString(),
-    }
+    const { error: updateError } = await this.supabase
+      .from('strava_tokens')
+      .upsert({
+        strava_id: stravaId,
+        access_token: newTokens.access_token,
+        refresh_token: newTokens.refresh_token,
+        expires_at: new Date(newTokens.expires_at * 1000).toISOString(),
+      })
 
-    if (stravaId) {
-      // Update existing tokens for specific user
-      await this.supabase
-        .from('strava_tokens')
-        .update(tokenData)
-        .eq('strava_id', stravaId)
-    } else {
-      // Insert new tokens (fallback)
-      await this.supabase
-        .from('strava_tokens')
-        .insert(tokenData)
+    if (updateError) {
+      console.error('Failed to save refreshed tokens:', updateError)
     }
 
     return {
       access_token: newTokens.access_token,
       refresh_token: newTokens.refresh_token,
-      expires_at: new Date(newTokens.expires_at * 1000).toISOString(),
+      expires_at: new Date(newTokens.expires_at * 1000).toISOString()
     }
   }
 
   /**
    * Fetch activities from Strava API with rate limiting
    */
-  async fetchActivities(page = 1, perPage = 200): Promise<StravaActivity[]> {
+  async fetchActivities(page = 1, perPage = config.stravaApiLimits.maxActivitiesPerRequest): Promise<StravaActivity[]> {
     // Check rate limits before making request
     if (!rateLimitTracker.canMakeRequest()) {
       const status = rateLimitTracker.getStatus()
-      throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN}, Day: ${status.requestsDay}/${RATE_LIMIT_CONFIG.REQUESTS_PER_DAY}`)
+      throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
     }
 
-    if (NO_LIMITS_MODE) {
+    if (config.stravaApiLimits.noLimitsMode) {
       console.log('🚀 NO-LIMITS MODE: Fetching activities without rate limiting')
     }
 
@@ -305,7 +250,7 @@ export class StravaService {
       if (response.status === 429) {
         // Rate limit hit, wait for reset
         console.warn('Rate limit hit, waiting for reset...')
-        await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_CONFIG.RETRY_DELAY_MS))
+        await new Promise(resolve => setTimeout(resolve, config.stravaApiLimits.retryDelayMs))
         return this.fetchActivities(page, perPage) // Retry after waiting
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
@@ -371,10 +316,10 @@ export class StravaService {
     // Check rate limits before making request
     if (!rateLimitTracker.canMakeRequest()) {
       const status = rateLimitTracker.getStatus()
-      throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN}, Day: ${status.requestsDay}/${RATE_LIMIT_CONFIG.REQUESTS_PER_DAY}`)
+      throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
     }
 
-    if (NO_LIMITS_MODE) {
+    if (config.stravaApiLimits.noLimitsMode) {
       console.log(`🚀 NO-LIMITS MODE: Fetching segments for activity ${activityId} without rate limiting`)
     }
 
@@ -394,7 +339,7 @@ export class StravaService {
       if (response.status === 429) {
         // Rate limit hit, wait for reset
         console.warn('Rate limit hit, waiting for reset...')
-        await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_CONFIG.RETRY_DELAY_MS))
+        await new Promise(resolve => setTimeout(resolve, config.stravaApiLimits.retryDelayMs))
         return this.fetchActivitySegments(activityId) // Retry after waiting
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
@@ -418,7 +363,7 @@ export class StravaService {
   /**
    * Sync activities from Strava to local database with rate limiting
    */
-  async syncActivities(limit = RATE_LIMIT_CONFIG.BATCH_SIZE): Promise<{ synced: number; errors: number }> {
+  async syncActivities(limit = config.stravaApiLimits.maxCrawlerBatchSize): Promise<{ synced: number; errors: number }> {
     let synced = 0
     let errors = 0
 
@@ -475,7 +420,7 @@ export class StravaService {
   /**
    * Sync segments for activities that need them
    */
-  async syncSegments(batchSize = 50): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
+  async syncSegments(batchSize = config.stravaApiLimits.maxSegmentBatchSize): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
     let processed = 0
     let segmentsAdded = 0
     let errors = 0
@@ -597,17 +542,5 @@ export class StravaService {
     }
 
     return activity
-  }
-
-  /**
-   * Get current rate limit status
-   */
-  getRateLimitStatus() {
-    const status = rateLimitTracker.getStatus()
-    return {
-      ...status,
-      noLimitsMode: NO_LIMITS_MODE,
-      mode: NO_LIMITS_MODE ? 'no-limits' : 'rate-limited'
-    }
   }
 } 
