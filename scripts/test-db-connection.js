@@ -43,8 +43,21 @@ async function testConnection() {
     
     console.log('✅ app_sessions table exists and is accessible')
     
-    // Test inserting a session
+    // Test inserting a session (first create a test user)
     console.log('🔧 Testing session insertion...')
+    
+    // First create a test user
+    const testUser = {
+      strava_id: 999999,
+      firstname: 'Test',
+      lastname: 'User',
+      city: 'Test City',
+      state: 'Test State',
+      country: 'Test Country'
+    }
+    
+    await supabase.from('users').upsert(testUser, { onConflict: 'strava_id' })
+    
     const testSession = {
       strava_id: 999999,
       session_token: 'test-token-' + Date.now(),
@@ -62,13 +75,18 @@ async function testConnection() {
     
     console.log('✅ Session insertion successful')
     
-    // Clean up test session
+    // Clean up test session and user
     await supabase
       .from('app_sessions')
       .delete()
       .eq('strava_id', 999999)
     
-    console.log('✅ Test session cleaned up')
+    await supabase
+      .from('users')
+      .delete()
+      .eq('strava_id', 999999)
+    
+    console.log('✅ Test session and user cleaned up')
     console.log('🎉 All database tests passed!')
     
   } catch (error) {

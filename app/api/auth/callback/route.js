@@ -59,7 +59,7 @@ export async function GET(req) {
       // Redirect to home page with error
       const homeUrl = process.env.NODE_ENV === 'production' 
         ? 'https://strava-heatmap-alpha.vercel.app'
-        : 'http://localhost:3001';
+        : 'http://localhost:3000';
       
       return Response.redirect(homeUrl);
     }
@@ -67,24 +67,35 @@ export async function GET(req) {
     // Redirect to dashboard after successful authentication
     const dashboardUrl = process.env.NODE_ENV === 'production' 
       ? 'https://strava-heatmap-alpha.vercel.app/dashboard'
-      : 'http://localhost:3001/dashboard';
+      : 'http://localhost:3000/dashboard';
     
     // Create response with session cookie
+    console.log('🔧 Redirecting to dashboard:', dashboardUrl);
     const response_redirect = Response.redirect(dashboardUrl);
     
     // Set session cookie only if session was created successfully
     if (sessionToken && expiresAt) {
+      console.log('🔧 Setting cookies for session');
       const sessionCookie = CookieManagerServer.setSessionCookie(sessionToken, expiresAt);
-      response_redirect.headers.set('Set-Cookie', sessionCookie);
-      
-      // Set CSRF token
       const csrfToken = AuthServiceServer.generateCSRFToken();
       const csrfCookie = CookieManagerServer.setCSRFCookie(csrfToken);
-      response_redirect.headers.set('Set-Cookie', csrfCookie);
+      
+      console.log('🔧 Session cookie:', sessionCookie);
+      console.log('🔧 CSRF cookie:', csrfCookie);
+      
+      // Set both cookies in a single Set-Cookie header
+      response_redirect.headers.set('Set-Cookie', [sessionCookie, csrfCookie]);
+      console.log('✅ Cookies set successfully');
+    } else {
+      console.log('❌ No session token or expiresAt available');
     }
     
+    console.log('✅ Redirecting to dashboard');
     return response_redirect;
   } catch (error) {
+    console.error('❌ Callback error:', error);
+    console.error('❌ Error stack:', error.stack);
+    
     let errorDetails = { error: error.message };
     if (error.response) {
       errorDetails.status = error.response.status;

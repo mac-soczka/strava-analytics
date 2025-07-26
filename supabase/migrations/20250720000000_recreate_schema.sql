@@ -66,22 +66,28 @@ ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE strava_tokens ENABLE ROW LEVEL SECURITY;
 ALTER TABLE activities ENABLE ROW LEVEL SECURITY;
 
--- Create RLS policies
+-- Create RLS policies (drop if exists first)
+DROP POLICY IF EXISTS "Users can view their own data" ON users;
 CREATE POLICY "Users can view their own data" ON users
   FOR SELECT USING (true);
 
+DROP POLICY IF EXISTS "Users can update their own data" ON users;
 CREATE POLICY "Users can update their own data" ON users
   FOR UPDATE USING (true);
 
+DROP POLICY IF EXISTS "Users can insert their own data" ON users;
 CREATE POLICY "Users can insert their own data" ON users
   FOR INSERT WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Tokens can be managed by service role" ON strava_tokens;
 CREATE POLICY "Tokens can be managed by service role" ON strava_tokens
   FOR ALL USING (true);
 
+DROP POLICY IF EXISTS "Activities can be viewed by owner" ON activities;
 CREATE POLICY "Activities can be viewed by owner" ON activities
   FOR SELECT USING (true);
 
+DROP POLICY IF EXISTS "Activities can be inserted by service role" ON activities;
 CREATE POLICY "Activities can be inserted by service role" ON activities
   FOR INSERT WITH CHECK (true);
 

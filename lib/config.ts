@@ -51,11 +51,11 @@ function getDefaultRedirectUri(): string {
     return `${baseUrl}/api/auth/callback`;
   }
 
-  // Use localhost for development
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🔧 Using development redirect URI: http://localhost:3001/api/auth/callback');
-    return "http://localhost:3001/api/auth/callback";
-  }
+          // Use localhost for development
+        if (process.env.NODE_ENV === 'development') {
+          console.log('🔧 Using development redirect URI: http://localhost:3000/api/auth/callback');
+          return "http://localhost:3000/api/auth/callback";
+        }
   
   // Note: localhost won't work if Strava app is configured for production domain
   // You'll need to use the production URL even for local development
