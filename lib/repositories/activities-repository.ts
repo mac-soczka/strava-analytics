@@ -149,15 +149,57 @@ export class ActivitiesRepository {
   }
 
   /**
-   * Get activities that need segments fetched
+   * Reset segments_fetched flag for activities (useful for re-processing)
    */
-  async getActivitiesNeedingSegments(limit = 10) {
+  async resetSegmentsFetchedFlag(limit = 1000) {
+    try {
+      const { data, error } = await this.supabase
+        .from('activities')
+        .update({ segments_fetched: false })
+        .eq('segments_fetched', true)
+        .limit(limit)
+        .select('id, activity_id')
+
+      if (error) throw error
+      
+      console.log(`🔄 Reset segments_fetched flag for ${data?.length || 0} activities`)
+      return data?.length || 0
+    } catch (error) {
+      console.error('Error resetting segments_fetched flag:', error)
+      throw error
+    }
+  }
+
+  /**
+   * Get total count of activities that need segments fetched
+   */
+  async getActivitiesNeedingSegmentsCount() {
+    try {
+      const { count, error } = await this.supabase
+        .from('activities')
+        .select('*', { count: 'exact', head: true })
+        .eq('segments_fetched', false)
+
+      if (error) throw error
+      
+      return count || 0
+    } catch (error) {
+      console.error('Error fetching activities needing segments count:', error)
+      throw error
+    }
+  }
+
+  /**
+   * Get activities that need segments fetched with pagination support
+   */
+  async getActivitiesNeedingSegments(limit = 10, offset = 0) {
     try {
       const { data, error } = await this.supabase
         .from('activities')
         .select('id, activity_id, name')
         .eq('segments_fetched', false)
-        .limit(limit)
+        .range(offset, offset + limit - 1)
+        .order('start_date', { ascending: false })
 
       if (error) throw error
       

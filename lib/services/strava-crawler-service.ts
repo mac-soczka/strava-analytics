@@ -10,6 +10,7 @@ export interface CrawlerLogEntry {
   message: string
   activities_fetched: number
   segments_fetched: number
+  segment_efforts_fetched: number
   execution_time_ms: number
 }
 
@@ -19,6 +20,7 @@ export interface CrawlerResult {
   success: boolean
   activities_fetched: number
   segments_fetched: number
+  segment_efforts_fetched: number
   message: string
   errors?: string[]
   execution_time_ms: number
@@ -100,6 +102,7 @@ export class StravaCrawlerService {
         message: `Crawler completed: ${successfulUsers}/${users.length} users successful, ${totalActivities} activities, ${totalSegments} segments`,
         activities_fetched: totalActivities,
         segments_fetched: totalSegments,
+        segment_efforts_fetched: totalSegments, // For now, use segments_fetched as efforts_fetched
         execution_time_ms: executionTime
       })
 
@@ -116,6 +119,7 @@ export class StravaCrawlerService {
         message: `Crawler failed: ${error.message}`,
         activities_fetched: 0,
         segments_fetched: 0,
+        segment_efforts_fetched: 0,
         execution_time_ms: executionTime
       })
 
@@ -183,6 +187,7 @@ export class StravaCrawlerService {
       success: false,
       activities_fetched: 0,
       segments_fetched: 0,
+      segment_efforts_fetched: 0,
       message: '',
       errors: [],
       execution_time_ms: 0
@@ -196,30 +201,22 @@ export class StravaCrawlerService {
       
       // Log initial rate limit status
       const initialRateLimitStatus = this.stravaService.getRateLimitStatus()
-      console.log(`📊 Initial rate limit status for ${user.firstname}: ${initialRateLimitStatus.mode} - 15min: ${initialRateLimitStatus.requests15min}/${initialRateLimitStatus.requestsPer15Min}, Day: ${initialRateLimitStatus.requestsDay}/${initialRateLimitStatus.requestsPerDay}`)
+      console.log(`📊 Initial rate limit status for ${user.firstname}: ${initialRateLimitStatus.mode} - 15min: ${initialRateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${initialRateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
 
-      // Sync activities
-      const activityResult = await this.stravaService.syncActivities(options.batch_size || config.stravaApiLimits.maxCrawlerBatchSize)
-      result.activities_fetched = activityResult.synced
-
-      // Log rate limit status after activities
-      const afterActivitiesRateLimitStatus = this.stravaService.getRateLimitStatus()
-      console.log(`📊 Rate limit status after activities for ${user.firstname}: 15min: ${afterActivitiesRateLimitStatus.requests15min}/${afterActivitiesRateLimitStatus.requestsPer15Min}, Day: ${afterActivitiesRateLimitStatus.requestsDay}/${afterActivitiesRateLimitStatus.requestsPerDay}`)
-
-      // Sync segments if requested
-      if (options.include_segments !== false) {
-        const segmentResult = await this.stravaService.syncSegments(options.segment_batch_size || config.stravaApiLimits.maxSegmentBatchSize)
-        result.segments_fetched = segmentResult.segmentsAdded
-      }
+      // Use comprehensive sync to ensure ALL activities and segments are fetched
+      const syncResult = await this.stravaService.syncAllData()
+      result.activities_fetched = syncResult.activities.synced
+      result.segments_fetched = syncResult.segments.segmentsAdded
+      result.segment_efforts_fetched = syncResult.segments.segmentsAdded // For now, use segments added as efforts
 
       // Log final rate limit status
       const finalRateLimitStatus = this.stravaService.getRateLimitStatus()
-      console.log(`📊 Final rate limit status for ${user.firstname}: 15min: ${finalRateLimitStatus.requests15min}/${finalRateLimitStatus.requestsPer15Min}, Day: ${finalRateLimitStatus.requestsDay}/${finalRateLimitStatus.requestsPerDay}`)
+      console.log(`📊 Final rate limit status for ${user.firstname}: 15min: ${finalRateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${finalRateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
 
       result.execution_time_ms = Date.now() - startTime
       result.success = true
-      result.message = `Successfully processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments`
-      console.log(`✅ User ${user.firstname} ${user.lastname} processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments`)
+      result.message = `Successfully processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments, ${result.segment_efforts_fetched} segment efforts`
+      console.log(`✅ User ${user.firstname} ${user.lastname} processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments, ${result.segment_efforts_fetched} segment efforts`)
 
     } catch (error: any) {
       result.success = false // Ensure success is false on error
@@ -238,7 +235,7 @@ export class StravaCrawlerService {
         // Log detailed rate limit information
         if (this.stravaService) {
           const rateLimitStatus = this.stravaService.getRateLimitStatus()
-          console.log(`📊 Rate limit details at failure: ${rateLimitStatus.mode} - 15min: ${rateLimitStatus.requests15min}/${rateLimitStatus.requestsPer15Min}, Day: ${rateLimitStatus.requestsDay}/${rateLimitStatus.requestsPerDay}`)
+          console.log(`📊 Rate limit details at failure: ${rateLimitStatus.mode} - 15min: ${rateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${rateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
         }
       } else {
         result.message = `Error processing user ${user.firstname} ${user.lastname}: ${error.message}`

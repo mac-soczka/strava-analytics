@@ -19,6 +19,7 @@ interface CrawlerLog {
   message: string
   activities_fetched: number
   segments_fetched: number
+  segment_efforts_fetched: number
   error?: string
   execution_time_ms: number
 }

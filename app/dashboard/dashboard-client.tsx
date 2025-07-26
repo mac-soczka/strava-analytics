@@ -18,6 +18,7 @@ interface DashboardStats {
   totalActivities: number
   totalSegments: number
   totalEfforts: number
+  segmentsAttempted: number
   totalDistance: number
   totalTime: number
   totalElevation: number
@@ -117,7 +118,7 @@ export default function DashboardClient({
     },
     {
       title: 'Segments Attempted',
-      value: stats.totalSegments.toLocaleString(),
+      value: stats.segmentsAttempted.toLocaleString(),
       icon: Target,
       color: 'text-indigo-600',
       bgColor: 'bg-indigo-50 dark:bg-indigo-900/20'

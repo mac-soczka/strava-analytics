@@ -62,31 +62,37 @@ async function DashboardContent() {
     if (effortsCount.error) throw effortsCount.error
 
     // 🎯 APPROACH 2: Parallel data fetching for calculations
-    const [activities, segments, segmentEfforts, recentActivities] = await Promise.all([
+    const [activities, segments, segmentEfforts, recentActivities, totalStats] = await Promise.all([
       // Full data for calculations (limited for performance)
       supabase.from('activities').select('distance, moving_time, total_elevation_gain, type, start_date').order('start_date', { ascending: false }).limit(1000),
       supabase.from('segments').select('segment_id, name, distance, elevation_gain'),
       supabase.from('segment_efforts').select('segment_id'),
       
       // Recent activities for display
-      supabase.from('activities').select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date').order('start_date', { ascending: false }).limit(5)
+      supabase.from('activities').select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date').order('start_date', { ascending: false }).limit(5),
+      
+      // Get total stats from all activities (not limited)
+      supabase.from('activities').select('distance, moving_time, total_elevation_gain')
     ])
 
     if (activities.error) throw activities.error
     if (segments.error) throw segments.error
     if (segmentEfforts.error) throw segmentEfforts.error
     if (recentActivities.error) throw recentActivities.error
+    if (totalStats.error) throw totalStats.error
 
     // 🎯 APPROACH 3: Client-side aggregation for performance metrics
-    const totalDistance = activities.data?.reduce((sum: number, a: any) => sum + (a.distance || 0), 0) || 0
-    const totalTime = activities.data?.reduce((sum: number, a: any) => sum + (a.moving_time || 0), 0) || 0
-    const totalElevation = activities.data?.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0) || 0
+    const totalDistance = totalStats.data?.reduce((sum: number, a: any) => sum + (a.distance || 0), 0) || 0
+    const totalTime = totalStats.data?.reduce((sum: number, a: any) => sum + (a.moving_time || 0), 0) || 0
+    const totalElevation = totalStats.data?.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0) || 0
     
     // Calculate effort statistics efficiently
     const effortCountMap = new Map<number, number>()
+    const uniqueSegmentsAttempted = new Set<number>()
     segmentEfforts.data?.forEach((effort: any) => {
       const segmentId = effort.segment_id
       effortCountMap.set(segmentId, (effortCountMap.get(segmentId) || 0) + 1)
+      uniqueSegmentsAttempted.add(segmentId)
     })
 
     // Get top segments by effort count
@@ -138,6 +144,7 @@ async function DashboardContent() {
       totalActivities: activitiesCount.count || 0,
       totalSegments: segmentsCount.count || 0,
       totalEfforts: effortsCount.count || 0,
+      segmentsAttempted: uniqueSegmentsAttempted.size,
       totalDistance: Math.round(totalDistance / 1000 * 100) / 100, // km
       totalTime: Math.round(totalTime / 3600 * 100) / 100, // hours
       totalElevation: Math.round(totalElevation), // meters
