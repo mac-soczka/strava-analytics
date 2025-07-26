@@ -1,249 +1,209 @@
-import { createServerComponentClient } from '@/lib/supabase'
-import { StravaSegmentEffort } from '@/types/strava'
+import { createClient } from '@supabase/supabase-js'
+import { config } from '@/lib/config'
+
+export interface Segment {
+  id?: string
+  segment_id: number
+  name?: string
+  distance?: number
+  elevation_gain?: number
+  average_grade?: number
+  maximum_grade?: number
+  climb_category?: number
+  city?: string
+  state?: string
+  country?: string
+  polyline?: string
+  created_at?: string
+  updated_at?: string
+}
+
+export interface SegmentEffort {
+  id?: string
+  activity_id: number
+  segment_id: number
+  effort_id: number
+  elapsed_time?: number
+  moving_time?: number
+  start_date?: string
+  average_watts?: number
+  max_watts?: number
+  created_at?: string
+  updated_at?: string
+}
 
 export class SegmentsRepository {
-  private supabase: ReturnType<typeof createServerComponentClient>
+  private supabase: ReturnType<typeof createClient>
 
   constructor() {
-    this.supabase = createServerComponentClient()
+    this.supabase = createClient(
+      config.supabase.url,
+      config.supabase.serviceRoleKey
+    )
   }
 
   /**
-   * Get all segment efforts
+   * Upsert a segment (insert or update)
    */
-  async getAllSegmentEfforts(limit = 100, offset = 0) {
+  async upsertSegment(segment: Segment): Promise<{ data: Segment | null; error: any }> {
     const { data, error } = await this.supabase
       .from('segments')
-      .select(`
-        *,
-        activities (
-          id,
-          name,
-          start_date
-        )
-      `)
-      .order('start_date', { ascending: false })
-      .range(offset, offset + limit - 1)
+      .upsert(segment as any, { onConflict: 'segment_id' })
+      .select()
+      .single()
 
-    if (error) throw error
-    return data
-  }
-
-  /**
-   * Get segment efforts by segment ID
-   */
-  async getSegmentEffortsBySegmentId(segmentId: number) {
-    const { data, error } = await this.supabase
-      .from('segments')
-      .select(`
-        *,
-        activities (
-          id,
-          name,
-          start_date
-        )
-      `)
-      .eq('segment_id', segmentId)
-      .order('start_date', { ascending: false })
-
-    if (error) throw error
-    return data
-  }
-
-  /**
-   * Get segment efforts by activity ID
-   */
-  async getSegmentEffortsByActivityId(activityId: number) {
-    const { data, error } = await this.supabase
-      .from('segments')
-      .select('*')
-      .eq('activity_id', activityId)
-      .order('start_date', { ascending: false })
-
-    if (error) throw error
-    return data as StravaSegmentEffort[]
-  }
-
-  /**
-   * Get unique segments
-   */
-  async getUniqueSegments() {
-    const { data, error } = await this.supabase
-      .from('segments')
-      .select('segment_id, segment_name, segment_distance, segment_city, segment_state, segment_country')
-      .order('segment_name')
-
-    if (error) throw error
-
-    // Remove duplicates by segment_id
-    const uniqueSegments = data.reduce((acc, segment) => {
-      if (!acc.find(s => s.segment_id === segment.segment_id)) {
-        acc.push(segment)
-      }
-      return acc
-    }, [] as typeof data)
-
-    return uniqueSegments
+    return { data: data as Segment | null, error }
   }
 
   /**
    * Get segment by ID
    */
-  async getSegmentById(segmentId: number) {
+  async getSegmentById(segmentId: number): Promise<{ data: Segment | null; error: any }> {
     const { data, error } = await this.supabase
       .from('segments')
       .select('*')
       .eq('segment_id', segmentId)
-      .limit(1)
       .single()
 
-    if (error) throw error
-    return data
+    return { data: data as Segment | null, error }
   }
 
   /**
-   * Get personal records for segments
+   * Get segments by location
    */
-  async getPersonalRecords() {
+  async getSegmentsByLocation(city?: string, state?: string, country?: string): Promise<{ data: Segment[] | null; error: any }> {
+    let query = this.supabase
+      .from('segments')
+      .select('*')
+
+    if (city) query = query.eq('city', city)
+    if (state) query = query.eq('state', state)
+    if (country) query = query.eq('country', country)
+
+    const { data, error } = await query
+
+    return { data: data as Segment[] | null, error }
+  }
+
+  /**
+   * Get segments by climb category
+   */
+  async getSegmentsByClimbCategory(category: number): Promise<{ data: Segment[] | null; error: any }> {
     const { data, error } = await this.supabase
       .from('segments')
       .select('*')
-      .order('segment_id, elapsed_time')
+      .eq('climb_category', category)
 
-    if (error) throw error
-
-    // Group by segment_id and find best time for each
-    const personalRecords = data.reduce((acc, effort) => {
-      const existing = acc.find((pr: typeof data[0]) => pr.segment_id === effort.segment_id)
-      if (!existing || effort.elapsed_time < existing.elapsed_time) {
-        // Remove existing if found
-        const filtered = acc.filter((pr: typeof data[0]) => pr.segment_id !== effort.segment_id)
-        return [...filtered, effort]
-      }
-      return acc
-    }, [] as typeof data)
-
-    return personalRecords
+    return { data: data as Segment[] | null, error }
   }
 
   /**
-   * Create segment effort
+   * Upsert a segment effort
    */
-  async createSegmentEffort(segmentEffort: Omit<StravaSegmentEffort, 'id'>) {
+  async upsertSegmentEffort(effort: SegmentEffort): Promise<{ data: SegmentEffort | null; error: any }> {
     const { data, error } = await this.supabase
-      .from('segments')
-      .insert(segmentEffort)
+      .from('segment_efforts')
+      .upsert(effort as any, { onConflict: 'activity_id,segment_id' })
       .select()
       .single()
 
-    if (error) throw error
-    return data as StravaSegmentEffort
+    return { data: data as SegmentEffort | null, error }
   }
 
   /**
-   * Create multiple segment efforts
+   * Get segment efforts for an activity
    */
-  async createSegmentEfforts(segmentEfforts: Record<string, unknown>[]) {
+  async getSegmentEffortsByActivity(activityId: number): Promise<{ data: SegmentEffort[] | null; error: any }> {
+    const { data, error } = await this.supabase
+      .from('segment_efforts')
+      .select('*')
+      .eq('activity_id', activityId)
+
+    return { data: data as SegmentEffort[] | null, error }
+  }
+
+  /**
+   * Get segment efforts for a segment
+   */
+  async getSegmentEffortsBySegment(segmentId: number): Promise<{ data: SegmentEffort[] | null; error: any }> {
+    const { data, error } = await this.supabase
+      .from('segment_efforts')
+      .select('*')
+      .eq('segment_id', segmentId)
+      .order('elapsed_time', { ascending: true })
+
+    return { data: data as SegmentEffort[] | null, error }
+  }
+
+  /**
+   * Get user's best efforts for a segment
+   */
+  async getUserBestEffortsForSegment(segmentId: number, userId: number): Promise<{ data: SegmentEffort[] | null; error: any }> {
+    const { data, error } = await this.supabase
+      .from('segment_efforts')
+      .select('*')
+      .eq('segment_id', segmentId)
+
+    return { data: data as SegmentEffort[] | null, error }
+  }
+
+  /**
+   * Bulk upsert segments
+   */
+  async bulkUpsertSegments(segments: Segment[]): Promise<{ data: Segment[] | null; error: any }> {
     const { data, error } = await this.supabase
       .from('segments')
-      .insert(segmentEfforts)
+      .upsert(segments as any[], { onConflict: 'segment_id' })
       .select()
 
-    if (error) throw error
-    return data as StravaSegmentEffort[]
+    return { data: data as Segment[] | null, error }
   }
 
   /**
-   * Update segment effort
+   * Bulk upsert segment efforts
    */
-  async updateSegmentEffort(id: number, updates: Partial<StravaSegmentEffort>) {
+  async bulkUpsertSegmentEfforts(efforts: SegmentEffort[]): Promise<{ data: SegmentEffort[] | null; error: any }> {
     const { data, error } = await this.supabase
-      .from('segments')
-      .update(updates)
-      .eq('id', id)
+      .from('segment_efforts')
+      .upsert(efforts as any[], { onConflict: 'activity_id,segment_id' })
       .select()
-      .single()
 
-    if (error) throw error
-    return data as StravaSegmentEffort
-  }
-
-  /**
-   * Delete segment effort
-   */
-  async deleteSegmentEffort(id: number) {
-    const { error } = await this.supabase
-      .from('segments')
-      .delete()
-      .eq('id', id)
-
-    if (error) throw error
+    return { data: data as SegmentEffort[] | null, error }
   }
 
   /**
    * Get segment statistics
    */
-  async getSegmentStats() {
+  async getSegmentStats(): Promise<{ data: any; error: any }> {
     const { data, error } = await this.supabase
       .from('segments')
-      .select('segment_id, elapsed_time, segment_distance')
+      .select('climb_category, city, state, country')
 
-    if (error) throw error
+    if (error) return { data: null, error }
 
     const stats = {
-      totalEfforts: data.length,
-      uniqueSegments: new Set(data.map(s => s.segment_id)).size,
-      averageTime: data.reduce((sum, s) => sum + (s.elapsed_time || 0), 0) / data.length,
-      totalDistance: data.reduce((sum, s) => sum + (s.segment_distance || 0), 0)
+      total_segments: data.length,
+      by_climb_category: {} as Record<number, number>,
+      by_city: {} as Record<string, number>,
+      by_state: {} as Record<string, number>,
+      by_country: {} as Record<string, number>
     }
 
-    return stats
-  }
-
-  /**
-   * Get fastest efforts by segment
-   */
-  async getFastestEffortsBySegment(limit = 10) {
-    const { data, error } = await this.supabase
-      .from('segments')
-      .select('*')
-      .order('segment_id, elapsed_time')
-
-    if (error) throw error
-
-    // Group by segment and find fastest for each
-    const fastestBySegment = data.reduce((acc, effort) => {
-      const existing = acc.find((f: typeof data[0]) => f.segment_id === effort.segment_id)
-      if (!existing || effort.elapsed_time < existing.elapsed_time) {
-        const filtered = acc.filter((f: typeof data[0]) => f.segment_id !== effort.segment_id)
-        return [...filtered, effort]
+    data.forEach((segment: any) => {
+      if (segment.climb_category) {
+        stats.by_climb_category[segment.climb_category] = (stats.by_climb_category[segment.climb_category] || 0) + 1
       }
-      return acc
-    }, [] as typeof data)
-
-    return fastestBySegment.slice(0, limit)
-  }
-
-  /**
-   * Search segments by name
-   */
-  async searchSegmentsByName(searchTerm: string) {
-    const { data, error } = await this.supabase
-      .from('segments')
-      .select('segment_id, segment_name, segment_city, segment_state')
-      .ilike('segment_name', `%${searchTerm}%`)
-      .order('segment_name')
-
-    if (error) throw error
-
-    // Remove duplicates
-    const uniqueSegments = data.reduce((acc, segment) => {
-      if (!acc.find(s => s.segment_id === segment.segment_id)) {
-        acc.push(segment)
+      if (segment.city) {
+        stats.by_city[segment.city] = (stats.by_city[segment.city] || 0) + 1
       }
-      return acc
-    }, [] as typeof data)
+      if (segment.state) {
+        stats.by_state[segment.state] = (stats.by_state[segment.state] || 0) + 1
+      }
+      if (segment.country) {
+        stats.by_country[segment.country] = (stats.by_country[segment.country] || 0) + 1
+      }
+    })
 
-    return uniqueSegments
+    return { data: stats, error: null }
   }
 } 

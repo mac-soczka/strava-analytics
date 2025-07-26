@@ -5,6 +5,7 @@ import { createClientComponentClient } from '@/lib/supabase'
 import { supabase as serverSupabase } from '@/lib/database'
 import { AuthService, SessionManager, TokenManager } from '@/lib/services/auth-service'
 import { upsertUserClient, upsertTokensClient, getUserByStravaIdClient, getTokensByStravaIdClient } from '@/lib/database-client'
+import CrawlerControl from '@/app/components/CrawlerControl'
 
 interface TestResult {
   test: string
@@ -1011,6 +1012,11 @@ export default function TestPage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Crawler Control */}
+        <div className="mt-8">
+          <CrawlerControl />
         </div>
       </div>
     </div>
