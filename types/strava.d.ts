@@ -48,4 +48,27 @@ export interface StravaActivity {
   start_date_local: string;
   timezone?: string; // Optional since database doesn't have this column
   utc_offset?: number; // Optional since database doesn't have this column
+}
+
+export interface DatabaseActivity {
+  id?: string; // UUID primary key (optional for inserts)
+  strava_id: number;
+  activity_id: number;
+  name: string;
+  distance: number;
+  moving_time: number;
+  elapsed_time: number;
+  total_elevation_gain: number;
+  type: string;
+  start_date: string;
+  start_date_local: string;
+  average_speed?: number;
+  max_speed?: number;
+  average_watts?: number;
+  max_watts?: number;
+  average_heartrate?: number;
+  max_heartrate?: number;
+  polyline?: string;
+  created_at?: string;
+  updated_at?: string;
 } 

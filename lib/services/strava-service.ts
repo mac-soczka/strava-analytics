@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { ActivitiesRepository } from '@/lib/repositories/activities-repository'
 import { SegmentsRepository } from '@/lib/repositories/segments-repository'
-import { StravaActivity } from '@/types/strava'
+import { StravaActivity, DatabaseActivity } from '@/types/strava'
 import { config } from '@/lib/config'
 
 interface StravaTokens {
@@ -53,6 +53,9 @@ const RATE_LIMIT_CONFIG = {
   RETRY_DELAY_MS: 15 * 60 * 1000, // 15 minutes for rate limit reset
 }
 
+// Check if no-limits mode is enabled
+const NO_LIMITS_MODE = process.env.STRAVA_NO_LIMITS === 'true'
+
 // Rate limit tracking
 class RateLimitTracker {
   private requests15min: number = 0
@@ -61,6 +64,11 @@ class RateLimitTracker {
   private lastResetDay: number = Date.now()
 
   canMakeRequest(): boolean {
+    // In no-limits mode, always allow requests
+    if (NO_LIMITS_MODE) {
+      return true
+    }
+    
     this.updateCounters()
     return this.requests15min < RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN &&
            this.requestsDay < RATE_LIMIT_CONFIG.REQUESTS_PER_DAY
@@ -88,6 +96,11 @@ class RateLimitTracker {
   }
 
   getDelay(): number {
+    // In no-limits mode, no delay
+    if (NO_LIMITS_MODE) {
+      return 0
+    }
+    
     const remaining15min = RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN - this.requests15min
     const remainingDay = RATE_LIMIT_CONFIG.REQUESTS_PER_DAY - this.requestsDay
     
@@ -235,6 +248,10 @@ export class StravaService {
       throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN}, Day: ${status.requestsDay}/${RATE_LIMIT_CONFIG.REQUESTS_PER_DAY}`)
     }
 
+    if (NO_LIMITS_MODE) {
+      console.log('🚀 NO-LIMITS MODE: Fetching activities without rate limiting')
+    }
+
     const tokens = await this.getValidTokens()
 
     const response = await fetch(
@@ -276,6 +293,10 @@ export class StravaService {
     if (!rateLimitTracker.canMakeRequest()) {
       const status = rateLimitTracker.getStatus()
       throw new Error(`Rate limit exceeded. 15min: ${status.requests15min}/${RATE_LIMIT_CONFIG.REQUESTS_PER_15MIN}, Day: ${status.requestsDay}/${RATE_LIMIT_CONFIG.REQUESTS_PER_DAY}`)
+    }
+
+    if (NO_LIMITS_MODE) {
+      console.log(`🚀 NO-LIMITS MODE: Fetching segments for activity ${activityId} without rate limiting`)
     }
 
     const tokens = await this.getValidTokens()
@@ -336,19 +357,19 @@ export class StravaService {
           }
 
           // Create activity in database
-          await this.activitiesRepo.createActivity({
+          const activityData: Omit<DatabaseActivity, 'id'> = {
+            strava_id: this.userId!,
+            activity_id: activity.id,
             name: activity.name,
             distance: activity.distance,
             moving_time: activity.moving_time,
             elapsed_time: activity.elapsed_time,
             total_elevation_gain: activity.total_elevation_gain,
             type: activity.type,
-            sport_type: activity.sport_type,
             start_date: activity.start_date,
             start_date_local: activity.start_date_local,
-            timezone: activity.timezone,
-            utc_offset: activity.utc_offset,
-          })
+          }
+          await this.activitiesRepo.createActivity(activityData)
 
           synced++
           console.log(`✅ Synced activity: ${activity.name}`)
@@ -507,6 +528,11 @@ export class StravaService {
    * Get current rate limit status
    */
   getRateLimitStatus() {
-    return rateLimitTracker.getStatus()
+    const status = rateLimitTracker.getStatus()
+    return {
+      ...status,
+      noLimitsMode: NO_LIMITS_MODE,
+      mode: NO_LIMITS_MODE ? 'no-limits' : 'rate-limited'
+    }
   }
 } 

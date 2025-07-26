@@ -1,260 +1,124 @@
 # Environment Setup Guide
 
-This document provides comprehensive instructions for setting up environment variables for different deployment environments.
+This guide covers all environment variables needed for the Strava Heatmap application.
 
-## 🌍 Environment Configuration
-
-The application automatically detects the environment and configures the appropriate redirect URLs:
-
-- **Vercel Deployments**: `https://{VERCEL_URL}/api/auth/callback` (automatic)
-- **Custom Domain**: `{NEXT_PUBLIC_APP_URL}/api/auth/callback` (if set)
-- **Local Development**: `http://localhost:3000/api/auth/callback` (fallback)
-
-## 🔧 Required Environment Variables
+## Required Environment Variables
 
 ### Supabase Configuration
 ```bash
-# Required for database operations
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+# Supabase URL (from your Supabase project settings)
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+
+# Supabase Anon Key (from your Supabase project settings)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+
+# Supabase Service Role Key (from your Supabase project settings)
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
 ```
 
-### Strava Configuration
+### Strava OAuth Configuration
 ```bash
-# Required for Strava API integration
-STRAVA_CLIENT_ID=your_strava_client_id
-STRAVA_CLIENT_SECRET=your_strava_client_secret
+# Strava Client ID (from your Strava API application)
+STRAVA_CLIENT_ID=your-client-id-here
 
-# Optional: Override default redirect URI
-STRAVA_REDIRECT_URI=https://your-domain.com/api/auth/callback
+# Strava Client Secret (from your Strava API application)
+STRAVA_CLIENT_SECRET=your-client-secret-here
 
-# Optional: Custom app URL (if not using Vercel's automatic detection)
-NEXT_PUBLIC_APP_URL=https://your-custom-domain.com
+# Optional: Custom redirect URI (defaults to localhost:3000 for development)
+STRAVA_REDIRECT_URI=http://localhost:3000/api/auth/callback
 ```
 
-## 🚀 Deployment Environments
+## Optional Environment Variables
 
-### 1. Local Development
+### Strava No-Limits Mode
+```bash
+# Disable internal rate limiting (let Strava handle limits naturally)
+STRAVA_NO_LIMITS=true
+```
 
-Create a `.env.local` file in your project root:
+**What is No-Limits Mode?**
+- Disables the application's internal rate limiting system
+- Lets Strava handle rate limits naturally (you'll get 429 errors when limits are hit)
+- Useful for testing and development
+- May hit Strava rate limits faster since no delays are applied
 
+**To enable/disable:**
+```bash
+# Enable no-limits mode
+yarn strava:no-limits:enable
+
+# Disable no-limits mode
+yarn strava:no-limits:disable
+
+# Check current status
+yarn strava:no-limits:status
+```
+
+**⚠️ Important:** Restart your development server after changing this setting.
+
+### Deployment Configuration
+```bash
+# Custom app URL (for production deployments)
+NEXT_PUBLIC_APP_URL=https://your-domain.com
+
+# Vercel URL (automatically set by Vercel)
+VERCEL_URL=your-vercel-url.vercel.app
+```
+
+## Environment File Setup
+
+1. **Create `.env.local` file** in the project root:
+```bash
+cp .env.local.example .env.local
+```
+
+2. **Add your environment variables** to `.env.local`:
 ```bash
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
 
 # Strava
-STRAVA_CLIENT_ID=your_client_id
-STRAVA_CLIENT_SECRET=your_client_secret
-# STRAVA_REDIRECT_URI is optional - defaults to http://localhost:3000/api/auth/callback
+STRAVA_CLIENT_ID=your-client-id-here
+STRAVA_CLIENT_SECRET=your-client-secret-here
+
+# Optional: No-limits mode for development
+STRAVA_NO_LIMITS=true
 ```
 
-### 2. Vercel Production
-
-Configure these environment variables in your Vercel project settings:
-
+3. **Restart your development server**:
 ```bash
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-
-# Strava
-STRAVA_CLIENT_ID=your_client_id
-STRAVA_CLIENT_SECRET=your_client_secret
-# STRAVA_REDIRECT_URI is optional - defaults to production URL
+yarn dev
 ```
 
-### 3. Vercel Preview Deployments
+## Environment Variable Validation
 
-Preview deployments automatically use the `VERCEL_URL` environment variable:
+The application validates required environment variables on startup. If any are missing, you'll see an error message listing the missing variables.
 
-```bash
-# All the same variables as production
-# The redirect URI will automatically be: https://{VERCEL_URL}/api/auth/callback
-```
+## Security Notes
 
-## 🔗 Strava App Configuration
+- **Never commit `.env.local`** to version control
+- **Service Role Key** has full database access - keep it secure
+- **Client Secret** should be kept private
+- **No-Limits Mode** should only be used in development/testing
 
-### 1. Strava API Application Setup
+## Troubleshooting
 
-1. Go to [Strava API Settings](https://www.strava.com/settings/api)
-2. Create a new application or edit existing one
-3. Configure the following settings:
+### Missing Environment Variables
+If you see "Missing required environment variables" errors:
+1. Check that `.env.local` exists in the project root
+2. Verify all required variables are set
+3. Restart the development server
 
-#### For Local Development:
-- **Authorization Callback Domain**: `localhost:3000`
-- **Redirect URI**: `http://localhost:3000/api/auth/callback`
+### Rate Limiting Issues
+If you're hitting rate limits frequently:
+1. Check if no-limits mode is enabled: `yarn strava:no-limits:status`
+2. Disable it if needed: `yarn strava:no-limits:disable`
+3. Restart the development server
 
-#### For Production:
-- **Authorization Callback Domain**: `your-production-domain.com` (or Vercel domain)
-- **Redirect URI**: `https://your-production-domain.com/api/auth/callback` (or Vercel URL)
-- **Note**: The application automatically detects the correct URL using `VERCEL_URL` environment variable
-
-#### For Preview Deployments:
-- **Authorization Callback Domain**: `*.vercel.app`
-- **Redirect URI**: `https://{preview-url}.vercel.app/api/auth/callback`
-
-### 2. Required Scopes
-
-Ensure your Strava application has these scopes enabled:
-- `read` - Read user profile and activities
-- `activity:read` - Read detailed activity data
-
-## 🔄 Flexible Domain Configuration
-
-The application uses a flexible approach to determine the redirect URI, prioritizing environment variables over hardcoded values:
-
-### Priority Order:
-1. **`STRAVA_REDIRECT_URI`** - Explicit override (highest priority) ⭐ **Recommended for production**
-2. **`VERCEL_URL`** - Automatic Vercel detection
-3. **`NEXT_PUBLIC_APP_URL`** - Custom domain configuration
-4. **Localhost** - Development fallback
-
-### Automatic Redirect URI Detection
-
-The application automatically detects the environment and sets the appropriate redirect URI:
-
-```typescript
-// lib/config.ts
-function getDefaultRedirectUri(): string {
-  // Use VERCEL_URL if available (works for both production and preview deployments)
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}/api/auth/callback`
-  }
-  
-  // Use custom domain if specified
-  if (process.env.NEXT_PUBLIC_APP_URL) {
-    return `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/callback`
-  }
-  
-  // Fallback to localhost for development
-  return 'http://localhost:3000/api/auth/callback'
-}
-```
-
-## 🛠️ Manual Override
-
-If you need to override the automatic redirect URI detection, set the `STRAVA_REDIRECT_URI` environment variable:
-
-```bash
-# Example: Custom redirect URI
-STRAVA_REDIRECT_URI=https://your-custom-domain.com/api/auth/callback
-```
-
-## 🔍 Validation
-
-The application validates required environment variables on startup:
-
-```typescript
-// lib/config.ts
-export function validateConfig() {
-  const required = [
-    'STRAVA_CLIENT_ID',
-    'STRAVA_CLIENT_SECRET',
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-    'SUPABASE_SERVICE_ROLE_KEY',
-  ]
-
-  const missing = required.filter(key => !process.env[key])
-  
-  if (missing.length > 0) {
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`)
-  }
-}
-```
-
-## 🚨 Troubleshooting
-
-### Common Issues
-
-1. **"Invalid redirect_uri" Error**
-   - Ensure the redirect URI in your Strava app settings matches exactly
-   - Check that the domain is correctly configured
-   - Verify the protocol (http vs https)
-
-2. **"Missing environment variables" Error**
-   - Check that all required variables are set in your deployment environment
-   - Verify variable names are correct (case-sensitive)
-   - Ensure no extra spaces or quotes
-
-3. **"OAuth Error" in Production**
-   - Verify the production domain is added to Strava app settings
-   - Check that the redirect URI uses HTTPS in production
-   - Ensure the callback route is accessible
-
-### Debugging Steps
-
-1. **Check Environment Variables**
-   ```bash
-   # Local development
-   echo $STRAVA_CLIENT_ID
-   echo $STRAVA_REDIRECT_URI
-   
-   # Vercel (check in dashboard)
-   # Go to Project Settings > Environment Variables
-   ```
-
-2. **Test OAuth Flow**
-   ```bash
-   # Test local development
-   curl "http://localhost:3000/api/auth/login"
-   
-   # Test production (replace with your actual domain)
-   curl "https://your-production-domain.com/api/auth/login"
-   ```
-
-3. **Check Application Logs**
-   - Vercel Function Logs
-   - Browser Developer Tools
-   - Network tab for redirect URLs
-
-## 📋 Checklist
-
-### Before Deployment
-- [ ] All environment variables configured in Vercel
-- [ ] Strava app settings updated for production domain
-- [ ] Redirect URI matches exactly in Strava settings
-- [ ] HTTPS enabled for production URLs
-- [ ] Required scopes enabled in Strava app
-
-### After Deployment
-- [ ] OAuth flow works in production
-- [ ] Redirect URI is correctly set
-- [ ] No environment variable errors in logs
-- [ ] Application can authenticate with Strava
-- [ ] Token refresh works correctly
-
-This configuration ensures seamless OAuth authentication across all deployment environments while maintaining security and reliability.
-
-## 🔧 Quick Fix for "Bad Request - invalid redirect_uri"
-
-If you're getting the "Bad Request - invalid redirect_uri" error with double slashes (`//`), here's the immediate fix:
-
-### 1. Set Explicit Redirect URI in Vercel
-
-Add this environment variable in your Vercel project settings:
-
-```bash
-STRAVA_REDIRECT_URI=https://strava-heatmap-alpha.vercel.app/api/auth/callback
-```
-
-### 2. Verify Strava App Settings
-
-1. Go to [Strava API Settings](https://www.strava.com/settings/api)
-2. Set **Authorization Callback Domain** to: `strava-heatmap-alpha.vercel.app`
-3. Ensure the redirect URI matches exactly: `https://strava-heatmap-alpha.vercel.app/api/auth/callback`
-
-### 3. Test the Fix
-
-After setting the environment variable and redeploying:
-
-```bash
-# Test the login endpoint
-curl "https://strava-heatmap-alpha.vercel.app/api/auth/login"
-```
-
-This should redirect to Strava with the correct redirect URI without double slashes. 
+### OAuth Redirect Issues
+If OAuth isn't working:
+1. Verify `STRAVA_REDIRECT_URI` matches your Strava app settings
+2. For development, use `http://localhost:3000/api/auth/callback`
+3. For production, use your actual domain 

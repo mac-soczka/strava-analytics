@@ -38,7 +38,10 @@
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "strava:no-limits:enable": "node scripts/enable-no-limits.js enable",
+    "strava:no-limits:disable": "node scripts/enable-no-limits.js disable",
+    "strava:no-limits:status": "node scripts/enable-no-limits.js status"
   },
   "dependencies": {
     "@mapbox/polyline": "^1.2.1",

@@ -15,7 +15,9 @@ export async function GET() {
       usage: {
         percent15Min: Math.round((status.requests15min / 100) * 100),
         percentDay: Math.round((status.requestsDay / 1000) * 100),
-      }
+      },
+      mode: status.mode,
+      noLimitsMode: status.noLimitsMode
     })
   } catch (error) {
     console.error('Error getting rate limit status:', error)

@@ -40,6 +40,8 @@ export default function TestPage() {
   const [isRunning, setIsRunning] = useState(false)
   const [user, setUser] = useState<any>(null)
   const [rateLimitStatus, setRateLimitStatus] = useState<any>(null)
+  const [noLimitsMode, setNoLimitsMode] = useState<boolean>(false)
+  const [crawlerDiagnostics, setCrawlerDiagnostics] = useState<any>(null)
   const supabase = createClientComponentClient()
 
   const addResult = (test: string, status: TestResult['status'], message: string, data?: any, error?: any) => {
@@ -101,12 +103,205 @@ export default function TestPage() {
       
       if (response.ok) {
         setRateLimitStatus(data)
+        setNoLimitsMode(data.noLimitsMode || false)
         addResult('Rate Limit Status', 'success', 'Rate limit status retrieved', data)
       } else {
         addResult('Rate Limit Status', 'error', 'Failed to get rate limit status', undefined, data.error)
       }
     } catch (error: any) {
       addResult('Rate Limit Status', 'error', 'Rate limit status check failed', undefined, error.message)
+    }
+  }
+
+  // Toggle No-Limits Mode
+  const toggleNoLimitsMode = async () => {
+    try {
+      addResult('Toggle No-Limits Mode', 'pending', 'Toggling no-limits mode...')
+      
+      // This would require a server-side API to toggle the environment variable
+      // For now, we'll just show a message about how to enable it
+      addResult('Toggle No-Limits Mode', 'success', 'To enable no-limits mode, set STRAVA_NO_LIMITS=true in your .env.local file and restart the server', {
+        instruction: 'Add STRAVA_NO_LIMITS=true to your .env.local file and restart the development server'
+      })
+    } catch (error: any) {
+      addResult('Toggle No-Limits Mode', 'error', 'Failed to toggle no-limits mode', undefined, error.message)
+    }
+  }
+
+  // Crawler Diagnostics
+  const runCrawlerDiagnostics = async () => {
+    try {
+      addResult('Crawler Diagnostics', 'pending', 'Running comprehensive crawler diagnostics...')
+      
+      const diagnostics: any = {
+        timestamp: new Date().toISOString(),
+        issues: [],
+        recommendations: [],
+        status: 'unknown'
+      }
+
+      // 1. Check database connection
+      try {
+        const { data: users, error: usersError } = await supabase
+          .from('users')
+          .select('*')
+          .limit(1)
+        
+        if (usersError) {
+          diagnostics.issues.push('Database connection failed')
+          diagnostics.recommendations.push('Check Supabase configuration and network connectivity')
+        } else {
+          diagnostics.usersCount = users?.length || 0
+        }
+      } catch (error) {
+        diagnostics.issues.push('Database connection error')
+        diagnostics.recommendations.push('Verify Supabase environment variables')
+      }
+
+      // 2. Check users table
+      try {
+        const { data: allUsers, error: usersError } = await supabase
+          .from('users')
+          .select('*')
+        
+        if (!usersError && allUsers) {
+          diagnostics.totalUsers = allUsers.length
+          diagnostics.usersWithTokens = 0
+          
+          // Check which users have tokens
+          for (const user of allUsers) {
+            const { data: tokens } = await supabase
+              .from('strava_tokens')
+              .select('*')
+              .eq('strava_id', user.strava_id)
+              .limit(1)
+            
+            if (tokens && tokens.length > 0) {
+              diagnostics.usersWithTokens++
+              
+              // Check token expiration
+              const token = tokens[0]
+              const expiresAt = new Date(token.expires_at)
+              const now = new Date()
+              const isExpired = expiresAt < now
+              
+              if (isExpired) {
+                diagnostics.issues.push(`User ${user.strava_id} has expired tokens`)
+                diagnostics.recommendations.push(`User ${user.strava_id} needs to re-authenticate with Strava`)
+              }
+            } else {
+              diagnostics.issues.push(`User ${user.strava_id} has no Strava tokens`)
+              diagnostics.recommendations.push(`User ${user.strava_id} needs to authenticate with Strava`)
+            }
+          }
+        }
+      } catch (error) {
+        diagnostics.issues.push('Error checking users and tokens')
+      }
+
+      // 3. Check activities table
+      try {
+        const { data: activities, error: activitiesError } = await supabase
+          .from('activities')
+          .select('*')
+          .limit(1)
+        
+        if (!activitiesError) {
+          diagnostics.activitiesCount = activities?.length || 0
+          
+          // Check if segments_fetched column exists
+          const { data: testActivity, error: columnError } = await supabase
+            .from('activities')
+            .select('segments_fetched')
+            .limit(1)
+          
+          if (columnError && columnError.message.includes('segments_fetched')) {
+            diagnostics.issues.push('segments_fetched column missing from activities table')
+            diagnostics.recommendations.push('Run database migration: node scripts/apply-segments-fetched-migration.js')
+          }
+        }
+      } catch (error) {
+        diagnostics.issues.push('Error checking activities table')
+      }
+
+      // 4. Check segments table
+      try {
+        const { data: segments, error: segmentsError } = await supabase
+          .from('segments')
+          .select('*')
+          .limit(1)
+        
+        if (segmentsError && segmentsError.message.includes('relation "segments" does not exist')) {
+          diagnostics.issues.push('segments table missing')
+          diagnostics.recommendations.push('Run database migration for segments table')
+        } else {
+          diagnostics.segmentsCount = segments?.length || 0
+        }
+      } catch (error) {
+        diagnostics.issues.push('Error checking segments table')
+      }
+
+      // 5. Check rate limiting status
+      try {
+        const response = await fetch('/api/strava/rate-limit')
+        const rateLimitData = await response.json()
+        
+        if (response.ok) {
+          diagnostics.rateLimitStatus = rateLimitData
+          diagnostics.noLimitsMode = rateLimitData.noLimitsMode
+        } else {
+          diagnostics.issues.push('Rate limit API not accessible')
+        }
+      } catch (error) {
+        diagnostics.issues.push('Error checking rate limit status')
+      }
+
+      // 6. Check recent crawler logs
+      try {
+        const response = await fetch('/api/strava/crawler/logs?limit=5')
+        const logsData = await response.json()
+        
+        if (response.ok) {
+          diagnostics.recentLogs = logsData.logs
+          
+          // Analyze recent errors
+          const recentErrors = logsData.logs?.filter((log: any) => 
+            log.status === 'error' || log.message?.includes('Error')
+          ) || []
+          
+          if (recentErrors.length > 0) {
+            diagnostics.issues.push(`${recentErrors.length} recent crawler errors found`)
+            diagnostics.recentErrors = recentErrors
+          }
+        }
+      } catch (error) {
+        diagnostics.issues.push('Error fetching crawler logs')
+      }
+
+      // Determine overall status
+      if (diagnostics.issues.length === 0) {
+        diagnostics.status = 'healthy'
+        diagnostics.summary = 'All systems operational - crawler should work normally'
+      } else if (diagnostics.issues.length <= 2) {
+        diagnostics.status = 'warning'
+        diagnostics.summary = 'Minor issues detected - crawler may have problems'
+      } else {
+        diagnostics.status = 'critical'
+        diagnostics.summary = 'Multiple critical issues - crawler cannot progress'
+      }
+
+      setCrawlerDiagnostics(diagnostics)
+      
+      if (diagnostics.status === 'healthy') {
+        addResult('Crawler Diagnostics', 'success', 'All systems operational', diagnostics)
+      } else if (diagnostics.status === 'warning') {
+        addResult('Crawler Diagnostics', 'error', 'Minor issues detected', diagnostics)
+      } else {
+        addResult('Crawler Diagnostics', 'error', 'Critical issues preventing crawler progress', diagnostics)
+      }
+      
+    } catch (error: any) {
+      addResult('Crawler Diagnostics', 'error', 'Diagnostics failed', undefined, error.message)
     }
   }
 
@@ -706,6 +901,7 @@ export default function TestPage() {
     await testProtectedRoute()
     await testCSRFToken()
     await testCompleteAuthFlow()
+    await runCrawlerDiagnostics()
     
     setIsRunning(false)
   }
@@ -746,7 +942,14 @@ export default function TestPage() {
           {/* Rate Limit Status */}
           {rateLimitStatus && (
             <div className="mt-6 pt-6 border-t border-gray-200">
-              <h3 className="text-lg font-semibold mb-3">Strava API Rate Limits</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-lg font-semibold">Strava API Rate Limits</h3>
+                {rateLimitStatus.noLimitsMode && (
+                  <span className="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+                    🚀 NO-LIMITS MODE
+                  </span>
+                )}
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <p className="text-sm text-gray-600">15-Minute Limit:</p>
@@ -858,6 +1061,24 @@ export default function TestPage() {
               className="px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 disabled:opacity-50 text-sm"
             >
               Rate Limits
+            </button>
+            <button
+              onClick={runCrawlerDiagnostics}
+              disabled={isRunning}
+              className="px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 disabled:opacity-50 text-sm font-medium"
+            >
+              🔍 Crawler Diagnostics
+            </button>
+            <button
+              onClick={toggleNoLimitsMode}
+              disabled={isRunning}
+              className={`px-3 py-2 rounded hover:opacity-80 disabled:opacity-50 text-sm font-medium ${
+                noLimitsMode 
+                  ? 'bg-red-100 text-red-700 hover:bg-red-200' 
+                  : 'bg-green-100 text-green-700 hover:bg-green-200'
+              }`}
+            >
+              {noLimitsMode ? '🚀 No-Limits ON' : '⚡ No-Limits OFF'}
             </button>
             <button
               onClick={testStravaOAuthFlow}
@@ -1013,6 +1234,97 @@ export default function TestPage() {
             )}
           </div>
         </div>
+
+        {/* Crawler Diagnostics Display */}
+        {crawlerDiagnostics && (
+          <div className="bg-white rounded-lg shadow p-6 mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold">Crawler Diagnostics</h2>
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                crawlerDiagnostics.status === 'healthy' ? 'bg-green-100 text-green-800' :
+                crawlerDiagnostics.status === 'warning' ? 'bg-yellow-100 text-yellow-800' :
+                'bg-red-100 text-red-800'
+              }`}>
+                {crawlerDiagnostics.status.toUpperCase()}
+              </span>
+            </div>
+            
+            <div className="mb-4">
+              <p className="text-sm text-gray-600 mb-2">Summary:</p>
+              <p className="font-medium">{crawlerDiagnostics.summary}</p>
+            </div>
+
+            {/* System Status */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-gray-50 p-3 rounded">
+                <p className="text-sm text-gray-600">Users</p>
+                <p className="text-lg font-semibold">{crawlerDiagnostics.totalUsers || 0}</p>
+                <p className="text-xs text-gray-500">{crawlerDiagnostics.usersWithTokens || 0} with tokens</p>
+              </div>
+              <div className="bg-gray-50 p-3 rounded">
+                <p className="text-sm text-gray-600">Activities</p>
+                <p className="text-lg font-semibold">{crawlerDiagnostics.activitiesCount || 0}</p>
+              </div>
+              <div className="bg-gray-50 p-3 rounded">
+                <p className="text-sm text-gray-600">Segments</p>
+                <p className="text-lg font-semibold">{crawlerDiagnostics.segmentsCount || 0}</p>
+              </div>
+            </div>
+
+            {/* Issues */}
+            {crawlerDiagnostics.issues && crawlerDiagnostics.issues.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 text-red-700">Issues Found:</h3>
+                <ul className="space-y-2">
+                  {crawlerDiagnostics.issues.map((issue: string, index: number) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-red-500 mt-1">•</span>
+                      <span className="text-sm">{issue}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Recommendations */}
+            {crawlerDiagnostics.recommendations && crawlerDiagnostics.recommendations.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 text-blue-700">Recommendations:</h3>
+                <ul className="space-y-2">
+                  {crawlerDiagnostics.recommendations.map((rec: string, index: number) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-blue-500 mt-1">→</span>
+                      <span className="text-sm">{rec}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Recent Errors */}
+            {crawlerDiagnostics.recentErrors && crawlerDiagnostics.recentErrors.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-orange-700">Recent Errors:</h3>
+                <div className="space-y-2">
+                  {crawlerDiagnostics.recentErrors.slice(0, 3).map((error: any, index: number) => (
+                    <div key={index} className="bg-orange-50 p-3 rounded border border-orange-200">
+                      <p className="text-sm font-medium text-orange-800">{error.message}</p>
+                      <p className="text-xs text-orange-600 mt-1">
+                        {new Date(error.run_at).toLocaleString()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="text-xs text-gray-500">
+                Last updated: {new Date(crawlerDiagnostics.timestamp).toLocaleString()}
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Crawler Control */}
         <div className="mt-8">

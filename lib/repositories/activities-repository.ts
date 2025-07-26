@@ -1,5 +1,5 @@
 import { createServerComponentClient } from '@/lib/supabase'
-import { StravaActivity } from '@/types/strava'
+import { StravaActivity, DatabaseActivity } from '@/types/strava'
 
 export class ActivitiesRepository {
   private supabase: ReturnType<typeof createServerComponentClient>
@@ -134,7 +134,7 @@ export class ActivitiesRepository {
   /**
    * Create a new activity
    */
-  async createActivity(activity: Omit<StravaActivity, 'id'>) {
+  async createActivity(activity: Omit<DatabaseActivity, 'id'>) {
     try {
       const { data, error } = await this.supabase
         .from('activities')
@@ -143,7 +143,7 @@ export class ActivitiesRepository {
         .single()
 
       if (error) throw error
-      return data as StravaActivity
+      return data as DatabaseActivity
     } catch (error) {
       console.error('Error creating activity:', error)
       throw error
