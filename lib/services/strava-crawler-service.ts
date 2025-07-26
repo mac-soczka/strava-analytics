@@ -171,6 +171,7 @@ export class StravaCrawlerService {
       
       // Sync activities
       const activityResult = await this.stravaService.syncActivities(options.batch_size || config.stravaApiLimits.maxCrawlerBatchSize)
+      result.activities_fetched = activityResult.synced
 
       // Sync segments if requested
       if (options.include_segments !== false) {
@@ -266,6 +267,58 @@ export class StravaCrawlerService {
       total_activities_24h: totalActivities,
       total_segments_24h: totalSegments,
       last_run: typedLogs[0]?.run_at
+    }
+  }
+
+  /**
+   * Get comprehensive entity statistics
+   */
+  async getEntityStats() {
+    try {
+      // Get total counts from database
+      const [activitiesCount, segmentsCount, segmentEffortsCount, usersCount] = await Promise.all([
+        this.supabase.from('activities').select('*', { count: 'exact', head: true }),
+        this.supabase.from('segments').select('*', { count: 'exact', head: true }),
+        this.supabase.from('segment_efforts').select('*', { count: 'exact', head: true }),
+        this.supabase.from('users').select('*', { count: 'exact', head: true })
+      ])
+
+      // Get recent crawler activity (last 7 days)
+      const { data: recentLogs } = await this.supabase
+        .from('strava_crawler_logs')
+        .select('*')
+        .gte('run_at', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
+        .order('run_at', { ascending: false })
+
+      const typedLogs = (recentLogs as unknown as CrawlerLogEntry[]) || []
+      const recentActivities = typedLogs.reduce((sum, log) => sum + (log.activities_fetched || 0), 0)
+      const recentSegments = typedLogs.reduce((sum, log) => sum + (log.segments_fetched || 0), 0)
+
+      return {
+        totals: {
+          activities: activitiesCount.count || 0,
+          segments: segmentsCount.count || 0,
+          segment_efforts: segmentEffortsCount.count || 0,
+          users: usersCount.count || 0
+        },
+        recent_activity: {
+          activities_fetched_7d: recentActivities,
+          segments_fetched_7d: recentSegments,
+          last_crawler_run: typedLogs[0]?.run_at
+        },
+        summary: {
+          total_entities: (activitiesCount.count || 0) + (segmentsCount.count || 0) + (segmentEffortsCount.count || 0),
+          active_users: usersCount.count || 0,
+          data_freshness: typedLogs[0]?.run_at ? new Date(typedLogs[0].run_at).toISOString() : null
+        }
+      }
+    } catch (error) {
+      console.error('Failed to get entity stats:', error)
+      return {
+        totals: { activities: 0, segments: 0, segment_efforts: 0, users: 0 },
+        recent_activity: { activities_fetched_7d: 0, segments_fetched_7d: 0, last_crawler_run: null },
+        summary: { total_entities: 0, active_users: 0, data_freshness: null }
+      }
     }
   }
 } 

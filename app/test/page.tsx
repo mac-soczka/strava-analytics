@@ -88,6 +88,7 @@ export default function TestPage() {
     segments: [],
     tokens: []
   })
+  const [entityStats, setEntityStats] = useState<any>(null)
   const [activeTab, setActiveTab] = useState<'overview' | 'crud' | 'crawler' | 'auth' | 'diagnostics'>('overview')
   const supabase = createClientComponentClient()
 
@@ -1162,6 +1163,24 @@ export default function TestPage() {
     }
   }
 
+  const testEntityStats = async () => {
+    try {
+      addResult('Entity Stats', 'pending', 'Fetching entity statistics...')
+      
+      const response = await fetch('/api/strava/crawler/entity-stats')
+      const data = await response.json()
+      
+      if (data.success) {
+        setEntityStats(data.stats)
+        addResult('Entity Stats', 'success', `Entity statistics loaded`, data.stats)
+      } else {
+        addResult('Entity Stats', 'error', `Failed to load entity stats: ${data.error}`)
+      }
+    } catch (error: any) {
+      addResult('Entity Stats', 'error', `Error fetching entity stats: ${error.message}`)
+    }
+  }
+
   const runCrawlerTests = async () => {
     setIsRunning(true)
     clearResults()
@@ -1169,6 +1188,7 @@ export default function TestPage() {
     await testCrawlerTrigger()
     await testCrawlerLogs()
     await testCrawlerStats()
+    await testEntityStats()
     await runCrawlerDiagnostics()
     
     setIsRunning(false)
