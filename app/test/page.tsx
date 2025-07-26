@@ -1194,6 +1194,20 @@ export default function TestPage() {
     setIsRunning(false)
   }
 
+  // Load initial data on component mount
+  useEffect(() => {
+    testAppSessionStatus()
+    testRateLimitStatus()
+    testEntityStats()
+  }, [])
+
+  // Load entity stats when component mounts
+  useEffect(() => {
+    if (!entityStats) {
+      testEntityStats()
+    }
+  }, [entityStats])
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto">
@@ -1318,6 +1332,61 @@ export default function TestPage() {
             {activeTab === 'overview' && (
               <div>
                 <h2 className="text-xl font-semibold mb-4">System Overview</h2>
+                
+                {/* Entity Statistics */}
+                {entityStats && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold mb-4">📊 Entity Statistics</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                      <div className="bg-blue-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-blue-800">👥 Users</h4>
+                        <p className="text-2xl font-bold text-blue-600">{entityStats.totals.users}</p>
+                        <p className="text-sm text-blue-600">Active Users</p>
+                      </div>
+                      <div className="bg-green-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-green-800">🏃‍♂️ Activities</h4>
+                        <p className="text-2xl font-bold text-green-600">{entityStats.totals.activities}</p>
+                        <p className="text-sm text-green-600">Total Activities</p>
+                      </div>
+                      <div className="bg-purple-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-purple-800">⛰️ Segments</h4>
+                        <p className="text-2xl font-bold text-purple-600">{entityStats.totals.segments}</p>
+                        <p className="text-sm text-purple-600">Total Segments</p>
+                      </div>
+                      <div className="bg-orange-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-orange-800">🏁 Segment Efforts</h4>
+                        <p className="text-2xl font-bold text-orange-600">{entityStats.totals.segment_efforts}</p>
+                        <p className="text-sm text-orange-600">Total Efforts</p>
+                      </div>
+                    </div>
+                    
+                    {/* Recent Activity */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-gray-800 mb-3">🔄 Recent Activity (7 days)</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-600">Activities Fetched:</p>
+                          <p className="text-lg font-semibold text-green-600">{entityStats.recent_activity.activities_fetched_7d}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">Segments Fetched:</p>
+                          <p className="text-lg font-semibold text-purple-600">{entityStats.recent_activity.segments_fetched_7d}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">Last Crawler Run:</p>
+                          <p className="text-sm font-medium">
+                            {entityStats.recent_activity.last_crawler_run 
+                              ? new Date(entityStats.recent_activity.last_crawler_run).toLocaleString()
+                              : 'Never'
+                            }
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Legacy Test Data */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-blue-800">Database</h3>
