@@ -68,6 +68,15 @@ export class StravaCrawlerService {
     const startTime = Date.now()
     console.log('🚀 Starting Strava data crawler...')
 
+    // Track overall rate limit status across all users
+    let overallRateLimitStatus = {
+      mode: 'unknown',
+      requests15min: 0,
+      requestsDay: 0,
+      limit15min: config.stravaApiLimits.requestsPer15Min,
+      limitDay: config.stravaApiLimits.requestsPerDay
+    }
+
     // Log the start of the crawler run
     let startLogId: string | null = null
     try {
@@ -78,7 +87,8 @@ export class StravaCrawlerService {
         activities_fetched: 0,
         segments_fetched: 0,
         segment_efforts_fetched: 0,
-        execution_time_ms: 0
+        execution_time_ms: 0,
+        rate_limit_status: overallRateLimitStatus
       })
     } catch (logError) {
       console.error('❌ Failed to log crawler start:', logError)
@@ -122,10 +132,26 @@ export class StravaCrawlerService {
       const userErrors: string[] = []
 
       for (const user of users) {
+        const userStartTime = Date.now()
+        let userRateLimitStatus = null
+        
         try {
           console.log(`🔄 Processing user: ${user.firstname} ${user.lastname} (${user.strava_id})`)
           const result = await this.processUser(user, options)
           results.push(result)
+
+          // Capture rate limit status from this user's processing
+          if (this.stravaService) {
+            try {
+              userRateLimitStatus = this.stravaService.getRateLimitStatus()
+              // Update overall rate limit status with the highest usage seen
+              overallRateLimitStatus.mode = userRateLimitStatus.mode
+              overallRateLimitStatus.requests15min = Math.max(overallRateLimitStatus.requests15min, userRateLimitStatus.requests15min)
+              overallRateLimitStatus.requestsDay = Math.max(overallRateLimitStatus.requestsDay, userRateLimitStatus.requestsDay)
+            } catch (rateLimitError: any) {
+              console.warn(`⚠️ Failed to get rate limit status for user ${user.firstname}: ${rateLimitError.message}`)
+            }
+          }
 
           if (result.success) {
             successfulUsers++
@@ -145,8 +171,21 @@ export class StravaCrawlerService {
           userErrors.push(errorMsg)
           console.error(`❌ ${errorMsg}`)
           
-          // Log individual user failure
+          // Try to get rate limit status even on error
+          if (this.stravaService) {
+            try {
+              userRateLimitStatus = this.stravaService.getRateLimitStatus()
+              overallRateLimitStatus.mode = userRateLimitStatus.mode
+              overallRateLimitStatus.requests15min = Math.max(overallRateLimitStatus.requests15min, userRateLimitStatus.requests15min)
+              overallRateLimitStatus.requestsDay = Math.max(overallRateLimitStatus.requestsDay, userRateLimitStatus.requestsDay)
+            } catch (rateLimitError: any) {
+              console.warn(`⚠️ Failed to get rate limit status for failed user ${user.firstname}: ${rateLimitError.message}`)
+            }
+          }
+          
+          // Log individual user failure with actual execution time
           try {
+            const userExecutionTime = Date.now() - userStartTime
             await this.logCrawlerResult({
               user_id: Number(user.strava_id),
               status: 'error',
@@ -154,8 +193,15 @@ export class StravaCrawlerService {
               activities_fetched: 0,
               segments_fetched: 0,
               segment_efforts_fetched: 0,
-              execution_time_ms: 0,
-              error: userProcessError.message
+              execution_time_ms: userExecutionTime,
+              error: userProcessError.message,
+              rate_limit_status: userRateLimitStatus ? {
+                mode: userRateLimitStatus.mode,
+                requests15min: userRateLimitStatus.requests15min,
+                requestsDay: userRateLimitStatus.requestsDay,
+                limit15min: config.stravaApiLimits.requestsPer15Min,
+                limitDay: config.stravaApiLimits.requestsPerDay
+              } : undefined
             })
           } catch (logError) {
             console.error('❌ Failed to log user error:', logError)
@@ -194,13 +240,7 @@ export class StravaCrawlerService {
         segment_efforts_fetched: totalSegmentEfforts,
         execution_time_ms: executionTime,
         error: userErrors.length > 0 ? userErrors.join('; ') : undefined,
-        rate_limit_status: this.stravaService ? {
-          mode: this.stravaService.getRateLimitStatus().mode,
-          requests15min: this.stravaService.getRateLimitStatus().requests15min,
-          requestsDay: this.stravaService.getRateLimitStatus().requestsDay,
-          limit15min: config.stravaApiLimits.requestsPer15Min,
-          limitDay: config.stravaApiLimits.requestsPerDay
-        } : undefined
+        rate_limit_status: overallRateLimitStatus
       })
 
       // Step 5: Refresh cache after successful crawl (only if some users succeeded)
@@ -221,7 +261,8 @@ export class StravaCrawlerService {
               segments_fetched: totalSegments,
               segment_efforts_fetched: totalSegmentEfforts,
               execution_time_ms: executionTime,
-              error: `Cache refresh failed: ${cacheError.message}`
+              error: `Cache refresh failed: ${cacheError.message}`,
+              rate_limit_status: overallRateLimitStatus
             })
           } catch (logError) {
             console.error('❌ Failed to log cache refresh error:', logError)
@@ -247,13 +288,7 @@ export class StravaCrawlerService {
           segment_efforts_fetched: 0,
           execution_time_ms: executionTime,
           error: error.message,
-          rate_limit_status: this.stravaService ? {
-            mode: this.stravaService.getRateLimitStatus().mode,
-            requests15min: this.stravaService.getRateLimitStatus().requests15min,
-            requestsDay: this.stravaService.getRateLimitStatus().requestsDay,
-            limit15min: config.stravaApiLimits.requestsPer15Min,
-            limitDay: config.stravaApiLimits.requestsPerDay
-          } : undefined
+          rate_limit_status: overallRateLimitStatus
         })
       } catch (logError: any) {
         console.error('❌ Failed to log critical error:', logError)

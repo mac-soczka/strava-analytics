@@ -11,12 +11,10 @@ async function testCrawlerAPI() {
 
   try {
     // Call the crawler API endpoint
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/manual_trigger_strava_crawler`, {
+    const response = await fetch(`http://localhost:3000/api/strava/crawl`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
-        'Content-Type': 'application/json',
-        'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY
+        'Content-Type': 'application/json'
       },
       body: '{}'
     })
