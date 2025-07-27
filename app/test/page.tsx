@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createClientComponentClient } from '@/lib/supabase'
 import { SessionManager } from '@/lib/services/auth-service'
 import { upsertUserClient, upsertTokensClient, getUserByStravaIdClient, getTokensByStravaIdClient } from '@/lib/database-client'
@@ -85,13 +85,13 @@ export default function TestPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'crud' | 'crawler' | 'auth' | 'diagnostics'>('overview')
   const supabase = createClientComponentClient()
 
-  const addResult = (test: string, status: TestResult['status'], message: string, data?: any, error?: any) => {
+  const addResult = useCallback((test: string, status: TestResult['status'], message: string, data?: any, error?: any) => {
     setResults(prev => [...prev, { test, status, message, data, error }])
-  }
+  }, [])
 
-  const clearResults = () => {
+  const clearResults = useCallback(() => {
     setResults([])
-  }
+  }, [])
 
   // Test 1: Connection Test
   const testConnection = async () => {
@@ -112,7 +112,7 @@ export default function TestPage() {
   }
 
   // Test 2: App Session Status Check
-  const testAppSessionStatus = async () => {
+  const testAppSessionStatus = useCallback(async () => {
     try {
       addResult('App Session Status', 'pending', 'Checking app session status...')
       
@@ -132,10 +132,10 @@ export default function TestPage() {
     } catch (error: any) {
       addResult('App Session Status', 'error', 'Session status check failed', undefined, error.message)
     }
-  }
+  }, [])
 
   // Test 3: Rate Limit Status
-  const testRateLimitStatus = async () => {
+  const testRateLimitStatus = useCallback(async () => {
     try {
       addResult('Rate Limit Status', 'pending', 'Checking Strava API rate limits...')
       
@@ -152,7 +152,7 @@ export default function TestPage() {
     } catch (error: any) {
       addResult('Rate Limit Status', 'error', 'Rate limit status check failed', undefined, error.message)
     }
-  }
+  }, [])
 
   // Toggle No-Limits Mode
   const toggleNoLimitsMode = async () => {
@@ -1158,7 +1158,7 @@ export default function TestPage() {
     }
   }
 
-  const testEntityStats = async () => {
+  const testEntityStats = useCallback(async () => {
     try {
       addResult('Entity Stats', 'pending', 'Fetching entity statistics...')
       
@@ -1174,7 +1174,7 @@ export default function TestPage() {
     } catch (error: any) {
       addResult('Entity Stats', 'error', `Error fetching entity stats: ${error.message}`)
     }
-  }
+  }, [])
 
   const testSegmentCompletion = async () => {
     try {
@@ -1234,13 +1234,6 @@ export default function TestPage() {
     testRateLimitStatus()
     testEntityStats()
   }, [testAppSessionStatus, testRateLimitStatus, testEntityStats])
-
-  // Load entity stats when component mounts
-  useEffect(() => {
-    if (!entityStats) {
-      testEntityStats()
-    }
-  }, [entityStats, testEntityStats])
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">

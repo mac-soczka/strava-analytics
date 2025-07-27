@@ -59,6 +59,7 @@ interface ActivitiesStats {
   totalSegments: number
   totalEfforts: number
   activityTypes: Record<string, number>
+  segmentCompletionPercentage: number
 }
 
 interface ActivitiesClientProps {
@@ -180,7 +181,7 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
   return (
     <div className="space-y-6">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <motion.div
           className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
           initial={{ opacity: 0, y: 20 }}
@@ -238,6 +239,51 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
               <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalSegments.toLocaleString()}</p>
             </div>
             <Target className="h-8 w-8 text-orange-500" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segment Completion</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.segmentCompletionPercentage}%</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {stats.segmentCompletionPercentage >= 90 ? '🟢 Excellent' : 
+                 stats.segmentCompletionPercentage >= 70 ? '🟡 Good' : 
+                 stats.segmentCompletionPercentage >= 50 ? '🟠 Fair' : '🔴 Needs Sync'}
+              </p>
+            </div>
+            <div className="h-8 w-8 text-indigo-500 flex items-center justify-center">
+              <div className="relative">
+                <svg className="h-8 w-8 transform -rotate-90" viewBox="0 0 36 36">
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray={`${stats.segmentCompletionPercentage}, 100`}
+                    className="text-gray-200 dark:text-gray-700"
+                  />
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray={`${stats.segmentCompletionPercentage}, 100`}
+                    className={`${
+                      stats.segmentCompletionPercentage >= 90 ? 'text-green-500' :
+                      stats.segmentCompletionPercentage >= 70 ? 'text-yellow-500' :
+                      stats.segmentCompletionPercentage >= 50 ? 'text-orange-500' : 'text-red-500'
+                    }`}
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

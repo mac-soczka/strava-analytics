@@ -49,6 +49,7 @@ interface SegmentEffortsStats {
   totalElevation: number
   totalPRs: number
   displayedEfforts: number
+  effortCompletionPercentage: number
 }
 
 interface PersonalRecord {
@@ -185,7 +186,7 @@ export default function SegmentEffortsClient({
   return (
     <div className="space-y-6">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
           <div className="flex items-center">
             <Target className="h-8 w-8 text-blue-600 dark:text-blue-400" />
@@ -237,6 +238,46 @@ export default function SegmentEffortsClient({
             <div className="ml-3">
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Personal Records</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalPRs}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+          <div className="flex items-center">
+            <div className="h-8 w-8 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <div className="relative">
+                <svg className="h-8 w-8 transform -rotate-90" viewBox="0 0 36 36">
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
+                    className="text-gray-200 dark:text-gray-700"
+                  />
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
+                    className={`${
+                      stats.effortCompletionPercentage >= 90 ? 'text-green-500' :
+                      stats.effortCompletionPercentage >= 70 ? 'text-yellow-500' :
+                      stats.effortCompletionPercentage >= 50 ? 'text-orange-500' : 'text-red-500'
+                    }`}
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="ml-3">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Effort Completion</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.effortCompletionPercentage}%</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {stats.effortCompletionPercentage >= 90 ? '🟢 Excellent' : 
+                 stats.effortCompletionPercentage >= 70 ? '🟡 Good' : 
+                 stats.effortCompletionPercentage >= 50 ? '🟠 Fair' : '🔴 Needs Sync'}
+              </p>
             </div>
           </div>
         </div>

@@ -118,13 +118,29 @@ async function SegmentEffortsContent() {
     const personalRecords = Array.from(segmentPRs.values())
     const totalPRs = personalRecords.length
 
+    // Get completion statistics
+    const { data: completionStats, error: completionError } = await supabase
+      .rpc('get_segment_completion_stats')
+
+    if (completionError) {
+      console.error('Error fetching completion stats:', completionError)
+    }
+
+    // Calculate completion percentages
+    const segmentsWithEfforts = completionStats?.[0]?.segments_with_efforts || 0
+    const totalSegmentsInStats = completionStats?.[0]?.total_segments || 0
+    const effortCompletionPercentage = totalSegmentsInStats > 0 
+      ? Math.round((segmentsWithEfforts / totalSegmentsInStats) * 100)
+      : 0
+
     const stats = {
       totalEfforts,
       uniqueSegments,
       totalDistance: Math.round(totalDistance / 1000 * 100) / 100, // Convert to km
       totalElevation: Math.round(totalElevation),
       totalPRs,
-      displayedEfforts: efforts?.length || 0
+      displayedEfforts: efforts?.length || 0,
+      effortCompletionPercentage
     }
 
     const { default: SegmentEffortsClient } = await import('./segment-efforts-client')

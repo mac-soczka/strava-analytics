@@ -27,18 +27,24 @@ interface SegmentsClientProps {
     totalEfforts: number
     totalDistance: number
     totalElevation: number
+    effortCompletionPercentage: number
   }
 }
 
 // Supabase client not currently used
 
-export default function SegmentsClient({ segments, stats }: SegmentsClientProps) {
+export default function SegmentsClient({ segments: initialSegments, stats }: SegmentsClientProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState<'name' | 'distance' | 'efforts' | 'elevation' | 'steepness' | 'time_max' | 'time_min'>('name')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   const [lastSync, setLastSync] = useState<string>('')
+  const [segments, setSegments] = useState(initialSegments)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null)
 
   // Calculate segment metrics for sorting
   const segmentsWithMetrics = useMemo(() => {
@@ -66,7 +72,7 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
   const filteredAndSortedSegments = useMemo(() => {
     let filtered = segmentsWithMetrics
 
-    // Apply search filter
+    // Apply search filter (client-side for loaded segments)
     if (searchTerm) {
       filtered = filtered.filter(segment =>
         segment.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -113,12 +119,92 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
     router.push(`/segments/${segmentId}`)
   }, [router])
 
+  // Search segments from API
+  const searchSegments = async (search: string) => {
+    setLoading(true)
+    try {
+      const params = new URLSearchParams({
+        page: '1',
+        limit: '100',
+        sortBy: sortBy,
+        sortOrder: sortOrder,
+        ...(search && { search: search })
+      })
+      
+      const response = await fetch(`/api/segments?${params}`)
+      if (!response.ok) throw new Error('Failed to search segments')
+      
+      const data = await response.json()
+      
+      setSegments(data.segments || [])
+      setCurrentPage(1)
+      setHasMore(data.pagination && data.pagination.page < data.pagination.totalPages)
+    } catch (error) {
+      console.error('Error searching segments:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Handle search input with debouncing
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value)
+    
+    // Clear existing timeout
+    if (searchTimeout) {
+      clearTimeout(searchTimeout)
+    }
+    
+    // Set new timeout for debounced search
+    const timeout = setTimeout(() => {
+      searchSegments(value)
+    }, 500)
+    
+    setSearchTimeout(timeout)
+  }
+
+  // Load more segments
+  const loadMoreSegments = async () => {
+    if (loadingMore || !hasMore) return
+    
+    setLoadingMore(true)
+    try {
+      const nextPage = currentPage + 1
+      const params = new URLSearchParams({
+        page: nextPage.toString(),
+        limit: '100',
+        sortBy: sortBy,
+        sortOrder: sortOrder,
+        ...(searchTerm && { search: searchTerm })
+      })
+      
+      const response = await fetch(`/api/segments?${params}`)
+      if (!response.ok) throw new Error('Failed to fetch segments')
+      
+      const data = await response.json()
+      
+      if (data.segments && data.segments.length > 0) {
+        setSegments(prev => [...prev, ...data.segments])
+        setCurrentPage(nextPage)
+        setHasMore(nextPage < data.pagination.totalPages)
+      } else {
+        setHasMore(false)
+      }
+    } catch (error) {
+      console.error('Error loading more segments:', error)
+    } finally {
+      setLoadingMore(false)
+    }
+  }
+
   // Refresh segments
   const refreshSegments = async () => {
     setLoading(true)
     try {
-      // This would typically refetch from the server component
-      // For now, we'll just update the timestamp
+      // Reset to initial state
+      setSegments(initialSegments)
+      setCurrentPage(1)
+      setHasMore(true)
       setLastSync(new Date().toLocaleTimeString())
     } catch (error) {
       console.error('Error refreshing segments:', error)
@@ -140,7 +226,7 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
     <div className="space-y-6">
       {/* Statistics Cards */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-4 gap-4"
+        className="grid grid-cols-1 md:grid-cols-5 gap-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -208,6 +294,50 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
             </div>
           </div>
         </motion.div>
+
+        <motion.div 
+          className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Effort Completion</h3>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.effortCompletionPercentage}%</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {stats.effortCompletionPercentage >= 90 ? '🟢 Excellent' : 
+                 stats.effortCompletionPercentage >= 70 ? '🟡 Good' : 
+                 stats.effortCompletionPercentage >= 50 ? '🟠 Fair' : '🔴 Needs Sync'}
+              </p>
+            </div>
+            <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
+              <div className="relative">
+                <svg className="h-5 w-5 transform -rotate-90" viewBox="0 0 36 36">
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
+                    className="text-gray-200 dark:text-gray-700"
+                  />
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
+                    className={`${
+                      stats.effortCompletionPercentage >= 90 ? 'text-green-500' :
+                      stats.effortCompletionPercentage >= 70 ? 'text-yellow-500' :
+                      stats.effortCompletionPercentage >= 50 ? 'text-orange-500' : 'text-red-500'
+                    }`}
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
 
       {/* Controls Bar */}
@@ -225,7 +355,7 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder="Search segments..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               />
@@ -285,11 +415,9 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             All Segments ({stats.totalSegments})
-            {filteredAndSortedSegments.length < stats.totalSegments && (
-              <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">
-                (Showing {filteredAndSortedSegments.length} of {stats.totalSegments})
-              </span>
-            )}
+            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">
+              (Showing {segments.length} of {stats.totalSegments})
+            </span>
           </h3>
           
           {/* Segments Table */}
@@ -496,6 +624,35 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
           </div>
         </div>
       </motion.div>
+
+      {/* Load More Button */}
+      {hasMore && filteredAndSortedSegments.length > 0 && (
+        <motion.div
+          className="flex justify-center py-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <button
+            onClick={loadMoreSegments}
+            disabled={loadingMore}
+            className="flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {loadingMore ? (
+              <>
+                <RefreshCw className="h-4 w-4 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              <>
+                Load More Segments
+                <span className="text-sm opacity-75">
+                  ({segments.length} of {stats.totalSegments})
+                </span>
+              </>
+            )}
+          </button>
+        </motion.div>
+      )}
 
       {/* No Segments Message */}
       {filteredAndSortedSegments.length === 0 && (

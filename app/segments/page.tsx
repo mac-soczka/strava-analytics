@@ -64,24 +64,7 @@ async function SegmentsContent() {
     if (effortsCount.error) throw effortsCount.error
 
     // 🎯 APPROACH 2: Parallel data fetching for calculations
-    const [segments, segmentEfforts, distanceSum, elevationSum] = await Promise.all([
-      // Segments with efforts for display (no limit to see all segments)
-      supabase.from('segments')
-        .select(`
-          *,
-          segment_efforts (
-            id,
-            activity_id,
-            elapsed_time,
-            moving_time,
-            start_date,
-            average_watts,
-            max_watts
-          )
-        `)
-        .order('name')
-        .limit(50000), // Set very high limit to get all segments
-
+    const [segmentEfforts, distanceSum, elevationSum] = await Promise.all([
       // All segment efforts for accurate counting
       supabase.from('segment_efforts').select('segment_id'),
       
@@ -90,7 +73,6 @@ async function SegmentsContent() {
       supabase.from('segments').select('elevation_gain')
     ])
 
-    if (segments.error) throw segments.error
     if (segmentEfforts.error) throw segmentEfforts.error
     if (distanceSum.error) throw distanceSum.error
     if (elevationSum.error) throw elevationSum.error
@@ -106,20 +88,56 @@ async function SegmentsContent() {
       effortCountMap.set(segmentId, (effortCountMap.get(segmentId) || 0) + 1)
     })
 
+    // Get completion statistics
+    const { data: completionStats, error: completionError } = await supabase
+      .rpc('get_segment_completion_stats')
+
+    if (completionError) {
+      console.error('Error fetching completion stats:', completionError)
+    }
+
+    // Calculate completion percentages
+    const segmentsWithEfforts = completionStats?.[0]?.segments_with_efforts || 0
+    const totalSegmentsInStats = completionStats?.[0]?.total_segments || 0
+    const effortCompletionPercentage = totalSegmentsInStats > 0 
+      ? Math.round((segmentsWithEfforts / totalSegmentsInStats) * 100)
+      : 0
+
     // Calculate statistics
     const stats = {
       totalSegments: segmentsCount.count || 0,
       totalEfforts: effortsCount.count || 0,
       totalDistance,
-      totalElevation
+      totalElevation,
+      effortCompletionPercentage
     }
 
-    // Transform segments to match expected format
-    const transformedSegments = segments.data?.map((segment: any) => ({
+    // Get initial segments for display (first page)
+    const { data: initialSegments, error: initialError } = await supabase
+      .from('segments')
+      .select(`
+        *,
+        segment_efforts (
+          id,
+          activity_id,
+          elapsed_time,
+          moving_time,
+          start_date,
+          average_watts,
+          max_watts
+        )
+      `)
+      .order('name')
+      .limit(100) // Show first 100 segments initially
+
+    if (initialError) throw initialError
+
+    // Transform initial segments to match expected format
+    const transformedSegments = initialSegments?.map((segment: any) => ({
       id: segment.segment_id,
       name: segment.name,
       distance: segment.distance,
-      elevation_high: segment.elevation_gain + (segment.elevation_low || 0), // Approximate high elevation
+      elevation_high: segment.elevation_gain + (segment.elevation_low || 0),
       elevation_low: segment.elevation_low || 0,
       average_grade: segment.average_grade,
       maximum_grade: segment.maximum_grade,
@@ -127,9 +145,9 @@ async function SegmentsContent() {
       city: segment.city,
       state: segment.state,
       country: segment.country,
-      private: false, // Default value since not in database
-      hazardous: false, // Default value since not in database
-      starred: false, // Default value since not in database
+      private: false,
+      hazardous: false,
+      starred: false,
       map: segment.polyline ? { polyline: segment.polyline } : undefined,
       segment_efforts: segment.segment_efforts?.map((effort: any) => ({
         id: effort.id,
@@ -157,10 +175,8 @@ async function SegmentsContent() {
           map: segment.polyline ? { polyline: segment.polyline } : undefined
         }
       })) || [],
-      // Add the total effort count from the database
       total_effort_count: effortCountMap.get(segment.segment_id) || 0
-    }))
-    .sort((a: any, b: any) => b.total_effort_count - a.total_effort_count) || [] // Sort by effort count descending, no limit
+    })) || []
 
     const { default: SegmentsClient } = await import('./segments-client')
 
