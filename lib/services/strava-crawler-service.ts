@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { StravaService } from './strava-service'
+import { StatsService } from './stats-service'
 import { config } from '@/lib/config'
 import { TokenHealthService } from './token-health-service'
 
@@ -45,10 +46,12 @@ export class StravaCrawlerService {
   private supabase: ReturnType<typeof createClient>
   private stravaService!: StravaService
   private tokenHealthService: TokenHealthService
+  private statsService: StatsService
 
   constructor() {
     this.supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
     this.tokenHealthService = new TokenHealthService()
+    this.statsService = new StatsService()
   }
 
   /**
@@ -122,6 +125,16 @@ export class StravaCrawlerService {
           limitDay: config.stravaApiLimits.requestsPerDay
         } : undefined
       })
+
+      // Refresh cache after successful crawl
+      if (successfulUsers > 0) {
+        console.log('🔄 Refreshing cache...')
+        try {
+          await this.statsService.refreshCache()
+        } catch (error) {
+          console.warn('⚠️ Failed to refresh cache:', error)
+        }
+      }
 
       console.log('✅ Crawler completed successfully')
       return summary

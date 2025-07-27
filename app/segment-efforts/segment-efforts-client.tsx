@@ -48,6 +48,7 @@ interface SegmentEffortsStats {
   totalDistance: number
   totalElevation: number
   totalPRs: number
+  displayedEfforts: number
 }
 
 interface PersonalRecord {
@@ -191,6 +192,11 @@ export default function SegmentEffortsClient({
             <div className="ml-3">
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Efforts</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalEfforts.toLocaleString()}</p>
+              {stats.displayedEfforts < stats.totalEfforts && (
+                <p className="text-xs text-gray-400 dark:text-gray-500">
+                  Showing {stats.displayedEfforts.toLocaleString()} of {stats.totalEfforts.toLocaleString()}
+                </p>
+              )}
             </div>
           </div>
         </div>

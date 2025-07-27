@@ -303,7 +303,12 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
       >
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            All Segments ({filteredAndSortedSegments.length})
+            All Segments ({stats.totalSegments})
+            {filteredAndSortedSegments.length < stats.totalSegments && (
+              <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">
+                (Showing {filteredAndSortedSegments.length} of {stats.totalSegments})
+              </span>
+            )}
           </h3>
           
           {/* Segments Table */}

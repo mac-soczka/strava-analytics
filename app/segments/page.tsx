@@ -79,7 +79,8 @@ async function SegmentsContent() {
             max_watts
           )
         `)
-        .order('name'), // No limit to get all segments
+        .order('name')
+        .limit(50000), // Set very high limit to get all segments
 
       // All segment efforts for accurate counting
       supabase.from('segment_efforts').select('segment_id'),

@@ -59,7 +59,16 @@ async function SegmentEffortsContent() {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
-    // Fetch all segment efforts with segment and activity details
+    // Get real totals from database
+    const [effortsCount, segmentsCount] = await Promise.all([
+      supabase.from('segment_efforts').select('*', { count: 'exact', head: true }),
+      supabase.from('segments').select('*', { count: 'exact', head: true })
+    ])
+
+    if (effortsCount.error) throw effortsCount.error
+    if (segmentsCount.error) throw segmentsCount.error
+
+    // Fetch segment efforts with segment and activity details (increased limit)
     const { data: efforts, error: effortsError } = await supabase
       .from('segment_efforts')
       .select(`
@@ -86,13 +95,13 @@ async function SegmentEffortsContent() {
         )
       `)
       .order('start_date', { ascending: false })
-      .limit(1000) // Limit for performance
+      .limit(10000) // Increased limit to get more efforts
 
     if (effortsError) throw effortsError
 
-    // Calculate overall statistics
-    const totalEfforts = efforts?.length || 0
-    const uniqueSegments = new Set(efforts?.map(e => e.segment_id) || []).size
+    // Calculate overall statistics using real totals
+    const totalEfforts = effortsCount.count || 0
+    const uniqueSegments = segmentsCount.count || 0
     const totalDistance = efforts?.reduce((sum, e) => sum + (e.segments?.distance || 0), 0) || 0
     const totalElevation = efforts?.reduce((sum, e) => sum + (e.segments?.elevation_gain || 0), 0) || 0
 
@@ -114,7 +123,8 @@ async function SegmentEffortsContent() {
       uniqueSegments,
       totalDistance: Math.round(totalDistance / 1000 * 100) / 100, // Convert to km
       totalElevation: Math.round(totalElevation),
-      totalPRs
+      totalPRs,
+      displayedEfforts: efforts?.length || 0
     }
 
     const { default: SegmentEffortsClient } = await import('./segment-efforts-client')
