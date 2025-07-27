@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { 
   MapPin, 
@@ -11,9 +11,7 @@ import {
   Target,
   BarChart3,
   Mountain,
-  Activity,
   Award,
-  Calendar,
   ArrowLeft
 } from 'lucide-react'
 import dynamic from 'next/dynamic'

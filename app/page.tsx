@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
           Cycling Coach Dashboard
         </h1>
         <p className="text-lg text-center text-gray-700 dark:text-gray-300 mb-6">
-          Visualize, compare, and celebrate your team’s Strava performance. Built for cycling coaches and teams who want to go beyond the basics.
+          Visualize, compare, and celebrate your team&apos;s Strava performance. Built for cycling coaches and teams who want to go beyond the basics.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
           <a
@@ -24,24 +25,24 @@ export default function Home() {
           >
             Login with Strava
           </a>
-          <a
+          <Link
             href="/activities"
             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
           >
             Activities
-          </a>
-          <a
+          </Link>
+          <Link
             href="/segments"
             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
           >
             Segments
-          </a>
-          <a
+          </Link>
+          <Link
             href="/dashboard"
             className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white font-semibold py-3 px-8 rounded-lg shadow hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-center"
           >
             View Dashboard
-          </a>
+          </Link>
         </div>
       </main>
       <footer className="mt-16 text-gray-400 text-xs text-center">

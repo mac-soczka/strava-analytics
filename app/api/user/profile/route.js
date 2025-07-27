@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { config } from '@/lib/config'
 
-export async function GET(req) {
+export async function GET() {
   try {
     // Initialize Supabase client
     const supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)

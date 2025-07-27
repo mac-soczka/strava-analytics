@@ -17,23 +17,23 @@ export async function cronTrigger() {
       include_segments: true
     })
     
-    console.log(`✅ Cron job completed. Processed ${results.length} users`)
+    console.log(`✅ Cron job completed. Processed ${results.users_processed} users`)
     
     // Log summary
-    const successful = results.filter(r => r.success).length
-    const totalActivities = results.reduce((sum, r) => sum + r.activities_fetched, 0)
-    const totalSegments = results.reduce((sum, r) => sum + r.segments_fetched, 0)
+    const successful = results.users_successful
+    const totalActivities = results.total_activities
+    const totalSegments = results.total_segments
     
-    console.log(`📊 Summary: ${successful}/${results.length} users successful`)
+    console.log(`📊 Summary: ${successful}/${results.users_processed} users successful`)
     console.log(`📊 Total activities: ${totalActivities}, segments: ${totalSegments}`)
     
     return {
       success: true,
-      users_processed: results.length,
+      users_processed: results.users_processed,
       users_successful: successful,
       total_activities: totalActivities,
       total_segments: totalSegments,
-      results
+      results: results.results
     }
     
   } catch (error: any) {

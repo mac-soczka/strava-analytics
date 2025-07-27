@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 interface User {
   id: string;
@@ -83,9 +84,11 @@ export default function Navbar() {
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
-                <img
+                <Image
                   src={user.profile || '/vercel.svg'}
                   alt="Profile"
+                  width={32}
+                  height={32}
                   className="w-8 h-8 rounded-full border-2 border-orange-200"
                 />
                 <span className="text-gray-700 dark:text-gray-200 font-medium">

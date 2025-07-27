@@ -66,8 +66,6 @@ export default function DashboardClient({
   activityTypes,
   monthlyData
 }: DashboardClientProps) {
-  const [selectedTimeframe, setSelectedTimeframe] = useState('all')
-
   const formatDistance = (meters: number) => `${(meters / 1000).toFixed(1)} km`
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600)

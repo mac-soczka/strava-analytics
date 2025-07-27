@@ -7,11 +7,8 @@ import {
   Calendar, 
   Clock, 
   MapPin, 
-  TrendingUp,
   Target,
-  Trophy,
   Activity,
-  BarChart3,
   Mountain,
   ExternalLink
 } from 'lucide-react'

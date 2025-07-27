@@ -11,10 +11,6 @@ const navItems = [
   { name: "Settings", href: "/settings", icon: "⚙️" },
 ];
 
-const devItems = [
-  { name: "Test Page", href: "/test", icon: "🧪" },
-];
-
 export default function Sidebar() {
   const pathname = usePathname();
   return (

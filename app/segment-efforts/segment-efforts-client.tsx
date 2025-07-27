@@ -4,13 +4,10 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { 
   Target, 
-  Clock, 
   MapPin, 
   TrendingUp, 
   Trophy,
-  Filter,
   Search,
-  Calendar,
   Activity
 } from 'lucide-react'
 
