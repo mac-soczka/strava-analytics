@@ -72,6 +72,7 @@ export class StravaCrawlerService {
       const results: CrawlerResult[] = []
       let totalActivities = 0
       let totalSegments = 0
+      let totalSegmentEfforts = 0
       let successfulUsers = 0
 
       for (const user of users) {
@@ -82,6 +83,7 @@ export class StravaCrawlerService {
           successfulUsers++
           totalActivities += result.activities_fetched
           totalSegments += result.segments_fetched
+          totalSegmentEfforts += result.segment_efforts_fetched
         }
       }
 
@@ -99,10 +101,10 @@ export class StravaCrawlerService {
       await this.logCrawlerResult({
         user_id: null, // System log
         status: 'success',
-        message: `Crawler completed: ${successfulUsers}/${users.length} users successful, ${totalActivities} activities, ${totalSegments} segments`,
+        message: `Crawler completed: ${successfulUsers}/${users.length} users successful, ${totalActivities} activities, ${totalSegments} segments, ${totalSegmentEfforts} segment efforts`,
         activities_fetched: totalActivities,
         segments_fetched: totalSegments,
-        segment_efforts_fetched: totalSegments, // For now, use segments_fetched as efforts_fetched
+        segment_efforts_fetched: totalSegmentEfforts,
         execution_time_ms: executionTime
       })
 
@@ -207,7 +209,7 @@ export class StravaCrawlerService {
       const syncResult = await this.stravaService.syncAllData()
       result.activities_fetched = syncResult.activities.synced
       result.segments_fetched = syncResult.segments.segmentsAdded
-      result.segment_efforts_fetched = syncResult.segments.segmentsAdded // For now, use segments added as efforts
+      result.segment_efforts_fetched = syncResult.segmentEfforts.total
 
       // Log final rate limit status
       const finalRateLimitStatus = this.stravaService.getRateLimitStatus()

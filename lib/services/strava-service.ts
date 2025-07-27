@@ -188,10 +188,13 @@ export class StravaService {
         access_token: newTokens.access_token,
         refresh_token: newTokens.refresh_token,
         expires_at: new Date(newTokens.expires_at * 1000).toISOString(),
+      }, {
+        onConflict: 'strava_id'
       })
 
     if (updateError) {
       console.error('Failed to save refreshed tokens:', updateError)
+      // Don't throw error here, as the tokens are still valid for this request
     }
 
     return {
@@ -416,6 +419,7 @@ export class StravaService {
   async syncAllData(): Promise<{
     activities: { synced: number; errors: number }
     segments: { processed: number; segmentsAdded: number; errors: number }
+    segmentEfforts: { total: number }
     totalExecutionTime: number
   }> {
     const startTime = Date.now()
@@ -432,11 +436,17 @@ export class StravaService {
       console.log('\n📥 STEP 2: Syncing ALL segments for ALL activities...')
       const segmentResult = await this.syncSegments()
       
+      // Step 3: Get total segment efforts count
+      const { count: totalSegmentEfforts } = await this.supabase
+        .from('segment_efforts')
+        .select('*', { count: 'exact', head: true })
+      
       const totalExecutionTime = Date.now() - startTime
       
       const summary = {
         activities: activityResult,
         segments: segmentResult,
+        segmentEfforts: { total: totalSegmentEfforts || 0 },
         totalExecutionTime
       }
       
@@ -444,6 +454,7 @@ export class StravaService {
       console.log(`📊 Summary:`)
       console.log(`   Activities: ${activityResult.synced} synced, ${activityResult.errors} errors`)
       console.log(`   Segments: ${segmentResult.processed} activities processed, ${segmentResult.segmentsAdded} segments added, ${segmentResult.errors} errors`)
+      console.log(`   Segment Efforts: ${totalSegmentEfforts || 0} total efforts`)
       console.log(`   Total time: ${Math.round(totalExecutionTime / 1000)}s`)
       
       return summary
