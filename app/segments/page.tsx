@@ -79,7 +79,7 @@ async function SegmentsContent() {
             max_watts
           )
         `)
-        .order('name'),
+        .order('name'), // No limit to get all segments
 
       // All segment efforts for accurate counting
       supabase.from('segment_efforts').select('segment_id'),
@@ -159,8 +159,7 @@ async function SegmentsContent() {
       // Add the total effort count from the database
       total_effort_count: effortCountMap.get(segment.segment_id) || 0
     }))
-    .sort((a: any, b: any) => b.total_effort_count - a.total_effort_count) // Sort by effort count descending
-    .slice(0, 200) || [] // Limit to top 200 by effort count
+    .sort((a: any, b: any) => b.total_effort_count - a.total_effort_count) || [] // Sort by effort count descending, no limit
 
     const { default: SegmentsClient } = await import('./segments-client')
 

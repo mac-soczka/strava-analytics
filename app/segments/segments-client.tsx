@@ -146,7 +146,8 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
   // Format date helper
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
-    return date.toLocaleDateString()
+    // Use ISO format to ensure consistency between server and client
+    return date.toISOString().split('T')[0]
   }
 
   // Format speed helper

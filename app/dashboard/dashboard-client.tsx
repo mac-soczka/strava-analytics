@@ -251,7 +251,7 @@ export default function DashboardClient({
                     {activity.name}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
-                    {activity.type.replace('_', ' ')} • {new Date(activity.start_date).toLocaleDateString()}
+                    {activity.type.replace('_', ' ')} • {new Date(activity.start_date).toISOString().split('T')[0]}
                   </p>
                 </div>
                 <div className="flex items-center space-x-3 text-xs text-gray-600 dark:text-gray-400">

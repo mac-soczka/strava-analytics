@@ -110,8 +110,17 @@ async function DashboardContent() {
       .sort((a, b) => b.effortCount - a.effortCount)
       .slice(0, 10)
 
-    // Calculate activity type distribution
-    const activityTypes = activities.data?.reduce((acc: Record<string, number>, activity: any) => {
+    // Get activity type counts from entire database
+    const { data: activityTypeCounts, error: typeCountError } = await supabase
+      .from('activities')
+      .select('type')
+
+    if (typeCountError) {
+      console.error('Error fetching activity type counts:', typeCountError)
+    }
+
+    // Calculate activity type distribution from full database
+    const activityTypes = activityTypeCounts?.reduce((acc: Record<string, number>, activity: any) => {
       acc[activity.type] = (acc[activity.type] || 0) + 1
       return acc
     }, {} as Record<string, number>) || {}
@@ -129,7 +138,7 @@ async function DashboardContent() {
       }) || []
 
       return {
-        month: date.toLocaleDateString('en-US', { month: 'short' }),
+        month: date.toISOString().slice(0, 7), // Use YYYY-MM format for consistency
         activities: monthActivities.length,
         distance: monthActivities.reduce((sum: number, a: any) => sum + (a.distance || 0), 0),
         elevation: monthActivities.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0)

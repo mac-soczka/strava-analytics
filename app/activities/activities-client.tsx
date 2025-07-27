@@ -10,7 +10,8 @@ import {
   Target,
   Activity,
   Mountain,
-  ExternalLink
+  ExternalLink,
+  ChevronDown
 } from 'lucide-react'
 
 interface SegmentEffort {
@@ -57,6 +58,7 @@ interface ActivitiesStats {
   totalElevation: number
   totalSegments: number
   totalEfforts: number
+  activityTypes: Record<string, number>
 }
 
 interface ActivitiesClientProps {
@@ -69,12 +71,12 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
   const [selectedType, setSelectedType] = useState<string>('all')
   const [sortBy, setSortBy] = useState<'date' | 'distance' | 'time' | 'segments'>('date')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
+  const [expandedActivities, setExpandedActivities] = useState<Set<number>>(new Set())
 
-  // Get unique activity types for filter
+  // Get unique activity types for filter from stats (full database counts)
   const activityTypes = useMemo(() => {
-    const types = new Set(activities.map(a => a.type))
-    return Array.from(types).sort()
-  }, [activities])
+    return Object.keys(stats.activityTypes || {}).sort()
+  }, [stats.activityTypes])
 
   // Filter and sort activities
   const filteredAndSortedActivities = useMemo(() => {
@@ -139,10 +141,11 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
     return (meters / 1000).toFixed(2)
   }
 
-  // Format date helper
+  // Format date helper - use consistent format to avoid hydration mismatch
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
-    return date.toLocaleDateString()
+    // Use ISO format to ensure consistency between server and client
+    return date.toISOString().split('T')[0]
   }
 
   // Group segments by segment_id to avoid duplicates
@@ -154,6 +157,24 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
       }
     })
     return Array.from(uniqueSegments.values())
+  }
+
+  // Toggle activity expansion
+  const toggleActivityExpansion = (activityId: number) => {
+    setExpandedActivities(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(activityId)) {
+        newSet.delete(activityId)
+      } else {
+        newSet.add(activityId)
+      }
+      return newSet
+    })
+  }
+
+  // Check if activity is expanded
+  const isActivityExpanded = (activityId: number) => {
+    return expandedActivities.has(activityId)
   }
 
   return (
@@ -338,16 +359,29 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
                       </span>
                     </div>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 flex items-center gap-3">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
                       {activity.type}
                     </span>
+                    {uniqueSegments.length > 0 && (
+                      <button
+                        onClick={() => toggleActivityExpansion(activity.activity_id)}
+                        className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                      >
+                        <span>{isActivityExpanded(activity.activity_id) ? 'Hide' : 'Show'} segments</span>
+                        <ChevronDown 
+                          className={`h-4 w-4 transition-transform ${
+                            isActivityExpanded(activity.activity_id) ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Segments List */}
-              {uniqueSegments.length > 0 && (
+              {/* Segments List - Only show when expanded */}
+              {uniqueSegments.length > 0 && isActivityExpanded(activity.activity_id) && (
                 <div className="p-6">
                   <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2">
                     <Target className="h-4 w-4" />
@@ -390,8 +424,8 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
                 </div>
               )}
 
-              {/* No Segments Message */}
-              {uniqueSegments.length === 0 && (
+              {/* No Segments Message - Only show when expanded */}
+              {uniqueSegments.length === 0 && isActivityExpanded(activity.activity_id) && (
                 <div className="p-6 text-center text-gray-500 dark:text-gray-400">
                   <Target className="h-8 w-8 mx-auto mb-2 opacity-50" />
                   <p>No segments found for this activity</p>

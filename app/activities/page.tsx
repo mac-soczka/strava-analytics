@@ -102,7 +102,22 @@ async function ActivitiesContent() {
 
     if (activitiesError) throw activitiesError
 
-    // Calculate statistics
+    // Get activity type counts from entire database
+    const { data: activityTypeCounts, error: typeCountError } = await supabase
+      .from('activities')
+      .select('type')
+
+    if (typeCountError) {
+      console.error('Error fetching activity type counts:', typeCountError)
+    }
+
+    // Calculate activity type distribution
+    const activityTypes = activityTypeCounts?.reduce((acc: Record<string, number>, activity: any) => {
+      acc[activity.type] = (acc[activity.type] || 0) + 1
+      return acc
+    }, {} as Record<string, number>) || {}
+
+    // Calculate statistics for displayed activities only
     const totalDistance = activities?.reduce((sum: number, a: any) => sum + (a.distance || 0), 0) || 0
     const totalTime = activities?.reduce((sum: number, a: any) => sum + (a.moving_time || 0), 0) || 0
     const totalElevation = activities?.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0) || 0
@@ -123,7 +138,8 @@ async function ActivitiesContent() {
       totalTime,
       totalElevation,
       totalSegments: totalSegments.size,
-      totalEfforts
+      totalEfforts,
+      activityTypes
     }
 
     const { default: ActivitiesClient } = await import('./activities-client')

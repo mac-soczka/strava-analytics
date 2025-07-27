@@ -170,7 +170,8 @@ export default function SegmentEffortsClient({
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
+    // Use ISO format to ensure consistency between server and client
+    return new Date(dateString).toISOString().split('T')[0]
   }
 
   const isPR = (effort: SegmentEffort) => {

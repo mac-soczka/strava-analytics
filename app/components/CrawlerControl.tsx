@@ -116,7 +116,8 @@ export default function CrawlerControl() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString()
+    // Use ISO format to ensure consistency between server and client
+    return new Date(dateString).toISOString().replace('T', ' ').slice(0, 19)
   }
 
   return (
