@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 interface SegmentDetailPageProps {
-  params: {
+  params: Promise<{
     segmentId: string
-  }
+  }>
 }
 
 export default async function SegmentDetailPage({ params }: SegmentDetailPageProps) {
