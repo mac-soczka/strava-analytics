@@ -1053,7 +1053,8 @@ export default function TestPage() {
     setIsRunning(false)
   }
 
-  // Run specific test category
+  // Unused test functions (commented out to reduce warnings)
+  /*
   const runAuthTests = async () => {
     setIsRunning(true)
     clearResults()
@@ -1076,6 +1077,7 @@ export default function TestPage() {
     
     setIsRunning(false)
   }
+  */
 
   const runDiagnosticTests = async () => {
     setIsRunning(true)
@@ -1174,6 +1176,8 @@ export default function TestPage() {
     }
   }
 
+  // Unused test functions (commented out to reduce warnings)
+  /*
   const testUpdateActivities = async () => {
     try {
       addResult('Update Activities', 'pending', 'Updating activities with missing data...')
@@ -1205,20 +1209,21 @@ export default function TestPage() {
     
     setIsRunning(false)
   }
+  */
 
   // Load initial data on component mount
   useEffect(() => {
     testAppSessionStatus()
     testRateLimitStatus()
     testEntityStats()
-  }, [])
+  }, [testAppSessionStatus, testRateLimitStatus, testEntityStats])
 
   // Load entity stats when component mounts
   useEffect(() => {
     if (!entityStats) {
       testEntityStats()
     }
-  }, [entityStats])
+  }, [entityStats, testEntityStats])
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">

@@ -25,7 +25,7 @@ export class TokenHealthService {
     console.log('🔍 Checking token health for all users...')
 
     // Get all users
-    const { data: users, error: usersError } = await this.supabase
+    const { data: users } = await this.supabase
       .from('users')
       .select('strava_id, firstname, lastname')
 
@@ -128,7 +128,7 @@ export class TokenHealthService {
       let errorDetails
       try {
         errorDetails = JSON.parse(errorText)
-      } catch (e) {
+      } catch {
         errorDetails = { message: errorText }
       }
 

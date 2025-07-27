@@ -166,7 +166,7 @@ export class StravaService {
       let errorDetails
       try {
         errorDetails = JSON.parse(errorText)
-      } catch (e) {
+      } catch {
         errorDetails = { message: errorText }
       }
       if (response.status === 400 && errorDetails.errors?.some((e: any) => e.code === 'invalid')) {
@@ -516,7 +516,6 @@ export class StravaService {
       return summary
       
     } catch (error) {
-      const totalExecutionTime = Date.now() - startTime
       console.error('❌ Error in comprehensive sync:', error)
       throw error
     }

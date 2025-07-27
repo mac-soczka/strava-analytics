@@ -91,7 +91,7 @@ export class SessionManagerServer {
       }
 
       return data.strava_id
-    } catch (error) {
+    } catch {
       return null
     }
   }
@@ -116,7 +116,7 @@ export class SessionManagerServer {
 
       if (error) return null
       return newToken
-    } catch (error) {
+    } catch {
       return null
     }
   }
@@ -146,7 +146,7 @@ export class SessionManagerServer {
       }
 
       return data
-    } catch (error) {
+    } catch {
       return null
     }
   }

@@ -15,7 +15,7 @@ export async function serverlessTrigger(req: Request) {
     try {
       const body = await req.json()
       options = body || {}
-    } catch (e) {
+    } catch {
       // No body or invalid JSON, use defaults
     }
     

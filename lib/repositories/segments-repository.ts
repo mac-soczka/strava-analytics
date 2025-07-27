@@ -142,7 +142,7 @@ export class SegmentsRepository {
   /**
    * Get user's best efforts for a segment
    */
-  async getUserBestEffortsForSegment(segmentId: number, userId: number): Promise<{ data: SegmentEffort[] | null; error: any }> {
+  async getUserBestEffortsForSegment(segmentId: number, _userId: number): Promise<{ data: SegmentEffort[] | null; error: any }> {
     const { data, error } = await this.supabase
       .from('segment_efforts')
       .select('*')
