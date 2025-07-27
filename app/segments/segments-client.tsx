@@ -3,28 +3,22 @@
 import React, { useState, useMemo, useCallback } from 'react'
 import { StravaSegment, StravaSegmentEffort } from '@/types/strava'
 import { createClient } from '@supabase/supabase-js'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { 
   Search, 
   MapPin, 
   Clock, 
-  TrendingUp,
   RefreshCw,
   ChevronDown,
   ChevronUp,
-  ExternalLink,
   Trophy,
   Target,
-  BarChart3,
-  Mountain,
-  Activity,
-  Timer,
-  Award
+  Mountain
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 
-const LeafletSegmentMap = dynamic(() => import('../components/LeafletSegmentMap'), { ssr: false })
+// LeafletSegmentMap is not currently used
 
 interface SegmentsClientProps {
   segments: (StravaSegment & { segment_efforts?: StravaSegmentEffort[] })[]
@@ -36,10 +30,7 @@ interface SegmentsClientProps {
   }
 }
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Supabase client not currently used
 
 export default function SegmentsClient({ segments, stats }: SegmentsClientProps) {
   const router = useRouter()
@@ -143,17 +134,7 @@ export default function SegmentsClient({ segments, stats }: SegmentsClientProps)
     return `${m}m ${s.toFixed(2)}s`
   }
 
-  // Format date helper
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    // Use ISO format to ensure consistency between server and client
-    return date.toISOString().split('T')[0]
-  }
-
-  // Format speed helper
-  const formatSpeed = (distance: number, time: number) => {
-    return (distance / time * 3.6).toFixed(2) // km/h
-  }
+  // Format helpers (currently unused but kept for future use)
 
   return (
     <div className="space-y-6">

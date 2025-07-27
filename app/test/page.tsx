@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@/lib/supabase'
-import { supabase as serverSupabase } from '@/lib/database'
-import { AuthService, SessionManager, TokenManager } from '@/lib/services/auth-service'
+import { SessionManager } from '@/lib/services/auth-service'
 import { upsertUserClient, upsertTokensClient, getUserByStravaIdClient, getTokensByStravaIdClient } from '@/lib/database-client'
 import CrawlerControl from '@/app/components/CrawlerControl'
 import Link from 'next/link'
@@ -75,13 +74,7 @@ export default function TestPage() {
   const [rateLimitStatus, setRateLimitStatus] = useState<any>(null)
   const [noLimitsMode, setNoLimitsMode] = useState<boolean>(false)
   const [crawlerDiagnostics, setCrawlerDiagnostics] = useState<any>(null)
-  const [systemStatus, setSystemStatus] = useState<SystemStatus>({
-    database: 'unknown',
-    authentication: 'unknown',
-    strava: 'unknown',
-    crawler: 'unknown',
-    overall: 'unknown'
-  })
+  // System status tracking (currently unused)
   const [testData, setTestData] = useState<any>({
     users: [],
     activities: [],
@@ -201,7 +194,7 @@ export default function TestPage() {
         } else {
           diagnostics.usersCount = users?.length || 0
         }
-      } catch (error) {
+      } catch {
         diagnostics.issues.push('Database connection error')
         diagnostics.recommendations.push('Verify Supabase environment variables')
       }
@@ -243,7 +236,7 @@ export default function TestPage() {
             }
           }
         }
-      } catch (error) {
+      } catch {
         diagnostics.issues.push('Error checking users and tokens')
       }
 
@@ -268,7 +261,7 @@ export default function TestPage() {
             diagnostics.recommendations.push('Run database migration: node scripts/apply-segments-fetched-migration.js')
           }
         }
-      } catch (error) {
+      } catch {
         diagnostics.issues.push('Error checking activities table')
       }
 
@@ -285,7 +278,7 @@ export default function TestPage() {
         } else {
           diagnostics.segmentsCount = segments?.length || 0
         }
-      } catch (error) {
+      } catch {
         diagnostics.issues.push('Error checking segments table')
       }
 
@@ -755,12 +748,12 @@ export default function TestPage() {
       addResult('RLS Policies', 'pending', 'Testing RLS policies...')
       
       // Test if we can read from tables (should work with current policies)
-      const { data: users, error: usersError } = await supabase
+      const { error: usersError } = await supabase
         .from('users')
         .select('count')
         .limit(1)
       
-      const { data: activities, error: activitiesError } = await supabase
+      const { error: activitiesError } = await supabase
         .from('activities')
         .select('count')
         .limit(1)

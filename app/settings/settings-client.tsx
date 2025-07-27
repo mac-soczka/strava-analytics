@@ -96,7 +96,7 @@ export default function SettingsClient() {
       
       setSaveMessage('Settings saved successfully!');
       setTimeout(() => setSaveMessage(''), 3000);
-    } catch (error) {
+    } catch {
       setSaveMessage('Error saving settings. Please try again.');
     } finally {
       setIsSaving(false);
