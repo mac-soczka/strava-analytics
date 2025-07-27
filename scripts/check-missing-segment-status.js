@@ -143,4 +143,4 @@ async function checkMissingSegmentStatus() {
   }
 }
 
-checkMissingSegmentStatus() 
+checkMissingSegmentStatus()
