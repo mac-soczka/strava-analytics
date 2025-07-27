@@ -6,15 +6,21 @@ import Link from 'next/link'
 interface CrawlerLog {
   id: string
   run_at: string
-  user_id: number
-  status: 'success' | 'error' | 'warning'
+  user_id: number | null
+  status: 'success' | 'error' | 'partial'
   message: string
   activities_fetched: number
   segments_fetched: number
   segment_efforts_fetched: number
   error?: string
   execution_time_ms: number
-  rate_limit_status?: string
+  rate_limit_status?: {
+    mode: string
+    requests15min: number
+    requestsDay: number
+    limit15min: number
+    limitDay: number
+  }
 }
 
 interface LogFilters {
@@ -71,7 +77,7 @@ export default function CrawlerLogsPage() {
 
     // Apply user ID filter
     if (filters.userId) {
-      filtered = filtered.filter(log => log.user_id.toString() === filters.userId)
+      filtered = filtered.filter(log => log.user_id?.toString() === filters.userId)
     }
 
     // Apply date range filter
@@ -88,7 +94,7 @@ export default function CrawlerLogsPage() {
       filtered = filtered.filter(log => 
         log.message.toLowerCase().includes(searchLower) ||
         log.error?.toLowerCase().includes(searchLower) ||
-        log.user_id.toString().includes(searchLower)
+        log.user_id?.toString().includes(searchLower)
       )
     }
 
@@ -129,7 +135,7 @@ export default function CrawlerLogsPage() {
     total: logs.length,
     success: logs.filter(log => log.status === 'success').length,
     error: logs.filter(log => log.status === 'error').length,
-    warning: logs.filter(log => log.status === 'warning').length,
+    partial: logs.filter(log => log.status === 'partial').length,
     totalActivities: logs.reduce((sum, log) => sum + log.activities_fetched, 0),
     totalSegments: logs.reduce((sum, log) => sum + log.segments_fetched, 0),
     avgExecutionTime: logs.length > 0 ? Math.round(logs.reduce((sum, log) => sum + log.execution_time_ms, 0) / logs.length) : 0
@@ -139,7 +145,7 @@ export default function CrawlerLogsPage() {
     switch (status) {
       case 'success': return 'text-green-600 bg-green-100'
       case 'error': return 'text-red-600 bg-red-100'
-      case 'warning': return 'text-yellow-600 bg-yellow-100'
+      case 'partial': return 'text-yellow-600 bg-yellow-100'
       default: return 'text-gray-600 bg-gray-100'
     }
   }
@@ -229,7 +235,7 @@ export default function CrawlerLogsPage() {
                 <option value="">All Statuses</option>
                 <option value="success">Success</option>
                 <option value="error">Error</option>
-                <option value="warning">Warning</option>
+                <option value="partial">Partial</option>
               </select>
             </div>
             <div>
@@ -348,6 +354,9 @@ export default function CrawlerLogsPage() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Duration
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Rate Limit
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -382,6 +391,17 @@ export default function CrawlerLogsPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {formatDuration(log.execution_time_ms)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {log.rate_limit_status ? (
+                        <div className="text-xs">
+                          <div className="font-medium">{log.rate_limit_status.mode}</div>
+                          <div>15m: {log.rate_limit_status.requests15min}/{log.rate_limit_status.limit15min}</div>
+                          <div>Day: {log.rate_limit_status.requestsDay}/{log.rate_limit_status.limitDay}</div>
+                        </div>
+                      ) : (
+                        <span className="text-gray-400">-</span>
+                      )}
                     </td>
                   </tr>
                 ))}

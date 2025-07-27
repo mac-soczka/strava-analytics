@@ -85,6 +85,31 @@ export default function CrawlerControl() {
     }
   }
 
+  const updateActivities = async () => {
+    setIsRunning(true)
+    try {
+      const response = await fetch('/api/strava/update-activities?limit=10', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      
+      const result = await response.json()
+      setLastResult(result)
+      
+      // Reload stats and logs after completion
+      await loadStats()
+      await loadLogs()
+      
+    } catch (error: any) {
+      console.error('Activity update failed:', error)
+      setLastResult({ success: false, error: error?.message || 'Unknown error' })
+    } finally {
+      setIsRunning(false)
+    }
+  }
+
   const formatDuration = (ms: number) => {
     const seconds = Math.round(ms / 1000)
     return `${seconds}s`
@@ -99,18 +124,35 @@ export default function CrawlerControl() {
       <h2 className="text-2xl font-bold mb-6">Strava Data Crawler</h2>
       
       {/* Control Panel */}
-      <div className="mb-6">
-        <button
-          onClick={triggerCrawler}
-          disabled={isRunning}
-          className={`px-4 py-2 rounded-md font-medium ${
-            isRunning
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 text-white'
-          }`}
-        >
-          {isRunning ? '🔄 Running...' : '🚀 Start Crawler'}
-        </button>
+      <div className="mb-6 space-y-3">
+        <div className="flex gap-3">
+          <button
+            onClick={triggerCrawler}
+            disabled={isRunning}
+            className={`px-4 py-2 rounded-md font-medium ${
+              isRunning
+                ? 'bg-gray-300 cursor-not-allowed'
+                : 'bg-blue-600 hover:bg-blue-700 text-white'
+            }`}
+          >
+            {isRunning ? '🔄 Running...' : '🚀 Start Crawler'}
+          </button>
+          <button
+            onClick={updateActivities}
+            disabled={isRunning}
+            className={`px-4 py-2 rounded-md font-medium ${
+              isRunning
+                ? 'bg-gray-300 cursor-not-allowed'
+                : 'bg-green-600 hover:bg-green-700 text-white'
+            }`}
+          >
+            {isRunning ? '🔄 Running...' : '📊 Update Activities'}
+          </button>
+        </div>
+        <p className="text-sm text-gray-600">
+          <strong>Start Crawler:</strong> Sync new activities and segments | 
+          <strong> Update Activities:</strong> Add polylines and Strava URLs to existing activities
+        </p>
       </div>
 
       {/* Last Result */}

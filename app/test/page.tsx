@@ -1181,6 +1181,25 @@ export default function TestPage() {
     }
   }
 
+  const testUpdateActivities = async () => {
+    try {
+      addResult('Update Activities', 'pending', 'Updating activities with missing data...')
+      
+      const response = await fetch('/api/strava/update-activities?limit=5', {
+        method: 'POST'
+      })
+      const data = await response.json()
+      
+      if (data.success) {
+        addResult('Update Activities', 'success', data.message, data.result)
+      } else {
+        addResult('Update Activities', 'error', `Error updating activities: ${data.error}`)
+      }
+    } catch (error: any) {
+      addResult('Update Activities', 'error', `Error updating activities: ${error.message}`)
+    }
+  }
+
   const runCrawlerTests = async () => {
     setIsRunning(true)
     clearResults()

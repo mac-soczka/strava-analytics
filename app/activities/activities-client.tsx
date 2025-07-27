@@ -46,6 +46,8 @@ interface Activity {
   start_date: string
   start_date_local: string
   segment_efforts: SegmentEffort[]
+  strava_url?: string
+  polyline?: string
 }
 
 interface ActivitiesStats {
@@ -295,9 +297,22 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
               <div className="p-6 border-b border-gray-100 dark:border-gray-700">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                      {activity.name}
-                    </h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        {activity.name}
+                      </h3>
+                      {activity.strava_url && (
+                        <a
+                          href={activity.strava_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 transition-colors"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          View on Strava
+                        </a>
+                      )}
+                    </div>
                     <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />

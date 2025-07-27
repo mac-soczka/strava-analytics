@@ -12,6 +12,14 @@ export interface CrawlerLogEntry {
   segments_fetched: number
   segment_efforts_fetched: number
   execution_time_ms: number
+  error?: string
+  rate_limit_status?: {
+    mode: string
+    requests15min: number
+    requestsDay: number
+    limit15min: number
+    limitDay: number
+  }
 }
 
 export interface CrawlerResult {
@@ -105,7 +113,14 @@ export class StravaCrawlerService {
         activities_fetched: totalActivities,
         segments_fetched: totalSegments,
         segment_efforts_fetched: totalSegmentEfforts,
-        execution_time_ms: executionTime
+        execution_time_ms: executionTime,
+        rate_limit_status: this.stravaService ? {
+          mode: this.stravaService.getRateLimitStatus().mode,
+          requests15min: this.stravaService.getRateLimitStatus().requests15min,
+          requestsDay: this.stravaService.getRateLimitStatus().requestsDay,
+          limit15min: config.stravaApiLimits.requestsPer15Min,
+          limitDay: config.stravaApiLimits.requestsPerDay
+        } : undefined
       })
 
       console.log('✅ Crawler completed successfully')
@@ -122,7 +137,15 @@ export class StravaCrawlerService {
         activities_fetched: 0,
         segments_fetched: 0,
         segment_efforts_fetched: 0,
-        execution_time_ms: executionTime
+        execution_time_ms: executionTime,
+        error: error.message,
+        rate_limit_status: this.stravaService ? {
+          mode: this.stravaService.getRateLimitStatus().mode,
+          requests15min: this.stravaService.getRateLimitStatus().requests15min,
+          requestsDay: this.stravaService.getRateLimitStatus().requestsDay,
+          limit15min: config.stravaApiLimits.requestsPer15Min,
+          limitDay: config.stravaApiLimits.requestsPerDay
+        } : undefined
       })
 
       return {
@@ -244,6 +267,26 @@ export class StravaCrawlerService {
         console.error(`❌ Error processing user ${user.firstname} ${user.lastname} (${user.strava_id}):`, error)
       }
     }
+
+    // Log individual user result
+    const rateLimitStatus = this.stravaService ? this.stravaService.getRateLimitStatus() : null
+    await this.logCrawlerResult({
+      user_id: user.strava_id,
+      status: result.success ? 'success' : 'error',
+      message: result.message,
+      activities_fetched: result.activities_fetched,
+      segments_fetched: result.segments_fetched,
+      segment_efforts_fetched: result.segment_efforts_fetched,
+      execution_time_ms: result.execution_time_ms,
+      error: result.errors?.join(', '),
+      rate_limit_status: rateLimitStatus ? {
+        mode: rateLimitStatus.mode,
+        requests15min: rateLimitStatus.requests15min,
+        requestsDay: rateLimitStatus.requestsDay,
+        limit15min: config.stravaApiLimits.requestsPer15Min,
+        limitDay: config.stravaApiLimits.requestsPerDay
+      } : undefined
+    })
 
     return result
   }

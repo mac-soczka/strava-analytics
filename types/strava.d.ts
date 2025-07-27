@@ -48,12 +48,25 @@ export interface StravaActivity {
   elapsed_time: number;
   total_elevation_gain: number;
   type: string;
-  sport_type?: string; // Optional since database doesn't have this column
+  sport_type?: string;
   workout_type?: number;
   start_date: string;
   start_date_local: string;
-  timezone?: string; // Optional since database doesn't have this column
-  utc_offset?: number; // Optional since database doesn't have this column
+  timezone?: string;
+  utc_offset?: number;
+  // Additional fields from detailed activity endpoint
+  average_speed?: number;
+  max_speed?: number;
+  average_watts?: number;
+  max_watts?: number;
+  average_heartrate?: number;
+  max_heartrate?: number;
+  map?: {
+    polyline: string;
+    summary_polyline: string;
+  };
+  // Strava URL can be constructed from activity ID
+  strava_url?: string;
 }
 
 export interface DatabaseActivity {
@@ -75,6 +88,7 @@ export interface DatabaseActivity {
   average_heartrate?: number;
   max_heartrate?: number;
   polyline?: string;
+  strava_url?: string;
   created_at?: string;
   updated_at?: string;
 } 

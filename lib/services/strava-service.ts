@@ -267,6 +267,62 @@ export class StravaService {
   }
 
   /**
+   * Fetch detailed activity information including polyline from Strava API
+   */
+  async fetchActivityDetails(activityId: number): Promise<StravaActivity> {
+    // Check rate limits before making request
+    if (!rateLimitTracker.canMakeRequest()) {
+      const status = rateLimitTracker.getStatus()
+      const errorMsg = `Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`
+      console.warn(`🚫 ${errorMsg}`)
+      throw new Error(errorMsg)
+    }
+
+    const tokens = await this.getValidTokens()
+
+    const response = await fetch(
+      `https://www.strava.com/api/v3/activities/${activityId}`,
+      {
+        headers: { 'Authorization': `Bearer ${tokens.access_token}` }
+      }
+    )
+
+    // Record the request
+    rateLimitTracker.recordRequest()
+
+    if (!response.ok) {
+      if (response.status === 429) {
+        console.warn(`🚫 Rate limit hit (429) while fetching activity details!`)
+        console.warn(`⏳ Waiting ${config.stravaApiLimits.retryDelayMs / 1000}s for rate limit reset...`)
+        await new Promise(resolve => setTimeout(resolve, config.stravaApiLimits.retryDelayMs))
+        console.log(`🔄 Retrying activity details fetch after rate limit reset...`)
+        return this.fetchActivityDetails(activityId) // Retry after waiting
+      } else if (response.status === 401) {
+        console.warn(`🔄 Token expired (401), refreshing tokens...`)
+        await this.refreshTokens(tokens.refresh_token, this.userId)
+        return this.fetchActivityDetails(activityId) // Retry with new tokens
+      }
+      throw new Error(`Failed to fetch activity details: ${response.status}`)
+    }
+
+    // Apply rate limiting delay
+    const delay = rateLimitTracker.getDelay()
+    if (delay > 0) {
+      console.log(`⏱️ Applying rate limit delay: ${delay}ms`)
+      await new Promise(resolve => setTimeout(resolve, delay))
+    }
+
+    const activity = await response.json()
+    
+    // Add Strava URL
+    activity.strava_url = `https://www.strava.com/activities/${activityId}`
+    
+    console.log(`✅ Fetched detailed activity: ${activity.name} (ID: ${activityId})`)
+    
+    return activity
+  }
+
+  /**
    * Fetch segments for a specific activity from Strava API
    */
   async fetchActivitySegments(activityId: number): Promise<StravaSegmentEffort[]> {
@@ -504,25 +560,51 @@ export class StravaService {
               continue
             }
 
-            // Create activity in database
+            // For new activities, try to get detailed data but fall back to basic data if needed
+            let detailedActivity: StravaActivity
+            let hasDetailedData = false
+
+            try {
+              console.log(`📊 Fetching detailed data for activity ${activity.id}...`)
+              detailedActivity = await this.fetchActivityDetails(activity.id)
+              hasDetailedData = true
+            } catch (detailError) {
+              console.warn(`⚠️ Failed to fetch detailed data for activity ${activity.id}, using basic data:`, detailError)
+              // Fall back to basic activity data
+              detailedActivity = {
+                ...activity,
+                strava_url: `https://www.strava.com/activities/${activity.id}`
+              }
+              hasDetailedData = false
+            }
+
+            // Create activity in database with available data
             const activityData: Omit<DatabaseActivity, 'id'> = {
               strava_id: this.userId!,
-              activity_id: activity.id,
-              name: activity.name,
-              distance: activity.distance,
-              moving_time: activity.moving_time,
-              elapsed_time: activity.elapsed_time,
-              total_elevation_gain: activity.total_elevation_gain,
-              type: activity.type,
-              start_date: activity.start_date,
-              start_date_local: activity.start_date_local,
+              activity_id: detailedActivity.id,
+              name: detailedActivity.name,
+              distance: detailedActivity.distance,
+              moving_time: detailedActivity.moving_time,
+              elapsed_time: detailedActivity.elapsed_time,
+              total_elevation_gain: detailedActivity.total_elevation_gain,
+              type: detailedActivity.type,
+              start_date: detailedActivity.start_date,
+              start_date_local: detailedActivity.start_date_local,
+              average_speed: detailedActivity.average_speed,
+              max_speed: detailedActivity.max_speed,
+              average_watts: detailedActivity.average_watts,
+              max_watts: detailedActivity.max_watts,
+              average_heartrate: detailedActivity.average_heartrate,
+              max_heartrate: detailedActivity.max_heartrate,
+              polyline: detailedActivity.map?.polyline || detailedActivity.map?.summary_polyline,
+              strava_url: detailedActivity.strava_url,
             }
             await this.activitiesRepo.createActivity(activityData)
 
             synced++
-            console.log(`✅ Synced activity: ${activity.name}`)
+            console.log(`✅ Synced activity${hasDetailedData ? ' with polyline' : ' (basic data)'}: ${detailedActivity.name}`)
 
-            // Rate limiting is handled in fetchActivities
+            // Rate limiting is handled in fetchActivityDetails
           } catch (error) {
             console.error(`❌ Error syncing activity ${activity.id}:`, error)
             errors++
@@ -709,6 +791,78 @@ export class StravaService {
 
     if (error) throw error
     return data
+  }
+
+  /**
+   * Update existing activities with missing polyline and strava_url data
+   * This is a separate process that can be run independently
+   */
+  async updateActivitiesWithMissingData(limit = 10): Promise<{ updated: number; errors: number }> {
+    let updated = 0
+    let errors = 0
+
+    try {
+      console.log(`🔄 Starting update of activities with missing data (limit: ${limit})`)
+      
+      // Get activities that are missing polyline or strava_url
+      const { data: activitiesNeedingUpdate, error } = await this.supabase
+        .from('activities')
+        .select('activity_id, name')
+        .or('polyline.is.null,strava_url.is.null')
+        .eq('strava_id', this.userId!)
+        .limit(limit)
+
+      if (error) throw error
+
+      if (!activitiesNeedingUpdate || activitiesNeedingUpdate.length === 0) {
+        console.log('✅ No activities need updating')
+        return { updated: 0, errors: 0 }
+      }
+
+      console.log(`📊 Found ${activitiesNeedingUpdate.length} activities needing updates`)
+
+      for (const activity of activitiesNeedingUpdate) {
+        try {
+          console.log(`📊 Updating activity ${activity.activity_id}...`)
+          
+          // Fetch detailed activity data
+          const detailedActivity = await this.fetchActivityDetails(activity.activity_id as number)
+          
+          // Update the activity with missing data
+          const updateData: Partial<DatabaseActivity> = {
+            average_speed: detailedActivity.average_speed,
+            max_speed: detailedActivity.max_speed,
+            average_watts: detailedActivity.average_watts,
+            max_watts: detailedActivity.max_watts,
+            average_heartrate: detailedActivity.average_heartrate,
+            max_heartrate: detailedActivity.max_heartrate,
+            polyline: detailedActivity.map?.polyline || detailedActivity.map?.summary_polyline,
+            strava_url: detailedActivity.strava_url,
+          }
+
+          const { error: updateError } = await this.supabase
+            .from('activities')
+            .update(updateData)
+            .eq('activity_id', activity.activity_id as number)
+
+          if (updateError) throw updateError
+
+          updated++
+          console.log(`✅ Updated activity: ${activity.name}`)
+
+        } catch (error) {
+          console.error(`❌ Error updating activity ${activity.activity_id}:`, error)
+          errors++
+        }
+      }
+
+      console.log(`🎉 Activity update completed: ${updated} updated, ${errors} errors`)
+    } catch (error) {
+      console.error('❌ Error in updateActivitiesWithMissingData:', error)
+      throw error
+    }
+
+    return { updated, errors }
   }
 
   /**
