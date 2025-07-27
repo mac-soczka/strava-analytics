@@ -1,7 +1,7 @@
 // API route: /api/segments
 // Returns all segment efforts, or filters by ?segment_id=xxx
 
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { createRouteHandlerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
