@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Authentication Flow', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to the test page before each test
-    await page.goto('/test')
+    // Navigate to the debug page before each test
+    await page.goto('/debug')
   })
 
   test('should display authentication status correctly', async ({ page }) => {

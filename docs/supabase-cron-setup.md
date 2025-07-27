@@ -203,8 +203,8 @@ The cron job is designed to work with your Vercel deployment at:
 
 ### **UI Monitoring**
 
-- **Test page**: `https://strava-heatmap-alpha.vercel.app/test`
-- **Crawler logs**: `https://strava-heatmap-alpha.vercel.app/test/logs`
+- **Debug page**: `https://strava-heatmap-alpha.vercel.app/debug`
+- **Crawler logs**: `https://strava-heatmap-alpha.vercel.app/debug/logs`
 
 ## **Best Practices**
 

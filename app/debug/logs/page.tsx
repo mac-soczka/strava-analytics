@@ -193,10 +193,10 @@ export default function CrawlerLogsPage() {
             <p className="text-gray-600 mt-1">Monitor and analyze crawler execution history</p>
           </div>
           <Link 
-            href="/test" 
+            href="/debug" 
             className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
           >
-            ← Back to Test Page
+            ← Back to Debug Page
           </Link>
         </div>
 

@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Crawler E2E Workflow', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to the test page
-    await page.goto('/test')
+    // Navigate to the debug page
+    await page.goto('/debug')
   })
 
   test('should trigger crawler and show results', async ({ page }) => {

@@ -67,7 +67,7 @@ interface SystemStatus {
   overall: 'healthy' | 'warning' | 'critical' | 'unknown'
 }
 
-export default function TestPage() {
+export default function DebugPage() {
   const [results, setResults] = useState<TestResult[]>([])
   const [isRunning, setIsRunning] = useState(false)
   const [user, setUser] = useState<any>(null)
@@ -1193,6 +1193,24 @@ export default function TestPage() {
     }
   }
 
+  const testRateLimitAnalysis = async () => {
+    try {
+      addResult('Rate Limit Analysis', 'pending', 'Analyzing current rate limit status...')
+      
+      const response = await fetch('/api/strava/rate-limit-analysis')
+      const data = await response.json()
+      
+      if (data.success) {
+        addResult('Rate Limit Analysis', 'success', 'Rate limit analysis completed', data.analysis)
+        console.log('Rate Limit Summary:', data.summary)
+      } else {
+        addResult('Rate Limit Analysis', 'error', `Failed to analyze rate limits: ${data.error}`)
+      }
+    } catch (error: any) {
+      addResult('Rate Limit Analysis', 'error', `Error analyzing rate limits: ${error.message}`)
+    }
+  }
+
   // Unused test functions (commented out to reduce warnings)
   /*
   const testUpdateActivities = async () => {
@@ -1238,7 +1256,7 @@ export default function TestPage() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Supabase Test Page</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Debug Page</h1>
         
         {/* Current User Status */}
         <div className="bg-white rounded-lg shadow p-6 mb-8">
@@ -1554,7 +1572,7 @@ export default function TestPage() {
                 <div className="flex items-center justify-between">
                   <h2 className="text-xl font-semibold">Crawler Controls</h2>
                   <Link 
-                    href="/test/logs" 
+                    href="/debug/logs" 
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                   >
                     📊 View Logs
@@ -1562,6 +1580,21 @@ export default function TestPage() {
                 </div>
                 
                 <CrawlerControl />
+                
+                {/* Rate Limit Analysis Section */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                  <h3 className="text-lg font-semibold mb-4">📊 Rate Limit Analysis</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Analyze current Strava API rate limit status and get recommendations for crawling.
+                  </p>
+                  <button
+                    onClick={testRateLimitAnalysis}
+                    disabled={isRunning}
+                    className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50"
+                  >
+                    🔍 Analyze Rate Limits
+                  </button>
+                </div>
               </div>
             )}
 

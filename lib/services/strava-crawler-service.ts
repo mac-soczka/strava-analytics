@@ -3,6 +3,7 @@ import { StravaService } from './strava-service'
 import { StatsService } from './stats-service'
 import { config } from '@/lib/config'
 import { TokenHealthService } from './token-health-service'
+import { RateLimitAnalyzer } from './rate-limit-analyzer'
 
 export interface CrawlerLogEntry {
   run_at: string
@@ -47,11 +48,13 @@ export class StravaCrawlerService {
   private stravaService!: StravaService
   private tokenHealthService: TokenHealthService
   private statsService: StatsService
+  private rateLimitAnalyzer: RateLimitAnalyzer
 
   constructor() {
     this.supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
     this.tokenHealthService = new TokenHealthService()
     this.statsService = new StatsService()
+    this.rateLimitAnalyzer = new RateLimitAnalyzer()
   }
 
   /**
@@ -64,15 +67,71 @@ export class StravaCrawlerService {
     total_activities: number
     total_segments: number
     results: CrawlerResult[]
+    rate_limit_blocked?: boolean
+    next_run_time?: Date
   }> {
     const startTime = Date.now()
     console.log('🚀 Starting Strava data crawler...')
 
+    // Step 0: Analyze rate limits before starting
+    console.log('📊 Analyzing rate limits before crawling...')
+    let rateLimitAnalysis
+    try {
+      rateLimitAnalysis = await this.rateLimitAnalyzer.analyzeRateLimits()
+      const summary = await this.rateLimitAnalyzer.getRateLimitSummary()
+      console.log(summary)
+      
+      // Check if we should proceed based on rate limit analysis
+      if (!rateLimitAnalysis.recommendations.shouldProceed) {
+        console.log(`⚠️ Rate limit analysis suggests not proceeding: ${rateLimitAnalysis.recommendations.reason}`)
+        console.log(`⏰ Next recommended run time: ${rateLimitAnalysis.recommendations.nextRunTime.toLocaleString()}`)
+        
+        // Log the decision not to proceed
+        await this.logCrawlerResult({
+          user_id: null, // System log
+          status: 'partial',
+          message: `Crawler skipped due to rate limits: ${rateLimitAnalysis.recommendations.reason}`,
+          activities_fetched: 0,
+          segments_fetched: 0,
+          segment_efforts_fetched: 0,
+          execution_time_ms: Date.now() - startTime,
+          rate_limit_status: {
+            mode: rateLimitAnalysis.currentStatus.mode,
+            requests15min: rateLimitAnalysis.currentStatus.requests15min,
+            requestsDay: rateLimitAnalysis.currentStatus.requestsDay,
+            limit15min: rateLimitAnalysis.currentStatus.limit15min,
+            limitDay: rateLimitAnalysis.currentStatus.limitDay
+          }
+        })
+        
+        return {
+          success: false,
+          users_processed: 0,
+          users_successful: 0,
+          total_activities: 0,
+          total_segments: 0,
+          results: [],
+          rate_limit_blocked: true,
+          next_run_time: rateLimitAnalysis.recommendations.nextRunTime
+        }
+      }
+      
+      // Update options based on rate limit analysis
+      if (rateLimitAnalysis.recommendations.suggestedBatchSize !== config.stravaApiLimits.maxCrawlerBatchSize) {
+        options.batch_size = rateLimitAnalysis.recommendations.suggestedBatchSize
+        console.log(`📦 Adjusted batch size to ${options.batch_size} based on rate limit analysis`)
+      }
+      
+    } catch (rateLimitError: any) {
+      console.warn(`⚠️ Rate limit analysis failed: ${rateLimitError.message}`)
+      console.log('🔄 Proceeding with default settings...')
+    }
+
     // Track overall rate limit status across all users
     let overallRateLimitStatus = {
-      mode: 'unknown',
-      requests15min: 0,
-      requestsDay: 0,
+      mode: rateLimitAnalysis?.currentStatus.mode || 'unknown',
+      requests15min: rateLimitAnalysis?.currentStatus.requests15min || 0,
+      requestsDay: rateLimitAnalysis?.currentStatus.requestsDay || 0,
       limit15min: config.stravaApiLimits.requestsPer15Min,
       limitDay: config.stravaApiLimits.requestsPerDay
     }

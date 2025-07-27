@@ -38,16 +38,16 @@ export default function Sidebar() {
           </h3>
           <div className="mt-1 space-y-1">
             <Link
-              href="/test"
+              href="/debug"
               className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
             >
               <span className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500">
-                🧪
+                🐛
               </span>
-              Test Page
+              Debug Page
             </Link>
             <Link
-              href="/test/logs"
+              href="/debug/logs"
               className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
             >
               <span className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500">
