@@ -68,39 +68,109 @@ export class StravaCrawlerService {
     const startTime = Date.now()
     console.log('🚀 Starting Strava data crawler...')
 
+    // Log the start of the crawler run
+    let startLogId: string | null = null
     try {
-      // Check token health if requested
+      await this.logCrawlerResult({
+        user_id: null, // System log
+        status: 'partial',
+        message: 'Crawler started - initializing...',
+        activities_fetched: 0,
+        segments_fetched: 0,
+        segment_efforts_fetched: 0,
+        execution_time_ms: 0
+      })
+    } catch (logError) {
+      console.error('❌ Failed to log crawler start:', logError)
+    }
+
+    try {
+      // Step 1: Check token health if requested
       if (options.skip_invalid_tokens) {
         console.log('🔍 Checking token health before crawling...')
-        const tokenHealth = await this.tokenHealthService.checkAllTokenHealth()
-        const usersWithValidTokens = tokenHealth.filter(status => !status.needs_reauthentication)
-        console.log(`✅ Found ${usersWithValidTokens.length} users with valid tokens out of ${tokenHealth.length} total users`)
+        try {
+          const tokenHealth = await this.tokenHealthService.checkAllTokenHealth()
+          const usersWithValidTokens = tokenHealth.filter(status => !status.needs_reauthentication)
+          console.log(`✅ Found ${usersWithValidTokens.length} users with valid tokens out of ${tokenHealth.length} total users`)
+        } catch (tokenError: any) {
+          console.error('❌ Token health check failed:', tokenError)
+          throw new Error(`Token health check failed: ${tokenError.message}`)
+        }
       }
 
-      const users = await this.getUsersToProcess(options.skip_invalid_tokens)
-      console.log(`👥 Processing ${users.length} users...`)
+      // Step 2: Get users to process
+      let users: any[] = []
+      try {
+        users = await this.getUsersToProcess(options.skip_invalid_tokens)
+        console.log(`👥 Processing ${users.length} users...`)
+        
+        if (users.length === 0) {
+          throw new Error('No users found to process')
+        }
+      } catch (userError: any) {
+        console.error('❌ Failed to get users:', userError)
+        throw new Error(`Failed to get users: ${userError.message}`)
+      }
 
+      // Step 3: Process each user with individual error handling
       const results: CrawlerResult[] = []
       let totalActivities = 0
       let totalSegments = 0
       let totalSegmentEfforts = 0
       let successfulUsers = 0
+      let failedUsers = 0
+      const userErrors: string[] = []
 
       for (const user of users) {
-        const result = await this.processUser(user, options)
-        results.push(result)
+        try {
+          console.log(`🔄 Processing user: ${user.firstname} ${user.lastname} (${user.strava_id})`)
+          const result = await this.processUser(user, options)
+          results.push(result)
 
-        if (result.success) {
-          successfulUsers++
-          totalActivities += result.activities_fetched
-          totalSegments += result.segments_fetched
-          totalSegmentEfforts += result.segment_efforts_fetched
+          if (result.success) {
+            successfulUsers++
+            totalActivities += result.activities_fetched
+            totalSegments += result.segments_fetched
+            totalSegmentEfforts += result.segment_efforts_fetched
+            console.log(`✅ User ${user.firstname} ${user.lastname} processed successfully`)
+          } else {
+            failedUsers++
+            const errorMsg = `User ${user.firstname} ${user.lastname} failed: ${result.message}`
+            userErrors.push(errorMsg)
+            console.error(`❌ ${errorMsg}`)
+          }
+        } catch (userProcessError: any) {
+          failedUsers++
+          const errorMsg = `User ${user.firstname} ${user.lastname} processing error: ${userProcessError.message}`
+          userErrors.push(errorMsg)
+          console.error(`❌ ${errorMsg}`)
+          
+          // Log individual user failure
+          try {
+            await this.logCrawlerResult({
+              user_id: Number(user.strava_id),
+              status: 'error',
+              message: errorMsg,
+              activities_fetched: 0,
+              segments_fetched: 0,
+              segment_efforts_fetched: 0,
+              execution_time_ms: 0,
+              error: userProcessError.message
+            })
+          } catch (logError) {
+            console.error('❌ Failed to log user error:', logError)
+          }
         }
       }
 
       const executionTime = Date.now() - startTime
+      
+      // Determine overall status
+      const overallStatus = failedUsers === 0 ? 'success' : 
+                           successfulUsers > 0 ? 'partial' : 'error'
+      
       const summary = {
-        success: true,
+        success: overallStatus !== 'error',
         users_processed: users.length,
         users_successful: successfulUsers,
         total_activities: totalActivities,
@@ -108,15 +178,22 @@ export class StravaCrawlerService {
         results
       }
 
-      // Log the overall result
+      // Step 4: Log the overall result with comprehensive error reporting
+      const logMessage = overallStatus === 'success' 
+        ? `Crawler completed successfully: ${successfulUsers}/${users.length} users, ${totalActivities} activities, ${totalSegments} segments, ${totalSegmentEfforts} segment efforts`
+        : overallStatus === 'partial'
+        ? `Crawler completed partially: ${successfulUsers}/${users.length} users successful, ${failedUsers} failed. ${totalActivities} activities, ${totalSegments} segments, ${totalSegmentEfforts} segment efforts. Errors: ${userErrors.slice(0, 3).join('; ')}${userErrors.length > 3 ? '...' : ''}`
+        : `Crawler failed: ${failedUsers}/${users.length} users failed. Errors: ${userErrors.slice(0, 5).join('; ')}${userErrors.length > 5 ? '...' : ''}`
+
       await this.logCrawlerResult({
         user_id: null, // System log
-        status: 'success',
-        message: `Crawler completed: ${successfulUsers}/${users.length} users successful, ${totalActivities} activities, ${totalSegments} segments, ${totalSegmentEfforts} segment efforts`,
+        status: overallStatus,
+        message: logMessage,
         activities_fetched: totalActivities,
         segments_fetched: totalSegments,
         segment_efforts_fetched: totalSegmentEfforts,
         execution_time_ms: executionTime,
+        error: userErrors.length > 0 ? userErrors.join('; ') : undefined,
         rate_limit_status: this.stravaService ? {
           mode: this.stravaService.getRateLimitStatus().mode,
           requests15min: this.stravaService.getRateLimitStatus().requests15min,
@@ -126,40 +203,63 @@ export class StravaCrawlerService {
         } : undefined
       })
 
-      // Refresh cache after successful crawl
+      // Step 5: Refresh cache after successful crawl (only if some users succeeded)
       if (successfulUsers > 0) {
         console.log('🔄 Refreshing cache...')
         try {
           await this.statsService.refreshCache()
-        } catch (error) {
-          console.warn('⚠️ Failed to refresh cache:', error)
+          console.log('✅ Cache refreshed successfully')
+        } catch (cacheError: any) {
+          console.warn('⚠️ Failed to refresh cache:', cacheError)
+          // Log cache refresh failure but don't fail the entire crawl
+          try {
+            await this.logCrawlerResult({
+              user_id: null,
+              status: 'partial',
+              message: `Crawler completed but cache refresh failed: ${cacheError.message}`,
+              activities_fetched: totalActivities,
+              segments_fetched: totalSegments,
+              segment_efforts_fetched: totalSegmentEfforts,
+              execution_time_ms: executionTime,
+              error: `Cache refresh failed: ${cacheError.message}`
+            })
+          } catch (logError) {
+            console.error('❌ Failed to log cache refresh error:', logError)
+          }
         }
       }
 
-      console.log('✅ Crawler completed successfully')
+      console.log(`✅ Crawler completed with status: ${overallStatus}`)
       return summary
 
     } catch (error: any) {
       const executionTime = Date.now() - startTime
-      console.error('❌ Crawler failed:', error)
+      console.error('❌ Crawler failed with critical error:', error)
 
-      await this.logCrawlerResult({
-        user_id: null, // System log
-        status: 'error',
-        message: `Crawler failed: ${error.message}`,
-        activities_fetched: 0,
-        segments_fetched: 0,
-        segment_efforts_fetched: 0,
-        execution_time_ms: executionTime,
-        error: error.message,
-        rate_limit_status: this.stravaService ? {
-          mode: this.stravaService.getRateLimitStatus().mode,
-          requests15min: this.stravaService.getRateLimitStatus().requests15min,
-          requestsDay: this.stravaService.getRateLimitStatus().requestsDay,
-          limit15min: config.stravaApiLimits.requestsPer15Min,
-          limitDay: config.stravaApiLimits.requestsPerDay
-        } : undefined
-      })
+      // Log the critical failure
+      try {
+        await this.logCrawlerResult({
+          user_id: null, // System log
+          status: 'error',
+          message: `Crawler failed with critical error: ${error.message}`,
+          activities_fetched: 0,
+          segments_fetched: 0,
+          segment_efforts_fetched: 0,
+          execution_time_ms: executionTime,
+          error: error.message,
+          rate_limit_status: this.stravaService ? {
+            mode: this.stravaService.getRateLimitStatus().mode,
+            requests15min: this.stravaService.getRateLimitStatus().requests15min,
+            requestsDay: this.stravaService.getRateLimitStatus().requestsDay,
+            limit15min: config.stravaApiLimits.requestsPer15Min,
+            limitDay: config.stravaApiLimits.requestsPerDay
+          } : undefined
+        })
+      } catch (logError: any) {
+        console.error('❌ Failed to log critical error:', logError)
+        // If we can't even log the error, this is a serious system failure
+        throw new Error(`Critical crawler failure and logging failed: ${error.message}. Log error: ${logError.message}`)
+      }
 
       return {
         success: false,
@@ -219,8 +319,16 @@ export class StravaCrawlerService {
    */
   private async processUser(user: any, _options: CrawlerOptions = {}): Promise<CrawlerResult> {
     const startTime = Date.now()
+    
+    // Validate user data and ensure strava_id is a number
+    if (!user.strava_id || isNaN(Number(user.strava_id))) {
+      throw new Error(`Invalid user data: strava_id must be a number, got ${user.strava_id}`)
+    }
+    
+    const stravaId = Number(user.strava_id)
+    
     const result: CrawlerResult = {
-      user_id: user.strava_id,
+      user_id: stravaId,
       user_name: `${user.firstname} ${user.lastname}`,
       success: false,
       activities_fetched: 0,
@@ -232,24 +340,43 @@ export class StravaCrawlerService {
     }
 
     try {
-      console.log(`🔄 Processing user: ${user.firstname} ${user.lastname} (${user.strava_id})`)
+      console.log(`🔄 Processing user: ${user.firstname} ${user.lastname} (${stravaId})`)
       
-      // Initialize StravaService for this user
-      this.stravaService = new StravaService(user.strava_id)
+      // Step 1: Initialize StravaService for this user
+      try {
+        this.stravaService = new StravaService(stravaId)
+      } catch (initError: any) {
+        throw new Error(`Failed to initialize StravaService: ${initError.message}`)
+      }
       
-      // Log initial rate limit status
-      const initialRateLimitStatus = this.stravaService.getRateLimitStatus()
-      console.log(`📊 Initial rate limit status for ${user.firstname}: ${initialRateLimitStatus.mode} - 15min: ${initialRateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${initialRateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      // Step 2: Log initial rate limit status
+      let initialRateLimitStatus
+      try {
+        initialRateLimitStatus = this.stravaService.getRateLimitStatus()
+        console.log(`📊 Initial rate limit status for ${user.firstname}: ${initialRateLimitStatus.mode} - 15min: ${initialRateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${initialRateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      } catch (rateLimitError: any) {
+        console.warn(`⚠️ Failed to get initial rate limit status for ${user.firstname}: ${rateLimitError.message}`)
+      }
 
-      // Use comprehensive sync to ensure ALL activities and segments are fetched
-      const syncResult = await this.stravaService.syncAllData()
-      result.activities_fetched = syncResult.activities.synced
-      result.segments_fetched = syncResult.segments.segmentsAdded
-      result.segment_efforts_fetched = syncResult.segmentEfforts.total
+      // Step 3: Use comprehensive sync to ensure ALL activities and segments are fetched
+      let syncResult
+      try {
+        syncResult = await this.stravaService.syncAllData()
+        result.activities_fetched = syncResult.activities.synced
+        result.segments_fetched = syncResult.segments.segmentsAdded
+        result.segment_efforts_fetched = syncResult.segmentEfforts.total
+      } catch (syncError: any) {
+        throw new Error(`Sync failed: ${syncError.message}`)
+      }
 
-      // Log final rate limit status
-      const finalRateLimitStatus = this.stravaService.getRateLimitStatus()
-      console.log(`📊 Final rate limit status for ${user.firstname}: 15min: ${finalRateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${finalRateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      // Step 4: Log final rate limit status
+      let finalRateLimitStatus
+      try {
+        finalRateLimitStatus = this.stravaService.getRateLimitStatus()
+        console.log(`📊 Final rate limit status for ${user.firstname}: 15min: ${finalRateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${finalRateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      } catch (rateLimitError: any) {
+        console.warn(`⚠️ Failed to get final rate limit status for ${user.firstname}: ${rateLimitError.message}`)
+      }
 
       result.execution_time_ms = Date.now() - startTime
       result.success = true
@@ -262,65 +389,123 @@ export class StravaCrawlerService {
       result.errors.push(error.message)
       result.execution_time_ms = Date.now() - startTime
 
-      // Handle specific error types with enhanced logging
-      if (error.message.includes('Invalid refresh token')) {
+      // Handle specific error types with enhanced logging and categorization
+      if (error.message.includes('Invalid refresh token') || error.message.includes('401')) {
         result.message = `User ${user.firstname} ${user.lastname} needs to re-authenticate with Strava`
-        console.log(`⚠️ User ${user.firstname} ${user.lastname} (${user.strava_id}) needs re-authentication`)
-      } else if (error.message.includes('Rate limit exceeded')) {
+        console.log(`⚠️ User ${user.firstname} ${user.lastname} (${stravaId}) needs re-authentication`)
+      } else if (error.message.includes('Rate limit exceeded') || error.message.includes('429')) {
         result.message = `Rate limit hit while processing user ${user.firstname} ${user.lastname}`
-        console.log(`⚠️ Rate limit exceeded for user ${user.firstname} ${user.lastname} (${user.strava_id})`)
+        console.log(`⚠️ Rate limit exceeded for user ${user.firstname} ${user.lastname} (${stravaId})`)
         
         // Log detailed rate limit information
-        if (this.stravaService) {
-          const rateLimitStatus = this.stravaService.getRateLimitStatus()
-          console.log(`📊 Rate limit details at failure: ${rateLimitStatus.mode} - 15min: ${rateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${rateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+        try {
+          if (this.stravaService) {
+            const rateLimitStatus = this.stravaService.getRateLimitStatus()
+            console.log(`📊 Rate limit details at failure: ${rateLimitStatus.mode} - 15min: ${rateLimitStatus.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${rateLimitStatus.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+          }
+        } catch (rateLimitError: any) {
+          console.warn(`⚠️ Failed to get rate limit status at failure: ${rateLimitError.message}`)
         }
+      } else if (error.message.includes('Network') || error.message.includes('fetch') || error.message.includes('timeout')) {
+        result.message = `Network error while processing user ${user.firstname} ${user.lastname}: ${error.message}`
+        console.error(`🌐 Network error processing user ${user.firstname} ${user.lastname} (${stravaId}):`, error)
+      } else if (error.message.includes('Database') || error.message.includes('supabase')) {
+        result.message = `Database error while processing user ${user.firstname} ${user.lastname}: ${error.message}`
+        console.error(`🗄️ Database error processing user ${user.firstname} ${user.lastname} (${stravaId}):`, error)
       } else {
-        result.message = `Error processing user ${user.firstname} ${user.lastname}: ${error.message}`
-        console.error(`❌ Error processing user ${user.firstname} ${user.lastname} (${user.strava_id}):`, error)
+        result.message = `Unexpected error processing user ${user.firstname} ${user.lastname}: ${error.message}`
+        console.error(`❌ Unexpected error processing user ${user.firstname} ${user.lastname} (${stravaId}):`, error)
       }
     }
 
-    // Log individual user result
-    const rateLimitStatus = this.stravaService ? this.stravaService.getRateLimitStatus() : null
-    await this.logCrawlerResult({
-      user_id: user.strava_id,
-      status: result.success ? 'success' : 'error',
-      message: result.message,
-      activities_fetched: result.activities_fetched,
-      segments_fetched: result.segments_fetched,
-      segment_efforts_fetched: result.segment_efforts_fetched,
-      execution_time_ms: result.execution_time_ms,
-      error: result.errors?.join(', '),
-      rate_limit_status: rateLimitStatus ? {
-        mode: rateLimitStatus.mode,
-        requests15min: rateLimitStatus.requests15min,
-        requestsDay: rateLimitStatus.requestsDay,
-        limit15min: config.stravaApiLimits.requestsPer15Min,
-        limitDay: config.stravaApiLimits.requestsPerDay
-      } : undefined
-    })
+    // Step 5: Log individual user result with error handling
+    try {
+      const rateLimitStatus = this.stravaService ? this.stravaService.getRateLimitStatus() : null
+      await this.logCrawlerResult({
+        user_id: stravaId,
+        status: result.success ? 'success' : 'error',
+        message: result.message,
+        activities_fetched: result.activities_fetched,
+        segments_fetched: result.segments_fetched,
+        segment_efforts_fetched: result.segment_efforts_fetched,
+        execution_time_ms: result.execution_time_ms,
+        error: result.errors?.join(', '),
+        rate_limit_status: rateLimitStatus ? {
+          mode: rateLimitStatus.mode,
+          requests15min: rateLimitStatus.requests15min,
+          requestsDay: rateLimitStatus.requestsDay,
+          limit15min: config.stravaApiLimits.requestsPer15Min,
+          limitDay: config.stravaApiLimits.requestsPerDay
+        } : undefined
+      })
+    } catch (logError: any) {
+      console.error(`❌ Failed to log result for user ${user.firstname} ${user.lastname}:`, logError)
+      // Add logging failure to errors but don't fail the entire process
+      if (!result.errors) result.errors = []
+      result.errors.push(`Logging failed: ${logError.message}`)
+    }
 
     return result
   }
 
   /**
-   * Log crawler results to database
+   * Log crawler results to database with comprehensive error handling
    */
   private async logCrawlerResult(logEntry: Omit<CrawlerLogEntry, 'run_at'>) {
     try {
+      // Validate log entry before inserting
+      if (!logEntry.status || !['success', 'error', 'partial'].includes(logEntry.status)) {
+        throw new Error(`Invalid status: ${logEntry.status}`)
+      }
+
+      if (!logEntry.message) {
+        throw new Error('Message is required')
+      }
+
+      // Validate user_id if provided
+      if (logEntry.user_id !== null && logEntry.user_id !== undefined) {
+        if (isNaN(Number(logEntry.user_id))) {
+          throw new Error(`Invalid user_id: must be a number, got ${logEntry.user_id}`)
+        }
+      }
+
+      // Ensure numeric fields are valid
+      const validatedEntry = {
+        ...logEntry,
+        user_id: logEntry.user_id !== null && logEntry.user_id !== undefined ? Number(logEntry.user_id) : null,
+        activities_fetched: Math.max(0, logEntry.activities_fetched || 0),
+        segments_fetched: Math.max(0, logEntry.segments_fetched || 0),
+        segment_efforts_fetched: Math.max(0, logEntry.segment_efforts_fetched || 0),
+        execution_time_ms: Math.max(0, logEntry.execution_time_ms || 0),
+        run_at: new Date().toISOString()
+      }
+
       const { error } = await this.supabase
         .from('strava_crawler_logs')
-        .insert({
-          ...logEntry,
-          run_at: new Date().toISOString()
-        })
+        .insert(validatedEntry)
 
       if (error) {
-        console.error('Failed to log crawler result:', error)
+        console.error('❌ Database error logging crawler result:', error)
+        throw new Error(`Database insert failed: ${error.message}`)
       }
-    } catch (error) {
-      console.error('Failed to log crawler result:', error)
+
+      console.log(`📝 Logged crawler result: ${logEntry.status} - ${logEntry.message}`)
+    } catch (error: any) {
+      console.error('❌ Failed to log crawler result:', error)
+      
+      // Try to log the logging failure to console with detailed information
+      console.error('📋 Log entry that failed:', {
+        user_id: logEntry.user_id,
+        status: logEntry.status,
+        message: logEntry.message,
+        activities_fetched: logEntry.activities_fetched,
+        segments_fetched: logEntry.segments_fetched,
+        execution_time_ms: logEntry.execution_time_ms,
+        error: logEntry.error
+      })
+      
+      // Re-throw the error so calling code can handle it
+      throw error
     }
   }
 
