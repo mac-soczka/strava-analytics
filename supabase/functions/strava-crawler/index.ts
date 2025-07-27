@@ -1,6 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { StravaCrawlerService } from '../../lib/services/strava-crawler-service.ts'
+import { StravaCrawlerService } from '../../../lib/services/strava-crawler-service.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -31,24 +31,24 @@ serve(async (req) => {
       include_segments: true
     })
     
-    console.log(`✅ Edge Function completed. Processed ${results.length} users`)
+    console.log(`✅ Edge Function completed. Processed ${results.users_processed} users`)
     
     // Calculate summary statistics
-    const successful = results.filter(r => r.success).length
-    const totalActivities = results.reduce((sum, r) => sum + r.activities_fetched, 0)
-    const totalSegments = results.reduce((sum, r) => sum + r.segments_fetched, 0)
-    const totalExecutionTime = results.reduce((sum, r) => sum + r.execution_time_ms, 0)
+    const successful = results.users_successful
+    const totalActivities = results.total_activities
+    const totalSegments = results.total_segments
+    const totalExecutionTime = results.results.reduce((sum, r) => sum + r.execution_time_ms, 0)
     
     const response = {
       success: true,
-      users_processed: results.length,
+      users_processed: results.users_processed,
       users_successful: successful,
       total_activities: totalActivities,
       total_segments: totalSegments,
       execution_time_ms: totalExecutionTime,
-      results: results,
+      results: results.results,
       timestamp: new Date().toISOString(),
-      message: `Processed ${results.length} users: ${successful} successful, ${totalActivities} activities, ${totalSegments} segments`
+      message: `Processed ${results.users_processed} users: ${successful} successful, ${totalActivities} activities, ${totalSegments} segments`
     }
     
     return new Response(
