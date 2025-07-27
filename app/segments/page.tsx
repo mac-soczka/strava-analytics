@@ -126,6 +126,9 @@ async function SegmentsContent() {
       city: segment.city,
       state: segment.state,
       country: segment.country,
+      private: false, // Default value since not in database
+      hazardous: false, // Default value since not in database
+      starred: false, // Default value since not in database
       map: segment.polyline ? { polyline: segment.polyline } : undefined,
       segment_efforts: segment.segment_efforts?.map((effort: any) => ({
         id: effort.id,
@@ -147,6 +150,9 @@ async function SegmentsContent() {
           city: segment.city,
           state: segment.state,
           country: segment.country,
+          private: false,
+          hazardous: false,
+          starred: false,
           map: segment.polyline ? { polyline: segment.polyline } : undefined
         }
       })) || [],

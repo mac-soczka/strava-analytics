@@ -15,8 +15,8 @@ export default [
   ...compat.extends('next/core-web-vitals'),
   {
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off', // Temporarily disable to allow build
-      '@typescript-eslint/no-unused-vars': 'warn' // Change to warn instead of error
+      // Temporarily disable problematic rules
+      'no-unused-vars': 'warn'
     }
   }
 ]
