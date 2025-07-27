@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
+import ProtectedRoute from '../components/ProtectedRoute'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -7,22 +8,24 @@ export const revalidate = 0
 
 export default async function ActivitiesPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-            🚴‍♂️ Activities
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
-            Your Strava activities with segments and efforts
-          </p>
+    <ProtectedRoute>
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-4 py-8">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+              🚴‍♂️ Activities
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 text-lg">
+              Your Strava activities with segments and efforts
+            </p>
+          </div>
+          
+          <Suspense fallback={<ActivitiesLoadingSkeleton />}>
+            <ActivitiesContent />
+          </Suspense>
         </div>
-        
-        <Suspense fallback={<ActivitiesLoadingSkeleton />}>
-          <ActivitiesContent />
-        </Suspense>
-      </div>
-    </main>
+      </main>
+    </ProtectedRoute>
   )
 }
 

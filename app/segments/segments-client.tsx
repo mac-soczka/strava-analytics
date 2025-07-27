@@ -139,6 +139,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
       setSegments(data.segments || [])
       setCurrentPage(1)
       setHasMore(data.pagination && data.pagination.page < data.pagination.totalPages)
+      setLastSync(new Date().toLocaleTimeString())
     } catch (error) {
       console.error('Error searching segments:', error)
     } finally {
@@ -178,17 +179,34 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
         ...(searchTerm && { search: searchTerm })
       })
       
+      console.log('Loading more segments:', { nextPage, currentSegments: segments.length, totalSegments: stats.totalSegments })
+      
       const response = await fetch(`/api/segments?${params}`)
       if (!response.ok) throw new Error('Failed to fetch segments')
       
       const data = await response.json()
       
+      console.log('Load more response:', { 
+        segmentsReceived: data.segments?.length || 0, 
+        pagination: data.pagination,
+        hasMorePages: data.pagination && nextPage < data.pagination.totalPages
+      })
+      
       if (data.segments && data.segments.length > 0) {
         setSegments(prev => [...prev, ...data.segments])
         setCurrentPage(nextPage)
-        setHasMore(nextPage < data.pagination.totalPages)
+        // Check if we have more pages or if we've loaded all segments
+        const hasMorePages = data.pagination && nextPage < data.pagination.totalPages
+        const hasMoreSegments = segments.length + data.segments.length < (data.pagination?.total || stats.totalSegments)
+        setHasMore(hasMorePages && hasMoreSegments)
+        
+        console.log('Updated state:', { 
+          newTotalSegments: segments.length + data.segments.length,
+          hasMore: hasMorePages && hasMoreSegments
+        })
       } else {
         setHasMore(false)
+        console.log('No more segments to load')
       }
     } catch (error) {
       console.error('Error loading more segments:', error)

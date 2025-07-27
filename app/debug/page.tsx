@@ -5,6 +5,7 @@ import { createClientComponentClient } from '@/lib/supabase'
 import { SessionManager } from '@/lib/services/auth-service'
 import { upsertUserClient, upsertTokensClient, getUserByStravaIdClient, getTokensByStravaIdClient } from '@/lib/database-client'
 import CrawlerControl from '@/app/components/CrawlerControl'
+import ProtectedRoute from '@/app/components/ProtectedRoute'
 import Link from 'next/link'
 
 interface TestResult {
@@ -92,6 +93,115 @@ export default function DebugPage() {
   const clearResults = useCallback(() => {
     setResults([])
   }, [])
+
+  const copyToClipboard = useCallback(async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error)
+      return false
+    }
+  }, [])
+
+  const copySingleResult = useCallback(async (result: TestResult) => {
+    const resultText = `Test: ${result.test}
+Status: ${result.status}
+Message: ${result.message}
+${result.data ? `Data: ${JSON.stringify(result.data, null, 2)}` : ''}
+${result.error ? `Error: ${result.error}` : ''}
+---`
+    
+    const success = await copyToClipboard(resultText)
+    if (success) {
+      // Show a brief success indicator
+      const button = document.getElementById(`copy-${result.test.replace(/\s+/g, '-')}`)
+      if (button) {
+        const originalText = button.textContent
+        button.textContent = 'Copied!'
+        button.className = 'px-2 py-1 bg-green-500 text-white text-xs rounded hover:bg-green-600 transition-colors'
+        setTimeout(() => {
+          button.textContent = originalText
+          button.className = 'px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors'
+        }, 2000)
+      }
+    }
+  }, [copyToClipboard])
+
+  const copyAllResults = useCallback(async () => {
+    if (results.length === 0) return
+    
+    const allResultsText = results.map(result => 
+      `Test: ${result.test}
+Status: ${result.status}
+Message: ${result.message}
+${result.data ? `Data: ${JSON.stringify(result.data, null, 2)}` : ''}
+${result.error ? `Error: ${result.error}` : ''}
+---`
+    ).join('\n\n')
+    
+    const success = await copyToClipboard(allResultsText)
+    if (success) {
+      // Show a brief success indicator
+      const button = document.getElementById('copy-all-results')
+      if (button) {
+        const originalText = button.textContent
+        button.textContent = 'All Results Copied!'
+        button.className = 'px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors'
+        setTimeout(() => {
+          button.textContent = originalText
+          button.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors'
+        }, 2000)
+      }
+    }
+  }, [results, copyToClipboard])
+
+  const copyCrawlerDiagnostics = useCallback(async () => {
+    if (!crawlerDiagnostics) return
+    
+    const diagnosticsText = `Crawler Diagnostics Report
+Generated: ${new Date(crawlerDiagnostics.timestamp).toLocaleString()}
+
+Status: ${crawlerDiagnostics.status.toUpperCase()}
+Summary: ${crawlerDiagnostics.summary}
+
+System Status:
+- Users: ${crawlerDiagnostics.totalUsers || 0} (${crawlerDiagnostics.usersWithTokens || 0} with tokens)
+- Activities: ${crawlerDiagnostics.activitiesCount || 0}
+- Segments: ${crawlerDiagnostics.segmentsCount || 0}
+
+${crawlerDiagnostics.issues && crawlerDiagnostics.issues.length > 0 ? `
+Issues Found:
+${crawlerDiagnostics.issues.map((issue: string) => `- ${issue}`).join('\n')}
+` : ''}
+
+${crawlerDiagnostics.recommendations && crawlerDiagnostics.recommendations.length > 0 ? `
+Recommendations:
+${crawlerDiagnostics.recommendations.map((rec: string) => `- ${rec}`).join('\n')}
+` : ''}
+
+${crawlerDiagnostics.recentErrors && crawlerDiagnostics.recentErrors.length > 0 ? `
+Recent Errors:
+${crawlerDiagnostics.recentErrors.slice(0, 3).map((error: any) => 
+  `- ${error.message} (${new Date(error.run_at).toLocaleString()})`
+).join('\n')}
+` : ''}`
+    
+    const success = await copyToClipboard(diagnosticsText)
+    if (success) {
+      // Show a brief success indicator
+      const button = document.getElementById('copy-crawler-diagnostics')
+      if (button) {
+        const originalText = button.textContent
+        button.textContent = 'Copied!'
+        button.className = 'px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors'
+        setTimeout(() => {
+          button.textContent = originalText
+          button.className = 'px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-colors'
+        }, 2000)
+      }
+    }
+  }, [crawlerDiagnostics, copyToClipboard])
 
   // Test 1: Connection Test
   const testConnection = async () => {
@@ -1254,9 +1364,10 @@ export default function DebugPage() {
   }, [testAppSessionStatus, testRateLimitStatus, testEntityStats])
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Debug Page</h1>
+    <ProtectedRoute>
+      <div className="min-h-screen bg-gray-50 p-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Debug Page</h1>
         
         {/* Current User Status */}
         <div className="bg-white rounded-lg shadow p-6 mb-8">
@@ -1753,10 +1864,31 @@ export default function DebugPage() {
         {/* Test Results */}
         <div className="bg-white rounded-lg shadow">
           <div className="p-6 border-b">
-            <h2 className="text-xl font-semibold">Test Results</h2>
-            <p className="text-sm text-gray-600 mt-1">
-              {results.length} tests completed
-            </p>
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-semibold">Test Results</h2>
+                <p className="text-sm text-gray-600 mt-1">
+                  {results.length} tests completed
+                </p>
+              </div>
+              <div className="flex space-x-2">
+                {results.length > 0 && (
+                  <button
+                    id="copy-all-results"
+                    onClick={copyAllResults}
+                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                  >
+                    Copy All Results
+                  </button>
+                )}
+                <button
+                  onClick={clearResults}
+                  className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
+                >
+                  Clear Results
+                </button>
+              </div>
+            </div>
           </div>
           
           <div className="max-h-96 overflow-y-auto">
@@ -1769,7 +1901,17 @@ export default function DebugPage() {
                 {results.map((result, index) => (
                   <div key={index} className="p-6">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium">{result.test}</h3>
+                      <div className="flex items-center space-x-2">
+                        <h3 className="font-medium">{result.test}</h3>
+                        <button
+                          id={`copy-${result.test.replace(/\s+/g, '-')}`}
+                          onClick={() => copySingleResult(result)}
+                          className="px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors"
+                          title="Copy this test result"
+                        >
+                          Copy
+                        </button>
+                      </div>
                       <span className={`px-2 py-1 rounded text-xs font-medium ${
                         result.status === 'success' ? 'bg-green-100 text-green-800' :
                         result.status === 'error' ? 'bg-red-100 text-red-800' :
@@ -1808,7 +1950,17 @@ export default function DebugPage() {
         {crawlerDiagnostics && (
           <div className="bg-white rounded-lg shadow p-6 mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Crawler Diagnostics</h2>
+              <div className="flex items-center space-x-3">
+                <h2 className="text-xl font-semibold">Crawler Diagnostics</h2>
+                <button
+                  id="copy-crawler-diagnostics"
+                  onClick={copyCrawlerDiagnostics}
+                  className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-colors"
+                  title="Copy crawler diagnostics report"
+                >
+                  Copy Report
+                </button>
+              </div>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                 crawlerDiagnostics.status === 'healthy' ? 'bg-green-100 text-green-800' :
                 crawlerDiagnostics.status === 'warning' ? 'bg-yellow-100 text-yellow-800' :
@@ -1901,5 +2053,6 @@ export default function DebugPage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   )
 } 

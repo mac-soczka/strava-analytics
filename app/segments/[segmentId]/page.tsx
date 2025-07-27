@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
+import ProtectedRoute from '../../components/ProtectedRoute'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -16,13 +17,15 @@ export default async function SegmentDetailPage({ params }: SegmentDetailPagePro
   const { segmentId } = await params
   
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-8">
-        <Suspense fallback={<SegmentDetailLoadingSkeleton />}>
-          <SegmentDetailContent segmentId={segmentId} />
-        </Suspense>
-      </div>
-    </main>
+    <ProtectedRoute>
+      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-4 py-8">
+          <Suspense fallback={<SegmentDetailLoadingSkeleton />}>
+            <SegmentDetailContent segmentId={segmentId} />
+          </Suspense>
+        </div>
+      </main>
+    </ProtectedRoute>
   )
 }
 

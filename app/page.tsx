@@ -25,24 +25,9 @@ export default function Home() {
           >
             Login with Strava
           </a>
-          <Link
-            href="/activities"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-          >
-            Activities
-          </Link>
-          <Link
-            href="/segments"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-          >
-            Segments
-          </Link>
-          <Link
-            href="/dashboard"
-            className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white font-semibold py-3 px-8 rounded-lg shadow hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-center"
-          >
-            View Dashboard
-          </Link>
+          <div className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+            <p>Sign in to access your Strava data and analytics</p>
+          </div>
         </div>
       </main>
       <footer className="mt-16 text-gray-400 text-xs text-center">
