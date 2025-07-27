@@ -1,6 +1,6 @@
 # Architecture Documentation
 
-This document describes the architecture and design patterns implemented in the Strava Heatmap project.
+This document describes the architecture and design patterns implemented in the StravaHeatmap project.
 
 ## 🏗️ System Architecture
 

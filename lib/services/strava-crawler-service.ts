@@ -217,7 +217,7 @@ export class StravaCrawlerService {
   /**
    * Process a single user's Strava data
    */
-  private async processUser(user: any, options: CrawlerOptions = {}): Promise<CrawlerResult> {
+  private async processUser(user: any, _options: CrawlerOptions = {}): Promise<CrawlerResult> {
     const startTime = Date.now()
     const result: CrawlerResult = {
       user_id: user.strava_id,

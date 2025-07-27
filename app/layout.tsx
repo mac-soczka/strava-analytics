@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Strava Heatmap - Cycling Coach",
+  title: "StravaHeatmap",
   description: "Track your cycling activities and analyze your performance with Strava integration",
 };
 

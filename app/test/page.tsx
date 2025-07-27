@@ -1176,6 +1176,23 @@ export default function TestPage() {
     }
   }
 
+  const testSegmentCompletion = async () => {
+    try {
+      addResult('Segment Completion', 'pending', 'Fetching segment completion statistics...')
+      
+      const response = await fetch('/api/strava/segment-completion?type=overview')
+      const data = await response.json()
+      
+      if (data.success) {
+        addResult('Segment Completion', 'success', 'Segment completion statistics loaded', data.data)
+      } else {
+        addResult('Segment Completion', 'error', `Failed to load segment completion stats: ${data.error}`)
+      }
+    } catch (error: any) {
+      addResult('Segment Completion', 'error', `Error fetching segment completion stats: ${error.message}`)
+    }
+  }
+
   // Unused test functions (commented out to reduce warnings)
   /*
   const testUpdateActivities = async () => {
@@ -1441,6 +1458,13 @@ export default function TestPage() {
                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
                   >
                     🔍 Quick Diagnostics
+                  </button>
+                  <button
+                    onClick={testSegmentCompletion}
+                    disabled={isRunning}
+                    className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50"
+                  >
+                    📊 Segment Completion
                   </button>
                   <button
                     onClick={clearResults}

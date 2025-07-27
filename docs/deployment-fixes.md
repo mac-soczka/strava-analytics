@@ -351,4 +351,4 @@ VERCEL_BYPASS_FALLBACK_OVERSIZED_ERROR=1
    }
    ```
 
-This solution provides a robust, scalable foundation for the Strava Heatmap application while maintaining excellent performance and user experience. 
+This solution provides a robust, scalable foundation for the StravaHeatmap application while maintaining excellent performance and user experience. 

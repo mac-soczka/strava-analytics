@@ -67,7 +67,7 @@ export default function Navbar() {
         {/* Logo/Brand */}
         <div className="flex items-center">
           <h1 className="text-2xl font-bold text-orange-500 tracking-tight">
-            🚴 Strava Heatmap
+            🚴 StravaHeatmap
           </h1>
         </div>
 

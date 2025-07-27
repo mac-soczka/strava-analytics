@@ -1,6 +1,6 @@
-# Strava Heatmap - Documentation 📚
+# StravaHeatmap - Documentation 📚
 
-Welcome to the comprehensive documentation for the Strava Heatmap project. This project is built with Next.js 15 and Supabase, implementing modern design patterns for scalability and maintainability.
+Welcome to the comprehensive documentation for the StravaHeatmap project. This project is built with Next.js 15 and Supabase, implementing modern design patterns for scalability and maintainability.
 
 ## 📋 Documentation Index
 

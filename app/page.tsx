@@ -7,16 +7,16 @@ export default function Home() {
       <main className="flex flex-col items-center gap-8 max-w-xl w-full">
         <Image
           src="/cycling-coach.svg"
-          alt="Cycling Coach Dashboard"
+          alt="StravaHeatmap Dashboard"
           width={120}
           height={120}
           className="mb-4"
         />
         <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-2">
-          Cycling Coach Dashboard
+          StravaHeatmap
         </h1>
         <p className="text-lg text-center text-gray-700 dark:text-gray-300 mb-6">
-          Visualize, compare, and celebrate your team&apos;s Strava performance. Built for cycling coaches and teams who want to go beyond the basics.
+          Visualize, compare, and celebrate your team&apos;s Strava performance. Built for athletes and teams who want to go beyond the basics.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
           <a

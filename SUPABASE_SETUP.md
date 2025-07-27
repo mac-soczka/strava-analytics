@@ -1,6 +1,6 @@
 # Supabase Setup Guide
 
-This guide will help you add Supabase to your existing Next.js Strava heatmap project.
+This guide will help you add Supabase to your existing Next.js StravaHeatmap project.
 
 ## Step 1: Create Supabase Project
 

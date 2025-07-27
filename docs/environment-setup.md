@@ -1,6 +1,6 @@
 # Environment Setup Guide
 
-This guide covers all environment variables needed for the Strava Heatmap application.
+This guide covers all environment variables needed for the StravaHeatmap application.
 
 ## Required Environment Variables
 

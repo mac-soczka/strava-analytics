@@ -1,6 +1,6 @@
 # Design Patterns Implementation Summary
 
-This document provides a comprehensive overview of the design patterns implemented in the Strava Heatmap project.
+This document provides a comprehensive overview of the design patterns implemented in the StravaHeatmap project.
 
 ## 🎯 Overview
 

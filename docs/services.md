@@ -1,6 +1,6 @@
 # Services Documentation
 
-This document describes the services layer of the Strava Heatmap application, which encapsulates business logic and external API integrations.
+This document describes the services layer of the StravaHeatmap application, which encapsulates business logic and external API integrations.
 
 ## 🏗️ Service Layer Overview
 
