@@ -89,7 +89,7 @@ export default function ProtectedRoute({ children, fallback }: ProtectedRoutePro
               </a>
               
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                <p>Don't have an account?</p>
+                <p>Don&apos;t have an account?</p>
                 <p>Sign up for free at <a href="https://www.strava.com" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600">strava.com</a></p>
               </div>
             </div>
