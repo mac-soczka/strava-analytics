@@ -120,20 +120,24 @@ async function ActivitiesContent() {
       return acc
     }, {} as Record<string, number>) || {}
 
-    // Get completion statistics
-    const { data: completionStats, error: completionError } = await supabase
-      .rpc('get_segment_completion_stats')
+    // Get activity completion statistics
+    const { data: activityCompletionStats, error: activityCompletionError } = await supabase
+      .rpc('get_activity_completion_stats')
 
-    if (completionError) {
-      console.error('Error fetching completion stats:', completionError)
+    if (activityCompletionError) {
+      console.error('Error fetching activity completion stats:', activityCompletionError)
     }
 
-    // Calculate completion percentages
-    const activitiesWithSegments = completionStats?.[0]?.activities_with_segments || 0
-    const totalActivitiesWithSegmentsColumn = completionStats?.[0]?.total_activities || 0
-    const segmentCompletionPercentage = totalActivitiesWithSegmentsColumn > 0 
-      ? Math.round((activitiesWithSegments / totalActivitiesWithSegmentsColumn) * 100)
-      : 0
+    // Calculate activity completion percentages
+    const activityStats = activityCompletionStats?.[0] || {
+      total_activities_fetched: 0,
+      total_activities_available: 0,
+      activities_with_segments: 0,
+      activities_without_segments: 0,
+      activities_with_polyline: 0,
+      activities_without_polyline: 0,
+      completion_percentage: 0
+    }
 
     // Calculate statistics for displayed activities only
     const totalDistance = activities?.reduce((sum: number, a: any) => sum + (a.distance || 0), 0) || 0
@@ -158,7 +162,7 @@ async function ActivitiesContent() {
       totalSegments: totalSegments.size,
       totalEfforts,
       activityTypes,
-      segmentCompletionPercentage
+      activityCompletionStats: activityStats
     }
 
     const { default: ActivitiesClient } = await import('./activities-client')

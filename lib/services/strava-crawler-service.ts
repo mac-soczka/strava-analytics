@@ -167,7 +167,21 @@ export class StravaCrawlerService {
         }
       }
 
-      // Step 2: Get users to process
+      // Step 2: Get current state before processing
+      let currentState = { activities: 0, segments: 0, efforts: 0 }
+      try {
+        const entityStats = await this.statsService.getGlobalStats()
+        currentState = {
+          activities: entityStats.totalActivities || 0,
+          segments: entityStats.totalSegments || 0,
+          efforts: entityStats.totalEfforts || 0
+        }
+        console.log(`📊 CURRENT STATE: ${currentState.activities} activities, ${currentState.segments} segments, ${currentState.efforts} efforts in database`)
+      } catch (statsError) {
+        console.warn('⚠️ Failed to get current state for logging:', statsError)
+      }
+
+      // Step 3: Get users to process
       let users: any[] = []
       try {
         users = await this.getUsersToProcess(options.skip_invalid_tokens)
@@ -284,11 +298,25 @@ export class StravaCrawlerService {
       }
 
       // Step 4: Log the overall result with comprehensive error reporting
+      // Get total accumulated numbers for context
+      let totalAccumulatedActivities = 0
+      let totalAccumulatedSegments = 0
+      let totalAccumulatedEfforts = 0
+      
+      try {
+        const entityStats = await this.statsService.getGlobalStats()
+        totalAccumulatedActivities = entityStats.totalActivities || 0
+        totalAccumulatedSegments = entityStats.totalSegments || 0
+        totalAccumulatedEfforts = entityStats.totalEfforts || 0
+      } catch (statsError) {
+        console.warn('⚠️ Failed to get accumulated stats for logging:', statsError)
+      }
+      
       const logMessage = overallStatus === 'success' 
-        ? `Crawler completed successfully: ${successfulUsers}/${users.length} users, ${totalActivities} activities, ${totalSegments} segments, ${totalSegmentEfforts} segment efforts`
+        ? `Crawler completed successfully: ${successfulUsers}/${users.length} users processed. THIS RUN: ${totalActivities} NEW activities, ${totalSegments} NEW segments, ${totalSegmentEfforts} NEW efforts. TOTAL ACCUMULATED: ${totalAccumulatedActivities} activities, ${totalAccumulatedSegments} segments, ${totalAccumulatedEfforts} efforts`
         : overallStatus === 'partial'
-        ? `Crawler completed partially: ${successfulUsers}/${users.length} users successful, ${failedUsers} failed. ${totalActivities} activities, ${totalSegments} segments, ${totalSegmentEfforts} segment efforts. Errors: ${userErrors.slice(0, 3).join('; ')}${userErrors.length > 3 ? '...' : ''}`
-        : `Crawler failed: ${failedUsers}/${users.length} users failed. Errors: ${userErrors.slice(0, 5).join('; ')}${userErrors.length > 5 ? '...' : ''}`
+        ? `Crawler completed partially: ${successfulUsers}/${users.length} users successful, ${failedUsers} failed. THIS RUN: ${totalActivities} NEW activities, ${totalSegments} NEW segments, ${totalSegmentEfforts} NEW efforts. TOTAL ACCUMULATED: ${totalAccumulatedActivities} activities, ${totalAccumulatedSegments} segments, ${totalAccumulatedEfforts} efforts. Errors: ${userErrors.slice(0, 3).join('; ')}${userErrors.length > 3 ? '...' : ''}`
+        : `Crawler failed: ${failedUsers}/${users.length} users failed. THIS RUN: ${totalActivities} NEW activities, ${totalSegments} NEW segments, ${totalSegmentEfforts} NEW efforts. TOTAL ACCUMULATED: ${totalAccumulatedActivities} activities, ${totalAccumulatedSegments} segments, ${totalAccumulatedEfforts} efforts. Errors: ${userErrors.slice(0, 5).join('; ')}${userErrors.length > 5 ? '...' : ''}`
 
       await this.logCrawlerResult({
         user_id: null, // System log
@@ -474,8 +502,8 @@ export class StravaCrawlerService {
 
       result.execution_time_ms = Date.now() - startTime
       result.success = true
-      result.message = `Successfully processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments, ${result.segment_efforts_fetched} segment efforts`
-      console.log(`✅ User ${user.firstname} ${user.lastname} processed: ${result.activities_fetched} activities, ${result.segments_fetched} segments, ${result.segment_efforts_fetched} segment efforts`)
+      result.message = `Successfully processed: ${result.activities_fetched} NEW activities, ${result.segments_fetched} NEW segments, ${result.segment_efforts_fetched} NEW segment efforts`
+      console.log(`✅ User ${user.firstname} ${user.lastname} processed: ${result.activities_fetched} NEW activities, ${result.segments_fetched} NEW segments, ${result.segment_efforts_fetched} NEW segment efforts`)
 
     } catch (error: any) {
       result.success = false // Ensure success is false on error

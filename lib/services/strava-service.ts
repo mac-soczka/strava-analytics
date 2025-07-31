@@ -676,7 +676,7 @@ export class StravaService {
               console.log(`Activity ${activity.activity_id} already has ${existingSegments.data.length} segments, marking as fetched...`)
               // Mark as fetched even if we skip
               await this.activitiesRepo.markSegmentsFetched(activity.id)
-              processed++
+              // Don't increment processed count for already-fetched activities
               continue
             }
 
@@ -716,9 +716,16 @@ export class StravaService {
                 max_watts: effort.max_watts,
               }))
 
+              // Check how many segment efforts were actually inserted (not updated)
+              const existingEfforts = await this.segmentsRepo.getSegmentEffortsByActivity(activity.activity_id)
+              const existingEffortIds = new Set(existingEfforts.data?.map(e => e.effort_id) || [])
+              
+              // Only count efforts that don't already exist
+              const newEfforts = segmentsToSave.filter(effort => !existingEffortIds.has(effort.effort_id))
+              
               await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
-              segmentsAdded += segmentEfforts.length
-              console.log(`✅ Added ${segmentEfforts.length} segments for activity ${activity.activity_id}`)
+              segmentsAdded += newEfforts.length
+              console.log(`✅ Added ${newEfforts.length} NEW segment efforts for activity ${activity.activity_id} (${segmentEfforts.length} total found, ${existingEfforts.data?.length || 0} already existed)`)
               
               // Mark activity as having segments fetched only if segments were found
               await this.activitiesRepo.markSegmentsFetched(activity.id)
