@@ -44,20 +44,31 @@ export async function GET(
     const rateLimitService = getRateLimitService()
     const rateLimits = rateLimitService.getStatus()
 
-    return NextResponse.json({ 
-      job,
-      rateLimits: {
-        requests15min: rateLimits.requests15min,
-        limit15min: rateLimits.limit15min,
-        remaining15min: rateLimits.remaining15min,
-        requestsDay: rateLimits.requestsDay,
-        limitDay: rateLimits.limitDay,
-        remainingDay: rateLimits.remainingDay,
-        nextReset15min: rateLimits.nextReset15min.toISOString(),
-        nextResetDaily: rateLimits.nextResetDaily.toISOString(),
-        lastUpdate: rateLimits.lastUpdate.toISOString()
-      }
-    })
+    // Expose current Strava rate limit state via HTTP headers so clients can treat
+    // the response as the source of truth (mirrors Strava's header format).
+    const headers = new Headers()
+    headers.set('X-RateLimit-Usage', `${rateLimits.requests15min},${rateLimits.requestsDay}`)
+    headers.set('X-RateLimit-Limit', `${rateLimits.limit15min},${rateLimits.limitDay}`)
+    headers.set('X-RateLimit-LastUpdate', rateLimits.lastUpdate.toISOString())
+
+    return NextResponse.json(
+      {
+        job,
+        // Keep body fields for backward compatibility; clients should prefer headers.
+        rateLimits: {
+          requests15min: rateLimits.requests15min,
+          limit15min: rateLimits.limit15min,
+          remaining15min: rateLimits.remaining15min,
+          requestsDay: rateLimits.requestsDay,
+          limitDay: rateLimits.limitDay,
+          remainingDay: rateLimits.remainingDay,
+          nextReset15min: rateLimits.nextReset15min.toISOString(),
+          nextResetDaily: rateLimits.nextResetDaily.toISOString(),
+          lastUpdate: rateLimits.lastUpdate.toISOString(),
+        },
+      },
+      { headers }
+    )
   } catch (error: any) {
     console.error('Error fetching job status:', error)
     return NextResponse.json(

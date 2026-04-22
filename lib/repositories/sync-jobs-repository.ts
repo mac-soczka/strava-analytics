@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import config from '@/lib/config'
 
 export type SyncJobStatus = 'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'paused'
-export type SyncJobType = 'full_sync' | 'activities_only' | 'routes_only' | 'stats_only'
+export type SyncJobType = 'full_sync' | 'activities_only' | 'segments_only' | 'routes_only' | 'stats_only'
 
 export interface SyncJobProgress {
   activities: { total: number; processed: number; failed: number }
@@ -70,7 +70,7 @@ export class SyncJobsRepository {
       .from('sync_jobs')
       .select('*')
       .eq('strava_id', stravaId)
-      .in('status', ['pending', 'running'])
+      .in('status', ['pending', 'running', 'paused'])
       .order('created_at', { ascending: false })
       .limit(1)
       .single()
@@ -163,8 +163,28 @@ export class SyncJobsRepository {
   async pauseJob(
     jobId: string,
     lastProcessedActivityId: number,
-    reason: string = 'Rate limit exceeded'
+    reason: string = 'Rate limit exceeded',
+    resumeAt?: Date
   ): Promise<SyncJob> {
+    if (resumeAt) {
+      const { data, error } = await this.supabase
+        .from('sync_jobs')
+        .update({
+          status: 'paused',
+          last_processed_activity_id: lastProcessedActivityId,
+          paused_at: new Date().toISOString(),
+          resume_at: resumeAt.toISOString(),
+          pause_reason: reason,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', jobId)
+        .select()
+        .single()
+
+      if (error) throw error
+      return data
+    }
+
     const { data, error } = await this.supabase.rpc('pause_sync_job', {
       job_id: jobId,
       last_activity_id: lastProcessedActivityId,

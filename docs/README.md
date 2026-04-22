@@ -32,6 +32,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 ### 📖 Reference Guides
 - **[Quick Reference](./quick-reference.md)** - Quick commands and shortcuts
 - **[Package.json Scripts](./package-json-scripts.md)** - Available npm/yarn scripts
+- **[Strava-first Domain Model (DDD)](./domain-model-strava.md)** - Canonical entities (mirror Strava)
 
 ## 🏗️ Design Patterns Implemented
 

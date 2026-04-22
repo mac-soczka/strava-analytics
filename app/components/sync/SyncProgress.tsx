@@ -16,6 +16,32 @@ interface RateLimits {
   lastUpdate: string
 }
 
+function parseRateLimitHeaders(headers: Headers): Pick<
+  RateLimits,
+  'requests15min' | 'limit15min' | 'remaining15min' | 'requestsDay' | 'limitDay' | 'remainingDay' | 'lastUpdate'
+> | null {
+  const usage = headers.get('X-RateLimit-Usage')
+  const limit = headers.get('X-RateLimit-Limit')
+  const lastUpdate = headers.get('X-RateLimit-LastUpdate') ?? new Date().toISOString()
+
+  if (!usage || !limit) return null
+
+  const [requests15min, requestsDay] = usage.split(',').map((n) => Number(n))
+  const [limit15min, limitDay] = limit.split(',').map((n) => Number(n))
+
+  if (![requests15min, requestsDay, limit15min, limitDay].every(Number.isFinite)) return null
+
+  return {
+    requests15min,
+    limit15min,
+    remaining15min: Math.max(0, limit15min - requests15min),
+    requestsDay,
+    limitDay,
+    remainingDay: Math.max(0, limitDay - requestsDay),
+    lastUpdate,
+  }
+}
+
 interface SyncProgressProps {
   jobId: string
   onComplete?: () => void
@@ -29,7 +55,14 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout
-    let pollInterval = 2000 // Start with 2 seconds
+    let pollIntervalMs = 2000 // Start with 2 seconds
+    const maxPollIntervalMs = 30000
+    const jitter = (ms: number) => {
+      // +/- 15% jitter to avoid synchronized polling.
+      const r = 0.85 + Math.random() * 0.3
+      return Math.round(ms * r)
+    }
+    let lastSignature: string | null = null
 
     const fetchStatus = async () => {
       try {
@@ -41,40 +74,65 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
         }
 
         setJob(data.job)
-        setRateLimits(data.rateLimits || null)
+        const headerLimits = parseRateLimitHeaders(response.headers)
+        setRateLimits(
+          headerLimits
+            ? {
+                ...headerLimits,
+                // These reset timestamps are informational; if we need them later we can
+                // add explicit headers. For now keep them as best-effort.
+                nextReset15min: data.rateLimits?.nextReset15min ?? new Date().toISOString(),
+                nextResetDaily: data.rateLimits?.nextResetDaily ?? new Date().toISOString(),
+              }
+            : null
+        )
 
         if (['completed', 'failed', 'cancelled'].includes(data.job.status)) {
           // Job finished, stop polling
           return
         }
 
-        // Smart polling based on job status
+        // Exponential backoff: if nothing changes, we back off (up to a cap).
+        // If something changes, reset to fast polling.
+        const signature = [
+          data.job.status,
+          data.job.processed_items,
+          data.job.failed_items,
+          data.job.updated_at,
+        ].join('|')
+
+        const changed = lastSignature !== signature
+        lastSignature = signature
+
+        // Base interval by status (before backoff tuning).
+        let baseIntervalMs = 5000
+        if (data.job.status === 'running') baseIntervalMs = 2000
+        if (data.job.status === 'pending') baseIntervalMs = 5000
+
+        // Special-case paused: schedule around resume_at (more practical than blind backoff).
         if (data.job.status === 'paused' && data.job.resume_at) {
-          // Calculate time until resume
           const resumeTime = new Date(data.job.resume_at).getTime()
           const now = Date.now()
-          const timeUntilResume = resumeTime - now
+          const msUntilResume = resumeTime - now
 
-          if (timeUntilResume > 60000) {
-            // More than 1 minute away - poll every 30 seconds
-            pollInterval = 30000
-          } else if (timeUntilResume > 10000) {
-            // 10-60 seconds away - poll every 5 seconds
-            pollInterval = 5000
+          if (msUntilResume > 60000) {
+            baseIntervalMs = 60000
+          } else if (msUntilResume > 10000) {
+            baseIntervalMs = 5000
           } else {
-            // Less than 10 seconds - poll every 2 seconds
-            pollInterval = 2000
+            baseIntervalMs = 2000
           }
-        } else if (data.job.status === 'running') {
-          // Active job - poll frequently
-          pollInterval = 2000
+
+          pollIntervalMs = baseIntervalMs
+        } else if (changed) {
+          pollIntervalMs = baseIntervalMs
         } else {
-          // Pending or other - moderate polling
-          pollInterval = 5000
+          // No change: exponential backoff from current interval.
+          pollIntervalMs = Math.min(maxPollIntervalMs, Math.max(baseIntervalMs, pollIntervalMs * 2))
         }
 
         // Schedule next poll
-        timeoutId = setTimeout(fetchStatus, pollInterval)
+        timeoutId = setTimeout(fetchStatus, jitter(pollIntervalMs))
 
         if (data.job.status === 'completed' && onComplete) {
           onComplete()

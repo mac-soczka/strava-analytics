@@ -93,10 +93,20 @@ export function SyncDashboard() {
             Fetch all your activities, routes, and stats from Strava
           </p>
         </div>
-        <SyncButton
-          onSyncStart={handleSyncStart}
-          disabled={!!activeJobId}
-        />
+        <div className="flex items-center gap-3">
+          <SyncButton
+            onSyncStart={handleSyncStart}
+            disabled={!!activeJobId}
+            label="Sync My Activities"
+            endpoint="/api/sync/start"
+          />
+          <SyncButton
+            onSyncStart={handleSyncStart}
+            disabled={!!activeJobId}
+            label="Sync Segments"
+            endpoint="/api/sync/start-segments"
+          />
+        </div>
       </div>
 
       {activeJobId && (

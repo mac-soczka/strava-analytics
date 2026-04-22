@@ -29,6 +29,22 @@ export class SyncOrchestrationService {
     return job
   }
 
+  async startSegmentsSync(stravaId: number): Promise<SyncJob> {
+    const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
+    if (activeJob) {
+      throw new Error('A sync job is already running for this user')
+    }
+
+    const job = await this.jobsRepo.createJob(stravaId, 'segments_only')
+
+    this.executeSegmentsSync(job.id, stravaId).catch((error: any) => {
+      console.error(`Sync job ${job.id} failed:`, error)
+      this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
+    })
+
+    return job
+  }
+
   private async executeFullSync(jobId: string, stravaId: number, resumeFromActivityId?: number): Promise<void> {
     try {
       await this.jobsRepo.updateJobStatus(jobId, 'running')
@@ -58,10 +74,13 @@ export class SyncOrchestrationService {
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during activity sync! Pausing job...`)
+          const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
+          const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
           await this.jobsRepo.pauseJob(
             jobId,
             0,
-            'Rate limit exceeded during activity sync - will resume in 15 minutes'
+            `Rate limit exceeded during activity sync - will resume at ${resumeAt.toISOString()}`,
+            resumeAt
           )
           return
         }
@@ -80,10 +99,13 @@ export class SyncOrchestrationService {
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during segment sync! Pausing job...`)
+          const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
+          const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
           await this.jobsRepo.pauseJob(
             jobId,
             0,
-            'Rate limit exceeded during segment sync - will resume in 15 minutes'
+            `Rate limit exceeded during segment sync - will resume at ${resumeAt.toISOString()}`,
+            resumeAt
           )
           return
         }
@@ -115,6 +137,47 @@ export class SyncOrchestrationService {
       
     } catch (error: any) {
       console.error(`[Job ${jobId}] Sync failed:`, error)
+      await this.jobsRepo.markJobFailed(jobId, error?.message || 'Unknown error', { stack: error?.stack })
+      throw error
+    }
+  }
+
+  private async executeSegmentsSync(jobId: string, stravaId: number): Promise<void> {
+    try {
+      await this.jobsRepo.updateJobStatus(jobId, 'running')
+
+      console.log(`[Job ${jobId}] Starting segments-only sync from Strava API...`)
+
+      try {
+        const segmentResult = await this.stravaService.syncSegments(
+          undefined // batchSize - use default
+        )
+
+        await this.jobsRepo.updateJobProgress(jobId, {
+          segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
+        } as any)
+
+        await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+          processed_items: segmentResult.processed,
+          failed_items: segmentResult.errors,
+        })
+      } catch (error: any) {
+        if (this.isRateLimitError(error)) {
+          console.warn(`[Job ${jobId}] Rate limit hit during segments-only sync! Pausing job...`)
+          const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
+          const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
+          await this.jobsRepo.pauseJob(
+            jobId,
+            0,
+            `Rate limit exceeded during segments-only sync - will resume at ${resumeAt.toISOString()}`,
+            resumeAt
+          )
+          return
+        }
+        throw error
+      }
+    } catch (error: any) {
+      console.error(`[Job ${jobId}] Segments-only sync failed:`, error)
       await this.jobsRepo.markJobFailed(jobId, error?.message || 'Unknown error', { stack: error?.stack })
       throw error
     }

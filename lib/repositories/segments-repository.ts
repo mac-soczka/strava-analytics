@@ -69,6 +69,21 @@ export class SegmentsRepository {
   }
 
   /**
+   * Given a list of Strava segment ids, returns the subset that already exist in DB.
+   */
+  async getExistingSegmentIds(segmentIds: number[]): Promise<{ data: number[]; error: any }> {
+    if (segmentIds.length === 0) return { data: [], error: null }
+
+    const { data, error } = await this.supabase
+      .from('segments')
+      .select('segment_id')
+      .in('segment_id', segmentIds)
+
+    if (error) return { data: [], error }
+    return { data: (data || []).map((r: any) => r.segment_id as number), error: null }
+  }
+
+  /**
    * Get segments by location (city, state, country)
    */
   async getSegmentsByLocation(city?: string, state?: string, country?: string) {
