@@ -1,11 +1,12 @@
 import { SyncJobsRepository, SyncJob, SyncJobProgress } from '../repositories/sync-jobs-repository'
 import { StravaService } from './strava-service'
-import { createClientComponentClient } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
+import config from '@/lib/config'
 
 export class SyncOrchestrationService {
   private jobsRepo: SyncJobsRepository
   private stravaService: StravaService
-  private supabase = createClientComponentClient()
+  private supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
   constructor(stravaId: number) {
     this.jobsRepo = new SyncJobsRepository()
@@ -32,80 +33,74 @@ export class SyncOrchestrationService {
     try {
       await this.jobsRepo.updateJobStatus(jobId, 'running')
 
+      console.log(`[Job ${jobId}] Starting full sync from Strava API...`)
+
+      // Step 1: Sync activities from Strava API to database
+      console.log(`[Job ${jobId}] Fetching activities from Strava...`)
+      try {
+        const activityResult = await this.stravaService.syncActivities()
+        console.log(`[Job ${jobId}] Activities synced: ${activityResult.synced}, errors: ${activityResult.errors}`)
+        
+        await this.jobsRepo.updateJobProgress(jobId, {
+          activities: { total: activityResult.synced, processed: activityResult.synced, failed: activityResult.errors },
+        } as Partial<SyncJobProgress>)
+      } catch (error: any) {
+        if (this.isRateLimitError(error)) {
+          console.warn(`[Job ${jobId}] Rate limit hit during activity sync! Pausing job...`)
+          await this.jobsRepo.pauseJob(
+            jobId,
+            0,
+            'Rate limit exceeded during activity sync - will resume in 15 minutes'
+          )
+          return
+        }
+        throw error
+      }
+
+      // Step 2: Sync segments for all activities
+      console.log(`[Job ${jobId}] Syncing segments for activities...`)
+      try {
+        const segmentResult = await this.stravaService.syncSegments()
+        console.log(`[Job ${jobId}] Segments synced: ${segmentResult.segmentsAdded}, activities processed: ${segmentResult.processed}`)
+        
+        await this.jobsRepo.updateJobProgress(jobId, {
+          segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
+        } as Partial<SyncJobProgress>)
+      } catch (error: any) {
+        if (this.isRateLimitError(error)) {
+          console.warn(`[Job ${jobId}] Rate limit hit during segment sync! Pausing job...`)
+          await this.jobsRepo.pauseJob(
+            jobId,
+            0,
+            'Rate limit exceeded during segment sync - will resume in 15 minutes'
+          )
+          return
+        }
+        throw error
+      }
+
+      // Step 3: Sync athlete stats
       console.log(`[Job ${jobId}] Syncing athlete stats...`)
       await this.syncAthleteStats(jobId, stravaId)
 
+      // Step 4: Sync routes
       console.log(`[Job ${jobId}] Syncing routes...`)
       await this.syncRoutes(jobId, stravaId)
 
-      console.log(`[Job ${jobId}] Fetching activities list...`)
-      const { data: activities, error } = await this.supabase
+      // Mark job as completed
+      const { data: finalActivities } = await this.supabase
         .from('activities')
-        .select('activity_id')
+        .select('activity_id', { count: 'exact' })
         .eq('strava_id', stravaId)
-        .order('start_date', { ascending: false })
 
-      if (error) throw error
-
-      const totalActivities = activities?.length || 0
-      console.log(`[Job ${jobId}] Found ${totalActivities} activities`)
-
-      // If resuming, find the index to start from
-      let startIndex = 0
-      if (resumeFromActivityId) {
-        startIndex = activities?.findIndex(a => a.activity_id === resumeFromActivityId) || 0
-        if (startIndex > 0) {
-          console.log(`[Job ${jobId}] Resuming from activity ${resumeFromActivityId} (index ${startIndex})`)
-        }
-      }
-
-      await this.jobsRepo.updateJobProgress(jobId, {
-        activities: { total: totalActivities, processed: startIndex, failed: 0 },
-        laps: { total: totalActivities, processed: startIndex, failed: 0 },
-        streams: { total: totalActivities, processed: startIndex, failed: 0 },
-      } as Partial<SyncJobProgress>)
-
-      let processedCount = startIndex
-      let failedCount = 0
-
-      for (let i = startIndex; i < (activities?.length || 0); i++) {
-        const activity = activities![i]
-        
-        try {
-          console.log(`[Job ${jobId}] Syncing activity ${activity.activity_id} (${processedCount + 1}/${totalActivities})`)
-          
-          await this.syncActivityDetails(activity.activity_id, stravaId)
-          
-          processedCount++
-          
-          await this.jobsRepo.incrementProgress(jobId, 'activities', 1)
-          await this.jobsRepo.incrementProgress(jobId, 'laps', 1)
-          await this.jobsRepo.incrementProgress(jobId, 'streams', 1)
-          
-        } catch (error: any) {
-          // Check if it's a rate limit error
-          if (this.isRateLimitError(error)) {
-            console.warn(`[Job ${jobId}] Rate limit hit! Pausing job...`)
-            await this.jobsRepo.pauseJob(
-              jobId,
-              activity.activity_id,
-              'Rate limit exceeded - will resume in 15 minutes'
-            )
-            console.log(`[Job ${jobId}] Job paused. Will resume from activity ${activity.activity_id}`)
-            return // Exit gracefully - job will be resumed by worker
-          }
-          
-          console.error(`[Job ${jobId}] Failed to sync activity ${activity.activity_id}:`, error)
-          failedCount++
-        }
-      }
+      const totalActivities = finalActivities?.length || 0
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
-        processed_items: processedCount,
-        failed_items: failedCount,
+        processed_items: totalActivities,
+        failed_items: 0,
       })
 
-      console.log(`[Job ${jobId}] Sync completed! Processed: ${processedCount}, Failed: ${failedCount}`)
+      console.log(`[Job ${jobId}] Sync completed! Total activities in database: ${totalActivities}`)
       
     } catch (error: any) {
       console.error(`[Job ${jobId}] Sync failed:`, error)

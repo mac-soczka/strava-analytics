@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { AuthServiceServer } from '@/lib/services/auth-service-server'
 import { SyncJobsRepository } from '@/lib/repositories/sync-jobs-repository'
 
-export async function GET(
+export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ jobId: string }> }
 ) {
@@ -39,11 +39,25 @@ export async function GET(
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
-    return NextResponse.json({ job })
+    // Only allow cancelling running or paused jobs
+    if (job.status !== 'running' && job.status !== 'paused' && job.status !== 'pending') {
+      return NextResponse.json(
+        { error: `Cannot cancel job with status: ${job.status}` },
+        { status: 400 }
+      )
+    }
+
+    // Cancel the job
+    const cancelledJob = await jobsRepo.cancelJob(jobId)
+
+    return NextResponse.json({
+      success: true,
+      job: cancelledJob,
+    })
   } catch (error: any) {
-    console.error('Error fetching job status:', error)
+    console.error('Error cancelling job:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch job status', details: error?.message },
+      { error: 'Failed to cancel job', details: error?.message },
       { status: 500 }
     )
   }

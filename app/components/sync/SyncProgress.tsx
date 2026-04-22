@@ -12,6 +12,7 @@ interface SyncProgressProps {
 export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   const [job, setJob] = useState<SyncJob | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [isCancelling, setIsCancelling] = useState(false)
 
   useEffect(() => {
     let interval: NodeJS.Timeout
@@ -46,6 +47,32 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
 
     return () => clearInterval(interval)
   }, [jobId, onComplete])
+
+  const handleCancel = async () => {
+    if (!confirm('Are you sure you want to cancel this sync?')) {
+      return
+    }
+
+    setIsCancelling(true)
+    try {
+      const response = await fetch(`/api/sync/cancel/${jobId}`, {
+        method: 'POST',
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'Failed to cancel job')
+      }
+
+      const data = await response.json()
+      setJob(data.job)
+    } catch (err: any) {
+      console.error('Error cancelling job:', err)
+      setError(err?.message || 'Failed to cancel')
+    } finally {
+      setIsCancelling(false)
+    }
+  }
 
   if (error) {
     return (
@@ -108,8 +135,25 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
               <span className="font-medium text-gray-900">Paused</span>
             </>
           )}
+          {job.status === 'cancelled' && (
+            <>
+              <XCircle className="w-5 h-5 text-gray-500" />
+              <span className="font-medium text-gray-900">Cancelled</span>
+            </>
+          )}
         </div>
-        <span className="text-sm text-gray-500">{progressPercentage}%</span>
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-gray-500">{progressPercentage}%</span>
+          {(job.status === 'running' || job.status === 'paused' || job.status === 'pending') && (
+            <button
+              onClick={handleCancel}
+              disabled={isCancelling}
+              className="px-3 py-1 text-xs font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded border border-red-300 hover:border-red-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isCancelling ? 'Cancelling...' : 'Cancel'}
+            </button>
+          )}
+        </div>
       </div>
 
       {job.status === 'paused' && job.resume_at && (

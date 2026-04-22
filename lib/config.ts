@@ -38,6 +38,10 @@ export interface AppConfig {
   strava: StravaConfig
   supabase: SupabaseConfig
   stravaApiLimits: StravaApiLimits
+  app: {
+    baseUrl: string
+    port: number
+  }
 }
 
 function formatMissingEnvError(section: string, missingKeys: string[]): Error {
@@ -162,10 +166,37 @@ function getStravaApiLimits(): StravaApiLimits {
   }
 }
 
+function getAppConfig() {
+  const port = 3001 // Development port (different from default 3000)
+  
+  // Priority: NEXT_PUBLIC_APP_URL > VERCEL_URL > localhost with port
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL
+  if (appUrl) {
+    return {
+      baseUrl: appUrl.replace(/\/$/, ''),
+      port
+    }
+  }
+
+  const vercelUrl = process.env.VERCEL_URL
+  if (vercelUrl) {
+    return {
+      baseUrl: `https://${vercelUrl.replace(/\/$/, '')}`,
+      port: 443 // HTTPS default
+    }
+  }
+
+  return {
+    baseUrl: `http://localhost:${port}`,
+    port
+  }
+}
+
 export const config: AppConfig = {
   strava: getStravaConfig(),
   supabase: getSupabaseConfig(),
-  stravaApiLimits: getStravaApiLimits()
+  stravaApiLimits: getStravaApiLimits(),
+  app: getAppConfig()
 }
 
 export default config

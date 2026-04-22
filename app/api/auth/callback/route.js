@@ -59,7 +59,7 @@ export async function GET(req) {
       // Redirect to home page with error
       const homeUrl = process.env.NODE_ENV === 'production' 
         ? 'https://strava-heatmap-alpha.vercel.app'
-        : 'http://localhost:3000';
+        : config.app.baseUrl;
       
       return Response.redirect(homeUrl);
     }
@@ -67,7 +67,7 @@ export async function GET(req) {
     // Redirect to dashboard after successful authentication
     const dashboardUrl = process.env.NODE_ENV === 'production' 
       ? 'https://strava-heatmap-alpha.vercel.app/dashboard'
-      : 'http://localhost:3000/dashboard';
+      : `${config.app.baseUrl}/dashboard`;
     
     // Create response with session cookie
     console.log('🔧 Redirecting to dashboard:', dashboardUrl);

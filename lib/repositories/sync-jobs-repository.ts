@@ -1,4 +1,5 @@
-import { createClientComponentClient } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
+import config from '@/lib/config'
 
 export type SyncJobStatus = 'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'paused'
 export type SyncJobType = 'full_sync' | 'activities_only' | 'routes_only' | 'stats_only'
@@ -36,7 +37,7 @@ export interface SyncJob {
 }
 
 export class SyncJobsRepository {
-  private supabase = createClientComponentClient()
+  private supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
   async createJob(stravaId: number, type: SyncJobType = 'full_sync'): Promise<SyncJob> {
     const { data, error } = await this.supabase
@@ -188,5 +189,11 @@ export class SyncJobsRepository {
 
     if (error) throw error
     return data || []
+  }
+
+  async cancelJob(jobId: string): Promise<SyncJob> {
+    return this.updateJobStatus(jobId, 'cancelled', {
+      error_message: 'Job cancelled by user',
+    })
   }
 }
