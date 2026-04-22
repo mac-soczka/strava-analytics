@@ -4,6 +4,18 @@ import { useEffect, useState } from 'react'
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react'
 import type { SyncJob } from '@/lib/repositories/sync-jobs-repository'
 
+interface RateLimits {
+  requests15min: number
+  limit15min: number
+  remaining15min: number
+  requestsDay: number
+  limitDay: number
+  remainingDay: number
+  nextReset15min: string
+  nextResetDaily: string
+  lastUpdate: string
+}
+
 interface SyncProgressProps {
   jobId: string
   onComplete?: () => void
@@ -11,11 +23,13 @@ interface SyncProgressProps {
 
 export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   const [job, setJob] = useState<SyncJob | null>(null)
+  const [rateLimits, setRateLimits] = useState<RateLimits | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [isCancelling, setIsCancelling] = useState(false)
 
   useEffect(() => {
-    let interval: NodeJS.Timeout
+    let timeoutId: NodeJS.Timeout
+    let pollInterval = 2000 // Start with 2 seconds
 
     const fetchStatus = async () => {
       try {
@@ -27,25 +41,55 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
         }
 
         setJob(data.job)
+        setRateLimits(data.rateLimits || null)
 
         if (['completed', 'failed', 'cancelled'].includes(data.job.status)) {
-          clearInterval(interval)
-          if (data.job.status === 'completed' && onComplete) {
-            onComplete()
+          // Job finished, stop polling
+          return
+        }
+
+        // Smart polling based on job status
+        if (data.job.status === 'paused' && data.job.resume_at) {
+          // Calculate time until resume
+          const resumeTime = new Date(data.job.resume_at).getTime()
+          const now = Date.now()
+          const timeUntilResume = resumeTime - now
+
+          if (timeUntilResume > 60000) {
+            // More than 1 minute away - poll every 30 seconds
+            pollInterval = 30000
+          } else if (timeUntilResume > 10000) {
+            // 10-60 seconds away - poll every 5 seconds
+            pollInterval = 5000
+          } else {
+            // Less than 10 seconds - poll every 2 seconds
+            pollInterval = 2000
           }
+        } else if (data.job.status === 'running') {
+          // Active job - poll frequently
+          pollInterval = 2000
+        } else {
+          // Pending or other - moderate polling
+          pollInterval = 5000
+        }
+
+        // Schedule next poll
+        timeoutId = setTimeout(fetchStatus, pollInterval)
+
+        if (data.job.status === 'completed' && onComplete) {
+          onComplete()
         }
       } catch (err: any) {
         console.error('Error fetching job status:', err)
         setError(err?.message || 'Unknown error')
-        clearInterval(interval)
       }
     }
 
     fetchStatus()
 
-    interval = setInterval(fetchStatus, 2000)
-
-    return () => clearInterval(interval)
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId)
+    }
   }, [jobId, onComplete])
 
   const handleCancel = async () => {
@@ -199,6 +243,53 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
       {job.status === 'failed' && job.error_message && (
         <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded">
           <p className="text-sm text-red-700">{job.error_message}</p>
+        </div>
+      )}
+
+      {rateLimits && (job.status === 'running' || job.status === 'paused') && (
+        <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
+          <h4 className="text-sm font-medium text-blue-900 mb-2">Strava API Rate Limits</h4>
+          <div className="space-y-2">
+            <div>
+              <div className="flex justify-between text-xs text-blue-700 mb-1">
+                <span>15-minute window:</span>
+                <span className="font-medium">{rateLimits.requests15min} / {rateLimits.limit15min}</span>
+              </div>
+              <div className="w-full bg-blue-200 rounded-full h-1.5">
+                <div
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    rateLimits.remaining15min <= 10 ? 'bg-red-500' :
+                    rateLimits.remaining15min <= 30 ? 'bg-yellow-500' :
+                    'bg-blue-500'
+                  }`}
+                  style={{ width: `${(rateLimits.requests15min / rateLimits.limit15min) * 100}%` }}
+                />
+              </div>
+              <p className="text-xs text-blue-600 mt-0.5">{rateLimits.remaining15min} remaining</p>
+            </div>
+            <div>
+              <div className="flex justify-between text-xs text-blue-700 mb-1">
+                <span>Daily window:</span>
+                <span className="font-medium">{rateLimits.requestsDay} / {rateLimits.limitDay}</span>
+              </div>
+              <div className="w-full bg-blue-200 rounded-full h-1.5">
+                <div
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    rateLimits.remainingDay <= 50 ? 'bg-red-500' :
+                    rateLimits.remainingDay <= 200 ? 'bg-yellow-500' :
+                    'bg-blue-500'
+                  }`}
+                  style={{ width: `${(rateLimits.requestsDay / rateLimits.limitDay) * 100}%` }}
+                />
+              </div>
+              <p className="text-xs text-blue-600 mt-0.5">{rateLimits.remainingDay} remaining</p>
+            </div>
+            <div className="pt-1 border-t border-blue-200">
+              <p className="text-xs text-blue-600">
+                Last updated: {new Date(rateLimits.lastUpdate).toLocaleTimeString()}
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </div>

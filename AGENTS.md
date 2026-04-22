@@ -16,6 +16,12 @@ This file provides AI agents with project-specific guidelines for working on the
 - **Before planning or implementation**, read relevant files in `docs/` for the feature being changed
 - If docs are missing or conflicting, call that out explicitly and proceed with the safest minimal change
 - For any documentation-related change, include an explicit date stamp (format: `YYYY-MM-DD`)
+- **Document your findings**: When researching external APIs, libraries, or systems:
+  - Create or update documentation in `docs/` folder
+  - Include official documentation links
+  - Document rate limits, quotas, and constraints
+  - Add examples and best practices
+  - Update `docs/README.md` index if adding new doc
 
 ### 2. Minimalism & Simplicity
 - **Make the most minimalistic set of changes** to meet requirements
@@ -38,6 +44,27 @@ Every action plan must include explicit tasks for:
 2. **TypeScript type checking**: `yarn tsc --noEmit`
 3. **Integration tests**: `yarn test`
 4. **E2E tests**: `yarn test:e2e`
+
+### 5. Logging Guidelines
+- **Use the logger utility** (`lib/utils/logger.ts`) for all application logging
+- Logs are written to both console AND file (`logs/sync-YYYY-MM-DDTHH-MM-SS.log`)
+- **Never use emojis in log output** - they clutter logs and cause encoding issues
+- Use plain text for all console.log, logger.log, logger.warn, logger.error
+- Rate limits should use the special `logger.rateLimit()` method for formatted output
+- Log files are automatically excluded from git via `.gitignore`
+
+### 6. Emoji Usage Policy
+- **Avoid emojis in code** - Do not add emojis to:
+  - Console logs
+  - Error messages
+  - Log files
+  - Code comments
+  - Variable names
+- **Emojis are acceptable only in**:
+  - User-facing UI text (sparingly)
+  - Documentation markdown (for visual hierarchy)
+  - Commit messages (optional, not required)
+- **Rationale**: Emojis cause issues with log parsing, terminal compatibility, and professional output
 
 ## 🏗️ Architecture References
 

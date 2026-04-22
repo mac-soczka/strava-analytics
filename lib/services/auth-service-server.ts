@@ -37,14 +37,14 @@ export class SessionManagerServer {
     const sessionToken = generateSecureToken()
     const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days
 
-    console.log('🔧 Creating session for strava_id:', stravaId)
-    console.log('🔧 Session token:', sessionToken)
-    console.log('🔧 Expires at:', expiresAt)
-    console.log('🔧 ServerSupabase client:', !!serverSupabase)
+    console.log('Creating session for strava_id:', stravaId)
+    console.log('Session token:', sessionToken)
+    console.log('Expires at:', expiresAt)
+    console.log('ServerSupabase client:', !!serverSupabase)
 
     try {
       // First, clean up any existing sessions for this user
-      console.log('🧹 Cleaning up existing sessions for user:', stravaId)
+      console.log('Cleaning up existing sessions for user:', stravaId)
       await serverSupabase
         .from('app_sessions')
         .delete()
@@ -60,7 +60,7 @@ export class SessionManagerServer {
         })
 
       if (error) {
-        console.error('❌ Session creation error:', error)
+        console.error('Session creation error:', error)
         throw new Error(`Failed to create session: ${error.message}`)
       }
     } catch (_error) {
@@ -68,7 +68,7 @@ export class SessionManagerServer {
       throw new Error('Failed to create session')
     }
 
-    console.log('✅ Session created successfully')
+    console.log('Session created successfully')
     return { sessionToken, expiresAt }
   }
 
@@ -232,7 +232,7 @@ export class AuthServiceServer {
       // Check for existing valid session
       const existingSession = await SessionManagerServer.getExistingSession(stravaId)
       if (existingSession) {
-        console.log('✅ Found existing valid session for user:', stravaId)
+        console.log('Found existing valid session for user:', stravaId)
         return {
           sessionToken: existingSession.session_token,
           expiresAt: existingSession.expires_at,

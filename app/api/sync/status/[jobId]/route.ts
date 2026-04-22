@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AuthServiceServer } from '@/lib/services/auth-service-server'
 import { SyncJobsRepository } from '@/lib/repositories/sync-jobs-repository'
+import { getRateLimitService } from '@/lib/services/rate-limit-service'
 
 export async function GET(
   request: NextRequest,
@@ -39,7 +40,24 @@ export async function GET(
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
-    return NextResponse.json({ job })
+    // Get current rate limit status
+    const rateLimitService = getRateLimitService()
+    const rateLimits = rateLimitService.getStatus()
+
+    return NextResponse.json({ 
+      job,
+      rateLimits: {
+        requests15min: rateLimits.requests15min,
+        limit15min: rateLimits.limit15min,
+        remaining15min: rateLimits.remaining15min,
+        requestsDay: rateLimits.requestsDay,
+        limitDay: rateLimits.limitDay,
+        remainingDay: rateLimits.remainingDay,
+        nextReset15min: rateLimits.nextReset15min.toISOString(),
+        nextResetDaily: rateLimits.nextResetDaily.toISOString(),
+        lastUpdate: rateLimits.lastUpdate.toISOString()
+      }
+    })
   } catch (error: any) {
     console.error('Error fetching job status:', error)
     return NextResponse.json(

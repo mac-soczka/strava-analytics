@@ -38,11 +38,22 @@ export class SyncOrchestrationService {
       // Step 1: Sync activities from Strava API to database
       console.log(`[Job ${jobId}] Fetching activities from Strava...`)
       try {
-        const activityResult = await this.stravaService.syncActivities()
+        const activityResult = await this.stravaService.syncActivities(
+          undefined, // pageSize - use default
+          undefined, // processBatchSize - use default
+          async (synced, errors, total) => {
+            // Update progress in real-time after each batch
+            console.log(`[Job ${jobId}] Progress update: ${synced}/${total} synced, ${errors} errors`)
+            await this.jobsRepo.updateJobProgress(jobId, {
+              activities: { total, processed: synced, failed: errors },
+            } as Partial<SyncJobProgress>)
+          }
+        )
         console.log(`[Job ${jobId}] Activities synced: ${activityResult.synced}, errors: ${activityResult.errors}`)
         
+        // Final update
         await this.jobsRepo.updateJobProgress(jobId, {
-          activities: { total: activityResult.synced, processed: activityResult.synced, failed: activityResult.errors },
+          activities: { total: activityResult.synced + activityResult.errors, processed: activityResult.synced, failed: activityResult.errors },
         } as Partial<SyncJobProgress>)
       } catch (error: any) {
         if (this.isRateLimitError(error)) {

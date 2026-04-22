@@ -3,81 +3,10 @@ import { config } from '@/lib/config'
 import { ActivitiesRepository } from '@/lib/repositories/activities-repository'
 import { SegmentsRepository } from '@/lib/repositories/segments-repository'
 import { StravaActivity, StravaSegmentEffort, StravaTokens, DatabaseActivity } from '@/types/strava'
+import { getLogger } from '@/lib/utils/logger'
+import { getRateLimitService } from '@/lib/services/rate-limit-service'
 
-// Rate limit tracking
-class RateLimitTracker {
-  private requests15min: number = 0
-  private requestsDay: number = 0
-  private lastReset15min: number = Date.now()
-  private lastResetDay: number = Date.now()
-
-  canMakeRequest(): boolean {
-    // In no-limits mode, always allow requests
-    if (config.stravaApiLimits.noLimitsMode) {
-      return true
-    }
-    
-    this.updateCounters()
-    return this.requests15min < config.stravaApiLimits.requestsPer15Min &&
-           this.requestsDay < config.stravaApiLimits.requestsPerDay
-  }
-
-  recordRequest() {
-    this.requests15min++
-    this.requestsDay++
-  }
-
-  private updateCounters() {
-    const now = Date.now()
-    
-    // Reset 15-minute counter
-    if (now - this.lastReset15min >= 15 * 60 * 1000) {
-      this.requests15min = 0
-      this.lastReset15min = now
-    }
-    
-    // Reset daily counter (simplified - resets every 24 hours from first request)
-    if (now - this.lastResetDay >= 24 * 60 * 60 * 1000) {
-      this.requestsDay = 0
-      this.lastResetDay = now
-    }
-  }
-
-  getStatus() {
-    this.updateCounters()
-    return {
-      requests15min: this.requests15min,
-      requestsDay: this.requestsDay,
-      remaining15min: config.stravaApiLimits.requestsPer15Min - this.requests15min,
-      remainingDay: config.stravaApiLimits.requestsPerDay - this.requestsDay,
-      noLimitsMode: config.stravaApiLimits.noLimitsMode,
-      mode: config.stravaApiLimits.noLimitsMode ? 'NO-LIMITS' : 'RATE-LIMITED'
-    }
-  }
-
-  getDelay(): number {
-    // In no-limits mode, no delay
-    if (config.stravaApiLimits.noLimitsMode) {
-      return 0
-    }
-    
-    const remaining15min = config.stravaApiLimits.requestsPer15Min - this.requests15min
-    const remainingDay = config.stravaApiLimits.requestsPerDay - this.requestsDay
-    
-    // Use the more restrictive limit
-    const remaining = Math.min(remaining15min, remainingDay)
-    
-    if (remaining <= 10) {
-      return config.stravaApiLimits.maxDelayMs // Slow down when approaching limit
-    } else if (remaining <= 20) {
-      return config.stravaApiLimits.minDelayMs + 100 // Moderate delay
-    } else {
-      return config.stravaApiLimits.minDelayMs // Normal speed
-    }
-  }
-}
-
-const rateLimitTracker = new RateLimitTracker()
+const rateLimitService = getRateLimitService()
 
 export class StravaService {
   private supabase: ReturnType<typeof createClient>
@@ -99,7 +28,7 @@ export class StravaService {
    * Get current rate limit status
    */
   getRateLimitStatus() {
-    return rateLimitTracker.getStatus()
+    return rateLimitService.getStatus()
   }
 
   /**
@@ -209,8 +138,8 @@ export class StravaService {
    */
   async fetchActivities(page = 1, perPage = config.stravaApiLimits.maxActivitiesPerRequest): Promise<StravaActivity[]> {
     // Check rate limits before making request
-    if (!rateLimitTracker.canMakeRequest()) {
-      const status = rateLimitTracker.getStatus()
+    if (!rateLimitService.canMakeRequest()) {
+      const status = rateLimitService.getStatus()
       const errorMsg = `Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`
       console.warn(`${errorMsg}`)
       throw new Error(errorMsg)
@@ -219,8 +148,8 @@ export class StravaService {
     if (config.stravaApiLimits.noLimitsMode) {
       console.log(`NO-LIMITS MODE: Fetching activities page ${page} without rate limiting`)
     } else {
-      const status = rateLimitTracker.getStatus()
-      console.log(`Rate limit status before activities fetch: 15min ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      const status = rateLimitService.getStatus()
+      console.log(`Rate limit status before activities fetch: 15min ${status.requests15min}/${status.limit15min}, Day ${status.requestsDay}/${status.limitDay}`)
     }
 
     const tokens = await this.getValidTokens()
@@ -232,17 +161,17 @@ export class StravaService {
       }
     )
 
-    // Record the request
-    rateLimitTracker.recordRequest()
+    // Update rate limits from response headers
+    rateLimitService.updateFromHeaders(response)
 
     if (!response.ok) {
       if (response.status === 429) {
         // Rate limit hit - throw error so sync job can pause
-        const status = rateLimitTracker.getStatus()
-        console.warn(`Rate limit hit (429) while fetching activities! 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+        const status = rateLimitService.getStatus()
+        console.warn(`Rate limit hit (429) while fetching activities! 15min: ${status.requests15min}/${status.limit15min}, Day: ${status.requestsDay}/${status.limitDay}`)
         const error: any = new Error('Strava API rate limit exceeded')
         error.statusCode = 429
-        error.retryAfter = config.stravaApiLimits.retryDelayMs
+        error.retryAfter = rateLimitService.getRecommendedWaitTime()
         throw error
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
@@ -254,7 +183,7 @@ export class StravaService {
     }
 
     // Apply rate limiting delay
-    const delay = rateLimitTracker.getDelay()
+    const delay = rateLimitService.getAdaptiveDelay()
     if (delay > 0) {
       console.log(`Applying rate limit delay: ${delay}ms`)
       await new Promise(resolve => setTimeout(resolve, delay))
@@ -269,13 +198,12 @@ export class StravaService {
   /**
    * Fetch detailed activity information including polyline from Strava API
    */
-  async fetchActivityDetails(activityId: number): Promise<StravaActivity> {
+  async fetchActivityDetails(activityId: number): Promise<StravaActivity | null> {
     // Check rate limits before making request
-    if (!rateLimitTracker.canMakeRequest()) {
-      const status = rateLimitTracker.getStatus()
-      const errorMsg = `Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`
-      console.warn(`${errorMsg}`)
-      throw new Error(errorMsg)
+    if (!rateLimitService.canMakeRequest()) {
+      const status = rateLimitService.getStatus()
+      console.log(`Rate limit reached. 15min: ${status.requests15min}/${status.limit15min}, Day: ${status.requestsDay}/${status.limitDay}. Skipping detailed fetch for activity ${activityId}`)
+      return null // Return null instead of throwing - this is expected behavior
     }
 
     const tokens = await this.getValidTokens()
@@ -287,15 +215,15 @@ export class StravaService {
       }
     )
 
-    // Record the request
-    rateLimitTracker.recordRequest()
+    // Update rate limits from response headers
+    rateLimitService.updateFromHeaders(response)
 
     if (!response.ok) {
       if (response.status === 429) {
-        console.warn(`🚫 Rate limit hit (429) while fetching activity details!`)
-        console.warn(`⏳ Waiting ${config.stravaApiLimits.retryDelayMs / 1000}s for rate limit reset...`)
+        console.warn(`Rate limit hit (429) while fetching activity details!`)
+        console.warn(`Waiting ${config.stravaApiLimits.retryDelayMs / 1000}s for rate limit reset...`)
         await new Promise(resolve => setTimeout(resolve, config.stravaApiLimits.retryDelayMs))
-        console.log(`🔄 Retrying activity details fetch after rate limit reset...`)
+        console.log(`Retrying activity details fetch after rate limit reset...`)
         return this.fetchActivityDetails(activityId) // Retry after waiting
       } else if (response.status === 401) {
         console.warn(`Token expired (401), refreshing tokens...`)
@@ -306,7 +234,7 @@ export class StravaService {
     }
 
     // Apply rate limiting delay
-    const delay = rateLimitTracker.getDelay()
+    const delay = rateLimitService.getAdaptiveDelay()
     if (delay > 0) {
       console.log(`Applying rate limit delay: ${delay}ms`)
       await new Promise(resolve => setTimeout(resolve, delay))
@@ -317,7 +245,7 @@ export class StravaService {
     // Add Strava URL
     activity.strava_url = `https://www.strava.com/activities/${activityId}`
     
-    console.log(`✅ Fetched detailed activity: ${activity.name} (ID: ${activityId})`)
+    console.log(`Fetched detailed activity: ${activity.name} (ID: ${activityId})`)
     
     return activity
   }
@@ -330,7 +258,7 @@ export class StravaService {
     const existingSegmentsResult = await this.segmentsRepo.getSegmentEffortsByActivity(activityId)
     
     if (existingSegmentsResult.data && existingSegmentsResult.data.length > 0) {
-      console.log(`📊 Found ${existingSegmentsResult.data.length} existing segments for activity ${activityId} in database, skipping Strava API call`)
+      console.log(`Found ${existingSegmentsResult.data.length} existing segments for activity ${activityId} in database, skipping Strava API call`)
       return existingSegmentsResult.data.map((segment: any) => ({
         id: segment.effort_id,
         segment: {
@@ -363,21 +291,21 @@ export class StravaService {
       }))
     }
 
-    console.log(`🔄 Fetching segments for activity ${activityId} from Strava API`)
+    console.log(`Fetching segments for activity ${activityId} from Strava API`)
 
     // Check rate limits before making request
-    if (!rateLimitTracker.canMakeRequest()) {
-      const status = rateLimitTracker.getStatus()
+    if (!rateLimitService.canMakeRequest()) {
+      const status = rateLimitService.getStatus()
       const errorMsg = `Rate limit exceeded. 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`
       console.warn(`${errorMsg}`)
       throw new Error(errorMsg)
     }
 
     if (config.stravaApiLimits.noLimitsMode) {
-      console.log(`🚀 NO-LIMITS MODE: Fetching segments for activity ${activityId} without rate limiting`)
+      console.log(`NO-LIMITS MODE: Fetching segments for activity ${activityId} without rate limiting`)
     } else {
-      const status = rateLimitTracker.getStatus()
-      console.log(`📊 Rate limit status before segments fetch: 15min ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
+      const status = rateLimitService.getStatus()
+      console.log(`Rate limit status before segments fetch: 15min ${status.requests15min}/${status.limit15min}, Day ${status.requestsDay}/${status.limitDay}`)
     }
 
     const tokens = await this.getValidTokens()
@@ -389,17 +317,18 @@ export class StravaService {
       }
     )
 
-    // Record the request
-    rateLimitTracker.recordRequest()
+    // Update rate limits from response headers
+    rateLimitService.updateFromHeaders(response)
 
     if (!response.ok) {
       if (response.status === 429) {
         // Rate limit hit, wait for reset
-        const status = rateLimitTracker.getStatus()
-        console.warn(`🚫 Rate limit hit (429) while fetching segments for activity ${activityId}! 15min: ${status.requests15min}/${config.stravaApiLimits.requestsPer15Min}, Day: ${status.requestsDay}/${config.stravaApiLimits.requestsPerDay}`)
-        console.warn(`⏳ Waiting ${config.stravaApiLimits.retryDelayMs / 1000}s for rate limit reset...`)
-        await new Promise(resolve => setTimeout(resolve, config.stravaApiLimits.retryDelayMs))
-        console.log(`🔄 Retrying segments fetch for activity ${activityId} after rate limit reset...`)
+        const status = rateLimitService.getStatus()
+        const waitTime = rateLimitService.getRecommendedWaitTime()
+        console.warn(`Rate limit hit (429) while fetching segments for activity ${activityId}! 15min: ${status.requests15min}/${status.limit15min}, Day: ${status.requestsDay}/${status.limitDay}`)
+        console.warn(`Waiting ${Math.round(waitTime / 1000)}s for rate limit reset...`)
+        await new Promise(resolve => setTimeout(resolve, waitTime))
+        console.log(`Retrying segments fetch for activity ${activityId} after rate limit reset...`)
         return this.fetchActivitySegments(activityId) // Retry after waiting
       } else if (response.status === 401) {
         // Token might be invalid, try to refresh
@@ -411,7 +340,7 @@ export class StravaService {
     }
 
     // Apply rate limiting delay
-    const delay = rateLimitTracker.getDelay()
+    const delay = rateLimitService.getAdaptiveDelay()
     if (delay > 0) {
       console.log(`Applying rate limit delay: ${delay}ms`)
       await new Promise(resolve => setTimeout(resolve, delay))
@@ -419,7 +348,7 @@ export class StravaService {
 
     const activity = await response.json()
     const segments = activity.segment_efforts || []
-    console.log(`✅ Fetched ${segments.length} segments for activity ${activityId} from Strava API`)
+    console.log(`Fetched ${segments.length} segments for activity ${activityId} from Strava API`)
     
     return segments
   }
@@ -480,16 +409,16 @@ export class StravaService {
   }> {
     const startTime = Date.now()
     
-    console.log('🚀 Starting comprehensive Strava data sync...')
-    console.log('📋 Sequence: 1. Fetch ALL activities → 2. Fetch ALL segments for ALL activities')
+    console.log('Starting comprehensive Strava data sync...')
+    console.log('Sequence: 1. Fetch ALL activities -> 2. Fetch ALL segments for ALL activities')
     
     try {
       // Step 1: Sync ALL activities
-      console.log('\n📥 STEP 1: Syncing ALL activities from Strava...')
+      console.log('\nSTEP 1: Syncing ALL activities from Strava...')
       const activityResult = await this.syncActivities()
       
       // Step 2: Sync ALL segments for ALL activities
-      console.log('\n📥 STEP 2: Syncing ALL segments for ALL activities...')
+      console.log('\nSTEP 2: Syncing ALL segments for ALL activities...')
       const segmentResult = await this.syncSegments()
       
       // Step 3: Get total segment efforts count
@@ -506,8 +435,8 @@ export class StravaService {
         totalExecutionTime
       }
       
-      console.log('\n🎉 Comprehensive sync completed!')
-      console.log(`📊 Summary:`)
+      console.log('\nComprehensive sync completed!')
+      console.log(`Summary:`)
       console.log(`   Activities: ${activityResult.synced} synced, ${activityResult.errors} errors`)
       console.log(`   Segments: ${segmentResult.processed} activities processed, ${segmentResult.segmentsAdded} segments added, ${segmentResult.errors} errors`)
       console.log(`   Segment Efforts: ${totalSegmentEfforts || 0} total efforts`)
@@ -516,7 +445,7 @@ export class StravaService {
       return summary
       
     } catch (error) {
-      console.error('❌ Error in comprehensive sync:', error)
+      console.error('Error in comprehensive sync:', error)
       throw error
     }
   }
@@ -527,31 +456,42 @@ export class StravaService {
    */
   async syncActivities(
     pageSize = config.stravaApiLimits.maxCrawlerBatchSize,
-    processBatchSize = 20 // Process 20 activities at a time
+    processBatchSize = 20, // Process 20 activities at a time
+    onProgress?: (synced: number, errors: number, total: number) => Promise<void>
   ): Promise<{ synced: number; errors: number }> {
     let synced = 0
     let errors = 0
     let page = 1
     let hasMoreActivities = true
+    let totalActivitiesSeen = 0 // Track total across all pages
 
     try {
-      console.log(`🔄 Starting activity sync (page size: ${pageSize}, batch size: ${processBatchSize})`)
-      const status = rateLimitTracker.getStatus()
-      console.log(`📊 Rate limit status: 15min ${status.remaining15min} remaining, Day ${status.remainingDay} remaining`)
+      const logger = getLogger()
+      logger.log(`Starting activity sync (page size: ${pageSize}, batch size: ${processBatchSize})`)
+      const status = rateLimitService.getStatus()
+      logger.log(`Initial rate limit status: 15min ${status.remaining15min} remaining, Day ${status.remainingDay} remaining`)
 
       // Continue fetching until no more activities are found
       while (hasMoreActivities) {
-        console.log(`📄 Fetching activities page ${page}...`)
+        console.log(`Fetching activities page ${page}...`)
         
         const activities = await this.fetchActivities(page, pageSize)
         
         if (activities.length === 0) {
-          console.log(`✅ No more activities found on page ${page}, sync complete`)
+          console.log(`No more activities found on page ${page}, sync complete`)
           hasMoreActivities = false
           break
         }
 
-        console.log(`📊 Found ${activities.length} activities on page ${page}`)
+        console.log(`Found ${activities.length} activities on page ${page}`)
+        
+        // Update total count
+        totalActivitiesSeen += activities.length
+
+        // Report progress with current total
+        if (onProgress) {
+          await onProgress(synced, errors, totalActivitiesSeen)
+        }
 
         // Process activities in batches
         for (let i = 0; i < activities.length; i += processBatchSize) {
@@ -559,14 +499,14 @@ export class StravaService {
           const batchNum = Math.floor(i / processBatchSize) + 1
           const totalBatches = Math.ceil(activities.length / processBatchSize)
           
-          console.log(`📦 Processing batch ${batchNum}/${totalBatches} (${batch.length} activities)`)
+          console.log(`Processing batch ${batchNum}/${totalBatches} (${batch.length} activities)`)
 
           for (const activity of batch) {
             try {
               // Check if activity already exists
               const existing = await this.activitiesRepo.getActivityById(activity.id)
               if (existing) {
-                console.log(`⏭️  Activity ${activity.id} already exists, skipping...`)
+                console.log(`Activity ${activity.id} already exists, skipping...`)
                 synced++ // Count as synced since it's in DB
                 continue
               }
@@ -575,13 +515,15 @@ export class StravaService {
               let detailedActivity: StravaActivity
               let hasDetailedData = false
 
-              try {
-                console.log(`📊 Fetching detailed data for activity ${activity.id}...`)
-                detailedActivity = await this.fetchActivityDetails(activity.id)
+              console.log(`Fetching detailed data for activity ${activity.id}...`)
+              const fetchedDetails = await this.fetchActivityDetails(activity.id)
+              
+              if (fetchedDetails) {
+                detailedActivity = fetchedDetails
                 hasDetailedData = true
-              } catch (detailError) {
-                console.warn(`⚠️ Failed to fetch detailed data for activity ${activity.id}, using basic data:`, detailError)
-                // Fall back to basic activity data
+              } else {
+                // Rate limit reached or other issue - use basic activity data
+                console.log(`Using basic data for activity ${activity.id} (rate limit reached)`)
                 detailedActivity = {
                   ...activity,
                   strava_url: `https://www.strava.com/activities/${activity.id}`
@@ -613,16 +555,21 @@ export class StravaService {
               await this.activitiesRepo.createActivity(activityData)
 
               synced++
-              console.log(`✅ Synced activity${hasDetailedData ? ' with polyline' : ' (basic data)'}: ${detailedActivity.name}`)
+              console.log(`Synced activity${hasDetailedData ? ' with polyline' : ' (basic data)'}: ${detailedActivity.name}`)
 
               // Rate limiting is handled in fetchActivityDetails
             } catch (error) {
-              console.error(`❌ Error syncing activity ${activity.id}:`, error)
+              console.error(`Error syncing activity ${activity.id}:`, error)
               errors++
             }
           }
 
-          console.log(`✅ Batch ${batchNum}/${totalBatches} complete: ${synced} total synced, ${errors} errors`)
+          console.log(`Batch ${batchNum}/${totalBatches} complete: ${synced} total synced, ${errors} errors`)
+          
+          // Report progress after each batch
+          if (onProgress) {
+            await onProgress(synced, errors, totalActivitiesSeen)
+          }
         }
 
         // Move to next page
@@ -630,14 +577,14 @@ export class StravaService {
         
         // Safety check to prevent infinite loops
         if (page > 100) {
-          console.log(`⚠️ Reached page limit (100), stopping sync to prevent infinite loop`)
+          console.log(`Reached page limit (100), stopping sync to prevent infinite loop`)
           break
         }
       }
 
-      console.log(`🎉 Complete activity sync finished: ${synced} synced, ${errors} errors, ${page - 1} pages processed`)
+      console.log(`Complete activity sync finished: ${synced} synced, ${errors} errors, ${page - 1} pages processed`)
     } catch (error) {
-      console.error('❌ Error in syncActivities:', error)
+      console.error('Error in syncActivities:', error)
       throw error
     }
 
@@ -656,31 +603,31 @@ export class StravaService {
     let hasMoreActivities = true
 
     try {
-      console.log(`🔄 Starting complete segment sync (batch size: ${batchSize})`)
+      console.log(`Starting complete segment sync (batch size: ${batchSize})`)
 
       // Get total count of activities needing segments for progress tracking
       const totalActivitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegmentsCount()
-      console.log(`📊 Total activities needing segments: ${totalActivitiesNeedingSegments}`)
+      console.log(`Total activities needing segments: ${totalActivitiesNeedingSegments}`)
 
       if (totalActivitiesNeedingSegments === 0) {
-        console.log('✅ No activities need segments fetched')
+        console.log('No activities need segments fetched')
         return { processed: 0, segmentsAdded: 0, errors: 0 }
       }
 
       // Continue processing until no more activities need segments
       while (hasMoreActivities) {
-        console.log(`📄 Processing activities batch starting at offset ${offset} (${processed}/${totalActivitiesNeedingSegments} processed)...`)
+        console.log(`Processing activities batch starting at offset ${offset} (${processed}/${totalActivitiesNeedingSegments} processed)...`)
 
         // Get activities that need segments fetched
         const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, offset)
 
         if (!activitiesNeedingSegments || activitiesNeedingSegments.length === 0) {
-          console.log(`✅ No more activities need segments fetched at offset ${offset}`)
+          console.log(`No more activities need segments fetched at offset ${offset}`)
           hasMoreActivities = false
           break
         }
 
-        console.log(`📊 Found ${activitiesNeedingSegments.length} activities needing segments at offset ${offset}`)
+        console.log(`Found ${activitiesNeedingSegments.length} activities needing segments at offset ${offset}`)
 
         for (const activity of activitiesNeedingSegments) {
           try {
@@ -740,19 +687,19 @@ export class StravaService {
               
               await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
               segmentsAdded += newEfforts.length
-              console.log(`✅ Added ${newEfforts.length} NEW segment efforts for activity ${activity.activity_id} (${segmentEfforts.length} total found, ${existingEfforts.data?.length || 0} already existed)`)
+              console.log(`Added ${newEfforts.length} NEW segment efforts for activity ${activity.activity_id} (${segmentEfforts.length} total found, ${existingEfforts.data?.length || 0} already existed)`)
               
               // Mark activity as having segments fetched only if segments were found
               await this.activitiesRepo.markSegmentsFetched(activity.id)
             } else {
-              console.log(`ℹ️  No segments found for activity ${activity.activity_id}`)
+              console.log(`No segments found for activity ${activity.activity_id}`)
               // Don't mark as fetched if no segments were found
             }
             
             processed++
 
           } catch (error) {
-            console.error(`❌ Error processing activity ${activity.activity_id}:`, error)
+            console.error(`Error processing activity ${activity.activity_id}:`, error)
             errors++
           }
         }
@@ -762,14 +709,14 @@ export class StravaService {
         
         // Safety check to prevent infinite loops
         if (offset > 10000) {
-          console.log(`⚠️ Reached offset limit (10000), stopping sync to prevent infinite loop`)
+          console.log(`Reached offset limit (10000), stopping sync to prevent infinite loop`)
           break
         }
       }
 
-      console.log(`🎉 Complete segment sync finished: ${processed} processed, ${segmentsAdded} segments added, ${errors} errors`)
+      console.log(`Complete segment sync finished: ${processed} processed, ${segmentsAdded} segments added, ${errors} errors`)
     } catch (error) {
-      console.error('❌ Error in syncSegments:', error)
+      console.error('Error in syncSegments:', error)
       throw error
     }
 
@@ -836,18 +783,23 @@ export class StravaService {
       if (error) throw error
 
       if (!activitiesNeedingUpdate || activitiesNeedingUpdate.length === 0) {
-        console.log('✅ No activities need updating')
+        console.log('No activities need updating')
         return { updated: 0, errors: 0 }
       }
 
-      console.log(`📊 Found ${activitiesNeedingUpdate.length} activities needing updates`)
+      console.log(`Found ${activitiesNeedingUpdate.length} activities needing updates`)
 
       for (const activity of activitiesNeedingUpdate) {
         try {
-          console.log(`📊 Updating activity ${activity.activity_id}...`)
+          console.log(`Updating activity ${activity.activity_id}...`)
           
           // Fetch detailed activity data
           const detailedActivity = await this.fetchActivityDetails(activity.activity_id as number)
+          
+          if (!detailedActivity) {
+            console.log(`Rate limit reached, skipping update for activity ${activity.activity_id}`)
+            continue
+          }
           
           // Update the activity with missing data
           const updateData: Partial<DatabaseActivity> = {
@@ -869,17 +821,17 @@ export class StravaService {
           if (updateError) throw updateError
 
           updated++
-          console.log(`✅ Updated activity: ${activity.name}`)
+          console.log(`Updated activity: ${activity.name}`)
 
         } catch (error) {
-          console.error(`❌ Error updating activity ${activity.activity_id}:`, error)
+          console.error(`Error updating activity ${activity.activity_id}:`, error)
           errors++
         }
       }
 
-      console.log(`🎉 Activity update completed: ${updated} updated, ${errors} errors`)
+      console.log(`Activity update completed: ${updated} updated, ${errors} errors`)
     } catch (error) {
-      console.error('❌ Error in updateActivitiesWithMissingData:', error)
+      console.error('Error in updateActivitiesWithMissingData:', error)
       throw error
     }
 

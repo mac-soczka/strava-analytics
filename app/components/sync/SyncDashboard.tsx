@@ -23,6 +23,8 @@ export function SyncDashboard() {
             const data = await response.json()
             if (['running', 'pending', 'paused'].includes(data.job?.status)) {
               setActiveJobId(savedJobId)
+              setIsLoading(false)
+              return
             } else {
               // Job is complete/failed, clear it
               localStorage.removeItem(ACTIVE_JOB_KEY)
@@ -35,6 +37,21 @@ export function SyncDashboard() {
           localStorage.removeItem(ACTIVE_JOB_KEY)
         }
       }
+      
+      // Fallback: Check if there's any active job for this user
+      try {
+        const response = await fetch('/api/sync/active')
+        if (response.ok) {
+          const data = await response.json()
+          if (data.job) {
+            setActiveJobId(data.job.id)
+            localStorage.setItem(ACTIVE_JOB_KEY, data.job.id)
+          }
+        }
+      } catch (error) {
+        console.error('Error checking for active jobs:', error)
+      }
+      
       setIsLoading(false)
     }
 
