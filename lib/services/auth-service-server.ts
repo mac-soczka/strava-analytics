@@ -35,7 +35,7 @@ function generateCSRFToken(): string {
 export class SessionManagerServer {
   static async createSession(stravaId: number): Promise<{ sessionToken: string; expiresAt: string }> {
     const sessionToken = generateSecureToken()
-    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24 hours
+    const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days
 
     console.log('🔧 Creating session for strava_id:', stravaId)
     console.log('🔧 Session token:', sessionToken)
@@ -167,8 +167,9 @@ export class TokenManagerServer {
       const tokens = await getTokensByStravaId(stravaId)
       const expiresAt = new Date(tokens.expires_at)
       
-      // If token expires in next 5 minutes, refresh it
-      if (expiresAt <= new Date(Date.now() + 5 * 60 * 1000)) {
+      // If token expires in next 1 hour, refresh it proactively
+      if (expiresAt <= new Date(Date.now() + 60 * 60 * 1000)) {
+        console.log('🔄 Strava token expiring soon, refreshing proactively...')
         return await this.refreshTokens(tokens.refresh_token, stravaId)
       }
       

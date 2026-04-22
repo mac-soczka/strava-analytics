@@ -1,18 +1,70 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SyncButton } from './SyncButton'
 import { SyncProgress } from './SyncProgress'
 
+const ACTIVE_JOB_KEY = 'strava_active_sync_job'
+
 export function SyncDashboard() {
   const [activeJobId, setActiveJobId] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Check for active job on mount
+  useEffect(() => {
+    const checkForActiveJob = async () => {
+      // Check localStorage first
+      const savedJobId = localStorage.getItem(ACTIVE_JOB_KEY)
+      if (savedJobId) {
+        // Verify the job is still active
+        try {
+          const response = await fetch(`/api/sync/status/${savedJobId}`)
+          if (response.ok) {
+            const data = await response.json()
+            if (['running', 'pending', 'paused'].includes(data.job?.status)) {
+              setActiveJobId(savedJobId)
+            } else {
+              // Job is complete/failed, clear it
+              localStorage.removeItem(ACTIVE_JOB_KEY)
+            }
+          } else {
+            localStorage.removeItem(ACTIVE_JOB_KEY)
+          }
+        } catch (error) {
+          console.error('Error checking job status:', error)
+          localStorage.removeItem(ACTIVE_JOB_KEY)
+        }
+      }
+      setIsLoading(false)
+    }
+
+    checkForActiveJob()
+  }, [])
 
   const handleSyncStart = (jobId: string) => {
     setActiveJobId(jobId)
+    localStorage.setItem(ACTIVE_JOB_KEY, jobId)
   }
 
   const handleSyncComplete = () => {
     console.log('Sync completed!')
+    localStorage.removeItem(ACTIVE_JOB_KEY)
+    setActiveJobId(null)
+  }
+
+  if (isLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Sync Your Data</h2>
+            <p className="text-gray-600 mt-1">
+              Checking for active sync jobs...
+            </p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (

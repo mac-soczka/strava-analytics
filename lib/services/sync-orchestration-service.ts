@@ -112,7 +112,12 @@ export class SyncOrchestrationService {
   private isRateLimitError(error: any): boolean {
     if (!error) return false
     const message = error.message || error.toString()
-    return message.includes('Rate limit') || message.includes('429') || error.status === 429
+    return (
+      message.includes('Rate limit') || 
+      message.includes('429') || 
+      error.status === 429 ||
+      error.statusCode === 429
+    )
   }
 
   async resumeJob(jobId: string): Promise<void> {
