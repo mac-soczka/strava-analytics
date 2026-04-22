@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import config from '@/lib/config'
 
 export type SyncJobStatus = 'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'paused'
-export type SyncJobType = 'full_sync' | 'activities_only' | 'segments_only' | 'routes_only' | 'stats_only'
+export type SyncJobType = 'full_sync' | 'activities_only' | 'segments_only' | 'segment_efforts_only' | 'routes_only' | 'stats_only'
 
 export interface SyncJobProgress {
   activities: { total: number; processed: number; failed: number }

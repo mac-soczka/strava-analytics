@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { SyncButton } from './SyncButton'
 import { SyncProgress } from './SyncProgress'
 
 const ACTIVE_JOB_KEY = 'strava_active_sync_job'
@@ -58,11 +57,6 @@ export function SyncDashboard() {
     checkForActiveJob()
   }, [])
 
-  const handleSyncStart = (jobId: string) => {
-    setActiveJobId(jobId)
-    localStorage.setItem(ACTIVE_JOB_KEY, jobId)
-  }
-
   const handleSyncComplete = () => {
     console.log('Sync completed!')
     localStorage.removeItem(ACTIVE_JOB_KEY)
@@ -92,20 +86,6 @@ export function SyncDashboard() {
           <p className="text-gray-600 mt-1">
             Fetch all your activities, routes, and stats from Strava
           </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <SyncButton
-            onSyncStart={handleSyncStart}
-            disabled={!!activeJobId}
-            label="Sync My Activities"
-            endpoint="/api/sync/start"
-          />
-          <SyncButton
-            onSyncStart={handleSyncStart}
-            disabled={!!activeJobId}
-            label="Sync Segments"
-            endpoint="/api/sync/start-segments"
-          />
         </div>
       </div>
 

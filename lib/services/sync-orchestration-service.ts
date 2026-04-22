@@ -13,6 +13,43 @@ export class SyncOrchestrationService {
     this.stravaService = new StravaService(stravaId)
   }
 
+  private async runJob(job: SyncJob): Promise<void> {
+    try {
+      await this.jobsRepo.updateJobStatus(job.id, 'running')
+
+      switch (job.type) {
+        case 'segment_efforts_only':
+          await this.runSegmentEffortsOnly(job)
+          break
+        case 'segments_only':
+          await this.runSegmentsOnly(job)
+          break
+        case 'full_sync':
+        default:
+          await this.runFullSync(job)
+          break
+      }
+    } catch (error: any) {
+      // Rate limits are expected and are handled via pauseJob inside run steps.
+      if (job.status !== 'paused') {
+        console.error(`[Job ${job.id}] Sync failed:`, error)
+        await this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
+      }
+      throw error
+    }
+  }
+
+  private async pauseForRateLimit(jobId: string, reasonPrefix: string, error: any) {
+    const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
+    const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
+    await this.jobsRepo.pauseJob(
+      jobId,
+      0,
+      `${reasonPrefix} - will resume at ${resumeAt.toISOString()}`,
+      resumeAt
+    )
+  }
+
   async startFullSync(stravaId: number): Promise<SyncJob> {
     const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
     if (activeJob) {
@@ -21,7 +58,7 @@ export class SyncOrchestrationService {
 
     const job = await this.jobsRepo.createJob(stravaId, 'full_sync')
 
-    this.executeFullSync(job.id, stravaId).catch((error: any) => {
+    this.runJob(job).catch((error: any) => {
       console.error(`Sync job ${job.id} failed:`, error)
       this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
     })
@@ -37,7 +74,7 @@ export class SyncOrchestrationService {
 
     const job = await this.jobsRepo.createJob(stravaId, 'segments_only')
 
-    this.executeSegmentsSync(job.id, stravaId).catch((error: any) => {
+    this.runJob(job).catch((error: any) => {
       console.error(`Sync job ${job.id} failed:`, error)
       this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
     })
@@ -45,14 +82,30 @@ export class SyncOrchestrationService {
     return job
   }
 
-  private async executeFullSync(jobId: string, stravaId: number, resumeFromActivityId?: number): Promise<void> {
-    try {
-      await this.jobsRepo.updateJobStatus(jobId, 'running')
+  async startSegmentEffortsSync(stravaId: number): Promise<SyncJob> {
+    const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
+    if (activeJob) {
+      throw new Error('A sync job is already running for this user')
+    }
 
-      console.log(`[Job ${jobId}] Starting full sync from Strava API...`)
+    const job = await this.jobsRepo.createJob(stravaId, 'segment_efforts_only')
 
-      // Step 1: Sync activities from Strava API to database
-      console.log(`[Job ${jobId}] Fetching activities from Strava...`)
+    this.runJob(job).catch((error: any) => {
+      console.error(`Sync job ${job.id} failed:`, error)
+      this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
+    })
+
+    return job
+  }
+
+  private async runFullSync(job: SyncJob): Promise<void> {
+    const jobId = job.id
+    const stravaId = job.strava_id
+
+    console.log(`[Job ${jobId}] Starting full sync from Strava API...`)
+
+    // Step 1: Sync activities from Strava API to database
+    console.log(`[Job ${jobId}] Fetching activities from Strava...`)
       try {
         const activityResult = await this.stravaService.syncActivities(
           undefined, // pageSize - use default
@@ -74,14 +127,7 @@ export class SyncOrchestrationService {
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during activity sync! Pausing job...`)
-          const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
-          const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
-          await this.jobsRepo.pauseJob(
-            jobId,
-            0,
-            `Rate limit exceeded during activity sync - will resume at ${resumeAt.toISOString()}`,
-            resumeAt
-          )
+          await this.pauseForRateLimit(jobId, 'Rate limit exceeded during activity sync', error)
           return
         }
         throw error
@@ -99,14 +145,7 @@ export class SyncOrchestrationService {
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during segment sync! Pausing job...`)
-          const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
-          const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
-          await this.jobsRepo.pauseJob(
-            jobId,
-            0,
-            `Rate limit exceeded during segment sync - will resume at ${resumeAt.toISOString()}`,
-            resumeAt
-          )
+          await this.pauseForRateLimit(jobId, 'Rate limit exceeded during segment sync', error)
           return
         }
         throw error
@@ -134,51 +173,56 @@ export class SyncOrchestrationService {
       })
 
       console.log(`[Job ${jobId}] Sync completed! Total activities in database: ${totalActivities}`)
-      
+  }
+
+  private async runSegmentsOnly(job: SyncJob): Promise<void> {
+    const jobId = job.id
+    console.log(`[Job ${jobId}] Starting segments-only sync from Strava API...`)
+
+    try {
+      const segmentResult = await this.stravaService.syncSegments()
+
+      await this.jobsRepo.updateJobProgress(jobId, {
+        segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
+      } as any)
+
+      await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        processed_items: segmentResult.processed,
+        failed_items: segmentResult.errors,
+      })
     } catch (error: any) {
-      console.error(`[Job ${jobId}] Sync failed:`, error)
-      await this.jobsRepo.markJobFailed(jobId, error?.message || 'Unknown error', { stack: error?.stack })
+      if (this.isRateLimitError(error)) {
+        console.warn(`[Job ${jobId}] Rate limit hit during segments-only sync! Pausing job...`)
+        await this.pauseForRateLimit(jobId, 'Rate limit exceeded during segments-only sync', error)
+        return
+      }
       throw error
     }
   }
 
-  private async executeSegmentsSync(jobId: string, stravaId: number): Promise<void> {
+  private async runSegmentEffortsOnly(job: SyncJob): Promise<void> {
+    const jobId = job.id
+    console.log(`[Job ${jobId}] Starting segment-efforts-only sync from Strava API...`)
+
+    // In Strava’s model, efforts are best fetched in bulk via activity details with include_all_efforts=true.
+    // We reuse the same sync path as segments sync, which persists both segments and segment_efforts.
     try {
-      await this.jobsRepo.updateJobStatus(jobId, 'running')
+      const segmentResult = await this.stravaService.syncSegments()
 
-      console.log(`[Job ${jobId}] Starting segments-only sync from Strava API...`)
+      await this.jobsRepo.updateJobProgress(jobId, {
+        segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
+      } as any)
 
-      try {
-        const segmentResult = await this.stravaService.syncSegments(
-          undefined // batchSize - use default
-        )
-
-        await this.jobsRepo.updateJobProgress(jobId, {
-          segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
-        } as any)
-
-        await this.jobsRepo.updateJobStatus(jobId, 'completed', {
-          processed_items: segmentResult.processed,
-          failed_items: segmentResult.errors,
-        })
-      } catch (error: any) {
-        if (this.isRateLimitError(error)) {
-          console.warn(`[Job ${jobId}] Rate limit hit during segments-only sync! Pausing job...`)
-          const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
-          const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
-          await this.jobsRepo.pauseJob(
-            jobId,
-            0,
-            `Rate limit exceeded during segments-only sync - will resume at ${resumeAt.toISOString()}`,
-            resumeAt
-          )
-          return
-        }
-        throw error
-      }
+      await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        processed_items: segmentResult.processed,
+        failed_items: segmentResult.errors,
+      })
     } catch (error: any) {
-      console.error(`[Job ${jobId}] Segments-only sync failed:`, error)
-      await this.jobsRepo.markJobFailed(jobId, error?.message || 'Unknown error', { stack: error?.stack })
+      if (this.isRateLimitError(error)) {
+        console.warn(`[Job ${jobId}] Rate limit hit during segment-efforts-only sync! Pausing job...`)
+        await this.pauseForRateLimit(jobId, 'Rate limit exceeded during segment-efforts-only sync', error)
+        return
+      }
       throw error
     }
   }
@@ -206,8 +250,8 @@ export class SyncOrchestrationService {
 
     console.log(`[Job ${jobId}] Resuming paused job from activity ${job.last_processed_activity_id}`)
     
-    // Resume execution from where it left off
-    this.executeFullSync(job.id, job.strava_id, job.last_processed_activity_id).catch((error: any) => {
+    // Resume based on job type
+    this.runJob(job).catch((error: any) => {
       console.error(`[Job ${jobId}] Resume failed:`, error)
       this.jobsRepo.markJobFailed(jobId, error?.message || 'Unknown error', { stack: error?.stack })
     })

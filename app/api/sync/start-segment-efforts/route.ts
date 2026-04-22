@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     const syncService = new SyncOrchestrationService(user.strava_id)
-    const job = await syncService.startSegmentsSync(user.strava_id)
+    const job = await syncService.startSegmentEffortsSync(user.strava_id)
 
     return NextResponse.json({
       success: true,
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (error: any) {
-    console.error('Error starting segments sync job:', error)
+    console.error('Error starting segment efforts sync job:', error)
 
     if (error?.message?.includes('already running')) {
       return NextResponse.json(
@@ -40,20 +40,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Common local-dev footgun: DB enum not migrated yet.
-    // Supabase/Postgres throws 22P02 for invalid enum values.
     if (error?.code === '22P02' && `${error?.message || ''}`.includes('sync_job_type')) {
       return NextResponse.json(
         {
           error: 'Database schema is out of date',
-          details: 'Missing enum value "segments_only" in sync_job_type. Apply latest migrations (supabase db reset or supabase db push).',
+          details: 'Missing enum value "segment_efforts_only" in sync_job_type. Apply latest migrations (supabase db push / apply migration).',
         },
         { status: 400 }
       )
     }
 
     return NextResponse.json(
-      { error: 'Failed to start segments sync job', details: error?.message },
+      { error: 'Failed to start segment efforts sync job', details: error?.message },
       { status: 500 }
     )
   }

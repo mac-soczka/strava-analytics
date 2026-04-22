@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import ProtectedRoute from '../components/ProtectedRoute'
+import { SyncJobControls } from '../components/sync/SyncJobControls'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -18,6 +19,12 @@ export default function SegmentEffortsPage() {
             <p className="text-lg text-gray-600 dark:text-gray-300">
               All your segment attempts across all activities
             </p>
+            <div className="mt-4">
+              <SyncJobControls
+                label="Sync Segment Efforts"
+                endpoint="/api/sync/start-segment-efforts"
+              />
+            </div>
           </div>
           
           <Suspense fallback={<SegmentEffortsLoadingSkeleton />}>

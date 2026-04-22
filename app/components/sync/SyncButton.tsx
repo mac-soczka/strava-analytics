@@ -26,7 +26,9 @@ export function SyncButton({ onSyncStart, disabled, label, endpoint }: SyncButto
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to start sync')
+        const details = typeof data?.details === 'string' ? data.details : null
+        const message = typeof data?.error === 'string' ? data.error : 'Failed to start sync'
+        throw new Error(details ? `${message}: ${details}` : message)
       }
 
       if (onSyncStart && data.job?.id) {

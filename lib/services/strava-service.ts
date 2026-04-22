@@ -530,7 +530,10 @@ export class StravaService {
 
       console.log(`Complete activity sync finished: ${synced} synced, ${errors} errors, ${page - 1} pages processed`)
     } catch (error) {
-      console.error('Error in syncActivities:', error)
+      // Rate limiting is expected and handled by orchestration (pause + resume).
+      if ((error as any)?.statusCode !== 429) {
+        console.error('Error in syncActivities:', error)
+      }
       throw error
     }
 
@@ -656,7 +659,12 @@ export class StravaService {
             
             processed++
 
-          } catch (error) {
+          } catch (error: any) {
+            // If we're rate-limited, abort the loop so the orchestration layer can pause the job.
+            if (error?.statusCode === 429 || `${error?.message || ''}`.includes('rate limit')) {
+              throw error
+            }
+
             console.error(`Error processing activity ${activity.activity_id}:`, error)
             errors++
           }
@@ -673,8 +681,11 @@ export class StravaService {
       }
 
       console.log(`Complete segment sync finished: ${processed} processed, ${segmentsAdded} segments added, ${errors} errors`)
-    } catch (error) {
-      console.error('Error in syncSegments:', error)
+    } catch (error: any) {
+      // Rate limiting is expected and handled by orchestration (pause + resume).
+      if (error?.statusCode !== 429) {
+        console.error('Error in syncSegments:', error)
+      }
       throw error
     }
 

@@ -42,23 +42,33 @@ export class RateLimitService {
   private limit15min: number = 100
   private limitDay: number = 1000
   private lastUpdate: Date = new Date()
-  private firstRequestTime: Date = new Date()
 
   /**
    * Update rate limits from Strava API response headers
    */
   updateFromHeaders(response: Response): void {
+    // Strava may send both overall and read-specific rate limit headers.
+    // If read headers are present, treat them as the effective limits for GET-heavy workloads.
+    const readUsage = response.headers.get('X-ReadRateLimit-Usage')
+    const readLimit = response.headers.get('X-ReadRateLimit-Limit')
+
     const rateLimitUsage = response.headers.get('X-RateLimit-Usage')
     const rateLimitLimit = response.headers.get('X-RateLimit-Limit')
     
     const logger = getLogger()
-    
-    if (rateLimitUsage && rateLimitLimit) {
+
+    const effectiveUsage = readUsage ?? rateLimitUsage
+    const effectiveLimit = readLimit ?? rateLimitLimit
+
+    if (effectiveUsage && effectiveLimit) {
       // Log raw header values for debugging
-      logger.log(`Strava headers - X-RateLimit-Usage: "${rateLimitUsage}", X-RateLimit-Limit: "${rateLimitLimit}"`)
+      logger.log(
+        `Strava headers - X-RateLimit-Usage: "${rateLimitUsage}", X-RateLimit-Limit: "${rateLimitLimit}", ` +
+        `X-ReadRateLimit-Usage: "${readUsage}", X-ReadRateLimit-Limit: "${readLimit}"`
+      )
       
-      const usage = rateLimitUsage.split(',').map(Number)
-      const limits = rateLimitLimit.split(',').map(Number)
+      const usage = effectiveUsage.split(',').map(Number)
+      const limits = effectiveLimit.split(',').map(Number)
       
       if (usage.length >= 2 && limits.length >= 2) {
         this.requests15min = usage[0] || 0
@@ -86,8 +96,17 @@ export class RateLimitService {
   getStatus(): RateLimitStatus {
     const now = new Date()
     
-    // Calculate next 15-minute reset (rolling window)
-    const next15minReset = new Date(this.firstRequestTime.getTime() + 15 * 60 * 1000)
+    // Strava resets the 15-minute limit at natural quarter-hour boundaries
+    // (0, 15, 30, 45 minutes after the hour) per:
+    // https://developers.strava.com/docs/rate-limits/
+    const next15minReset = new Date(now)
+    const utcMinutes = next15minReset.getUTCMinutes()
+    const nextQuarter = Math.floor(utcMinutes / 15) * 15 + 15
+    if (nextQuarter >= 60) {
+      next15minReset.setUTCHours(next15minReset.getUTCHours() + 1, 0, 0, 0)
+    } else {
+      next15minReset.setUTCMinutes(nextQuarter, 0, 0)
+    }
     const timeUntilReset15min = Math.max(0, next15minReset.getTime() - now.getTime())
     
     // Calculate next daily reset (midnight UTC)
@@ -95,8 +114,9 @@ export class RateLimitService {
     nextDailyReset.setUTCHours(24, 0, 0, 0) // Next midnight UTC
     const timeUntilResetDaily = nextDailyReset.getTime() - now.getTime()
     
-    const remaining15min = this.limit15min - this.requests15min
-    const remainingDay = this.limitDay - this.requestsDay
+    // Strava sometimes reports usage slightly over limit; treat remaining as 0 in that case.
+    const remaining15min = Math.max(0, this.limit15min - this.requests15min)
+    const remainingDay = Math.max(0, this.limitDay - this.requestsDay)
     
     return {
       requests15min: this.requests15min,

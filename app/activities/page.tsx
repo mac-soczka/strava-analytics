@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import ProtectedRoute from '../components/ProtectedRoute'
+import { SyncJobControls } from '../components/sync/SyncJobControls'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -18,6 +19,12 @@ export default async function ActivitiesPage() {
             <p className="text-gray-600 dark:text-gray-400 text-lg">
               Your Strava activities with segments and efforts
             </p>
+            <div className="mt-4">
+              <SyncJobControls
+                label="Sync Activities"
+                endpoint="/api/sync/start"
+              />
+            </div>
           </div>
           
           <Suspense fallback={<ActivitiesLoadingSkeleton />}>

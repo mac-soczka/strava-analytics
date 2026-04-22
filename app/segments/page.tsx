@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { createServerComponentClient } from '@/lib/supabase'
 import ProtectedRoute from '../components/ProtectedRoute'
+import { SyncJobControls } from '../components/sync/SyncJobControls'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -18,6 +19,12 @@ export default async function SegmentsPage() {
             <p className="text-gray-600 dark:text-gray-400 text-lg">
               Your Strava segment efforts and performance tracking
             </p>
+            <div className="mt-4">
+              <SyncJobControls
+                label="Sync Segments"
+                endpoint="/api/sync/start-segments"
+              />
+            </div>
           </div>
           
           <Suspense fallback={<SegmentsLoadingSkeleton />}>
