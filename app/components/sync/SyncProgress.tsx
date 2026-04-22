@@ -145,6 +145,13 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
     ? Math.round((job.processed_items / job.total_items) * 100)
     : 0
 
+  // Some jobs (older rows / partial updates) may have missing progress or missing
+  // nested keys (e.g. `{}`), so guard each field we render.
+  const zero = { total: 0, processed: 0, failed: 0 }
+  const activities = job.progress?.activities ?? zero
+  const laps = job.progress?.laps ?? zero
+  const streams = job.progress?.streams ?? zero
+
   return (
     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
       <div className="flex items-center justify-between mb-4">
@@ -222,15 +229,15 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
       <div className="space-y-2 text-sm">
         <div className="flex justify-between text-gray-600">
           <span>Activities:</span>
-          <span>{job.progress.activities.processed} / {job.progress.activities.total}</span>
+          <span>{activities.processed} / {activities.total}</span>
         </div>
         <div className="flex justify-between text-gray-600">
           <span>Laps:</span>
-          <span>{job.progress.laps.processed} / {job.progress.laps.total}</span>
+          <span>{laps.processed} / {laps.total}</span>
         </div>
         <div className="flex justify-between text-gray-600">
           <span>Streams:</span>
-          <span>{job.progress.streams.processed} / {job.progress.streams.total}</span>
+          <span>{streams.processed} / {streams.total}</span>
         </div>
         {job.failed_items > 0 && (
           <div className="flex justify-between text-red-600">
