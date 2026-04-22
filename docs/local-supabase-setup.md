@@ -74,7 +74,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_local_service_role_key
 # Strava configuration
 STRAVA_CLIENT_ID=your_strava_client_id
 STRAVA_CLIENT_SECRET=your_strava_client_secret
-STRAVA_REDIRECT_URI=http://localhost:3000/api/auth/callback
+STRAVA_REDIRECT_URI=http://localhost:3001/api/auth/callback
 ```
 
 ### 5. Run Database Migration

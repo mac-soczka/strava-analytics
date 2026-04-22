@@ -20,7 +20,7 @@ Follow this checklist to get up and running:
 - [ ] **Apply migrations** (`supabase db reset`)
 - [ ] **Seed test data** (optional)
 - [ ] **Start Next.js** (`yarn dev`)
-- [ ] **Verify app** (http://localhost:3000)
+- [ ] **Verify app** (http://localhost:3001)
 - [ ] **Run quality gates** (`yarn lint && yarn tsc --noEmit && yarn test`)
 
 ---
@@ -146,7 +146,7 @@ done
 
 Update `.env.local`:
 ```bash
-NEXT_PUBLIC_SUPABASE_URL=http://localhost:3000/api  # Use Next.js API routes
+NEXT_PUBLIC_SUPABASE_URL=http://localhost:3001/api  # Use Next.js API routes
 DATABASE_URL=postgresql://postgres:password@localhost:5432/strava_heatmap
 ```
 
@@ -242,7 +242,7 @@ STRAVA_CLIENT_SECRET=4a25afdf6a53d5cc330d3fff3595b768bf8a8b33
 STRAVA_NO_LIMITS=true
 
 # Local app URL
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=http://localhost:3001
 ```
 
 **Save and close the file.**
@@ -387,14 +387,14 @@ yarn dev
 yarn run v1.22.22
 $ next dev
    ▲ Next.js 15.4.2
-   - Local:        http://localhost:3000
-   - Network:      http://192.168.0.189:3000
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.0.189:3001
 
  ✓ Starting...
  ✓ Ready in 1390ms
 ```
 
-**App is now running at:** http://localhost:3000
+**App is now running at:** http://localhost:3001
 
 ---
 
@@ -402,7 +402,7 @@ $ next dev
 
 **Checklist:**
 
-- [ ] Visit http://localhost:3000 - Dashboard loads
+- [ ] Visit http://localhost:3001 - Dashboard loads
 - [ ] Visit http://127.0.0.1:54323 - Supabase Studio opens
 - [ ] Check browser console - No errors
 - [ ] Check Supabase Studio → Table Editor → `activities` - See test data
@@ -634,7 +634,7 @@ kill -9 $(lsof -t -i:54321)
 - `54322` - PostgreSQL (Supabase)
 - `54323` - Supabase Studio
 - `5432` - Standard PostgreSQL
-- `3000` - Next.js
+- `3001` - Next.js (dev server)
 
 ---
 
@@ -915,7 +915,7 @@ yarn dev
 supabase status
 docker ps
 curl http://127.0.0.1:54321/rest/v1/
-curl http://localhost:3000
+curl http://localhost:3001
 ```
 
 ---
@@ -975,7 +975,7 @@ You're ready to develop when:
 - [ ] Supabase Studio opens at http://127.0.0.1:54323
 - [ ] Test data is seeded in database
 - [ ] `yarn dev` starts Next.js successfully
-- [ ] App loads at http://localhost:3000
+- [ ] App loads at http://localhost:3001
 - [ ] No errors in browser console
 
 **Estimated setup time:** 15-30 minutes  

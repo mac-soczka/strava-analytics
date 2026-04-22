@@ -73,7 +73,7 @@ function getDefaultStravaRedirectUri(): string {
     return `https://${vercelUrl.replace(/\/$/, '')}/api/auth/callback`
   }
 
-  return 'http://localhost:3000/api/auth/callback'
+  return 'http://localhost:3001/api/auth/callback'
 }
 
 function getStravaConfig(): StravaConfig {

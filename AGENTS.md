@@ -25,7 +25,12 @@ This file provides AI agents with project-specific guidelines for working on the
 
 ### 3. Package Manager
 - **Always use `yarn`** for dependency management and scripts
-- Avoid `npm`, `pnpm`, and other package managers unless explicitly requested
+- **Never use `npm`** commands - always convert to `yarn` equivalents:
+  - `npm install` → `yarn install` or `yarn`
+  - `npm run <script>` → `yarn <script>`
+  - `npm install <package>` → `yarn add <package>`
+  - `npm install -D <package>` → `yarn add -D <package>`
+- Avoid `pnpm` and other package managers unless explicitly requested by the user
 
 ### 4. Quality Gates (Required)
 Every action plan must include explicit tasks for:
@@ -73,5 +78,129 @@ Every action plan must include explicit tasks for:
 - **E2E (Playwright):** do **not** mock application code or HTTP to our own APIs. E2E runs against a real app instance and configured backends; see [docs/testing-strategy.md](docs/testing-strategy.md).
 - **Integration tests:** use a **real Postgres** database (see [docs/testing-strategy.md](docs/testing-strategy.md)). For code paths that use Strava API, integration tests should exercise those **real** services (sandbox/test credentials), not mocked `fetch`.
 - **Unit tests only:** mocks are allowed **only** to isolate a **single function or small pure unit** when testing that unit in isolation is the goal. Do not mock internal modules broadly to make an integration-style test "pass"; that belongs in **`tests/integration/**`** with real boundaries instead.
+
+## 📋 Action Plan Guidelines
+
+**Last Updated:** 2026-04-22
+
+### Purpose
+
+Action plans are comprehensive, executable roadmaps for implementing features. They ensure:
+- Complete full-stack coverage (database → backend → frontend → tests)
+- Nothing is forgotten (migrations, tests, docs, deployment)
+- Progress can be tracked with checkboxes
+- Time estimates are realistic
+- Quality gates are enforced
+
+### When to Create an Action Plan
+
+Create a detailed action plan for:
+- ✅ New features (user-facing or backend)
+- ✅ Major refactors affecting multiple layers
+- ✅ Complex integrations (external APIs, background jobs)
+- ✅ Multi-day work requiring coordination
+
+Skip for:
+- ❌ Bug fixes (unless they require schema changes)
+- ❌ Documentation-only changes
+- ❌ Simple UI tweaks
+
+### Action Plan Structure (7 Phases)
+
+Every action plan must include these phases in order:
+
+1. **Overview & Scope**
+   - Clear goal statement
+   - User flow (for user-facing features)
+   - What's included vs excluded
+   - Dependencies and prerequisites
+   - Total time estimate
+
+2. **Database Layer**
+   - Migrations with RLS policies
+   - Indexes for performance
+   - Helper functions/triggers
+   - Enum types
+   - Data validation
+
+3. **Backend Layer**
+   - TypeScript types/interfaces
+   - Repository classes (data access)
+   - Service classes (business logic)
+   - API route handlers
+   - Error handling
+
+4. **Frontend Layer**
+   - Component hierarchy
+   - State management
+   - Loading/error states
+   - Accessibility
+   - Integration with pages
+
+5. **Testing**
+   - Integration tests (repos, services, APIs)
+   - E2E tests (user flows)
+   - Test data setup/teardown
+   - No timeouts > 30 seconds
+
+6. **Documentation**
+   - Update relevant docs in `docs/`
+   - API documentation
+   - User guides (if applicable)
+   - Inline code comments
+
+7. **Deployment**
+   - Quality gates (lint, tsc, test, test:e2e)
+   - Local migration testing
+   - Production migration
+   - Deployment verification
+   - Monitoring setup
+
+### Common Patterns
+
+**Background Job System** (sync, reports, bulk ops):
+- Job queue table → Job repository → Orchestration service → API routes → UI components → Real-time updates → Error recovery
+
+**Data Synchronization** (external APIs):
+- API client → Sync service → Repository → Progress tracking → Incremental sync → Error handling
+
+**CRUD Feature**:
+- Database table → Repository → API routes → Form component → List component → Detail component → Tests
+
+### Key Principles
+
+1. **Full Stack**: Every plan covers all layers (database → backend → frontend → tests)
+2. **Actionable**: Use checkboxes for every task
+3. **Incremental**: Each phase can be completed independently
+4. **Realistic**: Include time estimates for each phase
+5. **Test-Driven**: Tests are part of the plan, not optional
+6. **Quality Gates**: Always include lint, tsc, test, test:e2e
+7. **Bottom-Up**: Build database first, then backend, then frontend
+
+### File Location
+
+Save detailed action plans in: `docs/action-plans/[feature-name].md`
+
+Example: `docs/action-plans/user-triggered-sync.md`
+
+### Progress Tracking
+
+Each action plan should include:
+- Overall status (Not Started, In Progress, Completed)
+- Phase completion checkboxes
+- Blockers section
+- Notes section
+- Last updated timestamp
+
+### Anti-Patterns to Avoid
+
+❌ Skip testing → ✅ Include integration and E2E tests  
+❌ No RLS policies → ✅ Always add RLS for user data  
+❌ UI before API → ✅ Build bottom-up (database → backend → frontend)  
+❌ Mock everything → ✅ Use real database and services  
+❌ No error states → ✅ Handle loading, error, empty states  
+❌ Deploy untested → ✅ Run all quality gates first
+
+---
 
 Keep this file as an index; place detailed guidance in `docs/` where it already exists (links above).

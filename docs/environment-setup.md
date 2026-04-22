@@ -24,8 +24,8 @@ STRAVA_CLIENT_ID=your-client-id-here
 # Strava Client Secret (from your Strava API application)
 STRAVA_CLIENT_SECRET=your-client-secret-here
 
-# Optional: Custom redirect URI (defaults to localhost:3000 for development)
-STRAVA_REDIRECT_URI=http://localhost:3000/api/auth/callback
+# Optional: Custom redirect URI (defaults to localhost:3001 for development)
+STRAVA_REDIRECT_URI=http://localhost:3001/api/auth/callback
 ```
 
 ## Optional Environment Variables
@@ -120,5 +120,5 @@ If you're hitting rate limits frequently:
 ### OAuth Redirect Issues
 If OAuth isn't working:
 1. Verify `STRAVA_REDIRECT_URI` matches your Strava app settings
-2. For development, use `http://localhost:3000/api/auth/callback`
+2. For development, use `http://localhost:3001/api/auth/callback`
 3. For production, use your actual domain 

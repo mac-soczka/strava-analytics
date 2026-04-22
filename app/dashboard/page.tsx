@@ -1,6 +1,7 @@
 import { createServerComponentClient } from '@/lib/supabase'
 import { Suspense } from 'react'
 import ProtectedRoute from "../components/ProtectedRoute"
+import { SyncDashboard } from '../components/sync/SyncDashboard'
 
 // Loading skeleton for dashboard
 function DashboardLoadingSkeleton() {
@@ -205,6 +206,10 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
             🚴‍♂️ Strava Dashboard
           </h1>
+          
+          <div className="mb-8">
+            <SyncDashboard />
+          </div>
           
           <Suspense fallback={<DashboardLoadingSkeleton />}>
             <DashboardContent />

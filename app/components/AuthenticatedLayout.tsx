@@ -54,9 +54,13 @@ export default function AuthenticatedLayout({ children }: AuthenticatedLayoutPro
     )
   }
 
-  // If not authenticated, only show the children (which should be the main page or auth prompts)
+  // If not authenticated, only show the children (no navbar, no sidebar)
   if (!user) {
-    return <>{children}</>
+    return (
+      <div className="min-h-screen">
+        {children}
+      </div>
+    )
   }
 
   // If authenticated, show the full layout with navbar and sidebar

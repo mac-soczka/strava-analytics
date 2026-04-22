@@ -21,13 +21,13 @@ Strava only allows one Authorization Callback Domain per application. When you s
 #### Option 2: Create Separate Strava App for Development
 
 1. **Create New Strava App**: https://www.strava.com/settings/api
-2. **Set Callback Domain**: `localhost:3000`
+2. **Set Callback Domain**: `localhost:3001`
 3. **Use Different Environment Variables**:
    ```bash
    # .env.local
    STRAVA_CLIENT_ID=your_dev_client_id
    STRAVA_CLIENT_SECRET=your_dev_client_secret
-   STRAVA_REDIRECT_URI=http://localhost:3000/api/auth/callback
+   STRAVA_REDIRECT_URI=http://localhost:3001/api/auth/callback
    ```
 
 ### Current Configuration
