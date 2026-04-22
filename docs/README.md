@@ -17,6 +17,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Supabase Setup](./supabase-setup.md)** - Production Supabase configuration
 
 ### 🗄️ Database & Migrations
+- **[Supabase Operations](./supabase-operations.md)** - Complete guide for migrations, seeding, and database operations
 - **[Migration Guide](./migration-guide.md)** - Database migration procedures
 - **[Supabase Commands](./supabase-commands.md)** - Useful Supabase CLI commands
 - **[Testing Without Triggers](./testing-without-triggers.md)** - Database testing strategies
