@@ -40,18 +40,69 @@ export interface AppConfig {
   stravaApiLimits: StravaApiLimits
 }
 
+function formatMissingEnvError(section: string, missingKeys: string[]): Error {
+  return new Error(
+    `Missing required ${section} environment variables: ${missingKeys.join(', ')}. ` +
+    'Add them to .env.local and restart the server.'
+  )
+}
+
+function formatInvalidEnvError(section: string, invalidKeys: string[]): Error {
+  return new Error(
+    `Invalid ${section} environment variable values for: ${invalidKeys.join(', ')}. ` +
+    'Replace placeholder values in .env.local with real credentials and restart the server.'
+  )
+}
+
+function isPlaceholderValue(value: string): boolean {
+  // Don't reject valid local Supabase keys (sb_publishable_, sb_secret_)
+  if (value.startsWith('sb_publishable_') || value.startsWith('sb_secret_')) {
+    return false
+  }
+  return /your[-_]|example|placeholder/i.test(value)
+}
+
+function getDefaultStravaRedirectUri(): string {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL
+  if (appUrl) {
+    return `${appUrl.replace(/\/$/, '')}/api/auth/callback`
+  }
+
+  const vercelUrl = process.env.VERCEL_URL
+  if (vercelUrl) {
+    return `https://${vercelUrl.replace(/\/$/, '')}/api/auth/callback`
+  }
+
+  return 'http://localhost:3000/api/auth/callback'
+}
+
 function getStravaConfig(): StravaConfig {
   const clientId = process.env.STRAVA_CLIENT_ID
   const clientSecret = process.env.STRAVA_CLIENT_SECRET
-  const redirectUri = process.env.STRAVA_REDIRECT_URI
+  const redirectUri = process.env.STRAVA_REDIRECT_URI || getDefaultStravaRedirectUri()
 
-  if (!clientId || !clientSecret || !redirectUri) {
-    throw new Error('Missing required Strava configuration. Please check your environment variables.')
+  const missing: string[] = []
+  if (!clientId) missing.push('STRAVA_CLIENT_ID')
+  if (!clientSecret) missing.push('STRAVA_CLIENT_SECRET')
+
+  if (missing.length > 0) {
+    throw formatMissingEnvError('Strava', missing)
+  }
+
+  const requiredClientId = clientId as string
+  const requiredClientSecret = clientSecret as string
+
+  const invalid: string[] = []
+  if (isPlaceholderValue(requiredClientId)) invalid.push('STRAVA_CLIENT_ID')
+  if (isPlaceholderValue(requiredClientSecret)) invalid.push('STRAVA_CLIENT_SECRET')
+
+  if (invalid.length > 0) {
+    throw formatInvalidEnvError('Strava', invalid)
   }
 
   return {
-    clientId,
-    clientSecret,
+    clientId: requiredClientId,
+    clientSecret: requiredClientSecret,
     redirectUri
   }
 }
@@ -61,14 +112,32 @@ function getSupabaseConfig(): SupabaseConfig {
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-  if (!url || !anonKey || !serviceRoleKey) {
-    throw new Error('Missing required Supabase configuration. Please check your environment variables.')
+  const missing: string[] = []
+  if (!url) missing.push('NEXT_PUBLIC_SUPABASE_URL')
+  if (!anonKey) missing.push('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+  if (!serviceRoleKey) missing.push('SUPABASE_SERVICE_ROLE_KEY')
+
+  if (missing.length > 0) {
+    throw formatMissingEnvError('Supabase', missing)
+  }
+
+  const requiredUrl = url as string
+  const requiredAnonKey = anonKey as string
+  const requiredServiceRoleKey = serviceRoleKey as string
+
+  const invalid: string[] = []
+  if (isPlaceholderValue(requiredUrl)) invalid.push('NEXT_PUBLIC_SUPABASE_URL')
+  if (isPlaceholderValue(requiredAnonKey)) invalid.push('NEXT_PUBLIC_SUPABASE_ANON_KEY')
+  if (isPlaceholderValue(requiredServiceRoleKey)) invalid.push('SUPABASE_SERVICE_ROLE_KEY')
+
+  if (invalid.length > 0) {
+    throw formatInvalidEnvError('Supabase', invalid)
   }
 
   return {
-    url,
-    anonKey,
-    serviceRoleKey
+    url: requiredUrl,
+    anonKey: requiredAnonKey,
+    serviceRoleKey: requiredServiceRoleKey
   }
 }
 
