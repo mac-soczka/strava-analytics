@@ -89,7 +89,8 @@ Every action plan must include explicit tasks for:
 ## Supabase
 
 - Any change to **`supabase/migrations/*.sql`** (tables, columns, indexes, functions, triggers) requires creating a new migration file and applying it.
-- **Local development:** Run **`supabase db reset`** to apply all migrations to your local database.
+- **Local development (preserve data):** Prefer **`supabase db push`** (or `supabase migration up`) to apply new migrations **without dropping** your local database.
+- **Local development (destructive):** Use **`supabase db reset`** only when you explicitly want a clean slate (it **drops local data**).
 - **Production:** Use **`supabase db push`** to apply migrations to cloud (after testing locally).
 - Create new migrations with **`supabase migration new <description>`**, then edit the generated SQL file.
 - See [docs/migration-guide.md](docs/migration-guide.md) and [docs/supabase-commands.md](docs/supabase-commands.md) for detailed workflows.
