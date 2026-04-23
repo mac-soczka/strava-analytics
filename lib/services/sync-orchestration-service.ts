@@ -41,7 +41,12 @@ export class SyncOrchestrationService {
 
   private async pauseForRateLimit(jobId: string, reasonPrefix: string, error: any) {
     const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
-    const resumeAt = new Date(Date.now() + Math.max(60_000, retryAfterMs))
+    const effectiveRetryAfterMs = Math.max(60_000, retryAfterMs)
+    const resumeAt = new Date(Date.now() + effectiveRetryAfterMs)
+
+    console.warn(
+      `[Job ${jobId}] Pausing for rate limit. Retry after: ${effectiveRetryAfterMs}ms. Resume at: ${resumeAt.toISOString()}`
+    )
     await this.jobsRepo.pauseJob(
       jobId,
       0,

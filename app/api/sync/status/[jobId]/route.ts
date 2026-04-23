@@ -43,6 +43,8 @@ export async function GET(
     // Get current rate limit status
     const rateLimitService = getRateLimitService()
     const rateLimits = rateLimitService.getStatus()
+    const adaptiveDelayMs = rateLimitService.getAdaptiveDelay()
+    const recommendedWaitMs = rateLimitService.getRecommendedWaitTime()
 
     // Expose current Strava rate limit state via HTTP headers so clients can treat
     // the response as the source of truth (mirrors Strava's header format).
@@ -62,6 +64,8 @@ export async function GET(
           requestsDay: rateLimits.requestsDay,
           limitDay: rateLimits.limitDay,
           remainingDay: rateLimits.remainingDay,
+          adaptiveDelayMs,
+          recommendedWaitMs,
           nextReset15min: rateLimits.nextReset15min.toISOString(),
           nextResetDaily: rateLimits.nextResetDaily.toISOString(),
           lastUpdate: rateLimits.lastUpdate.toISOString(),

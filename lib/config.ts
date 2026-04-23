@@ -1,7 +1,7 @@
 import { config as dotenvConfig } from 'dotenv'
 
 // Load environment variables
-dotenvConfig({ path: '.env.local' })
+dotenvConfig({ path: '.env.local', quiet: true })
 
 export interface StravaConfig {
   clientId: string

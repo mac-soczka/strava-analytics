@@ -81,7 +81,10 @@ export class StravaService {
 
     const delay = rateLimitService.getAdaptiveDelay()
     if (delay > 0) {
-      console.log(`Applying rate limit delay: ${delay}ms`)
+      const status = rateLimitService.getStatus()
+      console.log(
+        `Applying rate limit delay: ${delay}ms (15min ${status.requests15min}/${status.limit15min}, day ${status.requestsDay}/${status.limitDay})`
+      )
       await new Promise((resolve) => setTimeout(resolve, delay))
     }
 
