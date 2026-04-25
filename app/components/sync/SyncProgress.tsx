@@ -63,6 +63,7 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
       return Math.round(ms * r)
     }
     let lastSignature: string | null = null
+    let resumeAttempted = false
 
     const fetchStatus = async () => {
       try {
@@ -86,6 +87,17 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
               }
             : null
         )
+
+        // If the job is paused and the resume time has passed, proactively ask the server to resume it.
+        // This prevents jobs from getting stuck in paused state when no external cron is configured.
+        if (data.job.status === 'paused' && data.job.resume_at && !resumeAttempted) {
+          const resumeTime = new Date(data.job.resume_at).getTime()
+          if (Number.isFinite(resumeTime) && Date.now() >= resumeTime) {
+            resumeAttempted = true
+            // Fire-and-forget: the next poll will pick up the new status (running/paused/failed).
+            fetch(`/api/sync/resume/${jobId}`, { method: 'POST' }).catch(() => {})
+          }
+        }
 
         if (['completed', 'failed', 'cancelled'].includes(data.job.status)) {
           // Job finished, stop polling
