@@ -36,10 +36,9 @@ export async function POST(
     }
 
     if (job.status !== 'paused') {
-      return NextResponse.json(
-        { error: `Job ${jobId} is not paused (status: ${job.status})` },
-        { status: 400 }
-      )
+      // Idempotent: multiple callers (tabs/polls) can race.
+      // If it's already running/pending/completed/etc, just return current state.
+      return NextResponse.json({ success: true, job })
     }
 
     const syncService = new SyncOrchestrationService(user.strava_id)

@@ -250,7 +250,9 @@ export class SyncOrchestrationService {
     }
 
     if (job.status !== 'paused') {
-      throw new Error(`Job ${jobId} is not paused (status: ${job.status})`)
+      // Idempotency: resume can be triggered concurrently (cron + UI polling).
+      // If it already resumed, there's nothing to do.
+      return
     }
 
     console.log(`[Job ${jobId}] Resuming paused job from activity ${job.last_processed_activity_id}`)
