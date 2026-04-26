@@ -2,18 +2,21 @@
 
 import React, { useState, useMemo, useCallback } from 'react'
 import { StravaSegment, StravaSegmentEffort } from '@/types/strava'
-import { createClient } from '@supabase/supabase-js'
+import type { SegmentsPageStats } from '@/lib/server/segments-page-stats'
 import { motion } from 'framer-motion'
 import { 
   Search, 
   MapPin, 
-  Clock, 
   RefreshCw,
   ChevronDown,
   ChevronUp,
   Trophy,
   Target,
-  Mountain
+  Mountain,
+  GitBranch,
+  Map,
+  BarChart3,
+  User,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
@@ -22,13 +25,8 @@ import PolylineMap from '@/app/components/PolylineMap'
 const LeafletSegmentMap = dynamic(() => import('@/app/components/LeafletSegmentMap'), { ssr: false })
 
 interface SegmentsClientProps {
-  segments: (StravaSegment & { segment_efforts?: StravaSegmentEffort[] })[]
-  stats: {
-    totalSegments: number
-    totalEfforts: number
-    totalDistance: number
-    totalElevation: number
-  }
+  segments: (StravaSegment & { segment_efforts?: StravaSegmentEffort[]; total_effort_count?: number })[]
+  stats: SegmentsPageStats
 }
 
 // Supabase client not currently used
@@ -179,18 +177,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
         ...(searchTerm && { search: searchTerm })
       })
       
-      console.log('Loading more segments:', { nextPage, currentSegments: segments.length, totalSegments: stats.totalSegments })
-      
       const response = await fetch(`/api/segments?${params}`)
       if (!response.ok) throw new Error('Failed to fetch segments')
       
       const data = await response.json()
-      
-      console.log('Load more response:', { 
-        segmentsReceived: data.segments?.length || 0, 
-        pagination: data.pagination,
-        hasMorePages: data.pagination && nextPage < data.pagination.totalPages
-      })
       
       if (data.segments && data.segments.length > 0) {
         setSegments(prev => [...prev, ...data.segments])
@@ -199,14 +189,8 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
         const hasMorePages = data.pagination && nextPage < data.pagination.totalPages
         const hasMoreSegments = segments.length + data.segments.length < (data.pagination?.total || stats.totalSegments)
         setHasMore(hasMorePages && hasMoreSegments)
-        
-        console.log('Updated state:', { 
-          newTotalSegments: segments.length + data.segments.length,
-          hasMore: hasMorePages && hasMoreSegments
-        })
       } else {
         setHasMore(false)
-        console.log('No more segments to load')
       }
     } catch (error) {
       console.error('Error loading more segments:', error)
@@ -306,6 +290,115 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
             </div>
             <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
               <Mountain className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Catalog insights: polylines, attempts distribution, coverage */}
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.05 }}
+      >
+        <motion.div
+          className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl shadow-sm border border-slate-200/80 dark:border-gray-700"
+          whileHover={{ scale: 1.01 }}
+        >
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Route polylines</h3>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                {stats.segmentsWithPolyline.toLocaleString()}
+                <span className="text-base font-normal text-gray-500 dark:text-gray-400">
+                  {' '}
+                  / {stats.totalSegments.toLocaleString()}
+                </span>
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                {stats.polylineCoveragePercent}% of catalog segments have a drawable route
+              </p>
+            </div>
+            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+              <Map className="h-6 w-6 text-teal-600 dark:text-teal-400" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl shadow-sm border border-slate-200/80 dark:border-gray-700"
+          whileHover={{ scale: 1.01 }}
+        >
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Segments with attempts</h3>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                {stats.segmentsWithEfforts.toLocaleString()}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                {stats.segmentsNeverAttempted.toLocaleString()} never logged · {stats.effortCompletionRatePercent}%
+                catalog coverage
+              </p>
+            </div>
+            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+              <GitBranch className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl shadow-sm border border-slate-200/80 dark:border-gray-700"
+          whileHover={{ scale: 1.01 }}
+        >
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg attempts / ridden segment</h3>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                {stats.avgAttemptsPerRiddenSegment > 0 ? stats.avgAttemptsPerRiddenSegment : '—'}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Across segments that have at least one effort in the database
+              </p>
+            </div>
+            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+              <BarChart3 className="h-6 w-6 text-rose-600 dark:text-rose-400" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl shadow-sm border border-slate-200/80 dark:border-gray-700"
+          whileHover={{ scale: 1.01 }}
+        >
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Your segment diversity</h3>
+              {stats.athleteStatsAvailable ? (
+                <>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                    {(stats.yourUniqueSegmentsAttempted ?? 0).toLocaleString()}
+                    <span className="text-base font-normal text-gray-500 dark:text-gray-400"> unique</span>
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Distinct segments from your synced activities
+                    {stats.yourTotalActivities != null
+                      ? ` · ${stats.yourTotalActivities} activities in sync stats`
+                      : ''}
+                  </p>
+                </>
+              ) : stats.hasStravaSession ? (
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  Your segment summary could not be loaded. Try syncing activities or check that your profile exists in the database.
+                </p>
+              ) : (
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  Sign in with Strava to see how many different segments appear in your activities.
+                </p>
+              )}
+            </div>
+            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+              <User className="h-6 w-6 text-sky-600 dark:text-sky-400" />
             </div>
           </div>
         </motion.div>
@@ -556,6 +649,13 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                           <div className="text-sm text-gray-500 dark:text-gray-400">
                             {segment.city && `${segment.city}, `}
                             {segment.state || segment.country}
+                          </div>
+                          <div className="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                            {segment.map?.polyline ? (
+                              <span className="text-teal-600 dark:text-teal-400">Has route polyline</span>
+                            ) : (
+                              <span>No route polyline</span>
+                            )}
                           </div>
                         </div>
                       </td>

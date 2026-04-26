@@ -1,7 +1,10 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import type { ReactNode } from 'react'
 import Link from 'next/link'
+import PolylineMap from '@/app/components/PolylineMap'
+import SegmentEffortFullMap from '@/app/components/SegmentEffortFullMap'
 import { 
   Target, 
   MapPin, 
@@ -31,6 +34,7 @@ interface SegmentEffort {
     city: string
     state: string
     country: string
+    polyline?: string | null
   }
   activities: {
     activity_id: number
@@ -88,6 +92,8 @@ export default function SegmentEffortsClient({
   const [sortBy, setSortBy] = useState<'date' | 'time' | 'segment' | 'activity'>('date')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
   const [showOnlyPRs, setShowOnlyPRs] = useState(false)
+  /** Effort id whose full Leaflet map row is open. */
+  const [fullMapEffortId, setFullMapEffortId] = useState<string | null>(null)
 
   // Get unique segments for filter
   const uniqueSegments = useMemo(() => {
@@ -195,6 +201,10 @@ export default function SegmentEffortsClient({
       pr.elapsed_time === effort.elapsed_time
     )
   }
+
+  const toggleFullMap = useCallback((effortId: string) => {
+    setFullMapEffortId((cur) => (cur === effortId ? null : effortId))
+  }, [])
 
   return (
     <div className="space-y-6">
@@ -379,11 +389,16 @@ export default function SegmentEffortsClient({
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Date
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-[140px]">
+                  Route
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-              {filteredAndSortedEfforts.slice(0, 100).map((effort) => (
-                <tr key={effort.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+              {filteredAndSortedEfforts.slice(0, 100).flatMap((effort) => {
+                const poly = effort.segments.polyline
+                const rows: ReactNode[] = [
+                  <tr key={effort.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <Link 
@@ -427,8 +442,46 @@ export default function SegmentEffortsClient({
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                     {formatDate(effort.start_date)}
                   </td>
-                </tr>
-              ))}
+                  <td
+                    className="px-6 py-4 align-middle"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="flex flex-col gap-2 items-start">
+                      {poly ? (
+                        <>
+                          <PolylineMap polyline={poly} />
+                          <button
+                            type="button"
+                            onClick={() => toggleFullMap(effort.id)}
+                            className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 whitespace-nowrap"
+                          >
+                            {fullMapEffortId === effort.id ? 'Hide map' : 'Full map'}
+                          </button>
+                        </>
+                      ) : (
+                        <span className="text-xs text-gray-400 dark:text-gray-500">—</span>
+                      )}
+                    </div>
+                  </td>
+                </tr>,
+                ]
+                if (fullMapEffortId === effort.id && poly) {
+                  rows.push(
+                    <tr
+                      key={`${effort.id}-map`}
+                      className="bg-slate-50 dark:bg-gray-900/50"
+                    >
+                      <td colSpan={7} className="p-4">
+                        <SegmentEffortFullMap
+                          polyline={poly}
+                          testId={`segment-effort-leaflet-${effort.id}`}
+                        />
+                      </td>
+                    </tr>
+                  )
+                }
+                return rows
+              })}
             </tbody>
           </table>
         </div>

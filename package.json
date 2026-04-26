@@ -8,6 +8,7 @@
     "start": "next start -p 3001",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
+    "tsc": "tsc --noEmit",
     "validate": "yarn lint && yarn type-check",
     "test": "jest",
     "test:e2e": "playwright test",

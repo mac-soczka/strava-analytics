@@ -5,6 +5,7 @@ import { SyncJobControls } from '../components/sync/SyncJobControls'
 import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
+import SegmentEffortsClient from './segment-efforts-client'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -101,7 +102,8 @@ async function SegmentEffortsContent() {
           climb_category,
           city,
           state,
-          country
+          country,
+          polyline
         ),
         activities!inner (
           activity_id,
@@ -125,7 +127,8 @@ async function SegmentEffortsContent() {
           climb_category,
           city,
           state,
-          country
+          country,
+          polyline
         ),
         activities (
           activity_id,
@@ -190,8 +193,6 @@ async function SegmentEffortsContent() {
       lastSegmentsSyncAt: syncCoverage?.segments.lastSyncAt ?? null,
       lastEffortsSyncAt: syncCoverage?.segmentEfforts.lastSyncAt ?? null,
     }
-
-    const { default: SegmentEffortsClient } = await import('./segment-efforts-client')
 
     return (
       <div className="space-y-6">

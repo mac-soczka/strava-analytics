@@ -5,6 +5,8 @@ import { SyncJobControls } from '../components/sync/SyncJobControls'
 import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
+import { buildSegmentEffortCountMap } from '@/lib/server/segment-effort-counts'
+import { loadSegmentsPageStats } from '@/lib/server/segments-page-stats'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -68,51 +70,12 @@ async function SegmentsContent() {
   const stravaId = await getSessionStravaId()
 
   try {
-    // 🎯 APPROACH 1: Reliable count queries for totals
-    const [segmentsCount, effortsCount] = await Promise.all([
-      supabase.from('segments').select('*', { count: 'exact', head: true }),
-      supabase.from('segment_efforts').select('*', { count: 'exact', head: true })
-    ])
-
-    if (segmentsCount.error) throw segmentsCount.error
-    if (effortsCount.error) throw effortsCount.error
-
-    // 🎯 APPROACH 2: Parallel data fetching for calculations
-    const [segmentEfforts, distanceSum, elevationSum] = await Promise.all([
-      // All segment efforts for accurate counting
-      supabase.from('segment_efforts').select('segment_id'),
-      
-      // Distance and elevation for statistics
-      supabase.from('segments').select('distance'),
-      supabase.from('segments').select('elevation_gain')
-    ])
-
-    if (segmentEfforts.error) throw segmentEfforts.error
-    if (distanceSum.error) throw distanceSum.error
-    if (elevationSum.error) throw elevationSum.error
-
-    // 🎯 APPROACH 3: Client-side aggregation for accurate counts
-    const totalDistance = distanceSum.data?.reduce((sum: number, s: any) => sum + (s.distance || 0), 0) || 0
-    const totalElevation = elevationSum.data?.reduce((sum: number, s: any) => sum + (s.elevation_gain || 0), 0) || 0
-
-    // Calculate effort counts per segment efficiently
-    const effortCountMap = new Map<number, number>()
-    segmentEfforts.data?.forEach((effort: any) => {
-      const segmentId = effort.segment_id
-      effortCountMap.set(segmentId, (effortCountMap.get(segmentId) || 0) + 1)
-    })
-
     const syncCoverage = stravaId ? await loadSyncCoverage(supabase, stravaId) : null
 
-    const stats = {
-      totalSegments: segmentsCount.count || 0,
-      totalEfforts: effortsCount.count || 0,
-      totalDistance,
-      totalElevation,
-    }
-
-    // Get initial segments for display (first page)
-    const { data: initialSegments, error: initialError } = await supabase
+    const [stats, effortCountMap, initialSegmentsResult] = await Promise.all([
+      loadSegmentsPageStats(supabase, stravaId),
+      buildSegmentEffortCountMap(supabase),
+      supabase
       .from('segments')
       .select(`
         *,
@@ -127,7 +90,10 @@ async function SegmentsContent() {
         )
       `)
       .order('name')
-      .limit(100) // Show first 100 segments initially
+      .limit(100),
+    ])
+
+    const { data: initialSegments, error: initialError } = initialSegmentsResult
 
     if (initialError) throw initialError
 
@@ -174,7 +140,7 @@ async function SegmentsContent() {
           map: segment.polyline ? { polyline: segment.polyline } : undefined
         }
       })) || [],
-      total_effort_count: effortCountMap.get(segment.segment_id) || 0
+      total_effort_count: effortCountMap.get(segment.segment_id) ?? 0
     })) || []
 
     const { default: SegmentsClient } = await import('./segments-client')

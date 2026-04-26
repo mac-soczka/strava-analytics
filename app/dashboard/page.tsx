@@ -5,6 +5,10 @@ import { SyncDashboard } from '../components/sync/SyncDashboard'
 import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
+import {
+  fetchAllActivitiesForMonthlyChart,
+  fetchDashboardActivityTotals,
+} from '@/lib/server/dashboard-activity-stats'
 
 // Loading skeleton for dashboard
 function DashboardLoadingSkeleton() {
@@ -83,14 +87,6 @@ async function DashboardContent() {
     if (segmentsCount.error) throw segmentsCount.error
     if (effortsCount.error) throw effortsCount.error
 
-    // 🎯 APPROACH 2: Parallel data fetching for calculations
-    let activitiesLimitedQuery = supabase
-      .from('activities')
-      .select('distance, moving_time, total_elevation_gain, type, start_date')
-      .order('start_date', { ascending: false })
-      .limit(1000)
-    if (stravaId) activitiesLimitedQuery = activitiesLimitedQuery.eq('strava_id', stravaId)
-
     let recentActivitiesQuery = supabase
       .from('activities')
       .select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date, polyline')
@@ -98,28 +94,22 @@ async function DashboardContent() {
       .limit(5)
     if (stravaId) recentActivitiesQuery = recentActivitiesQuery.eq('strava_id', stravaId)
 
-    let totalStatsQuery = supabase.from('activities').select('distance, moving_time, total_elevation_gain')
-    if (stravaId) totalStatsQuery = totalStatsQuery.eq('strava_id', stravaId)
-
-    const [activities, segments, segmentEfforts, recentActivities, totalStats] = await Promise.all([
-      activitiesLimitedQuery,
+    const [segments, segmentEfforts, recentActivities, totals, monthlySource] = await Promise.all([
       supabase.from('segments').select('segment_id, name, distance, elevation_gain, polyline'),
       segmentEffortsListQuery,
       recentActivitiesQuery,
-      totalStatsQuery,
+      fetchDashboardActivityTotals(supabase, stravaId),
+      fetchAllActivitiesForMonthlyChart(supabase, stravaId),
     ])
 
-    if (activities.error) throw activities.error
     if (segments.error) throw segments.error
     if (segmentEfforts.error) throw segmentEfforts.error
     if (recentActivities.error) throw recentActivities.error
-    if (totalStats.error) throw totalStats.error
 
-    // 🎯 APPROACH 3: Client-side aggregation for performance metrics
-    const totalDistance = totalStats.data?.reduce((sum: number, a: any) => sum + (a.distance || 0), 0) || 0
-    const totalTime = totalStats.data?.reduce((sum: number, a: any) => sum + (a.moving_time || 0), 0) || 0
-    const totalElevation = totalStats.data?.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0) || 0
-    
+    const totalDistance = totals.totalDistanceMeters
+    const totalTime = totals.totalMovingSeconds
+    const totalElevation = totals.totalElevationMeters
+
     // Calculate effort statistics efficiently
     const effortCountMap = new Map<number, number>()
     const uniqueSegmentsAttempted = new Set<number>()
@@ -168,16 +158,16 @@ async function DashboardContent() {
       const month = date.getMonth()
       const year = date.getFullYear()
       
-      const monthActivities = activities.data?.filter((activity: any) => {
+      const monthActivities = monthlySource.filter((activity) => {
         const activityDate = new Date(activity.start_date)
         return activityDate.getMonth() === month && activityDate.getFullYear() === year
-      }) || []
+      })
 
       return {
         month: date.toISOString().slice(0, 7), // Use YYYY-MM format for consistency
         activities: monthActivities.length,
-        distance: monthActivities.reduce((sum: number, a: any) => sum + (a.distance || 0), 0),
-        elevation: monthActivities.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0)
+        distance: monthActivities.reduce((sum, a) => sum + Number(a.distance || 0), 0),
+        elevation: monthActivities.reduce((sum, a) => sum + Number(a.total_elevation_gain || 0), 0)
       }
     }).reverse()
 
@@ -214,7 +204,17 @@ async function DashboardContent() {
       </div>
     )
   } catch (error) {
-    console.error('Error loading dashboard:', error)
+    const msg =
+      error && typeof error === 'object' && 'message' in error
+        ? String((error as { message?: string }).message)
+        : error instanceof Error
+          ? error.message
+          : String(error)
+    const details =
+      error && typeof error === 'object' && 'details' in error
+        ? String((error as { details?: string }).details)
+        : ''
+    console.error('Error loading dashboard:', msg, details || error)
     
     return (
       <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6">

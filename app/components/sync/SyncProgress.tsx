@@ -54,9 +54,12 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   const [isCancelling, setIsCancelling] = useState(false)
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout
+    let timeoutId: ReturnType<typeof setTimeout>
+    let cancelled = false
     let pollIntervalMs = 2000 // Start with 2 seconds
     const maxPollIntervalMs = 30000
+    const maxTransientPollFailures = 10
+    let consecutiveFailures = 0
     const jitter = (ms: number) => {
       // +/- 15% jitter to avoid synchronized polling.
       const r = 0.85 + Math.random() * 0.3
@@ -65,13 +68,55 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
     let lastSignature: string | null = null
     let resumeAttempted = false
 
+    const isLikelyNetworkError = (err: unknown) => {
+      if (!err || typeof err !== 'object') return false
+      const e = err as Error
+      const msg = `${e.name || ''} ${e.message || ''}`.toLowerCase()
+      return (
+        e.name === 'TypeError' ||
+        msg.includes('failed to fetch') ||
+        msg.includes('networkerror') ||
+        msg.includes('load failed') ||
+        msg.includes('network request failed')
+      )
+    }
+
+    const schedule = (fn: () => void, ms: number) => {
+      timeoutId = setTimeout(fn, jitter(ms))
+    }
+
     const fetchStatus = async () => {
+      if (cancelled) return
       try {
-        const response = await fetch(`/api/sync/status/${jobId}`)
-        const data = await response.json()
+        const response = await fetch(`/api/sync/status/${jobId}`, {
+          credentials: 'include',
+          cache: 'no-store',
+        })
+
+        let data: { job?: SyncJob; error?: string; rateLimits?: RateLimits }
+        try {
+          data = await response.json()
+        } catch {
+          throw new Error('Invalid response from server (not JSON)')
+        }
 
         if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch status')
+          if (response.status === 401 || response.status === 403) {
+            if (!cancelled) setError(data.error || 'Unauthorized')
+            return
+          }
+          if (response.status === 404) {
+            if (!cancelled) setError(data.error || 'Job not found')
+            return
+          }
+          throw new Error(data.error || `Failed to fetch status (${response.status})`)
+        }
+
+        consecutiveFailures = 0
+        if (!cancelled) setError(null)
+
+        if (!data.job) {
+          throw new Error('Missing job in response')
         }
 
         setJob(data.job)
@@ -95,12 +140,15 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
           if (Number.isFinite(resumeTime) && Date.now() >= resumeTime) {
             resumeAttempted = true
             // Fire-and-forget: the next poll will pick up the new status (running/paused/failed).
-            fetch(`/api/sync/resume/${jobId}`, { method: 'POST' }).catch(() => {})
+            fetch(`/api/sync/resume/${jobId}`, { method: 'POST', credentials: 'include' }).catch(() => {})
           }
         }
 
         if (['completed', 'failed', 'cancelled'].includes(data.job.status)) {
           // Job finished, stop polling
+          if (data.job.status === 'completed' && onComplete) {
+            onComplete()
+          }
           return
         }
 
@@ -144,20 +192,35 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
         }
 
         // Schedule next poll
-        timeoutId = setTimeout(fetchStatus, jitter(pollIntervalMs))
-
-        if (data.job.status === 'completed' && onComplete) {
-          onComplete()
+        if (!cancelled) {
+          schedule(() => void fetchStatus(), pollIntervalMs)
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
+        if (cancelled) return
+        consecutiveFailures += 1
+        const transient = isLikelyNetworkError(err)
+        if (transient && consecutiveFailures < maxTransientPollFailures) {
+          const backoffMs = Math.min(
+            maxPollIntervalMs,
+            2000 * 2 ** Math.min(consecutiveFailures - 1, 4)
+          )
+          console.warn(
+            `Sync status poll failed (${consecutiveFailures}/${maxTransientPollFailures}), retrying in ~${backoffMs}ms:`,
+            err
+          )
+          schedule(() => void fetchStatus(), backoffMs)
+          return
+        }
+        const message = err instanceof Error ? err.message : 'Unknown error'
         console.error('Error fetching job status:', err)
-        setError(err?.message || 'Unknown error')
+        setError(message)
       }
     }
 
-    fetchStatus()
+    void fetchStatus()
 
     return () => {
+      cancelled = true
       if (timeoutId) clearTimeout(timeoutId)
     }
   }, [jobId, onComplete])
@@ -213,7 +276,6 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
 
   const zero = { total: 0, processed: 0, failed: 0 }
   const activities = job.progress?.activities ?? zero
-  const laps = job.progress?.laps ?? zero
   const streams = job.progress?.streams ?? zero
   const segments = job.progress?.segments ?? zero
 
@@ -321,10 +383,6 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
             <div className="flex justify-between text-gray-600">
               <span>Activities:</span>
               <span>{activities.processed} / {activities.total}</span>
-            </div>
-            <div className="flex justify-between text-gray-600">
-              <span>Laps:</span>
-              <span>{laps.processed} / {laps.total}</span>
             </div>
             <div className="flex justify-between text-gray-600">
               <span>Streams:</span>
