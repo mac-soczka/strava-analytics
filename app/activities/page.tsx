@@ -103,7 +103,8 @@ async function ActivitiesContent() {
             climb_category,
             city,
             state,
-            country
+            country,
+            polyline
           )
         )
       `)

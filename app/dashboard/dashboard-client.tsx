@@ -1,18 +1,19 @@
 'use client'
 
-// useState is not used in this component
-import { 
-  Activity, 
-  Mountain, 
-  Target, 
-  Clock, 
-  TrendingUp, 
-  MapPin, 
+import Link from 'next/link'
+import {
+  Activity,
+  Mountain,
+  Target,
+  Clock,
+  TrendingUp,
+  MapPin,
   Calendar,
   BarChart3,
   Trophy,
-  Zap
+  Zap,
 } from 'lucide-react'
+import PolylineMap from '@/app/components/PolylineMap'
 
 interface DashboardStats {
   totalActivities: number
@@ -34,6 +35,7 @@ interface RecentActivity {
   total_elevation_gain: number
   type: string
   start_date: string
+  polyline?: string | null
 }
 
 interface TopSegment {
@@ -42,6 +44,7 @@ interface TopSegment {
   distance: number
   elevation: number
   effortCount: number
+  polyline?: string | null
 }
 
 interface MonthlyData {
@@ -245,20 +248,32 @@ export default function DashboardClient({
           </h3>
           <div className="space-y-3">
             {recentActivities.slice(0, 5).map((activity) => (
-              <div key={activity.activity_id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div
+                key={activity.activity_id}
+                className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+              >
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                  <Link
+                    href="/activities"
+                    className="text-sm font-medium text-gray-900 dark:text-white truncate hover:text-blue-600 dark:hover:text-blue-400 block"
+                  >
                     {activity.name}
-                  </p>
+                  </Link>
                   <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
-                    {activity.type.replace('_', ' ')} • {new Date(activity.start_date).toISOString().split('T')[0]}
+                    {activity.type.replace('_', ' ')} •{' '}
+                    {new Date(activity.start_date).toISOString().split('T')[0]}
                   </p>
+                  <div className="flex flex-wrap gap-2 mt-1 text-xs text-gray-600 dark:text-gray-400">
+                    <span>{formatDistance(activity.distance)}</span>
+                    <span>{formatTime(activity.moving_time)}</span>
+                    <span>{formatElevation(activity.total_elevation_gain)}</span>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3 text-xs text-gray-600 dark:text-gray-400">
-                  <span>{formatDistance(activity.distance)}</span>
-                  <span>{formatTime(activity.moving_time)}</span>
-                  <span>{formatElevation(activity.total_elevation_gain)}</span>
-                </div>
+                {activity.polyline ? (
+                  <div className="flex-shrink-0 self-center sm:self-center">
+                    <PolylineMap polyline={activity.polyline} />
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>
@@ -272,30 +287,44 @@ export default function DashboardClient({
           </h3>
           <div className="space-y-3">
             {topSegments.slice(0, 5).map((segment, index) => (
-              <div key={segment.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                    index === 0 ? 'bg-yellow-100 text-yellow-800' :
-                    index === 1 ? 'bg-gray-100 text-gray-800' :
-                    index === 2 ? 'bg-orange-100 text-orange-800' :
-                    'bg-blue-100 text-blue-800'
-                  }`}>
+              <div
+                key={segment.id}
+                className="flex flex-col sm:flex-row sm:items-center gap-3 justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+              >
+                <div className="flex items-center space-x-3 min-w-0 flex-1">
+                  <div
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                      index === 0
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : index === 1
+                          ? 'bg-gray-100 text-gray-800'
+                          : index === 2
+                            ? 'bg-orange-100 text-orange-800'
+                            : 'bg-blue-100 text-blue-800'
+                    }`}
+                  >
                     {index + 1}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                    <Link
+                      href={`/segments/${segment.id}`}
+                      className="text-sm font-medium text-gray-900 dark:text-white truncate hover:text-orange-600 dark:hover:text-orange-400 block"
+                    >
                       {segment.name}
-                    </p>
+                    </Link>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       {formatDistance(segment.distance)} • {formatElevation(segment.elevation)}
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                    {segment.effortCount}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">attempts</p>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  {segment.polyline ? <PolylineMap polyline={segment.polyline} /> : null}
+                  <div className="text-right">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                      {segment.effortCount}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">attempts</p>
+                  </div>
                 </div>
               </div>
             ))}

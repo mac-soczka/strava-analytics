@@ -37,7 +37,20 @@ A modern web application for visualizing and analyzing Strava activities and seg
    ```
 
 5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to [http://localhost:3001](http://localhost:3001) (see `yarn dev` port in `package.json`).
+
+## 🗺️ Activity polylines → maps
+
+Strava **encoded polylines** (`activities.polyline` / API `summary_polyline`) are normalized in **`lib/geo/polyline.ts`**:
+
+- **`decodeActivityPolyline`** — returns `RouteGeometry`: `latlngs` (lat, lng), `bounds`, and **GeoJSON `LineString`** with **`[lng, lat]`** coordinates.
+- **`unionBounds`**, **`decimateLatLngs`**, **`projectPolylineToSvgPoints`** — multi-route bounds, cheap decimation, SVG thumbnails.
+
+UI: **`PolylineMap`** (SVG preview, `data-testid="activity-route-map-thumb"`), **`LeafletSegmentMap`** (Leaflet + optional `tileUrlTemplate`, `data-testid="route-map-leaflet"`).
+
+**E2E:** Dev-only fixture at **`/e2e-fixtures/route-map`** (404 in production). First-time Playwright: `npx playwright install`, then `yarn test:e2e`.
+
+Full roadmap and task status: **[docs/polyline-map-execution-plan.md](./docs/polyline-map-execution-plan.md)**.
 
 ## 🛠️ Tech Stack
 

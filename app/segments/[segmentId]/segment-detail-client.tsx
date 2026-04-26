@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import PolylineMap from '@/app/components/PolylineMap'
 
 const LeafletSegmentMap = dynamic(() => import('../../components/LeafletSegmentMap'), { ssr: false })
 
@@ -224,15 +225,25 @@ export default function SegmentDetailClient({ segment, efforts, stats, pr, mostR
 
       {/* Segment Map */}
       {segment.polyline && (
-        <motion.div 
+        <motion.div
           className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Segment Route</h3>
-          <div className="h-64 rounded-lg overflow-hidden">
-            <LeafletSegmentMap polyline={segment.polyline} />
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Segment route</h3>
+          <div className="flex flex-col lg:flex-row gap-6 items-start">
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-xs text-gray-500 dark:text-gray-400">Preview</p>
+              <PolylineMap polyline={segment.polyline} />
+            </div>
+            <div className="flex-1 min-w-0 w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 h-80 lg:h-96">
+              <LeafletSegmentMap
+                polyline={segment.polyline}
+                testId="segment-detail-leaflet"
+                className="w-full h-full rounded-lg overflow-hidden border-0 shadow-none mb-0"
+              />
+            </div>
           </div>
         </motion.div>
       )}

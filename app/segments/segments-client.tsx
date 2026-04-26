@@ -15,10 +15,11 @@ import {
   Target,
   Mountain
 } from 'lucide-react'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
+import PolylineMap from '@/app/components/PolylineMap'
 
-// LeafletSegmentMap is not currently used
+const LeafletSegmentMap = dynamic(() => import('@/app/components/LeafletSegmentMap'), { ssr: false })
 
 interface SegmentsClientProps {
   segments: (StravaSegment & { segment_efforts?: StravaSegmentEffort[] })[]
@@ -43,6 +44,8 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const [hasMore, setHasMore] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null)
+  /** Segment id with expanded full map row (table). */
+  const [fullMapSegmentId, setFullMapSegmentId] = useState<number | null>(null)
 
   // Calculate segment metrics for sorting
   const segmentsWithMetrics = useMemo(() => {
@@ -527,60 +530,107 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                       )}
                     </div>
                   </th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 w-[140px]">
+                    Route
+                  </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {filteredAndSortedSegments.map((segment, index) => (
-                  <motion.tr
-                    key={segment.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer"
-                    onClick={() => handleSegmentClick(String(segment.id))}
-                  >
-                    <td className="py-3 px-4">
-                      <div>
-                        <div className="font-medium text-gray-900 dark:text-white">{segment.name}</div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                          {segment.city && `${segment.city}, `}{segment.state || segment.country}
+                {filteredAndSortedSegments.flatMap((segment, index) => {
+                  const sid = Number(segment.id)
+                  const rows: React.ReactNode[] = [
+                    <motion.tr
+                      key={segment.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                      onClick={() => handleSegmentClick(String(segment.id))}
+                    >
+                      <td className="py-3 px-4">
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-white">{segment.name}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            {segment.city && `${segment.city}, `}
+                            {segment.state || segment.country}
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                      {(segment.distance / 1000).toFixed(2)} km
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                      {Math.round(segment.metrics.elevationGain)}m
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                      {segment.metrics.steepness.toFixed(1)}%
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                      {segment.metrics.effortCount}
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                      {segment.metrics.timeMin > 0 ? formatTime(segment.metrics.timeMin) : '-'}
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                      {segment.metrics.averageTime > 0 ? formatTime(segment.metrics.averageTime) : '-'}
-                    </td>
-                    <td className="py-3 px-4">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleSegmentClick(String(segment.id))
-                        }}
-                        className="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 transition-colors"
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+                        {(segment.distance / 1000).toFixed(2)} km
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+                        {Math.round(segment.metrics.elevationGain)}m
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+                        {segment.metrics.steepness.toFixed(1)}%
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+                        {segment.metrics.effortCount}
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+                        {segment.metrics.timeMin > 0 ? formatTime(segment.metrics.timeMin) : '-'}
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+                        {segment.metrics.averageTime > 0 ? formatTime(segment.metrics.averageTime) : '-'}
+                      </td>
+                      <td
+                        className="py-3 px-4 align-middle"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        View Details
-                      </button>
-                    </td>
-                  </motion.tr>
-                ))}
+                        <div className="flex flex-col gap-2 items-start">
+                          {segment.map?.polyline ? (
+                            <>
+                              <PolylineMap polyline={segment.map.polyline} />
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setFullMapSegmentId((cur) => (cur === sid ? null : sid))
+                                }
+                                className="text-xs font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 whitespace-nowrap"
+                              >
+                                {fullMapSegmentId === sid ? 'Hide map' : 'Full map'}
+                              </button>
+                            </>
+                          ) : (
+                            <span className="text-xs text-gray-400 dark:text-gray-500">—</span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleSegmentClick(String(segment.id))
+                          }}
+                          className="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 transition-colors"
+                        >
+                          View Details
+                        </button>
+                      </td>
+                    </motion.tr>,
+                  ]
+                  if (fullMapSegmentId === sid && segment.map?.polyline) {
+                    rows.push(
+                      <tr
+                        key={`${segment.id}-full-map`}
+                        className="border-b border-gray-100 dark:border-gray-800 bg-slate-50 dark:bg-gray-900/50"
+                      >
+                        <td colSpan={9} className="p-4">
+                          <LeafletSegmentMap
+                            polyline={segment.map.polyline}
+                            testId={`segment-list-leaflet-${sid}`}
+                            className="w-full h-72 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 shadow-sm mb-0"
+                          />
+                        </td>
+                      </tr>
+                    )
+                  }
+                  return rows
+                })}
               </tbody>
             </table>
           </div>

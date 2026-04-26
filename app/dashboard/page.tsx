@@ -93,7 +93,7 @@ async function DashboardContent() {
 
     let recentActivitiesQuery = supabase
       .from('activities')
-      .select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date')
+      .select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date, polyline')
       .order('start_date', { ascending: false })
       .limit(5)
     if (stravaId) recentActivitiesQuery = recentActivitiesQuery.eq('strava_id', stravaId)
@@ -103,7 +103,7 @@ async function DashboardContent() {
 
     const [activities, segments, segmentEfforts, recentActivities, totalStats] = await Promise.all([
       activitiesLimitedQuery,
-      supabase.from('segments').select('segment_id, name, distance, elevation_gain'),
+      supabase.from('segments').select('segment_id, name, distance, elevation_gain, polyline'),
       segmentEffortsListQuery,
       recentActivitiesQuery,
       totalStatsQuery,
@@ -138,7 +138,8 @@ async function DashboardContent() {
           name: segment?.name || 'Unknown',
           distance: segment?.distance || 0,
           elevation: segment?.elevation_gain || 0,
-          effortCount: count
+          effortCount: count,
+          polyline: segment?.polyline || undefined,
         }
       })
       .sort((a, b) => b.effortCount - a.effortCount)

@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import {
   Calendar,
   Clock,
@@ -15,6 +16,9 @@ import {
   TrendingUp,
 } from 'lucide-react'
 import type { SyncCoverage } from '@/lib/sync/sync-coverage'
+import PolylineMap from '@/app/components/PolylineMap'
+
+const LeafletSegmentMap = dynamic(() => import('@/app/components/LeafletSegmentMap'), { ssr: false })
 
 interface SegmentEffort {
   id: string
@@ -35,6 +39,7 @@ interface SegmentEffort {
     city: string
     state: string
     country: string
+    polyline?: string | null
   }
 }
 
@@ -94,7 +99,6 @@ export default function ActivitiesClient({ activities, stats, coverage }: Activi
   const [sortBy, setSortBy] = useState<'date' | 'distance' | 'time' | 'segments'>('date')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
   const [expandedActivities, setExpandedActivities] = useState<Set<number>>(new Set())
-
   // Get unique activity types for filter from stats (full database counts)
   const activityTypes = useMemo(() => {
     return Object.keys(stats.activityTypes || {}).sort()
@@ -515,26 +519,42 @@ export default function ActivitiesClient({ activities, stats, coverage }: Activi
                       </span>
                     </div>
                   </div>
-                  <div className="flex-shrink-0 flex items-center gap-3">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                      {activity.type}
-                    </span>
-                    {uniqueSegments.length > 0 && (
-                      <button
-                        onClick={() => toggleActivityExpansion(activity.activity_id)}
-                        className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                      >
-                        <span>{isActivityExpanded(activity.activity_id) ? 'Hide' : 'Show'} segments</span>
-                        <ChevronDown 
-                          className={`h-4 w-4 transition-transform ${
-                            isActivityExpanded(activity.activity_id) ? 'rotate-180' : ''
-                          }`}
-                        />
-                      </button>
+                  <div className="flex-shrink-0 flex flex-col items-end gap-3">
+                    {activity.polyline && (
+                      <PolylineMap polyline={activity.polyline} href={activity.strava_url} />
                     )}
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                        {activity.type}
+                      </span>
+                      {uniqueSegments.length > 0 && (
+                        <button
+                          onClick={() => toggleActivityExpansion(activity.activity_id)}
+                          className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                        >
+                          <span>{isActivityExpanded(activity.activity_id) ? 'Hide' : 'Show'} segments</span>
+                          <ChevronDown
+                            className={`h-4 w-4 transition-transform ${
+                              isActivityExpanded(activity.activity_id) ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {activity.polyline && (
+                <div className="border-b border-gray-100 dark:border-gray-700 px-6 py-4 bg-slate-50 dark:bg-gray-900/40">
+                  <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">Activity route</p>
+                  <LeafletSegmentMap
+                    polyline={activity.polyline}
+                    testId={`activity-route-leaflet-${activity.activity_id}`}
+                    className="w-full h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 shadow-sm mb-0"
+                  />
+                </div>
+              )}
 
               {/* Segments List - Only show when expanded */}
               {uniqueSegments.length > 0 && isActivityExpanded(activity.activity_id) && (
@@ -548,32 +568,42 @@ export default function ActivitiesClient({ activities, stats, coverage }: Activi
                       <Link
                         key={segment.segment_id}
                         href={`/segments/${segment.segment_id}`}
-                        className="block p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                        className="flex flex-col sm:flex-row gap-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                       >
-                        <div className="flex items-start justify-between mb-2">
-                          <h5 className="font-medium text-gray-900 dark:text-white text-sm line-clamp-2">
-                            {segment.name}
-                          </h5>
-                          <ExternalLink className="h-4 w-4 text-gray-400 flex-shrink-0 ml-2" />
-                        </div>
-                        <div className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
-                          <div className="flex justify-between">
-                            <span>Distance:</span>
-                            <span>{(segment.distance / 1000).toFixed(2)} km</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-2 gap-2">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm line-clamp-2">
+                              {segment.name}
+                            </h5>
+                            <ExternalLink className="h-4 w-4 text-gray-400 flex-shrink-0" />
                           </div>
-                          {segment.elevation_gain > 0 && (
+                          <div className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
                             <div className="flex justify-between">
-                              <span>Elevation:</span>
-                              <span>{Math.round(segment.elevation_gain)}m</span>
+                              <span>Distance:</span>
+                              <span>{(segment.distance / 1000).toFixed(2)} km</span>
                             </div>
-                          )}
-                          {segment.average_grade !== 0 && (
-                            <div className="flex justify-between">
-                              <span>Grade:</span>
-                              <span>{segment.average_grade.toFixed(1)}%</span>
-                            </div>
-                          )}
+                            {segment.elevation_gain > 0 && (
+                              <div className="flex justify-between">
+                                <span>Elevation:</span>
+                                <span>{Math.round(segment.elevation_gain)}m</span>
+                              </div>
+                            )}
+                            {segment.average_grade !== 0 && (
+                              <div className="flex justify-between">
+                                <span>Grade:</span>
+                                <span>{segment.average_grade.toFixed(1)}%</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
+                        {segment.polyline ? (
+                          <div
+                            className="flex-shrink-0 self-center sm:self-start"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <PolylineMap polyline={segment.polyline} />
+                          </div>
+                        ) : null}
                       </Link>
                     ))}
                   </div>
