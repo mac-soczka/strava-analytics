@@ -2,6 +2,9 @@ import { createServerComponentClient } from '@/lib/supabase'
 import { Suspense } from 'react'
 import ProtectedRoute from "../components/ProtectedRoute"
 import { SyncDashboard } from '../components/sync/SyncDashboard'
+import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
+import { getSessionStravaId } from '@/lib/server/session-strava'
+import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 
 // Loading skeleton for dashboard
 function DashboardLoadingSkeleton() {
@@ -49,13 +52,31 @@ function DashboardLoadingSkeleton() {
 // Main dashboard content
 async function DashboardContent() {
   const supabase = createServerComponentClient()
+  const stravaId = await getSessionStravaId()
 
   try {
+    const effortsCountQuery = stravaId
+      ? supabase
+          .from('segment_efforts')
+          .select('id, activities!inner(strava_id)', { count: 'exact', head: true })
+          .eq('activities.strava_id', stravaId)
+      : supabase.from('segment_efforts').select('*', { count: 'exact', head: true })
+
+    const segmentEffortsListQuery = stravaId
+      ? supabase
+          .from('segment_efforts')
+          .select('segment_id, activities!inner(strava_id)')
+          .eq('activities.strava_id', stravaId)
+      : supabase.from('segment_efforts').select('segment_id')
+
     // 🎯 APPROACH 1: Efficient count queries for simple totals
+    let activitiesCountQuery = supabase.from('activities').select('*', { count: 'exact', head: true })
+    if (stravaId) activitiesCountQuery = activitiesCountQuery.eq('strava_id', stravaId)
+
     const [activitiesCount, segmentsCount, effortsCount] = await Promise.all([
-      supabase.from('activities').select('*', { count: 'exact', head: true }),
+      activitiesCountQuery,
       supabase.from('segments').select('*', { count: 'exact', head: true }),
-      supabase.from('segment_efforts').select('*', { count: 'exact', head: true })
+      effortsCountQuery,
     ])
 
     if (activitiesCount.error) throw activitiesCount.error
@@ -63,17 +84,29 @@ async function DashboardContent() {
     if (effortsCount.error) throw effortsCount.error
 
     // 🎯 APPROACH 2: Parallel data fetching for calculations
+    let activitiesLimitedQuery = supabase
+      .from('activities')
+      .select('distance, moving_time, total_elevation_gain, type, start_date')
+      .order('start_date', { ascending: false })
+      .limit(1000)
+    if (stravaId) activitiesLimitedQuery = activitiesLimitedQuery.eq('strava_id', stravaId)
+
+    let recentActivitiesQuery = supabase
+      .from('activities')
+      .select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date')
+      .order('start_date', { ascending: false })
+      .limit(5)
+    if (stravaId) recentActivitiesQuery = recentActivitiesQuery.eq('strava_id', stravaId)
+
+    let totalStatsQuery = supabase.from('activities').select('distance, moving_time, total_elevation_gain')
+    if (stravaId) totalStatsQuery = totalStatsQuery.eq('strava_id', stravaId)
+
     const [activities, segments, segmentEfforts, recentActivities, totalStats] = await Promise.all([
-      // Full data for calculations (limited for performance)
-      supabase.from('activities').select('distance, moving_time, total_elevation_gain, type, start_date').order('start_date', { ascending: false }).limit(1000),
+      activitiesLimitedQuery,
       supabase.from('segments').select('segment_id, name, distance, elevation_gain'),
-      supabase.from('segment_efforts').select('segment_id'),
-      
-      // Recent activities for display
-      supabase.from('activities').select('activity_id, name, distance, moving_time, total_elevation_gain, type, start_date').order('start_date', { ascending: false }).limit(5),
-      
-      // Get total stats from all activities (not limited)
-      supabase.from('activities').select('distance, moving_time, total_elevation_gain')
+      segmentEffortsListQuery,
+      recentActivitiesQuery,
+      totalStatsQuery,
     ])
 
     if (activities.error) throw activities.error
@@ -111,10 +144,11 @@ async function DashboardContent() {
       .sort((a, b) => b.effortCount - a.effortCount)
       .slice(0, 10)
 
-    // Get activity type counts from entire database
-    const { data: activityTypeCounts, error: typeCountError } = await supabase
-      .from('activities')
-      .select('type')
+    const activityTypesQuery = stravaId
+      ? supabase.from('activities').select('type').eq('strava_id', stravaId)
+      : supabase.from('activities').select('type')
+
+    const { data: activityTypeCounts, error: typeCountError } = await activityTypesQuery
 
     if (typeCountError) {
       console.error('Error fetching activity type counts:', typeCountError)
@@ -152,7 +186,7 @@ async function DashboardContent() {
 
     const stats = {
       totalActivities: activitiesCount.count || 0,
-      totalSegments: segmentsCount.count || 0,
+      totalSegments: stravaId ? uniqueSegmentsAttempted.size : segmentsCount.count || 0,
       totalEfforts: effortsCount.count || 0,
       segmentsAttempted: uniqueSegmentsAttempted.size,
       totalDistance: Math.round(totalDistance / 1000 * 100) / 100, // km
@@ -162,16 +196,21 @@ async function DashboardContent() {
       avgElevationPerActivity: Math.round(avgElevationPerActivity) // meters
     }
 
+    const syncCoverage = stravaId ? await loadSyncCoverage(supabase, stravaId) : null
+
     const { default: DashboardClient } = await import('./dashboard-client')
 
     return (
-      <DashboardClient 
-        stats={stats}
-        recentActivities={recentActivities.data || []}
-        topSegments={topSegments}
-        activityTypes={activityTypes}
-        monthlyData={monthlyData}
-      />
+      <div className="space-y-8">
+        {syncCoverage && <SyncCoverageSummary coverage={syncCoverage} />}
+        <DashboardClient 
+          stats={stats}
+          recentActivities={recentActivities.data || []}
+          topSegments={topSegments}
+          activityTypes={activityTypes}
+          monthlyData={monthlyData}
+        />
+      </div>
     )
   } catch (error) {
     console.error('Error loading dashboard:', error)

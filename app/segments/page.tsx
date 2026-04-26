@@ -2,6 +2,9 @@ import { Suspense } from 'react'
 import { createServerComponentClient } from '@/lib/supabase'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { SyncJobControls } from '../components/sync/SyncJobControls'
+import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
+import { getSessionStravaId } from '@/lib/server/session-strava'
+import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -62,6 +65,7 @@ function SegmentsLoadingSkeleton() {
 
 async function SegmentsContent() {
   const supabase = createServerComponentClient()
+  const stravaId = await getSessionStravaId()
 
   try {
     // 🎯 APPROACH 1: Reliable count queries for totals
@@ -98,28 +102,13 @@ async function SegmentsContent() {
       effortCountMap.set(segmentId, (effortCountMap.get(segmentId) || 0) + 1)
     })
 
-    // Get completion statistics
-    const { data: completionStats, error: completionError } = await supabase
-      .rpc('get_segment_completion_stats')
+    const syncCoverage = stravaId ? await loadSyncCoverage(supabase, stravaId) : null
 
-    if (completionError) {
-      console.error('Error fetching completion stats:', completionError)
-    }
-
-    // Calculate completion percentages
-    const segmentsWithEfforts = completionStats?.[0]?.segments_with_efforts || 0
-    const totalSegmentsInStats = completionStats?.[0]?.total_segments || 0
-    const effortCompletionPercentage = totalSegmentsInStats > 0 
-      ? Math.round((segmentsWithEfforts / totalSegmentsInStats) * 100)
-      : 0
-
-    // Calculate statistics
     const stats = {
       totalSegments: segmentsCount.count || 0,
       totalEfforts: effortsCount.count || 0,
       totalDistance,
       totalElevation,
-      effortCompletionPercentage
     }
 
     // Get initial segments for display (first page)
@@ -191,10 +180,13 @@ async function SegmentsContent() {
     const { default: SegmentsClient } = await import('./segments-client')
 
     return (
-      <SegmentsClient 
-        segments={transformedSegments}
-        stats={stats}
-      />
+      <div className="space-y-6">
+        {syncCoverage && <SyncCoverageSummary coverage={syncCoverage} />}
+        <SegmentsClient 
+          segments={transformedSegments}
+          stats={stats}
+        />
+      </div>
     )
   } catch (error) {
     console.error('Error loading segments:', error)

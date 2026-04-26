@@ -50,6 +50,11 @@ interface SegmentEffortsStats {
   totalPRs: number
   displayedEfforts: number
   effortCompletionPercentage: number
+  segmentSyncPercent: number
+  activityImportPercent: number
+  lastActivitiesSyncAt: string | null
+  lastSegmentsSyncAt: string | null
+  lastEffortsSyncAt: string | null
 }
 
 interface PersonalRecord {
@@ -176,6 +181,11 @@ export default function SegmentEffortsClient({
     return new Date(dateString).toISOString().split('T')[0]
   }
 
+  const formatSyncAt = (iso: string | null) => {
+    if (!iso) return 'Never'
+    return new Date(iso).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
+  }
+
   const isPR = (effort: SegmentEffort) => {
     return personalRecords.some(pr => 
       pr.segment_id === effort.segment_id && 
@@ -185,6 +195,19 @@ export default function SegmentEffortsClient({
 
   return (
     <div className="space-y-6">
+      <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+        <span className="font-medium text-gray-800 dark:text-gray-200">Last successful sync: </span>
+        activities {formatSyncAt(stats.lastActivitiesSyncAt)}
+        <span className="mx-2 text-gray-400">|</span>
+        segments {formatSyncAt(stats.lastSegmentsSyncAt)}
+        <span className="mx-2 text-gray-400">|</span>
+        efforts {formatSyncAt(stats.lastEffortsSyncAt)}
+        <span className="mx-3 text-gray-400">|</span>
+        <span className="font-medium text-gray-800 dark:text-gray-200">Coverage: </span>
+        activities ~{stats.activityImportPercent}% · segments {stats.segmentSyncPercent}% · efforts{' '}
+        {stats.effortCompletionPercentage}%
+      </div>
+
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">

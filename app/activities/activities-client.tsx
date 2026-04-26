@@ -11,7 +11,8 @@ import {
   Activity,
   Mountain,
   ExternalLink,
-  ChevronDown
+  ChevronDown,
+  TrendingUp
 } from 'lucide-react'
 
 interface SegmentEffort {
@@ -59,6 +60,10 @@ interface ActivityCompletionStats {
   activities_with_polyline: number
   activities_without_polyline: number
   completion_percentage: number
+  activity_import_percent?: number
+  last_activities_sync_at?: string | null
+  last_segments_sync_at?: string | null
+  last_efforts_sync_at?: string | null
 }
 
 interface ActivitiesStats {
@@ -159,6 +164,11 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
     return date.toISOString().split('T')[0]
   }
 
+  const formatSyncAt = (iso: string | null | undefined) => {
+    if (!iso) return 'Never'
+    return new Date(iso).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
+  }
+
   // Group segments by segment_id to avoid duplicates
   const getUniqueSegments = (efforts: SegmentEffort[]) => {
     const uniqueSegments = new Map()
@@ -191,7 +201,7 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
   return (
     <div className="space-y-6">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         <motion.div
           className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
           initial={{ opacity: 0, y: 20 }}
@@ -260,26 +270,44 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Activity Completion</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.activityCompletionStats.completion_percentage}%</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.activityCompletionStats.total_activities_fetched} / {stats.activityCompletionStats.total_activities_available} fetched
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Activities sync</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.activityCompletionStats.activity_import_percent != null
+                  ? `${stats.activityCompletionStats.activity_import_percent}%`
+                  : `${stats.activityCompletionStats.total_activities_fetched} / ${stats.activityCompletionStats.total_activities_available}`}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.activityCompletionStats.completion_percentage >= 90 ? '🟢 Excellent' : 
-                 stats.activityCompletionStats.completion_percentage >= 70 ? '🟡 Good' : 
-                 stats.activityCompletionStats.completion_percentage >= 50 ? '🟠 Fair' : '🔴 Needs Sync'}
+                {stats.activityCompletionStats.total_activities_fetched.toLocaleString()} stored
+                {stats.activityCompletionStats.activity_import_percent != null &&
+                  ` (estimate ${stats.activityCompletionStats.total_activities_available.toLocaleString()} total)`}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Last activities sync: {formatSyncAt(stats.activityCompletionStats.last_activities_sync_at)}
               </p>
             </div>
             <div className="h-8 w-8 text-indigo-500 flex items-center justify-center">
               <div className="relative">
+                {(() => {
+                  const pct =
+                    stats.activityCompletionStats.activity_import_percent ??
+                    (stats.activityCompletionStats.total_activities_available > 0
+                      ? Math.min(
+                          100,
+                          Math.round(
+                            (stats.activityCompletionStats.total_activities_fetched /
+                              stats.activityCompletionStats.total_activities_available) *
+                              100
+                          )
+                        )
+                      : 0)
+                  return (
                 <svg className="h-8 w-8 transform -rotate-90" viewBox="0 0 36 36">
                   <path
                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    strokeDasharray={`${stats.activityCompletionStats.completion_percentage}, 100`}
+                    strokeDasharray={`${pct}, 100`}
                     className="text-gray-200 dark:text-gray-700"
                   />
                   <path
@@ -287,20 +315,21 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    strokeDasharray={`${stats.activityCompletionStats.completion_percentage}, 100`}
+                    strokeDasharray={`${pct}, 100`}
                     className={`${
-                      stats.activityCompletionStats.completion_percentage >= 90 ? 'text-green-500' :
-                      stats.activityCompletionStats.completion_percentage >= 70 ? 'text-yellow-500' :
-                      stats.activityCompletionStats.completion_percentage >= 50 ? 'text-orange-500' : 'text-red-500'
+                      pct >= 90 ? 'text-green-500' :
+                      pct >= 70 ? 'text-yellow-500' :
+                      pct >= 50 ? 'text-orange-500' : 'text-red-500'
                     }`}
                   />
                 </svg>
+                  )
+                })()}
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Segment Completion Card */}
         <motion.div
           className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
           initial={{ opacity: 0, y: 20 }}
@@ -309,18 +338,39 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segment Completion</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segments sync</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {stats.activityCompletionStats.activities_with_segments} / {stats.activityCompletionStats.total_activities_fetched}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.activityCompletionStats.activities_with_segments > 0 && stats.activityCompletionStats.total_activities_fetched > 0 
-                  ? `${Math.round((stats.activityCompletionStats.activities_with_segments / stats.activityCompletionStats.total_activities_fetched) * 100)}% of activities have segments`
-                  : 'No segments fetched yet'
-                }
+                {stats.activityCompletionStats.total_activities_fetched > 0
+                  ? `${stats.activityCompletionStats.completion_percentage}% of activities have segment data`
+                  : 'No activities yet'}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Last segments sync: {formatSyncAt(stats.activityCompletionStats.last_segments_sync_at)}
               </p>
             </div>
             <Target className="h-8 w-8 text-orange-500" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segment efforts sync</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalEfforts.toLocaleString()}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Efforts stored for your activities</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Last efforts sync: {formatSyncAt(stats.activityCompletionStats.last_efforts_sync_at)}
+              </p>
+            </div>
+            <TrendingUp className="h-8 w-8 text-emerald-500" />
           </div>
         </motion.div>
       </div>

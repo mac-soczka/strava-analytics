@@ -2,6 +2,9 @@ import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { SyncJobControls } from '../components/sync/SyncJobControls'
+import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
+import { getSessionStravaId } from '@/lib/server/session-strava'
+import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -72,18 +75,15 @@ async function ActivitiesContent() {
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
-    
-    // Get total count of activities
-    const { count: totalActivities, error: countError } = await supabase
-      .from('activities')
-      .select('*', { count: 'exact', head: true })
+    const stravaId = await getSessionStravaId()
+
+    let countQ = supabase.from('activities').select('*', { count: 'exact', head: true })
+    if (stravaId) countQ = countQ.eq('strava_id', stravaId)
+    const { count: totalActivities, error: countError } = await countQ
 
     if (countError) throw countError
 
-    // Fetch activities with their segments and segment efforts
-    const { data: activities, error: activitiesError } = await supabase
-      .from('activities')
-      .select(`
+    let activitiesQuery = supabase.from('activities').select(`
         *,
         segment_efforts (
           id,
@@ -107,44 +107,79 @@ async function ActivitiesContent() {
           )
         )
       `)
+
+    if (stravaId) {
+      activitiesQuery = activitiesQuery.eq('strava_id', stravaId)
+    }
+
+    const { data: activities, error: activitiesError } = await activitiesQuery
       .order('start_date', { ascending: false })
       .limit(50)
 
     if (activitiesError) throw activitiesError
 
-    // Get activity type counts from entire database
-    const { data: activityTypeCounts, error: typeCountError } = await supabase
-      .from('activities')
-      .select('type')
+    let typeQuery = supabase.from('activities').select('type')
+    if (stravaId) typeQuery = typeQuery.eq('strava_id', stravaId)
+
+    const { data: activityTypeCounts, error: typeCountError } = await typeQuery
 
     if (typeCountError) {
       console.error('Error fetching activity type counts:', typeCountError)
     }
 
-    // Calculate activity type distribution
     const activityTypes = activityTypeCounts?.reduce((acc: Record<string, number>, activity: any) => {
       acc[activity.type] = (acc[activity.type] || 0) + 1
       return acc
     }, {} as Record<string, number>) || {}
 
-    // Get activity completion statistics
-    const { data: activityCompletionStats, error: activityCompletionError } = await supabase
-      .rpc('get_activity_completion_stats')
+    const syncCoverage = stravaId ? await loadSyncCoverage(supabase, stravaId) : null
 
-    if (activityCompletionError) {
-      console.error('Error fetching activity completion stats:', activityCompletionError)
-    }
+    const { data: legacyActivityStats } = !stravaId
+      ? await supabase.rpc('get_activity_completion_stats')
+      : { data: null as null }
 
-    // Calculate activity completion percentages
-    const activityStats = activityCompletionStats?.[0] || {
-      total_activities_fetched: 0,
-      total_activities_available: 0,
-      activities_with_segments: 0,
-      activities_without_segments: 0,
-      activities_with_polyline: 0,
-      activities_without_polyline: 0,
-      completion_percentage: 0
-    }
+    const legacyRow = legacyActivityStats?.[0] as
+      | {
+          total_activities_fetched?: number
+          total_activities_available?: number
+          activities_with_segments?: number
+          activities_without_segments?: number
+          activities_with_polyline?: number
+          activities_without_polyline?: number
+          completion_percentage?: number
+        }
+      | undefined
+
+    const activityStats = syncCoverage
+      ? {
+          total_activities_fetched: syncCoverage.activities.stored,
+          total_activities_available: syncCoverage.activities.estimatedTotal,
+          activities_with_segments: syncCoverage.segments.activitiesWithSegments,
+          activities_without_segments: Math.max(
+            0,
+            syncCoverage.segments.totalActivities - syncCoverage.segments.activitiesWithSegments
+          ),
+          activities_with_polyline: 0,
+          activities_without_polyline: 0,
+          completion_percentage: Math.round(syncCoverage.segments.percent),
+          activity_import_percent: syncCoverage.activities.importPercent,
+          last_activities_sync_at: syncCoverage.activities.lastSyncAt,
+          last_segments_sync_at: syncCoverage.segments.lastSyncAt,
+          last_efforts_sync_at: syncCoverage.segmentEfforts.lastSyncAt,
+        }
+      : {
+          total_activities_fetched: legacyRow?.total_activities_fetched ?? 0,
+          total_activities_available: legacyRow?.total_activities_available ?? 0,
+          activities_with_segments: legacyRow?.activities_with_segments ?? 0,
+          activities_without_segments: legacyRow?.activities_without_segments ?? 0,
+          activities_with_polyline: legacyRow?.activities_with_polyline ?? 0,
+          activities_without_polyline: legacyRow?.activities_without_polyline ?? 0,
+          completion_percentage: Number(legacyRow?.completion_percentage ?? 0),
+          activity_import_percent: 0,
+          last_activities_sync_at: null as string | null,
+          last_segments_sync_at: null as string | null,
+          last_efforts_sync_at: null as string | null,
+        }
 
     // Calculate statistics for displayed activities only
     const totalDistance = activities?.reduce((sum: number, a: any) => sum + (a.distance || 0), 0) || 0
@@ -175,10 +210,13 @@ async function ActivitiesContent() {
     const { default: ActivitiesClient } = await import('./activities-client')
 
     return (
-      <ActivitiesClient 
-        activities={activities || []} 
-        stats={stats}
-      />
+      <div className="space-y-6">
+        {syncCoverage && <SyncCoverageSummary coverage={syncCoverage} />}
+        <ActivitiesClient 
+          activities={activities || []} 
+          stats={stats}
+        />
+      </div>
     )
   } catch (error) {
     console.error('Error loading activities:', error)

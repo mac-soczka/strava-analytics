@@ -27,7 +27,6 @@ interface SegmentsClientProps {
     totalEfforts: number
     totalDistance: number
     totalElevation: number
-    effortCompletionPercentage: number
   }
 }
 
@@ -39,7 +38,6 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState<'name' | 'distance' | 'efforts' | 'elevation' | 'steepness' | 'time_max' | 'time_min'>('name')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-  const [lastSync, setLastSync] = useState<string>('')
   const [segments, setSegments] = useState(initialSegments)
   const [currentPage, setCurrentPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
@@ -139,7 +137,6 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
       setSegments(data.segments || [])
       setCurrentPage(1)
       setHasMore(data.pagination && data.pagination.page < data.pagination.totalPages)
-      setLastSync(new Date().toLocaleTimeString())
     } catch (error) {
       console.error('Error searching segments:', error)
     } finally {
@@ -223,7 +220,6 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
       setSegments(initialSegments)
       setCurrentPage(1)
       setHasMore(true)
-      setLastSync(new Date().toLocaleTimeString())
     } catch (error) {
       console.error('Error refreshing segments:', error)
     } finally {
@@ -238,13 +234,11 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
     return `${m}m ${s.toFixed(2)}s`
   }
 
-  // Format helpers (currently unused but kept for future use)
-
   return (
     <div className="space-y-6">
-      {/* Statistics Cards */}
+      {/* Catalog totals (not sync completion — see Sync coverage above) */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-5 gap-4"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -312,50 +306,6 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
             </div>
           </div>
         </motion.div>
-
-        <motion.div 
-          className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Effort Completion</h3>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.effortCompletionPercentage}%</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.effortCompletionPercentage >= 90 ? '🟢 Excellent' : 
-                 stats.effortCompletionPercentage >= 70 ? '🟡 Good' : 
-                 stats.effortCompletionPercentage >= 50 ? '🟠 Fair' : '🔴 Needs Sync'}
-              </p>
-            </div>
-            <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
-              <div className="relative">
-                <svg className="h-5 w-5 transform -rotate-90" viewBox="0 0 36 36">
-                  <path
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
-                    className="text-gray-200 dark:text-gray-700"
-                  />
-                  <path
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
-                    className={`${
-                      stats.effortCompletionPercentage >= 90 ? 'text-green-500' :
-                      stats.effortCompletionPercentage >= 70 ? 'text-yellow-500' :
-                      stats.effortCompletionPercentage >= 50 ? 'text-orange-500' : 'text-red-500'
-                    }`}
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </motion.div>
 
       {/* Controls Bar */}
@@ -415,12 +365,6 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
           </button>
         </div>
 
-        {/* Last Sync Info */}
-        {lastSync && (
-          <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-            Last synced: {lastSync}
-          </div>
-        )}
       </motion.div>
 
       {/* Segments List */}

@@ -2,6 +2,9 @@ import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { SyncJobControls } from '../components/sync/SyncJobControls'
+import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
+import { getSessionStravaId } from '@/lib/server/session-strava'
+import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 
 // Force dynamic rendering to avoid ISR issues
 export const dynamic = 'force-dynamic'
@@ -68,20 +71,49 @@ async function SegmentEffortsContent() {
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
+    const stravaId = await getSessionStravaId()
 
-    // Get real totals from database
+    const effortsCountQuery = stravaId
+      ? supabase
+          .from('segment_efforts')
+          .select('id, activities!inner(strava_id)', { count: 'exact', head: true })
+          .eq('activities.strava_id', stravaId)
+      : supabase.from('segment_efforts').select('*', { count: 'exact', head: true })
+
     const [effortsCount, segmentsCount] = await Promise.all([
-      supabase.from('segment_efforts').select('*', { count: 'exact', head: true }),
-      supabase.from('segments').select('*', { count: 'exact', head: true })
+      effortsCountQuery,
+      supabase.from('segments').select('*', { count: 'exact', head: true }),
     ])
 
     if (effortsCount.error) throw effortsCount.error
     if (segmentsCount.error) throw segmentsCount.error
 
-    // Fetch segment efforts with segment and activity details (increased limit)
-    const { data: efforts, error: effortsError } = await supabase
-      .from('segment_efforts')
-      .select(`
+    const effortsSelect = stravaId
+      ? `
+        *,
+        segments (
+          segment_id,
+          name,
+          distance,
+          elevation_gain,
+          average_grade,
+          maximum_grade,
+          climb_category,
+          city,
+          state,
+          country
+        ),
+        activities!inner (
+          activity_id,
+          name,
+          type,
+          start_date,
+          distance,
+          moving_time,
+          strava_id
+        )
+      `
+      : `
         *,
         segments (
           segment_id,
@@ -103,9 +135,16 @@ async function SegmentEffortsContent() {
           distance,
           moving_time
         )
-      `)
+      `
+
+    let effortsListQuery = supabase.from('segment_efforts').select(effortsSelect)
+    if (stravaId) {
+      effortsListQuery = effortsListQuery.eq('activities.strava_id', stravaId)
+    }
+
+    const { data: efforts, error: effortsError } = await effortsListQuery
       .order('start_date', { ascending: false })
-      .limit(10000) // Increased limit to get more efforts
+      .limit(10000)
 
     if (effortsError) throw effortsError
 
@@ -128,39 +167,55 @@ async function SegmentEffortsContent() {
     const personalRecords = Array.from(segmentPRs.values())
     const totalPRs = personalRecords.length
 
-    // Get completion statistics
-    const { data: completionStats, error: completionError } = await supabase
-      .rpc('get_segment_completion_stats')
+    const syncCoverage = stravaId ? await loadSyncCoverage(supabase, stravaId) : null
+
+    const { data: completionStats, error: completionError } = !stravaId
+      ? await supabase.rpc('get_segment_completion_stats')
+      : { data: null as null, error: null as null }
 
     if (completionError) {
       console.error('Error fetching completion stats:', completionError)
     }
 
-    // Calculate completion percentages
     const segmentsWithEfforts = completionStats?.[0]?.segments_with_efforts || 0
     const totalSegmentsInStats = completionStats?.[0]?.total_segments || 0
-    const effortCompletionPercentage = totalSegmentsInStats > 0 
-      ? Math.round((segmentsWithEfforts / totalSegmentsInStats) * 100)
-      : 0
+    const legacyEffortPct =
+      totalSegmentsInStats > 0
+        ? Math.round((segmentsWithEfforts / totalSegmentsInStats) * 100)
+        : 0
+
+    const effortCompletionPercentage = syncCoverage
+      ? Math.round(syncCoverage.segmentEfforts.percent)
+      : legacyEffortPct
 
     const stats = {
       totalEfforts,
-      uniqueSegments,
+      uniqueSegments: stravaId ? new Set(efforts?.map((e) => e.segment_id)).size : uniqueSegments,
       totalDistance: Math.round(totalDistance / 1000 * 100) / 100, // Convert to km
       totalElevation: Math.round(totalElevation),
       totalPRs,
       displayedEfforts: efforts?.length || 0,
-      effortCompletionPercentage
+      effortCompletionPercentage,
+      segmentSyncPercent: syncCoverage
+        ? Math.round(syncCoverage.segments.percent)
+        : Math.round(Number(completionStats?.[0]?.segment_completion_rate ?? 0)),
+      activityImportPercent: syncCoverage ? syncCoverage.activities.importPercent : 0,
+      lastActivitiesSyncAt: syncCoverage?.activities.lastSyncAt ?? null,
+      lastSegmentsSyncAt: syncCoverage?.segments.lastSyncAt ?? null,
+      lastEffortsSyncAt: syncCoverage?.segmentEfforts.lastSyncAt ?? null,
     }
 
     const { default: SegmentEffortsClient } = await import('./segment-efforts-client')
 
     return (
-      <SegmentEffortsClient
-        efforts={efforts || []}
-        stats={stats}
-        personalRecords={personalRecords}
-      />
+      <div className="space-y-6">
+        {syncCoverage && <SyncCoverageSummary coverage={syncCoverage} />}
+        <SegmentEffortsClient
+          efforts={efforts || []}
+          stats={stats}
+          personalRecords={personalRecords}
+        />
+      </div>
     )
   } catch (error) {
     console.error('Error loading segment efforts:', error)
