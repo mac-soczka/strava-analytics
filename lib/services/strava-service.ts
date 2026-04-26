@@ -547,12 +547,16 @@ export class StravaService {
    * Sync segments for ALL activities that need them
    * Processes ALL activities, not just a limited batch
    */
-  async syncSegments(batchSize = config.stravaApiLimits.maxSegmentBatchSize): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
+  async syncSegments(
+    batchSize = config.stravaApiLimits.maxSegmentBatchSize,
+    onProgress?: (p: { processed: number; errors: number; total: number }) => Promise<void>
+  ): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
     let processed = 0
     let segmentsAdded = 0
     let errors = 0
     let offset = 0
     let hasMoreActivities = true
+    let activitiesHandled = 0
 
     try {
       console.log(`Starting complete segment sync (batch size: ${batchSize})`)
@@ -565,6 +569,8 @@ export class StravaService {
         console.log('No activities need segments fetched')
         return { processed: 0, segmentsAdded: 0, errors: 0 }
       }
+
+      await onProgress?.({ processed: 0, errors: 0, total: totalActivitiesNeedingSegments })
 
       // Continue processing until no more activities need segments
       while (hasMoreActivities) {
@@ -590,7 +596,6 @@ export class StravaService {
               console.log(`Activity ${activity.activity_id} already has ${existingSegments.data.length} segments, marking as fetched...`)
               // Mark as fetched even if we skip
               await this.activitiesRepo.markSegmentsFetched(activity.id)
-              // Don't increment processed count for already-fetched activities
               continue
             }
 
@@ -670,6 +675,13 @@ export class StravaService {
 
             console.error(`Error processing activity ${activity.activity_id}:`, error)
             errors++
+          } finally {
+            activitiesHandled++
+            await onProgress?.({
+              processed: activitiesHandled,
+              errors,
+              total: totalActivitiesNeedingSegments,
+            })
           }
         }
 

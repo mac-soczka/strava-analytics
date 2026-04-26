@@ -83,6 +83,23 @@ describe('SyncJobsRepository', () => {
     expect(updated.progress.activities.processed).toBe(50)
   })
 
+  it('should merge progress entities instead of replacing the whole progress object', async () => {
+    const job = await repo.createJob(testStravaId)
+    createdJobIds.push(job.id)
+
+    await repo.updateJobProgress(job.id, {
+      activities: { total: 100, processed: 10, failed: 0 },
+    })
+    const merged = await repo.updateJobProgress(job.id, {
+      segments: { total: 2000, processed: 42, failed: 1 },
+    })
+
+    expect(merged.progress.activities.processed).toBe(10)
+    expect(merged.progress.segments.total).toBe(2000)
+    expect(merged.progress.segments.processed).toBe(42)
+    expect(merged.progress.segments.failed).toBe(1)
+  })
+
   it('should mark job as failed', async () => {
     const job = await repo.createJob(testStravaId)
     createdJobIds.push(job.id)

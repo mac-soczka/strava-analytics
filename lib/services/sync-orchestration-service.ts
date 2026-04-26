@@ -141,12 +141,11 @@ export class SyncOrchestrationService {
       // Step 2: Sync segments for all activities
       console.log(`[Job ${jobId}] Syncing segments for activities...`)
       try {
-        const segmentResult = await this.stravaService.syncSegments()
+        const segmentResult = await this.stravaService.syncSegments(
+          undefined,
+          this.segmentProgressReporter(jobId, false)
+        )
         console.log(`[Job ${jobId}] Segments synced: ${segmentResult.segmentsAdded}, activities processed: ${segmentResult.processed}`)
-        
-        await this.jobsRepo.updateJobProgress(jobId, {
-          segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
-        } as Partial<SyncJobProgress>)
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during segment sync! Pausing job...`)
@@ -185,11 +184,10 @@ export class SyncOrchestrationService {
     console.log(`[Job ${jobId}] Starting segments-only sync from Strava API...`)
 
     try {
-      const segmentResult = await this.stravaService.syncSegments()
-
-      await this.jobsRepo.updateJobProgress(jobId, {
-        segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
-      } as any)
+      const segmentResult = await this.stravaService.syncSegments(
+        undefined,
+        this.segmentProgressReporter(jobId, true)
+      )
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
         processed_items: segmentResult.processed,
@@ -212,11 +210,10 @@ export class SyncOrchestrationService {
     // In Strava’s model, efforts are best fetched in bulk via activity details with include_all_efforts=true.
     // We reuse the same sync path as segments sync, which persists both segments and segment_efforts.
     try {
-      const segmentResult = await this.stravaService.syncSegments()
-
-      await this.jobsRepo.updateJobProgress(jobId, {
-        segments: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
-      } as any)
+      const segmentResult = await this.stravaService.syncSegments(
+        undefined,
+        this.segmentProgressReporter(jobId, true)
+      )
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
         processed_items: segmentResult.processed,
@@ -229,6 +226,21 @@ export class SyncOrchestrationService {
         return
       }
       throw error
+    }
+  }
+
+  private segmentProgressReporter(
+    jobId: string,
+    mirrorProcessedItems: boolean
+  ): (p: { processed: number; errors: number; total: number }) => Promise<void> {
+    return async (p) => {
+      await this.jobsRepo.updateJobProgress(
+        jobId,
+        {
+          segments: { total: p.total, processed: p.processed, failed: p.errors },
+        } as Partial<SyncJobProgress>,
+        mirrorProcessedItems ? p.processed : undefined
+      )
     }
   }
 

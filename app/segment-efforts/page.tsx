@@ -169,37 +169,23 @@ async function SegmentEffortsContent() {
 
     const syncCoverage = stravaId ? await loadSyncCoverage(supabase, stravaId) : null
 
-    const { data: completionStats, error: completionError } = !stravaId
-      ? await supabase.rpc('get_segment_completion_stats')
-      : { data: null as null, error: null as null }
-
-    if (completionError) {
-      console.error('Error fetching completion stats:', completionError)
-    }
-
-    const segmentsWithEfforts = completionStats?.[0]?.segments_with_efforts || 0
-    const totalSegmentsInStats = completionStats?.[0]?.total_segments || 0
-    const legacyEffortPct =
-      totalSegmentsInStats > 0
-        ? Math.round((segmentsWithEfforts / totalSegmentsInStats) * 100)
-        : 0
-
-    const effortCompletionPercentage = syncCoverage
-      ? Math.round(syncCoverage.segmentEfforts.percent)
-      : legacyEffortPct
-
     const stats = {
       totalEfforts,
-      uniqueSegments: stravaId ? new Set(efforts?.map((e) => e.segment_id)).size : uniqueSegments,
-      totalDistance: Math.round(totalDistance / 1000 * 100) / 100, // Convert to km
+      uniqueSegments: syncCoverage
+        ? syncCoverage.segmentEfforts.distinctSegments
+        : stravaId
+          ? new Set(efforts?.map((e) => e.segment_id)).size
+          : uniqueSegments,
+      totalDistance: Math.round((totalDistance / 1000) * 100) / 100, // Convert to km
       totalElevation: Math.round(totalElevation),
       totalPRs,
       displayedEfforts: efforts?.length || 0,
-      effortCompletionPercentage,
-      segmentSyncPercent: syncCoverage
-        ? Math.round(syncCoverage.segments.percent)
-        : Math.round(Number(completionStats?.[0]?.segment_completion_rate ?? 0)),
       activityImportPercent: syncCoverage ? syncCoverage.activities.importPercent : 0,
+      segmentActivitiesChecked: syncCoverage?.segments.activitiesCheckedForSegmentList ?? 0,
+      segmentActivitiesQueued: syncCoverage?.segments.activitiesQueuedForSegmentList ?? 0,
+      importedActivities: syncCoverage?.activities.stored ?? 0,
+      effortRowsStored: syncCoverage?.segmentEfforts.effortRowsStored ?? totalEfforts,
+      activitiesWithEffortRows: syncCoverage?.segmentEfforts.activitiesWithAtLeastOneEffortRow ?? 0,
       lastActivitiesSyncAt: syncCoverage?.activities.lastSyncAt ?? null,
       lastSegmentsSyncAt: syncCoverage?.segments.lastSyncAt ?? null,
       lastEffortsSyncAt: syncCoverage?.segmentEfforts.lastSyncAt ?? null,

@@ -211,16 +211,30 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
     )
   }
 
-  const progressPercentage = job.total_items > 0
-    ? Math.round((job.processed_items / job.total_items) * 100)
-    : 0
-
-  // Some jobs (older rows / partial updates) may have missing progress or missing
-  // nested keys (e.g. `{}`), so guard each field we render.
   const zero = { total: 0, processed: 0, failed: 0 }
   const activities = job.progress?.activities ?? zero
   const laps = job.progress?.laps ?? zero
   const streams = job.progress?.streams ?? zero
+  const segments = job.progress?.segments ?? zero
+
+  const segmentFocused =
+    job.type === 'segments_only' || job.type === 'segment_efforts_only'
+
+  const progressPercentage = (() => {
+    if (job.total_items > 0) {
+      return Math.round((job.processed_items / job.total_items) * 100)
+    }
+    if (segmentFocused && segments.total > 0) {
+      return Math.round((segments.processed / segments.total) * 100)
+    }
+    if (activities.total > 0) {
+      return Math.round((activities.processed / activities.total) * 100)
+    }
+    return 0
+  })()
+
+  // Some jobs (older rows / partial updates) may have missing progress or missing
+  // nested keys (e.g. `{}`), so guard each field we render.
 
   return (
     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
@@ -297,18 +311,33 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
       </div>
 
       <div className="space-y-2 text-sm">
-        <div className="flex justify-between text-gray-600">
-          <span>Activities:</span>
-          <span>{activities.processed} / {activities.total}</span>
-        </div>
-        <div className="flex justify-between text-gray-600">
-          <span>Laps:</span>
-          <span>{laps.processed} / {laps.total}</span>
-        </div>
-        <div className="flex justify-between text-gray-600">
-          <span>Streams:</span>
-          <span>{streams.processed} / {streams.total}</span>
-        </div>
+        {segmentFocused ? (
+          <div className="flex justify-between text-gray-600">
+            <span>Activities (segment fetch):</span>
+            <span>{segments.processed} / {segments.total}</span>
+          </div>
+        ) : (
+          <>
+            <div className="flex justify-between text-gray-600">
+              <span>Activities:</span>
+              <span>{activities.processed} / {activities.total}</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>Laps:</span>
+              <span>{laps.processed} / {laps.total}</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>Streams:</span>
+              <span>{streams.processed} / {streams.total}</span>
+            </div>
+            {(job.type === 'full_sync' || segments.total > 0) && (
+              <div className="flex justify-between text-gray-600">
+                <span>Segments:</span>
+                <span>{segments.processed} / {segments.total}</span>
+              </div>
+            )}
+          </>
+        )}
         {job.failed_items > 0 && (
           <div className="flex justify-between text-red-600">
             <span>Failed:</span>

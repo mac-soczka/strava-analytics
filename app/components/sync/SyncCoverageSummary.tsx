@@ -25,13 +25,31 @@ function ProgressRow({ label, value, max, percent }: { label: string; value: num
   )
 }
 
+function StatLines({ lines }: { lines: { label: string; value: string }[] }) {
+  return (
+    <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+      {lines.map(({ label, value }) => (
+        <li key={label} className="flex justify-between gap-3">
+          <span className="text-gray-600 dark:text-gray-400">{label}</span>
+          <span className="font-medium text-gray-900 dark:text-white text-right">{value}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export function SyncCoverageSummary({ coverage }: { coverage: SyncCoverage }) {
+  const seg = coverage.segments
+  const eff = coverage.segmentEfforts
+  const n = (v: number | undefined) => (typeof v === 'number' && Number.isFinite(v) ? v : 0)
+
   return (
     <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 shadow-sm space-y-6">
       <div>
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Sync coverage</h2>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-          Progress for your account and when each sync type last completed successfully.
+          Activities are imported first. Segment lists and effort rows are fetched per activity—many segments (or none)
+          can appear on a single ride, and each stored crossing is one database row.
         </p>
       </div>
 
@@ -40,9 +58,13 @@ export function SyncCoverageSummary({ coverage }: { coverage: SyncCoverage }) {
           <h3 className="text-sm font-medium text-gray-900 dark:text-white">Activities</h3>
           <ProgressRow
             label="Imported (estimate)"
-            value={coverage.activities.stored}
-            max={Math.max(coverage.activities.estimatedTotal, coverage.activities.stored, 1)}
-            percent={coverage.activities.importPercent}
+            value={n(coverage.activities.stored)}
+            max={Math.max(
+              n(coverage.activities.estimatedTotal),
+              n(coverage.activities.stored),
+              1
+            )}
+            percent={n(coverage.activities.importPercent)}
           />
           <p className="text-xs text-gray-500 dark:text-gray-400">
             Last sync: {formatCompletedAt(coverage.activities.lastSyncAt)}
@@ -50,28 +72,52 @@ export function SyncCoverageSummary({ coverage }: { coverage: SyncCoverage }) {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-gray-900 dark:text-white">Segments</h3>
-          <ProgressRow
-            label="Activities with segment data"
-            value={coverage.segments.activitiesWithSegments}
-            max={Math.max(coverage.segments.totalActivities, 1)}
-            percent={Math.round(coverage.segments.percent)}
+          <h3 className="text-sm font-medium text-gray-900 dark:text-white">Segment lists</h3>
+          <StatLines
+            lines={[
+              {
+                label: 'Activities checked',
+                value: `${n(seg?.activitiesCheckedForSegmentList).toLocaleString()} / ${n(seg?.importedActivities).toLocaleString()}`,
+              },
+              {
+                label: 'Still queued',
+                value: n(seg?.activitiesQueuedForSegmentList).toLocaleString(),
+              },
+              {
+                label: 'Crossings stored',
+                value: `${n(seg?.segmentCrossingRows).toLocaleString()} rows · ${n(seg?.distinctSegmentsCrossed).toLocaleString()} segments`,
+              },
+            ]}
           />
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Last sync: {formatCompletedAt(coverage.segments.lastSyncAt)}
+            “Checked” means we requested this activity’s segment list from Strava. Crossings are stored segment-effort
+            rows (each ride × segment appearance).
+            <span className="block mt-1">Last sync: {formatCompletedAt(seg?.lastSyncAt ?? null)}</span>
           </p>
         </div>
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-gray-900 dark:text-white">Segment efforts</h3>
-          <ProgressRow
-            label="Segments with stored efforts"
-            value={coverage.segmentEfforts.segmentsWithEfforts}
-            max={Math.max(coverage.segmentEfforts.uniqueSegmentsAttempted, 1)}
-            percent={Math.round(coverage.segmentEfforts.percent)}
+          <StatLines
+            lines={[
+              {
+                label: 'Effort rows stored',
+                value: n(eff?.effortRowsStored).toLocaleString(),
+              },
+              {
+                label: 'Distinct segments',
+                value: n(eff?.distinctSegments).toLocaleString(),
+              },
+              {
+                label: 'Activities with ≥1 row',
+                value: `${n(eff?.activitiesWithAtLeastOneEffortRow).toLocaleString()} / ${n(eff?.importedActivities).toLocaleString()}`,
+              },
+            ]}
           />
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Last sync: {formatCompletedAt(coverage.segmentEfforts.lastSyncAt)}
+            Row count is the meaningful volume metric; activity counts only describe how many rides include at least one
+            crossing.
+            <span className="block mt-1">Last sync: {formatCompletedAt(eff?.lastSyncAt ?? null)}</span>
           </p>
         </div>
       </div>

@@ -7,16 +7,30 @@ export type SyncCoverage = {
     importPercent: number
     lastSyncAt: string | null
   }
+  /**
+   * Segment list fetch from Strava is per activity. Counts here are activity-queue + how much
+   * segment-effort data we have stored (each row is one segment crossed on one activity).
+   */
   segments: {
-    activitiesWithSegments: number
-    totalActivities: number
-    percent: number
+    /** Activities where segments_fetched = true (we asked Strava for this activity’s segment list) */
+    activitiesCheckedForSegmentList: number
+    /** Imported activities still waiting for that fetch (segments_fetched IS DISTINCT FROM true) */
+    activitiesQueuedForSegmentList: number
+    importedActivities: number
+    /** Rows in segment_efforts for this user (segment crossings with times) */
+    segmentCrossingRows: number
+    /** Distinct segment_id values among those rows */
+    distinctSegmentsCrossed: number
     lastSyncAt: string | null
   }
+  /**
+   * Same underlying table as segment crossings; framed as “efforts” for the efforts page.
+   */
   segmentEfforts: {
-    segmentsWithEfforts: number
-    uniqueSegmentsAttempted: number
-    percent: number
+    effortRowsStored: number
+    distinctSegments: number
+    activitiesWithAtLeastOneEffortRow: number
+    importedActivities: number
     lastSyncAt: string | null
   }
 }
@@ -78,13 +92,27 @@ export async function loadSyncCoverage(
   const row = userSegRes.data?.[0] as
     | {
         activities_with_segments?: number
+        activities_without_segments?: number
         total_activities?: number
-        segment_completion_rate?: number
         segments_with_efforts?: number
         unique_segments_attempted?: number
-        effort_completion_rate?: number
+        activities_with_segment_efforts?: number
+        total_segment_effort_rows?: number
       }
     | undefined
+
+  const actsChecked = row?.activities_with_segments ?? 0
+  const actsQueued =
+    row?.activities_without_segments ??
+    Math.max(0, (row?.total_activities ?? fetched) - actsChecked)
+  const rpcTotal = row?.total_activities ?? 0
+  const imported = Math.max(fetched, rpcTotal, 1)
+  const crossingRows = row?.total_segment_effort_rows ?? 0
+  const distinctSeg = Math.max(
+    row?.unique_segments_attempted ?? 0,
+    row?.segments_with_efforts ?? 0
+  )
+  const actsWithEfforts = row?.activities_with_segment_efforts ?? 0
 
   return {
     activities: {
@@ -94,15 +122,18 @@ export async function loadSyncCoverage(
       lastSyncAt: lastSync.activities,
     },
     segments: {
-      activitiesWithSegments: row?.activities_with_segments ?? 0,
-      totalActivities: row?.total_activities ?? 0,
-      percent: Number(row?.segment_completion_rate ?? 0),
+      activitiesCheckedForSegmentList: actsChecked,
+      activitiesQueuedForSegmentList: actsQueued,
+      importedActivities: imported,
+      segmentCrossingRows: crossingRows,
+      distinctSegmentsCrossed: distinctSeg,
       lastSyncAt: lastSync.segments,
     },
     segmentEfforts: {
-      segmentsWithEfforts: row?.segments_with_efforts ?? 0,
-      uniqueSegmentsAttempted: row?.unique_segments_attempted ?? 0,
-      percent: Number(row?.effort_completion_rate ?? 0),
+      effortRowsStored: crossingRows,
+      distinctSegments: distinctSeg,
+      activitiesWithAtLeastOneEffortRow: actsWithEfforts,
+      importedActivities: imported,
       lastSyncAt: lastSync.segmentEfforts,
     },
   }

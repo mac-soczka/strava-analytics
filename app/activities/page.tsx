@@ -154,14 +154,11 @@ async function ActivitiesContent() {
       ? {
           total_activities_fetched: syncCoverage.activities.stored,
           total_activities_available: syncCoverage.activities.estimatedTotal,
-          activities_with_segments: syncCoverage.segments.activitiesWithSegments,
-          activities_without_segments: Math.max(
-            0,
-            syncCoverage.segments.totalActivities - syncCoverage.segments.activitiesWithSegments
-          ),
+          activities_with_segments: syncCoverage.segments.activitiesCheckedForSegmentList,
+          activities_without_segments: syncCoverage.segments.activitiesQueuedForSegmentList,
           activities_with_polyline: 0,
           activities_without_polyline: 0,
-          completion_percentage: Math.round(syncCoverage.segments.percent),
+          completion_percentage: 0,
           activity_import_percent: syncCoverage.activities.importPercent,
           last_activities_sync_at: syncCoverage.activities.lastSyncAt,
           last_segments_sync_at: syncCoverage.segments.lastSyncAt,
@@ -186,10 +183,11 @@ async function ActivitiesContent() {
     const totalTime = activities?.reduce((sum: number, a: any) => sum + (a.moving_time || 0), 0) || 0
     const totalElevation = activities?.reduce((sum: number, a: any) => sum + (a.total_elevation_gain || 0), 0) || 0
     
-    // Count total segments and efforts
+    // Count total segments and efforts (list view only — account totals come from syncCoverage)
     const totalSegments = new Set()
-    const totalEfforts = activities?.reduce((sum: number, a: any) => sum + (a.segment_efforts?.length || 0), 0) || 0
-    
+    const totalEffortsInList =
+      activities?.reduce((sum: number, a: any) => sum + (a.segment_efforts?.length || 0), 0) || 0
+
     activities?.forEach((activity: any) => {
       activity.segment_efforts?.forEach((effort: any) => {
         totalSegments.add(effort.segments?.segment_id)
@@ -202,9 +200,11 @@ async function ActivitiesContent() {
       totalTime,
       totalElevation,
       totalSegments: totalSegments.size,
-      totalEfforts,
+      totalEfforts: totalEffortsInList,
+      accountEffortRows: syncCoverage?.segmentEfforts.effortRowsStored ?? null,
+      accountDistinctSegments: syncCoverage?.segments.distinctSegmentsCrossed ?? null,
       activityTypes,
-      activityCompletionStats: activityStats
+      activityCompletionStats: activityStats,
     }
 
     const { default: ActivitiesClient } = await import('./activities-client')
@@ -212,10 +212,7 @@ async function ActivitiesContent() {
     return (
       <div className="space-y-6">
         {syncCoverage && <SyncCoverageSummary coverage={syncCoverage} />}
-        <ActivitiesClient 
-          activities={activities || []} 
-          stats={stats}
-        />
+        <ActivitiesClient activities={activities || []} stats={stats} coverage={syncCoverage} />
       </div>
     )
   } catch (error) {

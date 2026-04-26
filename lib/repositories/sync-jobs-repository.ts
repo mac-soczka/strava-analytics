@@ -122,8 +122,24 @@ export class SyncJobsRepository {
     progress: Partial<SyncJobProgress>,
     processedItems?: number
   ): Promise<SyncJob> {
-    const updates: any = { progress }
-    
+    const existing = await this.getJobById(jobId)
+    const z = { total: 0, processed: 0, failed: 0 }
+    const prev = (existing?.progress || {}) as Partial<SyncJobProgress>
+    const merge = (key: keyof SyncJobProgress) => ({
+      ...z,
+      ...(prev[key] as object),
+      ...((progress[key] as object) || {}),
+    })
+    const merged: SyncJobProgress = {
+      activities: merge('activities'),
+      laps: merge('laps'),
+      streams: merge('streams'),
+      segments: merge('segments'),
+      routes: merge('routes'),
+      stats: merge('stats'),
+    }
+    const updates: any = { progress: merged }
+
     if (processedItems !== undefined) {
       updates.processed_items = processedItems
     }

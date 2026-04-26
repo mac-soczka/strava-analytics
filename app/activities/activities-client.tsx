@@ -3,17 +3,18 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { 
-  Calendar, 
-  Clock, 
-  MapPin, 
+import {
+  Calendar,
+  Clock,
+  MapPin,
   Target,
   Activity,
   Mountain,
   ExternalLink,
   ChevronDown,
-  TrendingUp
+  TrendingUp,
 } from 'lucide-react'
+import type { SyncCoverage } from '@/lib/sync/sync-coverage'
 
 interface SegmentEffort {
   id: string
@@ -72,7 +73,11 @@ interface ActivitiesStats {
   totalTime: number
   totalElevation: number
   totalSegments: number
+  /** Efforts counted only on the loaded activity list (recent page) */
   totalEfforts: number
+  /** Full-account totals from sync coverage (preferred when logged in) */
+  accountEffortRows: number | null
+  accountDistinctSegments: number | null
   activityTypes: Record<string, number>
   activityCompletionStats: ActivityCompletionStats
 }
@@ -80,9 +85,10 @@ interface ActivitiesStats {
 interface ActivitiesClientProps {
   activities: Activity[]
   stats: ActivitiesStats
+  coverage: SyncCoverage | null
 }
 
-export default function ActivitiesClient({ activities, stats }: ActivitiesClientProps) {
+export default function ActivitiesClient({ activities, stats, coverage }: ActivitiesClientProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedType, setSelectedType] = useState<string>('all')
   const [sortBy, setSortBy] = useState<'date' | 'distance' | 'time' | 'segments'>('date')
@@ -255,8 +261,13 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Segments</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segments (this list)</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalSegments.toLocaleString()}</p>
+              {stats.accountDistinctSegments != null && (
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  {stats.accountDistinctSegments.toLocaleString()} distinct in account
+                </p>
+              )}
             </div>
             <Target className="h-8 w-8 text-orange-500" />
           </div>
@@ -338,14 +349,16 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segments sync</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segment list queue</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {stats.activityCompletionStats.activities_with_segments} / {stats.activityCompletionStats.total_activities_fetched}
+                {stats.activityCompletionStats.activities_with_segments} /{' '}
+                {stats.activityCompletionStats.total_activities_fetched}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.activityCompletionStats.total_activities_fetched > 0
-                  ? `${stats.activityCompletionStats.completion_percentage}% of activities have segment data`
-                  : 'No activities yet'}
+                Activities checked vs imported. Each can have many segment crossings (or none).{' '}
+                {coverage
+                  ? `${coverage.segments.segmentCrossingRows.toLocaleString()} crossing rows stored.`
+                  : ''}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 Last segments sync: {formatSyncAt(stats.activityCompletionStats.last_segments_sync_at)}
@@ -363,9 +376,19 @@ export default function ActivitiesClient({ activities, stats }: ActivitiesClient
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segment efforts sync</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalEfforts.toLocaleString()}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Efforts stored for your activities</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Segment efforts (account)</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {(stats.accountEffortRows ?? stats.totalEfforts).toLocaleString()}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Effort rows in the database (not “per activity cap”).{' '}
+                {stats.accountEffortRows != null &&
+                  stats.totalEfforts !== stats.accountEffortRows && (
+                    <span className="block">
+                      {stats.totalEfforts.toLocaleString()} on the visible activity list only.
+                    </span>
+                  )}
+              </p>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 Last efforts sync: {formatSyncAt(stats.activityCompletionStats.last_efforts_sync_at)}
               </p>

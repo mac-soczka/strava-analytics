@@ -49,9 +49,12 @@ interface SegmentEffortsStats {
   totalElevation: number
   totalPRs: number
   displayedEfforts: number
-  effortCompletionPercentage: number
-  segmentSyncPercent: number
   activityImportPercent: number
+  segmentActivitiesChecked: number
+  segmentActivitiesQueued: number
+  importedActivities: number
+  effortRowsStored: number
+  activitiesWithEffortRows: number
   lastActivitiesSyncAt: string | null
   lastSegmentsSyncAt: string | null
   lastEffortsSyncAt: string | null
@@ -203,9 +206,12 @@ export default function SegmentEffortsClient({
         <span className="mx-2 text-gray-400">|</span>
         efforts {formatSyncAt(stats.lastEffortsSyncAt)}
         <span className="mx-3 text-gray-400">|</span>
-        <span className="font-medium text-gray-800 dark:text-gray-200">Coverage: </span>
-        activities ~{stats.activityImportPercent}% · segments {stats.segmentSyncPercent}% · efforts{' '}
-        {stats.effortCompletionPercentage}%
+        <span className="font-medium text-gray-800 dark:text-gray-200">Import: </span>
+        ~{stats.activityImportPercent}% of estimated activities · segment lists{' '}
+        {stats.importedActivities > 0
+          ? `${stats.segmentActivitiesChecked}/${stats.importedActivities} activities checked`
+          : '—'}
+        · {stats.effortRowsStored.toLocaleString()} effort rows stored
       </div>
 
       {/* Stats Cards */}
@@ -267,39 +273,17 @@ export default function SegmentEffortsClient({
 
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
           <div className="flex items-center">
-            <div className="h-8 w-8 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-              <div className="relative">
-                <svg className="h-8 w-8 transform -rotate-90" viewBox="0 0 36 36">
-                  <path
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
-                    className="text-gray-200 dark:text-gray-700"
-                  />
-                  <path
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeDasharray={`${stats.effortCompletionPercentage}, 100`}
-                    className={`${
-                      stats.effortCompletionPercentage >= 90 ? 'text-green-500' :
-                      stats.effortCompletionPercentage >= 70 ? 'text-yellow-500' :
-                      stats.effortCompletionPercentage >= 50 ? 'text-orange-500' : 'text-red-500'
-                    }`}
-                  />
-                </svg>
-              </div>
-            </div>
+            <Activity className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
             <div className="ml-3">
-              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Effort Completion</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.effortCompletionPercentage}%</p>
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Activities w/ efforts</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats.importedActivities > 0
+                  ? `${stats.activitiesWithEffortRows} / ${stats.importedActivities}`
+                  : stats.activitiesWithEffortRows}
+              </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.effortCompletionPercentage >= 90 ? '🟢 Excellent' : 
-                 stats.effortCompletionPercentage >= 70 ? '🟡 Good' : 
-                 stats.effortCompletionPercentage >= 50 ? '🟠 Fair' : '🔴 Needs Sync'}
+                Rides with ≥1 stored crossing · {stats.segmentActivitiesQueued.toLocaleString()} rides still queued for
+                segment list fetch
               </p>
             </div>
           </div>
