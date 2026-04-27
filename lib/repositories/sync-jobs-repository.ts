@@ -36,6 +36,20 @@ export interface SyncJob {
   pause_reason?: string
 }
 
+export type SyncJobEventType = 'rate_limit_paused' | 'rate_limit_resumed' | 'progress_snapshot' | 'job_failed'
+
+export interface SyncJobEvent {
+  id: string
+  job_id: string
+  strava_id: number
+  event_type: SyncJobEventType | string
+  entity_type?: string | null
+  message?: string | null
+  stats?: any
+  rate_limit?: any
+  created_at: string
+}
+
 export class SyncJobsRepository {
   private supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
@@ -231,5 +245,39 @@ export class SyncJobsRepository {
     return this.updateJobStatus(jobId, 'cancelled', {
       error_message: 'Job cancelled by user',
     })
+  }
+
+  async logEvent(input: {
+    jobId: string
+    stravaId: number
+    eventType: SyncJobEventType | string
+    entityType?: string
+    message?: string
+    stats?: any
+    rateLimit?: any
+  }): Promise<void> {
+    const { error } = await this.supabase.from('sync_job_events').insert({
+      job_id: input.jobId,
+      strava_id: input.stravaId,
+      event_type: input.eventType,
+      entity_type: input.entityType ?? null,
+      message: input.message ?? null,
+      stats: input.stats ?? null,
+      rate_limit: input.rateLimit ?? null,
+    })
+
+    if (error) throw error
+  }
+
+  async getRecentEventsForJob(jobId: string, limit: number = 50): Promise<SyncJobEvent[]> {
+    const { data, error } = await this.supabase
+      .from('sync_job_events')
+      .select('*')
+      .eq('job_id', jobId)
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    if (error) throw error
+    return (data || []) as SyncJobEvent[]
   }
 }

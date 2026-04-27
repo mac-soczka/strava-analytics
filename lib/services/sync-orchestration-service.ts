@@ -47,6 +47,37 @@ export class SyncOrchestrationService {
     console.warn(
       `[Job ${jobId}] Pausing for rate limit. Retry after: ${effectiveRetryAfterMs}ms. Resume at: ${resumeAt.toISOString()}`
     )
+
+    const job = await this.jobsRepo.getJobById(jobId)
+    if (job) {
+      const entityType =
+        reasonPrefix.toLowerCase().includes('activity') ? 'activities'
+        : reasonPrefix.toLowerCase().includes('segment effort') ? 'segment_efforts'
+        : reasonPrefix.toLowerCase().includes('segment') ? 'segments'
+        : 'unknown'
+
+      await this.jobsRepo.logEvent({
+        jobId,
+        stravaId: job.strava_id,
+        eventType: 'rate_limit_paused',
+        entityType,
+        message: `${reasonPrefix} - will resume at ${resumeAt.toISOString()}`,
+        stats: {
+          status: job.status,
+          type: job.type,
+          processed_items: job.processed_items,
+          failed_items: job.failed_items,
+          progress: job.progress,
+          last_processed_activity_id: job.last_processed_activity_id ?? null,
+        },
+        rateLimit: {
+          retryAfterMs: effectiveRetryAfterMs,
+          resumeAt: resumeAt.toISOString(),
+          raw: typeof error === 'object' ? { ...error } : String(error),
+        },
+      })
+    }
+
     await this.jobsRepo.pauseJob(
       jobId,
       0,

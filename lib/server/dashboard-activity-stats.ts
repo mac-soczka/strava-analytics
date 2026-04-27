@@ -14,6 +14,16 @@ export type DashboardActivityTotals = {
   totalElevationMeters: number
 }
 
+export type DashboardActivityTypeStats = Record<
+  string,
+  {
+    count: number
+    distanceMeters: number
+    movingSeconds: number
+    elevationMeters: number
+  }
+>
+
 function mapActivityTotalsRow(row: Record<string, unknown> | null | undefined): DashboardActivityTotals {
   return {
     totalDistanceMeters: Number(row?.total_distance ?? 0),
@@ -109,6 +119,53 @@ export async function fetchAllActivitiesForMonthlyChart(
 
     const batch = (data || []) as MonthlyRow[]
     out.push(...batch)
+
+    if (batch.length < PAGE) break
+    offset += PAGE
+  }
+
+  return out
+}
+
+/**
+ * Per-activity-type totals, computed by paginating the activities table to avoid
+ * the 1000-row API cap.
+ */
+export async function fetchDashboardActivityTypeStats(
+  supabase: SupabaseClient,
+  stravaId: number | null
+): Promise<DashboardActivityTypeStats> {
+  const out: DashboardActivityTypeStats = {}
+  let offset = 0
+
+  for (;;) {
+    let q = supabase
+      .from('activities')
+      .select('type, distance, moving_time, total_elevation_gain')
+      .order('activity_id', { ascending: true })
+      .range(offset, offset + PAGE - 1)
+
+    if (stravaId != null) q = q.eq('strava_id', stravaId)
+
+    const { data, error } = await q
+    if (error) throw error
+
+    const batch = (data || []) as Array<{
+      type?: string | null
+      distance?: number | null
+      moving_time?: number | null
+      total_elevation_gain?: number | null
+    }>
+
+    for (const a of batch) {
+      const type = String(a.type ?? 'unknown')
+      const cur = out[type] ?? { count: 0, distanceMeters: 0, movingSeconds: 0, elevationMeters: 0 }
+      cur.count += 1
+      cur.distanceMeters += Number(a.distance ?? 0)
+      cur.movingSeconds += Number(a.moving_time ?? 0)
+      cur.elevationMeters += Number(a.total_elevation_gain ?? 0)
+      out[type] = cur
+    }
 
     if (batch.length < PAGE) break
     offset += PAGE

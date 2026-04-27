@@ -14,6 +14,7 @@ import {
   Zap,
 } from 'lucide-react'
 import PolylineMap from '@/app/components/PolylineMap'
+import type { DashboardActivityTypeStats } from '@/lib/server/dashboard-activity-stats'
 
 interface DashboardStats {
   totalActivities: number
@@ -59,6 +60,7 @@ interface DashboardClientProps {
   recentActivities: RecentActivity[]
   topSegments: TopSegment[]
   activityTypes: Record<string, number>
+  activityTypeStats: DashboardActivityTypeStats
   monthlyData: MonthlyData[]
 }
 
@@ -67,6 +69,7 @@ export default function DashboardClient({
   recentActivities,
   topSegments,
   activityTypes,
+  activityTypeStats,
   monthlyData
 }: DashboardClientProps) {
   const formatDistance = (meters: number) => `${(meters / 1000).toFixed(1)} km`
@@ -206,6 +209,43 @@ export default function DashboardClient({
                   </div>
                 </div>
               ))}
+          </div>
+        </div>
+
+        {/* Activity Type Totals */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <Activity className="h-5 w-5 mr-2 text-indigo-600" />
+            Activity type totals
+          </h3>
+          <div className="space-y-3">
+            {Object.entries(activityTypeStats)
+              .sort(([, a], [, b]) => b.distanceMeters - a.distanceMeters)
+              .slice(0, 8)
+              .map(([type, s]) => {
+                const hours = s.movingSeconds / 3600
+                const km = s.distanceMeters / 1000
+                const avgKm = s.count > 0 ? km / s.count : 0
+                const avgMin = s.count > 0 ? (s.movingSeconds / 60) / s.count : 0
+                const avgElev = s.count > 0 ? s.elevationMeters / s.count : 0
+                return (
+                  <div key={type} className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white capitalize truncate">
+                          {type.replace('_', ' ')}
+                        </div>
+                        <div className="text-xs text-gray-600 dark:text-gray-300">
+                          {s.count.toLocaleString()} activities · {km.toFixed(1)} km · {hours.toFixed(1)} h · {Math.round(s.elevationMeters).toLocaleString()} m
+                        </div>
+                      </div>
+                      <div className="text-right text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                        avg {avgKm.toFixed(1)} km · {avgMin.toFixed(0)} min · {Math.round(avgElev).toLocaleString()} m
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
           </div>
         </div>
 

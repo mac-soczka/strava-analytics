@@ -8,6 +8,7 @@ import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 import {
   fetchAllActivitiesForMonthlyChart,
   fetchDashboardActivityTotals,
+  fetchDashboardActivityTypeStats,
 } from '@/lib/server/dashboard-activity-stats'
 
 // Loading skeleton for dashboard
@@ -135,21 +136,10 @@ async function DashboardContent() {
       .sort((a, b) => b.effortCount - a.effortCount)
       .slice(0, 10)
 
-    const activityTypesQuery = stravaId
-      ? supabase.from('activities').select('type').eq('strava_id', stravaId)
-      : supabase.from('activities').select('type')
-
-    const { data: activityTypeCounts, error: typeCountError } = await activityTypesQuery
-
-    if (typeCountError) {
-      console.error('Error fetching activity type counts:', typeCountError)
-    }
-
-    // Calculate activity type distribution from full database
-    const activityTypes = activityTypeCounts?.reduce((acc: Record<string, number>, activity: any) => {
-      acc[activity.type] = (acc[activity.type] || 0) + 1
-      return acc
-    }, {} as Record<string, number>) || {}
+    const activityTypeStats = await fetchDashboardActivityTypeStats(supabase, stravaId)
+    const activityTypes = Object.fromEntries(
+      Object.entries(activityTypeStats).map(([type, s]) => [type, s.count])
+    )
 
     // Calculate monthly trends (last 12 months) - efficient approach
     const monthlyData = new Array(12).fill(0).map((_, i) => {
@@ -199,6 +189,7 @@ async function DashboardContent() {
           recentActivities={recentActivities.data || []}
           topSegments={topSegments}
           activityTypes={activityTypes}
+          activityTypeStats={activityTypeStats}
           monthlyData={monthlyData}
         />
       </div>
