@@ -27,40 +27,50 @@ class Logger {
     try {
       fs.appendFileSync(this.logFile, message)
     } catch (error) {
-      console.error('Failed to write to log file:', error)
+      const ts = new Date().toISOString()
+      console.error(`[${ts}] [ERROR] Failed to write to log file:`, error)
     }
+  }
+
+  private prefixLines(prefix: string, content: string): string {
+    return content
+      .split('\n')
+      .map((line) => `${prefix}${line}`)
+      .join('\n')
   }
 
   private formatMessage(level: string, message: string, data?: any): string {
     const timestamp = new Date().toISOString()
-    let formatted = `[${timestamp}] [${level}] ${message}`
-    
+    const prefix = `[${timestamp}] [${level}] `
+
+    let body = message
     if (data !== undefined) {
       if (typeof data === 'object') {
-        formatted += '\n' + JSON.stringify(data, null, 2)
+        const json = JSON.stringify(data, null, 2)
+        body += `\n${json}`
       } else {
-        formatted += ` ${data}`
+        body += ` ${String(data)}`
       }
     }
-    
-    return formatted + '\n'
+
+    return this.prefixLines(prefix, body) + '\n'
   }
 
   log(message: string, data?: any) {
     const formatted = this.formatMessage('INFO', message, data)
-    console.log(message, data !== undefined ? data : '')
+    console.log(formatted.trimEnd())
     this.writeToFile(formatted)
   }
 
   warn(message: string, data?: any) {
     const formatted = this.formatMessage('WARN', message, data)
-    console.warn(message, data !== undefined ? data : '')
+    console.warn(formatted.trimEnd())
     this.writeToFile(formatted)
   }
 
   error(message: string, data?: any) {
     const formatted = this.formatMessage('ERROR', message, data)
-    console.error(message, data !== undefined ? data : '')
+    console.error(formatted.trimEnd())
     this.writeToFile(formatted)
   }
 
@@ -76,8 +86,9 @@ class Logger {
 │ Daily window:     ${String(usage.requestsDay).padStart(3)} / ${String(usage.limitDay).padEnd(4)} (${String(usage.limitDay - usage.requestsDay).padStart(4)} remaining) │
 └─────────────────────────────────────────────────────────────┘
 `
-    console.log(message)
-    this.writeToFile(`[${new Date().toISOString()}] [RATE-LIMIT]\n${message}\n`)
+    const formatted = this.formatMessage('RATE-LIMIT', message.trim())
+    console.log(formatted.trimEnd())
+    this.writeToFile(formatted)
   }
 
   /**

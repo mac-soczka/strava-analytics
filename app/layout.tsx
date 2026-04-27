@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthenticatedLayout from "./components/AuthenticatedLayout";
+import { installConsoleTimestampPrefix } from "@/lib/utils/console-timestamp";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,8 @@ export const metadata: Metadata = {
   title: "StravaHeatmap",
   description: "Track your cycling activities and analyze your performance with Strava integration",
 };
+
+installConsoleTimestampPrefix();
 
 export default function RootLayout({
   children,
