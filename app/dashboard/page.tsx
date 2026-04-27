@@ -2,7 +2,7 @@ import { createServerComponentClient } from '@/lib/supabase'
 import { Suspense } from 'react'
 import ProtectedRoute from "../components/ProtectedRoute"
 import { SyncDashboard } from '../components/sync/SyncDashboard'
-import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
+import { SyncCoveragePanel } from '../components/sync/SyncCoveragePanel'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 import {
@@ -193,7 +193,7 @@ async function DashboardContent() {
 
     return (
       <div className="space-y-8">
-        {syncCoverage && <SyncCoverageSummary coverage={syncCoverage} />}
+        <SyncCoveragePanel initialCoverage={syncCoverage} />
         <DashboardClient 
           stats={stats}
           recentActivities={recentActivities.data || []}

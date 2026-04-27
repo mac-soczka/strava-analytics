@@ -33,6 +33,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Quick Reference](./quick-reference.md)** - Quick commands and shortcuts
 - **[Package.json Scripts](./package-json-scripts.md)** - Available npm/yarn scripts
 - **[Strava-first Domain Model (DDD)](./domain-model-strava.md)** - Canonical entities (mirror Strava)
+- **[Domain Driven Design](./domain-driven-design.md)** - Entities, aggregates, and relationships
 
 ## 🏗️ Design Patterns Implemented
 
@@ -107,6 +108,7 @@ strava-heatmap/
 - **Supabase** - Backend as a Service (Database, Auth, Real-time)
 - **TypeScript** - Type safety and developer experience
 - **Tailwind CSS** - Utility-first CSS framework
+- **Zustand** - Client-side state management for shared UI state
 - **React Leaflet** - Interactive maps
 - **Recharts** - Data visualization
 - **Jest & Playwright** - Testing framework

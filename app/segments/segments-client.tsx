@@ -21,6 +21,7 @@ import {
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import PolylineMap from '@/app/components/PolylineMap'
+import { useSegmentsUiStore } from '@/app/state/useSegmentsUiStore'
 
 const LeafletSegmentMap = dynamic(() => import('@/app/components/LeafletSegmentMap'), { ssr: false })
 
@@ -42,8 +43,8 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const [hasMore, setHasMore] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null)
-  /** Segment id with expanded full map row (table). */
-  const [fullMapSegmentId, setFullMapSegmentId] = useState<number | null>(null)
+  const expandedSegmentId = useSegmentsUiStore((s) => s.expandedSegmentId)
+  const toggleExpandedSegmentId = useSegmentsUiStore((s) => s.toggleExpandedSegmentId)
 
   // Calculate segment metrics for sorting
   const segmentsWithMetrics = useMemo(() => {
@@ -687,12 +688,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                               <PolylineMap polyline={segment.map.polyline} />
                               <button
                                 type="button"
-                                onClick={() =>
-                                  setFullMapSegmentId((cur) => (cur === sid ? null : sid))
-                                }
+                                onClick={() => toggleExpandedSegmentId(sid)}
                                 className="text-xs font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 whitespace-nowrap"
                               >
-                                {fullMapSegmentId === sid ? 'Hide map' : 'Full map'}
+                                {expandedSegmentId === sid ? 'Hide map' : 'Full map'}
                               </button>
                             </>
                           ) : (
@@ -713,7 +712,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                       </td>
                     </motion.tr>,
                   ]
-                  if (fullMapSegmentId === sid && segment.map?.polyline) {
+                  if (expandedSegmentId === sid && segment.map?.polyline) {
                     rows.push(
                       <tr
                         key={`${segment.id}-full-map`}

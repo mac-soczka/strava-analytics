@@ -1,69 +1,19 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { SyncProgress } from './SyncProgress'
-
-const ACTIVE_JOB_KEY = 'strava_active_sync_job'
+import { useSyncStore } from '@/app/state/useSyncStore'
 
 export function SyncDashboard() {
-  const [activeJobId, setActiveJobId] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const isHydrating = useSyncStore((s) => s.isHydrating)
+  const activeJobId = useSyncStore((s) => s.activeJobId)
+  const hydrate = useSyncStore((s) => s.hydrate)
 
-  // Check for active job on mount
   useEffect(() => {
-    const checkForActiveJob = async () => {
-      // Check localStorage first
-      const savedJobId = localStorage.getItem(ACTIVE_JOB_KEY)
-      if (savedJobId) {
-        // Verify the job is still active
-        try {
-          const response = await fetch(`/api/sync/status/${savedJobId}`)
-          if (response.ok) {
-            const data = await response.json()
-            if (['running', 'pending', 'paused'].includes(data.job?.status)) {
-              setActiveJobId(savedJobId)
-              setIsLoading(false)
-              return
-            } else {
-              // Job is complete/failed, clear it
-              localStorage.removeItem(ACTIVE_JOB_KEY)
-            }
-          } else {
-            localStorage.removeItem(ACTIVE_JOB_KEY)
-          }
-        } catch (error) {
-          console.error('Error checking job status:', error)
-          localStorage.removeItem(ACTIVE_JOB_KEY)
-        }
-      }
-      
-      // Fallback: Check if there's any active job for this user
-      try {
-        const response = await fetch('/api/sync/active')
-        if (response.ok) {
-          const data = await response.json()
-          if (data.job) {
-            setActiveJobId(data.job.id)
-            localStorage.setItem(ACTIVE_JOB_KEY, data.job.id)
-          }
-        }
-      } catch (error) {
-        console.error('Error checking for active jobs:', error)
-      }
-      
-      setIsLoading(false)
-    }
+    void hydrate()
+  }, [hydrate])
 
-    checkForActiveJob()
-  }, [])
-
-  const handleSyncComplete = () => {
-    console.log('Sync completed!')
-    localStorage.removeItem(ACTIVE_JOB_KEY)
-    setActiveJobId(null)
-  }
-
-  if (isLoading) {
+  if (isHydrating) {
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -92,7 +42,6 @@ export function SyncDashboard() {
       {activeJobId && (
         <SyncProgress
           jobId={activeJobId}
-          onComplete={handleSyncComplete}
         />
       )}
     </div>

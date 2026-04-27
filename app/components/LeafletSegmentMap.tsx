@@ -7,8 +7,7 @@ import { MapContainer, TileLayer, Polyline } from 'react-leaflet'
 import { useMap } from 'react-leaflet/hooks'
 import type { LatLngBoundsExpression, PathOptions } from 'leaflet'
 import { decodeActivityPolyline } from '@/lib/geo/polyline'
-
-const DEFAULT_TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+import { useMapStore } from '@/app/state/useMapStore'
 
 function FitBounds({ bounds }: { bounds: LatLngBoundsExpression }) {
   const map = useMap()
@@ -30,11 +29,14 @@ export interface LeafletSegmentMapProps {
 
 export default function LeafletSegmentMap({
   polyline,
-  tileUrlTemplate = DEFAULT_TILE,
+  tileUrlTemplate,
   pathOptions = { color: '#f87171', weight: 5, opacity: 0.9 },
   testId = 'route-map-leaflet',
   className = 'w-full h-64 rounded overflow-hidden border shadow mb-4',
 }: LeafletSegmentMapProps) {
+  const storeTileUrlTemplate = useMapStore((s) => s.tileUrlTemplate)
+  const effectiveTileUrlTemplate = tileUrlTemplate ?? storeTileUrlTemplate
+
   const geometry = decodeActivityPolyline(polyline)
   if (!geometry) return null
 
@@ -53,7 +55,7 @@ export default function LeafletSegmentMap({
         scrollWheelZoom={false}
         style={{ width: '100%', height: '100%' }}
       >
-        <TileLayer url={tileUrlTemplate} />
+        <TileLayer url={effectiveTileUrlTemplate} />
         <FitBounds bounds={leafletBounds} />
         <Polyline positions={latlngs} pathOptions={pathOptions} />
       </MapContainer>

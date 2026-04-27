@@ -1,46 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react'
-import type { SyncJob } from '@/lib/repositories/sync-jobs-repository'
-
-interface RateLimits {
-  requests15min: number
-  limit15min: number
-  remaining15min: number
-  requestsDay: number
-  limitDay: number
-  remainingDay: number
-  nextReset15min: string
-  nextResetDaily: string
-  lastUpdate: string
-}
-
-function parseRateLimitHeaders(headers: Headers): Pick<
-  RateLimits,
-  'requests15min' | 'limit15min' | 'remaining15min' | 'requestsDay' | 'limitDay' | 'remainingDay' | 'lastUpdate'
-> | null {
-  const usage = headers.get('X-RateLimit-Usage')
-  const limit = headers.get('X-RateLimit-Limit')
-  const lastUpdate = headers.get('X-RateLimit-LastUpdate') ?? new Date().toISOString()
-
-  if (!usage || !limit) return null
-
-  const [requests15min, requestsDay] = usage.split(',').map((n) => Number(n))
-  const [limit15min, limitDay] = limit.split(',').map((n) => Number(n))
-
-  if (![requests15min, requestsDay, limit15min, limitDay].every(Number.isFinite)) return null
-
-  return {
-    requests15min,
-    limit15min,
-    remaining15min: Math.max(0, limit15min - requests15min),
-    requestsDay,
-    limitDay,
-    remainingDay: Math.max(0, limitDay - requestsDay),
-    lastUpdate,
-  }
-}
+import { useSyncStore } from '@/app/state/useSyncStore'
 
 interface SyncProgressProps {
   jobId: string
@@ -48,206 +10,33 @@ interface SyncProgressProps {
 }
 
 export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
-  const [job, setJob] = useState<SyncJob | null>(null)
-  const [rateLimits, setRateLimits] = useState<RateLimits | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  const [isCancelling, setIsCancelling] = useState(false)
+  const job = useSyncStore((s) => s.job)
+  const rateLimits = useSyncStore((s) => s.rateLimits)
+  const error = useSyncStore((s) => s.error)
+  const isCancelling = useSyncStore((s) => s.isCancelling)
+  const cancelActiveJob = useSyncStore((s) => s.cancelActiveJob)
+  const startPolling = useSyncStore((s) => s.startPolling)
+  const stopPolling = useSyncStore((s) => s.stopPolling)
 
   useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>
-    let cancelled = false
-    let pollIntervalMs = 2000 // Start with 2 seconds
-    const maxPollIntervalMs = 30000
-    const maxTransientPollFailures = 10
-    let consecutiveFailures = 0
-    const jitter = (ms: number) => {
-      // +/- 15% jitter to avoid synchronized polling.
-      const r = 0.85 + Math.random() * 0.3
-      return Math.round(ms * r)
-    }
-    let lastSignature: string | null = null
-    let resumeAttempted = false
+    startPolling(jobId)
+    return () => stopPolling()
+  }, [jobId, startPolling, stopPolling])
 
-    const isLikelyNetworkError = (err: unknown) => {
-      if (!err || typeof err !== 'object') return false
-      const e = err as Error
-      const msg = `${e.name || ''} ${e.message || ''}`.toLowerCase()
-      return (
-        e.name === 'TypeError' ||
-        msg.includes('failed to fetch') ||
-        msg.includes('networkerror') ||
-        msg.includes('load failed') ||
-        msg.includes('network request failed')
-      )
-    }
-
-    const schedule = (fn: () => void, ms: number) => {
-      timeoutId = setTimeout(fn, jitter(ms))
-    }
-
-    const fetchStatus = async () => {
-      if (cancelled) return
-      try {
-        const response = await fetch(`/api/sync/status/${jobId}`, {
-          credentials: 'include',
-          cache: 'no-store',
-        })
-
-        let data: { job?: SyncJob; error?: string; rateLimits?: RateLimits }
-        try {
-          data = await response.json()
-        } catch {
-          throw new Error('Invalid response from server (not JSON)')
-        }
-
-        if (!response.ok) {
-          if (response.status === 401 || response.status === 403) {
-            if (!cancelled) setError(data.error || 'Unauthorized')
-            return
-          }
-          if (response.status === 404) {
-            if (!cancelled) setError(data.error || 'Job not found')
-            return
-          }
-          throw new Error(data.error || `Failed to fetch status (${response.status})`)
-        }
-
-        consecutiveFailures = 0
-        if (!cancelled) setError(null)
-
-        if (!data.job) {
-          throw new Error('Missing job in response')
-        }
-
-        setJob(data.job)
-        const headerLimits = parseRateLimitHeaders(response.headers)
-        setRateLimits(
-          headerLimits
-            ? {
-                ...headerLimits,
-                // These reset timestamps are informational; if we need them later we can
-                // add explicit headers. For now keep them as best-effort.
-                nextReset15min: data.rateLimits?.nextReset15min ?? new Date().toISOString(),
-                nextResetDaily: data.rateLimits?.nextResetDaily ?? new Date().toISOString(),
-              }
-            : null
-        )
-
-        // If the job is paused and the resume time has passed, proactively ask the server to resume it.
-        // This prevents jobs from getting stuck in paused state when no external cron is configured.
-        if (data.job.status === 'paused' && data.job.resume_at && !resumeAttempted) {
-          const resumeTime = new Date(data.job.resume_at).getTime()
-          if (Number.isFinite(resumeTime) && Date.now() >= resumeTime) {
-            resumeAttempted = true
-            // Fire-and-forget: the next poll will pick up the new status (running/paused/failed).
-            fetch(`/api/sync/resume/${jobId}`, { method: 'POST', credentials: 'include' }).catch(() => {})
-          }
-        }
-
-        if (['completed', 'failed', 'cancelled'].includes(data.job.status)) {
-          // Job finished, stop polling
-          if (data.job.status === 'completed' && onComplete) {
-            onComplete()
-          }
-          return
-        }
-
-        // Exponential backoff: if nothing changes, we back off (up to a cap).
-        // If something changes, reset to fast polling.
-        const signature = [
-          data.job.status,
-          data.job.processed_items,
-          data.job.failed_items,
-          data.job.updated_at,
-        ].join('|')
-
-        const changed = lastSignature !== signature
-        lastSignature = signature
-
-        // Base interval by status (before backoff tuning).
-        let baseIntervalMs = 5000
-        if (data.job.status === 'running') baseIntervalMs = 2000
-        if (data.job.status === 'pending') baseIntervalMs = 5000
-
-        // Special-case paused: schedule around resume_at (more practical than blind backoff).
-        if (data.job.status === 'paused' && data.job.resume_at) {
-          const resumeTime = new Date(data.job.resume_at).getTime()
-          const now = Date.now()
-          const msUntilResume = resumeTime - now
-
-          if (msUntilResume > 60000) {
-            baseIntervalMs = 60000
-          } else if (msUntilResume > 10000) {
-            baseIntervalMs = 5000
-          } else {
-            baseIntervalMs = 2000
-          }
-
-          pollIntervalMs = baseIntervalMs
-        } else if (changed) {
-          pollIntervalMs = baseIntervalMs
-        } else {
-          // No change: exponential backoff from current interval.
-          pollIntervalMs = Math.min(maxPollIntervalMs, Math.max(baseIntervalMs, pollIntervalMs * 2))
-        }
-
-        // Schedule next poll
-        if (!cancelled) {
-          schedule(() => void fetchStatus(), pollIntervalMs)
-        }
-      } catch (err: unknown) {
-        if (cancelled) return
-        consecutiveFailures += 1
-        const transient = isLikelyNetworkError(err)
-        if (transient && consecutiveFailures < maxTransientPollFailures) {
-          const backoffMs = Math.min(
-            maxPollIntervalMs,
-            2000 * 2 ** Math.min(consecutiveFailures - 1, 4)
-          )
-          console.warn(
-            `Sync status poll failed (${consecutiveFailures}/${maxTransientPollFailures}), retrying in ~${backoffMs}ms:`,
-            err
-          )
-          schedule(() => void fetchStatus(), backoffMs)
-          return
-        }
-        const message = err instanceof Error ? err.message : 'Unknown error'
-        console.error('Error fetching job status:', err)
-        setError(message)
-      }
-    }
-
-    void fetchStatus()
-
-    return () => {
-      cancelled = true
-      if (timeoutId) clearTimeout(timeoutId)
-    }
-  }, [jobId, onComplete])
+  useEffect(() => {
+    if (!job) return
+    if (job.id !== jobId) return
+    if (job.status === 'completed' && onComplete) onComplete()
+  }, [job, jobId, onComplete])
 
   const handleCancel = async () => {
     if (!confirm('Are you sure you want to cancel this sync?')) {
       return
     }
-
-    setIsCancelling(true)
     try {
-      const response = await fetch(`/api/sync/cancel/${jobId}`, {
-        method: 'POST',
-      })
-
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || 'Failed to cancel job')
-      }
-
-      const data = await response.json()
-      setJob(data.job)
+      await cancelActiveJob()
     } catch (err: any) {
       console.error('Error cancelling job:', err)
-      setError(err?.message || 'Failed to cancel')
-    } finally {
-      setIsCancelling(false)
     }
   }
 
@@ -264,6 +53,17 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   }
 
   if (!job) {
+    return (
+      <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+        <div className="flex items-center gap-2 text-gray-600">
+          <Loader2 className="w-5 h-5 animate-spin" />
+          <span>Loading sync status...</span>
+        </div>
+      </div>
+    )
+  }
+
+  if (job.id !== jobId) {
     return (
       <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
         <div className="flex items-center gap-2 text-gray-600">

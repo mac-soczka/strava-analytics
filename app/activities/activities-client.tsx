@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import type { SyncCoverage } from '@/lib/sync/sync-coverage'
 import PolylineMap from '@/app/components/PolylineMap'
+import { useSyncStore } from '@/app/state/useSyncStore'
 
 const LeafletSegmentMap = dynamic(() => import('@/app/components/LeafletSegmentMap'), { ssr: false })
 
@@ -94,6 +95,9 @@ interface ActivitiesClientProps {
 }
 
 export default function ActivitiesClient({ activities, stats, coverage }: ActivitiesClientProps) {
+  const storeCoverage = useSyncStore((s) => s.coverage)
+  const effectiveCoverage = storeCoverage ?? coverage
+
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedType, setSelectedType] = useState<string>('all')
   const [sortBy, setSortBy] = useState<'date' | 'distance' | 'time' | 'segments'>('date')
@@ -297,13 +301,14 @@ export default function ActivitiesClient({ activities, stats, coverage }: Activi
                   ` (estimate ${stats.activityCompletionStats.total_activities_available.toLocaleString()} total)`}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Last activities sync: {formatSyncAt(stats.activityCompletionStats.last_activities_sync_at)}
+                Last activities sync: {formatSyncAt(effectiveCoverage?.activities.lastSyncAt ?? stats.activityCompletionStats.last_activities_sync_at)}
               </p>
             </div>
             <div className="h-8 w-8 text-indigo-500 flex items-center justify-center">
               <div className="relative">
                 {(() => {
                   const pct =
+                    effectiveCoverage?.activities.importPercent ??
                     stats.activityCompletionStats.activity_import_percent ??
                     (stats.activityCompletionStats.total_activities_available > 0
                       ? Math.min(
@@ -360,12 +365,12 @@ export default function ActivitiesClient({ activities, stats, coverage }: Activi
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 Activities checked vs imported. Each can have many segment crossings (or none).{' '}
-                {coverage
-                  ? `${coverage.segments.segmentCrossingRows.toLocaleString()} crossing rows stored.`
+                {effectiveCoverage
+                  ? `${effectiveCoverage.segments.segmentCrossingRows.toLocaleString()} crossing rows stored.`
                   : ''}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Last segments sync: {formatSyncAt(stats.activityCompletionStats.last_segments_sync_at)}
+                Last segments sync: {formatSyncAt(effectiveCoverage?.segments.lastSyncAt ?? stats.activityCompletionStats.last_segments_sync_at)}
               </p>
             </div>
             <Target className="h-8 w-8 text-orange-500" />
@@ -394,7 +399,7 @@ export default function ActivitiesClient({ activities, stats, coverage }: Activi
                   )}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Last efforts sync: {formatSyncAt(stats.activityCompletionStats.last_efforts_sync_at)}
+                Last efforts sync: {formatSyncAt(effectiveCoverage?.segmentEfforts.lastSyncAt ?? stats.activityCompletionStats.last_efforts_sync_at)}
               </p>
             </div>
             <TrendingUp className="h-8 w-8 text-emerald-500" />

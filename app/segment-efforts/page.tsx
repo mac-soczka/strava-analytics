@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { SyncJobControls } from '../components/sync/SyncJobControls'
-import { SyncCoverageSummary } from '../components/sync/SyncCoverageSummary'
+import { SyncCoveragePanel } from '../components/sync/SyncCoveragePanel'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 import SegmentEffortsClient from './segment-efforts-client'
@@ -196,7 +196,7 @@ async function SegmentEffortsContent() {
 
     return (
       <div className="space-y-6">
-        {syncCoverage && <SyncCoverageSummary coverage={syncCoverage} />}
+        <SyncCoveragePanel initialCoverage={syncCoverage} />
         <SegmentEffortsClient
           efforts={efforts || []}
           stats={stats}

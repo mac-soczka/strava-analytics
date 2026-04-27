@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import Link from 'next/link'
 import PolylineMap from '@/app/components/PolylineMap'
 import SegmentEffortFullMap from '@/app/components/SegmentEffortFullMap'
+import { useSyncStore } from '@/app/state/useSyncStore'
 import { 
   Target, 
   MapPin, 
@@ -87,6 +88,8 @@ export default function SegmentEffortsClient({
   stats, 
   personalRecords 
 }: SegmentEffortsClientProps) {
+  const coverage = useSyncStore((s) => s.coverage)
+
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedSegment, setSelectedSegment] = useState<string>('all')
   const [sortBy, setSortBy] = useState<'date' | 'time' | 'segment' | 'activity'>('date')
@@ -210,18 +213,18 @@ export default function SegmentEffortsClient({
     <div className="space-y-6">
       <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
         <span className="font-medium text-gray-800 dark:text-gray-200">Last successful sync: </span>
-        activities {formatSyncAt(stats.lastActivitiesSyncAt)}
+        activities {formatSyncAt(coverage?.activities.lastSyncAt ?? stats.lastActivitiesSyncAt)}
         <span className="mx-2 text-gray-400">|</span>
-        segments {formatSyncAt(stats.lastSegmentsSyncAt)}
+        segments {formatSyncAt(coverage?.segments.lastSyncAt ?? stats.lastSegmentsSyncAt)}
         <span className="mx-2 text-gray-400">|</span>
-        efforts {formatSyncAt(stats.lastEffortsSyncAt)}
+        efforts {formatSyncAt(coverage?.segmentEfforts.lastSyncAt ?? stats.lastEffortsSyncAt)}
         <span className="mx-3 text-gray-400">|</span>
         <span className="font-medium text-gray-800 dark:text-gray-200">Import: </span>
-        ~{stats.activityImportPercent}% of estimated activities · segment lists{' '}
-        {stats.importedActivities > 0
-          ? `${stats.segmentActivitiesChecked}/${stats.importedActivities} activities checked`
+        ~{coverage?.activities.importPercent ?? stats.activityImportPercent}% of estimated activities · segment lists{' '}
+        {(coverage?.segments.importedActivities ?? stats.importedActivities) > 0
+          ? `${coverage?.segments.activitiesCheckedForSegmentList ?? stats.segmentActivitiesChecked}/${coverage?.segments.importedActivities ?? stats.importedActivities} activities checked`
           : '—'}
-        · {stats.effortRowsStored.toLocaleString()} effort rows stored
+        · {(coverage?.segmentEfforts.effortRowsStored ?? stats.effortRowsStored).toLocaleString()} effort rows stored
       </div>
 
       {/* Stats Cards */}

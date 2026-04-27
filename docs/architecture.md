@@ -8,27 +8,64 @@ The application follows a **layered architecture** with clear separation of conc
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Presentation Layer                       │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐ │
-│  │   Server        │  │   Client        │  │   API        │ │
-│  │  Components     │  │  Components     │  │  Routes      │ │
-│  └─────────────────┘  └─────────────────┘  └──────────────┘ │
+│                      API / Views Layer                      │
+│  ┌─────────────────┐  ┌─────────────────┐                  │
+│  │   Server        │  │   API Routes    │                  │
+│  │  Components     │  │  (Route Handlers)                  │
+│  └─────────────────┘  └─────────────────┘                  │
 └─────────────────────────────────────────────────────────────┘
 ┌─────────────────────────────────────────────────────────────┐
-│                    Business Logic Layer                     │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐ │
-│  │   Services      │  │   Repositories  │  │   Utilities  │ │
-│  │   (Strava)      │  │   (Data Access) │  │   (Helpers)  │ │
-│  └─────────────────┘  └─────────────────┘  └──────────────┘ │
+│                  Business Logic Layer (Backend)             │
+│  ┌─────────────────┐  ┌─────────────────┐                  │
+│  │   Services      │  │   Utilities     │                  │
+│  │ (orchestration) │  │  (pure helpers) │                  │
+│  └─────────────────┘  └─────────────────┘                  │
 └─────────────────────────────────────────────────────────────┘
 ┌─────────────────────────────────────────────────────────────┐
-│                    Data Access Layer                        │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐ │
-│  │   Supabase      │  │   External      │  │   Local      │ │
-│  │   Database      │  │   APIs (Strava) │  │   Storage    │ │
-│  └─────────────────┘  └─────────────────┘  └──────────────┘ │
+│                 Data Access Layer (Backend)                 │
+│  ┌─────────────────┐  ┌─────────────────┐                  │
+│  │ Repositories    │  │  External APIs  │                  │
+│  │ (Supabase)      │  │   (Strava)      │                  │
+│  └─────────────────┘  └─────────────────┘                  │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                Client State Layer (Zustand)                 │
+│  ┌─────────────────┐  ┌─────────────────┐                  │
+│  │ Zustand stores  │  │ Client          │                  │
+│  │ (UI state)      │  │ Components      │                  │
+│  └─────────────────┘  └─────────────────┘                  │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+### Layer responsibilities (practical rules)
+
+- **Data Access layer (backend)** (`lib/repositories/**`, external API clients)
+  - Reads/writes data. No orchestration, no UI decisions.
+  - Returns typed domain objects; errors bubble up.
+- **Business Logic layer (backend)** (`lib/services/**`)
+  - Orchestrates workflows (sync, rate limiting, batching, retries).
+  - Calls repositories and external services; owns the “why” and sequencing.
+- **API / Views layer** (`app/api/**`, `app/**/page.tsx`, server components)
+  - Converts HTTP/request context into service calls.
+  - Owns auth/session, request validation, status codes, and view composition.
+- **Client State layer (Zustand)** (client-only modules used by `'use client'` components)
+  - Owns *shared UI state* that spans multiple client components.
+  - Must not become a second cache of backend truth.
+
+### Zustand boundaries (what goes where)
+
+Use **Zustand** for:
+- **Cross-component UI state**: map viewport, selected entity id, sidebar open/closed, view mode toggles.
+- **Ephemeral workflow state**: multi-step client flows (wizard step, local draft edits) before persisting.
+
+Prefer **URL state** (query params) for:
+- Anything that should be **shareable / bookmarkable** (filters, selected date ranges).
+
+Prefer **server components / API** for:
+- Backend truth (activities, segments, sync jobs). Fetch it; don’t mirror it into a global client store unless you have a measured UX need.
+
+Avoid in Zustand:
+- Long-lived copies of server data (“global cache”) without a clear invalidation strategy.
 
 ## 🎯 Design Patterns Implemented
 
