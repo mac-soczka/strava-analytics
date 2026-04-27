@@ -36,8 +36,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState<'name' | 'distance' | 'efforts' | 'elevation' | 'steepness' | 'time_max' | 'time_min'>('name')
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+  const [sortBy, setSortBy] = useState<
+    'last_effort' | 'name' | 'distance' | 'efforts' | 'elevation' | 'steepness' | 'time_max' | 'time_min'
+  >('last_effort')
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
   const [segments, setSegments] = useState(initialSegments)
   const [currentPage, setCurrentPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
@@ -51,6 +53,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
     return segments.map(segment => {
       const efforts = segment.segment_efforts || []
       const times = efforts.map(e => e.elapsed_time)
+      const lastEffortAt =
+        efforts.length > 0
+          ? Math.max(...efforts.map((e) => new Date(e.start_date || 0).getTime()))
+          : 0
       const elevationGain = segment.elevation_high - segment.elevation_low
       const steepness = segment.distance > 0 ? (elevationGain / segment.distance) * 100 : 0 // percentage grade
       
@@ -60,6 +66,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
           effortCount: (segment as any).total_effort_count || efforts.length, // Use database count if available
           timeMax: times.length > 0 ? Math.max(...times) : 0,
           timeMin: times.length > 0 ? Math.min(...times) : 0,
+          lastEffortAt,
           elevationGain,
           steepness,
           averageTime: times.length > 0 ? times.reduce((a, b) => a + b, 0) / times.length : 0
@@ -85,6 +92,9 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
     filtered.sort((a, b) => {
       let comparison = 0
       switch (sortBy) {
+        case 'last_effort':
+          comparison = a.metrics.lastEffortAt - b.metrics.lastEffortAt
+          break
         case 'distance':
           comparison = (a.distance || 0) - (b.distance || 0)
           break

@@ -25,6 +25,9 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 ### 🧪 Testing
 - **[Testing Strategy](./testing-strategy.md)** - Comprehensive testing guidelines and examples
 
+### ✅ Action plans
+- **[Sync dedupe + Strava ID safety](./action-plans/sync-dedupe-and-id-safety.md)** - Ensure idempotent sync and safe large IDs
+
 ### 🔧 Troubleshooting & Deployment
 - **[Strava OAuth Troubleshooting](./strava-oauth-troubleshooting.md)** - Common OAuth issues and solutions
 - **[Deployment Fixes](./deployment-fixes.md)** - Deployment issues and solutions

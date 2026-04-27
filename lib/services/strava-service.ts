@@ -5,6 +5,7 @@ import { SegmentsRepository } from '@/lib/repositories/segments-repository'
 import { StravaActivity, StravaSegmentEffort, StravaTokens, DatabaseActivity } from '@/types/strava'
 import { getLogger } from '@/lib/utils/logger'
 import { getRateLimitService } from '@/lib/services/rate-limit-service'
+import JSONbig from 'json-bigint'
 
 const rateLimitService = getRateLimitService()
 
@@ -89,6 +90,27 @@ export class StravaService {
     }
 
     return response.json()
+  }
+
+  private async stravaFetchJsonBigInt<T>(url: string, init: RequestInit = {}): Promise<T> {
+    const response = await this.stravaFetch(url, init)
+
+    if (!response.ok) {
+      const bodyText = await response.text().catch(() => '')
+      throw new Error(`Strava API request failed: ${response.status}${bodyText ? ` - ${bodyText}` : ''}`)
+    }
+
+    const delay = rateLimitService.getAdaptiveDelay()
+    if (delay > 0) {
+      const status = rateLimitService.getStatus()
+      console.log(
+        `Applying rate limit delay: ${delay}ms (15min ${status.requests15min}/${status.limit15min}, day ${status.requestsDay}/${status.limitDay})`
+      )
+      await new Promise((resolve) => setTimeout(resolve, delay))
+    }
+
+    const text = await response.text()
+    return JSONbig({ storeAsString: true }).parse(text) as T
   }
 
   /**
@@ -248,43 +270,6 @@ export class StravaService {
    * Fetch segments for a specific activity from Strava API
    */
   async fetchActivitySegments(activityId: number): Promise<StravaSegmentEffort[]> {
-    // Check if we already have segments for this activity in the database
-    const existingSegmentsResult = await this.segmentsRepo.getSegmentEffortsByActivity(activityId)
-    
-    if (existingSegmentsResult.data && existingSegmentsResult.data.length > 0) {
-      console.log(`Found ${existingSegmentsResult.data.length} existing segments for activity ${activityId} in database, skipping Strava API call`)
-      return existingSegmentsResult.data.map((segment: any) => ({
-        id: segment.effort_id,
-        segment: {
-          id: segment.segment_id,
-          name: segment.segment_name || '',
-          distance: segment.segment_distance || 0,
-          average_grade: segment.segment_average_grade || 0,
-          maximum_grade: segment.segment_maximum_grade || 0,
-          elevation_high: segment.segment_elevation_high || 0,
-          elevation_low: segment.segment_elevation_low || 0,
-          climb_category: segment.segment_climb_category || 0,
-          city: segment.segment_city || '',
-          state: segment.segment_state || '',
-          country: segment.segment_country || '',
-          private: false,
-          hazardous: false,
-          starred: false
-        },
-        elapsed_time: segment.elapsed_time,
-        moving_time: segment.moving_time,
-        start_date: segment.start_date,
-        start_date_local: segment.start_date_local,
-        average_watts: segment.average_watts,
-        max_watts: segment.max_watts,
-        average_heartrate: segment.average_heartrate,
-        max_heartrate: segment.max_heartrate,
-        average_cadence: segment.average_cadence,
-        max_cadence: segment.max_cadence,
-        average_temp: segment.average_temp
-      }))
-    }
-
     console.log(`Fetching segments for activity ${activityId} from Strava API`)
 
     if (config.stravaApiLimits.noLimitsMode) {
@@ -293,7 +278,7 @@ export class StravaService {
       const status = rateLimitService.getStatus()
       console.log(`Rate limit status before segments fetch: 15min ${status.requests15min}/${status.limit15min}, Day ${status.requestsDay}/${status.limitDay}`)
     }
-    const activity = await this.stravaFetchJson<any>(
+    const activity = await this.stravaFetchJsonBigInt<any>(
       `https://www.strava.com/api/v3/activities/${activityId}?include_all_efforts=true`
     )
     const segments = activity.segment_efforts || []
@@ -600,15 +585,9 @@ export class StravaService {
 
         for (const activity of activitiesNeedingSegments) {
           try {
-            // Check if segments already exist for this activity
-            const existingSegments = await this.segmentsRepo.getSegmentEffortsByActivity(activity.activity_id)
-            
-            if (existingSegments.data && existingSegments.data.length > 0) {
-              console.log(`Activity ${activity.activity_id} already has ${existingSegments.data.length} segments, marking as fetched...`)
-              // Mark as fetched even if we skip
-              await this.activitiesRepo.markSegmentsFetched(activity.id)
-              continue
-            }
+            // NOTE: We intentionally do NOT short-circuit on "already has some effort rows".
+            // The queue is driven by activities.segments_fetch_status to avoid inconsistent states
+            // like segments_fetched=true but 0 effort rows (or partial inserts).
 
             console.log(`🔄 Processing segments for activity ${activity.activity_id}`)
 
@@ -650,7 +629,8 @@ export class StravaService {
               const segmentsToSave = segmentEfforts.map(effort => ({
                 activity_id: activity.activity_id,
                 segment_id: effort.segment.id,
-                effort_id: effort.id,
+                effort_id: String(effort.id),
+                effort_id_text: String(effort.id),
                 elapsed_time: effort.elapsed_time,
                 moving_time: effort.moving_time,
                 start_date: effort.start_date,
@@ -660,22 +640,21 @@ export class StravaService {
 
               // Check how many segment efforts were actually inserted (not updated)
               const existingEfforts = await this.segmentsRepo.getSegmentEffortsByActivity(activity.activity_id)
-              const existingEffortIds = new Set(existingEfforts.data?.map(e => e.effort_id) || [])
+              const existingEffortIds = new Set(
+                existingEfforts.data?.map((e) => e.effort_id_text ?? String(e.effort_id)) || []
+              )
               
               // Only count efforts that don't already exist
-              const newEfforts = segmentsToSave.filter(effort => !existingEffortIds.has(effort.effort_id))
+              const newEfforts = segmentsToSave.filter(effort => !existingEffortIds.has(effort.effort_id_text))
               
               await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
               segmentsAdded += newEfforts.length
               console.log(`Added ${newEfforts.length} NEW segment efforts for activity ${activity.activity_id} (${segmentEfforts.length} total found, ${existingEfforts.data?.length || 0} already existed)`)
               
-              // Mark activity as having segments fetched only if segments were found
-              await this.activitiesRepo.markSegmentsFetched(activity.id)
+              await this.activitiesRepo.markSegmentsFetchSuccessRows(activity.id, segmentEfforts.length)
             } else {
               console.log(`No segments found for activity ${activity.activity_id}`)
-              // Mark as fetched: we did ask Strava for the segment list and got an empty result.
-              // Keeping this false would cause repeat fetches forever with no chance of new data.
-              await this.activitiesRepo.markSegmentsFetched(activity.id)
+              await this.activitiesRepo.markSegmentsFetchSuccessEmpty(activity.id)
             }
             
             processed++
@@ -687,6 +666,9 @@ export class StravaService {
             }
 
             console.error(`Error processing activity ${activity.activity_id}:`, error)
+            await this.activitiesRepo
+              .markSegmentsFetchFailed(activity.id, error?.message || 'Failed to fetch segments')
+              .catch(() => {})
             errors++
           } finally {
             activitiesHandled++

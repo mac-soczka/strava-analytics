@@ -178,7 +178,7 @@ export class ActivitiesRepository {
       const { count, error } = await this.supabase
         .from('activities')
         .select('*', { count: 'exact', head: true })
-        .eq('segments_fetched', false)
+        .or('segments_fetch_status.in.(pending,failed),segments_fetched.eq.false')
 
       if (error) throw error
       
@@ -197,7 +197,7 @@ export class ActivitiesRepository {
       const { data, error } = await this.supabase
         .from('activities')
         .select('id, activity_id, name')
-        .eq('segments_fetched', false)
+        .or('segments_fetch_status.in.(pending,failed),segments_fetched.eq.false')
         .range(offset, offset + limit - 1)
         .order('start_date', { ascending: false })
 
@@ -257,7 +257,12 @@ export class ActivitiesRepository {
     try {
       const { error } = await this.supabase
         .from('activities')
-        .update({ segments_fetched: true })
+        .update({
+          segments_fetched: true,
+          segments_fetch_status: 'success_rows',
+          segments_fetched_at: new Date().toISOString(),
+          segments_fetch_error: null,
+        })
         .eq('id', id)
 
       if (error) throw error
@@ -265,6 +270,58 @@ export class ActivitiesRepository {
       console.error('Error marking segments fetched:', error)
       throw error
     }
+  }
+
+  async markSegmentsFetchSuccessEmpty(id: number) {
+    const { error } = await this.supabase
+      .from('activities')
+      .update({
+        segments_fetched: true,
+        segments_fetch_status: 'success_empty',
+        segments_fetched_at: new Date().toISOString(),
+        segments_fetch_error: null,
+        segments_effort_rows_count: 0,
+      })
+      .eq('id', id)
+    if (error) throw error
+  }
+
+  async markSegmentsFetchSuccessRows(id: number, effortRowsCount: number) {
+    const { error } = await this.supabase
+      .from('activities')
+      .update({
+        segments_fetched: true,
+        segments_fetch_status: 'success_rows',
+        segments_fetched_at: new Date().toISOString(),
+        segments_fetch_error: null,
+        segments_effort_rows_count: effortRowsCount,
+      })
+      .eq('id', id)
+    if (error) throw error
+  }
+
+  async markSegmentsFetchFailed(id: number, errorMessage: string) {
+    const { error } = await this.supabase
+      .from('activities')
+      .update({
+        segments_fetched: false,
+        segments_fetch_status: 'failed',
+        segments_fetch_error: errorMessage,
+      })
+      .eq('id', id)
+    if (error) throw error
+  }
+
+  async requeueSegmentsFetchByActivityId(activityId: number, reason: string = 'manual requeue') {
+    const { error } = await this.supabase
+      .from('activities')
+      .update({
+        segments_fetched: false,
+        segments_fetch_status: 'pending',
+        segments_fetch_error: reason,
+      })
+      .eq('activity_id', activityId)
+    if (error) throw error
   }
 
   /**

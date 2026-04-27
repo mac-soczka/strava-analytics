@@ -22,7 +22,8 @@ export interface SegmentEffort {
   id?: string
   activity_id: number
   segment_id: number
-  effort_id: number
+  effort_id: string
+  effort_id_text?: string
   elapsed_time?: number
   moving_time?: number
   start_date?: string
@@ -122,7 +123,7 @@ export class SegmentsRepository {
   async upsertSegmentEffort(effort: SegmentEffort): Promise<{ data: SegmentEffort | null; error: any }> {
     const { data, error } = await this.supabase
       .from('segment_efforts')
-      .upsert(effort as any, { onConflict: 'activity_id,segment_id' })
+      .upsert(effort as any, { onConflict: 'effort_id_text' })
       .select()
       .single()
 
@@ -184,7 +185,7 @@ export class SegmentsRepository {
   async bulkUpsertSegmentEfforts(efforts: SegmentEffort[]): Promise<{ data: SegmentEffort[] | null; error: any }> {
     const { data, error } = await this.supabase
       .from('segment_efforts')
-      .upsert(efforts as any[], { onConflict: 'activity_id,segment_id' })
+      .upsert(efforts as any[], { onConflict: 'effort_id_text' })
       .select()
 
     return { data: data as SegmentEffort[] | null, error }
