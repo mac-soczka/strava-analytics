@@ -442,6 +442,8 @@ export class StravaService {
           await onProgress(synced, errors, totalActivitiesSeen)
         }
 
+        let newActivitiesThisPage = 0
+
         // Process activities in batches
         for (let i = 0; i < activities.length; i += processBatchSize) {
           const batch = activities.slice(i, i + processBatchSize)
@@ -459,6 +461,8 @@ export class StravaService {
                 synced++ // Count as synced since it's in DB
                 continue
               }
+
+              newActivitiesThisPage += 1
 
               // For new activities, try to get detailed data but fall back to basic data if needed
               let detailedActivity: StravaActivity
@@ -519,6 +523,13 @@ export class StravaService {
           if (onProgress) {
             await onProgress(synced, errors, totalActivitiesSeen)
           }
+        }
+
+        // If a full page contained no new activities, we are fully caught up (Strava returns newest-first).
+        // Avoid scanning older pages and re-checking DB rows with no chance of new inserts.
+        if (newActivitiesThisPage === 0) {
+          console.log(`Page ${page} contained no new activities. Stopping early to avoid duplicate work.`)
+          break
         }
 
         // Move to next page
@@ -662,7 +673,9 @@ export class StravaService {
               await this.activitiesRepo.markSegmentsFetched(activity.id)
             } else {
               console.log(`No segments found for activity ${activity.activity_id}`)
-              // Don't mark as fetched if no segments were found
+              // Mark as fetched: we did ask Strava for the segment list and got an empty result.
+              // Keeping this false would cause repeat fetches forever with no chance of new data.
+              await this.activitiesRepo.markSegmentsFetched(activity.id)
             }
             
             processed++
