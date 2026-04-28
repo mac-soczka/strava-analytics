@@ -89,6 +89,13 @@ export interface DatabaseActivity {
   max_heartrate?: number;
   polyline?: string;
   strava_url?: string;
+  activity_synced_at?: string;
+  activity_details_synced_at?: string | null;
+  segment_efforts_synced_at?: string | null;
+  segments_fetch_status?: string;
+  segments_fetched_at?: string | null;
+  segments_fetch_error?: string | null;
+  segments_effort_rows_count?: number | null;
   created_at?: string;
   updated_at?: string;
 } 

@@ -27,6 +27,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 
 ### ✅ Action plans
 - **[Sync dedupe + Strava ID safety](./action-plans/sync-dedupe-and-id-safety.md)** - Ensure idempotent sync and safe large IDs
+- **[Strava sync under 1000/day](./action-plans/strava-sync-under-1000-per-day.md)** - Multi-day, budget-aware strategy for activities, segments, and segment efforts
 
 ### 🔧 Troubleshooting & Deployment
 - **[Strava OAuth Troubleshooting](./strava-oauth-troubleshooting.md)** - Common OAuth issues and solutions

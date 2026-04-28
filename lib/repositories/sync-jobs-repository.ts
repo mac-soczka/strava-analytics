@@ -22,6 +22,7 @@ export interface SyncJob {
   processed_items: number
   failed_items: number
   progress: SyncJobProgress
+  options?: any
   error_message?: string
   error_details?: any
   started_at?: string
@@ -53,13 +54,18 @@ export interface SyncJobEvent {
 export class SyncJobsRepository {
   private supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
-  async createJob(stravaId: number, type: SyncJobType = 'full_sync'): Promise<SyncJob> {
+  async createJob(
+    stravaId: number,
+    type: SyncJobType = 'full_sync',
+    options?: Record<string, any>
+  ): Promise<SyncJob> {
     const { data, error } = await this.supabase
       .from('sync_jobs')
       .insert({
         strava_id: stravaId,
         type,
         status: 'pending',
+        ...(options ? { options } : {}),
       })
       .select()
       .single()

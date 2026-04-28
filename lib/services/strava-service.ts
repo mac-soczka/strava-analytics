@@ -225,15 +225,27 @@ export class StravaService {
   /**
    * Fetch activities from Strava API with rate limiting
    */
-  async fetchActivities(page = 1, perPage = config.stravaApiLimits.maxActivitiesPerRequest): Promise<StravaActivity[]> {
+  async fetchActivities(
+    page = 1,
+    perPage = config.stravaApiLimits.maxActivitiesPerRequest,
+    options?: { before?: number; after?: number }
+  ): Promise<StravaActivity[]> {
     if (config.stravaApiLimits.noLimitsMode) {
       console.log(`NO-LIMITS MODE: Fetching activities page ${page} without rate limiting`)
     } else {
       const status = rateLimitService.getStatus()
       console.log(`Rate limit status before activities fetch: 15min ${status.requests15min}/${status.limit15min}, Day ${status.requestsDay}/${status.limitDay}`)
     }
+
+    const params = new URLSearchParams({
+      page: String(page),
+      per_page: String(perPage),
+    })
+    if (typeof options?.before === 'number') params.set('before', String(options.before))
+    if (typeof options?.after === 'number') params.set('after', String(options.after))
+
     const activities = await this.stravaFetchJson<StravaActivity[]>(
-      `https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${perPage}`
+      `https://www.strava.com/api/v3/athlete/activities?${params.toString()}`
     )
     console.log(`Fetched ${activities.length} activities from Strava API`)
     return activities
@@ -489,6 +501,8 @@ export class StravaService {
                 max_heartrate: detailedActivity.max_heartrate,
                 polyline: detailedActivity.map?.polyline || detailedActivity.map?.summary_polyline,
                 strava_url: detailedActivity.strava_url,
+                activity_synced_at: new Date().toISOString(),
+                activity_details_synced_at: hasDetailedData ? new Date().toISOString() : null,
               }
               await this.activitiesRepo.createActivity(activityData)
 
@@ -537,6 +551,204 @@ export class StravaService {
     }
 
     return { synced, errors }
+  }
+
+  /**
+   * Backfill activities older than a moving "before" cursor.
+   *
+   * This avoids scanning deep pages from the top every day by using Strava's `before` filter
+   * and repeatedly requesting page=1 for progressively older windows.
+   */
+  async syncActivitiesBackfill(options: {
+    beforeEpoch: number
+    pageSize?: number
+    processBatchSize?: number
+    maxRequests?: number
+    onProgress?: (p: { synced: number; errors: number; requestsUsed: number; cursorBeforeEpoch: number }) => Promise<void>
+  }): Promise<{ synced: number; errors: number; newBeforeEpoch: number }> {
+    const pageSize = options.pageSize ?? config.stravaApiLimits.maxActivitiesPerRequest
+    const processBatchSize = options.processBatchSize ?? 20
+    const maxRequests = options.maxRequests ?? 250
+
+    let synced = 0
+    let errors = 0
+    let requestsUsed = 0
+    let cursorBeforeEpoch = options.beforeEpoch
+
+    while (requestsUsed < maxRequests) {
+      // Respect daily quota proactively (before we hit a hard 429).
+      const status = rateLimitService.getStatus()
+      if (status.remainingDay <= 0 || status.remaining15min <= 0) {
+        throw this.buildRateLimitError('Strava API rate limit exceeded', this.computeRetryAfterMs())
+      }
+
+      console.log(`Backfill: fetching activities before ${cursorBeforeEpoch} (epoch)`)
+      const activities = await this.fetchActivities(1, pageSize, { before: cursorBeforeEpoch })
+      requestsUsed += 1
+
+      if (activities.length === 0) {
+        console.log('Backfill: no more activities returned; reached end of history')
+        break
+      }
+
+      // Track oldest activity in this page to advance cursor.
+      let oldestEpoch = cursorBeforeEpoch
+
+      for (let i = 0; i < activities.length; i += processBatchSize) {
+        const batch = activities.slice(i, i + processBatchSize)
+        for (const activity of batch) {
+          try {
+            const existing = await this.activitiesRepo.getActivityById(activity.id)
+            if (existing) {
+              // Already imported; still counts as "handled" for backfill.
+              continue
+            }
+
+            // Insert summary-only. Details/efforts are fetched by the segments/efforts sync.
+            const activityData: Omit<DatabaseActivity, 'id'> = {
+              strava_id: this.userId!,
+              activity_id: activity.id,
+              name: activity.name,
+              distance: activity.distance,
+              moving_time: activity.moving_time,
+              elapsed_time: activity.elapsed_time,
+              total_elevation_gain: activity.total_elevation_gain,
+              type: activity.type,
+              start_date: activity.start_date,
+              start_date_local: activity.start_date_local,
+              average_speed: activity.average_speed,
+              max_speed: activity.max_speed,
+              average_watts: activity.average_watts,
+              max_watts: activity.max_watts,
+              average_heartrate: activity.average_heartrate,
+              max_heartrate: activity.max_heartrate,
+              polyline: activity.map?.summary_polyline,
+              strava_url: `https://www.strava.com/activities/${activity.id}`,
+              activity_synced_at: new Date().toISOString(),
+              activity_details_synced_at: null,
+            }
+
+            await this.activitiesRepo.createActivity(activityData)
+            synced += 1
+          } catch (e: any) {
+            console.error(`Backfill: failed to insert activity ${activity?.id}:`, e)
+            errors += 1
+          }
+        }
+      }
+
+      for (const a of activities) {
+        const epoch = Math.floor(new Date(a.start_date).getTime() / 1000)
+        if (Number.isFinite(epoch) && epoch > 0) {
+          oldestEpoch = Math.min(oldestEpoch, epoch)
+        }
+      }
+
+      // Move cursor further back in time. Use -1s to avoid repeating the same oldest activity.
+      const nextCursor = Math.max(0, oldestEpoch - 1)
+      if (nextCursor >= cursorBeforeEpoch) {
+        // Safety: avoid infinite loops if timestamps are missing or weird.
+        console.warn('Backfill: cursor did not advance; stopping to avoid loop')
+        break
+      }
+      cursorBeforeEpoch = nextCursor
+
+      await options.onProgress?.({ synced, errors, requestsUsed, cursorBeforeEpoch })
+    }
+
+    return { synced, errors, newBeforeEpoch: cursorBeforeEpoch }
+  }
+
+  /**
+   * Frontfill (recent-first): fetch activities after a cursor, within a recent window.
+   * Inserts summary-only rows; segment efforts are fetched via the segment-efforts sync.
+   */
+  async syncActivitiesRecent(options: {
+    afterEpoch: number
+    recentWindowDays: number
+    pageSize?: number
+    processBatchSize?: number
+    maxRequests?: number
+    onProgress?: (p: { synced: number; errors: number; requestsUsed: number; cursorAfterEpoch: number }) => Promise<void>
+  }): Promise<{ synced: number; errors: number; newAfterEpoch: number }> {
+    const pageSize = options.pageSize ?? config.stravaApiLimits.maxActivitiesPerRequest
+    const processBatchSize = options.processBatchSize ?? 20
+    const maxRequests = options.maxRequests ?? 100
+
+    const nowEpoch = Math.floor(Date.now() / 1000)
+    const windowAfterEpoch = nowEpoch - Math.max(1, options.recentWindowDays) * 24 * 60 * 60
+    const cursorAfterEpoch = Math.max(windowAfterEpoch, options.afterEpoch)
+
+    let synced = 0
+    let errors = 0
+    let requestsUsed = 0
+    let newestEpochSeen = cursorAfterEpoch
+
+    let page = 1
+    while (requestsUsed < maxRequests) {
+      const status = rateLimitService.getStatus()
+      if (status.remainingDay <= 0 || status.remaining15min <= 0) {
+        throw this.buildRateLimitError('Strava API rate limit exceeded', this.computeRetryAfterMs())
+      }
+
+      console.log(`Recent sync: fetching activities after ${cursorAfterEpoch} page ${page}`)
+      const activities = await this.fetchActivities(page, pageSize, { after: cursorAfterEpoch })
+      requestsUsed += 1
+
+      if (activities.length === 0) break
+
+      for (let i = 0; i < activities.length; i += processBatchSize) {
+        const batch = activities.slice(i, i + processBatchSize)
+        for (const activity of batch) {
+          try {
+            const existing = await this.activitiesRepo.getActivityById(activity.id)
+            if (existing) continue
+
+            const activityData: Omit<DatabaseActivity, 'id'> = {
+              strava_id: this.userId!,
+              activity_id: activity.id,
+              name: activity.name,
+              distance: activity.distance,
+              moving_time: activity.moving_time,
+              elapsed_time: activity.elapsed_time,
+              total_elevation_gain: activity.total_elevation_gain,
+              type: activity.type,
+              start_date: activity.start_date,
+              start_date_local: activity.start_date_local,
+              average_speed: activity.average_speed,
+              max_speed: activity.max_speed,
+              average_watts: activity.average_watts,
+              max_watts: activity.max_watts,
+              average_heartrate: activity.average_heartrate,
+              max_heartrate: activity.max_heartrate,
+              polyline: activity.map?.summary_polyline,
+              strava_url: `https://www.strava.com/activities/${activity.id}`,
+              activity_synced_at: new Date().toISOString(),
+              activity_details_synced_at: null,
+            }
+
+            await this.activitiesRepo.createActivity(activityData)
+            synced += 1
+          } catch (e: any) {
+            console.error(`Recent sync: failed to insert activity ${activity?.id}:`, e)
+            errors += 1
+          }
+
+          const epoch = Math.floor(new Date(activity.start_date).getTime() / 1000)
+          if (Number.isFinite(epoch) && epoch > 0) {
+            newestEpochSeen = Math.max(newestEpochSeen, epoch)
+          }
+        }
+      }
+
+      await options.onProgress?.({ synced, errors, requestsUsed, cursorAfterEpoch: newestEpochSeen })
+
+      // Continue paging; Strava returns newest-first but supports paging with after filter.
+      page += 1
+      if (page > 50) break
+    }
+
+    return { synced, errors, newAfterEpoch: newestEpochSeen }
   }
 
   /**

@@ -2,15 +2,18 @@ import { SyncJobsRepository, SyncJob, SyncJobProgress } from '../repositories/sy
 import { StravaService } from './strava-service'
 import { createClient } from '@supabase/supabase-js'
 import config from '@/lib/config'
+import { StravaSyncStateRepository } from '@/lib/repositories/strava-sync-state-repository'
 
 export class SyncOrchestrationService {
   private jobsRepo: SyncJobsRepository
   private stravaService: StravaService
+  private syncStateRepo: StravaSyncStateRepository
   private supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
   constructor(stravaId: number) {
     this.jobsRepo = new SyncJobsRepository()
     this.stravaService = new StravaService(stravaId)
+    this.syncStateRepo = new StravaSyncStateRepository()
   }
 
   private async runJob(job: SyncJob): Promise<void> {
@@ -18,6 +21,9 @@ export class SyncOrchestrationService {
       await this.jobsRepo.updateJobStatus(job.id, 'running')
 
       switch (job.type) {
+        case 'activities_only':
+          await this.runActivitiesOnly(job)
+          break
         case 'segment_efforts_only':
           await this.runSegmentEffortsOnly(job)
           break
@@ -109,6 +115,41 @@ export class SyncOrchestrationService {
     }
 
     const job = await this.jobsRepo.createJob(stravaId, 'segments_only')
+
+    this.runJob(job).catch((error: any) => {
+      console.error(`Sync job ${job.id} failed:`, error)
+      this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
+    })
+
+    return job
+  }
+
+  async startActivitiesBackfillSync(stravaId: number): Promise<SyncJob> {
+    const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
+    if (activeJob) {
+      throw new Error('A sync job is already running for this user')
+    }
+
+    const job = await this.jobsRepo.createJob(stravaId, 'activities_only', { mode: 'backfill' })
+
+    this.runJob(job).catch((error: any) => {
+      console.error(`Sync job ${job.id} failed:`, error)
+      this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
+    })
+
+    return job
+  }
+
+  async startActivitiesRecentSync(stravaId: number, recentWindowDays: number = 30): Promise<SyncJob> {
+    const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
+    if (activeJob) {
+      throw new Error('A sync job is already running for this user')
+    }
+
+    const job = await this.jobsRepo.createJob(stravaId, 'activities_only', {
+      mode: 'recent',
+      recentWindowDays,
+    })
 
     this.runJob(job).catch((error: any) => {
       console.error(`Sync job ${job.id} failed:`, error)
@@ -229,6 +270,93 @@ export class SyncOrchestrationService {
       if (this.isRateLimitError(error)) {
         console.warn(`[Job ${jobId}] Rate limit hit during segments-only sync! Pausing job...`)
         await this.pauseForRateLimit(jobId, 'Rate limit exceeded during segments-only sync', error)
+        return
+      }
+      throw error
+    }
+  }
+
+  private async runActivitiesOnly(job: SyncJob): Promise<void> {
+    const mode = (job.options?.mode as string | undefined) ?? 'recent'
+    if (mode === 'backfill') return this.runActivitiesBackfill(job)
+    return this.runActivitiesRecent(job)
+  }
+
+  private async runActivitiesRecent(job: SyncJob): Promise<void> {
+    const jobId = job.id
+    const stravaId = job.strava_id
+    const recentWindowDays = Number(job.options?.recentWindowDays ?? 30)
+
+    console.log(`[Job ${jobId}] Starting recent activities sync (activities_only, last ${recentWindowDays}d) from Strava API...`)
+
+    const state = await this.syncStateRepo.getOrCreate(stravaId)
+    const nowEpoch = Math.floor(Date.now() / 1000)
+    const windowAfterEpoch = nowEpoch - Math.max(1, recentWindowDays) * 24 * 60 * 60
+    const afterEpoch = Math.max(windowAfterEpoch, state.activities_after ?? 0)
+
+    try {
+      const result = await this.stravaService.syncActivitiesRecent({
+        afterEpoch,
+        recentWindowDays,
+        maxRequests: 100,
+        onProgress: async (p) => {
+          await this.jobsRepo.updateJobProgress(
+            jobId,
+            { activities: { total: 0, processed: p.synced, failed: p.errors } } as Partial<SyncJobProgress>,
+            p.synced
+          )
+        },
+      })
+
+      await this.syncStateRepo.update(stravaId, { activities_after: result.newAfterEpoch })
+
+      await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        processed_items: result.synced,
+        failed_items: result.errors,
+      })
+    } catch (error: any) {
+      if (this.isRateLimitError(error)) {
+        console.warn(`[Job ${jobId}] Rate limit hit during recent activities sync! Pausing job...`)
+        await this.pauseForRateLimit(jobId, 'Rate limit exceeded during recent activities sync', error)
+        return
+      }
+      throw error
+    }
+  }
+
+  private async runActivitiesBackfill(job: SyncJob): Promise<void> {
+    const jobId = job.id
+    const stravaId = job.strava_id
+
+    console.log(`[Job ${jobId}] Starting activities backfill (activities_only) from Strava API...`)
+
+    const state = await this.syncStateRepo.getOrCreate(stravaId)
+    const nowEpoch = Math.floor(Date.now() / 1000)
+    const beforeEpoch = state.backfill_cursor_before ?? nowEpoch
+
+    try {
+      const result = await this.stravaService.syncActivitiesBackfill({
+        beforeEpoch,
+        maxRequests: 250,
+        onProgress: async (p) => {
+          await this.jobsRepo.updateJobProgress(
+            jobId,
+            { activities: { total: 0, processed: p.synced, failed: p.errors } } as Partial<SyncJobProgress>,
+            p.synced
+          )
+        },
+      })
+
+      await this.syncStateRepo.update(stravaId, { backfill_cursor_before: result.newBeforeEpoch })
+
+      await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        processed_items: result.synced,
+        failed_items: result.errors,
+      })
+    } catch (error: any) {
+      if (this.isRateLimitError(error)) {
+        console.warn(`[Job ${jobId}] Rate limit hit during activities backfill! Pausing job...`)
+        await this.pauseForRateLimit(jobId, 'Rate limit exceeded during activities backfill', error)
         return
       }
       throw error
