@@ -270,19 +270,19 @@ export class StravaService {
    * Fetch segments for a specific activity from Strava API
    */
   async fetchActivitySegments(activityId: number): Promise<StravaSegmentEffort[]> {
-    console.log(`Fetching segments for activity ${activityId} from Strava API`)
+    console.log(`Fetching segment efforts for activity ${activityId} from Strava API`)
 
     if (config.stravaApiLimits.noLimitsMode) {
-      console.log(`NO-LIMITS MODE: Fetching segments for activity ${activityId} without rate limiting`)
+      console.log(`NO-LIMITS MODE: Fetching segment efforts for activity ${activityId} without rate limiting`)
     } else {
       const status = rateLimitService.getStatus()
-      console.log(`Rate limit status before segments fetch: 15min ${status.requests15min}/${status.limit15min}, Day ${status.requestsDay}/${status.limitDay}`)
+      console.log(`Rate limit status before segment-efforts fetch: 15min ${status.requests15min}/${status.limit15min}, Day ${status.requestsDay}/${status.limitDay}`)
     }
     const activity = await this.stravaFetchJsonBigInt<any>(
       `https://www.strava.com/api/v3/activities/${activityId}?include_all_efforts=true`
     )
     const segments = activity.segment_efforts || []
-    console.log(`Fetched ${segments.length} segments for activity ${activityId} from Strava API`)
+    console.log(`Fetched ${segments.length} segment efforts for activity ${activityId} from Strava API`)
     
     return segments
   }
@@ -391,7 +391,7 @@ export class StravaService {
   async syncActivities(
     pageSize = config.stravaApiLimits.maxCrawlerBatchSize,
     processBatchSize = 20, // Process 20 activities at a time
-    onProgress?: (synced: number, errors: number, total: number) => Promise<void>
+    onProgress?: (_synced: number, _errors: number, _total: number) => Promise<void>
   ): Promise<{ synced: number; errors: number }> {
     let synced = 0
     let errors = 0
@@ -545,7 +545,7 @@ export class StravaService {
    */
   async syncSegments(
     batchSize = config.stravaApiLimits.maxSegmentBatchSize,
-    onProgress?: (p: { processed: number; errors: number; total: number }) => Promise<void>
+    onProgress?: (_p: { processed: number; errors: number; total: number }) => Promise<void>
   ): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
     let processed = 0
     let segmentsAdded = 0
@@ -555,7 +555,7 @@ export class StravaService {
     let activitiesHandled = 0
 
     try {
-      console.log(`Starting complete segment sync (batch size: ${batchSize})`)
+      console.log(`Starting complete segments/segment-efforts sync (batch size: ${batchSize})`)
 
       // Get total count of activities needing segments for progress tracking
       const totalActivitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegmentsCount()
@@ -589,7 +589,7 @@ export class StravaService {
             // The queue is driven by activities.segments_fetch_status to avoid inconsistent states
             // like segments_fetched=true but 0 effort rows (or partial inserts).
 
-            console.log(`🔄 Processing segments for activity ${activity.activity_id}`)
+            console.log(`Processing segment efforts for activity ${activity.activity_id}`)
 
             // Fetch segments from Strava
             const segmentEfforts = await this.fetchActivitySegments(activity.activity_id)

@@ -18,6 +18,25 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   const startPolling = useSyncStore((s) => s.startPolling)
   const stopPolling = useSyncStore((s) => s.stopPolling)
 
+  const jobEntityLabel = (() => {
+    if (!job) return 'data'
+    switch (job.type) {
+      case 'activities_only':
+        return 'activities'
+      case 'segments_only':
+        return 'segments'
+      case 'segment_efforts_only':
+        return 'segment efforts'
+      case 'routes_only':
+        return 'routes'
+      case 'stats_only':
+        return 'stats'
+      case 'full_sync':
+      default:
+        return 'data'
+    }
+  })()
+
   useEffect(() => {
     startPolling(jobId)
     return () => stopPolling()
@@ -105,7 +124,7 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
           {job.status === 'running' && (
             <>
               <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
-              <span className="font-medium text-gray-900">Syncing...</span>
+              <span className="font-medium text-gray-900">Syncing {jobEntityLabel}...</span>
             </>
           )}
           {job.status === 'completed' && (
@@ -175,7 +194,9 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
       <div className="space-y-2 text-sm">
         {segmentFocused ? (
           <div className="flex justify-between text-gray-600">
-            <span>Activities (segment fetch):</span>
+            <span>
+              Activities (fetching {job.type === 'segment_efforts_only' ? 'segment efforts' : 'segments'}):
+            </span>
             <span>{segments.processed} / {segments.total}</span>
           </div>
         ) : (

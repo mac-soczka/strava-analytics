@@ -170,7 +170,7 @@ export class SyncOrchestrationService {
       }
 
       // Step 2: Sync segments for all activities
-      console.log(`[Job ${jobId}] Syncing segments for activities...`)
+      console.log(`[Job ${jobId}] Syncing segments + segment efforts for activities...`)
       try {
         const segmentResult = await this.stravaService.syncSegments(
           undefined,
@@ -179,8 +179,8 @@ export class SyncOrchestrationService {
         console.log(`[Job ${jobId}] Segments synced: ${segmentResult.segmentsAdded}, activities processed: ${segmentResult.processed}`)
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
-          console.warn(`[Job ${jobId}] Rate limit hit during segment sync! Pausing job...`)
-          await this.pauseForRateLimit(jobId, 'Rate limit exceeded during segment sync', error)
+          console.warn(`[Job ${jobId}] Rate limit hit during segments/efforts sync! Pausing job...`)
+          await this.pauseForRateLimit(jobId, 'Rate limit exceeded during segments/efforts sync', error)
           return
         }
         throw error
@@ -215,6 +215,7 @@ export class SyncOrchestrationService {
     console.log(`[Job ${jobId}] Starting segments-only sync from Strava API...`)
 
     try {
+      console.log(`[Job ${jobId}] Fetching segments (derived from segment efforts in activity details)...`)
       const segmentResult = await this.stravaService.syncSegments(
         undefined,
         this.segmentProgressReporter(jobId, true)
@@ -241,6 +242,7 @@ export class SyncOrchestrationService {
     // In Strava’s model, efforts are best fetched in bulk via activity details with include_all_efforts=true.
     // We reuse the same sync path as segments sync, which persists both segments and segment_efforts.
     try {
+      console.log(`[Job ${jobId}] Fetching segment efforts (and segments) from activity details...`)
       const segmentResult = await this.stravaService.syncSegments(
         undefined,
         this.segmentProgressReporter(jobId, true)
@@ -263,7 +265,7 @@ export class SyncOrchestrationService {
   private segmentProgressReporter(
     jobId: string,
     mirrorProcessedItems: boolean
-  ): (p: { processed: number; errors: number; total: number }) => Promise<void> {
+  ): (_p: { processed: number; errors: number; total: number }) => Promise<void> {
     return async (p) => {
       await this.jobsRepo.updateJobProgress(
         jobId,
@@ -307,19 +309,19 @@ export class SyncOrchestrationService {
     })
   }
 
-  private async syncAthleteStats(jobId: string, stravaId: number): Promise<void> {
+  private async syncAthleteStats(jobId: string, _stravaId: number): Promise<void> {
     await this.jobsRepo.updateJobProgress(jobId, {
       stats: { total: 1, processed: 1, failed: 0 },
     } as Partial<SyncJobProgress>)
   }
 
-  private async syncRoutes(jobId: string, stravaId: number): Promise<void> {
+  private async syncRoutes(jobId: string, _stravaId: number): Promise<void> {
     await this.jobsRepo.updateJobProgress(jobId, {
       routes: { total: 1, processed: 1, failed: 0 },
     } as Partial<SyncJobProgress>)
   }
 
-  private async syncActivityDetails(activityId: number, stravaId: number): Promise<void> {
+  private async syncActivityDetails(_activityId: number, _stravaId: number): Promise<void> {
   }
 
   async getJobStatus(jobId: string): Promise<SyncJob | null> {
