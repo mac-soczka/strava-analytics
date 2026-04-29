@@ -4,6 +4,7 @@ import ProtectedRoute from "../components/ProtectedRoute"
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 import {
+  buildDashboardTrendSummary,
   fetchAllActivitiesForMonthlyChart,
   fetchDashboardActivityTotals,
   fetchDashboardActivityTypeStats,
@@ -159,6 +160,8 @@ async function DashboardContent() {
       }
     }).reverse()
 
+    const trendSummary = buildDashboardTrendSummary(monthlySource, 30)
+
     // Calculate performance metrics
     const avgSpeed = totalDistance > 0 ? (totalDistance / 1000) / (totalTime / 3600) : 0 // km/h
     const avgElevationPerActivity = (activitiesCount.count || 0) > 0 ? totalElevation / (activitiesCount.count || 0) : 0
@@ -176,6 +179,13 @@ async function DashboardContent() {
     }
 
     const syncCoverage = stravaId ? await loadSyncCoverage(supabase, stravaId) : null
+    const mostRecentSyncAt = [
+      syncCoverage?.activities.lastSyncAt,
+      syncCoverage?.segments.lastSyncAt,
+      syncCoverage?.segmentEfforts.lastSyncAt,
+    ]
+      .filter((value): value is string => Boolean(value))
+      .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0] ?? null
 
     const { default: DashboardClient } = await import('./dashboard-client')
 
@@ -187,6 +197,8 @@ async function DashboardContent() {
         activityTypes={activityTypes}
         activityTypeStats={activityTypeStats}
         monthlyData={monthlyData}
+        trendSummary={trendSummary}
+        mostRecentSyncAt={mostRecentSyncAt}
       />
     )
   } catch (error) {

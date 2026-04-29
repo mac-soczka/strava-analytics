@@ -24,6 +24,86 @@ export type DashboardActivityTypeStats = Record<
   }
 >
 
+export type TrendDirection = 'up' | 'down' | 'flat'
+
+export type DashboardTrendMetric = {
+  current: number
+  previous: number
+  delta: number
+  deltaPercent: number | null
+  direction: TrendDirection
+}
+
+export type DashboardTrendSummary = {
+  windowDays: number
+  activities: DashboardTrendMetric
+  distanceMeters: DashboardTrendMetric
+  elevationMeters: DashboardTrendMetric
+}
+
+function resolveDirection(delta: number): TrendDirection {
+  if (delta > 0) return 'up'
+  if (delta < 0) return 'down'
+  return 'flat'
+}
+
+function buildMetric(current: number, previous: number): DashboardTrendMetric {
+  const delta = current - previous
+  const deltaPercent = previous > 0 ? (delta / previous) * 100 : null
+  return {
+    current,
+    previous,
+    delta,
+    deltaPercent,
+    direction: resolveDirection(delta),
+  }
+}
+
+export function buildDashboardTrendSummary(
+  rows: MonthlyRow[],
+  windowDays = 30,
+  now = new Date()
+): DashboardTrendSummary {
+  const nowMs = now.getTime()
+  const dayMs = 24 * 60 * 60 * 1000
+  const windowMs = windowDays * dayMs
+  const currentWindowStart = nowMs - windowMs
+  const previousWindowStart = nowMs - (windowMs * 2)
+
+  let currentActivities = 0
+  let previousActivities = 0
+  let currentDistanceMeters = 0
+  let previousDistanceMeters = 0
+  let currentElevationMeters = 0
+  let previousElevationMeters = 0
+
+  for (const row of rows) {
+    const ts = new Date(row.start_date).getTime()
+    if (!Number.isFinite(ts) || ts > nowMs || ts < previousWindowStart) continue
+
+    const distance = Number(row.distance ?? 0)
+    const elevation = Number(row.total_elevation_gain ?? 0)
+
+    if (ts >= currentWindowStart) {
+      currentActivities += 1
+      currentDistanceMeters += distance
+      currentElevationMeters += elevation
+      continue
+    }
+
+    previousActivities += 1
+    previousDistanceMeters += distance
+    previousElevationMeters += elevation
+  }
+
+  return {
+    windowDays,
+    activities: buildMetric(currentActivities, previousActivities),
+    distanceMeters: buildMetric(currentDistanceMeters, previousDistanceMeters),
+    elevationMeters: buildMetric(currentElevationMeters, previousElevationMeters),
+  }
+}
+
 function mapActivityTotalsRow(row: Record<string, unknown> | null | undefined): DashboardActivityTotals {
   return {
     totalDistanceMeters: Number(row?.total_distance ?? 0),
