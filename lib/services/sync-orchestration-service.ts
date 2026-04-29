@@ -182,7 +182,7 @@ export class SyncOrchestrationService {
     console.log(`[Job ${jobId}] Starting full sync from Strava API...`)
 
     // Step 1: Sync activities from Strava API to database
-    console.log(`[Job ${jobId}] Fetching activities from Strava...`)
+    console.log(`[Job ${jobId}] Fetching activities (entity=activities)...`)
       try {
         const activityResult = await this.stravaService.syncActivities(
           undefined, // pageSize - use default
@@ -211,7 +211,7 @@ export class SyncOrchestrationService {
       }
 
       // Step 2: Sync segments for all activities
-      console.log(`[Job ${jobId}] Syncing segments + segment efforts for activities...`)
+      console.log(`[Job ${jobId}] Syncing segment efforts (and segments) (entity=segment_efforts,segments)...`)
       try {
         const segmentResult = await this.stravaService.syncSegments(
           undefined,

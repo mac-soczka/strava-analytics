@@ -233,17 +233,17 @@ export class ActivitiesRepository {
   /**
    * Update an activity
    */
-  async updateActivity(id: number, updates: Partial<StravaActivity>) {
+  async updateActivity(id: number, updates: Partial<DatabaseActivity>) {
     try {
-      const { data, error } = await this.supabase
+      const { data, error} = await this.supabase
         .from('activities')
         .update(updates)
-        .eq('id', id)
+        .eq('activity_id', id)
         .select()
         .single()
 
       if (error) throw error
-      return data as StravaActivity
+      return data as DatabaseActivity
     } catch (error) {
       console.error('Error updating activity:', error)
       throw error

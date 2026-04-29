@@ -29,15 +29,23 @@ export interface StravaSegmentEffort {
   segment: StravaSegment;
   elapsed_time: number;
   moving_time: number;
+  distance: number;
   start_date: string;
   start_date_local: string;
+  start_index?: number;
+  end_index?: number;
   average_watts?: number;
   max_watts?: number;
+  device_watts?: boolean;
   average_heartrate?: number;
   max_heartrate?: number;
   average_cadence?: number;
   max_cadence?: number;
   average_temp?: number;
+  pr_rank?: number | null;
+  kom_rank?: number | null;
+  achievements?: any[];
+  hidden?: boolean;
 }
 
 export interface StravaActivity {
@@ -65,6 +73,11 @@ export interface StravaActivity {
     polyline: string;
     summary_polyline: string;
   };
+  // Embedded data from detailed activity response
+  segment_efforts?: StravaSegmentEffort[];
+  laps?: any[];
+  splits_metric?: any[];
+  splits_standard?: any[];
   // Strava URL can be constructed from activity ID
   strava_url?: string;
 }

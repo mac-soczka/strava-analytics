@@ -1,8 +1,6 @@
 import { Suspense } from 'react'
 import { createServerComponentClient } from '@/lib/supabase'
 import ProtectedRoute from '../components/ProtectedRoute'
-import { SyncJobControls } from '../components/sync/SyncJobControls'
-import { SyncCoveragePanel } from '../components/sync/SyncCoveragePanel'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 import { buildSegmentEffortCountMap } from '@/lib/server/segment-effort-counts'
@@ -24,12 +22,6 @@ export default async function SegmentsPage() {
             <p className="text-gray-600 dark:text-gray-400 text-lg">
               Your Strava segment efforts and performance tracking
             </p>
-            <div className="mt-4">
-              <SyncJobControls
-                label="Sync Segments"
-                endpoint="/api/sync/start-segments"
-              />
-            </div>
           </div>
           
           <Suspense fallback={<SegmentsLoadingSkeleton />}>
@@ -146,13 +138,10 @@ async function SegmentsContent() {
     const { default: SegmentsClient } = await import('./segments-client')
 
     return (
-      <div className="space-y-6">
-        <SyncCoveragePanel initialCoverage={syncCoverage} />
-        <SegmentsClient 
-          segments={transformedSegments}
-          stats={stats}
-        />
-      </div>
+      <SegmentsClient 
+        segments={transformedSegments}
+        stats={stats}
+      />
     )
   } catch (error) {
     console.error('Error loading segments:', error)

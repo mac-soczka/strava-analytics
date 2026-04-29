@@ -14,6 +14,7 @@ import {
   Zap,
 } from 'lucide-react'
 import PolylineMap from '@/app/components/PolylineMap'
+import { SyncStatusWidget } from '@/app/components/sync/SyncStatusWidget'
 import type { DashboardActivityTypeStats } from '@/lib/server/dashboard-activity-stats'
 
 interface DashboardStats {
@@ -145,6 +146,9 @@ export default function DashboardClient({
 
   return (
     <div className="space-y-8">
+      {/* Sync Status */}
+      <SyncStatusWidget variant="detailed" />
+
       {/* Main Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((card, index) => (

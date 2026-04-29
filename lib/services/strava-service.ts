@@ -244,6 +244,12 @@ export class StravaService {
     if (typeof options?.before === 'number') params.set('before', String(options.before))
     if (typeof options?.after === 'number') params.set('after', String(options.after))
 
+    console.log(
+      `Strava fetch: entity=activities endpoint=/athlete/activities page=${page} per_page=${perPage}` +
+      `${typeof options?.after === 'number' ? ` after=${options.after}` : ''}` +
+      `${typeof options?.before === 'number' ? ` before=${options.before}` : ''}`
+    )
+
     const activities = await this.stravaFetchJson<StravaActivity[]>(
       `https://www.strava.com/api/v3/athlete/activities?${params.toString()}`
     )
@@ -252,19 +258,20 @@ export class StravaService {
   }
 
   /**
-   * Fetch detailed activity information including polyline from Strava API
+   * Fetch detailed activity information including polyline and ALL segment efforts from Strava API
+   * CRITICAL: Uses include_all_efforts=true to ensure all segment efforts are included
    */
   async fetchActivityDetails(activityId: number): Promise<StravaActivity | null> {
     // Activity details are enrichment; if rate-limited, we skip (do not pause the whole job).
     try {
       const activity = await this.stravaFetchJson<StravaActivity>(
-        `https://www.strava.com/api/v3/activities/${activityId}`
+        `https://www.strava.com/api/v3/activities/${activityId}?include_all_efforts=true`
       )
     
       // Add Strava URL
       activity.strava_url = `https://www.strava.com/activities/${activityId}`
 
-      console.log(`Fetched detailed activity: ${activity.name} (ID: ${activityId})`)
+      console.log(`Strava fetch: entity=activity_details activity_id=${activityId} result=ok name="${activity.name}"`)
       return activity
     } catch (err: any) {
       if (err?.statusCode === 429) {
@@ -282,7 +289,7 @@ export class StravaService {
    * Fetch segments for a specific activity from Strava API
    */
   async fetchActivitySegments(activityId: number): Promise<StravaSegmentEffort[]> {
-    console.log(`Fetching segment efforts for activity ${activityId} from Strava API`)
+    console.log(`Strava fetch: entity=segment_efforts activity_id=${activityId} endpoint=/activities/{id}?include_all_efforts=true`)
 
     if (config.stravaApiLimits.noLimitsMode) {
       console.log(`NO-LIMITS MODE: Fetching segment efforts for activity ${activityId} without rate limiting`)
@@ -294,7 +301,7 @@ export class StravaService {
       `https://www.strava.com/api/v3/activities/${activityId}?include_all_efforts=true`
     )
     const segments = activity.segment_efforts || []
-    console.log(`Fetched ${segments.length} segment efforts for activity ${activityId} from Strava API`)
+    console.log(`Strava fetch: entity=segment_efforts activity_id=${activityId} result=count count=${segments.length}`)
     
     return segments
   }
@@ -506,6 +513,58 @@ export class StravaService {
               }
               await this.activitiesRepo.createActivity(activityData)
 
+              // Extract and save segment efforts if we have detailed data
+              if (hasDetailedData && detailedActivity.segment_efforts && detailedActivity.segment_efforts.length > 0) {
+                console.log(`Extracting ${detailedActivity.segment_efforts.length} segment efforts for activity ${detailedActivity.id}...`)
+                
+                // Save segments first (from embedded segment summaries)
+                const uniqueSegments = new Map()
+                for (const effort of detailedActivity.segment_efforts) {
+                  if (effort.segment && !uniqueSegments.has(effort.segment.id)) {
+                    uniqueSegments.set(effort.segment.id, {
+                      segment_id: effort.segment.id,
+                      name: effort.segment.name,
+                      distance: effort.segment.distance,
+                      average_grade: effort.segment.average_grade,
+                      maximum_grade: effort.segment.maximum_grade,
+                      elevation_gain: (effort.segment.elevation_high || 0) - (effort.segment.elevation_low || 0),
+                      climb_category: effort.segment.climb_category,
+                      city: effort.segment.city,
+                      state: effort.segment.state,
+                      country: effort.segment.country,
+                    })
+                  }
+                }
+                
+                if (uniqueSegments.size > 0) {
+                  await this.segmentsRepo.bulkUpsertSegments(Array.from(uniqueSegments.values()))
+                  console.log(`Saved ${uniqueSegments.size} unique segments`)
+                }
+                
+                // Save segment efforts with ALL fields
+                const effortResult = await this.segmentsRepo.batchSaveEffortsFromStravaActivity(
+                  detailedActivity.id,
+                  detailedActivity.segment_efforts
+                )
+                console.log(`Saved ${effortResult.saved} segment efforts (${effortResult.errors} errors)`)
+                
+                // Update activity sync status
+                await this.activitiesRepo.updateActivity(detailedActivity.id, {
+                  segment_efforts_synced_at: new Date().toISOString(),
+                  segments_fetch_status: 'success_rows',
+                  segments_fetched_at: new Date().toISOString(),
+                  segments_effort_rows_count: effortResult.saved
+                })
+              } else if (hasDetailedData) {
+                // Activity has no segment efforts
+                await this.activitiesRepo.updateActivity(detailedActivity.id, {
+                  segment_efforts_synced_at: new Date().toISOString(),
+                  segments_fetch_status: 'success_empty',
+                  segments_fetched_at: new Date().toISOString(),
+                  segments_effort_rows_count: 0
+                })
+              }
+
               synced++
               console.log(`Synced activity${hasDetailedData ? ' with polyline' : ' (basic data)'}: ${detailedActivity.name}`)
 
@@ -554,6 +613,125 @@ export class StravaService {
   }
 
   /**
+   * Sync segment efforts for activities that don't have them yet
+   * Uses embedded data from activity response - no extra requests!
+   */
+  async syncPendingSegmentEfforts(
+    batchSize = 20,
+    onProgress?: (processed: number, total: number) => Promise<void>
+  ): Promise<{ processed: number; errors: number }> {
+    let processed = 0
+    let errors = 0
+    
+    try {
+      // Get activities that need segment efforts (status = 'pending')
+      const { data: pendingActivities, error } = await this.supabase
+        .from('activities')
+        .select('activity_id, name')
+        .eq('segments_fetch_status', 'pending')
+        .order('start_date', { ascending: false })
+      
+      if (error) {
+        console.error('Error fetching pending activities:', error)
+        throw error
+      }
+      
+      if (!pendingActivities || pendingActivities.length === 0) {
+        console.log('No pending activities found')
+        return { processed: 0, errors: 0 }
+      }
+      
+      const total = pendingActivities.length
+      console.log(`Found ${total} activities needing segment efforts`)
+      
+      // Process in batches
+      for (let i = 0; i < pendingActivities.length; i += batchSize) {
+        const batch = pendingActivities.slice(i, i + batchSize)
+        
+        for (const activity of batch) {
+          try {
+            // Fetch detailed activity (includes segment_efforts)
+            const detailed = await this.fetchActivityDetails(activity.activity_id as number)
+            
+            if (!detailed) {
+              console.log(`Rate limit reached, skipping activity ${activity.activity_id}`)
+              continue
+            }
+            
+            // Extract and save segment efforts if present
+            if (detailed.segment_efforts && detailed.segment_efforts.length > 0) {
+              console.log(`Extracting ${detailed.segment_efforts.length} segment efforts for activity ${detailed.id}...`)
+              
+              // Save segments first
+              const uniqueSegments = new Map()
+              for (const effort of detailed.segment_efforts) {
+                if (effort.segment && !uniqueSegments.has(effort.segment.id)) {
+                  uniqueSegments.set(effort.segment.id, {
+                    segment_id: effort.segment.id,
+                    name: effort.segment.name,
+                    distance: effort.segment.distance,
+                    average_grade: effort.segment.average_grade,
+                    maximum_grade: effort.segment.maximum_grade,
+                    elevation_gain: (effort.segment.elevation_high || 0) - (effort.segment.elevation_low || 0),
+                    climb_category: effort.segment.climb_category,
+                    city: effort.segment.city,
+                    state: effort.segment.state,
+                    country: effort.segment.country,
+                  })
+                }
+              }
+              
+              if (uniqueSegments.size > 0) {
+                await this.segmentsRepo.bulkUpsertSegments(Array.from(uniqueSegments.values()))
+              }
+              
+              // Save segment efforts with ALL fields
+              const effortResult = await this.segmentsRepo.batchSaveEffortsFromStravaActivity(
+                detailed.id,
+                detailed.segment_efforts
+              )
+              console.log(`Saved ${effortResult.saved} segment efforts (${effortResult.errors} errors)`)
+              
+              // Update activity sync status
+              await this.activitiesRepo.updateActivity(detailed.id, {
+                segment_efforts_synced_at: new Date().toISOString(),
+                segments_fetch_status: 'success_rows',
+                segments_fetched_at: new Date().toISOString(),
+                segments_effort_rows_count: effortResult.saved
+              })
+            } else {
+              // Activity has no segment efforts
+              await this.activitiesRepo.updateActivity(detailed.id, {
+                segment_efforts_synced_at: new Date().toISOString(),
+                segments_fetch_status: 'success_empty',
+                segments_fetched_at: new Date().toISOString(),
+                segments_effort_rows_count: 0
+              })
+            }
+            
+            processed++
+            
+            // Report progress
+            if (onProgress) {
+              await onProgress(processed, total)
+            }
+          } catch (error) {
+            console.error(`Error syncing efforts for activity ${activity.activity_id}:`, error)
+            errors++
+          }
+        }
+      }
+      
+      console.log(`Pending segment efforts sync complete: ${processed} processed, ${errors} errors`)
+    } catch (error) {
+      console.error('Error in syncPendingSegmentEfforts:', error)
+      throw error
+    }
+    
+    return { processed, errors }
+  }
+
+  /**
    * Backfill activities older than a moving "before" cursor.
    *
    * This avoids scanning deep pages from the top every day by using Strava's `before` filter
@@ -582,12 +760,12 @@ export class StravaService {
         throw this.buildRateLimitError('Strava API rate limit exceeded', this.computeRetryAfterMs())
       }
 
-      console.log(`Backfill: fetching activities before ${cursorBeforeEpoch} (epoch)`)
+      console.log(`Sync: entity=activities mode=backfill cursor_before=${cursorBeforeEpoch} requests_used=${requestsUsed}/${maxRequests}`)
       const activities = await this.fetchActivities(1, pageSize, { before: cursorBeforeEpoch })
       requestsUsed += 1
 
       if (activities.length === 0) {
-        console.log('Backfill: no more activities returned; reached end of history')
+        console.log('Sync: entity=activities mode=backfill result=end_of_history')
         break
       }
 
@@ -631,7 +809,7 @@ export class StravaService {
             await this.activitiesRepo.createActivity(activityData)
             synced += 1
           } catch (e: any) {
-            console.error(`Backfill: failed to insert activity ${activity?.id}:`, e)
+            console.error(`Sync: entity=activities mode=backfill insert_failed activity_id=${activity?.id}:`, e)
             errors += 1
           }
         }
@@ -648,7 +826,7 @@ export class StravaService {
       const nextCursor = Math.max(0, oldestEpoch - 1)
       if (nextCursor >= cursorBeforeEpoch) {
         // Safety: avoid infinite loops if timestamps are missing or weird.
-        console.warn('Backfill: cursor did not advance; stopping to avoid loop')
+        console.warn('Sync: entity=activities mode=backfill cursor_did_not_advance stopping')
         break
       }
       cursorBeforeEpoch = nextCursor
@@ -691,7 +869,10 @@ export class StravaService {
         throw this.buildRateLimitError('Strava API rate limit exceeded', this.computeRetryAfterMs())
       }
 
-      console.log(`Recent sync: fetching activities after ${cursorAfterEpoch} page ${page}`)
+      console.log(
+        `Sync: entity=activities mode=recent window_days=${options.recentWindowDays} after=${cursorAfterEpoch} ` +
+        `page=${page} requests_used=${requestsUsed}/${maxRequests}`
+      )
       const activities = await this.fetchActivities(page, pageSize, { after: cursorAfterEpoch })
       requestsUsed += 1
 
@@ -730,7 +911,7 @@ export class StravaService {
             await this.activitiesRepo.createActivity(activityData)
             synced += 1
           } catch (e: any) {
-            console.error(`Recent sync: failed to insert activity ${activity?.id}:`, e)
+            console.error(`Sync: entity=activities mode=recent insert_failed activity_id=${activity?.id}:`, e)
             errors += 1
           }
 
@@ -767,11 +948,11 @@ export class StravaService {
     let activitiesHandled = 0
 
     try {
-      console.log(`Starting complete segments/segment-efforts sync (batch size: ${batchSize})`)
+      console.log(`Sync: entity=segments_and_segment_efforts mode=queue batch_size=${batchSize}`)
 
       // Get total count of activities needing segments for progress tracking
       const totalActivitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegmentsCount()
-      console.log(`Total activities needing segments: ${totalActivitiesNeedingSegments}`)
+      console.log(`Sync: entity=segment_efforts queue_total_activities=${totalActivitiesNeedingSegments}`)
 
       if (totalActivitiesNeedingSegments === 0) {
         console.log('No activities need segments fetched')
@@ -782,7 +963,9 @@ export class StravaService {
 
       // Continue processing until no more activities need segments
       while (hasMoreActivities) {
-        console.log(`Processing activities batch starting at offset ${offset} (${processed}/${totalActivitiesNeedingSegments} processed)...`)
+        console.log(
+          `Sync: entity=segment_efforts processing_batch offset=${offset} processed=${processed}/${totalActivitiesNeedingSegments}`
+        )
 
         // Get activities that need segments fetched
         const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, offset)
@@ -801,7 +984,7 @@ export class StravaService {
             // The queue is driven by activities.segments_fetch_status to avoid inconsistent states
             // like segments_fetched=true but 0 effort rows (or partial inserts).
 
-            console.log(`Processing segment efforts for activity ${activity.activity_id}`)
+            console.log(`Sync: entity=segment_efforts activity_id=${activity.activity_id} step=fetch_and_persist`)
 
             // Fetch segments from Strava
             const segmentEfforts = await this.fetchActivitySegments(activity.activity_id)
@@ -861,11 +1044,14 @@ export class StravaService {
               
               await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
               segmentsAdded += newEfforts.length
-              console.log(`Added ${newEfforts.length} NEW segment efforts for activity ${activity.activity_id} (${segmentEfforts.length} total found, ${existingEfforts.data?.length || 0} already existed)`)
+              console.log(
+                `Sync: entity=segment_efforts activity_id=${activity.activity_id} inserted_new=${newEfforts.length} ` +
+                `total_found=${segmentEfforts.length} already_existed=${existingEfforts.data?.length || 0}`
+              )
               
               await this.activitiesRepo.markSegmentsFetchSuccessRows(activity.id, segmentEfforts.length)
             } else {
-              console.log(`No segments found for activity ${activity.activity_id}`)
+              console.log(`Sync: entity=segment_efforts activity_id=${activity.activity_id} result=empty`)
               await this.activitiesRepo.markSegmentsFetchSuccessEmpty(activity.id)
             }
             

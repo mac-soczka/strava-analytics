@@ -95,7 +95,7 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
 
   const zero = { total: 0, processed: 0, failed: 0 }
   const activities = job.progress?.activities ?? zero
-  const streams = job.progress?.streams ?? zero
+  const segmentEfforts = job.progress?.streams ?? zero
   const segments = job.progress?.segments ?? zero
 
   const segmentFocused =
@@ -206,8 +206,8 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
               <span>{activities.processed} / {activities.total}</span>
             </div>
             <div className="flex justify-between text-gray-600">
-              <span>Streams:</span>
-              <span>{streams.processed} / {streams.total}</span>
+              <span>Segment Efforts:</span>
+              <span>{segmentEfforts.processed} / {segmentEfforts.total}</span>
             </div>
             {(job.type === 'full_sync' || segments.total > 0) && (
               <div className="flex justify-between text-gray-600">

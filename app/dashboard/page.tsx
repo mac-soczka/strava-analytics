@@ -1,8 +1,6 @@
 import { createServerComponentClient } from '@/lib/supabase'
 import { Suspense } from 'react'
 import ProtectedRoute from "../components/ProtectedRoute"
-import { SyncDashboard } from '../components/sync/SyncDashboard'
-import { SyncCoveragePanel } from '../components/sync/SyncCoveragePanel'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 import {
@@ -182,17 +180,14 @@ async function DashboardContent() {
     const { default: DashboardClient } = await import('./dashboard-client')
 
     return (
-      <div className="space-y-8">
-        <SyncCoveragePanel initialCoverage={syncCoverage} />
-        <DashboardClient 
-          stats={stats}
-          recentActivities={recentActivities.data || []}
-          topSegments={topSegments}
-          activityTypes={activityTypes}
-          activityTypeStats={activityTypeStats}
-          monthlyData={monthlyData}
-        />
-      </div>
+      <DashboardClient 
+        stats={stats}
+        recentActivities={recentActivities.data || []}
+        topSegments={topSegments}
+        activityTypes={activityTypes}
+        activityTypeStats={activityTypeStats}
+        monthlyData={monthlyData}
+      />
     )
   } catch (error) {
     const msg =
@@ -237,10 +232,6 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
             🚴‍♂️ Strava Dashboard
           </h1>
-          
-          <div className="mb-8">
-            <SyncDashboard />
-          </div>
           
           <Suspense fallback={<DashboardLoadingSkeleton />}>
             <DashboardContent />

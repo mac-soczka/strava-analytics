@@ -1,8 +1,6 @@
 import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import ProtectedRoute from '../components/ProtectedRoute'
-import { SyncJobControls } from '../components/sync/SyncJobControls'
-import { SyncCoveragePanel } from '../components/sync/SyncCoveragePanel'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 import SegmentEffortsClient from './segment-efforts-client'
@@ -23,12 +21,6 @@ export default function SegmentEffortsPage() {
             <p className="text-lg text-gray-600 dark:text-gray-300">
               All your segment attempts across all activities
             </p>
-            <div className="mt-4">
-              <SyncJobControls
-                label="Sync Segment Efforts"
-                endpoint="/api/sync/start-segment-efforts"
-              />
-            </div>
           </div>
           
           <Suspense fallback={<SegmentEffortsLoadingSkeleton />}>
@@ -195,14 +187,11 @@ async function SegmentEffortsContent() {
     }
 
     return (
-      <div className="space-y-6">
-        <SyncCoveragePanel initialCoverage={syncCoverage} />
-        <SegmentEffortsClient
-          efforts={efforts || []}
-          stats={stats}
-          personalRecords={personalRecords}
-        />
-      </div>
+      <SegmentEffortsClient
+        efforts={efforts || []}
+        stats={stats}
+        personalRecords={personalRecords}
+      />
     )
   } catch (error) {
     console.error('Error loading segment efforts:', error)

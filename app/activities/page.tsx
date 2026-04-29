@@ -1,8 +1,6 @@
 import { Suspense } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import ProtectedRoute from '../components/ProtectedRoute'
-import { SyncJobControls } from '../components/sync/SyncJobControls'
-import { SyncCoveragePanel } from '../components/sync/SyncCoveragePanel'
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
 
@@ -22,12 +20,6 @@ export default async function ActivitiesPage() {
             <p className="text-gray-600 dark:text-gray-400 text-lg">
               Your Strava activities with segments and efforts
             </p>
-            <div className="mt-4">
-              <SyncJobControls
-                label="Sync Activities"
-                endpoint="/api/sync/start"
-              />
-            </div>
           </div>
           
           <Suspense fallback={<ActivitiesLoadingSkeleton />}>
@@ -211,10 +203,7 @@ async function ActivitiesContent() {
     const { default: ActivitiesClient } = await import('./activities-client')
 
     return (
-      <div className="space-y-6">
-        <SyncCoveragePanel initialCoverage={syncCoverage} />
-        <ActivitiesClient activities={activities || []} stats={stats} coverage={syncCoverage} />
-      </div>
+      <ActivitiesClient activities={activities || []} stats={stats} coverage={syncCoverage} />
     )
   } catch (error) {
     console.error('Error loading activities:', error)

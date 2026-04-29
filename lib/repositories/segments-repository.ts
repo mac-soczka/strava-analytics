@@ -29,6 +29,17 @@ export interface SegmentEffort {
   start_date?: string
   average_watts?: number
   max_watts?: number
+  // New fields from Strava API
+  distance?: number
+  start_index?: number
+  end_index?: number
+  average_cadence?: number
+  average_heartrate?: number
+  max_heartrate?: number
+  pr_rank?: number | null
+  kom_rank?: number | null
+  achievements?: any[]
+  hidden?: boolean
   created_at?: string
   updated_at?: string
 }
@@ -189,6 +200,64 @@ export class SegmentsRepository {
       .select()
 
     return { data: data as SegmentEffort[] | null, error }
+  }
+
+  /**
+   * Save segment effort from Strava activity response with ALL fields
+   * This extracts effort data from the embedded segment_efforts array in activity response
+   */
+  async saveEffortFromStravaActivity(activityId: number, effortData: any): Promise<{ data: SegmentEffort | null; error: any }> {
+    const effort: SegmentEffort = {
+      activity_id: activityId,
+      segment_id: effortData.segment.id,
+      effort_id: String(effortData.id),
+      effort_id_text: String(effortData.id),
+      
+      // Times and distance
+      elapsed_time: effortData.elapsed_time,
+      moving_time: effortData.moving_time,
+      distance: effortData.distance,
+      start_date: effortData.start_date,
+      
+      // Stream indexes
+      start_index: effortData.start_index,
+      end_index: effortData.end_index,
+      
+      // Performance metrics
+      average_watts: effortData.average_watts,
+      max_watts: effortData.device_watts ? effortData.max_watts : null,
+      average_cadence: effortData.average_cadence,
+      average_heartrate: effortData.average_heartrate,
+      max_heartrate: effortData.max_heartrate,
+      
+      // Rankings and achievements
+      pr_rank: effortData.pr_rank,
+      kom_rank: effortData.kom_rank,
+      achievements: effortData.achievements || [],
+      hidden: effortData.hidden || false
+    }
+
+    return this.upsertSegmentEffort(effort)
+  }
+
+  /**
+   * Batch save segment efforts from Strava activity response
+   */
+  async batchSaveEffortsFromStravaActivity(activityId: number, effortsData: any[]): Promise<{ saved: number; errors: number }> {
+    let saved = 0
+    let errors = 0
+
+    for (const effortData of effortsData) {
+      try {
+        await this.saveEffortFromStravaActivity(activityId, effortData)
+        saved++
+      } catch (error) {
+        console.error(`Error saving effort ${effortData.id}:`, error)
+        errors++
+      }
+    }
+
+    return { saved, errors }
   }
 
   /**
