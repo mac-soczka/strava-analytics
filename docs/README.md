@@ -28,6 +28,8 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 ### ✅ Action plans
 - **[Sync dedupe + Strava ID safety](./action-plans/sync-dedupe-and-id-safety.md)** - Ensure idempotent sync and safe large IDs
 - **[Strava sync under 1000/day](./action-plans/strava-sync-under-1000-per-day.md)** - Multi-day, budget-aware strategy for activities, segments, and segment efforts
+- **[Optimize Strava sync (1 request/activity)](./action-plans/optimize-strava-sync.md)** - Extract embedded segment efforts from activity details to stay under rate limits
+- **[User-triggered sync](./action-plans/user-triggered-sync.md)** - Background jobs + progress UI for user-triggered sync
 - **[Dashboard visual clues refresh](./action-plans/dashboard-visual-clues-refresh.md)** - Improve dashboard readability with semantic colors, temporal context, and trend cues
 
 ### 🔧 Troubleshooting & Deployment

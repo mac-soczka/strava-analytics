@@ -72,8 +72,7 @@ description: Optimize Strava sync to minimize API requests while fetching all da
 
 **Documentation:**
 10. `docs/action-plans/optimize-strava-sync.md` (this file)
-11. `docs/IMPLEMENTATION-SUMMARY.md` (new)
-12. `docs/OPTIMIZED-SYNC-UX.md` (new)
+11. `docs/OPTIMIZED-SYNC-UX.md` (new)
 
 ---
 

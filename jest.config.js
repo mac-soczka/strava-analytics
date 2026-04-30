@@ -9,6 +9,18 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
+  // supabase-js pulls some ESM-only dependencies (e.g. isows) that need transforming for Jest.
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
+  },
+  moduleNameMapper: {
+    // Force isows to use its CJS build under Jest.
+    '^isows$': '<rootDir>/node_modules/isows/_cjs/index.js',
+    '^isows/_esm/(.*)$': '<rootDir>/node_modules/isows/_cjs/$1',
+  },
+  transformIgnorePatterns: [
+    '/node_modules/(?!(isows|@supabase)/)',
+  ],
   testMatch: [
     '<rootDir>/tests/unit/**/*.test.ts',
     '<rootDir>/tests/unit/**/*.test.tsx',

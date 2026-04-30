@@ -358,7 +358,7 @@ Created a **single, unified sync status component** that:
 - `app/activities/activities-client.tsx` - Activities integration
 - `app/segments/segments-client.tsx` - Segments integration
 - `docs/action-plans/optimize-strava-sync.md` - Optimization strategy
-- `docs/EXECUTION-COMPLETE.md` - Implementation summary
+<!-- Implementation details live in the action plan above. -->
 
 ---
 

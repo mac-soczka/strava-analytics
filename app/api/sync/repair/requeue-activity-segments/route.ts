@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     const supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
-    const { error, count } = await supabase
+    const { data: updatedRows, error } = await supabase
       .from('activities')
       .update({
         segments_fetched: false,
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       })
       .eq('strava_id', user.strava_id)
       .eq('activity_id', activityId)
-      .select('*', { count: 'exact', head: true })
+      .select('id')
 
     if (error) throw error
 
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
         .catch(() => {})
     }
 
-    return NextResponse.json({ success: true, updated: count ?? 0 })
+    return NextResponse.json({ success: true, updated: updatedRows?.length ?? 0 })
   } catch (error: any) {
     console.error('Error requeueing activity segments:', error)
     return NextResponse.json({ error: 'Failed to requeue activity segments', details: error?.message }, { status: 500 })
