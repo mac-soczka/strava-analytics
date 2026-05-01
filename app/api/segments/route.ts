@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
       name: 'name',
       distance: 'distance',
       elevation: 'elevation_gain',
+      grade: 'average_grade',
     }
     const sortColumn = sortColumnByParam[sortBy] || 'name'
 

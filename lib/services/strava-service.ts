@@ -373,6 +373,82 @@ export class StravaService {
       return true
     }
 
+    const ensureActivityFromSummary = async (activity: StravaActivity) => {
+      if (!this.userId) return false
+      const existingActivity = await this.activitiesRepo.getActivityById(activity.id)
+      if (existingActivity) {
+        knownActivities.add(activity.id)
+        return true
+      }
+      await this.activitiesRepo.createActivity({
+        strava_id: this.userId,
+        activity_id: activity.id,
+        name: activity.name || `Activity ${activity.id}`,
+        distance: activity.distance || 0,
+        moving_time: activity.moving_time || 0,
+        elapsed_time: activity.elapsed_time || 0,
+        total_elevation_gain: activity.total_elevation_gain || 0,
+        type: activity.type || 'Unknown',
+        start_date: activity.start_date || new Date().toISOString(),
+        start_date_local: activity.start_date_local || activity.start_date || new Date().toISOString(),
+        strava_url: `https://www.strava.com/activities/${activity.id}`,
+        activity_synced_at: new Date().toISOString(),
+        activity_details_synced_at: null,
+      })
+      knownActivities.add(activity.id)
+      return true
+    }
+
+    const getCoveredActivityIds = async (activityIds: number[]): Promise<Set<number>> => {
+      if (!this.userId || activityIds.length === 0) return new Set<number>()
+      const { data } = await this.supabase
+        .from('activities')
+        .select('activity_id, segments_fetch_status, segment_efforts_synced_at')
+        .eq('strava_id', this.userId)
+        .in('activity_id', activityIds)
+      const covered = new Set<number>()
+      for (const row of data || []) {
+        const status = (row as any).segments_fetch_status
+        const syncedAt = (row as any).segment_efforts_synced_at
+        if ((status === 'success_rows' || status === 'success_empty') && syncedAt) {
+          covered.add((row as any).activity_id)
+        }
+      }
+      return covered
+    }
+
+    const persistNonTargetEffortsForActivity = async (
+      activityId: number,
+      allEfforts: StravaSegmentEffort[],
+      targetSegmentId: number
+    ) => {
+      const nonTargetEfforts = allEfforts.filter((effort) => effort.segment?.id !== targetSegmentId)
+      if (nonTargetEfforts.length === 0) return
+
+      const nonTargetSegments = new Map<number, any>()
+      for (const effort of nonTargetEfforts) {
+        const segment = effort.segment
+        if (!segment || nonTargetSegments.has(segment.id)) continue
+        nonTargetSegments.set(segment.id, {
+          segment_id: segment.id,
+          name: segment.name,
+          distance: segment.distance,
+          average_grade: segment.average_grade,
+          maximum_grade: segment.maximum_grade,
+          elevation_gain: (segment.elevation_high || 0) - (segment.elevation_low || 0),
+          climb_category: segment.climb_category,
+          city: segment.city,
+          state: segment.state,
+          country: segment.country,
+          polyline: segment.map?.polyline,
+        })
+      }
+      if (nonTargetSegments.size > 0) {
+        await this.segmentsRepo.bulkUpsertSegments(Array.from(nonTargetSegments.values()))
+      }
+      await this.segmentsRepo.batchSaveEffortsFromStravaActivity(activityId, nonTargetEfforts)
+    }
+
     const persistEfforts = async (efforts: StravaSegmentEffort[]) => {
       if (efforts.length === 0) return
 
@@ -504,10 +580,25 @@ export class StravaService {
           })
           if (activities.length === 0) break
 
+          const coveredIds = await getCoveredActivityIds(activities.map((a) => a.id))
+
           for (const activity of activities) {
             try {
+              await ensureActivityFromSummary(activity)
+              if (coveredIds.has(activity.id)) continue
+
               const details = await this.apiClient.fetchActivityDetails(activity.id)
-              if (!details || !details.segment_efforts || details.segment_efforts.length === 0) continue
+              if (!details || !details.segment_efforts || details.segment_efforts.length === 0) {
+                await this.activitiesRepo.updateActivity(activity.id, {
+                  activity_details_synced_at: new Date().toISOString(),
+                  segment_efforts_synced_at: new Date().toISOString(),
+                  segments_fetch_status: 'success_empty',
+                  segments_fetched_at: new Date().toISOString(),
+                  segments_fetched: true,
+                  segments_effort_rows_count: 0,
+                } as any)
+                continue
+              }
 
               const matchingEfforts = details.segment_efforts
                 .filter((effort) => effort.segment?.id === segmentId)
@@ -518,6 +609,15 @@ export class StravaService {
 
               total += matchingEfforts.length
               await persistEfforts(matchingEfforts)
+              await persistNonTargetEffortsForActivity(details.id, details.segment_efforts, segmentId)
+              await this.activitiesRepo.updateActivity(details.id, {
+                activity_details_synced_at: new Date().toISOString(),
+                segment_efforts_synced_at: new Date().toISOString(),
+                segments_fetch_status: details.segment_efforts.length > 0 ? 'success_rows' : 'success_empty',
+                segments_fetched_at: new Date().toISOString(),
+                segments_fetched: true,
+                segments_effort_rows_count: details.segment_efforts.length,
+              } as any)
             } catch (error: any) {
               if (error?.statusCode === 429) throw error
               errors += 1
@@ -551,10 +651,25 @@ export class StravaService {
             })
             if (activities.length === 0) break
 
+            const coveredIds = await getCoveredActivityIds(activities.map((a) => a.id))
+
             for (const activity of activities) {
               try {
+                await ensureActivityFromSummary(activity)
+                if (coveredIds.has(activity.id)) continue
+
                 const details = await this.apiClient.fetchActivityDetails(activity.id)
-                if (!details || !details.segment_efforts || details.segment_efforts.length === 0) continue
+                if (!details || !details.segment_efforts || details.segment_efforts.length === 0) {
+                  await this.activitiesRepo.updateActivity(activity.id, {
+                    activity_details_synced_at: new Date().toISOString(),
+                    segment_efforts_synced_at: new Date().toISOString(),
+                    segments_fetch_status: 'success_empty',
+                    segments_fetched_at: new Date().toISOString(),
+                    segments_fetched: true,
+                    segments_effort_rows_count: 0,
+                  } as any)
+                  continue
+                }
 
                 const matchingEfforts = details.segment_efforts
                   .filter((effort) => effort.segment?.id === segmentId)
@@ -565,6 +680,15 @@ export class StravaService {
 
                 total += matchingEfforts.length
                 await persistEfforts(matchingEfforts)
+                await persistNonTargetEffortsForActivity(details.id, details.segment_efforts, segmentId)
+                await this.activitiesRepo.updateActivity(details.id, {
+                  activity_details_synced_at: new Date().toISOString(),
+                  segment_efforts_synced_at: new Date().toISOString(),
+                  segments_fetch_status: details.segment_efforts.length > 0 ? 'success_rows' : 'success_empty',
+                  segments_fetched_at: new Date().toISOString(),
+                  segments_fetched: true,
+                  segments_effort_rows_count: details.segment_efforts.length,
+                } as any)
               } catch (error: any) {
                 if (error?.statusCode === 429) throw error
                 errors += 1

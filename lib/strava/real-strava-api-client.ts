@@ -3,6 +3,7 @@ import { config } from '@/lib/config'
 import { getRateLimitService, RateLimitService } from '@/lib/services/rate-limit-service'
 import type { StravaActivity, StravaSegment, StravaSegmentEffort, StravaTokens } from '@/types/strava'
 import type { StravaApiClient, StravaListActivitiesOptions } from './strava-api-client'
+import { getLogger } from '@/lib/utils/logger'
 import JSONbig from 'json-bigint'
 
 export type RealStravaApiClientDeps = {
@@ -42,22 +43,64 @@ export class RealStravaApiClient implements StravaApiClient {
   }
 
   private async stravaFetch(url: string, init: RequestInit, allowRefreshOnce: boolean = true): Promise<Response> {
+    const logger = getLogger()
+    const method = (init.method || 'GET').toUpperCase()
+
     if (!this.rateLimitService.canMakeRequest()) {
+      logger.warn('[Strava HTTP] blocked by local rate-limit guard', {
+        strava_id: this.stravaId,
+        method,
+        url,
+      })
       throw this.buildRateLimitError('Strava API rate limit exceeded', this.computeRetryAfterMs())
     }
 
     const tokens = await this.getValidTokens()
-    const response = await this.fetchFn(url, {
-      ...init,
-      headers: {
-        ...(init.headers || {}),
-        Authorization: `Bearer ${tokens.access_token}`,
-      },
+    const startedAt = Date.now()
+    logger.log('[Strava HTTP] request', {
+      strava_id: this.stravaId,
+      method,
+      url,
+      allow_refresh_once: allowRefreshOnce,
+    })
+
+    let response: Response
+    try {
+      response = await this.fetchFn(url, {
+        ...init,
+        headers: {
+          ...(init.headers || {}),
+          Authorization: `Bearer ${tokens.access_token}`,
+        },
+      })
+    } catch (error: any) {
+      logger.error('[Strava HTTP] network/request error', {
+        strava_id: this.stravaId,
+        method,
+        url,
+        elapsed_ms: Date.now() - startedAt,
+        error: error?.message || String(error),
+      })
+      throw error
+    }
+
+    logger.log('[Strava HTTP] response', {
+      strava_id: this.stravaId,
+      method,
+      url,
+      status: response.status,
+      ok: response.ok,
+      elapsed_ms: Date.now() - startedAt,
     })
 
     this.rateLimitService.updateFromHeaders(response)
 
     if (response.status === 401 && allowRefreshOnce) {
+      logger.warn('[Strava HTTP] 401 received, attempting token refresh', {
+        strava_id: this.stravaId,
+        method,
+        url,
+      })
       await this.refreshTokens(tokens.refresh_token, this.stravaId)
       return this.stravaFetch(url, init, false)
     }
@@ -137,15 +180,49 @@ export class RealStravaApiClient implements StravaApiClient {
   }
 
   private async refreshTokens(refreshToken: string, stravaId: number): Promise<StravaTokens> {
-    const response = await this.fetchFn('https://www.strava.com/oauth/token', {
+    const logger = getLogger()
+    const url = 'https://www.strava.com/oauth/token'
+    const startedAt = Date.now()
+
+    logger.log('[Strava HTTP] request', {
+      strava_id: stravaId,
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id: config.strava.clientId,
-        client_secret: config.strava.clientSecret,
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken,
-      }),
+      url,
+      token_refresh: true,
+    })
+
+    let response: Response
+    try {
+      response = await this.fetchFn(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          client_id: config.strava.clientId,
+          client_secret: config.strava.clientSecret,
+          grant_type: 'refresh_token',
+          refresh_token: refreshToken,
+        }),
+      })
+    } catch (error: any) {
+      logger.error('[Strava HTTP] network/request error', {
+        strava_id: stravaId,
+        method: 'POST',
+        url,
+        elapsed_ms: Date.now() - startedAt,
+        token_refresh: true,
+        error: error?.message || String(error),
+      })
+      throw error
+    }
+
+    logger.log('[Strava HTTP] response', {
+      strava_id: stravaId,
+      method: 'POST',
+      url,
+      status: response.status,
+      ok: response.ok,
+      elapsed_ms: Date.now() - startedAt,
+      token_refresh: true,
     })
 
     if (!response.ok) {

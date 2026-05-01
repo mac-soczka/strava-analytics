@@ -32,6 +32,9 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Stateful resumable sync plan](./action-plans/stateful-resumable-sync-plan.md)** - DB-backed phase/checkpoint sync with exact progress visibility and restart-safe resume
 - **[Segment efforts sideline sync](./action-plans/segment-efforts-sideline-sync.md)** - Targeted segment effort sync with autocomplete segment selection and resumable job tracking
 - **[Request-efficient 5-year sync for segment 3810079](./action-plans/segment-3810079-five-year-efficient-sync.md)** - Backfill + incremental plan to fetch complete segment history with checkpointed resume
+- **[Edinburgh weather via Open-Meteo (JSON plan)](./action-plans/weather-open-meteo-filesystem-json-plan.json)** - Filesystem-first hourly historical weather ingestion plan (no DB yet)
+- **[Edinburgh weather via Met Office (JSON plan)](./action-plans/weather-met-office-filesystem-json-plan.json)** - UK-authoritative integration plan with auth/quota handling and JSON outputs
+- **[Edinburgh weather via NOAA (JSON plan)](./action-plans/weather-noaa-filesystem-json-plan.json)** - Station-oriented historical pipeline plan with wrangling + filesystem JSON persistence
 - **[User-triggered sync](./action-plans/user-triggered-sync.md)** - Background jobs + progress UI for user-triggered sync
 - **[Dashboard visual clues refresh](./action-plans/dashboard-visual-clues-refresh.md)** - Improve dashboard readability with semantic colors, temporal context, and trend cues
 

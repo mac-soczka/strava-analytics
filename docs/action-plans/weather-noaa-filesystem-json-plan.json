@@ -1,0 +1,136 @@
+{
+  "plan_id": "weather-noaa-filesystem-json",
+  "title": "Action Plan: Edinburgh Historical Weather via NOAA datasets (Filesystem JSON first)",
+  "last_updated": "2026-05-01",
+  "status": "not_started",
+  "goal": "Build a research-grade NOAA ingestion path for Edinburgh historical weather, using station-based records where available, and persist normalized hourly JSON outputs to filesystem.",
+  "upfront_requirements": {
+    "must_be_confirmed_before_build": [
+      "Exact NOAA dataset/API selection finalized (for example CDO API vs bulk datasets).",
+      "Token requirements confirmed for selected NOAA path and token provisioned if needed.",
+      "Station selection strategy for Edinburgh approved (primary + fallback list policy).",
+      "Historical date range and acceptable sparsity/gap policy approved.",
+      "Variable mapping and normalization rules approved.",
+      "Filesystem path, schedule, and operational ownership confirmed."
+    ],
+    "credentials_and_access": [
+      "Some NOAA APIs require tokens (for example CDO token); verify requirements up front.",
+      "If using bulk/public files, verify download bandwidth and storage constraints."
+    ],
+    "definition_of_ready_checklist": [
+      "Dataset/API path chosen",
+      "Token/access validated",
+      "Station strategy approved",
+      "Gap-handling policy approved",
+      "Storage and schedule approved"
+    ]
+  },
+  "scope": {
+    "included": [
+      "NOAA station discovery strategy for Edinburgh region",
+      "Historical data pull and wrangling pipeline",
+      "Normalization into canonical hourly JSON files",
+      "Checkpointed, resumable ingestion workflow",
+      "Basic quality flags and missing-data handling"
+    ],
+    "excluded": [
+      "Database storage",
+      "Global station rollout beyond Edinburgh area",
+      "Advanced climatology QA framework",
+      "Visualization-heavy UI work"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Upfront Requirements Gate",
+      "tasks": [
+        "Finalize dataset/API path and credential model before implementation.",
+        "Run station discovery dry run for Edinburgh and document chosen station set.",
+        "Capture real sample payloads for parser design and edge-case planning.",
+        "Do not start ingestion build until definition_of_ready_checklist is complete."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Overview and Scope",
+      "tasks": [
+        "Choose NOAA endpoint/dataset path suitable for UK station history.",
+        "Define station-selection policy (primary station plus fallback station list).",
+        "Define normalization policy for sparse or irregular intervals.",
+        "Define hourly output expectation and documented caveats."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Filesystem Data Layer",
+      "tasks": [
+        "Create storage path (for example data/weather/noaa/edinburgh).",
+        "Create canonical JSON schema with source station metadata and quality flags.",
+        "Create checkpoint manifest with station cursor, date cursor, and retry state.",
+        "Use atomic writes and deterministic partitioning (year/month)."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Backend Integration Layer",
+      "tasks": [
+        "Implement station resolver for Edinburgh coordinates and proximity ranking.",
+        "Implement NOAA client wrapper with pagination and retry/backoff.",
+        "Implement parser/wrangler to convert raw observations to hourly rows.",
+        "Fill/flag gaps explicitly rather than silently interpolating by default.",
+        "Persist normalized rows and source metadata snapshots to filesystem."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "API and UX Layer",
+      "tasks": [
+        "Add trigger endpoint for station resolution + historical ingest.",
+        "Add status endpoint with station currently in use and date cursor.",
+        "Add read endpoint for hourly JSON outputs with optional source metadata.",
+        "Keep UX minimal and transparent about data gaps."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Testing",
+      "tasks": [
+        "Unit tests for station ranking and time-bucket normalization.",
+        "Unit tests for missing-value and quality-flag handling.",
+        "Integration tests with mocked NOAA payloads and real filesystem writes.",
+        "E2E test for trigger/status/read path with representative sparse data."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Documentation",
+      "tasks": [
+        "Document NOAA source limitations and expected data sparsity.",
+        "Document station choice logic and fallback behavior.",
+        "Document canonical schema and quality flag semantics.",
+        "Document operational guidance for reruns and checkpoint recovery."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Deployment and Verification",
+      "tasks": [
+        "Run quality gates and verify reproducible output files.",
+        "Validate sample periods against known weather events in Edinburgh.",
+        "Verify reruns are idempotent and recover cleanly from interruptions.",
+        "Record source comparison notes against Open-Meteo and Met Office outputs."
+      ]
+    }
+  ],
+  "quality_gates": [
+    "yarn lint",
+    "yarn tsc --noEmit",
+    "yarn test",
+    "yarn test:e2e"
+  ],
+  "notes": [
+    "NOAA plan prioritizes provenance and raw-station traceability.",
+    "Wrangling complexity is expected and explicitly scoped."
+  ]
+}

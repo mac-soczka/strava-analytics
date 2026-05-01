@@ -17,6 +17,7 @@
 - Incremental daily catch-up strategy after backfill
 - Checkpointed/restart-safe execution
 - Clear progress visibility in `sync_jobs`
+- Activity-first ingestion to persist **all segments + all segment efforts** from fetched activities
 
 **Excluded**
 - Broad “all segments” backfill
@@ -24,7 +25,8 @@
 
 **Constraints**
 - Strava rate limits apply (15-minute and daily budgets).
-- `GET /segments/{id}/all_efforts` may be unavailable (`402`) for some accounts.
+- On free/non-eligible Strava accounts, direct `GET /segments/{id}/all_efforts` may be unavailable (`402`).
+- In that case, the request-efficient path is activity-details ingestion (`include_all_efforts=true`) with no repeated activity-detail calls.
 
 **Official references**
 - [Strava API reference](https://developers.strava.com/docs/reference/)
@@ -62,15 +64,17 @@
 - [x] If direct endpoint returns `402`, use fallback:
   - List activities in time windows (`/athlete/activities` with `before/after`)
   - Fetch details per candidate activity (`/activities/{id}?include_all_efforts=true`)
-  - Keep only efforts where `effort.segment.id === 3810079`
+  - Persist **all** `segment_efforts` and **all** referenced `segments` from each fetched activity
+  - Derive target segment progress (`3810079`) from local DB filtering, not from additional Strava requests
 
 ### 3.2 Request-efficient 5-year fallback
 - [x] Split 5 years into monthly windows (oldest to newest).
 - [x] For each window:
   - page through activity summaries (cheap list calls)
   - fetch details once per activity
-  - persist only matching efforts
+  - persist all segment efforts + segments from each activity response
 - [x] Record window/activity checkpoint after each page to allow exact resume.
+- [ ] Mark activity as fully ingested (segments/efforts complete) so reruns skip detail refetch unless explicitly requested.
 
 ### 3.3 Two operating modes
 - [x] **Backfill mode** (one-time): cover entire 5-year range.
@@ -104,6 +108,7 @@
 - [ ] Checkpoint resume restarts from saved window/page, not from the beginning.
 - [ ] Idempotent rerun does not create duplicate efforts.
 - [ ] Incremental mode only fetches recent data after backfill completion.
+- [ ] Activity-first fallback persists non-target segment efforts too (single request serves future segment queries).
 
 ### 5.2 Unit tests
 - [ ] Window boundary calculation (5-year slicing).

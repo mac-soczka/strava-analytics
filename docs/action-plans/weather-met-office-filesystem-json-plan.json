@@ -1,0 +1,135 @@
+{
+  "plan_id": "weather-met-office-filesystem-json",
+  "title": "Action Plan: Edinburgh Historical Weather via UK Met Office DataHub (Filesystem JSON first)",
+  "last_updated": "2026-05-01",
+  "status": "not_started",
+  "goal": "Integrate UK Met Office DataHub for Edinburgh-focused historical weather and store normalized hourly JSON files on disk, with clear handling of auth, limits, and retries.",
+  "upfront_requirements": {
+    "must_be_confirmed_before_build": [
+      "Met Office DataHub account registration completed.",
+      "API key/credentials provisioned and validated in non-production environment.",
+      "Selected product/endpoints for hourly historical data confirmed.",
+      "Free-tier quota/limit expectations documented (request caps, window limits).",
+      "Final variable list, units, and date range approved.",
+      "Filesystem path, run schedule, and error handling policy approved."
+    ],
+    "credentials_and_access": [
+      "Met Office DataHub API credentials are required (store in environment variables, never in repo).",
+      "Network access to Met Office endpoints must be allowed from runtime environment."
+    ],
+    "definition_of_ready_checklist": [
+      "Credentials tested successfully",
+      "Endpoint and limits validated",
+      "Variables/date range approved",
+      "Storage path approved",
+      "Runbook owner assigned"
+    ]
+  },
+  "scope": {
+    "included": [
+      "Met Office DataHub authentication and client setup",
+      "Edinburgh-specific data fetch strategy",
+      "Hourly data normalization and JSON file persistence",
+      "Checkpointed sync for resumable backfill",
+      "Operational logging for quota/limit visibility"
+    ],
+    "excluded": [
+      "Database persistence",
+      "Nationwide multi-location rollout",
+      "Advanced station reconciliation pipeline",
+      "UI-heavy weather analytics views"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Upfront Requirements Gate",
+      "tasks": [
+        "Complete all credential and access prerequisites from upfront_requirements.",
+        "Run a manual API smoke test with real credentials and save response sample.",
+        "Document quota assumptions and backoff plan before coding ingestion.",
+        "Block implementation until definition_of_ready_checklist is complete."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Overview and Scope",
+      "tasks": [
+        "Confirm Met Office endpoint(s) for historical/hourly access relevant to Edinburgh.",
+        "Define required account setup and credential handling process.",
+        "Define target weather fields and canonical local schema.",
+        "Define expected free-tier constraints and fetch schedule."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Filesystem Data Layer",
+      "tasks": [
+        "Create storage path (for example data/weather/met-office/edinburgh).",
+        "Define monthly JSON file contract and manifest file.",
+        "Define sync-state file with window cursor, retry counters, and last success timestamp.",
+        "Implement deterministic file naming and safe write semantics."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Backend Integration Layer",
+      "tasks": [
+        "Implement Met Office API client with auth token/header support.",
+        "Implement throttled window fetcher respecting provider limits.",
+        "Normalize provider-specific units/fields into canonical shape.",
+        "Implement dedupe merge by UTC timestamp and rewrite changed rows only.",
+        "Implement fallback strategy for intermittent provider errors (retry and skip-window marker)."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "API and UX Layer",
+      "tasks": [
+        "Add trigger endpoint for backfill and incremental update.",
+        "Add status endpoint exposing quota usage, last successful window, and pending windows.",
+        "Add read endpoint returning stored weather JSON slices by date range.",
+        "Keep UI minimal and focused on sync controls/status."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Testing",
+      "tasks": [
+        "Unit tests for auth handling, field mapping, and unit conversions.",
+        "Integration tests with mocked Met Office responses and real filesystem writes.",
+        "Integration tests for resume behavior after forced mid-run interruption.",
+        "E2E test for trigger/status flow in local app."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Documentation",
+      "tasks": [
+        "Document registration/auth setup and local env configuration.",
+        "Document endpoint/limit assumptions and mitigation approach.",
+        "Document canonical JSON schema and checkpoint semantics."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Deployment and Verification",
+      "tasks": [
+        "Run quality gates and validate no secret leakage in logs.",
+        "Perform first historical pull and verify sample windows.",
+        "Confirm rerun idempotency and checkpoint correctness.",
+        "Record deltas versus Open-Meteo for future source comparison."
+      ]
+    }
+  ],
+  "quality_gates": [
+    "yarn lint",
+    "yarn tsc --noEmit",
+    "yarn test",
+    "yarn test:e2e"
+  ],
+  "notes": [
+    "Met Office path is designed for higher-trust UK workflows.",
+    "Auth and quota handling are first-class concerns in this plan."
+  ]
+}

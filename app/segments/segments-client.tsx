@@ -36,7 +36,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState<'name' | 'distance' | 'elevation'>('name')
+  const [sortBy, setSortBy] = useState<'name' | 'distance' | 'elevation' | 'grade' | 'attempts' | 'bestTime' | 'avgTime'>('name')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   const [segments, setSegments] = useState(initialSegments)
   const [currentPage, setCurrentPage] = useState(1)
@@ -73,7 +73,37 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
     })
   }, [segments])
 
-  const displayedSegments = segmentsWithMetrics
+  const displayedSegments = useMemo(() => {
+    const sorted = [...segmentsWithMetrics]
+    sorted.sort((a, b) => {
+      let compare = 0
+      switch (sortBy) {
+        case 'name':
+          compare = (a.name || '').localeCompare(b.name || '')
+          break
+        case 'distance':
+          compare = (a.distance || 0) - (b.distance || 0)
+          break
+        case 'elevation':
+          compare = (a.metrics.elevationGain || 0) - (b.metrics.elevationGain || 0)
+          break
+        case 'grade':
+          compare = (a.metrics.steepness || 0) - (b.metrics.steepness || 0)
+          break
+        case 'attempts':
+          compare = (a.metrics.effortCount || 0) - (b.metrics.effortCount || 0)
+          break
+        case 'bestTime':
+          compare = (a.metrics.timeMin || 0) - (b.metrics.timeMin || 0)
+          break
+        case 'avgTime':
+          compare = (a.metrics.averageTime || 0) - (b.metrics.averageTime || 0)
+          break
+      }
+      return sortOrder === 'asc' ? compare : -compare
+    })
+    return sorted
+  }, [segmentsWithMetrics, sortBy, sortOrder])
 
   // Navigate to segment detail page
   const handleSegmentClick = useCallback((segmentId: string) => {
@@ -83,10 +113,14 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const fetchSegmentsPage = async (page: number, search: string, append: boolean) => {
     setLoading(true)
     try {
+      const apiSortBy =
+        sortBy === 'name' || sortBy === 'distance' || sortBy === 'elevation' || sortBy === 'grade'
+          ? sortBy
+          : 'name'
       const params = new URLSearchParams({
         page: page.toString(),
         limit: '100',
-        sortBy: sortBy,
+        sortBy: apiSortBy,
         sortOrder: sortOrder,
         ...(search && { search: search })
       })
@@ -133,8 +167,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   }
 
   useEffect(() => {
-    // Keep sorting global by reloading page 1 from DB with selected order.
-    void fetchSegmentsPage(1, searchTerm, false)
+    // Keep DB-backed sorts global by reloading page 1 from DB.
+    if (sortBy === 'name' || sortBy === 'distance' || sortBy === 'elevation' || sortBy === 'grade') {
+      void fetchSegmentsPage(1, searchTerm, false)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy, sortOrder])
 
@@ -386,6 +422,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                 <option value="name">Name</option>
                 <option value="distance">Distance</option>
                 <option value="elevation">Elevation Gain</option>
+                <option value="grade">Grade</option>
+                <option value="attempts">Attempts</option>
+                <option value="bestTime">Best Time</option>
+                <option value="avgTime">Avg Time</option>
               </select>
               <button
                 onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
@@ -490,10 +530,86 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                       )}
                     </div>
                   </th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Grade</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Attempts</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Best Time</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Avg Time</th>
+                  <th
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'grade') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('grade')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Grade
+                      {sortBy === 'grade' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'attempts') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('attempts')
+                        setSortOrder('desc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Attempts
+                      {sortBy === 'attempts' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'bestTime') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('bestTime')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Best Time
+                      {sortBy === 'bestTime' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                  <th
+                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      if (sortBy === 'avgTime') {
+                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
+                      } else {
+                        setSortBy('avgTime')
+                        setSortOrder('asc')
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      Avg Time
+                      {sortBy === 'avgTime' && (
+                        <span className="text-orange-600 dark:text-orange-400">
+                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </span>
+                      )}
+                    </div>
+                  </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 w-[140px]">
                     Route
                   </th>

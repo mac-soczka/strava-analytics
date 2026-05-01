@@ -1,0 +1,147 @@
+{
+  "plan_id": "weather-open-meteo-filesystem-json",
+  "title": "Action Plan: Edinburgh Historical Weather via Open-Meteo (Filesystem JSON first)",
+  "last_updated": "2026-05-01",
+  "status": "not_started",
+  "goal": "Fetch hourly historical weather for Edinburgh, UK from Open-Meteo and persist normalized JSON files to the local filesystem, with restart-safe incremental backfill.",
+  "upfront_requirements": {
+    "must_be_confirmed_before_build": [
+      "Usage mode confirmed: non-commercial prototype vs commercial production.",
+      "Open-Meteo plan tier confirmed for production (Standard/Professional/Enterprise as needed).",
+      "Exact historical date range to ingest first (for example full 5 years or specific start date).",
+      "Canonical timezone policy (UTC storage, display timezone handling).",
+      "Final hourly variable list and units.",
+      "Filesystem base path and retention policy for JSON outputs.",
+      "Run schedule (manual, cron, or on-demand only).",
+      "Error/retry policy and acceptable freshness lag.",
+      "Call-cost model validated (variables/time-window can count as fractional multiple calls)."
+    ],
+    "credentials_and_access": [
+      "For non-commercial prototype use, free/open-access endpoint can be used without API key (no SLA).",
+      "For commercial production use, customer API with API key is required per Open-Meteo pricing/licence terms.",
+      "Historical Weather API access for customer tiers must be confirmed for selected plan (Professional/Enterprise where applicable).",
+      "Outbound network access to the selected Open-Meteo endpoint/domain must be available in runtime environment."
+    ],
+    "definition_of_ready_checklist": [
+      "Usage mode approved (non-commercial vs commercial)",
+      "Plan tier/API key available if production/commercial",
+      "Rate/call budget documented for chosen query shape",
+      "Date range approved",
+      "Variable list approved",
+      "Storage path approved",
+      "Schedule approved",
+      "Operational owner identified"
+    ]
+  },
+  "scope": {
+    "included": [
+      "Open-Meteo archive API integration",
+      "Edinburgh coordinate source (55.9533, -3.1883)",
+      "Hourly fetch in bounded windows",
+      "Filesystem JSON storage and metadata manifest",
+      "Idempotent reruns and checkpoint tracking",
+      "Read API endpoint for local JSON outputs"
+    ],
+    "excluded": [
+      "Database schema and persistence",
+      "Multi-city support",
+      "Certified station-grade validation",
+      "Complex geocoding workflow"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Upfront Requirements Gate",
+      "tasks": [
+        "Collect and lock all required inputs listed in upfront_requirements.",
+        "Validate Open-Meteo licensing fit for intended usage (commercial vs non-commercial).",
+        "If commercial/production: secure API key and customer endpoint before implementation.",
+        "Estimate monthly call volume based on variables, time-window length, models, and locations.",
+        "Record approved variables/date range/schedule in docs.",
+        "Confirm runtime network access to chosen Open-Meteo endpoint.",
+        "Do not start implementation until definition_of_ready_checklist is complete."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Overview and Scope",
+      "tasks": [
+        "Define canonical Edinburgh coordinates and timezone behavior.",
+        "Define hourly fields to ingest: temperature_2m, relativehumidity_2m, windspeed_10m, precipitation.",
+        "Define time range policy (initial backfill start/end and incremental cadence).",
+        "Define output structure: one JSON file per month plus run manifest."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Filesystem Data Layer",
+      "tasks": [
+        "Create weather storage directory (for example data/weather/open-meteo/edinburgh).",
+        "Define JSON schema for hourly records and monthly file envelope.",
+        "Create sync-state JSON file (cursor, last_successful_window, checksum/row counts).",
+        "Implement atomic write pattern (tmp file then rename) to avoid partial writes."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Backend Integration Layer",
+      "tasks": [
+        "Add Open-Meteo client with explicit URL builder and strict parameter validation.",
+        "Implement windowed downloader (monthly windows by default) with retry/backoff.",
+        "Normalize API payload into canonical local shape.",
+        "Merge-write strategy: dedupe by timestamp and overwrite only changed rows.",
+        "Add service orchestration methods: backfill(), resume(), incrementalUpdate()."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "API and UX Layer",
+      "tasks": [
+        "Add endpoint to trigger backfill/update for Edinburgh weather.",
+        "Add endpoint to query stored weather windows from JSON files.",
+        "Expose run status summary (current window, records written, errors).",
+        "Keep UX minimal: trigger plus latest status text."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Testing",
+      "tasks": [
+        "Unit tests for URL builder, normalization, and merge/dedupe logic.",
+        "Integration tests for windowed sync using mocked Open-Meteo responses and real filesystem writes.",
+        "Integration tests for resume-from-checkpoint after simulated interruption.",
+        "E2E test for trigger endpoint and status visibility."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Documentation",
+      "tasks": [
+        "Document Open-Meteo endpoint usage and parameter choices.",
+        "Document filesystem JSON schema and checkpoint format.",
+        "Document limitations: reanalysis source, no station SLA."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Deployment and Verification",
+      "tasks": [
+        "Run lint/typecheck/test gates before merge.",
+        "Run first historical backfill and verify monthly file counts.",
+        "Validate idempotent rerun produces no duplicate hourly rows.",
+        "Capture operational notes for future DB migration."
+      ]
+    }
+  ],
+  "quality_gates": [
+    "yarn lint",
+    "yarn tsc --noEmit",
+    "yarn test",
+    "yarn test:e2e"
+  ],
+  "notes": [
+    "Open-Meteo free/open-access is suitable for prototyping and non-commercial usage; production/commercial requires paid customer API.",
+    "Persist only normalized JSON now; DB migration comes later."
+  ]
+}
