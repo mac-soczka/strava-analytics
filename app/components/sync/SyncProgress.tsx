@@ -98,6 +98,11 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   const segmentEfforts = job.progress?.streams ?? zero
   const segments = job.progress?.segments ?? zero
   const segmentEffortsProgress = job.progress?.segment_efforts ?? segmentEfforts
+  // During discover_activities phase, segment/effort totals may not be populated yet.
+  // Use activities.total as a meaningful denominator so users can see phase scope.
+  const segmentScopeTotal = segments.total > 0 ? segments.total : activities.total
+  const segmentEffortScopeTotal =
+    segmentEffortsProgress.total > 0 ? segmentEffortsProgress.total : activities.total
 
   const phaseLabel = (() => {
     switch (job.current_phase) {
@@ -231,12 +236,12 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
             </div>
             <div className="flex justify-between text-gray-600">
               <span>Segment Efforts:</span>
-              <span>{segmentEffortsProgress.processed} / {segmentEffortsProgress.total}</span>
+              <span>{segmentEffortsProgress.processed} / {segmentEffortScopeTotal}</span>
             </div>
             {(job.type === 'full_sync' || segments.total > 0) && (
               <div className="flex justify-between text-gray-600">
                 <span>Segments:</span>
-                <span>{segments.processed} / {segments.total}</span>
+                <span>{segments.processed} / {segmentScopeTotal}</span>
               </div>
             )}
           </>

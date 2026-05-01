@@ -30,6 +30,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Strava sync under 1000/day](./action-plans/strava-sync-under-1000-per-day.md)** - Multi-day, budget-aware strategy for activities, segments, and segment efforts
 - **[Optimize Strava sync (1 request/activity)](./action-plans/optimize-strava-sync.md)** - Extract embedded segment efforts from activity details to stay under rate limits
 - **[Stateful resumable sync plan](./action-plans/stateful-resumable-sync-plan.md)** - DB-backed phase/checkpoint sync with exact progress visibility and restart-safe resume
+- **[Segment efforts sideline sync](./action-plans/segment-efforts-sideline-sync.md)** - Targeted segment effort sync with autocomplete segment selection and resumable job tracking
 - **[User-triggered sync](./action-plans/user-triggered-sync.md)** - Background jobs + progress UI for user-triggered sync
 - **[Dashboard visual clues refresh](./action-plans/dashboard-visual-clues-refresh.md)** - Improve dashboard readability with semantic colors, temporal context, and trend cues
 

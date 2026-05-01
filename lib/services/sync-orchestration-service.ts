@@ -183,13 +183,20 @@ export class SyncOrchestrationService {
     return job
   }
 
-  async startSegmentEffortsSync(stravaId: number): Promise<SyncJob> {
+  async startSegmentEffortsSync(
+    stravaId: number,
+    options?: { targetSegmentId?: number }
+  ): Promise<SyncJob> {
     const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
     if (activeJob) {
       throw new Error('A sync job is already running for this user')
     }
 
-    const job = await this.jobsRepo.createJob(stravaId, 'segment_efforts_only')
+    const job = await this.jobsRepo.createJob(
+      stravaId,
+      'segment_efforts_only',
+      options?.targetSegmentId ? { targetSegmentId: options.targetSegmentId } : undefined
+    )
 
     this.runJob(job).catch((error: any) => {
       console.error(`Sync job ${job.id} failed:`, error)
@@ -434,28 +441,62 @@ export class SyncOrchestrationService {
     const jobId = job.id
     console.log(`[Job ${jobId}] Starting segment-efforts-only sync from Strava API...`)
 
+    const targetSegmentIdRaw = Number(job.options?.targetSegmentId)
+    const hasTargetSegment =
+      Number.isFinite(targetSegmentIdRaw) && targetSegmentIdRaw > 0
+
     // In Strava’s model, efforts are best fetched in bulk via activity details with include_all_efforts=true.
     // We reuse the same sync path as segments sync, which persists both segments and segment_efforts.
     try {
       await this.setPhase(jobId, 'ensure_segment_efforts')
-      console.log(`[Job ${jobId}] Fetching segment efforts (and segments) from activity details...`)
-      const segmentResult = await this.stravaService.syncSegments(
-        undefined,
-        this.segmentProgressReporter(jobId, true)
-      )
 
-      await this.jobsRepo.updateJobProgress(
-        jobId,
-        {
-          segment_efforts: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
-        } as Partial<SyncJobProgress>
-      )
+      if (hasTargetSegment) {
+        console.log(
+          `[Job ${jobId}] Fetching segment efforts for target segment ${targetSegmentIdRaw}...`
+        )
+        const result = await this.stravaService.syncSegmentEffortsForSegment(
+          targetSegmentIdRaw,
+          async (p) => {
+            await this.jobsRepo.updateJobProgress(
+              jobId,
+              {
+                segments: { total: 1, processed: 1, failed: 0 },
+                segment_efforts: { total: p.total, processed: p.saved, failed: p.errors },
+              } as Partial<SyncJobProgress>,
+              p.processed
+            )
+          }
+        )
 
-      await this.jobsRepo.updateJobStatus(jobId, 'completed', {
-        current_phase: 'completed',
-        processed_items: segmentResult.processed,
-        failed_items: segmentResult.errors,
-      })
+        await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+          current_phase: 'completed',
+          processed_items: result.processed,
+          failed_items: result.errors,
+        })
+      } else {
+        console.log(`[Job ${jobId}] Fetching segment efforts (and segments) from activity details...`)
+        const segmentResult = await this.stravaService.syncSegments(
+          undefined,
+          this.segmentProgressReporter(jobId, true)
+        )
+
+        await this.jobsRepo.updateJobProgress(
+          jobId,
+          {
+            segment_efforts: {
+              total: segmentResult.processed,
+              processed: segmentResult.processed,
+              failed: segmentResult.errors,
+            },
+          } as Partial<SyncJobProgress>
+        )
+
+        await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+          current_phase: 'completed',
+          processed_items: segmentResult.processed,
+          failed_items: segmentResult.errors,
+        })
+      }
     } catch (error: any) {
       if (this.isRateLimitError(error)) {
         console.warn(`[Job ${jobId}] Rate limit hit during segment-efforts-only sync! Pausing job...`)
@@ -469,13 +510,22 @@ export class SyncOrchestrationService {
   private segmentProgressReporter(
     jobId: string,
     mirrorProcessedItems: boolean
-  ): (_p: { processed: number; errors: number; total: number }) => Promise<void> {
+  ): (_p: {
+    processed: number
+    errors: number
+    total: number
+    segmentsProcessed: number
+    segmentEffortsProcessed: number
+  }) => Promise<void> {
     return async (p) => {
       await this.jobsRepo.updateJobProgress(
         jobId,
         {
-          segments: { total: p.total, processed: p.processed, failed: p.errors },
-          segment_efforts: { total: p.total, processed: p.processed, failed: p.errors },
+          // Segments and segment efforts move at different rates; track them separately.
+          // Totals are unknown until the scan completes, so keep them at 0.
+          // The UI renders these as live counts when total is unknown.
+          segments: { total: 0, processed: p.segmentsProcessed, failed: p.errors },
+          segment_efforts: { total: 0, processed: p.segmentEffortsProcessed, failed: p.errors },
         } as Partial<SyncJobProgress>,
         mirrorProcessedItems ? p.processed : undefined
       )

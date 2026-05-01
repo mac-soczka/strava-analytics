@@ -1,4 +1,4 @@
-import type { StravaActivity, StravaSegmentEffort } from '@/types/strava'
+import type { StravaActivity, StravaSegment, StravaSegmentEffort } from '@/types/strava'
 
 export type StravaListActivitiesOptions = {
   before?: number
@@ -13,5 +13,7 @@ export interface StravaApiClient {
   fetchActivities(page: number, perPage: number, options?: StravaListActivitiesOptions): Promise<StravaActivity[]>
   fetchActivityDetails(activityId: number): Promise<StravaActivity | null>
   fetchActivitySegmentEfforts(activityId: number): Promise<StravaSegmentEffort[]>
+  fetchSegmentEffortsForSegment(segmentId: number, page: number, perPage: number): Promise<StravaSegmentEffort[]>
+  fetchSegmentById(segmentId: number): Promise<StravaSegment | null>
 }
 

@@ -136,6 +136,41 @@ export async function mockStravaFetch(input: RequestInfo | URL, init: RequestIni
     return mkResponse({ json: buildMockActivityDetails(id) })
   }
 
+  const segmentEffortsMatch = path.match(/^\/api\/v3\/segments\/(\d+)\/all_efforts$/)
+  if (segmentEffortsMatch) {
+    const segmentId = Number(segmentEffortsMatch[1])
+    const page = Number(getQueryParam(parsed, 'page') ?? '1')
+    const perPage = Number(getQueryParam(parsed, 'per_page') ?? '200')
+    const allEfforts = Array.from({ length: 12 }, (_v, idx) => ({
+      id: String(890_000_000 + idx),
+      activity: { id: 950_000_000 + idx },
+      elapsed_time: 240 + idx,
+      moving_time: 236 + idx,
+      distance: 1000,
+      start_date: new Date('2026-01-10T10:00:00Z').toISOString(),
+      average_watts: 230,
+      max_watts: 380,
+      segment: {
+        id: segmentId,
+        name: `Mock Segment ${segmentId}`,
+        distance: 1000,
+        average_grade: 5.2,
+        maximum_grade: 12.5,
+        elevation_high: 100,
+        elevation_low: 50,
+        climb_category: 2,
+        city: 'Test City',
+        state: 'TS',
+        country: 'Testland',
+        map: { polyline: 'mock_segment_polyline' },
+      },
+    }))
+
+    const start = Math.max(0, (page - 1) * perPage)
+    const end = start + perPage
+    return mkResponse({ json: allEfforts.slice(start, end) })
+  }
+
   return mkResponse({
     status: 404,
     json: { message: `Unhandled Strava mock request: ${init?.method || 'GET'} ${url}` },

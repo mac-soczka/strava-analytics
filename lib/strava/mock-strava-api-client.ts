@@ -1,4 +1,4 @@
-import type { StravaActivity, StravaSegmentEffort } from '@/types/strava'
+import type { StravaActivity, StravaSegment, StravaSegmentEffort } from '@/types/strava'
 import type { StravaApiClient, StravaListActivitiesOptions } from './strava-api-client'
 
 export type MockStravaData = {
@@ -38,6 +38,26 @@ export class MockStravaApiClient implements StravaApiClient {
 
   async fetchActivitySegmentEfforts(activityId: number): Promise<StravaSegmentEffort[]> {
     return this.data.segmentEffortsByActivityId.get(activityId) ?? []
+  }
+
+  async fetchSegmentEffortsForSegment(
+    segmentId: number,
+    page: number,
+    perPage: number
+  ): Promise<StravaSegmentEffort[]> {
+    const all = Array.from(this.data.segmentEffortsByActivityId.values())
+      .flat()
+      .filter((effort) => effort.segment?.id === segmentId)
+    const start = (page - 1) * perPage
+    const end = start + perPage
+    return all.slice(start, end)
+  }
+
+  async fetchSegmentById(segmentId: number): Promise<StravaSegment | null> {
+    const match = Array.from(this.data.segmentEffortsByActivityId.values())
+      .flat()
+      .find((effort) => effort.segment?.id === segmentId)
+    return match?.segment ?? null
   }
 }
 

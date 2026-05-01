@@ -10,6 +10,12 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || ''
     const sortBy = searchParams.get('sortBy') || 'name'
     const sortOrder = searchParams.get('sortOrder') || 'asc'
+    const sortColumnByParam: Record<string, string> = {
+      name: 'name',
+      distance: 'distance',
+      elevation: 'elevation_gain',
+    }
+    const sortColumn = sortColumnByParam[sortBy] || 'name'
 
     const supabase = createServerComponentClient()
     const offset = (page - 1) * limit
@@ -35,7 +41,7 @@ export async function GET(request: NextRequest) {
       query = query.or(`name.ilike.%${search}%,city.ilike.%${search}%,state.ilike.%${search}%`)
     }
 
-    query = query.order(sortBy, { ascending: sortOrder === 'asc' })
+    query = query.order(sortColumn, { ascending: sortOrder === 'asc' })
     query = query.range(offset, offset + limit - 1)
 
     const { data: segments, error } = await query
@@ -45,7 +51,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to fetch segments' }, { status: 500 })
     }
 
-    const { count: totalCount } = await supabase.from('segments').select('*', { count: 'exact', head: true })
+    let countQuery = supabase.from('segments').select('*', { count: 'exact', head: true })
+    if (search) {
+      countQuery = countQuery.or(`name.ilike.%${search}%,city.ilike.%${search}%,state.ilike.%${search}%`)
+    }
+    const { count: totalCount } = await countQuery
 
     const transformedSegments =
       segments?.map((segment: any) => {

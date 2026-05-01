@@ -26,6 +26,9 @@ export interface StravaTokens {
 
 export interface StravaSegmentEffort {
   id: string;
+  activity?: {
+    id: number;
+  };
   segment: StravaSegment;
   elapsed_time: number;
   moving_time: number;

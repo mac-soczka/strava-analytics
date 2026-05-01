@@ -39,7 +39,7 @@ type SyncState = {
   setCoverage: (coverage: SyncCoverage | null) => void
 
   // eslint-disable-next-line no-unused-vars
-  startSync: (endpoint?: string) => Promise<string>
+  startSync: (endpoint?: string, body?: unknown) => Promise<string>
   cancelActiveJob: () => Promise<void>
 
   refreshCoverage: () => Promise<void>
@@ -178,10 +178,18 @@ export const useSyncStore = create<SyncState>((set, get) => ({
 
   setCoverage: (coverage) => set({ coverage }),
 
-  startSync: async (endpoint) => {
+  startSync: async (endpoint, body) => {
     set({ isStarting: true, error: null })
     try {
-      const response = await fetch(endpoint ?? '/api/sync/start', { method: 'POST' })
+      const response = await fetch(endpoint ?? '/api/sync/start', {
+        method: 'POST',
+        ...(body !== undefined
+          ? {
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body),
+            }
+          : {}),
+      })
       const data = await response.json().catch(() => ({}))
 
       if (!response.ok) {

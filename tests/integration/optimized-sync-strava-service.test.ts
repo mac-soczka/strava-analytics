@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js/dist/main/index.js'
 import { mockStravaFetch } from '@/tests/helpers/strava-mock-fetch'
 import { RealStravaApiClient } from '@/lib/strava/real-strava-api-client'
 import { StravaSyncService } from '@/lib/services/strava-sync-service'
+import { StravaService } from '@/lib/services/strava-service'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -153,6 +154,77 @@ async function cleanupTestUserData() {
       .select('activity_id')
       .eq('activity_id', activityId)
     expect(efforts?.length).toBe(1)
+  })
+
+  it('syncSegmentEffortsForSegment() ingests all pages for a target segment', async () => {
+    const targetSegmentId = 700_079
+    const api = new RealStravaApiClient(TEST_STRAVA_ID, { fetchFn: mockStravaFetch, sleep: async () => {} })
+    const service = new StravaService(TEST_STRAVA_ID, { apiClient: api })
+
+    const result = await service.syncSegmentEffortsForSegment(targetSegmentId)
+    expect(result.errors).toBe(0)
+    expect(result.saved).toBe(12)
+    expect(result.processed).toBe(12)
+
+    const { count: effortCount, error: effortsError } = await supabase
+      .from('segment_efforts')
+      .select('*', { count: 'exact', head: true })
+      .eq('segment_id', targetSegmentId)
+      .gte('effort_id_text', '890000000')
+      .lte('effort_id_text', '899999999')
+
+    expect(effortsError).toBeNull()
+    expect(effortCount).toBe(12)
+
+    const { count: placeholderActivities, error: activitiesError } = await supabase
+      .from('activities')
+      .select('*', { count: 'exact', head: true })
+      .eq('strava_id', TEST_STRAVA_ID)
+      .gte('activity_id', 950_000_000)
+      .lte('activity_id', 950_000_020)
+
+    expect(activitiesError).toBeNull()
+    expect(placeholderActivities).toBe(12)
+  })
+
+  it('syncSegmentEffortsForSegment() falls back to recent-first activity scan when segment all_efforts returns 402', async () => {
+    const targetSegmentId = 700_001
+    const fetchWith402ForSegmentEndpoint: typeof fetch = async (input, init) => {
+      const url =
+        typeof input === 'string'
+          ? input
+          : input instanceof URL
+            ? input.toString()
+            : (input as Request).url
+      if (url.includes(`/api/v3/segments/${targetSegmentId}/all_efforts`)) {
+        return new Response(JSON.stringify({ message: 'Payment Required', errors: [] }), {
+          status: 402,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Usage': '1,10', 'X-RateLimit-Limit': '100,1000' },
+        })
+      }
+      return mockStravaFetch(input as any, init)
+    }
+
+    const api = new RealStravaApiClient(TEST_STRAVA_ID, {
+      fetchFn: fetchWith402ForSegmentEndpoint,
+      sleep: async () => {},
+    })
+    const service = new StravaService(TEST_STRAVA_ID, { apiClient: api })
+
+    const result = await service.syncSegmentEffortsForSegment(targetSegmentId)
+    expect(result.errors).toBe(0)
+    expect(result.saved).toBe(1)
+    expect(result.processed).toBe(1)
+
+    const { count: effortCount, error: effortsError } = await supabase
+      .from('segment_efforts')
+      .select('*', { count: 'exact', head: true })
+      .eq('segment_id', targetSegmentId)
+      .gte('effort_id_text', '800000000')
+      .lte('effort_id_text', '899999999')
+
+    expect(effortsError).toBeNull()
+    expect(effortCount).toBe(1)
   })
 })
 

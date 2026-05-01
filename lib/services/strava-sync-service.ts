@@ -173,7 +173,13 @@ export class StravaSyncService {
 
   async syncSegments(
     batchSize = config.stravaApiLimits.maxSegmentBatchSize,
-    onProgress?: (_p: { processed: number; errors: number; total: number }) => Promise<void>
+    onProgress?: (_p: {
+      processed: number
+      errors: number
+      total: number
+      segmentsProcessed: number
+      segmentEffortsProcessed: number
+    }) => Promise<void>
   ): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
     let processed = 0
     let segmentsAdded = 0
@@ -181,13 +187,21 @@ export class StravaSyncService {
     let offset = 0
     let hasMoreActivities = true
     let activitiesHandled = 0
+    const seenSegmentIds = new Set<number>()
+    let segmentEffortsProcessed = 0
 
     const totalActivitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegmentsCount(this.stravaId)
     if (totalActivitiesNeedingSegments === 0) {
       return { processed: 0, segmentsAdded: 0, errors: 0 }
     }
 
-    await onProgress?.({ processed: 0, errors: 0, total: totalActivitiesNeedingSegments })
+    await onProgress?.({
+      processed: 0,
+      errors: 0,
+      total: totalActivitiesNeedingSegments,
+      segmentsProcessed: 0,
+      segmentEffortsProcessed: 0,
+    })
 
     while (hasMoreActivities) {
       const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, offset, this.stravaId)
@@ -198,6 +212,11 @@ export class StravaSyncService {
           const segmentEfforts = await this.api.fetchActivitySegmentEfforts(activity.activity_id)
 
           if (segmentEfforts.length > 0) {
+            for (const effort of segmentEfforts) {
+              seenSegmentIds.add(effort.segment.id)
+            }
+            segmentEffortsProcessed += segmentEfforts.length
+
             const segmentsFromEfforts = segmentEfforts.map((effort) => ({
               segment_id: effort.segment.id,
               name: effort.segment.name,
@@ -257,7 +276,13 @@ export class StravaSyncService {
           await this.activitiesRepo.markSegmentsFetchFailed(activity.id, 'Failed to fetch segments').catch(() => {})
         } finally {
           activitiesHandled++
-          await onProgress?.({ processed: activitiesHandled, errors, total: totalActivitiesNeedingSegments })
+          await onProgress?.({
+            processed: activitiesHandled,
+            errors,
+            total: totalActivitiesNeedingSegments,
+            segmentsProcessed: seenSegmentIds.size,
+            segmentEffortsProcessed,
+          })
         }
       }
 

@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { config } from '@/lib/config'
 import { ActivitiesRepository } from '@/lib/repositories/activities-repository'
 import { SegmentsRepository } from '@/lib/repositories/segments-repository'
-import type { StravaActivity, StravaSegmentEffort, DatabaseActivity } from '@/types/strava'
+import type { StravaActivity, StravaSegment, StravaSegmentEffort, DatabaseActivity } from '@/types/strava'
 import { RealStravaApiClient, type RealStravaApiClientDeps } from '@/lib/strava/real-strava-api-client'
 import type { StravaApiClient } from '@/lib/strava/strava-api-client'
 import { StravaSyncService } from '@/lib/services/strava-sync-service'
@@ -60,6 +60,10 @@ export class StravaService {
 
   fetchActivitySegments(activityId: number): Promise<StravaSegmentEffort[]> {
     return this.apiClient.fetchActivitySegmentEfforts(activityId)
+  }
+
+  fetchSegmentById(segmentId: number): Promise<StravaSegment | null> {
+    return this.apiClient.fetchSegmentById(segmentId)
   }
 
   syncActivitiesBackfill(options: {
@@ -317,9 +321,197 @@ export class StravaService {
    */
   async syncSegments(
     batchSize = config.stravaApiLimits.maxSegmentBatchSize,
-    onProgress?: (_p: { processed: number; errors: number; total: number }) => Promise<void>
+    onProgress?: (_p: {
+      processed: number
+      errors: number
+      total: number
+      segmentsProcessed: number
+      segmentEffortsProcessed: number
+    }) => Promise<void>
   ): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
     return this.sync.syncSegments(batchSize, onProgress)
+  }
+
+  async syncSegmentEffortsForSegment(
+    segmentId: number,
+    onProgress?: (_p: { processed: number; saved: number; errors: number; total: number }) => Promise<void>
+  ): Promise<{ processed: number; saved: number; errors: number }> {
+    const pageSize = 200
+    const maxPages = 200
+    let page = 1
+    let processed = 0
+    let saved = 0
+    let errors = 0
+    let total = 0
+    let segmentUpserted = false
+    const knownActivities = new Set<number>()
+
+    const ensureActivityExists = async (activityId: number, effortDate: string) => {
+      if (knownActivities.has(activityId)) return true
+
+      const existingActivity = await this.activitiesRepo.getActivityById(activityId)
+      if (!existingActivity) {
+        if (!this.userId) return false
+        await this.activitiesRepo.createActivity({
+          strava_id: this.userId,
+          activity_id: activityId,
+          name: `Segment Effort Activity ${activityId}`,
+          distance: 0,
+          moving_time: 0,
+          elapsed_time: 0,
+          total_elevation_gain: 0,
+          type: 'Unknown',
+          start_date: effortDate,
+          start_date_local: effortDate,
+          strava_url: `https://www.strava.com/activities/${activityId}`,
+          activity_synced_at: new Date().toISOString(),
+          activity_details_synced_at: null,
+        })
+      }
+      knownActivities.add(activityId)
+      return true
+    }
+
+    const persistEfforts = async (efforts: StravaSegmentEffort[]) => {
+      if (efforts.length === 0) return
+
+      if (!segmentUpserted) {
+        const segment = efforts.find((e) => e.segment?.id === segmentId)?.segment
+        if (segment) {
+          await this.segmentsRepo.upsertSegment({
+            segment_id: segment.id,
+            name: segment.name,
+            distance: segment.distance,
+            average_grade: segment.average_grade,
+            maximum_grade: segment.maximum_grade,
+            elevation_gain: (segment.elevation_high || 0) - (segment.elevation_low || 0),
+            climb_category: segment.climb_category,
+            city: segment.city,
+            state: segment.state,
+            country: segment.country,
+            polyline: segment.map?.polyline,
+          })
+          segmentUpserted = true
+        }
+      }
+
+      for (const effort of efforts) {
+        processed += 1
+        try {
+          const activityId = Number((effort as any)?.activity?.id)
+          if (!Number.isFinite(activityId) || activityId <= 0) {
+            errors += 1
+            continue
+          }
+
+          const effortDate = effort.start_date || new Date().toISOString()
+          const ready = await ensureActivityExists(activityId, effortDate)
+          if (!ready) {
+            errors += 1
+            continue
+          }
+
+          const result = await this.segmentsRepo.saveEffortFromStravaActivity(activityId, effort)
+          if (result.error) {
+            errors += 1
+          } else {
+            saved += 1
+          }
+        } catch (_error) {
+          errors += 1
+        }
+      }
+    }
+
+    let useActivityFallback = false
+    while (page <= maxPages) {
+      if (useActivityFallback) break
+
+      let efforts: StravaSegmentEffort[] = []
+      try {
+        efforts = await this.apiClient.fetchSegmentEffortsForSegment(segmentId, page, pageSize)
+      } catch (error: any) {
+        if (error?.statusCode === 402) {
+          // Some Strava accounts cannot access /segments/{id}/all_efforts.
+          // Fallback to recent-first activity scan and extract matching efforts.
+          useActivityFallback = true
+          break
+        }
+        throw error
+      }
+      if (efforts.length === 0) break
+
+      total += efforts.length
+      await persistEfforts(efforts)
+
+      await onProgress?.({ processed, saved, errors, total })
+
+      if (efforts.length < pageSize) break
+      page += 1
+    }
+
+    if (useActivityFallback) {
+      const activitiesPageSize = 200
+      let activitiesPage = 1
+      let fallbackAfterEpoch: number | undefined
+
+      const { data: latestKnownEffort } = await this.supabase
+        .from('segment_efforts')
+        .select('start_date')
+        .eq('segment_id', segmentId)
+        .order('start_date', { ascending: false })
+        .limit(1)
+        .maybeSingle()
+
+      if (latestKnownEffort?.start_date && typeof latestKnownEffort.start_date === 'string') {
+        const epoch = Math.floor(new Date(latestKnownEffort.start_date).getTime() / 1000)
+        if (Number.isFinite(epoch) && epoch > 0) {
+          // Small overlap to avoid boundary misses around same-day activities.
+          fallbackAfterEpoch = Math.max(0, epoch - 24 * 60 * 60)
+        }
+      }
+
+      // Keep all sync data:
+      // - For segments with known history, do an incremental recent scan (request-efficient).
+      // - For first-time segments (no known effort), allow deep scan to build full history.
+      const maxActivityPages = fallbackAfterEpoch ? 30 : 200
+
+      while (activitiesPage <= maxActivityPages) {
+        const activities = await this.apiClient.fetchActivities(
+          activitiesPage,
+          activitiesPageSize,
+          fallbackAfterEpoch ? { after: fallbackAfterEpoch } : undefined
+        )
+        if (activities.length === 0) break
+
+        for (const activity of activities) {
+          try {
+            const details = await this.apiClient.fetchActivityDetails(activity.id)
+            if (!details || !details.segment_efforts || details.segment_efforts.length === 0) continue
+
+            const matchingEfforts = details.segment_efforts
+              .filter((effort) => effort.segment?.id === segmentId)
+              .map((effort) => ({
+                ...effort,
+                activity: { id: details.id },
+              }))
+
+            total += matchingEfforts.length
+            await persistEfforts(matchingEfforts)
+          } catch (error: any) {
+            if (error?.statusCode === 429) throw error
+            errors += 1
+          }
+        }
+
+        await onProgress?.({ processed, saved, errors, total })
+
+        if (activities.length < activitiesPageSize) break
+        activitiesPage += 1
+      }
+    }
+
+    return { processed, saved, errors }
   }
 
   /**

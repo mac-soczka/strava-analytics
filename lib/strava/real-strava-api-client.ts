@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { config } from '@/lib/config'
 import { getRateLimitService, RateLimitService } from '@/lib/services/rate-limit-service'
-import type { StravaActivity, StravaSegmentEffort, StravaTokens } from '@/types/strava'
+import type { StravaActivity, StravaSegment, StravaSegmentEffort, StravaTokens } from '@/types/strava'
 import type { StravaApiClient, StravaListActivitiesOptions } from './strava-api-client'
 import JSONbig from 'json-bigint'
 
@@ -73,7 +73,12 @@ export class RealStravaApiClient implements StravaApiClient {
     const response = await this.stravaFetch(url, init)
     if (!response.ok) {
       const bodyText = await response.text().catch(() => '')
-      throw new Error(`Strava API request failed: ${response.status}${bodyText ? ` - ${bodyText}` : ''}`)
+      const err: any = new Error(
+        `Strava API request failed: ${response.status}${bodyText ? ` - ${bodyText}` : ''}`
+      )
+      err.statusCode = response.status
+      err.responseBody = bodyText
+      throw err
     }
 
     const delay = this.rateLimitService.getAdaptiveDelay()
@@ -88,7 +93,12 @@ export class RealStravaApiClient implements StravaApiClient {
     const response = await this.stravaFetch(url, init)
     if (!response.ok) {
       const bodyText = await response.text().catch(() => '')
-      throw new Error(`Strava API request failed: ${response.status}${bodyText ? ` - ${bodyText}` : ''}`)
+      const err: any = new Error(
+        `Strava API request failed: ${response.status}${bodyText ? ` - ${bodyText}` : ''}`
+      )
+      err.statusCode = response.status
+      err.responseBody = bodyText
+      throw err
     }
 
     const delay = this.rateLimitService.getAdaptiveDelay()
@@ -199,6 +209,27 @@ export class RealStravaApiClient implements StravaApiClient {
       `https://www.strava.com/api/v3/activities/${activityId}?include_all_efforts=true`
     )
     return (activity.segment_efforts || []) as StravaSegmentEffort[]
+  }
+
+  async fetchSegmentEffortsForSegment(
+    segmentId: number,
+    page: number,
+    perPage: number
+  ): Promise<StravaSegmentEffort[]> {
+    return this.stravaFetchJson<StravaSegmentEffort[]>(
+      `https://www.strava.com/api/v3/segments/${segmentId}/all_efforts?page=${page}&per_page=${perPage}`
+    )
+  }
+
+  async fetchSegmentById(segmentId: number): Promise<StravaSegment | null> {
+    try {
+      return await this.stravaFetchJson<StravaSegment>(
+        `https://www.strava.com/api/v3/segments/${segmentId}`
+      )
+    } catch (error: any) {
+      if (error?.statusCode === 404) return null
+      throw error
+    }
   }
 }
 

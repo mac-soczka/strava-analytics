@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import { StravaSegment, StravaSegmentEffort } from '@/types/strava'
 import type { SegmentsPageStats } from '@/lib/server/segments-page-stats'
 import { motion } from 'framer-motion'
@@ -36,15 +36,13 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState<
-    'last_effort' | 'name' | 'distance' | 'efforts' | 'elevation' | 'steepness' | 'time_max' | 'time_min'
-  >('last_effort')
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
+  const [sortBy, setSortBy] = useState<'name' | 'distance' | 'elevation'>('name')
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   const [segments, setSegments] = useState(initialSegments)
   const [currentPage, setCurrentPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null)
+  const [searchTimeout, setSearchTimeout] = useState<ReturnType<typeof setTimeout> | null>(null)
   const expandedSegmentId = useSegmentsUiStore((s) => s.expandedSegmentId)
   const toggleExpandedSegmentId = useSegmentsUiStore((s) => s.toggleExpandedSegmentId)
 
@@ -75,66 +73,18 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
     })
   }, [segments])
 
-  // Filter and sort segments
-  const filteredAndSortedSegments = useMemo(() => {
-    let filtered = segmentsWithMetrics
-
-    // Apply search filter (client-side for loaded segments)
-    if (searchTerm) {
-      filtered = filtered.filter(segment =>
-        segment.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (segment.city && segment.city.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (segment.state && segment.state.toLowerCase().includes(searchTerm.toLowerCase()))
-      )
-    }
-
-    // Apply sorting
-    filtered.sort((a, b) => {
-      let comparison = 0
-      switch (sortBy) {
-        case 'last_effort':
-          comparison = a.metrics.lastEffortAt - b.metrics.lastEffortAt
-          break
-        case 'distance':
-          comparison = (a.distance || 0) - (b.distance || 0)
-          break
-        case 'efforts':
-          comparison = a.metrics.effortCount - b.metrics.effortCount
-          break
-        case 'elevation':
-          comparison = a.metrics.elevationGain - b.metrics.elevationGain
-          break
-        case 'steepness':
-          comparison = a.metrics.steepness - b.metrics.steepness
-          break
-        case 'time_max':
-          comparison = a.metrics.timeMax - b.metrics.timeMax
-          break
-        case 'time_min':
-          comparison = a.metrics.timeMin - b.metrics.timeMin
-          break
-        case 'name':
-        default:
-          comparison = a.name.localeCompare(b.name)
-          break
-      }
-      return sortOrder === 'asc' ? comparison : -comparison
-    })
-
-    return filtered
-  }, [segmentsWithMetrics, searchTerm, sortBy, sortOrder])
+  const displayedSegments = segmentsWithMetrics
 
   // Navigate to segment detail page
   const handleSegmentClick = useCallback((segmentId: string) => {
     router.push(`/segments/${segmentId}`)
   }, [router])
 
-  // Search segments from API
-  const searchSegments = async (search: string) => {
+  const fetchSegmentsPage = async (page: number, search: string, append: boolean) => {
     setLoading(true)
     try {
       const params = new URLSearchParams({
-        page: '1',
+        page: page.toString(),
         limit: '100',
         sortBy: sortBy,
         sortOrder: sortOrder,
@@ -145,15 +95,24 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
       if (!response.ok) throw new Error('Failed to search segments')
       
       const data = await response.json()
-      
-      setSegments(data.segments || [])
-      setCurrentPage(1)
-      setHasMore(data.pagination && data.pagination.page < data.pagination.totalPages)
+
+      if (append) {
+        setSegments(prev => [...prev, ...(data.segments || [])])
+      } else {
+        setSegments(data.segments || [])
+      }
+      setCurrentPage(page)
+      setHasMore(Boolean(data.pagination && data.pagination.page < data.pagination.totalPages))
     } catch (error) {
       console.error('Error searching segments:', error)
     } finally {
       setLoading(false)
     }
+  }
+
+  // Search segments from API
+  const searchSegments = async (search: string) => {
+    await fetchSegmentsPage(1, search, false)
   }
 
   // Handle search input with debouncing
@@ -173,6 +132,12 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
     setSearchTimeout(timeout)
   }
 
+  useEffect(() => {
+    // Keep sorting global by reloading page 1 from DB with selected order.
+    void fetchSegmentsPage(1, searchTerm, false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy, sortOrder])
+
   // Load more segments
   const loadMoreSegments = async () => {
     if (loadingMore || !hasMore) return
@@ -180,29 +145,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
     setLoadingMore(true)
     try {
       const nextPage = currentPage + 1
-      const params = new URLSearchParams({
-        page: nextPage.toString(),
-        limit: '100',
-        sortBy: sortBy,
-        sortOrder: sortOrder,
-        ...(searchTerm && { search: searchTerm })
-      })
-      
-      const response = await fetch(`/api/segments?${params}`)
-      if (!response.ok) throw new Error('Failed to fetch segments')
-      
-      const data = await response.json()
-      
-      if (data.segments && data.segments.length > 0) {
-        setSegments(prev => [...prev, ...data.segments])
-        setCurrentPage(nextPage)
-        // Check if we have more pages or if we've loaded all segments
-        const hasMorePages = data.pagination && nextPage < data.pagination.totalPages
-        const hasMoreSegments = segments.length + data.segments.length < (data.pagination?.total || stats.totalSegments)
-        setHasMore(hasMorePages && hasMoreSegments)
-      } else {
-        setHasMore(false)
-      }
+      await fetchSegmentsPage(nextPage, searchTerm, true)
     } catch (error) {
       console.error('Error loading more segments:', error)
     } finally {
@@ -214,10 +157,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const refreshSegments = async () => {
     setLoading(true)
     try {
-      // Reset to initial state
-      setSegments(initialSegments)
-      setCurrentPage(1)
-      setHasMore(true)
+      await fetchSegmentsPage(1, searchTerm, false)
     } catch (error) {
       console.error('Error refreshing segments:', error)
     } finally {
@@ -445,11 +385,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
               >
                 <option value="name">Name</option>
                 <option value="distance">Distance</option>
-                <option value="efforts">Number of Attempts</option>
                 <option value="elevation">Elevation Gain</option>
-                <option value="steepness">Steepness (Grade %)</option>
-                <option value="time_max">Slowest Time</option>
-                <option value="time_min">Fastest Time</option>
               </select>
               <button
                 onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
@@ -554,86 +490,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                       )}
                     </div>
                   </th>
-                  <th 
-                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => {
-                      if (sortBy === 'steepness') {
-                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
-                      } else {
-                        setSortBy('steepness')
-                        setSortOrder('asc')
-                      }
-                    }}
-                  >
-                    <div className="flex items-center gap-2">
-                      Grade
-                      {sortBy === 'steepness' && (
-                        <span className="text-orange-600 dark:text-orange-400">
-                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                        </span>
-                      )}
-                    </div>
-                  </th>
-                  <th 
-                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => {
-                      if (sortBy === 'efforts') {
-                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
-                      } else {
-                        setSortBy('efforts')
-                        setSortOrder('asc')
-                      }
-                    }}
-                  >
-                    <div className="flex items-center gap-2">
-                      Attempts
-                      {sortBy === 'efforts' && (
-                        <span className="text-orange-600 dark:text-orange-400">
-                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                        </span>
-                      )}
-                    </div>
-                  </th>
-                  <th 
-                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => {
-                      if (sortBy === 'time_min') {
-                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
-                      } else {
-                        setSortBy('time_min')
-                        setSortOrder('asc')
-                      }
-                    }}
-                  >
-                    <div className="flex items-center gap-2">
-                      Best Time
-                      {sortBy === 'time_min' && (
-                        <span className="text-orange-600 dark:text-orange-400">
-                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                        </span>
-                      )}
-                    </div>
-                  </th>
-                  <th 
-                    className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => {
-                      if (sortBy === 'time_max') {
-                        setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')
-                      } else {
-                        setSortBy('time_max')
-                        setSortOrder('asc')
-                      }
-                    }}
-                  >
-                    <div className="flex items-center gap-2">
-                      Avg Time
-                      {sortBy === 'time_max' && (
-                        <span className="text-orange-600 dark:text-orange-400">
-                          {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                        </span>
-                      )}
-                    </div>
-                  </th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Grade</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Attempts</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Best Time</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Avg Time</th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300 w-[140px]">
                     Route
                   </th>
@@ -643,7 +503,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
                 </tr>
               </thead>
               <tbody>
-                {filteredAndSortedSegments.flatMap((segment, index) => {
+                {displayedSegments.flatMap((segment, index) => {
                   const sid = Number(segment.id)
                   const rows: React.ReactNode[] = [
                     <motion.tr
@@ -747,7 +607,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
       </motion.div>
 
       {/* Load More Button */}
-      {hasMore && filteredAndSortedSegments.length > 0 && (
+      {hasMore && displayedSegments.length > 0 && (
         <motion.div
           className="flex justify-center py-6"
           initial={{ opacity: 0 }}
@@ -776,7 +636,7 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
       )}
 
       {/* No Segments Message */}
-      {filteredAndSortedSegments.length === 0 && (
+      {displayedSegments.length === 0 && (
         <motion.div
           className="text-center py-12"
           initial={{ opacity: 0 }}
