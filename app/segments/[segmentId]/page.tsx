@@ -89,26 +89,40 @@ async function SegmentDetailContent({ segmentId }: { segmentId: string }) {
       notFound()
     }
 
-    // Fetch all efforts for this segment
-    const { data: efforts, error: effortsError } = await supabase
-      .from('segment_efforts')
-      .select(`
-        *,
-        activities (
-          activity_id,
-          name,
-          type,
-          start_date
-        )
-      `)
-      .eq('segment_id', parseInt(segmentId))
-      .order('start_date', { ascending: false })
+    // Fetch all efforts for this segment (paged) to avoid API row caps.
+    const pageSize = 1000
+    let from = 0
+    let hasMore = true
+    const allEfforts: any[] = []
 
-    if (effortsError) throw effortsError
+    while (hasMore) {
+      const to = from + pageSize - 1
+      const { data: effortsPage, error: effortsError } = await supabase
+        .from('segment_efforts')
+        .select(`
+          *,
+          activities (
+            activity_id,
+            name,
+            type,
+            start_date
+          )
+        `)
+        .eq('segment_id', parseInt(segmentId))
+        .order('start_date', { ascending: false })
+        .range(from, to)
+
+      if (effortsError) throw effortsError
+
+      const page = effortsPage || []
+      allEfforts.push(...page)
+      hasMore = page.length === pageSize
+      from += pageSize
+    }
 
     // Calculate statistics
-    const totalEfforts = efforts?.length || 0
-    const times = efforts?.map(e => e.elapsed_time) || []
+    const totalEfforts = allEfforts.length
+    const times = allEfforts.map(e => e.elapsed_time)
     const bestTime = times.length > 0 ? Math.min(...times) : 0
     const worstTime = times.length > 0 ? Math.max(...times) : 0
     const averageTime = times.length > 0 ? times.reduce((a, b) => a + b, 0) / times.length : 0
@@ -116,21 +130,24 @@ async function SegmentDetailContent({ segmentId }: { segmentId: string }) {
     const steepness = segment.distance > 0 ? (elevationGain / segment.distance) * 100 : 0
 
     // Calculate percentiles for each effort
-    const effortsWithPercentile = efforts?.map((effort: any) => {
+    const effortsWithPercentile = allEfforts.map((effort: any) => {
       const betterCount = times.filter(time => time < effort.elapsed_time).length
       const percentile = totalEfforts > 1 ? 100 * (betterCount / (totalEfforts - 1)) : 0
       return { ...effort, percentile: Math.round(percentile) }
-    }).sort((a: any, b: any) => b.elapsed_time - a.elapsed_time) || []
+    })
 
     // Find PR (best effort)
-    const pr = efforts?.reduce((best: any, effort: any) => 
+    const pr = allEfforts.reduce((best: any, effort: any) =>
       !best || effort.elapsed_time < best.elapsed_time ? effort : best, null
     )
 
     // Find most recent effort
-    const mostRecent = efforts?.sort((a: any, b: any) => 
-      new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
-    )[0]
+    const mostRecent = allEfforts.reduce((latest: any, effort: any) => {
+      if (!latest) return effort
+      return new Date(effort.start_date).getTime() > new Date(latest.start_date).getTime()
+        ? effort
+        : latest
+    }, null)
 
     const stats = {
       totalEfforts,

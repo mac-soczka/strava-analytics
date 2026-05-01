@@ -12,7 +12,8 @@ import {
   BarChart3,
   Mountain,
   Award,
-  ArrowLeft
+  ArrowLeft,
+  ArrowUpDown
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -37,6 +38,10 @@ interface SegmentDetailClientProps {
 }
 
 export default function SegmentDetailClient({ segment, efforts, stats, pr, mostRecent }: SegmentDetailClientProps) {
+  type SortBy = 'date' | 'time' | 'speed' | 'percentile' | 'activity'
+  const [sortBy, setSortBy] = React.useState<SortBy>('date')
+  const [sortOrder, setSortOrder] = React.useState<'asc' | 'desc'>('desc')
+
   // Format time helper
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60)
@@ -55,6 +60,65 @@ export default function SegmentDetailClient({ segment, efforts, stats, pr, mostR
   const formatSpeed = (distance: number, time: number) => {
     return (distance / time * 3.6).toFixed(2) // km/h
   }
+
+  const handleSort = (column: SortBy) => {
+    if (sortBy === column) {
+      setSortOrder((current) => (current === 'asc' ? 'desc' : 'asc'))
+      return
+    }
+    setSortBy(column)
+    setSortOrder(column === 'date' ? 'desc' : 'asc')
+  }
+
+  const sortedEfforts = React.useMemo(() => {
+    const sorted = [...efforts]
+    sorted.sort((a: any, b: any) => {
+      let compare = 0
+      switch (sortBy) {
+        case 'date':
+          compare = new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
+          break
+        case 'time':
+          compare = a.elapsed_time - b.elapsed_time
+          break
+        case 'speed': {
+          const speedA = stats.distance > 0 && a.elapsed_time > 0 ? stats.distance / a.elapsed_time : 0
+          const speedB = stats.distance > 0 && b.elapsed_time > 0 ? stats.distance / b.elapsed_time : 0
+          compare = speedA - speedB
+          break
+        }
+        case 'percentile':
+          compare = (a.percentile || 0) - (b.percentile || 0)
+          break
+        case 'activity':
+          compare = String(a.activities?.name || '').localeCompare(String(b.activities?.name || ''))
+          break
+      }
+      return sortOrder === 'asc' ? compare : -compare
+    })
+    return sorted
+  }, [efforts, sortBy, sortOrder, stats.distance])
+
+  const SortHeader = ({
+    column,
+    label,
+    className = '',
+  }: {
+    column: SortBy
+    label: string
+    className?: string
+  }) => (
+    <th className={`py-3 px-4 text-left ${className}`}>
+      <button
+        type="button"
+        onClick={() => handleSort(column)}
+        className="inline-flex items-center gap-1 font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-300 transition-colors"
+      >
+        {label}
+        <ArrowUpDown className="h-3.5 w-3.5" />
+      </button>
+    </th>
+  )
 
   return (
     <div className="space-y-6">
@@ -267,15 +331,15 @@ export default function SegmentDetailClient({ segment, efforts, stats, pr, mostR
               <table className="min-w-full">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-700">
-                    <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Date</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Time</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Speed</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Percentile</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700 dark:text-gray-300">Activity</th>
+                    <SortHeader column="date" label="Date" />
+                    <SortHeader column="time" label="Time" />
+                    <SortHeader column="speed" label="Speed" />
+                    <SortHeader column="percentile" label="Percentile" />
+                    <SortHeader column="activity" label="Activity" />
                   </tr>
                 </thead>
                 <tbody>
-                  {efforts.map((effort, index) => (
+                  {sortedEfforts.map((effort, index) => (
                     <motion.tr
                       key={effort.id}
                       initial={{ opacity: 0, y: 10 }}
