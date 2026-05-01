@@ -182,7 +182,7 @@ export class StravaSyncService {
     let hasMoreActivities = true
     let activitiesHandled = 0
 
-    const totalActivitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegmentsCount()
+    const totalActivitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegmentsCount(this.stravaId)
     if (totalActivitiesNeedingSegments === 0) {
       return { processed: 0, segmentsAdded: 0, errors: 0 }
     }
@@ -190,7 +190,7 @@ export class StravaSyncService {
     await onProgress?.({ processed: 0, errors: 0, total: totalActivitiesNeedingSegments })
 
     while (hasMoreActivities) {
-      const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, offset)
+      const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, offset, this.stravaId)
       if (!activitiesNeedingSegments || activitiesNeedingSegments.length === 0) break
 
       for (const activity of activitiesNeedingSegments) {

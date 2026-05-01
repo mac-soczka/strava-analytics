@@ -10,10 +10,19 @@ export class SyncOrchestrationService {
   private syncStateRepo: StravaSyncStateRepository
   private supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
-  constructor(stravaId: number) {
+  constructor(stravaId: number, deps?: { stravaService?: StravaService }) {
     this.jobsRepo = new SyncJobsRepository()
-    this.stravaService = new StravaService(stravaId)
+    this.stravaService = deps?.stravaService ?? new StravaService(stravaId)
     this.syncStateRepo = new StravaSyncStateRepository()
+  }
+
+  private async getDbActivityCount(stravaId: number): Promise<number> {
+    const { count, error } = await this.supabase
+      .from('activities')
+      .select('activity_id', { count: 'exact', head: true })
+      .eq('strava_id', stravaId)
+    if (error) return 0
+    return count || 0
   }
 
   private async runJob(job: SyncJob): Promise<void> {
@@ -39,10 +48,18 @@ export class SyncOrchestrationService {
       // Rate limits are expected and are handled via pauseJob inside run steps.
       if (job.status !== 'paused') {
         console.error(`[Job ${job.id}] Sync failed:`, error)
-        await this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
+        await this.jobsRepo.updateJobStatus(job.id, 'failed', {
+          current_phase: 'failed',
+          error_message: error?.message || 'Unknown error',
+          error_details: { stack: error?.stack },
+        })
       }
       throw error
     }
+  }
+
+  private async setPhase(jobId: string, phase: 'discover_activities' | 'ensure_segments' | 'ensure_segment_efforts' | 'completed' | 'failed') {
+    await this.jobsRepo.updateJobStatus(jobId, 'running', { current_phase: phase })
   }
 
   private async pauseForRateLimit(jobId: string, reasonPrefix: string, error: any) {
@@ -53,6 +70,7 @@ export class SyncOrchestrationService {
     console.warn(
       `[Job ${jobId}] Pausing for rate limit. Retry after: ${effectiveRetryAfterMs}ms. Resume at: ${resumeAt.toISOString()}`
     )
+    const rateLimitStatus = this.stravaService.getRateLimitStatus()
 
     const job = await this.jobsRepo.getJobById(jobId)
     if (job) {
@@ -90,6 +108,12 @@ export class SyncOrchestrationService {
       `${reasonPrefix} - will resume at ${resumeAt.toISOString()}`,
       resumeAt
     )
+    await this.jobsRepo.updateJobStatus(jobId, 'paused', {
+      requests_used_15m: rateLimitStatus.requests15min,
+      requests_used_daily: rateLimitStatus.requestsDay,
+      rate_limit_15m_reset_at: rateLimitStatus.nextReset15min.toISOString(),
+      rate_limit_daily_reset_at: rateLimitStatus.nextResetDaily.toISOString(),
+    })
   }
 
   async startFullSync(stravaId: number): Promise<SyncJob> {
@@ -178,11 +202,18 @@ export class SyncOrchestrationService {
   private async runFullSync(job: SyncJob): Promise<void> {
     const jobId = job.id
     const stravaId = job.strava_id
+    const startingPhase = job.current_phase ?? 'discover_activities'
 
-    console.log(`[Job ${jobId}] Starting full sync from Strava API...`)
+    console.log(`[Job ${jobId}] Starting full sync from Strava API (phase=${startingPhase})...`)
+
+    // For UI display: show progress as scanned/total-known (DB), not scanned/scanned.
+    const baseDbTotalActivities = await this.getDbActivityCount(stravaId)
 
     // Step 1: Sync activities from Strava API to database
-    console.log(`[Job ${jobId}] Fetching activities (entity=activities)...`)
+    // Resume behavior: if job was already in ensure_* phase, skip activity discovery.
+    if (startingPhase === 'discover_activities') {
+      await this.setPhase(jobId, 'discover_activities')
+      console.log(`[Job ${jobId}] Fetching activities (entity=activities)...`)
       try {
         const activityResult = await this.stravaService.syncActivities(
           undefined, // pageSize - use default
@@ -191,15 +222,17 @@ export class SyncOrchestrationService {
             // Update progress in real-time after each batch
             console.log(`[Job ${jobId}] Progress update: ${synced}/${total} synced, ${errors} errors`)
             await this.jobsRepo.updateJobProgress(jobId, {
-              activities: { total, processed: synced, failed: errors },
+              // total = DB total activities (stable denominator), processed = scanned/handled this run
+              activities: { total: baseDbTotalActivities, processed: synced, failed: errors },
             } as Partial<SyncJobProgress>)
           }
         )
         console.log(`[Job ${jobId}] Activities synced: ${activityResult.synced}, errors: ${activityResult.errors}`)
-        
+
         // Final update
+        const finalDbTotalActivities = await this.getDbActivityCount(stravaId)
         await this.jobsRepo.updateJobProgress(jobId, {
-          activities: { total: activityResult.synced + activityResult.errors, processed: activityResult.synced, failed: activityResult.errors },
+          activities: { total: finalDbTotalActivities, processed: activityResult.synced, failed: activityResult.errors },
         } as Partial<SyncJobProgress>)
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
@@ -209,8 +242,11 @@ export class SyncOrchestrationService {
         }
         throw error
       }
+    }
 
-      // Step 2: Sync segments for all activities
+    // Step 2: Sync segments for all activities
+    if (startingPhase === 'discover_activities' || startingPhase === 'ensure_segments' || startingPhase === 'ensure_segment_efforts') {
+      await this.setPhase(jobId, 'ensure_segments')
       console.log(`[Job ${jobId}] Syncing segment efforts (and segments) (entity=segment_efforts,segments)...`)
       try {
         const segmentResult = await this.stravaService.syncSegments(
@@ -218,6 +254,15 @@ export class SyncOrchestrationService {
           this.segmentProgressReporter(jobId, false)
         )
         console.log(`[Job ${jobId}] Segments synced: ${segmentResult.segmentsAdded}, activities processed: ${segmentResult.processed}`)
+
+        // Segment efforts and segments are fetched from the same activity-details flow.
+        await this.setPhase(jobId, 'ensure_segment_efforts')
+        await this.jobsRepo.updateJobProgress(
+          jobId,
+          {
+            segment_efforts: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
+          } as Partial<SyncJobProgress>
+        )
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during segments/efforts sync! Pausing job...`)
@@ -226,6 +271,7 @@ export class SyncOrchestrationService {
         }
         throw error
       }
+    }
 
       // Step 3: Sync athlete stats
       console.log(`[Job ${jobId}] Syncing athlete stats...`)
@@ -244,6 +290,7 @@ export class SyncOrchestrationService {
       const totalActivities = finalActivities?.length || 0
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        current_phase: 'completed',
         processed_items: totalActivities,
         failed_items: 0,
       })
@@ -256,6 +303,7 @@ export class SyncOrchestrationService {
     console.log(`[Job ${jobId}] Starting segments-only sync from Strava API...`)
 
     try {
+      await this.setPhase(jobId, 'ensure_segments')
       console.log(`[Job ${jobId}] Fetching segments (derived from segment efforts in activity details)...`)
       const segmentResult = await this.stravaService.syncSegments(
         undefined,
@@ -263,6 +311,7 @@ export class SyncOrchestrationService {
       )
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        current_phase: 'completed',
         processed_items: segmentResult.processed,
         failed_items: segmentResult.errors,
       })
@@ -295,6 +344,8 @@ export class SyncOrchestrationService {
     const afterEpoch = Math.max(windowAfterEpoch, state.activities_after ?? 0)
 
     try {
+      await this.setPhase(jobId, 'discover_activities')
+      const baseDbTotalActivities = await this.getDbActivityCount(stravaId)
       const result = await this.stravaService.syncActivitiesRecent({
         afterEpoch,
         recentWindowDays,
@@ -302,15 +353,22 @@ export class SyncOrchestrationService {
         onProgress: async (p) => {
           await this.jobsRepo.updateJobProgress(
             jobId,
-            { activities: { total: 0, processed: p.synced, failed: p.errors } } as Partial<SyncJobProgress>,
+            { activities: { total: baseDbTotalActivities, processed: p.synced, failed: p.errors } } as Partial<SyncJobProgress>,
             p.synced
           )
         },
       })
 
       await this.syncStateRepo.update(stravaId, { activities_after: result.newAfterEpoch })
+      const rateLimitStatus = this.stravaService.getRateLimitStatus()
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        current_phase: 'completed',
+        cursor_after_epoch: result.newAfterEpoch,
+        requests_used_15m: rateLimitStatus.requests15min,
+        requests_used_daily: rateLimitStatus.requestsDay,
+        rate_limit_15m_reset_at: rateLimitStatus.nextReset15min.toISOString(),
+        rate_limit_daily_reset_at: rateLimitStatus.nextResetDaily.toISOString(),
         processed_items: result.synced,
         failed_items: result.errors,
       })
@@ -335,21 +393,30 @@ export class SyncOrchestrationService {
     const beforeEpoch = state.backfill_cursor_before ?? nowEpoch
 
     try {
+      await this.setPhase(jobId, 'discover_activities')
+      const baseDbTotalActivities = await this.getDbActivityCount(stravaId)
       const result = await this.stravaService.syncActivitiesBackfill({
         beforeEpoch,
         maxRequests: 250,
         onProgress: async (p) => {
           await this.jobsRepo.updateJobProgress(
             jobId,
-            { activities: { total: 0, processed: p.synced, failed: p.errors } } as Partial<SyncJobProgress>,
+            { activities: { total: baseDbTotalActivities, processed: p.synced, failed: p.errors } } as Partial<SyncJobProgress>,
             p.synced
           )
         },
       })
 
       await this.syncStateRepo.update(stravaId, { backfill_cursor_before: result.newBeforeEpoch })
+      const rateLimitStatus = this.stravaService.getRateLimitStatus()
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        current_phase: 'completed',
+        cursor_before_epoch: result.newBeforeEpoch,
+        requests_used_15m: rateLimitStatus.requests15min,
+        requests_used_daily: rateLimitStatus.requestsDay,
+        rate_limit_15m_reset_at: rateLimitStatus.nextReset15min.toISOString(),
+        rate_limit_daily_reset_at: rateLimitStatus.nextResetDaily.toISOString(),
         processed_items: result.synced,
         failed_items: result.errors,
       })
@@ -370,13 +437,22 @@ export class SyncOrchestrationService {
     // In Strava’s model, efforts are best fetched in bulk via activity details with include_all_efforts=true.
     // We reuse the same sync path as segments sync, which persists both segments and segment_efforts.
     try {
+      await this.setPhase(jobId, 'ensure_segment_efforts')
       console.log(`[Job ${jobId}] Fetching segment efforts (and segments) from activity details...`)
       const segmentResult = await this.stravaService.syncSegments(
         undefined,
         this.segmentProgressReporter(jobId, true)
       )
 
+      await this.jobsRepo.updateJobProgress(
+        jobId,
+        {
+          segment_efforts: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
+        } as Partial<SyncJobProgress>
+      )
+
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        current_phase: 'completed',
         processed_items: segmentResult.processed,
         failed_items: segmentResult.errors,
       })
@@ -399,6 +475,7 @@ export class SyncOrchestrationService {
         jobId,
         {
           segments: { total: p.total, processed: p.processed, failed: p.errors },
+          segment_efforts: { total: p.total, processed: p.processed, failed: p.errors },
         } as Partial<SyncJobProgress>,
         mirrorProcessedItems ? p.processed : undefined
       )

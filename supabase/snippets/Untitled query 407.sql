@@ -1,0 +1,2 @@
+select count(*)
+from supabase_migrations.schema_migrations

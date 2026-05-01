@@ -1,18 +1,21 @@
 import { test, expect } from '@playwright/test'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
-
 const SHOULD_RUN =
   Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) &&
   !String(process.env.NEXT_PUBLIC_SUPABASE_URL).includes('test.supabase.co')
 
+const supabase = SHOULD_RUN
+  ? createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+      process.env.SUPABASE_SERVICE_ROLE_KEY as string
+    )
+  : null
+
 const TEST_STRAVA_ID = 77665544
 
 async function cleanup() {
+  if (!supabase) return
   await supabase.from('segment_efforts').delete().gte('effort_id_text', '800000000').lte('effort_id_text', '899999999')
   await supabase.from('segments').delete().gte('segment_id', 700_000).lte('segment_id', 999_999)
   await supabase.from('activities').delete().eq('strava_id', TEST_STRAVA_ID)
@@ -25,6 +28,9 @@ async function cleanup() {
 test.describe('Optimized sync API (mocked Strava, full stack)', () => {
   test.beforeEach(async ({ context }) => {
     test.skip(!SHOULD_RUN, 'Requires a real/local Supabase configured via env vars')
+    if (!supabase) {
+      throw new Error('Supabase client not initialized')
+    }
 
     await cleanup()
 
@@ -73,8 +79,11 @@ test.describe('Optimized sync API (mocked Strava, full stack)', () => {
     await cleanup()
   })
 
-  test('POST /api/sync/start completes and writes activities + segment_efforts without touching Strava', async ({ request }) => {
-    const startResp = await request.post('/api/sync/start')
+  test('POST /api/sync/start completes and writes activities + segment_efforts without touching Strava', async ({ page }) => {
+    const request = page.request
+    const startResp = await request.post('/api/sync/start', {
+      data: { use_mock_strava: true },
+    })
     expect(startResp.ok()).toBeTruthy()
 
     const startBody = await startResp.json()
@@ -101,15 +110,17 @@ test.describe('Optimized sync API (mocked Strava, full stack)', () => {
 
     expect(lastStatus?.job?.status).toBe('completed')
 
-    const { data: activities } = await supabase
+    const { data: activities } = await supabase!
       .from('activities')
       .select('activity_id')
       .eq('strava_id', TEST_STRAVA_ID)
     expect(activities?.length).toBe(3)
 
-    const { data: efforts } = await supabase
+    const { data: efforts } = await supabase!
       .from('segment_efforts')
       .select('effort_id_text')
+      .gte('effort_id_text', '830000000')
+      .lte('effort_id_text', '830000999')
     expect(efforts?.length).toBe(3)
   })
 })

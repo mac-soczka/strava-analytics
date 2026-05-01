@@ -65,6 +65,16 @@ Facade that composes a real client and sync logic for existing code paths.
 
 **Location**: `lib/services/sync-orchestration-service.ts`
 
+**State model (DB is source of truth):**
+- Sync execution state is persisted in `sync_jobs` and `strava_sync_state`.
+- `sync_jobs.current_phase` tracks deterministic phase transitions:
+  - `discover_activities`
+  - `ensure_segments`
+  - `ensure_segment_efforts`
+  - `completed` / `failed`
+- Checkpoints (`last_processed_activity_id`, cursors, and request-usage counters) are persisted so jobs can continue after process restart.
+- `active_sync_job_state` view provides exact in-flight state for API/UI visibility.
+
 ---
 
 ## 🧪 Testing guidance (service layer)

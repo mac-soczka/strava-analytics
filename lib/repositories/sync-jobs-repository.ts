@@ -3,9 +3,11 @@ import config from '@/lib/config'
 
 export type SyncJobStatus = 'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'paused'
 export type SyncJobType = 'full_sync' | 'activities_only' | 'segments_only' | 'segment_efforts_only' | 'routes_only' | 'stats_only'
+export type SyncJobPhase = 'discover_activities' | 'ensure_segments' | 'ensure_segment_efforts' | 'completed' | 'failed'
 
 export interface SyncJobProgress {
   activities: { total: number; processed: number; failed: number }
+  segment_efforts: { total: number; processed: number; failed: number }
   laps: { total: number; processed: number; failed: number }
   streams: { total: number; processed: number; failed: number }
   segments: { total: number; processed: number; failed: number }
@@ -31,7 +33,16 @@ export interface SyncJob {
   triggered_by: string
   created_at: string
   updated_at: string
+  current_phase: SyncJobPhase
   last_processed_activity_id?: number
+  last_processed_segment_id?: number
+  strava_page?: number
+  cursor_after_epoch?: number
+  cursor_before_epoch?: number
+  requests_used_15m?: number
+  requests_used_daily?: number
+  rate_limit_15m_reset_at?: string
+  rate_limit_daily_reset_at?: string
   paused_at?: string
   resume_at?: string
   pause_reason?: string
@@ -54,6 +65,12 @@ export interface SyncJobEvent {
 export class SyncJobsRepository {
   private supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
 
+  private defaultPhaseForType(type: SyncJobType): SyncJobPhase {
+    if (type === 'segments_only') return 'ensure_segments'
+    if (type === 'segment_efforts_only') return 'ensure_segment_efforts'
+    return 'discover_activities'
+  }
+
   async createJob(
     stravaId: number,
     type: SyncJobType = 'full_sync',
@@ -65,6 +82,7 @@ export class SyncJobsRepository {
         strava_id: stravaId,
         type,
         status: 'pending',
+        current_phase: this.defaultPhaseForType(type),
         ...(options ? { options } : {}),
       })
       .select()
@@ -152,6 +170,7 @@ export class SyncJobsRepository {
     })
     const merged: SyncJobProgress = {
       activities: merge('activities'),
+      segment_efforts: merge('segment_efforts'),
       laps: merge('laps'),
       streams: merge('streams'),
       segments: merge('segments'),

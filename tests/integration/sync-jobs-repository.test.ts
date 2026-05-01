@@ -1,13 +1,18 @@
+/** @jest-environment node */
 import { describe, it, expect, beforeEach, afterEach } from '@jest/globals'
 import { createClient } from '@supabase/supabase-js'
 import { SyncJobsRepository } from '@/lib/repositories/sync-jobs-repository'
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+const SHOULD_RUN = Boolean(SUPABASE_URL && SUPABASE_KEY && !String(SUPABASE_URL).includes('test.supabase.co'))
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-describe('SyncJobsRepository', () => {
+;(SHOULD_RUN ? describe : describe.skip)('SyncJobsRepository', () => {
   let repo: SyncJobsRepository
   let testStravaId: number
   let createdJobIds: string[] = []
@@ -15,6 +20,9 @@ describe('SyncJobsRepository', () => {
   beforeEach(async () => {
     repo = new SyncJobsRepository()
     testStravaId = 12345678
+
+    // Ensure no leftover active jobs from prior runs violate one-active-job constraint.
+    await supabase.from('sync_jobs').delete().eq('strava_id', testStravaId)
 
     await supabase.from('users').upsert({
       strava_id: testStravaId,
@@ -38,6 +46,19 @@ describe('SyncJobsRepository', () => {
     expect(job.strava_id).toBe(testStravaId)
     expect(job.type).toBe('full_sync')
     expect(job.status).toBe('pending')
+    expect(job.current_phase).toBe('discover_activities')
+  })
+
+  it('should set phase defaults by job type', async () => {
+    const segmentsJob = await repo.createJob(testStravaId, 'segments_only')
+    createdJobIds.push(segmentsJob.id)
+    await repo.updateJobStatus(segmentsJob.id, 'completed')
+
+    const effortsJob = await repo.createJob(testStravaId, 'segment_efforts_only')
+    createdJobIds.push(effortsJob.id)
+
+    expect(segmentsJob.current_phase).toBe('ensure_segments')
+    expect(effortsJob.current_phase).toBe('ensure_segment_efforts')
   })
 
   it('should get job by ID', async () => {
@@ -100,6 +121,19 @@ describe('SyncJobsRepository', () => {
     expect(merged.progress.segments.failed).toBe(1)
   })
 
+  it('should support segment_efforts progress updates', async () => {
+    const job = await repo.createJob(testStravaId)
+    createdJobIds.push(job.id)
+
+    const updated = await repo.updateJobProgress(job.id, {
+      segment_efforts: { total: 50, processed: 25, failed: 2 },
+    })
+
+    expect(updated.progress.segment_efforts.total).toBe(50)
+    expect(updated.progress.segment_efforts.processed).toBe(25)
+    expect(updated.progress.segment_efforts.failed).toBe(2)
+  })
+
   it('should mark job as failed', async () => {
     const job = await repo.createJob(testStravaId)
     createdJobIds.push(job.id)
@@ -113,8 +147,11 @@ describe('SyncJobsRepository', () => {
 
   it('should get recent jobs for user', async () => {
     const job1 = await repo.createJob(testStravaId)
+    createdJobIds.push(job1.id)
+    await repo.updateJobStatus(job1.id, 'completed')
+
     const job2 = await repo.createJob(testStravaId)
-    createdJobIds.push(job1.id, job2.id)
+    createdJobIds.push(job2.id)
 
     const jobs = await repo.getRecentJobsForUser(testStravaId, 10)
 

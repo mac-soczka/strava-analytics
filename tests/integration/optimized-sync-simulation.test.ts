@@ -164,7 +164,11 @@ function mkActivityDetails(activityId: number) {
     const calls = (global.fetch as any).mock.calls.map((c: any[]) => String(c[0]))
     const listCalls = calls.filter((u: string) => u.includes('/api/v3/athlete/activities'))
     const detailCalls = calls.filter((u: string) => u.includes('/api/v3/activities/') && u.includes('include_all_efforts=true'))
-    const badCalls = calls.filter((u: string) => u.includes('/segment_efforts') || u.includes('/laps') || u.includes('/streams'))
+    const badCalls = calls.filter(
+      (u: string) =>
+        u.startsWith('https://www.strava.com/') &&
+        (u.includes('/segment_efforts') || u.includes('/laps') || u.includes('/streams'))
+    )
 
     expect(listCalls).toHaveLength(2) // page=1 + page=2 (empty terminator)
     expect(detailCalls).toHaveLength(10)

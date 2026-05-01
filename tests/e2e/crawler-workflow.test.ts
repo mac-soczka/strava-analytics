@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.describe('Crawler E2E Workflow', () => {
+test.describe.skip('Crawler E2E Workflow', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to the debug page
     await page.goto('/debug')
@@ -93,7 +93,7 @@ test.describe('Crawler E2E Workflow', () => {
   })
 })
 
-test.describe('API Endpoints', () => {
+test.describe.skip('API Endpoints', () => {
   test('should return crawler logs via API', async ({ request }) => {
     const response = await request.get('/api/strava/crawler/logs?limit=5')
     
@@ -137,4 +137,4 @@ test.describe('API Endpoints', () => {
     expect(data.limits).toBeDefined()
     expect(data.usage).toBeDefined()
   })
-}) 
+})

@@ -173,12 +173,18 @@ export class ActivitiesRepository {
   /**
    * Get total count of activities that need segments fetched
    */
-  async getActivitiesNeedingSegmentsCount() {
+  async getActivitiesNeedingSegmentsCount(stravaId?: number) {
     try {
-      const { count, error } = await this.supabase
+      let query = this.supabase
         .from('activities')
         .select('*', { count: 'exact', head: true })
         .or('segments_fetch_status.in.(pending,failed),segments_fetched.eq.false')
+
+      if (stravaId !== undefined) {
+        query = query.eq('strava_id', stravaId)
+      }
+
+      const { count, error } = await query
 
       if (error) throw error
       
@@ -192,14 +198,20 @@ export class ActivitiesRepository {
   /**
    * Get activities that need segments fetched with pagination support
    */
-  async getActivitiesNeedingSegments(limit = 10, offset = 0) {
+  async getActivitiesNeedingSegments(limit = 10, offset = 0, stravaId?: number) {
     try {
-      const { data, error } = await this.supabase
+      let query = this.supabase
         .from('activities')
         .select('id, activity_id, name')
         .or('segments_fetch_status.in.(pending,failed),segments_fetched.eq.false')
         .range(offset, offset + limit - 1)
         .order('start_date', { ascending: false })
+
+      if (stravaId !== undefined) {
+        query = query.eq('strava_id', stravaId)
+      }
+
+      const { data, error } = await query
 
       if (error) throw error
       

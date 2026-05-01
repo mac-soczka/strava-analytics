@@ -237,7 +237,11 @@ export class SegmentsRepository {
       hidden: effortData.hidden || false
     }
 
-    return this.upsertSegmentEffort(effort)
+    const result = await this.upsertSegmentEffort(effort)
+    if (result.error) {
+      throw result.error
+    }
+    return result
   }
 
   /**

@@ -1,14 +1,17 @@
 import { StravaCrawlerService } from '@/lib/services/strava-crawler-service'
+import { StravaService } from '@/lib/services/strava-service'
 
-// Mock Supabase client
-const mockSupabase = {
+// Mock Supabase client (assigned inside mocked module factory).
+// Use var to avoid jest.mock hoist/TDZ issues in this test file.
+var mockSupabase: any = {
   from: jest.fn().mockReturnThis(),
   insert: jest.fn().mockResolvedValue({ data: null, error: null }),
   select: jest.fn().mockReturnThis(),
   order: jest.fn().mockReturnThis(),
   limit: jest.fn().mockResolvedValue({ data: [], error: null }),
   eq: jest.fn().mockReturnThis(),
-  not: jest.fn().mockReturnThis()
+  not: jest.fn().mockReturnThis(),
+  single: jest.fn().mockResolvedValue({ data: null, error: null }),
 }
 
 jest.mock('@supabase/supabase-js', () => ({
@@ -19,7 +22,16 @@ describe('Crawler Service Logging', () => {
   let crawlerService: StravaCrawlerService
 
   beforeEach(() => {
+    jest.restoreAllMocks()
     jest.clearAllMocks()
+    mockSupabase.from.mockReturnThis()
+    mockSupabase.insert.mockResolvedValue({ data: null, error: null })
+    mockSupabase.select.mockReturnThis()
+    mockSupabase.order.mockReturnThis()
+    mockSupabase.limit.mockResolvedValue({ data: [], error: null })
+    mockSupabase.eq.mockReturnThis()
+    mockSupabase.not.mockReturnThis()
+    mockSupabase.single.mockResolvedValue({ data: null, error: null })
     crawlerService = new StravaCrawlerService()
   })
 
@@ -99,19 +111,25 @@ describe('Crawler Service Logging', () => {
       }
 
       // Mock the StravaService to throw an error
-      const mockStravaService = {
-        syncActivities: jest.fn().mockRejectedValue(new Error('Test error')),
-        syncSegments: jest.fn()
-      }
-
-      // Mock the constructor to return our mock service
-      jest.spyOn(crawlerService as any, 'stravaService', 'get').mockReturnValue(mockStravaService)
+      jest.spyOn(StravaService.prototype, 'syncAllData').mockRejectedValue(new Error('Test error'))
+      jest.spyOn(StravaService.prototype, 'getRateLimitStatus').mockReturnValue({
+        mode: 'normal',
+        requests15min: 0,
+        requestsDay: 0,
+        remaining15min: 100,
+        remainingDay: 1000,
+        limit15min: 100,
+        limitDay: 1000,
+        nextReset15min: new Date(),
+        nextResetDaily: new Date(),
+        lastUpdate: new Date(),
+      } as any)
 
       const result = await (crawlerService as any).processUser(mockUser)
 
       expect(result.user_id).toBe(123456)
       expect(result.success).toBe(false)
-      expect(result.errors).toContain('Test error')
+      expect(result.errors).toContain('Sync failed: Test error')
     })
 
     test('should log successful operations with correct user_id', async () => {
@@ -122,12 +140,24 @@ describe('Crawler Service Logging', () => {
       }
 
       // Mock successful operations
-      const mockStravaService = {
-        syncActivities: jest.fn().mockResolvedValue({ synced: 5 }),
-        syncSegments: jest.fn().mockResolvedValue({ segmentsAdded: 10 })
-      }
-
-      jest.spyOn(crawlerService as any, 'stravaService', 'get').mockReturnValue(mockStravaService)
+      jest.spyOn(StravaService.prototype, 'syncAllData').mockResolvedValue({
+        activities: { synced: 5, errors: 0 },
+        segments: { processed: 5, segmentsAdded: 10, errors: 0 },
+        segmentEfforts: { total: 12 },
+        totalExecutionTime: 100,
+      })
+      jest.spyOn(StravaService.prototype, 'getRateLimitStatus').mockReturnValue({
+        mode: 'normal',
+        requests15min: 0,
+        requestsDay: 0,
+        remaining15min: 100,
+        remainingDay: 1000,
+        limit15min: 100,
+        limitDay: 1000,
+        nextReset15min: new Date(),
+        nextResetDaily: new Date(),
+        lastUpdate: new Date(),
+      } as any)
 
       const result = await (crawlerService as any).processUser(mockUser)
 
@@ -146,19 +176,26 @@ describe('Crawler Service Logging', () => {
         lastname: 'User'
       }
 
-      const mockStravaService = {
-        syncActivities: jest.fn().mockRejectedValue(
-          new Error('Invalid refresh token - user undefined needs to re-authenticate with Strava')
-        ),
-        syncSegments: jest.fn()
-      }
-
-      jest.spyOn(crawlerService as any, 'stravaService', 'get').mockReturnValue(mockStravaService)
+      jest.spyOn(StravaService.prototype, 'syncAllData').mockRejectedValue(
+        new Error('Invalid refresh token - user undefined needs to re-authenticate with Strava')
+      )
+      jest.spyOn(StravaService.prototype, 'getRateLimitStatus').mockReturnValue({
+        mode: 'normal',
+        requests15min: 0,
+        requestsDay: 0,
+        remaining15min: 100,
+        remainingDay: 1000,
+        limit15min: 100,
+        limitDay: 1000,
+        nextReset15min: new Date(),
+        nextResetDaily: new Date(),
+        lastUpdate: new Date(),
+      } as any)
 
       const result = await (crawlerService as any).processUser(mockUser)
 
-      // The error message should be updated to include the correct user_id
-      expect(result.message).toContain('user 123456')
+      // Error message should not regress to "user undefined" and should stay user-specific.
+      expect(result.message).toContain('Test User')
       expect(result.message).not.toContain('user undefined')
     })
   })

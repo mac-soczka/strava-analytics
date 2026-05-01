@@ -86,6 +86,8 @@ async function cleanupTestUserData() {
     const { data: efforts, error: effortsErr } = await supabase
       .from('segment_efforts')
       .select('effort_id_text, distance, start_index, end_index, average_cadence, average_heartrate, max_heartrate, pr_rank, kom_rank, achievements, hidden')
+      .gte('effort_id_text', '800000000')
+      .lte('effort_id_text', '899999999')
       .order('effort_id_text', { ascending: true })
 
     expect(effortsErr).toBeNull()

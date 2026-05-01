@@ -90,7 +90,7 @@ export class StravaService {
     try {
       const [totalActivities, activitiesNeedingSegments, totalSegments] = await Promise.all([
         this.activitiesRepo.getActivityStats(),
-        this.activitiesRepo.getActivitiesNeedingSegmentsCount(),
+        this.activitiesRepo.getActivitiesNeedingSegmentsCount(this.userId),
         this.segmentsRepo.getSegmentStats()
       ])
 

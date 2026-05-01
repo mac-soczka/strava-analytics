@@ -97,6 +97,24 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   const activities = job.progress?.activities ?? zero
   const segmentEfforts = job.progress?.streams ?? zero
   const segments = job.progress?.segments ?? zero
+  const segmentEffortsProgress = job.progress?.segment_efforts ?? segmentEfforts
+
+  const phaseLabel = (() => {
+    switch (job.current_phase) {
+      case 'discover_activities':
+        return 'Fetching recent activities'
+      case 'ensure_segments':
+        return 'Ensuring segments'
+      case 'ensure_segment_efforts':
+        return 'Ensuring segment efforts'
+      case 'completed':
+        return 'Completed'
+      case 'failed':
+        return 'Failed'
+      default:
+        return null
+    }
+  })()
 
   const segmentFocused =
     job.type === 'segments_only' || job.type === 'segment_efforts_only'
@@ -192,6 +210,12 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
       </div>
 
       <div className="space-y-2 text-sm">
+        {phaseLabel && (
+          <div className="flex justify-between text-gray-700 font-medium">
+            <span>Current phase:</span>
+            <span>{phaseLabel}</span>
+          </div>
+        )}
         {segmentFocused ? (
           <div className="flex justify-between text-gray-600">
             <span>
@@ -207,7 +231,7 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
             </div>
             <div className="flex justify-between text-gray-600">
               <span>Segment Efforts:</span>
-              <span>{segmentEfforts.processed} / {segmentEfforts.total}</span>
+              <span>{segmentEffortsProgress.processed} / {segmentEffortsProgress.total}</span>
             </div>
             {(job.type === 'full_sync' || segments.total > 0) && (
               <div className="flex justify-between text-gray-600">
@@ -221,6 +245,34 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
           <div className="flex justify-between text-red-600">
             <span>Failed:</span>
             <span>{job.failed_items}</span>
+          </div>
+        )}
+        {(job.last_processed_activity_id || job.cursor_after_epoch || job.cursor_before_epoch || job.requests_used_daily !== undefined) && (
+          <div className="mt-1 pt-2 border-t border-gray-100 space-y-1 text-xs text-gray-500">
+            {job.last_processed_activity_id ? (
+              <div className="flex justify-between">
+                <span>Last processed activity:</span>
+                <span>{job.last_processed_activity_id}</span>
+              </div>
+            ) : null}
+            {job.cursor_after_epoch ? (
+              <div className="flex justify-between">
+                <span>Cursor after:</span>
+                <span>{job.cursor_after_epoch}</span>
+              </div>
+            ) : null}
+            {job.cursor_before_epoch ? (
+              <div className="flex justify-between">
+                <span>Cursor before:</span>
+                <span>{job.cursor_before_epoch}</span>
+              </div>
+            ) : null}
+            {job.requests_used_daily !== undefined ? (
+              <div className="flex justify-between">
+                <span>Requests used (daily):</span>
+                <span>{job.requests_used_daily}</span>
+              </div>
+            ) : null}
           </div>
         )}
       </div>

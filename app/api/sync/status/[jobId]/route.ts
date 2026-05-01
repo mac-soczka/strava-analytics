@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { AuthServiceServer } from '@/lib/services/auth-service-server'
 import { SyncJobsRepository } from '@/lib/repositories/sync-jobs-repository'
 import { getRateLimitService } from '@/lib/services/rate-limit-service'
+import { createClient } from '@supabase/supabase-js'
+import config from '@/lib/config'
 
 export async function GET(
   request: NextRequest,
@@ -46,6 +48,13 @@ export async function GET(
     const adaptiveDelayMs = rateLimitService.getAdaptiveDelay()
     const recommendedWaitMs = rateLimitService.getRecommendedWaitTime()
 
+    const supabase = createClient(config.supabase.url, config.supabase.serviceRoleKey)
+    const { data: activeState } = await supabase
+      .from('active_sync_job_state')
+      .select('*')
+      .eq('job_id', jobId)
+      .maybeSingle()
+
     // Expose current Strava rate limit state via HTTP headers so clients can treat
     // the response as the source of truth (mirrors Strava's header format).
     const headers = new Headers()
@@ -56,6 +65,23 @@ export async function GET(
     return NextResponse.json(
       {
         job,
+        exactState: {
+          phase: job.current_phase,
+          checkpoints: {
+            lastProcessedActivityId: job.last_processed_activity_id ?? null,
+            lastProcessedSegmentId: job.last_processed_segment_id ?? null,
+            stravaPage: job.strava_page ?? null,
+            cursorAfterEpoch: job.cursor_after_epoch ?? null,
+            cursorBeforeEpoch: job.cursor_before_epoch ?? null,
+          },
+          requestBudget: {
+            requestsUsed15m: job.requests_used_15m ?? null,
+            requestsUsedDaily: job.requests_used_daily ?? null,
+            reset15mAt: job.rate_limit_15m_reset_at ?? null,
+            resetDailyAt: job.rate_limit_daily_reset_at ?? null,
+          },
+          activeState: activeState ?? null,
+        },
         // Keep body fields for backward compatibility; clients should prefer headers.
         rateLimits: {
           requests15min: rateLimits.requests15min,
