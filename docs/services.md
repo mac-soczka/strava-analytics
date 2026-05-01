@@ -10,7 +10,7 @@ The service layer acts as an intermediary between the presentation layer (compon
 
 ### 1. Strava sync stack (Strava API + sync logic)
 
-**Last Updated:** 2026-04-30
+**Last Updated:** 2026-05-01
 
 We separate responsibilities so **sync logic is testable without touching Strava**:
 
@@ -50,6 +50,19 @@ Main entry points (all depend on `StravaApiClient`):
 ##### `StravaService` (`lib/services/strava-service.ts`)
 
 Facade that composes a real client and sync logic for existing code paths.
+
+##### Segment-targeted 5-year sync behavior (`syncSegmentEffortsForSegment`)
+
+- First tries `GET /segments/{id}/all_efforts` (best request efficiency when available).
+- If Strava returns `402` for that endpoint, falls back to activity-detail extraction:
+  - list activities in monthly windows (oldest to newest),
+  - fetch `GET /activities/{id}?include_all_efforts=true`,
+  - keep only efforts where `effort.segment.id === targetSegmentId`.
+- Fallback progress is restart-safe using `segment_target_sync_state` checkpoints:
+  - `mode`: `backfill` or `incremental`
+  - `backfill_before_epoch`: monthly cursor for 5-year history backfill
+  - `incremental_after_epoch`: low-cost recent updates after backfill completes
+- Idempotency remains enforced by unique effort IDs in `segment_efforts`.
 
 #### Request-minimizing rule (high-signal)
 

@@ -7,6 +7,7 @@ import { RealStravaApiClient, type RealStravaApiClientDeps } from '@/lib/strava/
 import type { StravaApiClient } from '@/lib/strava/strava-api-client'
 import { StravaSyncService } from '@/lib/services/strava-sync-service'
 import { getRateLimitService } from '@/lib/services/rate-limit-service'
+import { SegmentTargetSyncStateRepository } from '@/lib/repositories/segment-target-sync-state-repository'
 
 export type StravaServiceDeps = {
   apiClient?: StravaApiClient
@@ -451,9 +452,19 @@ export class StravaService {
     }
 
     if (useActivityFallback) {
+      if (!this.userId) {
+        throw new Error('userId is required for segment-target fallback sync')
+      }
+
+      const stateRepo = new SegmentTargetSyncStateRepository()
       const activitiesPageSize = 200
-      let activitiesPage = 1
-      let fallbackAfterEpoch: number | undefined
+      const maxPagesPerWindow = 30
+      const maxWindowsPerRun = 6
+      const oneDaySeconds = 24 * 60 * 60
+      const monthlyWindowSeconds = 30 * oneDaySeconds
+      const fiveYearsSeconds = 5 * 365 * oneDaySeconds
+      const nowEpoch = Math.floor(Date.now() / 1000)
+      const fiveYearsAgoEpoch = Math.max(0, nowEpoch - fiveYearsSeconds)
 
       const { data: latestKnownEffort } = await this.supabase
         .from('segment_efforts')
@@ -463,51 +474,136 @@ export class StravaService {
         .limit(1)
         .maybeSingle()
 
+      const syncState = await stateRepo.getOrCreate(this.userId, segmentId, nowEpoch, fiveYearsAgoEpoch)
+      let fallbackMode = syncState.mode
+
+      const backfillAfterSeed = syncState.backfill_after_epoch ?? fiveYearsAgoEpoch
+      if (backfillAfterSeed >= nowEpoch) {
+        fallbackMode = 'incremental'
+      }
+
       if (latestKnownEffort?.start_date && typeof latestKnownEffort.start_date === 'string') {
         const epoch = Math.floor(new Date(latestKnownEffort.start_date).getTime() / 1000)
         if (Number.isFinite(epoch) && epoch > 0) {
-          // Small overlap to avoid boundary misses around same-day activities.
-          fallbackAfterEpoch = Math.max(0, epoch - 24 * 60 * 60)
+          await stateRepo.update(this.userId, segmentId, {
+            incremental_after_epoch:
+              syncState.incremental_after_epoch ?? Math.max(fiveYearsAgoEpoch, epoch - oneDaySeconds),
+          })
         }
       }
 
-      // Keep all sync data:
-      // - For segments with known history, do an incremental recent scan (request-efficient).
-      // - For first-time segments (no known effort), allow deep scan to build full history.
-      const maxActivityPages = fallbackAfterEpoch ? 30 : 200
-
-      while (activitiesPage <= maxActivityPages) {
-        const activities = await this.apiClient.fetchActivities(
-          activitiesPage,
-          activitiesPageSize,
-          fallbackAfterEpoch ? { after: fallbackAfterEpoch } : undefined
+      if (fallbackMode === 'incremental') {
+        const fallbackAfterEpoch = Math.max(
+          fiveYearsAgoEpoch,
+          (syncState.incremental_after_epoch ?? fiveYearsAgoEpoch) - oneDaySeconds
         )
-        if (activities.length === 0) break
+        let activitiesPage = 1
+        while (activitiesPage <= maxPagesPerWindow) {
+          const activities = await this.apiClient.fetchActivities(activitiesPage, activitiesPageSize, {
+            after: fallbackAfterEpoch,
+          })
+          if (activities.length === 0) break
 
-        for (const activity of activities) {
-          try {
-            const details = await this.apiClient.fetchActivityDetails(activity.id)
-            if (!details || !details.segment_efforts || details.segment_efforts.length === 0) continue
+          for (const activity of activities) {
+            try {
+              const details = await this.apiClient.fetchActivityDetails(activity.id)
+              if (!details || !details.segment_efforts || details.segment_efforts.length === 0) continue
 
-            const matchingEfforts = details.segment_efforts
-              .filter((effort) => effort.segment?.id === segmentId)
-              .map((effort) => ({
-                ...effort,
-                activity: { id: details.id },
-              }))
+              const matchingEfforts = details.segment_efforts
+                .filter((effort) => effort.segment?.id === segmentId)
+                .map((effort) => ({
+                  ...effort,
+                  activity: { id: details.id },
+                }))
 
-            total += matchingEfforts.length
-            await persistEfforts(matchingEfforts)
-          } catch (error: any) {
-            if (error?.statusCode === 429) throw error
-            errors += 1
+              total += matchingEfforts.length
+              await persistEfforts(matchingEfforts)
+            } catch (error: any) {
+              if (error?.statusCode === 429) throw error
+              errors += 1
+            }
           }
+
+          await onProgress?.({ processed, saved, errors, total })
+
+          if (activities.length < activitiesPageSize) break
+          activitiesPage += 1
         }
 
-        await onProgress?.({ processed, saved, errors, total })
+        await stateRepo.update(this.userId, segmentId, {
+          mode: 'incremental',
+          incremental_after_epoch: nowEpoch,
+        })
+      } else {
+        // Oldest-first strategy:
+        // walk forward from 5 years ago in monthly windows and checkpoint each window.
+        let backfillAfterEpoch = syncState.backfill_after_epoch ?? fiveYearsAgoEpoch
+        let windowsProcessed = 0
 
-        if (activities.length < activitiesPageSize) break
-        activitiesPage += 1
+        while (backfillAfterEpoch < nowEpoch && windowsProcessed < maxWindowsPerRun) {
+          const windowBeforeEpoch = Math.min(nowEpoch, backfillAfterEpoch + monthlyWindowSeconds)
+          let activitiesPage = 1
+
+          while (activitiesPage <= maxPagesPerWindow) {
+            const activities = await this.apiClient.fetchActivities(activitiesPage, activitiesPageSize, {
+              before: windowBeforeEpoch,
+              after: backfillAfterEpoch,
+            })
+            if (activities.length === 0) break
+
+            for (const activity of activities) {
+              try {
+                const details = await this.apiClient.fetchActivityDetails(activity.id)
+                if (!details || !details.segment_efforts || details.segment_efforts.length === 0) continue
+
+                const matchingEfforts = details.segment_efforts
+                  .filter((effort) => effort.segment?.id === segmentId)
+                  .map((effort) => ({
+                    ...effort,
+                    activity: { id: details.id },
+                  }))
+
+                total += matchingEfforts.length
+                await persistEfforts(matchingEfforts)
+              } catch (error: any) {
+                if (error?.statusCode === 429) throw error
+                errors += 1
+              }
+            }
+
+            await stateRepo.update(this.userId, segmentId, {
+              mode: 'backfill',
+              backfill_after_epoch: backfillAfterEpoch,
+              backfill_before_epoch: windowBeforeEpoch,
+              last_activity_id: activities[activities.length - 1]?.id ?? null,
+            })
+
+            await onProgress?.({ processed, saved, errors, total })
+
+            if (activities.length < activitiesPageSize) break
+            activitiesPage += 1
+          }
+
+          backfillAfterEpoch = windowBeforeEpoch
+          windowsProcessed += 1
+
+          await stateRepo.update(this.userId, segmentId, {
+            mode: 'backfill',
+            backfill_after_epoch: backfillAfterEpoch,
+            backfill_before_epoch: windowBeforeEpoch,
+            last_activity_id: null,
+          })
+        }
+
+        if (backfillAfterEpoch >= nowEpoch) {
+          await stateRepo.update(this.userId, segmentId, {
+            mode: 'incremental',
+            backfill_after_epoch: nowEpoch,
+            backfill_before_epoch: nowEpoch,
+            incremental_after_epoch: nowEpoch,
+            last_activity_id: null,
+          })
+        }
       }
     }
 
