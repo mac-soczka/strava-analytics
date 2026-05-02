@@ -139,6 +139,9 @@ export class StravaSyncService {
               )
 
               await this.activitiesRepo.updateActivity(detailedActivity.id, {
+                activity_sync_state: 'completed',
+                activity_sync_completed_at: new Date().toISOString(),
+                activity_sync_error: null,
                 segment_efforts_synced_at: new Date().toISOString(),
                 segments_fetch_status: 'success_rows',
                 segments_fetched_at: new Date().toISOString(),
@@ -146,6 +149,9 @@ export class StravaSyncService {
               })
             } else if (hasDetailedData) {
               await this.activitiesRepo.updateActivity(detailedActivity.id, {
+                activity_sync_state: 'completed',
+                activity_sync_completed_at: new Date().toISOString(),
+                activity_sync_error: null,
                 segment_efforts_synced_at: new Date().toISOString(),
                 segments_fetch_status: 'success_empty',
                 segments_fetched_at: new Date().toISOString(),
@@ -172,7 +178,7 @@ export class StravaSyncService {
   }
 
   async syncSegments(
-    batchSize = config.stravaApiLimits.maxSegmentBatchSize,
+    _batchSize = config.stravaApiLimits.maxSegmentBatchSize,
     onProgress?: (_p: {
       processed: number
       errors: number
@@ -184,7 +190,6 @@ export class StravaSyncService {
     let processed = 0
     let segmentsAdded = 0
     let errors = 0
-    let hasMoreActivities = true
     let activitiesHandled = 0
     const seenSegmentIds = new Set<number>()
     let segmentEffortsProcessed = 0
@@ -202,98 +207,104 @@ export class StravaSyncService {
       segmentEffortsProcessed: 0,
     })
 
-    while (hasMoreActivities) {
-      // Always read from offset=0 because each processed activity leaves the pending set.
-      // Using a moving offset would skip rows as the filtered dataset shrinks.
-      const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, 0, this.stravaId)
-      if (!activitiesNeedingSegments || activitiesNeedingSegments.length === 0) break
+    while (activitiesHandled < totalActivitiesNeedingSegments) {
+      const activity = await this.activitiesRepo.claimNextActivityForSegmentSync(this.stravaId)
+      if (!activity) break
+      let shouldCountHandled = true
+      try {
+        const segmentEfforts = await this.api.fetchActivitySegmentEfforts(activity.activity_id)
 
-      for (const activity of activitiesNeedingSegments) {
-        try {
-          const segmentEfforts = await this.api.fetchActivitySegmentEfforts(activity.activity_id)
+        if (segmentEfforts.length > 0) {
+          for (const effort of segmentEfforts) {
+            seenSegmentIds.add(effort.segment.id)
+          }
+          segmentEffortsProcessed += segmentEfforts.length
 
-          if (segmentEfforts.length > 0) {
-            for (const effort of segmentEfforts) {
-              seenSegmentIds.add(effort.segment.id)
-            }
-            segmentEffortsProcessed += segmentEfforts.length
+          const segmentsFromEfforts = segmentEfforts.map((effort) => ({
+            segment_id: effort.segment.id,
+            name: effort.segment.name,
+            distance: effort.segment.distance,
+            elevation_gain: effort.segment.elevation_high - effort.segment.elevation_low,
+            average_grade: effort.segment.average_grade,
+            maximum_grade: effort.segment.maximum_grade,
+            climb_category: effort.segment.climb_category,
+            city: effort.segment.city,
+            state: effort.segment.state,
+            country: effort.segment.country,
+            polyline: effort.segment.map?.polyline,
+          }))
 
-            const segmentsFromEfforts = segmentEfforts.map((effort) => ({
-              segment_id: effort.segment.id,
-              name: effort.segment.name,
-              distance: effort.segment.distance,
-              elevation_gain: effort.segment.elevation_high - effort.segment.elevation_low,
-              average_grade: effort.segment.average_grade,
-              maximum_grade: effort.segment.maximum_grade,
-              climb_category: effort.segment.climb_category,
-              city: effort.segment.city,
-              state: effort.segment.state,
-              country: effort.segment.country,
-              polyline: effort.segment.map?.polyline,
-            }))
+          const uniqueSegmentIds = Array.from(new Set(segmentsFromEfforts.map((s) => s.segment_id)))
+          const existingIdsResult = await this.segmentsRepo.getExistingSegmentIds(uniqueSegmentIds)
+          if (existingIdsResult.error) throw existingIdsResult.error
+          const existingIds = new Set(existingIdsResult.data)
 
-            const uniqueSegmentIds = Array.from(new Set(segmentsFromEfforts.map((s) => s.segment_id)))
-            const existingIdsResult = await this.segmentsRepo.getExistingSegmentIds(uniqueSegmentIds)
-            if (existingIdsResult.error) throw existingIdsResult.error
-            const existingIds = new Set(existingIdsResult.data)
+          const segmentsToInsert = segmentsFromEfforts
+            .filter((s) => !existingIds.has(s.segment_id))
+            .filter((s, idx, arr) => arr.findIndex((x) => x.segment_id === s.segment_id) === idx)
 
-            const segmentsToInsert = segmentsFromEfforts
-              .filter((s) => !existingIds.has(s.segment_id))
-              .filter((s, idx, arr) => arr.findIndex((x) => x.segment_id === s.segment_id) === idx)
-
-            if (segmentsToInsert.length > 0) {
-              await this.segmentsRepo.bulkUpsertSegments(segmentsToInsert)
-            }
-
-            const segmentsToSave = segmentEfforts.map((effort) => ({
-              activity_id: activity.activity_id,
-              segment_id: effort.segment.id,
-              effort_id: String(effort.id),
-              effort_id_text: String(effort.id),
-              elapsed_time: effort.elapsed_time,
-              moving_time: effort.moving_time,
-              start_date: effort.start_date,
-              average_watts: effort.average_watts,
-              max_watts: effort.max_watts,
-            }))
-
-            const existingEfforts = await this.segmentsRepo.getSegmentEffortsByActivity(activity.activity_id)
-            const existingEffortIds = new Set(
-              existingEfforts.data?.map((e) => e.effort_id_text ?? String(e.effort_id)) || []
-            )
-            const newEfforts = segmentsToSave.filter((effort) => !existingEffortIds.has(effort.effort_id_text))
-
-            await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
-            segmentsAdded += newEfforts.length
-
-            await this.activitiesRepo.markSegmentsFetchSuccessRows(activity.id, segmentEfforts.length)
-          } else {
-            await this.activitiesRepo.markSegmentsFetchSuccessEmpty(activity.id)
+          if (segmentsToInsert.length > 0) {
+            await this.segmentsRepo.bulkUpsertSegments(segmentsToInsert)
           }
 
-          processed++
-        } catch (_e) {
-          const maybeRateLimit = _e as { statusCode?: number; status?: number; message?: string }
-          if (
-            maybeRateLimit?.statusCode === 429 ||
-            maybeRateLimit?.status === 429 ||
-            `${maybeRateLimit?.message || ''}`.includes('Rate limit')
-          ) {
-            // Bubble up so orchestration can pause/resume from checkpoint.
-            throw _e
-          }
-          errors++
-          await this.activitiesRepo.markSegmentsFetchFailed(activity.id, 'Failed to fetch segments').catch(() => {})
-        } finally {
-          activitiesHandled++
-          await onProgress?.({
-            processed: activitiesHandled,
-            errors,
-            total: totalActivitiesNeedingSegments,
-            segmentsProcessed: seenSegmentIds.size,
-            segmentEffortsProcessed,
-          })
+          const segmentsToSave = segmentEfforts.map((effort) => ({
+            activity_id: activity.activity_id,
+            segment_id: effort.segment.id,
+            effort_id: String(effort.id),
+            effort_id_text: String(effort.id),
+            elapsed_time: effort.elapsed_time,
+            moving_time: effort.moving_time,
+            start_date: effort.start_date,
+            average_watts: effort.average_watts,
+            max_watts: effort.max_watts,
+          }))
+
+          const existingEfforts = await this.segmentsRepo.getSegmentEffortsByActivity(activity.activity_id)
+          const existingEffortIds = new Set(
+            existingEfforts.data?.map((e) => e.effort_id_text ?? String(e.effort_id)) || []
+          )
+          const newEfforts = segmentsToSave.filter((effort) => !existingEffortIds.has(effort.effort_id_text))
+
+          await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
+          segmentsAdded += newEfforts.length
+
+          await this.activitiesRepo.markSegmentsFetchSuccessRows(activity.id, segmentEfforts.length)
+        } else {
+          await this.activitiesRepo.markSegmentsFetchSuccessEmpty(activity.id)
         }
+
+        processed++
+      } catch (_e) {
+        const maybeRateLimit = _e as {
+          statusCode?: number
+          status?: number
+          message?: string
+          retryAfter?: number
+        }
+        if (
+          maybeRateLimit?.statusCode === 429 ||
+          maybeRateLimit?.status === 429 ||
+          `${maybeRateLimit?.message || ''}`.includes('Rate limit')
+        ) {
+          shouldCountHandled = false
+          const rateLimitError = new Error(`${maybeRateLimit?.message || 'Rate limit exceeded'}`)
+          ;(rateLimitError as any).statusCode = maybeRateLimit?.statusCode ?? maybeRateLimit?.status ?? 429
+          ;(rateLimitError as any).retryAfter = maybeRateLimit?.retryAfter
+          ;(rateLimitError as any).currentActivityDbId = activity.id
+          ;(rateLimitError as any).currentActivityId = activity.activity_id
+          throw rateLimitError
+        }
+        errors++
+        await this.activitiesRepo.markSegmentsFetchFailed(activity.id, 'Failed to fetch segments').catch(() => {})
+      } finally {
+        if (shouldCountHandled) activitiesHandled++
+        await onProgress?.({
+          processed: activitiesHandled,
+          errors,
+          total: totalActivitiesNeedingSegments,
+          segmentsProcessed: seenSegmentIds.size,
+          segmentEffortsProcessed,
+        })
       }
 
       // small yield to keep polling UI responsive when used in job runner

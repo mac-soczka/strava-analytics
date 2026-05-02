@@ -51,18 +51,24 @@ Main entry points (all depend on `StravaApiClient`):
 
 Facade that composes a real client and sync logic for existing code paths.
 
-##### Segment-targeted 5-year sync behavior (`syncSegmentEffortsForSegment`)
+##### Activity-centric sync state machine (`syncSegments`)
 
-- First tries `GET /segments/{id}/all_efforts` (best request efficiency when available).
-- If Strava returns `402` for that endpoint, falls back to activity-detail extraction:
-  - list activities in monthly windows (oldest to newest),
+- Activity queue is explicit in `activities.activity_sync_state`:
+  - `pending`
+  - `in_progress`
+  - `completed`
+  - `failed`
+- Worker claims one activity at a time using DB function `claim_next_activity_for_segment_sync(strava_id)`.
+- Claim order is deterministic:
+  - always resume existing `in_progress` activity first,
+  - then oldest `pending/failed` by `start_date asc, activity_id asc`.
+- For each claimed activity:
   - fetch `GET /activities/{id}?include_all_efforts=true`,
-  - keep only efforts where `effort.segment.id === targetSegmentId`.
-- Fallback progress is restart-safe using `segment_target_sync_state` checkpoints:
-  - `mode`: `backfill` or `incremental`
-  - `backfill_before_epoch`: monthly cursor for 5-year history backfill
-  - `incremental_after_epoch`: low-cost recent updates after backfill completes
-- Idempotency remains enforced by unique effort IDs in `segment_efforts`.
+  - upsert segments,
+  - upsert segment efforts idempotently,
+  - mark activity `completed` only after persistence succeeds.
+- Non-rate-limit errors mark activity `failed` with error text; retries are explicit and deterministic.
+- Rate-limit errors bubble to orchestration so the job pauses with checkpoint metadata and resumes automatically.
 
 #### Request-minimizing rule (high-signal)
 
@@ -94,6 +100,12 @@ Facade that composes a real client and sync logic for existing code paths.
   - `GET /activities/{id}?include_all_efforts=true`
   - save/update segment summaries from embedded effort segment data
   - save effort rows idempotently
+- Activity completion is managed by explicit per-row state machine fields on `activities`:
+  - `activity_sync_state`
+  - `activity_sync_started_at`
+  - `activity_sync_completed_at`
+  - `activity_sync_error`
+  - `activity_sync_attempts`
 - Completion guard: a full-sync job is only marked completed when no activities remain with pending/incomplete segment-effort coverage for that user.
 - Pause/resume on rate limits stores the latest cursor before transitioning to `paused`, allowing continuation without restarting history scans.
 

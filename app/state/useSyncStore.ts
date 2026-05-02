@@ -18,12 +18,41 @@ export interface RateLimits {
   lastUpdate: string
 }
 
+export interface SyncExactState {
+  phase?: string | null
+  checkpoints?: {
+    lastProcessedActivityId?: number | null
+    lastProcessedSegmentId?: number | null
+    stravaPage?: number | null
+    cursorAfterEpoch?: number | null
+    cursorBeforeEpoch?: number | null
+  } | null
+  requestBudget?: {
+    requestsUsed15m?: number | null
+    requestsUsedDaily?: number | null
+    reset15mAt?: string | null
+    resetDailyAt?: string | null
+  } | null
+  activityQueue?: {
+    pending: number
+    in_progress: number
+    completed: number
+    failed: number
+  } | null
+  currentActivity?: {
+    activityId: number
+    name: string | null
+    startedAt: string | null
+  } | null
+}
+
 type SyncState = {
   isHydrating: boolean
   activeJobId: string | null
 
   job: SyncJob | null
   rateLimits: RateLimits | null
+  exactState: SyncExactState | null
   error: string | null
 
   coverage: SyncCoverage | null
@@ -114,6 +143,7 @@ export const useSyncStore = create<SyncState>((set, get) => ({
 
   job: null,
   rateLimits: null,
+  exactState: null,
   error: null,
 
   coverage: null,
@@ -285,6 +315,7 @@ export const useSyncStore = create<SyncState>((set, get) => ({
     set({
       job: data.job as SyncJob,
       rateLimits: mergedRateLimits,
+      exactState: (data?.exactState as SyncExactState | undefined) ?? null,
       error: null,
     })
   },

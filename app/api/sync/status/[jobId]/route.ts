@@ -55,6 +55,34 @@ export async function GET(
       .eq('job_id', jobId)
       .maybeSingle()
 
+    const { data: activitySyncRows } = await supabase
+      .from('activities')
+      .select('activity_sync_state')
+      .eq('strava_id', job.strava_id)
+
+    const activityQueue = {
+      pending: 0,
+      in_progress: 0,
+      completed: 0,
+      failed: 0,
+    }
+    for (const row of activitySyncRows || []) {
+      const state = (row as { activity_sync_state?: keyof typeof activityQueue | null }).activity_sync_state
+      if (state && state in activityQueue) {
+        activityQueue[state] += 1
+      }
+    }
+
+    const { data: inProgressActivity } = await supabase
+      .from('activities')
+      .select('activity_id,name,activity_sync_started_at')
+      .eq('strava_id', job.strava_id)
+      .eq('activity_sync_state', 'in_progress')
+      .order('activity_sync_started_at', { ascending: true, nullsFirst: true })
+      .order('start_date', { ascending: true })
+      .limit(1)
+      .maybeSingle()
+
     // Expose current Strava rate limit state via HTTP headers so clients can treat
     // the response as the source of truth (mirrors Strava's header format).
     const headers = new Headers()
@@ -81,6 +109,14 @@ export async function GET(
             resetDailyAt: job.rate_limit_daily_reset_at ?? null,
           },
           activeState: activeState ?? null,
+          activityQueue,
+          currentActivity: inProgressActivity
+            ? {
+                activityId: inProgressActivity.activity_id,
+                name: inProgressActivity.name,
+                startedAt: inProgressActivity.activity_sync_started_at,
+              }
+            : null,
         },
         // Keep body fields for backward compatibility; clients should prefer headers.
         rateLimits: {

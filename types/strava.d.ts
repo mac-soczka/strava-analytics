@@ -112,6 +112,11 @@ export interface DatabaseActivity {
   segments_fetched_at?: string | null;
   segments_fetch_error?: string | null;
   segments_effort_rows_count?: number | null;
+  activity_sync_state?: 'pending' | 'in_progress' | 'completed' | 'failed';
+  activity_sync_started_at?: string | null;
+  activity_sync_completed_at?: string | null;
+  activity_sync_error?: string | null;
+  activity_sync_attempts?: number;
   created_at?: string;
   updated_at?: string;
 } 

@@ -99,6 +99,17 @@ GET /api/sync/status/550e8400-e29b-41d4-a716-446655440000
     "requestBudget": {
       "requestsUsed15m": 74,
       "requestsUsedDaily": 641
+    },
+    "activityQueue": {
+      "pending": 2145,
+      "in_progress": 1,
+      "completed": 412,
+      "failed": 0
+    },
+    "currentActivity": {
+      "activityId": 2431300890,
+      "name": "Morning Ride",
+      "startedAt": "2026-05-02T09:58:07Z"
     }
   }
 }
@@ -184,6 +195,16 @@ Returns up to 10 most recent jobs, ordered by creation date (newest first).
 - `ensure_segment_efforts`: ensure segment-effort rows are persisted
 - `completed`: terminal success
 - `failed`: terminal failure
+
+## Activity State Machine Fields
+
+The sync pipeline exposes activity-level queue state through `exactState.activityQueue`:
+- `pending`: eligible for oldest-first processing
+- `in_progress`: currently being processed (resumed first after pause)
+- `completed`: segments + efforts persisted for activity
+- `failed`: non-rate-limit failure captured for retry/inspection
+
+`exactState.currentActivity` (if present) includes the active activity id/name/start timestamp.
 
 ## Error Handling
 

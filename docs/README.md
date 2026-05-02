@@ -38,6 +38,8 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Edinburgh weather via NOAA (JSON plan)](./action-plans/weather-noaa-filesystem-json-plan.json)** - Station-oriented historical pipeline plan with wrangling + filesystem JSON persistence
 - **[User-triggered sync](./action-plans/user-triggered-sync.md)** - Background jobs + progress UI for user-triggered sync
 - **[Dashboard visual clues refresh](./action-plans/dashboard-visual-clues-refresh.md)** - Improve dashboard readability with semantic colors, temporal context, and trend cues
+- **[Automatic resume after rate-limit pause](./action-plans/auto-resume-paused-sync.md)** - Ensure paused sync jobs resume unattended after `resume_at` without manual endpoint calls
+- **[Activity-centric oldest-first segment-effort sync](./action-plans/activity-centric-oldest-first-segment-efforts-sync.md)** - Deterministic per-activity state machine (pending/in-progress/completed) with request-efficient segment-effort extraction and pause/resume safety
 
 ### 🔧 Troubleshooting & Deployment
 - **[Strava OAuth Troubleshooting](./strava-oauth-troubleshooting.md)** - Common OAuth issues and solutions

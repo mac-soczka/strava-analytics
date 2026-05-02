@@ -108,6 +108,27 @@ If sync appears to complete with low/zero processed activities:
 3. Check for paused state and `resume_at` (rate-limit continuation)
 4. Re-run once and verify cursor/checkpoint moves forward in status output
 
+### Stuck `in_progress` activity
+
+If queue counts show a long-lived `in_progress` row:
+1. Check `/api/sync/status/[jobId]` and inspect `exactState.currentActivity`.
+2. If job is paused, wait for `resume_at` (automatic resume should pick this activity first).
+3. If job is running but unchanged for multiple polls, cancel and restart; the same `in_progress` activity is resumed first on next run.
+
+### Repeated request symptoms
+
+If logs look like the same activity is being fetched repeatedly:
+1. Check `exactState.activityQueue.failed` count.
+2. Validate that completed rows are increasing and pending rows are decreasing.
+3. Inspect activity-level error in DB (`activity_sync_error`) for the repeated activity and resolve root cause before retry.
+
+### Paused jobs not resuming
+
+If a paused job does not resume automatically:
+1. Verify `resume_at` has passed.
+2. Verify scheduler/worker is running (local dev server in local setup).
+3. Trigger `/api/sync/resume/[jobId]` once to recover if scheduler was down, then confirm automatic behavior on next pause cycle.
+
 ### Sync Taking Too Long
 
 For very large accounts:

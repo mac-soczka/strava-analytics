@@ -33,6 +33,7 @@ type SegmentLookup = {
 export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps) {
   const activeJobId = useSyncStore((s) => s.activeJobId)
   const job = useSyncStore((s) => s.job)
+  const exactState = useSyncStore((s) => s.exactState)
   const error = useSyncStore((s) => s.error)
   const isStarting = useSyncStore((s) => s.isStarting)
   const isCancelling = useSyncStore((s) => s.isCancelling)
@@ -150,6 +151,16 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   const activities = job?.progress?.activities ?? zeroProgress
   const segments = job?.progress?.segments ?? zeroProgress
   const segmentEfforts = job?.progress?.segment_efforts ?? job?.progress?.streams ?? zeroProgress
+  const activityQueue = exactState?.activityQueue
+  const currentActivity = exactState?.currentActivity
+  const currentActivityStep =
+    job?.current_phase === 'ensure_segments'
+      ? 'fetch_details/persist_segments/persist_efforts'
+      : job?.current_phase === 'ensure_segment_efforts'
+        ? 'mark_completed'
+        : job?.current_phase === 'discover_activities'
+          ? 'discover_activities'
+          : 'idle'
   const renderProgress = (processed: number, total: number) =>
     total > 0 ? `${processed}/${total}` : `${processed}`
 
@@ -278,6 +289,21 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
               <p className="font-semibold text-gray-900 dark:text-white">{renderProgress(segmentEfforts.processed, segmentEfforts.total)}</p>
             </div>
           </div>
+
+          {activityQueue && (
+            <div className="rounded-lg border border-gray-200 p-3 text-xs dark:border-gray-700">
+              <p className="mb-1 font-medium text-gray-900 dark:text-white">Activity Queue</p>
+              <p className="text-gray-600 dark:text-gray-300">
+                Pending {activityQueue.pending} · In progress {activityQueue.in_progress} · Completed {activityQueue.completed} · Failed {activityQueue.failed}
+              </p>
+              {currentActivity && (
+                <p className="mt-1 text-gray-500 dark:text-gray-400">
+                  Current activity #{currentActivity.activityId}
+                  {currentActivity.name ? ` (${currentActivity.name})` : ''} · Step {currentActivityStep}
+                </p>
+              )}
+            </div>
+          )}
 
           {!isActive && (
             <div className="rounded-lg border border-gray-200 p-3 text-xs dark:border-gray-700">

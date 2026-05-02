@@ -1,6 +1,14 @@
 import { createServerComponentClient } from '@/lib/supabase'
 import { StravaActivity, DatabaseActivity } from '@/types/strava'
 
+export type ActivitySyncState = 'pending' | 'in_progress' | 'completed' | 'failed'
+
+export type ClaimedActivityForSegmentSync = {
+  id: number
+  activity_id: number
+  name: string
+}
+
 export class ActivitiesRepository {
   private supabase: ReturnType<typeof createServerComponentClient>
 
@@ -178,9 +186,7 @@ export class ActivitiesRepository {
       let query = this.supabase
         .from('activities')
         .select('*', { count: 'exact', head: true })
-        .or(
-          'segments_fetch_status.in.(pending,failed),segments_fetched.eq.false,segment_efforts_synced_at.is.null,segments_fetch_status.is.null'
-        )
+        .neq('activity_sync_state', 'completed')
 
       if (stravaId !== undefined) {
         query = query.eq('strava_id', stravaId)
@@ -205,9 +211,7 @@ export class ActivitiesRepository {
       let query = this.supabase
         .from('activities')
         .select('id, activity_id, name')
-        .or(
-          'segments_fetch_status.in.(pending,failed),segments_fetched.eq.false,segment_efforts_synced_at.is.null,segments_fetch_status.is.null'
-        )
+        .neq('activity_sync_state', 'completed')
         .range(offset, offset + limit - 1)
         .order('start_date', { ascending: true })
 
@@ -223,6 +227,21 @@ export class ActivitiesRepository {
       return data || []
     } catch (error) {
       console.error('Error fetching activities needing segments:', error)
+      throw error
+    }
+  }
+
+  async claimNextActivityForSegmentSync(stravaId: number): Promise<ClaimedActivityForSegmentSync | null> {
+    try {
+      const { data, error } = await this.supabase.rpc('claim_next_activity_for_segment_sync', {
+        p_strava_id: stravaId,
+      })
+      if (error) throw error
+      const row = Array.isArray(data) ? data[0] : data
+      if (!row) return null
+      return row as ClaimedActivityForSegmentSync
+    } catch (error) {
+      console.error('Error claiming next activity for segment sync:', error)
       throw error
     }
   }
@@ -289,12 +308,17 @@ export class ActivitiesRepository {
   }
 
   async markSegmentsFetchSuccessEmpty(id: number) {
+    const now = new Date().toISOString()
     const { error } = await this.supabase
       .from('activities')
       .update({
+        activity_sync_state: 'completed',
+        activity_sync_completed_at: now,
+        activity_sync_error: null,
         segments_fetched: true,
         segments_fetch_status: 'success_empty',
-        segments_fetched_at: new Date().toISOString(),
+        segments_fetched_at: now,
+        segment_efforts_synced_at: now,
         segments_fetch_error: null,
         segments_effort_rows_count: 0,
       })
@@ -303,12 +327,17 @@ export class ActivitiesRepository {
   }
 
   async markSegmentsFetchSuccessRows(id: number, effortRowsCount: number) {
+    const now = new Date().toISOString()
     const { error } = await this.supabase
       .from('activities')
       .update({
+        activity_sync_state: 'completed',
+        activity_sync_completed_at: now,
+        activity_sync_error: null,
         segments_fetched: true,
         segments_fetch_status: 'success_rows',
-        segments_fetched_at: new Date().toISOString(),
+        segments_fetched_at: now,
+        segment_efforts_synced_at: now,
         segments_fetch_error: null,
         segments_effort_rows_count: effortRowsCount,
       })
@@ -320,6 +349,9 @@ export class ActivitiesRepository {
     const { error } = await this.supabase
       .from('activities')
       .update({
+        activity_sync_state: 'failed',
+        activity_sync_completed_at: null,
+        activity_sync_error: errorMessage,
         segments_fetched: false,
         segments_fetch_status: 'failed',
         segments_fetch_error: errorMessage,
@@ -332,6 +364,10 @@ export class ActivitiesRepository {
     const { error } = await this.supabase
       .from('activities')
       .update({
+        activity_sync_state: 'pending',
+        activity_sync_started_at: null,
+        activity_sync_completed_at: null,
+        activity_sync_error: null,
         segments_fetched: false,
         segments_fetch_status: 'pending',
         segments_fetch_error: reason,
