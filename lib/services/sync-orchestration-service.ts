@@ -311,10 +311,23 @@ export class SyncOrchestrationService {
           .select('activity_id', { count: 'exact', head: true })
           .eq('strava_id', stravaId)
           .neq('activity_sync_state', 'completed')
+        const { count: inconsistentCompletedRows } = await this.supabase
+          .from('activities')
+          .select('activity_id', { count: 'exact', head: true })
+          .eq('strava_id', stravaId)
+          .eq('segments_fetch_status', 'success_rows')
+          .is('segment_efforts_synced_at', null)
         if ((remainingNeedingSegments ?? 0) > 0) {
           await this.jobsRepo.updateJobStatus(jobId, 'failed', {
             current_phase: 'failed',
             error_message: `Sync incomplete: ${remainingNeedingSegments} activities still need segment effort sync`,
+          })
+          return
+        }
+        if ((inconsistentCompletedRows ?? 0) > 0) {
+          await this.jobsRepo.updateJobStatus(jobId, 'failed', {
+            current_phase: 'failed',
+            error_message: `Sync inconsistent: ${inconsistentCompletedRows} activities marked success_rows without segment_efforts checkpoint`,
           })
           return
         }
@@ -339,12 +352,27 @@ export class SyncOrchestrationService {
       await this.syncRoutes(jobId, stravaId)
 
       // Mark job as completed
-      const { data: finalActivities } = await this.supabase
+      const { count: completedActivitiesCount } = await this.supabase
         .from('activities')
-        .select('activity_id', { count: 'exact' })
+        .select('activity_id', { count: 'exact', head: true })
+        .eq('strava_id', stravaId)
+        .eq('activity_sync_state', 'completed')
+
+      const { count: totalActivitiesCount } = await this.supabase
+        .from('activities')
+        .select('activity_id', { count: 'exact', head: true })
         .eq('strava_id', stravaId)
 
-      const totalActivities = finalActivities?.length || 0
+      const totalActivities = totalActivitiesCount ?? 0
+      const completedActivities = completedActivitiesCount ?? totalActivities
+
+      await this.jobsRepo.updateJobProgress(jobId, {
+        activities: {
+          total: totalActivities,
+          processed: completedActivities,
+          failed: 0,
+        },
+      } as Partial<SyncJobProgress>)
 
       await this.jobsRepo.updateJobStatus(jobId, 'completed', {
         current_phase: 'completed',

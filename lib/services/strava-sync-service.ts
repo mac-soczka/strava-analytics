@@ -244,7 +244,8 @@ export class StravaSyncService {
             .filter((s, idx, arr) => arr.findIndex((x) => x.segment_id === s.segment_id) === idx)
 
           if (segmentsToInsert.length > 0) {
-            await this.segmentsRepo.bulkUpsertSegments(segmentsToInsert)
+            const upsertSegmentsResult = await this.segmentsRepo.bulkUpsertSegments(segmentsToInsert)
+            if (upsertSegmentsResult.error) throw upsertSegmentsResult.error
           }
 
           const segmentsToSave = segmentEfforts.map((effort) => ({
@@ -265,10 +266,15 @@ export class StravaSyncService {
           )
           const newEfforts = segmentsToSave.filter((effort) => !existingEffortIds.has(effort.effort_id_text))
 
-          await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
+          const upsertEffortsResult = await this.segmentsRepo.bulkUpsertSegmentEfforts(segmentsToSave)
+          if (upsertEffortsResult.error) throw upsertEffortsResult.error
+          const savedEffortsCount = upsertEffortsResult.data?.length ?? 0
+          if (savedEffortsCount === 0 && segmentEfforts.length > 0) {
+            throw new Error(`Segment efforts upsert returned zero rows for activity ${activity.activity_id}`)
+          }
           segmentsAdded += newEfforts.length
 
-          await this.activitiesRepo.markSegmentsFetchSuccessRows(activity.id, segmentEfforts.length)
+          await this.activitiesRepo.markSegmentsFetchSuccessRows(activity.id, savedEffortsCount)
         } else {
           await this.activitiesRepo.markSegmentsFetchSuccessEmpty(activity.id)
         }

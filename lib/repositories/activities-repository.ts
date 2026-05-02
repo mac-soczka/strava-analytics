@@ -4,7 +4,7 @@ import { StravaActivity, DatabaseActivity } from '@/types/strava'
 export type ActivitySyncState = 'pending' | 'in_progress' | 'completed' | 'failed'
 
 export type ClaimedActivityForSegmentSync = {
-  id: number
+  id: string
   activity_id: number
   name: string
 }
@@ -307,7 +307,7 @@ export class ActivitiesRepository {
     }
   }
 
-  async markSegmentsFetchSuccessEmpty(id: number) {
+  async markSegmentsFetchSuccessEmpty(id: string) {
     const now = new Date().toISOString()
     const { error } = await this.supabase
       .from('activities')
@@ -326,7 +326,7 @@ export class ActivitiesRepository {
     if (error) throw error
   }
 
-  async markSegmentsFetchSuccessRows(id: number, effortRowsCount: number) {
+  async markSegmentsFetchSuccessRows(id: string, effortRowsCount: number) {
     const now = new Date().toISOString()
     const { error } = await this.supabase
       .from('activities')
@@ -345,7 +345,7 @@ export class ActivitiesRepository {
     if (error) throw error
   }
 
-  async markSegmentsFetchFailed(id: number, errorMessage: string) {
+  async markSegmentsFetchFailed(id: string, errorMessage: string) {
     const { error } = await this.supabase
       .from('activities')
       .update({

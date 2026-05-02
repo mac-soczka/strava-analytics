@@ -176,6 +176,12 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   }, [job, activities.total, activities.processed])
 
   const status = job?.status ?? 'idle'
+  const activityDisplayProcessed =
+    status === 'completed' && activityQueue ? Math.max(activities.processed, activityQueue.completed) : activities.processed
+  const activityDisplayTotal =
+    status === 'completed' && activityQueue
+      ? Math.max(activities.total, activityQueue.pending + activityQueue.in_progress + activityQueue.completed + activityQueue.failed)
+      : activities.total
   const isActive = status === 'running' || status === 'pending' || status === 'paused'
 
   const statusMeta = {
@@ -226,8 +232,8 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
             <p className="text-xs text-gray-500 dark:text-gray-400">
               {job
                 ? job.current_phase === 'discover_activities'
-                  ? `${activities.processed}/${activities.total || job.total_items || 0} activities scanned`
-                  : `${activities.processed}/${activities.total || job.total_items || 0} activities`
+                  ? `${activityDisplayProcessed}/${activityDisplayTotal || job.total_items || 0} activities scanned`
+                  : `${activityDisplayProcessed}/${activityDisplayTotal || job.total_items || 0} activities`
                 : 'Start a sync job from dashboard'}
             </p>
           </div>
@@ -278,7 +284,7 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
           <div className="grid grid-cols-3 gap-2">
             <div className="rounded-lg border border-gray-200 p-2 text-xs dark:border-gray-700">
               <p className="text-gray-500">Activities</p>
-              <p className="font-semibold text-gray-900 dark:text-white">{activities.processed}/{activities.total}</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{activityDisplayProcessed}/{activityDisplayTotal}</p>
             </div>
             <div className="rounded-lg border border-gray-200 p-2 text-xs dark:border-gray-700">
               <p className="text-gray-500">Segments</p>

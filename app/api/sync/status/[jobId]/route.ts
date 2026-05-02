@@ -55,22 +55,35 @@ export async function GET(
       .eq('job_id', jobId)
       .maybeSingle()
 
-    const { data: activitySyncRows } = await supabase
-      .from('activities')
-      .select('activity_sync_state')
-      .eq('strava_id', job.strava_id)
+    const [{ count: pendingCount }, { count: inProgressCount }, { count: completedCount }, { count: failedCount }] =
+      await Promise.all([
+        supabase
+          .from('activities')
+          .select('activity_id', { count: 'exact', head: true })
+          .eq('strava_id', job.strava_id)
+          .eq('activity_sync_state', 'pending'),
+        supabase
+          .from('activities')
+          .select('activity_id', { count: 'exact', head: true })
+          .eq('strava_id', job.strava_id)
+          .eq('activity_sync_state', 'in_progress'),
+        supabase
+          .from('activities')
+          .select('activity_id', { count: 'exact', head: true })
+          .eq('strava_id', job.strava_id)
+          .eq('activity_sync_state', 'completed'),
+        supabase
+          .from('activities')
+          .select('activity_id', { count: 'exact', head: true })
+          .eq('strava_id', job.strava_id)
+          .eq('activity_sync_state', 'failed'),
+      ])
 
     const activityQueue = {
-      pending: 0,
-      in_progress: 0,
-      completed: 0,
-      failed: 0,
-    }
-    for (const row of activitySyncRows || []) {
-      const state = (row as { activity_sync_state?: keyof typeof activityQueue | null }).activity_sync_state
-      if (state && state in activityQueue) {
-        activityQueue[state] += 1
-      }
+      pending: pendingCount ?? 0,
+      in_progress: inProgressCount ?? 0,
+      completed: completedCount ?? 0,
+      failed: failedCount ?? 0,
     }
 
     const { data: inProgressActivity } = await supabase

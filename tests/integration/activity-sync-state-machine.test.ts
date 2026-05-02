@@ -72,15 +72,15 @@ async function cleanup() {
 
     const c1 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
     expect(c1?.activity_id).toBe(991001)
-    await repo.markSegmentsFetchSuccessRows(Number(c1?.id), 2)
+    await repo.markSegmentsFetchSuccessRows(String(c1?.id), 2)
 
     const c2 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
     expect(c2?.activity_id).toBe(991002)
-    await repo.markSegmentsFetchSuccessEmpty(Number(c2?.id))
+    await repo.markSegmentsFetchSuccessEmpty(String(c2?.id))
 
     const c3 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
     expect(c3?.activity_id).toBe(991003)
-    await repo.markSegmentsFetchSuccessRows(Number(c3?.id), 1)
+    await repo.markSegmentsFetchSuccessRows(String(c3?.id), 1)
 
     const c4 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
     expect(c4).toBeNull()
@@ -144,7 +144,7 @@ async function cleanup() {
 
     const claimed = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
     expect(claimed?.activity_id).toBe(991006)
-    await repo.markSegmentsFetchSuccessRows(Number(claimed?.id), 3)
+    await repo.markSegmentsFetchSuccessRows(String(claimed?.id), 3)
 
     const { data: row } = await supabase
       .from('activities')
