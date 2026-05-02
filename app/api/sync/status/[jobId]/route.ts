@@ -96,6 +96,36 @@ export async function GET(
       .limit(1)
       .maybeSingle()
 
+    const { data: activityQueueListData } = await supabase
+      .from('activities')
+      .select('activity_id,name,start_date,activity_sync_state')
+      .eq('strava_id', job.strava_id)
+      .neq('activity_sync_state', 'completed')
+      .order('start_date', { ascending: false })
+      .order('activity_id', { ascending: false })
+
+    const { data: segmentQueueListData } = await supabase
+      .rpc('get_user_segment_queue_fifo', { user_strava_id: job.strava_id })
+
+    const rawSegmentsProgress = (job.progress as any)?.segments ?? { total: 0, processed: 0, failed: 0 }
+    const segmentsTotal = Number(rawSegmentsProgress.total ?? 0)
+    const segmentsProcessed = Number(rawSegmentsProgress.processed ?? 0)
+    const segmentsFailed = Number(rawSegmentsProgress.failed ?? 0)
+    const segmentQueueList = (segmentQueueListData || []).map((row: any) => ({
+      segmentId: Number(row.segment_id),
+      name: row.name,
+      queuedAt: row.created_at,
+    }))
+    const segmentsQueue = {
+      pending: segmentQueueList.length,
+      in_progress:
+        job.status === 'running' && (job.current_phase === 'ensure_segments' || job.current_phase === 'ensure_segment_efforts')
+          ? 1
+          : 0,
+      completed: segmentsProcessed,
+      failed: segmentsFailed,
+    }
+
     // Expose current Strava rate limit state via HTTP headers so clients can treat
     // the response as the source of truth (mirrors Strava's header format).
     const headers = new Headers()
@@ -123,6 +153,22 @@ export async function GET(
           },
           activeState: activeState ?? null,
           activityQueue,
+          segmentsQueue,
+          activityQueueList: (activityQueueListData || [])
+            .map((row) => ({
+              activityId: row.activity_id,
+              name: row.name,
+              startDate: row.start_date,
+              state: row.activity_sync_state,
+            }))
+            .sort((a, b) => {
+              const rank = (state: string | null | undefined) =>
+                state === 'in_progress' ? 0 : state === 'pending' ? 1 : state === 'failed' ? 2 : 3
+              const rankDiff = rank(a.state) - rank(b.state)
+              if (rankDiff !== 0) return rankDiff
+              return `${b.startDate}`.localeCompare(`${a.startDate}`)
+            }),
+          segmentQueueList,
           currentActivity: inProgressActivity
             ? {
                 activityId: inProgressActivity.activity_id,

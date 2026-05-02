@@ -26,7 +26,7 @@ async function cleanup() {
     })
   })
 
-  it('claims oldest pending activities first and marks completed', async () => {
+  it('claims newest pending activities first and marks completed', async () => {
     const repo = new ActivitiesRepository()
     await supabase.from('activities').insert([
       {
@@ -71,7 +71,7 @@ async function cleanup() {
     ])
 
     const c1 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
-    expect(c1?.activity_id).toBe(991001)
+    expect(c1?.activity_id).toBe(991003)
     await repo.markSegmentsFetchSuccessRows(String(c1?.id), 2)
 
     const c2 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
@@ -79,7 +79,7 @@ async function cleanup() {
     await repo.markSegmentsFetchSuccessEmpty(String(c2?.id))
 
     const c3 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)
-    expect(c3?.activity_id).toBe(991003)
+    expect(c3?.activity_id).toBe(991001)
     await repo.markSegmentsFetchSuccessRows(String(c3?.id), 1)
 
     const c4 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID)

@@ -27,6 +27,19 @@ export class SyncOrchestrationService {
     return count || 0
   }
 
+  private async getDbNewestActivityEpoch(stravaId: number): Promise<number> {
+    const { data, error } = await this.supabase
+      .from('activities')
+      .select('start_date')
+      .eq('strava_id', stravaId)
+      .order('start_date', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (error || !data?.start_date) return 0
+    const epoch = Math.floor(new Date(data.start_date).getTime() / 1000)
+    return Number.isFinite(epoch) && epoch > 0 ? epoch : 0
+  }
+
   private async runJob(job: SyncJob): Promise<void> {
     try {
       await this.jobsRepo.updateJobStatus(job.id, 'running')
@@ -229,14 +242,36 @@ export class SyncOrchestrationService {
     // Resume behavior: if job was already in ensure_* phase, skip activity discovery.
     if (startingPhase === 'discover_activities') {
       await this.setPhase(jobId, 'discover_activities')
-      this.logger.log(`[Job ${jobId}] Fetching activities oldest-first (entity=activities)`)
+      this.logger.log(`[Job ${jobId}] Fetching recent activities first, then oldest-first backfill (entity=activities)`)
       const state = await this.syncStateRepo.getOrCreate(stravaId)
+      const newestDbEpoch = await this.getDbNewestActivityEpoch(stravaId)
+      const recentAfterEpoch = Math.max(state.activities_after ?? 0, Math.max(0, newestDbEpoch - 24 * 60 * 60))
       const startBeforeEpoch =
         job.cursor_before_epoch ??
         state.backfill_cursor_before ??
         Math.floor(Date.now() / 1000)
       let latestCursorBeforeEpoch = startBeforeEpoch
+      let latestCursorAfterEpoch = recentAfterEpoch
       try {
+        const recentResult = await this.stravaService.syncActivitiesRecent({
+          afterEpoch: recentAfterEpoch,
+          recentWindowDays: 30,
+          maxRequests: 200,
+          onProgress: async (p) => {
+            latestCursorAfterEpoch = p.cursorAfterEpoch
+            this.logger.log(
+              `[Job ${jobId}] Recent activity check: new=${p.synced}, errors=${p.errors}, after=${p.cursorAfterEpoch}`
+            )
+            await this.syncStateRepo.update(stravaId, {
+              activities_after: latestCursorAfterEpoch,
+            })
+          },
+        })
+        latestCursorAfterEpoch = Math.max(latestCursorAfterEpoch, recentResult.newAfterEpoch)
+        await this.syncStateRepo.update(stravaId, {
+          activities_after: latestCursorAfterEpoch,
+        })
+
         const activityResult = await this.stravaService.syncActivitiesBackfill({
           beforeEpoch: startBeforeEpoch,
           maxRequests: 10_000,
@@ -259,6 +294,7 @@ export class SyncOrchestrationService {
           `[Job ${jobId}] Activities scanned: ${activityResult.scanned}, new: ${activityResult.synced}, errors: ${activityResult.errors}`
         )
         await this.syncStateRepo.update(stravaId, {
+          activities_after: latestCursorAfterEpoch,
           backfill_cursor_before: latestCursorBeforeEpoch,
         })
 
@@ -275,9 +311,11 @@ export class SyncOrchestrationService {
         if (this.isRateLimitError(error)) {
           this.logger.warn(`[Job ${jobId}] Rate limit hit during activity sync. Pausing job`)
           await this.syncStateRepo.update(stravaId, {
+            activities_after: latestCursorAfterEpoch,
             backfill_cursor_before: latestCursorBeforeEpoch,
           })
           await this.pauseForRateLimit(jobId, 'Rate limit exceeded during activity sync', error, {
+            cursor_after_epoch: latestCursorAfterEpoch,
             cursor_before_epoch: latestCursorBeforeEpoch,
           })
           return

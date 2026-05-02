@@ -152,6 +152,9 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   const segments = job?.progress?.segments ?? zeroProgress
   const segmentEfforts = job?.progress?.segment_efforts ?? job?.progress?.streams ?? zeroProgress
   const activityQueue = exactState?.activityQueue
+  const segmentsQueue = exactState?.segmentsQueue
+  const activityQueueList = exactState?.activityQueueList ?? []
+  const segmentQueueList = exactState?.segmentQueueList ?? []
   const currentActivity = exactState?.currentActivity
   const currentActivityStep =
     job?.current_phase === 'ensure_segments'
@@ -307,6 +310,49 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
                   Current activity #{currentActivity.activityId}
                   {currentActivity.name ? ` (${currentActivity.name})` : ''} · Step {currentActivityStep}
                 </p>
+              )}
+              {activityQueueList.length > 0 && (
+                <div className="mt-2 max-h-44 overflow-auto rounded border border-gray-100 dark:border-gray-700">
+                  {activityQueueList.map((item, index) => (
+                    <div
+                      key={`${item.activityId}-${index}`}
+                      className="flex items-center justify-between border-b border-gray-100 px-2 py-1 last:border-b-0 dark:border-gray-700"
+                    >
+                      <span className="truncate text-gray-700 dark:text-gray-200">
+                        {index + 1}. #{item.activityId} {item.name ? `· ${item.name}` : ''}
+                      </span>
+                      <span className="ml-2 shrink-0 text-gray-500 dark:text-gray-400">
+                        {item.state}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {segmentsQueue && (
+            <div className="rounded-lg border border-gray-200 p-3 text-xs dark:border-gray-700">
+              <p className="mb-1 font-medium text-gray-900 dark:text-white">Segments Queue</p>
+              <p className="text-gray-600 dark:text-gray-300">
+                Pending {segmentsQueue.pending} · In progress {segmentsQueue.in_progress} · Completed {segmentsQueue.completed} · Failed {segmentsQueue.failed}
+              </p>
+              {segmentQueueList.length > 0 && (
+                <div className="mt-2 max-h-44 overflow-auto rounded border border-gray-100 dark:border-gray-700">
+                  {segmentQueueList.map((item, index) => (
+                    <div
+                      key={`${item.segmentId}-${index}`}
+                      className="flex items-center justify-between border-b border-gray-100 px-2 py-1 last:border-b-0 dark:border-gray-700"
+                    >
+                      <span className="truncate text-gray-700 dark:text-gray-200">
+                        {index + 1}. #{item.segmentId} · {item.name || 'Unknown'}
+                      </span>
+                      <span className="ml-2 shrink-0 text-gray-500 dark:text-gray-400">
+                        {item.queuedAt ? new Date(item.queuedAt).toLocaleDateString() : '-'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           )}

@@ -39,6 +39,23 @@ export interface SyncExactState {
     completed: number
     failed: number
   } | null
+  segmentsQueue?: {
+    pending: number
+    in_progress: number
+    completed: number
+    failed: number
+  } | null
+  activityQueueList?: Array<{
+    activityId: number
+    name: string | null
+    startDate: string
+    state: string | null
+  }> | null
+  segmentQueueList?: Array<{
+    segmentId: number
+    name: string | null
+    queuedAt: string | null
+  }> | null
   currentActivity?: {
     activityId: number
     name: string | null
