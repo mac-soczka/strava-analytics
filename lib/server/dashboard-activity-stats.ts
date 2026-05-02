@@ -114,7 +114,8 @@ function mapActivityTotalsRow(row: Record<string, unknown> | null | undefined): 
 
 async function fetchTotalsViaPagination(
   supabase: SupabaseClient,
-  stravaId: number | null
+  stravaId: number | null,
+  sinceIso: string | null = null
 ): Promise<DashboardActivityTotals> {
   const cols = 'distance, moving_time, total_elevation_gain'
 
@@ -126,6 +127,7 @@ async function fetchTotalsViaPagination(
   for (;;) {
     let q = supabase.from('activities').select(cols).order('activity_id', { ascending: true }).range(offset, offset + PAGE - 1)
     if (stravaId != null) q = q.eq('strava_id', stravaId)
+    if (sinceIso) q = q.gte('start_date', sinceIso)
 
     const { data, error } = await q
     if (error) throw error
@@ -161,15 +163,17 @@ const ACTIVITY_AGGREGATE_SELECT =
  */
 export async function fetchDashboardActivityTotals(
   supabase: SupabaseClient,
-  stravaId: number | null
+  stravaId: number | null,
+  sinceIso: string | null = null
 ): Promise<DashboardActivityTotals> {
   let q = supabase.from('activities').select(ACTIVITY_AGGREGATE_SELECT)
   if (stravaId != null) q = q.eq('strava_id', stravaId)
+  if (sinceIso) q = q.gte('start_date', sinceIso)
 
   const { data, error } = await q.maybeSingle()
 
   if (error) {
-    return fetchTotalsViaPagination(supabase, stravaId)
+    return fetchTotalsViaPagination(supabase, stravaId, sinceIso)
   }
 
   return mapActivityTotalsRow(data as unknown as Record<string, unknown>)
@@ -180,7 +184,8 @@ export async function fetchDashboardActivityTotals(
  */
 export async function fetchAllActivitiesForMonthlyChart(
   supabase: SupabaseClient,
-  stravaId: number | null
+  stravaId: number | null,
+  sinceIso: string | null = null
 ): Promise<MonthlyRow[]> {
   const out: MonthlyRow[] = []
   let offset = 0
@@ -193,6 +198,7 @@ export async function fetchAllActivitiesForMonthlyChart(
       .range(offset, offset + PAGE - 1)
 
     if (stravaId != null) q = q.eq('strava_id', stravaId)
+    if (sinceIso) q = q.gte('start_date', sinceIso)
 
     const { data, error } = await q
     if (error) throw error
@@ -213,7 +219,8 @@ export async function fetchAllActivitiesForMonthlyChart(
  */
 export async function fetchDashboardActivityTypeStats(
   supabase: SupabaseClient,
-  stravaId: number | null
+  stravaId: number | null,
+  sinceIso: string | null = null
 ): Promise<DashboardActivityTypeStats> {
   const out: DashboardActivityTypeStats = {}
   let offset = 0
@@ -226,6 +233,7 @@ export async function fetchDashboardActivityTypeStats(
       .range(offset, offset + PAGE - 1)
 
     if (stravaId != null) q = q.eq('strava_id', stravaId)
+    if (sinceIso) q = q.gte('start_date', sinceIso)
 
     const { data, error } = await q
     if (error) throw error

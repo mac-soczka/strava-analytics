@@ -1,5 +1,6 @@
 import { createServerComponentClient } from '@/lib/supabase'
 import { Suspense } from 'react'
+import Link from 'next/link'
 import ProtectedRoute from "../components/ProtectedRoute"
 import { getSessionStravaId } from '@/lib/server/session-strava'
 import { loadSyncCoverage } from '@/lib/sync/sync-coverage'
@@ -8,6 +9,13 @@ import {
   fetchDashboardActivityTotals,
   fetchDashboardActivityTypeStats,
 } from '@/lib/server/dashboard-activity-stats'
+import {
+  DASHBOARD_TIME_RANGES,
+  getDashboardRangeDescription,
+  getDashboardRangeSinceIso,
+  resolveDashboardTimeRange,
+  type DashboardTimeRangeKey,
+} from '@/lib/server/dashboard-time-range'
 
 // Loading skeleton for dashboard
 function DashboardLoadingSkeleton() {
@@ -53,9 +61,10 @@ function DashboardLoadingSkeleton() {
 }
 
 // Main dashboard content
-async function DashboardContent() {
+async function DashboardContent({ selectedRange }: { selectedRange: DashboardTimeRangeKey }) {
   const supabase = createServerComponentClient()
   const stravaId = await getSessionStravaId()
+  const sinceIso = getDashboardRangeSinceIso(selectedRange)
 
   try {
     const effortsCountQuery = stravaId
@@ -64,6 +73,7 @@ async function DashboardContent() {
           .select('id, activities!inner(strava_id)', { count: 'exact', head: true })
           .eq('activities.strava_id', stravaId)
       : supabase.from('segment_efforts').select('*', { count: 'exact', head: true })
+    if (stravaId && sinceIso) effortsCountQuery.gte('activities.start_date', sinceIso)
 
     const segmentEffortsListQuery = stravaId
       ? supabase
@@ -71,10 +81,12 @@ async function DashboardContent() {
           .select('segment_id, activities!inner(strava_id)')
           .eq('activities.strava_id', stravaId)
       : supabase.from('segment_efforts').select('segment_id')
+    if (stravaId && sinceIso) segmentEffortsListQuery.gte('activities.start_date', sinceIso)
 
     // 🎯 APPROACH 1: Efficient count queries for simple totals
     let activitiesCountQuery = supabase.from('activities').select('*', { count: 'exact', head: true })
     if (stravaId) activitiesCountQuery = activitiesCountQuery.eq('strava_id', stravaId)
+    if (sinceIso) activitiesCountQuery = activitiesCountQuery.gte('start_date', sinceIso)
 
     const [activitiesCount, segmentsCount, effortsCount] = await Promise.all([
       activitiesCountQuery,
@@ -92,13 +104,14 @@ async function DashboardContent() {
       .order('start_date', { ascending: false })
       .limit(5)
     if (stravaId) recentActivitiesQuery = recentActivitiesQuery.eq('strava_id', stravaId)
+    if (sinceIso) recentActivitiesQuery = recentActivitiesQuery.gte('start_date', sinceIso)
 
     const [segments, segmentEfforts, recentActivities, totals, monthlySource] = await Promise.all([
       supabase.from('segments').select('segment_id, name, distance, elevation_gain, polyline'),
       segmentEffortsListQuery,
       recentActivitiesQuery,
-      fetchDashboardActivityTotals(supabase, stravaId),
-      fetchAllActivitiesForMonthlyChart(supabase, stravaId),
+      fetchDashboardActivityTotals(supabase, stravaId, sinceIso),
+      fetchAllActivitiesForMonthlyChart(supabase, stravaId, sinceIso),
     ])
 
     if (segments.error) throw segments.error
@@ -134,7 +147,7 @@ async function DashboardContent() {
       .sort((a, b) => b.effortCount - a.effortCount)
       .slice(0, 10)
 
-    const activityTypeStats = await fetchDashboardActivityTypeStats(supabase, stravaId)
+    const activityTypeStats = await fetchDashboardActivityTypeStats(supabase, stravaId, sinceIso)
     const activityTypes = Object.fromEntries(
       Object.entries(activityTypeStats).map(([type, s]) => [type, s.count])
     )
@@ -232,17 +245,53 @@ async function DashboardContent() {
   }
 }
 
-export default function DashboardPage() {
+type DashboardPageProps = {
+  searchParams?: Promise<{
+    range?: string
+  }>
+}
+
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
+  const params = searchParams ? await searchParams : {}
+  const selectedRange = resolveDashboardTimeRange(params?.range)
+
   return (
     <ProtectedRoute>
       <main className="flex min-h-screen flex-col p-8 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto w-full">
-          <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-            🚴‍♂️ Strava Dashboard
-          </h1>
+          <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              🚴‍♂️ Strava Dashboard
+            </h1>
+            <div className="flex flex-wrap items-center justify-start gap-2 sm:justify-end">
+              <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                Time range
+              </span>
+              {DASHBOARD_TIME_RANGES.map((range) => {
+                const isActive = range.key === selectedRange
+                return (
+                  <Link
+                    key={range.key}
+                    href={`/dashboard?range=${range.key}`}
+                    className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+                      isActive
+                        ? 'border-blue-600 bg-blue-600 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200'
+                    }`}
+                  >
+                    {range.label}
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+
+          <p className="mb-6 text-sm text-gray-600 dark:text-gray-300">
+            Showing aggregates for {getDashboardRangeDescription(selectedRange).toLowerCase()}.
+          </p>
           
           <Suspense fallback={<DashboardLoadingSkeleton />}>
-            <DashboardContent />
+            <DashboardContent selectedRange={selectedRange} />
           </Suspense>
         </div>
       </main>
