@@ -113,14 +113,10 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   const fetchSegmentsPage = async (page: number, search: string, append: boolean) => {
     setLoading(true)
     try {
-      const apiSortBy =
-        sortBy === 'name' || sortBy === 'distance' || sortBy === 'elevation' || sortBy === 'grade'
-          ? sortBy
-          : 'name'
       const params = new URLSearchParams({
         page: page.toString(),
         limit: '100',
-        sortBy: apiSortBy,
+        sortBy,
         sortOrder: sortOrder,
         ...(search && { search: search })
       })
@@ -167,10 +163,8 @@ export default function SegmentsClient({ segments: initialSegments, stats }: Seg
   }
 
   useEffect(() => {
-    // Keep DB-backed sorts global by reloading page 1 from DB.
-    if (sortBy === 'name' || sortBy === 'distance' || sortBy === 'elevation' || sortBy === 'grade') {
-      void fetchSegmentsPage(1, searchTerm, false)
-    }
+    // Keep sorts global by reloading page 1 from DB/API for every column.
+    void fetchSegmentsPage(1, searchTerm, false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy, sortOrder])
 

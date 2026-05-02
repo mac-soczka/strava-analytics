@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
       grade: 'average_grade',
     }
     const sortColumn = sortColumnByParam[sortBy] || 'name'
+    const computedSort = sortBy === 'attempts' || sortBy === 'bestTime' || sortBy === 'avgTime'
 
     const supabase = createServerComponentClient()
     const offset = (page - 1) * limit
@@ -42,8 +43,13 @@ export async function GET(request: NextRequest) {
       query = query.or(`name.ilike.%${search}%,city.ilike.%${search}%,state.ilike.%${search}%`)
     }
 
-    query = query.order(sortColumn, { ascending: sortOrder === 'asc' })
-    query = query.range(offset, offset + limit - 1)
+    if (!computedSort) {
+      query = query.order(sortColumn, { ascending: sortOrder === 'asc' })
+      query = query.range(offset, offset + limit - 1)
+    } else {
+      // For computed metrics (attempts/best/avg), fetch full filtered set then sort/paginate in memory.
+      query = query.order('name', { ascending: true })
+    }
 
     const { data: segments, error } = await query
 
@@ -52,15 +58,18 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to fetch segments' }, { status: 500 })
     }
 
-    let countQuery = supabase.from('segments').select('*', { count: 'exact', head: true })
-    if (search) {
-      countQuery = countQuery.or(`name.ilike.%${search}%,city.ilike.%${search}%,state.ilike.%${search}%`)
-    }
-    const { count: totalCount } = await countQuery
-
     const transformedSegments =
       segments?.map((segment: any) => {
         const sid = segment.segment_id as number
+        const efforts = Array.isArray(segment.segment_efforts) ? segment.segment_efforts : []
+        const elapsedTimes = efforts
+          .map((effort: any) => Number(effort.elapsed_time ?? 0))
+          .filter((value: number) => Number.isFinite(value) && value > 0)
+        const bestTimeSeconds = elapsedTimes.length > 0 ? Math.min(...elapsedTimes) : 0
+        const avgTimeSeconds =
+          elapsedTimes.length > 0
+            ? elapsedTimes.reduce((sum: number, value: number) => sum + value, 0) / elapsedTimes.length
+            : 0
         return {
           id: sid,
           name: segment.name,
@@ -78,7 +87,7 @@ export async function GET(request: NextRequest) {
           starred: false,
           map: segment.polyline ? { polyline: segment.polyline } : undefined,
           segment_efforts:
-            segment.segment_efforts?.map((effort: any) => ({
+            efforts.map((effort: any) => ({
               id: effort.id,
               activity_id: effort.activity_id,
               elapsed_time: effort.elapsed_time,
@@ -105,11 +114,46 @@ export async function GET(request: NextRequest) {
               },
             })) || [],
           total_effort_count: effortCountMap.get(sid) ?? 0,
+          best_time_seconds: bestTimeSeconds,
+          avg_time_seconds: avgTimeSeconds,
         }
       }) || []
 
+    const sortedSegments = computedSort
+      ? [...transformedSegments].sort((a: any, b: any) => {
+          let compare = 0
+          if (sortBy === 'attempts') {
+            compare = Number(a.total_effort_count ?? 0) - Number(b.total_effort_count ?? 0)
+          } else if (sortBy === 'bestTime') {
+            compare = Number(a.best_time_seconds ?? 0) - Number(b.best_time_seconds ?? 0)
+          } else if (sortBy === 'avgTime') {
+            compare = Number(a.avg_time_seconds ?? 0) - Number(b.avg_time_seconds ?? 0)
+          }
+          if (compare === 0) {
+            compare = String(a.name ?? '').localeCompare(String(b.name ?? ''))
+          }
+          return sortOrder === 'asc' ? compare : -compare
+        })
+      : transformedSegments
+
+    const pagedSegments = computedSort
+      ? sortedSegments.slice(offset, offset + limit)
+      : sortedSegments
+
+    let totalCount = 0
+    if (computedSort) {
+      totalCount = sortedSegments.length
+    } else {
+      let countQuery = supabase.from('segments').select('*', { count: 'exact', head: true })
+      if (search) {
+        countQuery = countQuery.or(`name.ilike.%${search}%,city.ilike.%${search}%,state.ilike.%${search}%`)
+      }
+      const { count } = await countQuery
+      totalCount = count || 0
+    }
+
     return NextResponse.json({
-      segments: transformedSegments,
+      segments: pagedSegments,
       pagination: {
         page,
         limit,
