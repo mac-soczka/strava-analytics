@@ -107,7 +107,7 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
   const phaseLabel = (() => {
     switch (job.current_phase) {
       case 'discover_activities':
-        return 'Fetching recent activities'
+        return 'Backfilling activities (oldest-first)'
       case 'ensure_segments':
         return 'Ensuring segments'
       case 'ensure_segment_efforts':

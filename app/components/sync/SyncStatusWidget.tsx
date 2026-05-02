@@ -213,7 +213,11 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
           <div>
             <p className={`text-sm font-semibold ${meta.tone}`}>{meta.text}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              {job ? `${activities.processed}/${activities.total || job.total_items || 0} activities` : 'Start a sync job from dashboard'}
+              {job
+                ? job.current_phase === 'discover_activities'
+                  ? `${activities.processed}/${activities.total || job.total_items || 0} activities scanned`
+                  : `${activities.processed}/${activities.total || job.total_items || 0} activities`
+                : 'Start a sync job from dashboard'}
             </p>
           </div>
         </div>

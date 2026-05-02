@@ -1,6 +1,6 @@
 # Sync API Endpoints
 
-**Last Updated:** 2026-04-22
+**Last Updated:** 2026-05-02
 
 API documentation for the sync system endpoints.
 
@@ -59,7 +59,7 @@ Get the current status of a sync job.
 GET /api/sync/status/550e8400-e29b-41d4-a716-446655440000
 ```
 
-**Response:**
+**Response (abridged):**
 ```json
 {
   "job": {
@@ -70,14 +70,16 @@ GET /api/sync/status/550e8400-e29b-41d4-a716-446655440000
     "total_items": 150,
     "processed_items": 75,
     "failed_items": 2,
+    "current_phase": "discover_activities",
     "progress": {
-      "activities": { "total": 150, "processed": 75, "failed": 2 },
-      "laps": { "total": 150, "processed": 75, "failed": 0 },
-      "streams": { "total": 150, "processed": 75, "failed": 0 },
+      "activities": { "total": 2558, "processed": 413, "failed": 0 },
       "segments": { "total": 0, "processed": 0, "failed": 0 },
-      "routes": { "total": 1, "processed": 1, "failed": 0 },
-      "stats": { "total": 1, "processed": 1, "failed": 0 }
+      "segment_efforts": { "total": 0, "processed": 0, "failed": 0 }
     },
+    "cursor_before_epoch": 1711843199,
+    "cursor_after_epoch": null,
+    "requests_used_15m": 74,
+    "requests_used_daily": 641,
     "error_message": null,
     "error_details": null,
     "started_at": "2026-04-22T10:00:05Z",
@@ -86,6 +88,18 @@ GET /api/sync/status/550e8400-e29b-41d4-a716-446655440000
     "triggered_by": "user",
     "created_at": "2026-04-22T10:00:00Z",
     "updated_at": "2026-04-22T10:05:30Z"
+  },
+  "exactState": {
+    "phase": "discover_activities",
+    "checkpoints": {
+      "cursorBeforeEpoch": 1711843199,
+      "cursorAfterEpoch": null,
+      "lastProcessedActivityId": null
+    },
+    "requestBudget": {
+      "requestsUsed15m": 74,
+      "requestsUsedDaily": 641
+    }
   }
 }
 ```
@@ -154,6 +168,7 @@ Returns up to 10 most recent jobs, ordered by creation date (newest first).
 - `completed`: Job finished successfully
 - `failed`: Job encountered an error
 - `cancelled`: Job was cancelled (manually or by timeout)
+- `paused`: Job paused automatically (typically due to Strava rate limits) and resumable at `resume_at`
 
 ## Job Types
 
@@ -161,6 +176,14 @@ Returns up to 10 most recent jobs, ordered by creation date (newest first).
 - `activities_only`: Sync only activities
 - `routes_only`: Sync only routes
 - `stats_only`: Sync only athlete stats
+
+## Job Phases (for `current_phase`)
+
+- `discover_activities`: oldest-first activity backfill scan (progress may reflect scanned activities)
+- `ensure_segments`: ensure segment catalog from activity details
+- `ensure_segment_efforts`: ensure segment-effort rows are persisted
+- `completed`: terminal success
+- `failed`: terminal failure
 
 ## Error Handling
 
@@ -186,7 +209,10 @@ Sync jobs respect Strava API rate limits:
 - 100 requests per 15 minutes
 - 1000 requests per day
 
-If rate limits are exceeded, the job will fail with an appropriate error message.
+When limits are reached:
+- Job status transitions to `paused`
+- `resume_at` is set for automatic continuation
+- latest cursor/checkpoint is persisted to avoid restarting from scratch
 
 ## Polling Recommendations
 
@@ -216,7 +242,11 @@ const pollInterval = setInterval(async () => {
     clearInterval(pollInterval)
     console.log('Sync finished:', currentJob.status)
   } else {
+    console.log(`Phase: ${currentJob.current_phase}`)
     console.log(`Progress: ${currentJob.processed_items}/${currentJob.total_items}`)
+    if (currentJob.status === 'paused') {
+      console.log(`Will resume at: ${currentJob.resume_at}`)
+    }
   }
 }, 2000)
 ```

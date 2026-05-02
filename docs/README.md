@@ -30,6 +30,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Strava sync under 1000/day](./action-plans/strava-sync-under-1000-per-day.md)** - Multi-day, budget-aware strategy for activities, segments, and segment efforts
 - **[Optimize Strava sync (1 request/activity)](./action-plans/optimize-strava-sync.md)** - Extract embedded segment efforts from activity details to stay under rate limits
 - **[Stateful resumable sync plan](./action-plans/stateful-resumable-sync-plan.md)** - DB-backed phase/checkpoint sync with exact progress visibility and restart-safe resume
+- **[Full-coverage oldest-first resumable sync](./action-plans/full-coverage-oldest-first-resumable-sync.md)** - Ensure complete segment-effort coverage with oldest-first backfill and checkpointed continuation across rate limits
 - **[Segment efforts sideline sync](./action-plans/segment-efforts-sideline-sync.md)** - Targeted segment effort sync with autocomplete segment selection and resumable job tracking
 - **[Request-efficient 5-year sync for segment 3810079](./action-plans/segment-3810079-five-year-efficient-sync.md)** - Backfill + incremental plan to fetch complete segment history with checkpointed resume
 - **[Edinburgh weather via Open-Meteo (JSON plan)](./action-plans/weather-open-meteo-filesystem-json-plan.json)** - Filesystem-first hourly historical weather ingestion plan (no DB yet)

@@ -178,7 +178,9 @@ export class ActivitiesRepository {
       let query = this.supabase
         .from('activities')
         .select('*', { count: 'exact', head: true })
-        .or('segments_fetch_status.in.(pending,failed),segments_fetched.eq.false')
+        .or(
+          'segments_fetch_status.in.(pending,failed),segments_fetched.eq.false,segment_efforts_synced_at.is.null,segments_fetch_status.is.null'
+        )
 
       if (stravaId !== undefined) {
         query = query.eq('strava_id', stravaId)
@@ -203,9 +205,11 @@ export class ActivitiesRepository {
       let query = this.supabase
         .from('activities')
         .select('id, activity_id, name')
-        .or('segments_fetch_status.in.(pending,failed),segments_fetched.eq.false')
+        .or(
+          'segments_fetch_status.in.(pending,failed),segments_fetched.eq.false,segment_efforts_synced_at.is.null,segments_fetch_status.is.null'
+        )
         .range(offset, offset + limit - 1)
-        .order('start_date', { ascending: false })
+        .order('start_date', { ascending: true })
 
       if (stravaId !== undefined) {
         query = query.eq('strava_id', stravaId)

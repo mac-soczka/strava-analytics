@@ -13,6 +13,7 @@
     "test": "jest",
     "test:e2e": "playwright test",
     "test:all": "yarn validate && yarn test && yarn test:e2e",
+    "pw:install": "playwright install",
     "supabase": "supabase",
     "db:start": "supabase start",
     "db:stop": "supabase stop",

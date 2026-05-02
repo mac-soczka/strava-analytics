@@ -10,7 +10,7 @@ The service layer acts as an intermediary between the presentation layer (compon
 
 ### 1. Strava sync stack (Strava API + sync logic)
 
-**Last Updated:** 2026-05-01
+**Last Updated:** 2026-05-02
 
 We separate responsibilities so **sync logic is testable without touching Strava**:
 
@@ -87,6 +87,15 @@ Facade that composes a real client and sync logic for existing code paths.
   - `completed` / `failed`
 - Checkpoints (`last_processed_activity_id`, cursors, and request-usage counters) are persisted so jobs can continue after process restart.
 - `active_sync_job_state` view provides exact in-flight state for API/UI visibility.
+
+**Full coverage strategy (current):**
+- Full sync discovery runs as **oldest-first backfill** using a persisted `cursor_before_epoch`.
+- Segment and segment-effort completion work is treated as one activity-details flow:
+  - `GET /activities/{id}?include_all_efforts=true`
+  - save/update segment summaries from embedded effort segment data
+  - save effort rows idempotently
+- Completion guard: a full-sync job is only marked completed when no activities remain with pending/incomplete segment-effort coverage for that user.
+- Pause/resume on rate limits stores the latest cursor before transitioning to `paused`, allowing continuation without restarting history scans.
 
 ---
 

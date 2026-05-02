@@ -62,7 +62,12 @@ export class SyncOrchestrationService {
     await this.jobsRepo.updateJobStatus(jobId, 'running', { current_phase: phase })
   }
 
-  private async pauseForRateLimit(jobId: string, reasonPrefix: string, error: any) {
+  private async pauseForRateLimit(
+    jobId: string,
+    reasonPrefix: string,
+    error: any,
+    stateUpdates?: Partial<SyncJob>
+  ) {
     const retryAfterMs = typeof error?.retryAfter === 'number' ? error.retryAfter : 15 * 60 * 1000
     const effectiveRetryAfterMs = Math.max(60_000, retryAfterMs)
     const resumeAt = new Date(Date.now() + effectiveRetryAfterMs)
@@ -109,6 +114,7 @@ export class SyncOrchestrationService {
       resumeAt
     )
     await this.jobsRepo.updateJobStatus(jobId, 'paused', {
+      ...(stateUpdates ?? {}),
       requests_used_15m: rateLimitStatus.requests15min,
       requests_used_daily: rateLimitStatus.requestsDay,
       rate_limit_15m_reset_at: rateLimitStatus.nextReset15min.toISOString(),
@@ -220,31 +226,57 @@ export class SyncOrchestrationService {
     // Resume behavior: if job was already in ensure_* phase, skip activity discovery.
     if (startingPhase === 'discover_activities') {
       await this.setPhase(jobId, 'discover_activities')
-      console.log(`[Job ${jobId}] Fetching activities (entity=activities)...`)
+      console.log(`[Job ${jobId}] Fetching activities oldest-first (entity=activities)...`)
+      const state = await this.syncStateRepo.getOrCreate(stravaId)
+      const startBeforeEpoch =
+        job.cursor_before_epoch ??
+        state.backfill_cursor_before ??
+        Math.floor(Date.now() / 1000)
+      let latestCursorBeforeEpoch = startBeforeEpoch
       try {
-        const activityResult = await this.stravaService.syncActivities(
-          undefined, // pageSize - use default
-          undefined, // processBatchSize - use default
-          async (synced, errors, total) => {
-            // Update progress in real-time after each batch
-            console.log(`[Job ${jobId}] Progress update: ${synced}/${total} synced, ${errors} errors`)
+        const activityResult = await this.stravaService.syncActivitiesBackfill({
+          beforeEpoch: startBeforeEpoch,
+          maxRequests: 10_000,
+          onProgress: async (p) => {
+            latestCursorBeforeEpoch = p.cursorBeforeEpoch
+            console.log(
+              `[Job ${jobId}] Progress update: scanned=${p.scanned}, new=${p.synced}, errors=${p.errors}`
+            )
+            await this.syncStateRepo.update(stravaId, {
+              backfill_cursor_before: latestCursorBeforeEpoch,
+            })
             await this.jobsRepo.updateJobProgress(jobId, {
-              // total = DB total activities (stable denominator), processed = scanned/handled this run
-              activities: { total: baseDbTotalActivities, processed: synced, failed: errors },
+              // Show scanned activity volume in discover phase; this prevents false 0/N perception
+              // when no new inserts are needed for this page window.
+              activities: { total: baseDbTotalActivities, processed: p.scanned, failed: p.errors },
             } as Partial<SyncJobProgress>)
-          }
+          },
+        })
+        console.log(
+          `[Job ${jobId}] Activities scanned: ${activityResult.scanned}, new: ${activityResult.synced}, errors: ${activityResult.errors}`
         )
-        console.log(`[Job ${jobId}] Activities synced: ${activityResult.synced}, errors: ${activityResult.errors}`)
+        await this.syncStateRepo.update(stravaId, {
+          backfill_cursor_before: latestCursorBeforeEpoch,
+        })
 
         // Final update
         const finalDbTotalActivities = await this.getDbActivityCount(stravaId)
         await this.jobsRepo.updateJobProgress(jobId, {
-          activities: { total: finalDbTotalActivities, processed: activityResult.synced, failed: activityResult.errors },
+          activities: {
+            total: finalDbTotalActivities,
+            processed: activityResult.scanned,
+            failed: activityResult.errors,
+          },
         } as Partial<SyncJobProgress>)
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during activity sync! Pausing job...`)
-          await this.pauseForRateLimit(jobId, 'Rate limit exceeded during activity sync', error)
+          await this.syncStateRepo.update(stravaId, {
+            backfill_cursor_before: latestCursorBeforeEpoch,
+          })
+          await this.pauseForRateLimit(jobId, 'Rate limit exceeded during activity sync', error, {
+            cursor_before_epoch: latestCursorBeforeEpoch,
+          })
           return
         }
         throw error
@@ -270,6 +302,21 @@ export class SyncOrchestrationService {
             segment_efforts: { total: segmentResult.processed, processed: segmentResult.processed, failed: segmentResult.errors },
           } as Partial<SyncJobProgress>
         )
+
+        const { count: remainingNeedingSegments } = await this.supabase
+          .from('activities')
+          .select('activity_id', { count: 'exact', head: true })
+          .eq('strava_id', stravaId)
+          .or(
+            'segments_fetch_status.in.(pending,failed),segments_fetched.eq.false,segment_efforts_synced_at.is.null,segments_fetch_status.is.null'
+          )
+        if ((remainingNeedingSegments ?? 0) > 0) {
+          await this.jobsRepo.updateJobStatus(jobId, 'failed', {
+            current_phase: 'failed',
+            error_message: `Sync incomplete: ${remainingNeedingSegments} activities still need segment effort sync`,
+          })
+          return
+        }
       } catch (error: any) {
         if (this.isRateLimitError(error)) {
           console.warn(`[Job ${jobId}] Rate limit hit during segments/efforts sync! Pausing job...`)
@@ -399,6 +446,7 @@ export class SyncOrchestrationService {
     const nowEpoch = Math.floor(Date.now() / 1000)
     const beforeEpoch = state.backfill_cursor_before ?? nowEpoch
 
+    let latestCursorBeforeEpoch = beforeEpoch
     try {
       await this.setPhase(jobId, 'discover_activities')
       const baseDbTotalActivities = await this.getDbActivityCount(stravaId)
@@ -406,10 +454,12 @@ export class SyncOrchestrationService {
         beforeEpoch,
         maxRequests: 250,
         onProgress: async (p) => {
+          latestCursorBeforeEpoch = p.cursorBeforeEpoch
+          await this.syncStateRepo.update(stravaId, { backfill_cursor_before: p.cursorBeforeEpoch })
           await this.jobsRepo.updateJobProgress(
             jobId,
-            { activities: { total: baseDbTotalActivities, processed: p.synced, failed: p.errors } } as Partial<SyncJobProgress>,
-            p.synced
+            { activities: { total: baseDbTotalActivities, processed: p.scanned, failed: p.errors } } as Partial<SyncJobProgress>,
+            p.scanned
           )
         },
       })
@@ -424,13 +474,15 @@ export class SyncOrchestrationService {
         requests_used_daily: rateLimitStatus.requestsDay,
         rate_limit_15m_reset_at: rateLimitStatus.nextReset15min.toISOString(),
         rate_limit_daily_reset_at: rateLimitStatus.nextResetDaily.toISOString(),
-        processed_items: result.synced,
+        processed_items: result.scanned,
         failed_items: result.errors,
       })
     } catch (error: any) {
       if (this.isRateLimitError(error)) {
         console.warn(`[Job ${jobId}] Rate limit hit during activities backfill! Pausing job...`)
-        await this.pauseForRateLimit(jobId, 'Rate limit exceeded during activities backfill', error)
+        await this.pauseForRateLimit(jobId, 'Rate limit exceeded during activities backfill', error, {
+          cursor_before_epoch: latestCursorBeforeEpoch,
+        })
         return
       }
       throw error

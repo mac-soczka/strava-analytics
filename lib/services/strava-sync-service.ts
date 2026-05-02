@@ -184,7 +184,6 @@ export class StravaSyncService {
     let processed = 0
     let segmentsAdded = 0
     let errors = 0
-    let offset = 0
     let hasMoreActivities = true
     let activitiesHandled = 0
     const seenSegmentIds = new Set<number>()
@@ -204,7 +203,9 @@ export class StravaSyncService {
     })
 
     while (hasMoreActivities) {
-      const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, offset, this.stravaId)
+      // Always read from offset=0 because each processed activity leaves the pending set.
+      // Using a moving offset would skip rows as the filtered dataset shrinks.
+      const activitiesNeedingSegments = await this.activitiesRepo.getActivitiesNeedingSegments(batchSize, 0, this.stravaId)
       if (!activitiesNeedingSegments || activitiesNeedingSegments.length === 0) break
 
       for (const activity of activitiesNeedingSegments) {
@@ -286,9 +287,6 @@ export class StravaSyncService {
         }
       }
 
-      offset += batchSize
-      if (offset > 10000) break
-
       // small yield to keep polling UI responsive when used in job runner
       await this.sleep(0)
     }
@@ -301,13 +299,20 @@ export class StravaSyncService {
     pageSize?: number
     processBatchSize?: number
     maxRequests?: number
-    onProgress?: (p: { synced: number; errors: number; requestsUsed: number; cursorBeforeEpoch: number }) => Promise<void>
-  }): Promise<{ synced: number; errors: number; newBeforeEpoch: number }> {
+    onProgress?: (p: {
+      synced: number
+      scanned: number
+      errors: number
+      requestsUsed: number
+      cursorBeforeEpoch: number
+    }) => Promise<void>
+  }): Promise<{ synced: number; scanned: number; errors: number; newBeforeEpoch: number }> {
     const pageSize = options.pageSize ?? config.stravaApiLimits.maxActivitiesPerRequest
     const processBatchSize = options.processBatchSize ?? 20
     const maxRequests = options.maxRequests ?? 250
 
     let synced = 0
+    let scanned = 0
     let errors = 0
     let requestsUsed = 0
     let cursorBeforeEpoch = options.beforeEpoch
@@ -318,6 +323,7 @@ export class StravaSyncService {
 
       if (activities.length === 0) break
 
+      scanned += activities.length
       let oldestEpoch = cursorBeforeEpoch
 
       for (let i = 0; i < activities.length; i += processBatchSize) {
@@ -367,10 +373,10 @@ export class StravaSyncService {
       if (nextCursor >= cursorBeforeEpoch) break
       cursorBeforeEpoch = nextCursor
 
-      await options.onProgress?.({ synced, errors, requestsUsed, cursorBeforeEpoch })
+      await options.onProgress?.({ synced, scanned, errors, requestsUsed, cursorBeforeEpoch })
     }
 
-    return { synced, errors, newBeforeEpoch: cursorBeforeEpoch }
+    return { synced, scanned, errors, newBeforeEpoch: cursorBeforeEpoch }
   }
 
   async syncActivitiesRecent(options: {

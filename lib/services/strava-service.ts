@@ -72,7 +72,13 @@ export class StravaService {
     pageSize?: number
     processBatchSize?: number
     maxRequests?: number
-    onProgress?: (p: { synced: number; errors: number; requestsUsed: number; cursorBeforeEpoch: number }) => Promise<void>
+    onProgress?: (p: {
+      synced: number
+      scanned: number
+      errors: number
+      requestsUsed: number
+      cursorBeforeEpoch: number
+    }) => Promise<void>
   }) {
     return this.sync.syncActivitiesBackfill(options)
   }
