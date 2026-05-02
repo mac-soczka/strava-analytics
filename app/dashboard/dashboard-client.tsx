@@ -214,8 +214,9 @@ export default function DashboardClient({
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        {/* Activity Types Distribution */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="space-y-6">
+          {/* Activity Types Distribution */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
             <BarChart3 className="h-5 w-5 mr-2 text-blue-600" />
             Activity Types
@@ -243,10 +244,40 @@ export default function DashboardClient({
                 </div>
               ))}
           </div>
+          </div>
+
+          {/* Weekly Trends */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+              <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
+              Weekly Trends
+            </h3>
+            <div className="space-y-3">
+              {monthlyData.slice(0, 6).map((month, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {month.month}
+                  </span>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {month.activities} activities
+                    </span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {formatDistance(month.distance)}
+                    </span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {formatElevation(month.elevation)}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Activity Type Totals */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="space-y-6">
+          {/* Activity Type Totals */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
             <Activity className="h-5 w-5 mr-2 text-indigo-600" />
             Activity type totals
@@ -280,41 +311,15 @@ export default function DashboardClient({
                 )
               })}
           </div>
-        </div>
-
-        {/* Weekly Trends */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-            <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
-            Weekly Trends
-          </h3>
-          <div className="space-y-3">
-            {monthlyData.slice(0, 6).map((month, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {month.month}
-                </span>
-                <div className="flex items-center space-x-4">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {month.activities} activities
-                  </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {formatDistance(month.distance)}
-                  </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {formatElevation(month.elevation)}
-                  </span>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
 
       {/* Tables Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Activities */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+        <div className="space-y-6">
+          {/* Recent Activities */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
             <Calendar className="h-5 w-5 mr-2 text-purple-600" />
             Recent Activities
@@ -350,10 +355,12 @@ export default function DashboardClient({
               </div>
             ))}
           </div>
+          </div>
         </div>
 
-        {/* Top Segments */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="space-y-6">
+          {/* Top Segments */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
             <Trophy className="h-5 w-5 mr-2 text-yellow-600" />
             Top Segments
@@ -401,6 +408,7 @@ export default function DashboardClient({
                 </div>
               </div>
             ))}
+          </div>
           </div>
         </div>
       </div>
