@@ -106,7 +106,7 @@ async function DashboardContent({ selectedRange }: { selectedRange: DashboardTim
     if (stravaId) recentActivitiesQuery = recentActivitiesQuery.eq('strava_id', stravaId)
     if (sinceIso) recentActivitiesQuery = recentActivitiesQuery.gte('start_date', sinceIso)
 
-    const [segments, segmentEfforts, recentActivities, totals, monthlySource] = await Promise.all([
+    const [segments, segmentEfforts, recentActivities, totals, activitySource] = await Promise.all([
       supabase.from('segments').select('segment_id, name, distance, elevation_gain, polyline'),
       segmentEffortsListQuery,
       recentActivitiesQuery,
@@ -152,25 +152,28 @@ async function DashboardContent({ selectedRange }: { selectedRange: DashboardTim
       Object.entries(activityTypeStats).map(([type, s]) => [type, s.count])
     )
 
-    // Calculate monthly trends (last 12 months) - efficient approach
-    const monthlyData = new Array(12).fill(0).map((_, i) => {
-      const date = new Date()
-      date.setMonth(date.getMonth() - i)
-      const month = date.getMonth()
-      const year = date.getFullYear()
-      
-      const monthActivities = monthlySource.filter((activity) => {
+    // Calculate weekly trends (last 12 weeks), most recent week first.
+    const weeklyData = new Array(12).fill(0).map((_, i) => {
+      const weekStart = new Date()
+      weekStart.setHours(0, 0, 0, 0)
+      const weekday = (weekStart.getDay() + 6) % 7 // Monday = 0
+      weekStart.setDate(weekStart.getDate() - weekday - i * 7)
+
+      const weekEnd = new Date(weekStart)
+      weekEnd.setDate(weekEnd.getDate() + 7)
+
+      const weekActivities = activitySource.filter((activity) => {
         const activityDate = new Date(activity.start_date)
-        return activityDate.getMonth() === month && activityDate.getFullYear() === year
+        return activityDate >= weekStart && activityDate < weekEnd
       })
 
       return {
-        month: date.toISOString().slice(0, 7), // Use YYYY-MM format for consistency
-        activities: monthActivities.length,
-        distance: monthActivities.reduce((sum, a) => sum + Number(a.distance || 0), 0),
-        elevation: monthActivities.reduce((sum, a) => sum + Number(a.total_elevation_gain || 0), 0)
+        month: `Week of ${weekStart.toISOString().slice(0, 10)}`,
+        activities: weekActivities.length,
+        distance: weekActivities.reduce((sum, a) => sum + Number(a.distance || 0), 0),
+        elevation: weekActivities.reduce((sum, a) => sum + Number(a.total_elevation_gain || 0), 0),
       }
-    }).reverse()
+    })
 
     // Calculate performance metrics
     const avgSpeed = totalDistance > 0 ? (totalDistance / 1000) / (totalTime / 3600) : 0 // km/h
@@ -206,7 +209,7 @@ async function DashboardContent({ selectedRange }: { selectedRange: DashboardTim
         topSegments={topSegments}
         activityTypes={activityTypes}
         activityTypeStats={activityTypeStats}
-        monthlyData={monthlyData}
+        monthlyData={weeklyData}
         mostRecentSyncAt={mostRecentSyncAt}
       />
     )

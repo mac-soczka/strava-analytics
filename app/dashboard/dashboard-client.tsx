@@ -282,14 +282,14 @@ export default function DashboardClient({
           </div>
         </div>
 
-        {/* Monthly Trends */}
+        {/* Weekly Trends */}
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
             <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
-            Monthly Trends
+            Weekly Trends
           </h3>
           <div className="space-y-3">
-            {monthlyData.slice(-6).map((month, index) => (
+            {monthlyData.slice(0, 6).map((month, index) => (
               <div key={index} className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   {month.month}
