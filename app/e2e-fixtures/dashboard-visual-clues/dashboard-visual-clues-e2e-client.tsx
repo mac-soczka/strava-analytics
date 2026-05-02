@@ -1,6 +1,5 @@
 'use client'
 
-import type { DashboardTrendSummary } from '@/lib/server/dashboard-activity-stats'
 import DashboardClient from '@/app/dashboard/dashboard-client'
 
 const stats = {
@@ -73,31 +72,6 @@ const monthlyData = [
   { month: '2026-04', activities: 31, distance: 390000, elevation: 5300 },
 ]
 
-const trendSummary: DashboardTrendSummary = {
-  windowDays: 30,
-  activities: {
-    current: 31,
-    previous: 24,
-    delta: 7,
-    deltaPercent: 29.2,
-    direction: 'up',
-  },
-  distanceMeters: {
-    current: 390000,
-    previous: 310000,
-    delta: 80000,
-    deltaPercent: 25.8,
-    direction: 'up',
-  },
-  elevationMeters: {
-    current: 5300,
-    previous: 5800,
-    delta: -500,
-    deltaPercent: -8.6,
-    direction: 'down',
-  },
-}
-
 export default function DashboardVisualCluesE2eClient() {
   return (
     <div data-testid="dashboard-visual-clues-fixture">
@@ -108,7 +82,6 @@ export default function DashboardVisualCluesE2eClient() {
         activityTypes={activityTypes}
         activityTypeStats={activityTypeStats}
         monthlyData={monthlyData}
-        trendSummary={trendSummary}
         mostRecentSyncAt="2026-04-29T11:40:00.000Z"
       />
     </div>

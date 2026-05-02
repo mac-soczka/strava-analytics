@@ -3,8 +3,6 @@
 import Link from 'next/link'
 import {
   Activity,
-  ArrowDownRight,
-  ArrowUpRight,
   Mountain,
   Target,
   Clock,
@@ -14,11 +12,10 @@ import {
   BarChart3,
   Trophy,
   Zap,
-  Minus,
 } from 'lucide-react'
 import PolylineMap from '@/app/components/PolylineMap'
 import { SyncStatusWidget } from '@/app/components/sync/SyncStatusWidget'
-import type { DashboardActivityTypeStats, DashboardTrendSummary, TrendDirection } from '@/lib/server/dashboard-activity-stats'
+import type { DashboardActivityTypeStats } from '@/lib/server/dashboard-activity-stats'
 
 interface DashboardStats {
   totalActivities: number
@@ -66,7 +63,6 @@ interface DashboardClientProps {
   activityTypes: Record<string, number>
   activityTypeStats: DashboardActivityTypeStats
   monthlyData: MonthlyData[]
-  trendSummary: DashboardTrendSummary
   mostRecentSyncAt: string | null
 }
 
@@ -77,7 +73,6 @@ export default function DashboardClient({
   activityTypes,
   activityTypeStats,
   monthlyData,
-  trendSummary,
   mostRecentSyncAt,
 }: DashboardClientProps) {
   const formatDistance = (meters: number) => `${(meters / 1000).toFixed(1)} km`
@@ -107,29 +102,10 @@ export default function DashboardClient({
     return 'bg-red-100 text-red-700 border-red-200'
   })()
 
-  const trendTone = (direction: TrendDirection) => {
-    if (direction === 'up') return 'text-green-700 bg-green-100'
-    if (direction === 'down') return 'text-red-700 bg-red-100'
-    return 'text-gray-700 bg-gray-100'
-  }
-
-  const TrendIcon = ({ direction }: { direction: TrendDirection }) => {
-    if (direction === 'up') return <ArrowUpRight className="h-3.5 w-3.5" />
-    if (direction === 'down') return <ArrowDownRight className="h-3.5 w-3.5" />
-    return <Minus className="h-3.5 w-3.5" />
-  }
-
-  const formatTrend = (delta: number, deltaPercent: number | null, suffix = '') => {
-    const signedDelta = `${delta > 0 ? '+' : ''}${delta.toLocaleString()}${suffix}`
-    if (deltaPercent == null) return signedDelta
-    return `${signedDelta} (${deltaPercent > 0 ? '+' : ''}${deltaPercent.toFixed(1)}%)`
-  }
-
   const statCards = [
     {
       title: 'Total Activities',
       value: stats.totalActivities.toLocaleString(),
-      trend: trendSummary.activities,
       icon: Activity,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50 dark:bg-blue-900/20'
@@ -137,7 +113,6 @@ export default function DashboardClient({
     {
       title: 'Total Distance',
       value: formatDistance(stats.totalDistance * 1000),
-      trend: trendSummary.distanceMeters,
       icon: MapPin,
       color: 'text-green-600',
       bgColor: 'bg-green-50 dark:bg-green-900/20'
@@ -145,7 +120,6 @@ export default function DashboardClient({
     {
       title: 'Total Time',
       value: formatTime(stats.totalTime * 3600),
-      trend: null,
       icon: Clock,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50 dark:bg-purple-900/20'
@@ -153,7 +127,6 @@ export default function DashboardClient({
     {
       title: 'Total Elevation',
       value: formatElevation(stats.totalElevation),
-      trend: trendSummary.elevationMeters,
       icon: Mountain,
       color: 'text-orange-600',
       bgColor: 'bg-orange-50 dark:bg-orange-900/20'
@@ -198,12 +171,6 @@ export default function DashboardClient({
 
       <div className="flex flex-wrap items-center gap-3">
         <span
-          data-testid="dashboard-trend-window"
-          className="rounded-full border px-3 py-1 text-xs font-medium text-gray-700 bg-gray-50 border-gray-200"
-        >
-          Trend Window: Last {trendSummary.windowDays}d vs previous {trendSummary.windowDays}d
-        </span>
-        <span
           data-testid="dashboard-sync-freshness"
           className={`rounded-full border px-3 py-1 text-xs font-medium ${freshnessTone}`}
         >
@@ -219,23 +186,6 @@ export default function DashboardClient({
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{card.title}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{card.value}</p>
-                {card.trend ? (
-                  <span
-                    data-testid={`dashboard-trend-${card.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                    className={`inline-flex items-center gap-1 mt-2 rounded-full px-2 py-0.5 text-xs font-medium ${trendTone(card.trend.direction)}`}
-                  >
-                    <TrendIcon direction={card.trend.direction} />
-                    {formatTrend(
-                      card.trend.delta,
-                      card.trend.deltaPercent,
-                      card.title === 'Total Distance' ? 'm' : card.title === 'Total Elevation' ? 'm' : ''
-                    )}
-                  </span>
-                ) : (
-                  <span className="inline-flex mt-2 rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-600">
-                    No period comparison
-                  </span>
-                )}
               </div>
               <div className={`${card.color} p-3 rounded-lg bg-white dark:bg-gray-800 shadow-sm`}>
                 <card.icon className="h-6 w-6" />
@@ -475,26 +425,6 @@ export default function DashboardClient({
             <p className="text-gray-600 dark:text-gray-400">Favorite Segment</p>
             <p className="text-xl font-bold text-green-600">
               {topSegments[0]?.name || 'N/A'}
-            </p>
-          </div>
-        </div>
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-          <div className="rounded-lg bg-white/70 dark:bg-gray-800/50 p-3 border border-blue-200 dark:border-blue-800">
-            <p className="text-gray-500 dark:text-gray-400">Activities Trend</p>
-            <p className="font-semibold text-gray-900 dark:text-white">
-              {formatTrend(trendSummary.activities.delta, trendSummary.activities.deltaPercent)}
-            </p>
-          </div>
-          <div className="rounded-lg bg-white/70 dark:bg-gray-800/50 p-3 border border-purple-200 dark:border-purple-800">
-            <p className="text-gray-500 dark:text-gray-400">Distance Trend</p>
-            <p className="font-semibold text-gray-900 dark:text-white">
-              {formatTrend(Math.round(trendSummary.distanceMeters.delta), trendSummary.distanceMeters.deltaPercent, 'm')}
-            </p>
-          </div>
-          <div className="rounded-lg bg-white/70 dark:bg-gray-800/50 p-3 border border-green-200 dark:border-green-800">
-            <p className="text-gray-500 dark:text-gray-400">Elevation Trend</p>
-            <p className="font-semibold text-gray-900 dark:text-white">
-              {formatTrend(Math.round(trendSummary.elevationMeters.delta), trendSummary.elevationMeters.deltaPercent, 'm')}
             </p>
           </div>
         </div>

@@ -273,6 +273,15 @@ export class StravaSyncService {
 
           processed++
         } catch (_e) {
+          const maybeRateLimit = _e as { statusCode?: number; status?: number; message?: string }
+          if (
+            maybeRateLimit?.statusCode === 429 ||
+            maybeRateLimit?.status === 429 ||
+            `${maybeRateLimit?.message || ''}`.includes('Rate limit')
+          ) {
+            // Bubble up so orchestration can pause/resume from checkpoint.
+            throw _e
+          }
           errors++
           await this.activitiesRepo.markSegmentsFetchFailed(activity.id, 'Failed to fetch segments').catch(() => {})
         } finally {
