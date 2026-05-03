@@ -171,6 +171,12 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
         : job?.current_phase === 'discover_activities'
           ? 'discover_activities'
           : 'idle'
+  const formatDateTime = (value: string | null | undefined) => {
+    if (!value) return '-'
+    const date = new Date(value)
+    if (Number.isNaN(date.getTime())) return '-'
+    return date.toLocaleString()
+  }
   const renderProgress = (processed: number, total: number) =>
     total > 0 ? `${processed}/${total}` : `${processed}`
 
@@ -349,7 +355,7 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
                         {index + 1}. #{item.activityId} {item.name ? `· ${item.name}` : ''}
                       </span>
                       <span className="ml-2 shrink-0 text-gray-500 dark:text-gray-400">
-                        {item.state}
+                        {item.state || 'pending'} · {formatDateTime(item.startDate)}
                       </span>
                     </div>
                   ))}
@@ -380,7 +386,7 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
                         {index + 1}. #{item.segmentId} · {item.name || 'Unknown'}
                       </span>
                       <span className="ml-2 shrink-0 text-gray-500 dark:text-gray-400">
-                        {item.queuedAt ? new Date(item.queuedAt).toLocaleDateString() : '-'}
+                        {(item.state || 'pending')} · {formatDateTime(item.queuedAt)}
                       </span>
                     </div>
                   ))}

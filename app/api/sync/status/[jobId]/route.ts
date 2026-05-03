@@ -115,6 +115,7 @@ export async function GET(
       segmentId: Number(row.segment_id),
       name: row.name,
       queuedAt: row.created_at,
+      state: 'pending' as const,
     }))
     const segmentsQueue = {
       pending: segmentQueueList.length,

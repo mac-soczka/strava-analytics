@@ -55,6 +55,7 @@ export interface SyncExactState {
     segmentId: number
     name: string | null
     queuedAt: string | null
+    state?: 'pending' | 'in_progress' | 'completed' | 'failed' | null
   }> | null
   currentActivity?: {
     activityId: number
