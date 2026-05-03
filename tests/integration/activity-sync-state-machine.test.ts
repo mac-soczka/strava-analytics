@@ -327,6 +327,24 @@ async function cleanup() {
         segments_fetched: false,
         segment_efforts_synced_at: null,
       },
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991024,
+        name: 'Activity row completed but segments still pending',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2023-06-01T00:00:00Z',
+        start_date_local: '2023-06-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991024',
+        activity_sync_state: 'completed',
+        activity_sync_completed_at: '2026-05-03T10:00:00Z',
+        segments_fetch_status: 'pending',
+        segments_fetched: false,
+        segment_efforts_synced_at: null,
+      },
     ])
 
     const { data: countsRaw, error: countsError } = await supabase
@@ -340,7 +358,7 @@ async function cleanup() {
       failed?: number | string | null
     }
 
-    expect(Number(counts.pending)).toBe(1)
+    expect(Number(counts.pending)).toBe(2)
     expect(Number(counts.in_progress)).toBe(1)
     expect(Number(counts.completed)).toBe(1)
     expect(Number(counts.failed)).toBe(1)
