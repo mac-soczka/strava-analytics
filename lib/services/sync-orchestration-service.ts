@@ -138,13 +138,17 @@ export class SyncOrchestrationService {
     })
   }
 
-  async startFullSync(stravaId: number): Promise<SyncJob> {
+  async startFullSync(
+    stravaId: number,
+    options?: { startFrom?: 'oldest' | 'newest' }
+  ): Promise<SyncJob> {
     const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
     if (activeJob) {
       throw new Error('A sync job is already running for this user')
     }
 
-    const job = await this.jobsRepo.createJob(stravaId, 'full_sync')
+    const startFrom = options?.startFrom === 'oldest' ? 'oldest' : 'newest'
+    const job = await this.jobsRepo.createJob(stravaId, 'full_sync', { startFrom })
 
     this.runJob(job).catch((error: any) => {
       this.logger.error(`Sync job ${job.id} failed`, error)
@@ -242,7 +246,12 @@ export class SyncOrchestrationService {
     // Resume behavior: if job was already in ensure_* phase, skip activity discovery.
     if (startingPhase === 'discover_activities') {
       await this.setPhase(jobId, 'discover_activities')
-      this.logger.log(`[Job ${jobId}] Fetching recent activities first, then oldest-first backfill (entity=activities)`)
+      const startFrom = job.options?.startFrom === 'oldest' ? 'oldest' : 'newest'
+      const discoveryOrder: Array<'recent' | 'backfill'> =
+        startFrom === 'oldest' ? ['backfill', 'recent'] : ['recent', 'backfill']
+      this.logger.log(
+        `[Job ${jobId}] Activity discovery start mode=${startFrom} (order=${discoveryOrder.join(' -> ')}) (entity=activities)`
+      )
       const state = await this.syncStateRepo.getOrCreate(stravaId)
       const newestDbEpoch = await this.getDbNewestActivityEpoch(stravaId)
       const recentAfterEpoch = Math.max(state.activities_after ?? 0, Math.max(0, newestDbEpoch - 24 * 60 * 60))
@@ -252,7 +261,10 @@ export class SyncOrchestrationService {
         Math.floor(Date.now() / 1000)
       let latestCursorBeforeEpoch = startBeforeEpoch
       let latestCursorAfterEpoch = recentAfterEpoch
-      try {
+      let latestBackfillScanned = 0
+      let latestBackfillErrors = 0
+
+      const runRecentDiscovery = async (): Promise<void> => {
         const recentResult = await this.stravaService.syncActivitiesRecent({
           afterEpoch: recentAfterEpoch,
           recentWindowDays: 30,
@@ -271,9 +283,11 @@ export class SyncOrchestrationService {
         await this.syncStateRepo.update(stravaId, {
           activities_after: latestCursorAfterEpoch,
         })
+      }
 
+      const runBackfillDiscovery = async (): Promise<void> => {
         const activityResult = await this.stravaService.syncActivitiesBackfill({
-          beforeEpoch: startBeforeEpoch,
+          beforeEpoch: latestCursorBeforeEpoch,
           maxRequests: 10_000,
           onProgress: async (p) => {
             latestCursorBeforeEpoch = p.cursorBeforeEpoch
@@ -290,9 +304,21 @@ export class SyncOrchestrationService {
             } as Partial<SyncJobProgress>)
           },
         })
+        latestBackfillScanned = activityResult.scanned
+        latestBackfillErrors = activityResult.errors
         this.logger.log(
           `[Job ${jobId}] Activities scanned: ${activityResult.scanned}, new: ${activityResult.synced}, errors: ${activityResult.errors}`
         )
+      }
+
+      try {
+        for (const discoveryStep of discoveryOrder) {
+          if (discoveryStep === 'recent') {
+            await runRecentDiscovery()
+          } else {
+            await runBackfillDiscovery()
+          }
+        }
         await this.syncStateRepo.update(stravaId, {
           activities_after: latestCursorAfterEpoch,
           backfill_cursor_before: latestCursorBeforeEpoch,
@@ -303,8 +329,8 @@ export class SyncOrchestrationService {
         await this.jobsRepo.updateJobProgress(jobId, {
           activities: {
             total: finalDbTotalActivities,
-            processed: activityResult.scanned,
-            failed: activityResult.errors,
+            processed: latestBackfillScanned,
+            failed: latestBackfillErrors,
           },
         } as Partial<SyncJobProgress>)
       } catch (error: any) {

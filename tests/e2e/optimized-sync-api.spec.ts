@@ -82,7 +82,7 @@ test.describe('Optimized sync API (mocked Strava, full stack)', () => {
   test('POST /api/sync/start completes and writes activities + segment_efforts without touching Strava', async ({ page }) => {
     const request = page.request
     const startResp = await request.post('/api/sync/start', {
-      data: { use_mock_strava: true },
+      data: { use_mock_strava: true, start_from: 'oldest' },
     })
     expect(startResp.ok()).toBeTruthy()
 
@@ -98,6 +98,7 @@ test.describe('Optimized sync API (mocked Strava, full stack)', () => {
       const statusResp = await request.get(`/api/sync/status/${jobId}`)
       expect(statusResp.ok()).toBeTruthy()
       lastStatus = await statusResp.json()
+      expect(lastStatus?.job?.options?.startFrom).toBe('oldest')
 
       const status = lastStatus?.job?.status
       if (status === 'completed') break

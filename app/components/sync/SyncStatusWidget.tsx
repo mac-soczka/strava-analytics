@@ -45,6 +45,7 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   const [segmentQuery, setSegmentQuery] = useState('')
   const [segmentSuggestions, setSegmentSuggestions] = useState<SegmentSuggestion[]>([])
   const [selectedSegment, setSelectedSegment] = useState<SegmentSuggestion | null>(null)
+  const [startFrom, setStartFrom] = useState<'oldest' | 'newest'>('newest')
   const [isSearchingSegments, setIsSearchingSegments] = useState(false)
   const [segmentLookup, setSegmentLookup] = useState<SegmentLookup | null>(null)
   const [isLookingUpSegment, setIsLookingUpSegment] = useState(false)
@@ -155,6 +156,12 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   const segmentsQueue = exactState?.segmentsQueue
   const activityQueueList = exactState?.activityQueueList ?? []
   const segmentQueueList = exactState?.segmentQueueList ?? []
+  const activityQueueHeldCount = activityQueue
+    ? Math.max(activityQueueList.length, activityQueue.pending + activityQueue.in_progress + activityQueue.failed)
+    : activityQueueList.length
+  const segmentsQueueHeldCount = segmentsQueue
+    ? Math.max(segmentQueueList.length, segmentsQueue.pending + segmentsQueue.in_progress)
+    : segmentQueueList.length
   const currentActivity = exactState?.currentActivity
   const currentActivityStep =
     job?.current_phase === 'ensure_segments'
@@ -201,7 +208,7 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   const StatusIcon = meta.icon
 
   const onStart = async () => {
-    await startSync('/api/sync/start')
+    await startSync('/api/sync/start', { start_from: startFrom })
   }
 
   const onCancel = async () => {
@@ -212,7 +219,7 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   const onRestart = async () => {
     if (!confirm('Restart sync now? This will cancel the current job and start a new one.')) return
     await cancelActiveJob()
-    await startSync('/api/sync/start')
+    await startSync('/api/sync/start', { start_from: startFrom })
   }
 
   const selectedSegmentId = segmentLookup?.segmentId ?? null
@@ -240,6 +247,21 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
                 : 'Start a sync job from dashboard'}
             </p>
           </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <label htmlFor="sync-start-from" className="text-xs text-gray-500 dark:text-gray-400">
+            Start from
+          </label>
+          <select
+            id="sync-start-from"
+            value={startFrom}
+            onChange={(e) => setStartFrom(e.target.value === 'oldest' ? 'oldest' : 'newest')}
+            className="rounded-md border border-gray-300 bg-white px-2 py-1 text-xs text-gray-700 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
         </div>
 
         {!isActive ? (
@@ -301,7 +323,12 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
 
           {activityQueue && (
             <div className="rounded-lg border border-gray-200 p-3 text-xs dark:border-gray-700">
-              <p className="mb-1 font-medium text-gray-900 dark:text-white">Activity Queue</p>
+              <div className="mb-1 flex items-center justify-between gap-2">
+                <p className="font-medium text-gray-900 dark:text-white">Activity Queue</p>
+                <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
+                  Live held: {activityQueueHeldCount}
+                </span>
+              </div>
               <p className="text-gray-600 dark:text-gray-300">
                 Pending {activityQueue.pending} · In progress {activityQueue.in_progress} · Completed {activityQueue.completed} · Failed {activityQueue.failed}
               </p>
@@ -333,7 +360,12 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
 
           {segmentsQueue && (
             <div className="rounded-lg border border-gray-200 p-3 text-xs dark:border-gray-700">
-              <p className="mb-1 font-medium text-gray-900 dark:text-white">Segments Queue</p>
+              <div className="mb-1 flex items-center justify-between gap-2">
+                <p className="font-medium text-gray-900 dark:text-white">Segments Queue</p>
+                <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
+                  Live held: {segmentsQueueHeldCount}
+                </span>
+              </div>
               <p className="text-gray-600 dark:text-gray-300">
                 Pending {segmentsQueue.pending} · In progress {segmentsQueue.in_progress} · Completed {segmentsQueue.completed} · Failed {segmentsQueue.failed}
               </p>

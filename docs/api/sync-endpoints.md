@@ -1,6 +1,6 @@
 # Sync API Endpoints
 
-**Last Updated:** 2026-05-02
+**Last Updated:** 2026-05-03
 
 API documentation for the sync system endpoints.
 
@@ -19,6 +19,16 @@ Start a new sync job for the authenticated user.
 POST /api/sync/start
 Content-Type: application/json
 ```
+
+Optional JSON body:
+```json
+{
+  "start_from": "newest"
+}
+```
+
+- `start_from`: optional, one of `newest` (default) or `oldest`
+- Controls which side of your timeline full sync starts discovery from first
 
 **Response (Success):**
 ```json
@@ -190,7 +200,7 @@ Returns up to 10 most recent jobs, ordered by creation date (newest first).
 
 ## Job Phases (for `current_phase`)
 
-- `discover_activities`: oldest-first activity backfill scan (progress may reflect scanned activities)
+- `discover_activities`: activity discovery scan (start direction follows `start_from`, then full coverage continues)
 - `ensure_segments`: ensure segment catalog from activity details
 - `ensure_segment_efforts`: ensure segment-effort rows are persisted
 - `completed`: terminal success

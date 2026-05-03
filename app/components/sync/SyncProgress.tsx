@@ -105,9 +105,15 @@ export function SyncProgress({ jobId, onComplete }: SyncProgressProps) {
     segmentEffortsProgress.total > 0 ? segmentEffortsProgress.total : activities.total
 
   const phaseLabel = (() => {
+    const startFrom =
+      job?.options?.startFrom === 'oldest' || job?.options?.startFrom === 'newest'
+        ? job.options.startFrom
+        : 'newest'
     switch (job.current_phase) {
       case 'discover_activities':
-        return 'Backfilling activities (oldest-first)'
+        return startFrom === 'oldest'
+          ? 'Discovering activities (starting oldest-first)'
+          : 'Discovering activities (starting newest-first)'
       case 'ensure_segments':
         return 'Ensuring segments'
       case 'ensure_segment_efforts':

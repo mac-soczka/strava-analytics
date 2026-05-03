@@ -84,6 +84,10 @@ function buildMockDetails(activities: StravaActivity[]) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}))
+    const startFrom =
+      body?.start_from === 'oldest' || body?.start_from === 'newest'
+        ? body.start_from
+        : 'newest'
 
     // Get session token from cookies
     const cookies = request.headers.get('cookie')
@@ -120,7 +124,7 @@ export async function POST(request: NextRequest) {
       return new SyncOrchestrationService(user.strava_id, { stravaService })
     })()
 
-    const job = await syncService.startFullSync(user.strava_id)
+    const job = await syncService.startFullSync(user.strava_id, { startFrom })
 
     return NextResponse.json({
       success: true,

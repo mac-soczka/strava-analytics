@@ -1,6 +1,6 @@
 # Syncing Your Strava Activities
 
-**Last Updated:** 2026-05-02
+**Last Updated:** 2026-05-03
 
 This guide explains how to sync your Strava activities, routes, and stats to the Strava Heatmap application.
 
@@ -22,6 +22,10 @@ After signing in with your Strava account, go to the Dashboard page.
 ### 2. Click "Sync My Activities"
 
 You'll see a sync section at the top of the dashboard with an orange "Sync My Activities" button.
+
+Before starting, you can choose where discovery begins:
+- **Newest** (default): starts from your latest activities first
+- **Oldest**: starts from your oldest activities first
 
 ### 3. Monitor Progress
 
@@ -78,7 +82,7 @@ You'll see a "Sync Complete!" message when finished.
 
 ## How full sync progresses
 
-- Full sync backfills activities **oldest-first** using a persisted cursor.
+- Full sync can start from **newest** or **oldest** (selected in dashboard), then continues to full coverage using persisted cursors.
 - Segment and segment-effort coverage is then ensured per activity from `include_all_efforts=true` activity details.
 - If Strava limits are hit, the job pauses and resumes from the persisted checkpoint (`resume_at`) without restarting from scratch.
 
