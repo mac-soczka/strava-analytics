@@ -4,6 +4,15 @@
 
 This document outlines the comprehensive testing strategy for the Strava crawler system, covering unit tests, integration tests, and end-to-end (E2E) tests.
 
+## Live Strava API Policy
+
+**Policy Updated:** 2026-05-03
+
+- Automated tests must not call live Strava API endpoints.
+- Use mocked `StravaApiClient` responses for all third-party Strava interactions.
+- Keep integration tests focused on real database behavior plus mocked third-party boundaries.
+- If a test needs realistic activity/segment payloads, use fixtures checked into the test suite.
+
 ## Test Types
 
 ### 1. Unit Tests

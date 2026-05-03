@@ -180,17 +180,6 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
   const renderProgress = (processed: number, total: number) =>
     total > 0 ? `${processed}/${total}` : `${processed}`
 
-  const percentage = useMemo(() => {
-    if (!job) return 0
-    if (job.total_items > 0) {
-      return Math.round((job.processed_items / job.total_items) * 100)
-    }
-    if (activities.total > 0) {
-      return Math.round((activities.processed / activities.total) * 100)
-    }
-    return 0
-  }, [job, activities.total, activities.processed])
-
   const status = job?.status ?? 'idle'
   const activityDisplayProcessed =
     status === 'completed' && activityQueue ? Math.max(activities.processed, activityQueue.completed) : activities.processed
@@ -198,6 +187,26 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
     status === 'completed' && activityQueue
       ? Math.max(activities.total, activityQueue.pending + activityQueue.in_progress + activityQueue.completed + activityQueue.failed)
       : activities.total
+  const progressDisplayProcessed = job?.total_items && job.total_items > 0 ? job.processed_items : activities.processed
+  const progressDisplayTotal =
+    job?.total_items && job.total_items > 0
+      ? job.total_items
+      : activities.total > 0
+        ? activities.total
+        : activityQueue
+          ? activityQueue.pending + activityQueue.in_progress + activityQueue.completed + activityQueue.failed
+          : 0
+  const progressDisplayText =
+    progressDisplayTotal > 0
+      ? `${progressDisplayProcessed}/${progressDisplayTotal}`
+      : `${progressDisplayProcessed}`
+  const percentage = useMemo(() => {
+    if (!job) return 0
+    if (progressDisplayTotal > 0) {
+      return Math.round((progressDisplayProcessed / progressDisplayTotal) * 100)
+    }
+    return 0
+  }, [job, progressDisplayProcessed, progressDisplayTotal])
   const isActive = status === 'running' || status === 'pending' || status === 'paused'
 
   const statusMeta = {
@@ -305,7 +314,7 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
             <span>{percentage}%</span>
-            <span>{job?.processed_items ?? 0}/{job?.total_items ?? 0}</span>
+            <span>{progressDisplayText}</span>
           </div>
         </div>
       )}

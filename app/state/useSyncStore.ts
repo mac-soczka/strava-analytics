@@ -381,7 +381,19 @@ export const useSyncStore = create<SyncState>((set, get) => ({
 
         consecutiveFailures = 0
 
-        const signature = [j.status, j.processed_items, j.failed_items, j.updated_at].join('|')
+        const liveActivitiesProcessed = j.progress?.activities?.processed ?? 0
+        const liveSegmentsProcessed = j.progress?.segments?.processed ?? 0
+        const liveCurrentActivityId = get().exactState?.currentActivity?.activityId ?? 0
+        const signature = [
+          j.status,
+          j.current_phase,
+          j.processed_items,
+          j.failed_items,
+          liveActivitiesProcessed,
+          liveSegmentsProcessed,
+          liveCurrentActivityId,
+          j.updated_at,
+        ].join('|')
         const changed = lastSignature !== signature
         lastSignature = signature
 
@@ -397,6 +409,9 @@ export const useSyncStore = create<SyncState>((set, get) => ({
           else if (msUntilResume > 10000) baseIntervalMs = 5000
           else baseIntervalMs = 2000
 
+          pollIntervalMs = baseIntervalMs
+        } else if (j.status === 'running') {
+          // Keep queue UX responsive during active work; do not exponentially back off.
           pollIntervalMs = baseIntervalMs
         } else if (changed) {
           pollIntervalMs = baseIntervalMs

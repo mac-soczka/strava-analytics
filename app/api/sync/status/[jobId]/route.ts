@@ -104,13 +104,22 @@ export async function GET(
       .order('start_date', { ascending: false })
       .order('activity_id', { ascending: false })
 
-    const { data: segmentQueueListData } = await supabase
-      .rpc('get_user_segment_queue_fifo', { user_strava_id: job.strava_id })
+    const [{ data: segmentQueueListData }, { data: segmentQueueCountsDataRaw }] = await Promise.all([
+      supabase.rpc('get_user_segment_queue_fifo', { user_strava_id: job.strava_id }),
+      supabase.rpc('get_user_segment_queue_counts', { user_strava_id: job.strava_id }).maybeSingle(),
+    ])
+    const segmentQueueCountsData = (segmentQueueCountsDataRaw || null) as {
+      pending_segments?: number | null
+      completed_segments?: number | null
+      failed_segments?: number | null
+    } | null
 
     const rawSegmentsProgress = (job.progress as any)?.segments ?? { total: 0, processed: 0, failed: 0 }
-    const segmentsTotal = Number(rawSegmentsProgress.total ?? 0)
     const segmentsProcessed = Number(rawSegmentsProgress.processed ?? 0)
     const segmentsFailed = Number(rawSegmentsProgress.failed ?? 0)
+    const pendingSegmentsCount = Number(segmentQueueCountsData?.pending_segments ?? 0)
+    const completedSegmentsCount = Number(segmentQueueCountsData?.completed_segments ?? 0)
+    const failedSegmentsCount = Number(segmentQueueCountsData?.failed_segments ?? 0)
     const segmentQueueList = (segmentQueueListData || []).map((row: any) => ({
       segmentId: Number(row.segment_id),
       name: row.name,
@@ -118,14 +127,22 @@ export async function GET(
       state: 'pending' as const,
     }))
     const segmentsQueue = {
-      pending: segmentQueueList.length,
+      pending: Math.max(0, pendingSegmentsCount),
       in_progress:
         job.status === 'running' && (job.current_phase === 'ensure_segments' || job.current_phase === 'ensure_segment_efforts')
           ? 1
           : 0,
-      completed: segmentsProcessed,
-      failed: segmentsFailed,
+      completed: Math.max(segmentsProcessed, completedSegmentsCount),
+      failed: Math.max(segmentsFailed, failedSegmentsCount),
     }
+
+    const isCancelled = job.status === 'cancelled'
+    const activityQueueForUi = isCancelled
+      ? { pending: 0, in_progress: 0, completed: 0, failed: 0 }
+      : activityQueue
+    const segmentsQueueForUi = isCancelled
+      ? { pending: 0, in_progress: 0, completed: 0, failed: 0 }
+      : segmentsQueue
 
     // Expose current Strava rate limit state via HTTP headers so clients can treat
     // the response as the source of truth (mirrors Strava's header format).
@@ -153,9 +170,11 @@ export async function GET(
             resetDailyAt: job.rate_limit_daily_reset_at ?? null,
           },
           activeState: activeState ?? null,
-          activityQueue,
-          segmentsQueue,
-          activityQueueList: (activityQueueListData || [])
+          activityQueue: activityQueueForUi,
+          segmentsQueue: segmentsQueueForUi,
+          activityQueueList: isCancelled
+            ? []
+            : (activityQueueListData || [])
             .map((row) => ({
               activityId: row.activity_id,
               name: row.name,
@@ -163,14 +182,19 @@ export async function GET(
               state: row.activity_sync_state,
             }))
             .sort((a, b) => {
+              const startFrom = job.options?.startFrom === 'oldest' ? 'oldest' : 'newest'
               const rank = (state: string | null | undefined) =>
                 state === 'in_progress' ? 0 : state === 'pending' ? 1 : state === 'failed' ? 2 : 3
               const rankDiff = rank(a.state) - rank(b.state)
               if (rankDiff !== 0) return rankDiff
-              return `${b.startDate}`.localeCompare(`${a.startDate}`)
+              return startFrom === 'oldest'
+                ? `${a.startDate}`.localeCompare(`${b.startDate}`)
+                : `${b.startDate}`.localeCompare(`${a.startDate}`)
             }),
-          segmentQueueList,
-          currentActivity: inProgressActivity
+          segmentQueueList: isCancelled ? [] : segmentQueueList,
+          currentActivity: isCancelled
+            ? null
+            : inProgressActivity
             ? {
                 activityId: inProgressActivity.activity_id,
                 name: inProgressActivity.name,

@@ -213,4 +213,42 @@ async function cleanup() {
     expect((row?.activity_sync_attempts ?? 0) > 0).toBe(true)
     expect(row?.activity_sync_completed_at).toBeTruthy()
   })
+
+  it('prioritizes pending over failed so one failed item cannot stall the queue', async () => {
+    const repo = new ActivitiesRepository()
+    await supabase.from('activities').insert([
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991010,
+        name: 'Failed oldest',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2018-01-01T00:00:00Z',
+        start_date_local: '2018-01-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991010',
+        activity_sync_state: 'failed',
+        activity_sync_error: 'transient',
+      },
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991011,
+        name: 'Pending newer',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2020-01-01T00:00:00Z',
+        start_date_local: '2020-01-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991011',
+        activity_sync_state: 'pending',
+      },
+    ])
+
+    const claimed = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID, 'oldest')
+    expect(claimed?.activity_id).toBe(991011)
+  })
 })

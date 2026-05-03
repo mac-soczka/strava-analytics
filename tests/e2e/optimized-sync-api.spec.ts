@@ -124,5 +124,121 @@ test.describe('Optimized sync API (mocked Strava, full stack)', () => {
       .lte('effort_id_text', '830000999')
     expect(efforts?.length).toBe(3)
   })
+
+  test('status endpoint reflects live activity queue movement during sync', async ({ page }) => {
+    const request = page.request
+    const startResp = await request.post('/api/sync/start', {
+      data: { use_mock_strava: true, start_from: 'oldest' },
+    })
+    expect(startResp.ok()).toBeTruthy()
+
+    const startBody = await startResp.json()
+    const jobId = startBody.job.id as string
+    expect(typeof jobId).toBe('string')
+
+    const firstStatusResp = await request.get(`/api/sync/status/${jobId}`)
+    expect(firstStatusResp.ok()).toBeTruthy()
+    const firstStatus = await firstStatusResp.json()
+    const initialPending = Number(firstStatus?.exactState?.activityQueue?.pending ?? 0)
+
+    const deadline = Date.now() + 20_000
+    let queueMoved = false
+    let reachedCompleted = false
+
+    while (Date.now() < deadline) {
+      const statusResp = await request.get(`/api/sync/status/${jobId}`)
+      expect(statusResp.ok()).toBeTruthy()
+      const statusBody = await statusResp.json()
+
+      const status = statusBody?.job?.status as string | undefined
+      const pendingNow = Number(statusBody?.exactState?.activityQueue?.pending ?? 0)
+
+      if (pendingNow < initialPending) {
+        queueMoved = true
+        break
+      }
+
+      if (status === 'completed') {
+        reachedCompleted = true
+        queueMoved = pendingNow === 0 || initialPending === 0
+        break
+      }
+
+      if (status === 'failed') {
+        throw new Error(`Job failed: ${statusBody?.job?.error_message || 'unknown error'}`)
+      }
+
+      await new Promise((r) => setTimeout(r, 250))
+    }
+
+    expect(queueMoved || reachedCompleted).toBe(true)
+  })
+
+  test('cancelled job returns empty activity and segment queues', async ({ page }) => {
+    if (!supabase) {
+      throw new Error('Supabase client not initialized')
+    }
+
+    await supabase.from('activities').insert({
+      strava_id: TEST_STRAVA_ID,
+      activity_id: 991099001,
+      name: 'Pending test activity',
+      distance: 1000,
+      moving_time: 100,
+      elapsed_time: 100,
+      total_elevation_gain: 10,
+      type: 'Run',
+      start_date: '2022-01-01T00:00:00Z',
+      start_date_local: '2022-01-01T00:00:00Z',
+      strava_url: 'https://www.strava.com/activities/991099001',
+      activity_sync_state: 'pending',
+      segments_fetch_status: 'pending',
+      segments_fetched: false,
+      segment_efforts_synced_at: null,
+    })
+    await supabase.from('segments').insert({
+      segment_id: 991099,
+      name: 'Pending test segment',
+      distance: 500,
+      elevation_gain: 20,
+      average_grade: 4,
+      maximum_grade: 7,
+    })
+
+    const { data: cancelledJob, error: jobError } = await supabase
+      .from('sync_jobs')
+      .insert({
+        strava_id: TEST_STRAVA_ID,
+        type: 'full_sync',
+        status: 'cancelled',
+        current_phase: 'failed',
+      })
+      .select('id')
+      .single()
+
+    expect(jobError).toBeNull()
+    expect(cancelledJob?.id).toBeTruthy()
+
+    const statusResp = await page.request.get(`/api/sync/status/${cancelledJob!.id}`)
+    expect(statusResp.ok()).toBeTruthy()
+    const body = await statusResp.json()
+
+    expect(body?.job?.status).toBe('cancelled')
+    expect(body?.exactState?.activityQueue).toEqual({
+      pending: 0,
+      in_progress: 0,
+      completed: 0,
+      failed: 0,
+    })
+    expect(body?.exactState?.segmentsQueue).toEqual({
+      pending: 0,
+      in_progress: 0,
+      completed: 0,
+      failed: 0,
+    })
+    expect(body?.exactState?.activityQueueList).toEqual([])
+    expect(body?.exactState?.segmentQueueList).toEqual([])
+    expect(body?.exactState?.currentActivity).toBeNull()
+  })
 })
 

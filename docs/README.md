@@ -40,6 +40,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Dashboard visual clues refresh](./action-plans/dashboard-visual-clues-refresh.md)** - Improve dashboard readability with semantic colors, temporal context, and trend cues
 - **[Automatic resume after rate-limit pause](./action-plans/auto-resume-paused-sync.md)** - Ensure paused sync jobs resume unattended after `resume_at` without manual endpoint calls
 - **[Activity-centric oldest-first segment-effort sync](./action-plans/activity-centric-oldest-first-segment-efforts-sync.md)** - Deterministic per-activity state machine (pending/in-progress/completed) with request-efficient segment-effort extraction and pause/resume safety
+- **[Test coverage without live Strava API](./action-plans/test-coverage-without-live-strava-api.md)** - Expand unit/integration/E2E coverage using mocked Strava client responses to protect API rate limits
 
 ### 🔧 Troubleshooting & Deployment
 - **[Strava OAuth Troubleshooting](./strava-oauth-troubleshooting.md)** - Common OAuth issues and solutions
