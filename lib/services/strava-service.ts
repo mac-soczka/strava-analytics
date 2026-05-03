@@ -334,9 +334,10 @@ export class StravaService {
       total: number
       segmentsProcessed: number
       segmentEffortsProcessed: number
-    }) => Promise<void>
+    }) => Promise<void>,
+    options?: { claimOrder?: 'oldest' | 'newest' }
   ): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
-    return this.sync.syncSegments(batchSize, onProgress)
+    return this.sync.syncSegments(batchSize, options, onProgress)
   }
 
   async syncSegmentEffortsForSegment(

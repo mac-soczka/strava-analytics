@@ -231,10 +231,14 @@ export class ActivitiesRepository {
     }
   }
 
-  async claimNextActivityForSegmentSync(stravaId: number): Promise<ClaimedActivityForSegmentSync | null> {
+  async claimNextActivityForSegmentSync(
+    stravaId: number,
+    order: 'oldest' | 'newest' = 'newest'
+  ): Promise<ClaimedActivityForSegmentSync | null> {
     try {
       const { data, error } = await this.supabase.rpc('claim_next_activity_for_segment_sync', {
         p_strava_id: stravaId,
+        p_order: order === 'oldest' ? 'asc' : 'desc',
       })
       if (error) throw error
       const row = Array.isArray(data) ? data[0] : data

@@ -179,7 +179,14 @@ export class StravaSyncService {
 
   async syncSegments(
     _batchSize = config.stravaApiLimits.maxSegmentBatchSize,
-    onProgress?: (_p: {
+    optionsOrOnProgress?: { claimOrder?: 'oldest' | 'newest' } | ((_p: {
+      processed: number
+      errors: number
+      total: number
+      segmentsProcessed: number
+      segmentEffortsProcessed: number
+    }) => Promise<void>),
+    maybeOnProgress?: (_p: {
       processed: number
       errors: number
       total: number
@@ -187,6 +194,11 @@ export class StravaSyncService {
       segmentEffortsProcessed: number
     }) => Promise<void>
   ): Promise<{ processed: number; segmentsAdded: number; errors: number }> {
+    const options =
+      typeof optionsOrOnProgress === 'function' ? undefined : optionsOrOnProgress
+    const onProgress =
+      typeof optionsOrOnProgress === 'function' ? optionsOrOnProgress : maybeOnProgress
+
     let processed = 0
     let segmentsAdded = 0
     let errors = 0
@@ -208,7 +220,10 @@ export class StravaSyncService {
     })
 
     while (activitiesHandled < totalActivitiesNeedingSegments) {
-      const activity = await this.activitiesRepo.claimNextActivityForSegmentSync(this.stravaId)
+      const activity = await this.activitiesRepo.claimNextActivityForSegmentSync(
+        this.stravaId,
+        options?.claimOrder ?? 'newest'
+      )
       if (!activity) break
       let shouldCountHandled = true
       try {

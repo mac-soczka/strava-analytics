@@ -353,11 +353,13 @@ export class SyncOrchestrationService {
     // Step 2: Sync segments for all activities
     if (startingPhase === 'discover_activities' || startingPhase === 'ensure_segments' || startingPhase === 'ensure_segment_efforts') {
       await this.setPhase(jobId, 'ensure_segments')
+      const segmentClaimOrder = job.options?.startFrom === 'oldest' ? 'oldest' : 'newest'
       this.logger.log(`[Job ${jobId}] Syncing segment efforts (and segments) (entity=segment_efforts,segments)`)
       try {
         const segmentResult = await this.stravaService.syncSegments(
           undefined,
-          this.segmentProgressReporter(jobId, false)
+          this.segmentProgressReporter(jobId, false),
+          { claimOrder: segmentClaimOrder }
         )
         this.logger.log(`[Job ${jobId}] Segments synced: ${segmentResult.segmentsAdded}, activities processed: ${segmentResult.processed}`)
 

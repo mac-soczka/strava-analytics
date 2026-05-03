@@ -86,6 +86,63 @@ async function cleanup() {
     expect(c4).toBeNull()
   })
 
+  it('claims oldest pending activities first when requested', async () => {
+    const repo = new ActivitiesRepository()
+    await supabase.from('activities').insert([
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991001,
+        name: 'Oldest',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2020-01-01T00:00:00Z',
+        start_date_local: '2020-01-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991001',
+      },
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991002,
+        name: 'Middle',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2021-01-01T00:00:00Z',
+        start_date_local: '2021-01-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991002',
+      },
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991003,
+        name: 'Newest',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2022-01-01T00:00:00Z',
+        start_date_local: '2022-01-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991003',
+      },
+    ])
+
+    const c1 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID, 'oldest')
+    expect(c1?.activity_id).toBe(991001)
+    await repo.markSegmentsFetchSuccessRows(String(c1?.id), 1)
+
+    const c2 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID, 'oldest')
+    expect(c2?.activity_id).toBe(991002)
+    await repo.markSegmentsFetchSuccessRows(String(c2?.id), 1)
+
+    const c3 = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID, 'oldest')
+    expect(c3?.activity_id).toBe(991003)
+    await repo.markSegmentsFetchSuccessRows(String(c3?.id), 1)
+  })
+
   it('resumes in-progress activity before pending queue', async () => {
     const repo = new ActivitiesRepository()
     await supabase.from('activities').insert([
