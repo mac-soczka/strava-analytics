@@ -11,7 +11,10 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env
 const TEST_STRAVA_ID = 66554433
 
 async function cleanup() {
-  await supabase.from('segment_efforts').delete().in('activity_id', [991001, 991002, 991003, 991004, 991005, 991006])
+  await supabase
+    .from('segment_efforts')
+    .delete()
+    .in('activity_id', [991001, 991002, 991003, 991004, 991005, 991006, 991010, 991011, 991020, 991021, 991022, 991023])
   await supabase.from('activities').delete().eq('strava_id', TEST_STRAVA_ID)
   await supabase.from('users').delete().eq('strava_id', TEST_STRAVA_ID)
 }
@@ -250,5 +253,107 @@ async function cleanup() {
 
     const claimed = await repo.claimNextActivityForSegmentSync(TEST_STRAVA_ID, 'oldest')
     expect(claimed?.activity_id).toBe(991011)
+  })
+
+  it('segments sync queue counts reflect activities needing fetch (not global segment deficit)', async () => {
+    await supabase.from('activities').insert([
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991020,
+        name: 'Segments done',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2020-01-01T00:00:00Z',
+        start_date_local: '2020-01-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991020',
+        activity_sync_state: 'completed',
+        segments_fetch_status: 'success_rows',
+        segments_fetched: true,
+        segment_efforts_synced_at: '2025-01-01T00:00:00Z',
+      },
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991021,
+        name: 'Needs fetch',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2024-06-01T00:00:00Z',
+        start_date_local: '2024-06-01T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991021',
+        activity_sync_state: 'pending',
+        segments_fetch_status: 'pending',
+        segments_fetched: false,
+        segment_efforts_synced_at: null,
+      },
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991022,
+        name: 'Fetch failed',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2024-06-02T00:00:00Z',
+        start_date_local: '2024-06-02T00:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991022',
+        activity_sync_state: 'failed',
+        segments_fetch_status: 'failed',
+        segments_fetched: false,
+        segment_efforts_synced_at: null,
+        segments_fetch_error: 'boom',
+      },
+      {
+        strava_id: TEST_STRAVA_ID,
+        activity_id: 991023,
+        name: 'In progress fetch',
+        distance: 1000,
+        moving_time: 100,
+        elapsed_time: 100,
+        total_elevation_gain: 10,
+        type: 'Run',
+        start_date: '2025-06-02T12:00:00Z',
+        start_date_local: '2025-06-02T12:00:00Z',
+        strava_url: 'https://www.strava.com/activities/991023',
+        activity_sync_state: 'in_progress',
+        activity_sync_started_at: '2026-05-03T12:00:00Z',
+        segments_fetch_status: 'pending',
+        segments_fetched: false,
+        segment_efforts_synced_at: null,
+      },
+    ])
+
+    const { data: countsRaw, error: countsError } = await supabase
+      .rpc('get_user_segments_sync_queue_counts', { p_strava_id: TEST_STRAVA_ID })
+      .maybeSingle()
+    expect(countsError).toBeNull()
+    const counts = countsRaw as {
+      pending?: number | string | null
+      in_progress?: number | string | null
+      completed?: number | string | null
+      failed?: number | string | null
+    }
+
+    expect(Number(counts.pending)).toBe(1)
+    expect(Number(counts.in_progress)).toBe(1)
+    expect(Number(counts.completed)).toBe(1)
+    expect(Number(counts.failed)).toBe(1)
+
+    const { data: preview, error: previewError } = await supabase.rpc('get_user_segments_sync_queue_preview', {
+      p_strava_id: TEST_STRAVA_ID,
+      p_order: 'desc',
+      p_limit: 10,
+    })
+    expect(previewError).toBeNull()
+    const rows = preview || []
+    expect(rows.length >= 3).toBe(true)
+    expect(Number(rows[0]?.activity_id)).toBe(991023)
+    expect(rows.some((r: any) => Number(r.activity_id) === 991020)).toBe(false)
   })
 })

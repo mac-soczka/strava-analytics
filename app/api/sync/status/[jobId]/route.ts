@@ -104,36 +104,36 @@ export async function GET(
       .order('start_date', { ascending: false })
       .order('activity_id', { ascending: false })
 
+    const segmentClaimOrder = job.options?.startFrom === 'oldest' ? 'asc' : 'desc'
+
     const [{ data: segmentQueueListData }, { data: segmentQueueCountsDataRaw }] = await Promise.all([
-      supabase.rpc('get_user_segment_queue_fifo', { user_strava_id: job.strava_id }),
-      supabase.rpc('get_user_segment_queue_counts', { user_strava_id: job.strava_id }).maybeSingle(),
+      supabase.rpc('get_user_segments_sync_queue_preview', {
+        p_strava_id: job.strava_id,
+        p_order: segmentClaimOrder,
+        p_limit: 75,
+      }),
+      supabase.rpc('get_user_segments_sync_queue_counts', { p_strava_id: job.strava_id }).maybeSingle(),
     ])
     const segmentQueueCountsData = (segmentQueueCountsDataRaw || null) as {
-      pending_segments?: number | null
-      completed_segments?: number | null
-      failed_segments?: number | null
+      pending?: number | string | null
+      in_progress?: number | string | null
+      completed?: number | string | null
+      failed?: number | string | null
     } | null
 
-    const rawSegmentsProgress = (job.progress as any)?.segments ?? { total: 0, processed: 0, failed: 0 }
-    const segmentsProcessed = Number(rawSegmentsProgress.processed ?? 0)
-    const segmentsFailed = Number(rawSegmentsProgress.failed ?? 0)
-    const pendingSegmentsCount = Number(segmentQueueCountsData?.pending_segments ?? 0)
-    const completedSegmentsCount = Number(segmentQueueCountsData?.completed_segments ?? 0)
-    const failedSegmentsCount = Number(segmentQueueCountsData?.failed_segments ?? 0)
     const segmentQueueList = (segmentQueueListData || []).map((row: any) => ({
-      segmentId: Number(row.segment_id),
+      activityId: Number(row.activity_id),
       name: row.name,
-      queuedAt: row.created_at,
-      state: 'pending' as const,
+      startDate: row.start_date,
+      activitySyncState: row.activity_sync_state,
+      segmentsFetchStatus: row.segments_fetch_status ?? null,
+      queuedAt: row.queued_at ?? row.activity_sync_started_at ?? row.start_date,
     }))
     const segmentsQueue = {
-      pending: Math.max(0, pendingSegmentsCount),
-      in_progress:
-        job.status === 'running' && (job.current_phase === 'ensure_segments' || job.current_phase === 'ensure_segment_efforts')
-          ? 1
-          : 0,
-      completed: Math.max(segmentsProcessed, completedSegmentsCount),
-      failed: Math.max(segmentsFailed, failedSegmentsCount),
+      pending: Number(segmentQueueCountsData?.pending ?? 0),
+      in_progress: Number(segmentQueueCountsData?.in_progress ?? 0),
+      completed: Number(segmentQueueCountsData?.completed ?? 0),
+      failed: Number(segmentQueueCountsData?.failed ?? 0),
     }
 
     const isCancelled = job.status === 'cancelled'

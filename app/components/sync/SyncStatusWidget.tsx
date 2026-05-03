@@ -160,7 +160,10 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
     ? Math.max(activityQueueList.length, activityQueue.pending + activityQueue.in_progress + activityQueue.failed)
     : activityQueueList.length
   const segmentsQueueHeldCount = segmentsQueue
-    ? Math.max(segmentQueueList.length, segmentsQueue.pending + segmentsQueue.in_progress)
+    ? Math.max(
+        segmentQueueList.length,
+        segmentsQueue.pending + segmentsQueue.in_progress + segmentsQueue.failed
+      )
     : segmentQueueList.length
   const currentActivity = exactState?.currentActivity
   const currentActivityStep =
@@ -376,26 +379,33 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
           {segmentsQueue && (
             <div className="rounded-lg border border-gray-200 p-3 text-xs dark:border-gray-700">
               <div className="mb-1 flex items-center justify-between gap-2">
-                <p className="font-medium text-gray-900 dark:text-white">Segments Queue</p>
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">Segments queue</p>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                    Activities still needing segment effort sync (counts update from your Strava-linked rows).
+                  </p>
+                </div>
                 <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
                   Live held: {segmentsQueueHeldCount}
                 </span>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                Pending {segmentsQueue.pending} · In progress {segmentsQueue.in_progress} · Completed {segmentsQueue.completed} · Failed {segmentsQueue.failed}
+                Pending {segmentsQueue.pending} · In progress {segmentsQueue.in_progress} · Completed{' '}
+                {segmentsQueue.completed} · Failed {segmentsQueue.failed}
               </p>
               {segmentQueueList.length > 0 && (
                 <div className="mt-2 max-h-44 overflow-auto rounded border border-gray-100 dark:border-gray-700">
                   {segmentQueueList.map((item, index) => (
                     <div
-                      key={`${item.segmentId}-${index}`}
+                      key={`${item.activityId}-${index}`}
                       className="flex items-center justify-between border-b border-gray-100 px-2 py-1 last:border-b-0 dark:border-gray-700"
                     >
                       <span className="truncate text-gray-700 dark:text-gray-200">
-                        {index + 1}. #{item.segmentId} · {item.name || 'Unknown'}
+                        {index + 1}. #{item.activityId} {item.name ? `· ${item.name}` : ''}
                       </span>
                       <span className="ml-2 shrink-0 text-gray-500 dark:text-gray-400">
-                        {(item.state || 'pending')} · {formatDateTime(item.queuedAt)}
+                        {item.segmentsFetchStatus || 'pending'}
+                        {item.activitySyncState ? ` · sync ${item.activitySyncState}` : ''} · {formatDateTime(item.startDate ?? item.queuedAt)}
                       </span>
                     </div>
                   ))}

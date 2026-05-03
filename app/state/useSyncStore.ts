@@ -52,10 +52,12 @@ export interface SyncExactState {
     state: string | null
   }> | null
   segmentQueueList?: Array<{
-    segmentId: number
+    activityId: number
     name: string | null
-    queuedAt: string | null
-    state?: 'pending' | 'in_progress' | 'completed' | 'failed' | null
+    startDate: string | null
+    queuedAt?: string | null
+    segmentsFetchStatus: string | null
+    activitySyncState: string | null
   }> | null
   currentActivity?: {
     activityId: number
@@ -384,6 +386,12 @@ export const useSyncStore = create<SyncState>((set, get) => ({
         const liveActivitiesProcessed = j.progress?.activities?.processed ?? 0
         const liveSegmentsProcessed = j.progress?.segments?.processed ?? 0
         const liveCurrentActivityId = get().exactState?.currentActivity?.activityId ?? 0
+        const sq = get().exactState?.segmentsQueue
+        const sqSig = sq
+          ? [sq.pending, sq.in_progress, sq.completed, sq.failed, get().exactState?.segmentQueueList?.[0]?.activityId ?? 0].join(
+              ':'
+            )
+          : ''
         const signature = [
           j.status,
           j.current_phase,
@@ -392,6 +400,7 @@ export const useSyncStore = create<SyncState>((set, get) => ({
           liveActivitiesProcessed,
           liveSegmentsProcessed,
           liveCurrentActivityId,
+          sqSig,
           j.updated_at,
         ].join('|')
         const changed = lastSignature !== signature
