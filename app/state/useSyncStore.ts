@@ -157,6 +157,14 @@ function isLikelyNetworkError(err: unknown) {
   )
 }
 
+async function fetchActiveJobIdFromServer(): Promise<string | null> {
+  const response = await fetch('/api/sync/active', { credentials: 'include', cache: 'no-store' })
+  if (!response.ok) return null
+  const data = await response.json().catch(() => ({}))
+  const id = data?.job?.id as string | undefined
+  return id && typeof id === 'string' ? id : null
+}
+
 export const useSyncStore = create<SyncState>((set, get) => ({
   isHydrating: true,
   activeJobId: null,
@@ -242,6 +250,16 @@ export const useSyncStore = create<SyncState>((set, get) => ({
       })
       const data = await response.json().catch(() => ({}))
 
+      if (response.status === 409 && typeof data?.error === 'string' && data.error.includes('already running')) {
+        const existingId = await fetchActiveJobIdFromServer()
+        if (existingId) {
+          get().setActiveJobId(existingId)
+          await get().fetchStatusOnce(existingId)
+          void get().refreshCoverage()
+          return existingId
+        }
+      }
+
       if (!response.ok) {
         const details = typeof data?.details === 'string' ? data.details : null
         const message = typeof data?.error === 'string' ? data.error : 'Failed to start sync'
@@ -265,7 +283,11 @@ export const useSyncStore = create<SyncState>((set, get) => ({
   },
 
   cancelActiveJob: async () => {
-    const jobId = get().activeJobId
+    let jobId = get().activeJobId
+    if (!jobId) {
+      jobId = await fetchActiveJobIdFromServer()
+      if (jobId) get().setActiveJobId(jobId)
+    }
     if (!jobId) return
 
     set({ isCancelling: true, error: null })
@@ -315,7 +337,12 @@ export const useSyncStore = create<SyncState>((set, get) => ({
         return
       }
       if (response.status === 404) {
-        set({ error: data?.error || 'Job not found' })
+        set({
+          error: data?.error || 'Job not found',
+          job: null,
+          exactState: null,
+          rateLimits: null,
+        })
         return
       }
       throw new Error(data?.error || `Failed to fetch status (${response.status})`)

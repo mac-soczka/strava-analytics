@@ -235,19 +235,40 @@ export class ActivitiesRepository {
     stravaId: number,
     order: 'oldest' | 'newest' = 'newest'
   ): Promise<ClaimedActivityForSegmentSync | null> {
-    try {
-      const { data, error } = await this.supabase.rpc('claim_next_activity_for_segment_sync', {
-        p_strava_id: stravaId,
-        p_order: order === 'oldest' ? 'asc' : 'desc',
-      })
-      if (error) throw error
-      const row = Array.isArray(data) ? data[0] : data
-      if (!row) return null
-      return row as ClaimedActivityForSegmentSync
-    } catch (error) {
-      console.error('Error claiming next activity for segment sync:', error)
-      throw error
+    const isTransientClaimError = (err: unknown): boolean => {
+      const msg = `${(err as { message?: string })?.message ?? err ?? ''}`.toLowerCase()
+      return (
+        msg.includes('invalid response') ||
+        msg.includes('upstream server') ||
+        msg.includes('fetch failed') ||
+        msg.includes('network') ||
+        msg.includes('econnreset') ||
+        msg.includes('socket') ||
+        msg.includes('timeout')
+      )
     }
+
+    const maxAttempts = 3
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const { data, error } = await this.supabase.rpc('claim_next_activity_for_segment_sync', {
+          p_strava_id: stravaId,
+          p_order: order === 'oldest' ? 'asc' : 'desc',
+        })
+        if (error) throw error
+        const row = Array.isArray(data) ? data[0] : data
+        if (!row) return null
+        return row as ClaimedActivityForSegmentSync
+      } catch (error) {
+        if (attempt < maxAttempts && isTransientClaimError(error)) {
+          await new Promise((r) => setTimeout(r, 400 * attempt))
+          continue
+        }
+        console.error('Error claiming next activity for segment sync:', error)
+        throw error
+      }
+    }
+    throw new Error('claimNextActivityForSegmentSync: loop exited without return')
   }
 
   /**

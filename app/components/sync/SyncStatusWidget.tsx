@@ -342,7 +342,13 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
           {activityQueue && (
             <div className="rounded-lg border border-gray-200 p-3 text-xs dark:border-gray-700">
               <div className="mb-1 flex items-center justify-between gap-2">
-                <p className="font-medium text-gray-900 dark:text-white">Activity Queue</p>
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">Activity Queue</p>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                    Overall sync state per activity (<code className="text-[10px]">activity_sync_state</code>
+                    ).
+                  </p>
+                </div>
                 <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
                   Live held: {activityQueueHeldCount}
                 </span>
@@ -382,7 +388,10 @@ export function SyncStatusWidget({ variant = 'compact' }: SyncStatusWidgetProps)
                 <div>
                   <p className="font-medium text-gray-900 dark:text-white">Segments queue</p>
                   <p className="text-[11px] text-gray-500 dark:text-gray-400">
-                    Activities still needing segment effort sync (counts update from your Strava-linked rows).
+                    Same activities as above, with counts driven by segment-effort fields (
+                    <code className="text-[10px]">segments_fetch_status</code>,{' '}
+                    <code className="text-[10px]">segment_efforts_synced_at</code>). When the pipeline updates
+                    both together, numbers match the activity queue; if not, use repair/requeue to fix drift.
                   </p>
                 </div>
                 <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
