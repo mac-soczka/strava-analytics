@@ -1,31 +1,34 @@
-# StravaHeatmap - Documentation 📚
+# Strava Analytics Documentation
 
-Welcome to the comprehensive documentation for the StravaHeatmap project. This project is built with Next.js 15 and Supabase, implementing modern design patterns for scalability and maintainability.
+Strava does not allow applications to bypass API quotas or rate limits; integrations must operate within the official limits.
 
-## 📋 Documentation Index
+Welcome to the comprehensive documentation for the Strava Analytics project. This project is built with Next.js 15 and Supabase, implementing modern design patterns for scalability and maintainability.
 
-### 🏗️ Architecture & Design
+## Documentation Index
+
+### Architecture & Design
 - **[Architecture](./architecture.md)** - System architecture and design patterns
 - **[Design Patterns](./design-patterns.md)** - Implemented design patterns and best practices
 - **[Services](./services.md)** - Business logic and external integrations
 - **[Crawler Architecture](./crawler-architecture.md)** - Strava data crawler system design
 
-### 🚀 Setup & Development
+### Setup & Development
 - **[Development Setup](./development-setup.md)** - Development environment setup guide
 - **[Environment Setup](./environment-setup.md)** - Environment variables and configuration
 - **[Local Supabase Setup](./local-supabase-setup.md)** - Setting up Supabase locally
 - **[Supabase Setup](./supabase-setup.md)** - Production Supabase configuration
 
-### 🗄️ Database & Migrations
+### Database & Migrations
 - **[Supabase Operations](./supabase-operations.md)** - Complete guide for migrations, seeding, and database operations
 - **[Migration Guide](./migration-guide.md)** - Database migration procedures
 - **[Supabase Commands](./supabase-commands.md)** - Useful Supabase CLI commands
 - **[Testing Without Triggers](./testing-without-triggers.md)** - Database testing strategies
 
-### 🧪 Testing
+### Testing
 - **[Testing Strategy](./testing-strategy.md)** - Comprehensive testing guidelines and examples
 
-### ✅ Action plans
+### Action plans
+- **[Minimal Vercel Strava sync for all users](./action-plans/vercel-minimal-strava-sync-all-users.md)** - **2026-06-05** — single canonical production sync flow, strong job dedupe, and quota-safe scheduling
 - **[Strava sync simplification + full refetch](./action-plans/strava-sync-simplification-and-full-refetch.md)** - **2026-05-03** — JSON HTTP logging, full activity refetch, minimal Strava requests (`include_all_efforts`), prune redundant sync columns
 - **[Sync dedupe + Strava ID safety](./action-plans/sync-dedupe-and-id-safety.md)** - Ensure idempotent sync and safe large IDs
 - **[Strava sync under 1000/day](./action-plans/strava-sync-under-1000-per-day.md)** - Multi-day, budget-aware strategy for activities, segments, and segment efforts
@@ -43,17 +46,17 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Activity-centric oldest-first segment-effort sync](./action-plans/activity-centric-oldest-first-segment-efforts-sync.md)** - Deterministic per-activity state machine (pending/in-progress/completed) with request-efficient segment-effort extraction and pause/resume safety
 - **[Test coverage without live Strava API](./action-plans/test-coverage-without-live-strava-api.md)** - Expand unit/integration/E2E coverage using mocked Strava client responses to protect API rate limits
 
-### 🔧 Troubleshooting & Deployment
+### Troubleshooting & Deployment
 - **[Strava OAuth Troubleshooting](./strava-oauth-troubleshooting.md)** - Common OAuth issues and solutions
 - **[Deployment Fixes](./deployment-fixes.md)** - Deployment issues and solutions
 
-### 📖 Reference Guides
+### Reference Guides
 - **[Quick Reference](./quick-reference.md)** - Quick commands and shortcuts
 - **[Package.json Scripts](./package-json-scripts.md)** - Available npm/yarn scripts
 - **[Strava-first Domain Model (DDD)](./domain-model-strava.md)** - Canonical entities (mirror Strava)
 - **[Domain Driven Design](./domain-driven-design.md)** - Entities, aggregates, and relationships
 
-## 🏗️ Design Patterns Implemented
+## Design Patterns Implemented
 
 This project implements several key design patterns:
 
@@ -65,7 +68,7 @@ This project implements several key design patterns:
 6. **Rate Limiting Strategy** - Intelligent API call management
 7. **Crawler Architecture** - Automated data synchronization
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Setup Environment**
    ```bash
@@ -78,15 +81,14 @@ This project implements several key design patterns:
    yarn install
    ```
 
-3. **Setup Database**
+3. **Setup Local Database**
    ```bash
-   # Run the schema in Supabase SQL Editor
-   cat supabase/schema.sql
+   yarn db:start
    ```
 
-4. **Migrate Data**
+4. **Apply Migrations**
    ```bash
-   node scripts/migrate-to-supabase.js
+   yarn db:push
    ```
 
 5. **Start Development**
@@ -94,7 +96,7 @@ This project implements several key design patterns:
    yarn dev
    ```
 
-## 📊 Project Structure
+## Project Structure
 
 ```
 strava-heatmap/
@@ -120,7 +122,7 @@ strava-heatmap/
 └── docs/                  # Documentation
 ```
 
-## 🔧 Key Technologies
+## Key Technologies
 
 - **Next.js 15** - React framework with App Router
 - **Supabase** - Backend as a Service (Database, Auth, Real-time)
@@ -131,19 +133,19 @@ strava-heatmap/
 - **Recharts** - Data visualization
 - **Jest & Playwright** - Testing framework
 
-## 📈 Features
+## Features
 
-- ✅ **Activity Dashboard** - Overview of Strava activities
-- ✅ **Segment Analysis** - Detailed segment performance tracking
-- ✅ **Real-time Updates** - Live data synchronization
-- ✅ **Interactive Maps** - Activity and segment visualization
-- ✅ **Performance Charts** - Historical data analysis
-- ✅ **Responsive Design** - Mobile-friendly interface
-- ✅ **Automated Crawler** - Background data synchronization
-- ✅ **Rate Limit Management** - Intelligent API usage
-- ✅ **Comprehensive Testing** - Unit, integration, and E2E tests
+- **Activity Dashboard** - Overview of Strava activities
+- **Segment Analysis** - Detailed segment performance tracking
+- **Real-time Updates** - Live data synchronization
+- **Interactive Maps** - Activity and segment visualization
+- **Performance Charts** - Historical data analysis
+- **Responsive Design** - Mobile-friendly interface
+- **Automated Crawler** - Background data synchronization
+- **Rate Limit Management** - Intelligent API usage
+- **Comprehensive Testing** - Unit, integration, and E2E tests
 
-## 🧪 Testing
+## Testing
 
 The project includes comprehensive testing:
 
@@ -156,14 +158,14 @@ Run tests with:
 ```bash
 yarn test          # Unit and integration tests
 yarn test:e2e      # End-to-end tests
-yarn test:coverage # Coverage report
+yarn test:all      # Lint + type-check + unit/integration + E2E
 ```
 
-## 🤝 Contributing
+## Contributing
 
 See [Development Setup](./development-setup.md) for contribution guidelines and [Testing Strategy](./testing-strategy.md) for testing requirements.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
