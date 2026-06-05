@@ -48,6 +48,9 @@ export class SyncOrchestrationService {
         case 'activities_only':
           await this.runActivitiesOnly(job)
           break
+        case 'full_refetch':
+          await this.runFullRefetch(job)
+          break
         case 'segment_efforts_only':
           await this.runSegmentEffortsOnly(job)
           break
@@ -158,6 +161,22 @@ export class SyncOrchestrationService {
     return job
   }
 
+  async startFullRefetch(stravaId: number): Promise<SyncJob> {
+    const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
+    if (activeJob) {
+      throw new Error('A sync job is already running for this user')
+    }
+
+    const job = await this.jobsRepo.createJob(stravaId, 'full_refetch')
+
+    this.runJob(job).catch((error: any) => {
+      this.logger.error(`Sync job ${job.id} failed`, error)
+      this.jobsRepo.markJobFailed(job.id, error?.message || 'Unknown error', { stack: error?.stack })
+    })
+
+    return job
+  }
+
   async startSegmentsSync(stravaId: number): Promise<SyncJob> {
     const activeJob = await this.jobsRepo.getActiveJobForUser(stravaId)
     if (activeJob) {
@@ -230,6 +249,65 @@ export class SyncOrchestrationService {
     })
 
     return job
+  }
+
+  private async runFullRefetch(job: SyncJob): Promise<void> {
+    const jobId = job.id
+    const stravaId = job.strava_id
+
+    await this.setPhase(jobId, 'discover_activities')
+    const startPage = job.strava_page ?? 1
+    this.logger.log(`[Job ${jobId}] Full refetch: re-listing and re-importing all activities (startPage=${startPage})`)
+
+    const baseTotal = await this.getDbActivityCount(stravaId)
+
+    try {
+      const result = await this.stravaService.syncFullRefetch({
+        startPage,
+        onPageComplete: async (nextPage) => {
+          await this.jobsRepo.patchJob(jobId, { strava_page: nextPage })
+        },
+        onProgress: async (p) => {
+          await this.jobsRepo.updateJobProgress(
+            jobId,
+            {
+              activities: {
+                total: Math.max(baseTotal, p.processedTotal),
+                processed: p.processedTotal,
+                failed: p.errors,
+              },
+              segment_efforts: { total: 0, processed: p.segmentEfforts, failed: 0 },
+            } as Partial<SyncJobProgress>,
+            p.processedTotal
+          )
+        },
+      })
+
+      const rateLimitStatus = this.stravaService.getRateLimitStatus()
+      await this.jobsRepo.updateJobStatus(jobId, 'completed', {
+        current_phase: 'completed',
+        processed_items: result.processed,
+        failed_items: result.errors,
+        requests_used_15m: rateLimitStatus.requests15min,
+        requests_used_daily: rateLimitStatus.requestsDay,
+        rate_limit_15m_reset_at: rateLimitStatus.nextReset15min.toISOString(),
+        rate_limit_daily_reset_at: rateLimitStatus.nextResetDaily.toISOString(),
+      })
+      this.logger.log(
+        `[Job ${jobId}] Full refetch completed: processed=${result.processed} errors=${result.errors} segment_effort_upserts=${result.segmentEfforts}`
+      )
+    } catch (error: any) {
+      if (this.isRateLimitError(error)) {
+        this.logger.warn(`[Job ${jobId}] Rate limit hit during full refetch. Pausing job`)
+        await this.pauseForRateLimit(jobId, 'Rate limit exceeded during full refetch', error, {
+          last_processed_activity_id:
+            Number(error?.currentActivityId ?? job.last_processed_activity_id ?? 0) || 0,
+          strava_page: error?.refetchStravaPage ?? job.strava_page ?? 1,
+        })
+        return
+      }
+      throw error
+    }
   }
 
   private async runFullSync(job: SyncJob): Promise<void> {

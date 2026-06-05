@@ -26,6 +26,7 @@ Welcome to the comprehensive documentation for the StravaHeatmap project. This p
 - **[Testing Strategy](./testing-strategy.md)** - Comprehensive testing guidelines and examples
 
 ### ✅ Action plans
+- **[Strava sync simplification + full refetch](./action-plans/strava-sync-simplification-and-full-refetch.md)** - **2026-05-03** — JSON HTTP logging, full activity refetch, minimal Strava requests (`include_all_efforts`), prune redundant sync columns
 - **[Sync dedupe + Strava ID safety](./action-plans/sync-dedupe-and-id-safety.md)** - Ensure idempotent sync and safe large IDs
 - **[Strava sync under 1000/day](./action-plans/strava-sync-under-1000-per-day.md)** - Multi-day, budget-aware strategy for activities, segments, and segment efforts
 - **[Optimize Strava sync (1 request/activity)](./action-plans/optimize-strava-sync.md)** - Extract embedded segment efforts from activity details to stay under rate limits

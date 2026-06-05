@@ -203,6 +203,12 @@ export class StravaService {
     return this.sync.syncActivities(pageSize, processBatchSize, onProgress)
   }
 
+  syncFullRefetch(
+    options?: Parameters<StravaSyncService['syncFullRefetch']>[0]
+  ): ReturnType<StravaSyncService['syncFullRefetch']> {
+    return this.sync.syncFullRefetch(options)
+  }
+
   /**
    * Sync segment efforts for activities that don't have them yet
    * Uses embedded data from activity response - no extra requests!

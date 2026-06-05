@@ -89,6 +89,8 @@ export async function POST(request: NextRequest) {
         ? body.start_from
         : 'newest'
 
+    const mode = body?.mode === 'full_refetch' ? 'full_refetch' : 'full_sync'
+
     // Get session token from cookies
     const cookies = request.headers.get('cookie')
     const sessionToken = cookies?.split(';')
@@ -124,7 +126,10 @@ export async function POST(request: NextRequest) {
       return new SyncOrchestrationService(user.strava_id, { stravaService })
     })()
 
-    const job = await syncService.startFullSync(user.strava_id, { startFrom })
+    const job =
+      mode === 'full_refetch'
+        ? await syncService.startFullRefetch(user.strava_id)
+        : await syncService.startFullSync(user.strava_id, { startFrom })
 
     return NextResponse.json({
       success: true,

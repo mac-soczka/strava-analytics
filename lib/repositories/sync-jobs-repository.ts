@@ -2,7 +2,14 @@ import { createClient } from '@supabase/supabase-js'
 import config from '@/lib/config'
 
 export type SyncJobStatus = 'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'paused'
-export type SyncJobType = 'full_sync' | 'activities_only' | 'segments_only' | 'segment_efforts_only' | 'routes_only' | 'stats_only'
+export type SyncJobType =
+  | 'full_sync'
+  | 'full_refetch'
+  | 'activities_only'
+  | 'segments_only'
+  | 'segment_efforts_only'
+  | 'routes_only'
+  | 'stats_only'
 export type SyncJobPhase = 'discover_activities' | 'ensure_segments' | 'ensure_segment_efforts' | 'completed' | 'failed'
 
 export interface SyncJobProgress {
@@ -69,6 +76,11 @@ export class SyncJobsRepository {
     if (type === 'segments_only') return 'ensure_segments'
     if (type === 'segment_efforts_only') return 'ensure_segment_efforts'
     return 'discover_activities'
+  }
+
+  async patchJob(jobId: string, patch: Record<string, unknown>): Promise<void> {
+    const { error } = await this.supabase.from('sync_jobs').update(patch).eq('id', jobId)
+    if (error) throw error
   }
 
   async createJob(

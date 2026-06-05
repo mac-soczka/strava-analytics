@@ -4,6 +4,10 @@ import { getRateLimitService, RateLimitService } from '@/lib/services/rate-limit
 import type { StravaActivity, StravaSegment, StravaSegmentEffort, StravaTokens } from '@/types/strava'
 import type { StravaApiClient, StravaListActivitiesOptions } from './strava-api-client'
 import { getLogger } from '@/lib/utils/logger'
+import {
+  logStravaHttpFromFetchParts,
+  logStravaHttpNetworkFailure,
+} from '@/lib/strava/strava-http-json-logger'
 import JSONbig from 'json-bigint'
 
 export type RealStravaApiClientDeps = {
@@ -57,22 +61,21 @@ export class RealStravaApiClient implements StravaApiClient {
 
     const tokens = await this.getValidTokens()
     const startedAt = Date.now()
-    logger.log('[Strava HTTP] request', {
-      strava_id: this.stravaId,
-      method,
-      url,
-      allow_refresh_once: allowRefreshOnce,
-    })
+    const baseHeaders =
+      typeof init.headers === 'object' && init.headers && !(init.headers instanceof Headers)
+        ? (init.headers as Record<string, string>)
+        : {}
+    const mergedInit: RequestInit = {
+      ...init,
+      headers: {
+        ...baseHeaders,
+        Authorization: `Bearer ${tokens.access_token}`,
+      },
+    }
 
     let response: Response
     try {
-      response = await this.fetchFn(url, {
-        ...init,
-        headers: {
-          ...(init.headers || {}),
-          Authorization: `Bearer ${tokens.access_token}`,
-        },
-      })
+      response = await this.fetchFn(url, mergedInit)
     } catch (error: any) {
       logger.error('[Strava HTTP] network/request error', {
         strava_id: this.stravaId,
@@ -81,17 +84,25 @@ export class RealStravaApiClient implements StravaApiClient {
         elapsed_ms: Date.now() - startedAt,
         error: error?.message || String(error),
       })
+      logStravaHttpNetworkFailure({
+        strava_id: this.stravaId,
+        started_at_ms: startedAt,
+        method,
+        url,
+        init: mergedInit,
+        message: error?.message || String(error),
+      })
       throw error
     }
 
-    logger.log('[Strava HTTP] response', {
+    void logStravaHttpFromFetchParts({
       strava_id: this.stravaId,
+      started_at_ms: startedAt,
       method,
       url,
-      status: response.status,
-      ok: response.ok,
-      elapsed_ms: Date.now() - startedAt,
-    })
+      init: mergedInit,
+      response,
+    }).catch(() => {})
 
     this.rateLimitService.updateFromHeaders(response)
 
@@ -184,25 +195,20 @@ export class RealStravaApiClient implements StravaApiClient {
     const url = 'https://www.strava.com/oauth/token'
     const startedAt = Date.now()
 
-    logger.log('[Strava HTTP] request', {
-      strava_id: stravaId,
+    const refreshInit: RequestInit = {
       method: 'POST',
-      url,
-      token_refresh: true,
-    })
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id: config.strava.clientId,
+        client_secret: config.strava.clientSecret,
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+      }),
+    }
 
     let response: Response
     try {
-      response = await this.fetchFn(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          client_id: config.strava.clientId,
-          client_secret: config.strava.clientSecret,
-          grant_type: 'refresh_token',
-          refresh_token: refreshToken,
-        }),
-      })
+      response = await this.fetchFn(url, refreshInit)
     } catch (error: any) {
       logger.error('[Strava HTTP] network/request error', {
         strava_id: stravaId,
@@ -212,18 +218,27 @@ export class RealStravaApiClient implements StravaApiClient {
         token_refresh: true,
         error: error?.message || String(error),
       })
+      logStravaHttpNetworkFailure({
+        strava_id: stravaId,
+        token_refresh: true,
+        started_at_ms: startedAt,
+        method: 'POST',
+        url,
+        init: refreshInit,
+        message: error?.message || String(error),
+      })
       throw error
     }
 
-    logger.log('[Strava HTTP] response', {
+    void logStravaHttpFromFetchParts({
       strava_id: stravaId,
+      token_refresh: true,
+      started_at_ms: startedAt,
       method: 'POST',
       url,
-      status: response.status,
-      ok: response.ok,
-      elapsed_ms: Date.now() - startedAt,
-      token_refresh: true,
-    })
+      init: refreshInit,
+      response,
+    }).catch(() => {})
 
     if (!response.ok) {
       const errorText = await response.text()
@@ -269,16 +284,11 @@ export class RealStravaApiClient implements StravaApiClient {
   }
 
   async fetchActivityDetails(activityId: number): Promise<StravaActivity | null> {
-    try {
-      const activity = await this.stravaFetchJson<StravaActivity>(
-        `https://www.strava.com/api/v3/activities/${activityId}?include_all_efforts=true`
-      )
-      activity.strava_url = `https://www.strava.com/activities/${activityId}`
-      return activity
-    } catch (err: any) {
-      if (err?.statusCode === 429) return null
-      throw err
-    }
+    const activity = await this.stravaFetchJson<StravaActivity>(
+      `https://www.strava.com/api/v3/activities/${activityId}?include_all_efforts=true`
+    )
+    activity.strava_url = `https://www.strava.com/activities/${activityId}`
+    return activity
   }
 
   async fetchActivitySegmentEfforts(activityId: number): Promise<StravaSegmentEffort[]> {

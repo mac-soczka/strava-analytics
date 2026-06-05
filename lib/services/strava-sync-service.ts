@@ -34,6 +34,179 @@ export class StravaSyncService {
     this.sleep = deps.sleep ?? (async (ms) => new Promise((r) => setTimeout(r, ms)))
   }
 
+  /**
+   * Upsert activity row and segment efforts from a Strava activity payload (summary or detail).
+   */
+  private async persistStravaActivityDetail(
+    detailedActivity: StravaActivity,
+    hasDetailedData: boolean
+  ): Promise<number> {
+    const activityData: Omit<DatabaseActivity, 'id'> = {
+      strava_id: this.stravaId,
+      activity_id: detailedActivity.id,
+      name: detailedActivity.name,
+      distance: detailedActivity.distance,
+      moving_time: detailedActivity.moving_time,
+      elapsed_time: detailedActivity.elapsed_time,
+      total_elevation_gain: detailedActivity.total_elevation_gain,
+      type: detailedActivity.type,
+      start_date: detailedActivity.start_date,
+      start_date_local: detailedActivity.start_date_local,
+      average_speed: detailedActivity.average_speed,
+      max_speed: detailedActivity.max_speed,
+      average_watts: detailedActivity.average_watts,
+      max_watts: detailedActivity.max_watts,
+      average_heartrate: detailedActivity.average_heartrate,
+      max_heartrate: detailedActivity.max_heartrate,
+      polyline: detailedActivity.map?.polyline || detailedActivity.map?.summary_polyline,
+      strava_url: detailedActivity.strava_url ?? `https://www.strava.com/activities/${detailedActivity.id}`,
+      activity_synced_at: new Date().toISOString(),
+      activity_details_synced_at: hasDetailedData ? new Date().toISOString() : null,
+    }
+
+    const existing = await this.activitiesRepo.getActivityById(detailedActivity.id)
+    if (existing) {
+      await this.activitiesRepo.updateActivity(detailedActivity.id, activityData)
+    } else {
+      await this.activitiesRepo.createActivity(activityData)
+    }
+
+    if (hasDetailedData && detailedActivity.segment_efforts && detailedActivity.segment_efforts.length > 0) {
+      const uniqueSegments = new Map<number, any>()
+      for (const effort of detailedActivity.segment_efforts) {
+        if (effort.segment && !uniqueSegments.has(effort.segment.id)) {
+          uniqueSegments.set(effort.segment.id, {
+            segment_id: effort.segment.id,
+            name: effort.segment.name,
+            distance: effort.segment.distance,
+            average_grade: effort.segment.average_grade,
+            maximum_grade: effort.segment.maximum_grade,
+            elevation_gain: (effort.segment.elevation_high || 0) - (effort.segment.elevation_low || 0),
+            climb_category: effort.segment.climb_category,
+            city: effort.segment.city,
+            state: effort.segment.state,
+            country: effort.segment.country,
+            polyline: effort.segment.map?.polyline,
+          })
+        }
+      }
+
+      if (uniqueSegments.size > 0) {
+        await this.segmentsRepo.bulkUpsertSegments(Array.from(uniqueSegments.values()))
+      }
+
+      const effortResult = await this.segmentsRepo.batchSaveEffortsFromStravaActivity(
+        detailedActivity.id,
+        detailedActivity.segment_efforts
+      )
+
+      await this.activitiesRepo.updateActivity(detailedActivity.id, {
+        activity_sync_state: 'completed',
+        activity_sync_completed_at: new Date().toISOString(),
+        activity_sync_error: null,
+        segment_efforts_synced_at: new Date().toISOString(),
+        segments_fetch_status: 'success_rows',
+        segments_fetched_at: new Date().toISOString(),
+        segments_effort_rows_count: effortResult.saved,
+      })
+      return effortResult.saved
+    }
+
+    if (hasDetailedData) {
+      await this.activitiesRepo.updateActivity(detailedActivity.id, {
+        activity_sync_state: 'completed',
+        activity_sync_completed_at: new Date().toISOString(),
+        activity_sync_error: null,
+        segment_efforts_synced_at: new Date().toISOString(),
+        segments_fetch_status: 'success_empty',
+        segments_fetched_at: new Date().toISOString(),
+        segments_effort_rows_count: 0,
+      })
+    }
+
+    return 0
+  }
+
+  /**
+   * Refetch every activity: list all pages, then GET each activity with include_all_efforts.
+   * Idempotent upserts. Checkpoints via onPageComplete (next page index).
+   */
+  async syncFullRefetch(options?: {
+    startPage?: number
+    pageSize?: number
+    maxPages?: number
+    onPageComplete?: (_nextPage: number) => Promise<void>
+    onProgress?: (_p: {
+      page: number
+      processedTotal: number
+      errors: number
+      segmentEfforts: number
+      activitiesOnPage: number
+    }) => Promise<void>
+  }): Promise<{ processed: number; errors: number; segmentEfforts: number; lastPage: number }> {
+    const pageSize = options?.pageSize ?? config.stravaApiLimits.maxActivitiesPerRequest
+    const maxPages = options?.maxPages ?? 50_000
+    let page = Math.max(1, options?.startPage ?? 1)
+    let processed = 0
+    let errors = 0
+    let segmentEfforts = 0
+    let lastPage = page - 1
+
+    while (page <= maxPages) {
+      const activities = await this.api.fetchActivities(page, pageSize)
+      if (activities.length === 0) break
+
+      lastPage = page
+      for (const summary of activities) {
+        try {
+          let detailedActivity: StravaActivity
+          let hasDetailedData: boolean
+          const fetched = await this.api.fetchActivityDetails(summary.id)
+          if (fetched) {
+            detailedActivity = fetched
+            hasDetailedData = true
+          } else {
+            detailedActivity = {
+              ...summary,
+              strava_url: `https://www.strava.com/activities/${summary.id}`,
+            }
+            hasDetailedData = false
+          }
+          const added = await this.persistStravaActivityDetail(detailedActivity, hasDetailedData)
+          segmentEfforts += added
+          processed++
+          await options?.onProgress?.({
+            page,
+            processedTotal: processed,
+            errors,
+            segmentEfforts,
+            activitiesOnPage: activities.length,
+          })
+        } catch (e: any) {
+          if (e?.statusCode === 429 || e?.status === 429 || `${e?.message || ''}`.includes('Rate limit')) {
+            e.currentActivityId = summary.id
+            e.refetchStravaPage = page
+            throw e
+          }
+          errors++
+          await options?.onProgress?.({
+            page,
+            processedTotal: processed,
+            errors,
+            segmentEfforts,
+            activitiesOnPage: activities.length,
+          })
+        }
+      }
+
+      await options?.onPageComplete?.(page + 1)
+      page++
+      await this.sleep(0)
+    }
+
+    return { processed, errors, segmentEfforts, lastPage }
+  }
+
   async syncActivities(
     pageSize = config.stravaApiLimits.maxCrawlerBatchSize,
     processBatchSize = 20,
@@ -86,81 +259,13 @@ export class StravaSyncService {
               hasDetailedData = false
             }
 
-            const activityData: Omit<DatabaseActivity, 'id'> = {
-              strava_id: this.stravaId,
-              activity_id: detailedActivity.id,
-              name: detailedActivity.name,
-              distance: detailedActivity.distance,
-              moving_time: detailedActivity.moving_time,
-              elapsed_time: detailedActivity.elapsed_time,
-              total_elevation_gain: detailedActivity.total_elevation_gain,
-              type: detailedActivity.type,
-              start_date: detailedActivity.start_date,
-              start_date_local: detailedActivity.start_date_local,
-              average_speed: detailedActivity.average_speed,
-              max_speed: detailedActivity.max_speed,
-              average_watts: detailedActivity.average_watts,
-              max_watts: detailedActivity.max_watts,
-              average_heartrate: detailedActivity.average_heartrate,
-              max_heartrate: detailedActivity.max_heartrate,
-              polyline: detailedActivity.map?.polyline || detailedActivity.map?.summary_polyline,
-              strava_url: detailedActivity.strava_url,
-              activity_synced_at: new Date().toISOString(),
-              activity_details_synced_at: hasDetailedData ? new Date().toISOString() : null,
-            }
-            await this.activitiesRepo.createActivity(activityData)
-
-            if (hasDetailedData && detailedActivity.segment_efforts && detailedActivity.segment_efforts.length > 0) {
-              const uniqueSegments = new Map<number, any>()
-              for (const effort of detailedActivity.segment_efforts) {
-                if (effort.segment && !uniqueSegments.has(effort.segment.id)) {
-                  uniqueSegments.set(effort.segment.id, {
-                    segment_id: effort.segment.id,
-                    name: effort.segment.name,
-                    distance: effort.segment.distance,
-                    average_grade: effort.segment.average_grade,
-                    maximum_grade: effort.segment.maximum_grade,
-                    elevation_gain: (effort.segment.elevation_high || 0) - (effort.segment.elevation_low || 0),
-                    climb_category: effort.segment.climb_category,
-                    city: effort.segment.city,
-                    state: effort.segment.state,
-                    country: effort.segment.country,
-                  })
-                }
-              }
-
-              if (uniqueSegments.size > 0) {
-                await this.segmentsRepo.bulkUpsertSegments(Array.from(uniqueSegments.values()))
-              }
-
-              const effortResult = await this.segmentsRepo.batchSaveEffortsFromStravaActivity(
-                detailedActivity.id,
-                detailedActivity.segment_efforts
-              )
-
-              await this.activitiesRepo.updateActivity(detailedActivity.id, {
-                activity_sync_state: 'completed',
-                activity_sync_completed_at: new Date().toISOString(),
-                activity_sync_error: null,
-                segment_efforts_synced_at: new Date().toISOString(),
-                segments_fetch_status: 'success_rows',
-                segments_fetched_at: new Date().toISOString(),
-                segments_effort_rows_count: effortResult.saved,
-              })
-            } else if (hasDetailedData) {
-              await this.activitiesRepo.updateActivity(detailedActivity.id, {
-                activity_sync_state: 'completed',
-                activity_sync_completed_at: new Date().toISOString(),
-                activity_sync_error: null,
-                segment_efforts_synced_at: new Date().toISOString(),
-                segments_fetch_status: 'success_empty',
-                segments_fetched_at: new Date().toISOString(),
-                segments_effort_rows_count: 0,
-              })
-            }
+            await this.persistStravaActivityDetail(detailedActivity, hasDetailedData)
 
             synced++
-          } catch (_e) {
+          } catch (_e: any) {
+            if (_e?.statusCode === 429 || _e?.status === 429 || `${_e?.message || ''}`.includes('Rate limit')) {
+              throw _e
+            }
             errors++
           }
         }
