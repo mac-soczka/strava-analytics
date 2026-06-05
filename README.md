@@ -1,4 +1,4 @@
-# StravaHeatmap
+# Cylcing Analytics
 
 A modern web application for visualizing and analyzing Strava activities and segments with interactive maps, performance charts, and real-time data synchronization.
 
