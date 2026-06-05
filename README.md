@@ -1,18 +1,18 @@
-# StravaHeatmap 🚴‍♂️
+# StravaHeatmap
 
 A modern web application for visualizing and analyzing Strava activities and segments with interactive maps, performance charts, and real-time data synchronization.
 
-## 🌟 Features
+## Features
 
-- **📊 Activity Dashboard** - Comprehensive overview of your Strava activities
-- **🗺️ Interactive Maps** - Visualize your routes with Leaflet maps
-- **📈 Performance Analytics** - Track your progress with detailed charts
-- **🏁 Segment Analysis** - Analyze your performance on Strava segments
-- **🔄 Real-time Sync** - Automated data synchronization with Strava API
-- **📱 Responsive Design** - Works perfectly on desktop and mobile
-- **🔐 Secure Authentication** - OAuth 2.0 integration with Strava
+- **Activity Dashboard** - Comprehensive overview of your Strava activities
+- **Interactive Maps** - Visualize your routes with Leaflet maps
+- **Performance Analytics** - Track your progress with detailed charts
+- **Segment Analysis** - Analyze your performance on Strava segments
+- **Real-time Sync** - Automated data synchronization with Strava API
+- **Responsive Design** - Works perfectly on desktop and mobile
+- **Secure Authentication** - OAuth 2.0 integration with Strava
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Clone the repository**
    ```bash
@@ -39,7 +39,7 @@ A modern web application for visualizing and analyzing Strava activities and seg
 5. **Open your browser**
    Navigate to [http://localhost:3001](http://localhost:3001) (see `yarn dev` port in `package.json`).
 
-## 🗺️ Activity polylines → maps
+## Activity polylines to maps
 
 Strava **encoded polylines** (`activities.polyline` / API `summary_polyline`) are normalized in **`lib/geo/polyline.ts`**:
 
@@ -52,7 +52,7 @@ UI: **`PolylineMap`** (SVG preview, `data-testid="activity-route-map-thumb"`), *
 
 Full roadmap and task status: **[docs/polyline-map-execution-plan.md](./docs/polyline-map-execution-plan.md)**.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: Next.js 15, React 19, TypeScript
 - **Styling**: Tailwind CSS
@@ -62,7 +62,7 @@ Full roadmap and task status: **[docs/polyline-map-execution-plan.md](./docs/pol
 - **Authentication**: Strava OAuth 2.0
 - **Testing**: Jest, Playwright
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 strava-heatmap/
@@ -83,17 +83,17 @@ strava-heatmap/
 └── docs/                  # Documentation
 ```
 
-## 📚 Documentation
+## Documentation
 
 For detailed documentation, see the [docs](./docs/) directory:
 
-- **[📖 Documentation Overview](./docs/README.md)** - Complete documentation index
-- **[🏗️ Architecture](./docs/architecture.md)** - System design and patterns
-- **[🔧 Development Setup](./docs/development-setup.md)** - Getting started guide
-- **[🚀 Deployment](./docs/deployment-fixes.md)** - Deployment instructions
-- **[🧪 Testing Strategy](./docs/testing-strategy.md)** - Testing guidelines
+- **[Documentation Overview](./docs/README.md)** - Complete documentation index
+- **[Architecture](./docs/architecture.md)** - System design and patterns
+- **[Development Setup](./docs/development-setup.md)** - Getting started guide
+- **[Deployment](./docs/deployment-fixes.md)** - Deployment instructions
+- **[Testing Strategy](./docs/testing-strategy.md)** - Testing guidelines
 
-## 🔧 Available Scripts
+## Available Scripts
 
 - `yarn dev` - Start development server
 - `yarn build` - Build for production
@@ -102,7 +102,7 @@ For detailed documentation, see the [docs](./docs/) directory:
 - `yarn test:e2e` - Run end-to-end tests
 - `yarn lint` - Run ESLint
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -110,18 +110,18 @@ For detailed documentation, see the [docs](./docs/) directory:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Strava API](https://developers.strava.com/) for activity data
 - [Supabase](https://supabase.com/) for backend services
 - [Next.js](https://nextjs.org/) for the React framework
 - [Leaflet](https://leafletjs.com/) for interactive maps
 
-## 📞 Support
+## Support
 
 If you have any questions or need help, please:
 
@@ -131,4 +131,4 @@ If you have any questions or need help, please:
 
 ---
 
-**Happy coding! 🚴‍♂️💨**
+**Happy coding!**
