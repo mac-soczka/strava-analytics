@@ -1,5 +1,7 @@
 # Environment Setup Guide
 
+**Last Updated:** 2026-06-06
+
 This guide covers all environment variables needed for the StravaHeatmap application.
 
 ## Required Environment Variables
@@ -69,7 +71,7 @@ VERCEL_URL=your-vercel-url.vercel.app
 
 1. **Create `.env.local` file** in the project root:
 ```bash
-cp .env.local.example .env.local
+cp .env.example .env.local
 ```
 
 2. **Add your environment variables** to `.env.local`:

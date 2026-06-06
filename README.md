@@ -27,7 +27,7 @@ A modern web application for visualizing and analyzing Strava activities and seg
 
 3. **Set up environment variables**
    ```bash
-   cp .env.local.example .env.local
+   cp .env.example .env.local
    # Add your Supabase and Strava credentials
    ```
 

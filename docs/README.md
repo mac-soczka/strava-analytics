@@ -1,5 +1,7 @@
 # Strava Analytics Documentation
 
+**Last Updated:** 2026-06-06
+
 Strava does not allow applications to bypass API quotas or rate limits; integrations must operate within the official limits.
 
 Welcome to the comprehensive documentation for the Strava Analytics project. This project is built with Next.js 15 and Supabase, implementing modern design patterns for scalability and maintainability.
@@ -72,7 +74,7 @@ This project implements several key design patterns:
 
 1. **Setup Environment**
    ```bash
-   cp .env.local.example .env.local
+   cp .env.example .env.local
    # Add your Supabase and Strava credentials
    ```
 
